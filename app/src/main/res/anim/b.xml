@@ -1,0 +1,24 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<alpha xmlns:a="http://schemas.android.com/apk/res/android"
+    a:duration="500"
+    a:fromAlpha="1.0"
+    a:toAlpha="0.0" />

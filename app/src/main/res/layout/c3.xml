@@ -1,0 +1,82 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+    a:layout_height="fill_parent"
+    a:orientation="vertical">
+
+    <include layout="@layout/a16" />
+
+    <FrameLayout
+        a:layout_width="fill_parent"
+        a:layout_height="fill_parent">
+
+        <include layout="@layout/a18" />
+
+        <RelativeLayout
+            a:id="@id/l16"
+            a:layout_width="fill_parent"
+            a:layout_height="fill_parent"
+            a:gravity="center"
+            a:visibility="gone">
+
+            <TextView
+                a:id="@id/l17"
+                a:layout_width="wrap_content"
+                a:layout_height="wrap_content"
+                a:layout_centerInParent="true"
+                a:ellipsize="end"
+                a:maxLines="1"
+                a:textSize="@dimen/b" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            a:layout_width="match_parent"
+            a:layout_height="match_parent"
+            a:paddingBottom="20dp">
+
+            <ImageView
+                a:id="@id/f3"
+                a:layout_width="wrap_content"
+                a:layout_height="wrap_content"
+                a:layout_above="@id/l7"
+                a:layout_alignParentEnd="true"
+                a:layout_marginEnd="15dp"
+                a:layout_marginBottom="10dp"
+                a:contentDescription="@string/w21"
+                a:elevation="5dp"
+                a:padding="10dp" />
+
+            <ImageView
+                a:id="@id/l7"
+                a:layout_width="wrap_content"
+                a:layout_height="wrap_content"
+                a:layout_alignParentEnd="true"
+                a:layout_alignParentBottom="true"
+                a:layout_marginEnd="15dp"
+                a:layout_marginBottom="5dp"
+                a:contentDescription="@string/v30"
+                a:elevation="5dp"
+                a:padding="10dp" />
+
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

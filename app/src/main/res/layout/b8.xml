@@ -1,0 +1,59 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+
+    a:layout_height="fill_parent"
+    a:gravity="center"
+    a:orientation="vertical"
+    a:paddingStart="?m"
+    a:paddingEnd="?m">
+
+    <TextView
+        a:id="@id/e2"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:layout_marginTop="10dp"
+        a:labelFor="@id/g8"
+        a:textSize="@dimen/c" />
+
+    <com.droidmj.webvium.EDIT
+        a:id="@id/g8"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:layout_marginTop="10dp"
+        a:inputType="textAutoCorrect"
+        a:selectAllOnFocus="true"
+        a:textSize="@dimen/b" />
+
+    <Button
+        a:id="@id/k20"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_margin="10dp"
+        a:gravity="center"
+        a:paddingStart="10dp"
+        a:paddingEnd="10dp"
+        a:textSize="@dimen/b" />
+</LinearLayout>
+

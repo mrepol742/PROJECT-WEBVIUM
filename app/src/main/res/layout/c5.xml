@@ -1,0 +1,38 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<TextView xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@android:id/title"
+    a:layout_width="wrap_content"
+    a:layout_height="wrap_content"
+    a:layout_gravity="center_vertical"
+    a:layout_marginTop="16dp"
+    a:layout_marginBottom="10dp"
+    a:background="@drawable/d12"
+    a:ellipsize="end"
+    a:fontFamily="sans-serif-medium"
+    a:gravity="center_vertical"
+    a:maxLines="1"
+    a:paddingStart="15dp"
+    a:paddingTop="10dp"
+    a:paddingEnd="15dp"
+    a:paddingBottom="10dp"
+    a:textColor="@color/b"
+    a:textSize="15sp" />

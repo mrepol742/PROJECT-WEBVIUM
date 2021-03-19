@@ -1,0 +1,72 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<inset xmlns:a="http://schemas.android.com/apk/res/android"
+    a:insetLeft="0dp"
+    a:insetTop="0dp"
+    a:insetRight="0dp"
+    a:insetBottom="0dp">
+    <selector>
+        <item a:state_enabled="false">
+            <shape>
+                <solid a:color="@android:color/transparent" />
+                <stroke
+                    a:width="1dp"
+                    a:color="@color/c" />
+                <padding
+                    a:bottom="5dp"
+                    a:left="5dp"
+                    a:right="5dp"
+                    a:top="5dp" />
+                <corners a:radius="3dp" />
+            </shape>
+        </item>
+        <item
+            a:state_focused="false"
+            a:state_pressed="false">
+            <shape>
+                <solid a:color="@android:color/transparent" />
+                <stroke
+                    a:width="1dp"
+                    a:color="@color/c" />
+                <padding
+                    a:bottom="5dp"
+                    a:left="5dp"
+                    a:right="5dp"
+                    a:top="5dp" />
+                <corners a:radius="3dp" />
+            </shape>
+        </item>
+        <item>
+            <shape>
+                <solid a:color="@android:color/transparent" />
+                <stroke
+                    a:width="1dp"
+                    a:color="@color/a" />
+                <padding
+                    a:bottom="5dp"
+                    a:left="5dp"
+                    a:right="5dp"
+                    a:top="5dp" />
+                <corners a:radius="3dp" />
+            </shape>
+        </item>
+    </selector>
+</inset>

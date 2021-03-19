@@ -1,0 +1,39 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<layer-list xmlns:a="http://schemas.android.com/apk/res/android">
+
+    <item a:id="@android:id/background">
+        <shape a:shape="rectangle">
+            <solid a:color="@android:color/transparent" />
+        </shape>
+    </item>
+
+    <item a:id="@android:id/progress">
+        <clip>
+            <shape a:shape="rectangle">
+                <corners a:radius="5dp" />
+                <solid a:color="@color/a" />
+
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

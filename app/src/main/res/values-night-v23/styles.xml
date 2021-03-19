@@ -1,0 +1,38 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <style name="d" parent="e">
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="f" parent="d">
+        <item name="b">@color/n</item>
+        <item name="android:statusBarColor">@color/n</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/n</item>
+        <item name="android:windowBackground">?u</item>
+    </style>
+
+    <style name="d3" parent="d4">
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

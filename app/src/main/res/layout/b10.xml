@@ -1,0 +1,51 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
+    a:paddingStart="?m"
+
+    a:paddingEnd="?m">
+
+    <TextView
+        a:id="@id/m11"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_centerHorizontal="true"
+        a:layout_margin="10dp"
+        a:layout_marginStart="7dp"
+        a:ellipsize="end"
+        a:maxLines="1"
+        a:textSize="@dimen/b" />
+
+    <ScrollView
+        a:layout_width="wrap_content"
+        a:layout_height="match_parent"
+        a:layout_below="@id/m11">
+
+        <TextView
+            a:id="@id/b10"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:textIsSelectable="true"
+            a:textSize="@dimen/c" />
+    </ScrollView>
+</RelativeLayout>

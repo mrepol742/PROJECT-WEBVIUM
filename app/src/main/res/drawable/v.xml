@@ -1,0 +1,24 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<shape xmlns:a="http://schemas.android.com/apk/res/android"
+    a:shape="oval">
+    <solid a:color="@color/q" />
+</shape>

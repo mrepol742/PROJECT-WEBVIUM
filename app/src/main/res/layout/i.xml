@@ -1,0 +1,67 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/f2"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent">
+
+    <include layout="@layout/a16" />
+
+    <include
+        layout="@layout/a18"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:layout_below="@id/b7" />
+
+    <TextView
+        a:id="@id/f4"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_centerInParent="true"
+        a:ellipsize="end"
+        a:maxLines="1"
+        a:textSize="@dimen/b" />
+
+    <ImageView
+        a:id="@id/o22"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_above="@id/o21"
+        a:layout_alignParentEnd="true"
+        a:layout_marginEnd="15dp"
+        a:layout_marginBottom="10dp"
+        a:contentDescription="@string/i11"
+        a:elevation="5dp"
+        a:padding="10dp" />
+
+    <ImageView
+        a:id="@id/o21"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_alignParentEnd="true"
+        a:layout_alignParentBottom="true"
+        a:layout_marginEnd="15dp"
+        a:layout_marginBottom="20dp"
+        a:contentDescription="@string/m3"
+        a:elevation="5dp"
+        a:padding="10dp" />
+
+</RelativeLayout>

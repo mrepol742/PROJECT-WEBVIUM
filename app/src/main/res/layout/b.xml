@@ -1,0 +1,26 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<GridView xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/c17"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
+
+    />

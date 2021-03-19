@@ -1,0 +1,59 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<Toolbar xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/c3"
+    a:layout_width="fill_parent"
+    a:layout_height="wrap_content"
+    a:elevation="5dp"
+    a:minHeight="@dimen/o">
+
+    <HorizontalScrollView
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:layout_marginStart="10dp"
+        a:layout_marginEnd="10dp">
+
+        <LinearLayout
+            a:layout_width="wrap_content"
+            a:layout_height="match_parent"
+            a:orientation="horizontal">
+
+            <TextView
+                a:id="@id/c4"
+                a:layout_width="wrap_content"
+                a:layout_height="match_parent"
+                a:ellipsize="end"
+                a:gravity="center_vertical"
+                a:maxLines="1"
+                a:textSize="@dimen/a" />
+
+            <TextView
+                a:id="@id/c5"
+                a:layout_width="wrap_content"
+                a:layout_height="match_parent"
+                a:layout_marginStart="5dp"
+                a:ellipsize="end"
+                a:gravity="center_vertical"
+                a:maxLines="1"
+                a:textSize="@dimen/x" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</Toolbar>

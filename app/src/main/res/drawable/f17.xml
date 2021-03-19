@@ -1,0 +1,24 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<selector xmlns:a="http://schemas.android.com/apk/res/android">
+    <item a:drawable="@drawable/f19" a:state_checked="true" />
+    <item a:drawable="@drawable/f18" />
+</selector>

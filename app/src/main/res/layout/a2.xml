@@ -1,0 +1,48 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/g4"
+    a:layout_width="fill_parent"
+
+    a:layout_height="fill_parent"
+    a:orientation="vertical">
+
+    <include layout="@layout/c11" />
+
+    <RelativeLayout
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:paddingBottom="20dp">
+
+        <ImageView
+            a:id="@id/m19"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:layout_alignParentEnd="true"
+            a:layout_alignParentBottom="true"
+            a:layout_marginEnd="15dp"
+            a:layout_marginBottom="5dp"
+            a:contentDescription="@string/b4"
+            a:elevation="5dp"
+            a:padding="15dp" />
+
+    </RelativeLayout>
+</LinearLayout>

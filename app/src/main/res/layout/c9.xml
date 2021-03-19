@@ -1,0 +1,34 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+    a:layout_height="fill_parent"
+
+    a:orientation="vertical">
+
+    <include layout="@layout/a20" />
+
+    <FrameLayout
+        a:id="@id/d"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent" />
+
+</LinearLayout>

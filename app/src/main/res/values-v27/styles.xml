@@ -1,0 +1,62 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <style name="d" parent="@style/a11">
+        <item name="android:statusBarColor">@color/b</item>
+        <item name="android:navigationBarColor">@color/b</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="e" parent="@style/a12">
+        <item name="android:statusBarColor">@color/n</item>
+        <item name="android:navigationBarColor">@color/n</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <style name="f" parent="@style/d">
+        <item name="android:windowBackground">?u</item>
+        <item name="android:statusBarColor">@color/b</item>
+        <item name="android:navigationBarColor">@color/b</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <!-- MANAGE SPACE LIGHT THEME -->
+    <style name="d3" parent="@style/a11">
+        <item name="android:statusBarColor">@color/b</item>
+        <item name="android:navigationBarColor">@color/m</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:alertDialogTheme">@style/d7</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <!-- MANAGE SPACE  DARK THEME -->
+    <style name="d4" parent="@style/a12">
+        <item name="android:statusBarColor">@color/n</item>
+        <item name="android:navigationBarColor">@color/n</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:alertDialogTheme">@style/d8</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>

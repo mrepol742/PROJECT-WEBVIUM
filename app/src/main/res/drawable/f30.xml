@@ -1,0 +1,34 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<ripple xmlns:a="http://schemas.android.com/apk/res/android"
+    a:color="@color/b">
+    <item>
+        <shape a:shape="rectangle">
+            <corners
+                a:bottomLeftRadius="50dp"
+                a:bottomRightRadius="50dp"
+                a:topLeftRadius="0dp"
+                a:topRightRadius="0dp" />
+            <solid a:color="@color/g" />
+        </shape>
+
+    </item>
+</ripple>

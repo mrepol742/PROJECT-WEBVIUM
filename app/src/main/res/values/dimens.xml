@@ -1,0 +1,35 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+    <dimen name="a">20sp</dimen>
+    <dimen name="b">18sp</dimen>
+    <dimen name="c">16sp</dimen>
+    <dimen name="d">10dp</dimen>
+    <dimen name="e">5dp</dimen>
+    <dimen name="g">60dp</dimen>
+    <dimen name="h">22sp</dimen>
+    <dimen name="i">32sp</dimen>
+    <dimen name="o">56.0dip</dimen>
+
+    <dimen name="x">14sp</dimen>
+
+
+</resources>

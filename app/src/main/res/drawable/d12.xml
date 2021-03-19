@@ -1,0 +1,29 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<shape xmlns:a="http://schemas.android.com/apk/res/android"
+    a:shape="rectangle">
+    <corners
+        a:bottomLeftRadius="0dp"
+        a:bottomRightRadius="50dp"
+        a:topLeftRadius="0dp"
+        a:topRightRadius="50dp" />
+    <solid a:color="?g" />
+</shape>

@@ -1,0 +1,48 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+
+    a:layout_height="fill_parent"
+    a:gravity="center"
+    a:orientation="vertical"
+    a:paddingStart="?m"
+    a:paddingEnd="?m">
+
+    <TextView
+        a:id="@id/k13"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:layout_marginTop="10dp"
+        a:textIsSelectable="true"
+        a:textSize="@dimen/c" />
+
+    <Button
+        a:id="@id/k14"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_margin="10dp"
+        a:gravity="center"
+        a:paddingStart="10dp"
+        a:paddingEnd="10dp"
+        a:textSize="@dimen/b" />
+</LinearLayout>

@@ -1,0 +1,71 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<!--suppress ALL -->
+<PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
+    <com.droidmj.webvium.PREF0 a:title="@string/p15">
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="true"
+            a:key="enableZ"
+            a:title="@string/g11" />
+
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="zoom"
+            a:summary="@string/g13"
+            a:title="@string/m" />
+    </com.droidmj.webvium.PREF0>
+
+    <com.droidmj.webvium.PREF0 a:title="@string/p16">
+        <com.droidmj.webvium.LIST
+            a:defaultValue="1u"
+            a:dialogTitle="@string/p19"
+            a:entries="@array/a19"
+            a:entryValues="@array/a20"
+            a:key="VU"
+            a:summary="%1$s"
+            a:title="@string/p17" />
+
+        <com.droidmj.webvium.LIST
+            a:defaultValue="1v"
+            a:dialogTitle="@string/w8"
+            a:entries="@array/b1"
+            a:entryValues="@array/b2"
+            a:key="VD"
+            a:summary="%1$s"
+            a:title="@string/p18" />
+
+    </com.droidmj.webvium.PREF0>
+
+
+    <com.droidmj.webvium.LIST
+        a:defaultValue="1p"
+        a:dialogTitle="@string/a19"
+        a:entries="@array/a7"
+        a:entryValues="@array/a8"
+        a:key="longP"
+        a:summary="%1$s"
+        a:title="@string/a18" />
+    <com.droidmj.webvium.PREF
+        a:key="textS"
+        a:title="@string/g14" />
+</PreferenceScreen>
+
+ 

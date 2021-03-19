@@ -1,0 +1,43 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<ScrollView xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+    a:layout_height="wrap_content"
+    a:layout_marginTop="10dp"
+
+    a:layout_marginBottom="10dp"
+    a:paddingStart="?m"
+
+    a:paddingEnd="?m">
+
+    <LinearLayout
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:orientation="vertical">
+
+        <TextView
+            a:id="@id/l8"
+            a:layout_width="wrap_content"
+            a:layout_height="fill_parent"
+            a:textIsSelectable="true"
+            a:textSize="@dimen/c" />
+    </LinearLayout>
+</ScrollView>

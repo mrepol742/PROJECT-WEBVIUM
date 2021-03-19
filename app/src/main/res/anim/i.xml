@@ -1,0 +1,31 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<set xmlns:a="http://schemas.android.com/apk/res/android">
+    <!-- floating button anim-->
+    <scale
+        a:duration="700"
+        a:fromXScale=".2"
+        a:fromYScale=".2"
+        a:pivotX="50%"
+        a:pivotY="50%"
+        a:toXScale="1.0"
+        a:toYScale="1.0" />
+</set>

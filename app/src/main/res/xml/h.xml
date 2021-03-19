@@ -1,0 +1,55 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<!--suppress ALL -->
+<PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
+    <com.droidmj.webvium.LIST
+        a:defaultValue="60a1"
+        a:dialogTitle="@string/a6"
+        a:entries="@array/b11"
+        a:entryValues="@array/b12"
+        a:key="horiVD"
+        a:summary="%1$s"
+        a:title="@string/p" />
+    <com.droidmj.webvium.PREF
+        a:key="captions"
+        a:title="@string/f10" />
+    <com.droidmj.webvium.SWIT
+        a:defaultValue="false"
+        a:key="auto"
+        a:title="@string/s" />
+    <com.droidmj.webvium.PREF0 a:title="@string/g37">
+        <com.droidmj.webvium.SWIT
+            a:key="webviumP"
+            a:title="@string/g38" />
+        <com.droidmj.webvium.PREF
+            a:dependency="webviumP"
+            a:key="cusP"
+            a:summary="@string/g40"
+            a:title="@string/g39" />
+        <com.droidmj.webvium.PREF
+            a:key="shDCu"
+            a:title="@string/b16" />
+    </com.droidmj.webvium.PREF0>
+</PreferenceScreen>
+
+
+
+

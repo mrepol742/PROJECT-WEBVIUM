@@ -1,0 +1,41 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+    <color name="a">#ff4285f4</color>
+    <color name="b">#ffffffff</color>
+    <color name="c">#ff484848</color>
+    <color name="d">#ff212121</color>
+    <color name="e">#ffea4335</color>
+    <color name="g">#ff5722</color>
+    <color name="i">#ff263238</color>
+    <color name="j">#61000000</color>
+    <color name="k">#80ffffff</color>
+    <color name="m">#ff141414</color>
+    <color name="n">#ff000000</color>
+    <color name="p">#fff5f5f5</color>
+    <color name="q">#ffd7d9db</color>
+    <color name="r">#fffbbc05</color>
+    <color name="s">#ff34a853</color>
+    <color name="t">#ff616161</color>
+    <color name="a6">#9e000000</color>
+    <color name="a7">#8bffffff</color>
+
+</resources>

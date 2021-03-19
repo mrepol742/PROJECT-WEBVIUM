@@ -1,0 +1,31 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<inset xmlns:a="http://schemas.android.com/apk/res/android"
+    a:inset="2dp">
+    <shape a:shape="rectangle">
+        <size
+            a:width="2dp"
+            a:height="2dp" />
+        <solid a:color="@color/a" />
+        <corners a:radius="10dp" />
+
+    </shape>
+</inset>

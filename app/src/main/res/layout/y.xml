@@ -1,0 +1,72 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/f6"
+    a:layout_width="fill_parent"
+    a:layout_height="fill_parent"
+    a:orientation="vertical">
+
+    <include layout="@layout/a16" />
+
+    <include
+        layout="@layout/b"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:layout_below="@id/b7" />
+
+    <TextView
+        a:id="@id/f8"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_centerInParent="true"
+        a:layout_margin="@dimen/e"
+        a:ellipsize="end"
+        a:maxLines="1"
+        a:padding="@dimen/e"
+        a:textSize="@dimen/b" />
+
+    <ImageView
+        a:id="@id/j2"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_above="@id/j3"
+        a:layout_alignParentEnd="true"
+        a:layout_marginEnd="15dp"
+        a:layout_marginBottom="10dp"
+        a:contentDescription="@string/i12"
+        a:elevation="5dp"
+        a:padding="10dp" />
+
+    <ImageView
+        a:id="@id/j3"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_alignParentEnd="true"
+        a:layout_alignParentBottom="true"
+        a:layout_marginEnd="15dp"
+        a:layout_marginBottom="20dp"
+        a:contentDescription="@string/o9"
+        a:elevation="5dp"
+        a:padding="10dp" />
+
+</RelativeLayout>
+
+ 

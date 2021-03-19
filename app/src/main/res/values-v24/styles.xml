@@ -1,0 +1,134 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <style name="c24">
+        <item name="android:subMenuArrow">@drawable/b13</item>
+    </style>
+
+    <style name="a11" parent="@style/h">
+        <item name="android:homeAsUpIndicator">?a</item>
+        <item name="android:windowBackground">?f</item>
+        <item name="android:listDivider">@null</item>
+        <item name="android:listDividerAlertDialog">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:actionOverflowButtonStyle">@style/b</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/f3</item>
+        <item name="android:alertDialogTheme">@style/s</item>
+        <item name="android:switchStyle">@style/c15</item>
+        <item name="android:checkboxStyle">@style/c16</item>
+        <item name="android:radioButtonStyle">@style/c17</item>
+        <item name="android:colorEdgeEffect">?r</item>
+
+        <item name="android:popupMenuStyle">@style/a15</item>
+        <item name="android:actionOverflowMenuStyle">@style/a15</item>
+        <item name="android:preferenceCategoryStyle">@style/c19</item>
+        <!--      <item name="android:preferenceStyle">@style/c20</item>
+            <item name="android:preferenceLayoutChild">@style/c20</item>-->
+
+        <item name="android:horizontalScrollViewStyle">@style/c22</item>
+
+        <item name="android:listMenuViewStyle">@style/c24</item>
+        <item name="android:textCursorDrawable">?z</item>
+
+        <item name="android:editTextStyle">@style/c26</item>
+        <item name="android:editTextBackground">@drawable/d14</item>
+        <item name="android:buttonStyle">@style/c</item>
+
+        <item name="android:actionModeBackground">@drawable/f27</item>
+        <item name="android:actionModeSplitBackground">@drawable/f27</item>
+        <item name="android:windowActionModeOverlay">false</item>
+        <item name="android:actionModeCloseDrawable">@drawable/a2</item>
+        <item name="android:actionModeCopyDrawable">@drawable/b16</item>
+        <item name="android:actionModeShareDrawable">@drawable/b15</item>
+        <item name="android:actionModeCutDrawable">@drawable/f16</item>
+        <item name="android:actionModePasteDrawable">@drawable/f15</item>
+        <item name="android:actionModeSelectAllDrawable">@drawable/f14</item>
+        <item name="android:actionModeFindDrawable">@drawable/f13</item>
+        <item name="android:actionModeWebSearchDrawable">@drawable/f12</item>
+        <item name="android:actionModeStyle">@style/d11</item>
+
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbarThumbVertical">?x</item>
+        <item name="android:scrollbarThumbHorizontal">?x</item>
+        <item name="android:scrollbarTrackVertical">@null</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">false</item>
+        <item name="android:scrollbarTrackHorizontal">@null</item>
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">false</item>
+        <item name="android:scrollbarFadeDuration">1000</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
+        <item name="android:fadeScrollbars">true</item>
+    </style>
+
+    <style name="a12" parent="@style/i">
+        <item name="android:homeAsUpIndicator">?a</item>
+        <item name="android:actionOverflowMenuStyle">@style/a15</item>
+        <item name="android:popupMenuStyle">@style/a15</item>
+        <item name="android:colorEdgeEffect">?r</item>
+        <item name="android:windowBackground">?f</item>
+        <item name="android:listDivider">@null</item>
+        <item name="android:listDividerAlertDialog">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:actionOverflowButtonStyle">@style/b</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/f3</item>
+        <item name="android:alertDialogTheme">@style/t</item>
+        <item name="android:switchStyle">@style/c15</item>
+        <item name="android:checkboxStyle">@style/c16</item>
+        <item name="android:radioButtonStyle">@style/c17</item>
+
+        <item name="android:preferenceCategoryStyle">@style/c19</item>
+        <!--  <item name="android:preferenceStyle">@style/c20</item>
+        <item name="android:preferenceLayoutChild">@style/c20</item>-->
+
+        <item name="android:horizontalScrollViewStyle">@style/c22</item>
+
+        <item name="android:listMenuViewStyle">@style/c24</item>
+        <item name="android:textCursorDrawable">?z</item>
+
+        <item name="android:editTextStyle">@style/c26</item>
+        <item name="android:editTextBackground">@drawable/d14</item>
+        <item name="android:buttonStyle">@style/c</item>
+
+        <item name="android:actionModeBackground">@drawable/f27</item>
+        <item name="android:actionModeSplitBackground">@drawable/f27</item>
+        <item name="android:windowActionModeOverlay">false</item>
+        <item name="android:actionModeCloseDrawable">@drawable/a2</item>
+        <item name="android:actionModeCopyDrawable">@drawable/b16</item>
+        <item name="android:actionModeShareDrawable">@drawable/b15</item>
+        <item name="android:actionModeCutDrawable">@drawable/f16</item>
+        <item name="android:actionModePasteDrawable">@drawable/f15</item>
+        <item name="android:actionModeSelectAllDrawable">@drawable/f14</item>
+        <item name="android:actionModeFindDrawable">@drawable/f13</item>
+        <item name="android:actionModeWebSearchDrawable">@drawable/f12</item>
+        <item name="android:actionModeStyle">@style/d11</item>
+
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbarThumbVertical">?x</item>
+        <item name="android:scrollbarThumbHorizontal">?x</item>
+        <item name="android:scrollbarTrackVertical">@null</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">false</item>
+        <item name="android:scrollbarTrackHorizontal">@null</item>
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">false</item>
+        <item name="android:scrollbarFadeDuration">1000</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
+        <item name="android:fadeScrollbars">true</item>
+    </style>
+</resources>

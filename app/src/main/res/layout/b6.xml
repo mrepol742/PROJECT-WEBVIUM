@@ -1,0 +1,27 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<TextView xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/d16"
+    a:layout_width="match_parent"
+    a:layout_height="wrap_content"
+    a:maxLines="1"
+    a:padding="12dp"
+    a:textSize="@dimen/b" />

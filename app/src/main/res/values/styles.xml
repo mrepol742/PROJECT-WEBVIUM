@@ -1,0 +1,502 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <!-- CUSTOM BACKGROUND TRANSLUCENT THEME LIGHT -->
+    <style name="a" parent="@style/a11">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- MENU ICON -->
+    <style name="b" parent="@style/c35">
+        <item name="android:src">?t</item>
+    </style>
+
+    <style name="c" parent="@style/c42">
+        <item name="android:background">@drawable/c10</item>
+        <item name="android:textColor">@color/a1</item>
+    </style>
+
+    <!-- LIGHT THEME -->
+    <style name="d" parent="@style/a11">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/m</item>
+
+    </style>
+
+    <!-- DARK THEME -->
+    <style name="e" parent="@style/a12">
+        <item name="android:statusBarColor">@color/n</item>
+        <item name="android:navigationBarColor">@color/n</item>
+    </style>
+
+    <!-- SPLASH SCREEN -->
+    <style name="f" parent="@style/d">
+        <item name="android:windowBackground">?u</item>
+        <item name="android:statusBarColor">@color/m</item>
+        <item name="android:navigationBarColor">@color/m</item>
+    </style>
+
+    <!-- CUSTOM BACKGROUND TRANSLUCENT THEME DARK -->
+    <style name="g" parent="@style/e">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- APP THEME LIGHT -->
+    <style name="h" parent="@style/d1">
+        <item name="a">@color/c</item>
+        <item name="b">@color/b</item>
+        <item name="c">@color/b</item>
+        <item name="d">@color/e</item>
+        <item name="e">@color/b</item>
+        <item name="f">@color/p</item>
+        <item name="g">@color/a</item>
+        <item name="h">@color/q</item>
+        <item name="i">@color/b</item>
+        <item name="j">@color/c</item>
+        <item name="k">@color/u</item>
+        <item name="l">@color/b</item>
+        <item name="m">24dp</item>
+        <item name="n">@drawable/f21</item>
+        <item name="o">@drawable/f17</item>
+        <item name="p">@drawable/f20</item>
+        <item name="q">@drawable/f24</item>
+        <item name="r">@color/q</item>
+        <item name="s">@color/d</item>
+        <item name="android:textColorPrimary">?a</item>
+        <item name="android:textColorSecondary">@color/a6</item>
+        <item name="android:textColorPrimaryInverse">?b</item>
+        <item name="android:textColorSecondaryInverse">?b</item>
+        <item name="android:colorPrimary">?f</item>
+        <item name="android:colorPrimaryDark">?f</item>
+        <item name="android:colorAccent">?g</item>
+        <item name="android:colorControlNormal">?a</item>
+        <item name="android:colorControlActivated">?g</item>
+        <item name="android:colorControlHighlight">@color/q</item>
+        <item name="android:colorButtonNormal">@color/p</item>
+        <item name="t">@drawable/a1</item>
+        <item name="u">@drawable/e5</item>
+        <item name="v">@drawable/f3</item>
+        <item name="w">@drawable/c5</item>
+        <item name="x">@drawable/a7</item>
+        <item name="y">@drawable/k</item>
+        <item name="z">@drawable/d11</item>
+        <item name="a1">@drawable/a2</item>
+        <item name="a2">@drawable/c12</item>
+        <item name="a3">@drawable/e18</item>
+        <item name="android:textColorHighlight">@color/a3</item>
+        <item name="android:textColorHighlightInverse">@color/a3</item>
+    </style>
+
+    <!-- APP THEME DARK -->
+    <style name="i" parent="@style/d2">
+        <item name="a3">@drawable/e18</item>
+        <item name="a2">@drawable/c12</item>
+        <item name="a1">@drawable/a2</item>
+        <item name="z">@drawable/d11</item>
+        <item name="t">@drawable/a1</item>
+        <item name="u">@drawable/e5</item>
+        <item name="v">@drawable/f3</item>
+        <item name="w">@drawable/c5</item>
+        <item name="x">@drawable/a7</item>
+        <item name="y">@drawable/k</item>
+        <item name="a">@color/b</item>
+        <item name="b">@color/n</item>
+        <item name="c">@color/d</item>
+        <item name="d">@color/e</item>
+        <item name="e">@color/b</item>
+        <item name="f">@color/m</item>
+        <item name="g">@color/a</item>
+        <item name="h">@color/c</item>
+        <item name="i">@color/m</item>
+        <item name="j">@color/c</item>
+        <item name="k">@color/v</item>
+        <item name="l">@color/m</item>
+        <item name="m">24dp</item>
+        <item name="n">@drawable/f21</item>
+        <item name="o">@drawable/f17</item>
+        <item name="p">@drawable/f20</item>
+        <item name="q">@drawable/f24</item>
+        <item name="r">@color/d</item>
+        <item name="s">@color/q</item>
+        <item name="android:textColorPrimary">?a</item>
+        <item name="android:textColorSecondary">@color/a7</item>
+        <item name="android:textColorPrimaryInverse">?b</item>
+        <item name="android:textColorSecondaryInverse">?b</item>
+        <item name="android:colorPrimary">?f</item>
+        <item name="android:colorPrimaryDark">?f</item>
+        <item name="android:colorAccent">?g</item>
+        <item name="android:colorControlNormal">?a</item>
+        <item name="android:colorControlActivated">?g</item>
+        <item name="android:colorControlHighlight">@color/m</item>
+        <item name="android:colorButtonNormal">@color/c</item>
+        <item name="android:textColorHighlight">@color/a3</item>
+        <item name="android:textColorHighlightInverse">@color/a3</item>
+    </style>
+
+    <!-- ASSISTANT THEME LIGHT -->
+    <style name="m" parent="@style/a11">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- ASSISTANT THEME DARK -->
+    <style name="n" parent="@style/a12">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- MAIN PROGRESS BAR LOADING THEME -->
+    <style name="r" parent="@style/c38">
+        <item name="android:progressDrawable">?y</item>
+    </style>
+
+    <!-- ALERT DIALOG THEME LIGhT -->
+    <style name="s" parent="@style/c32">
+        <item name="android:actionModeBackground">@drawable/f29</item>
+        <item name="android:actionModeSplitBackground">@drawable/f29</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/f28</item>
+        <item name="android:windowBackground">?w</item>
+        <item name="android:windowAnimationStyle">@style/w</item>
+        <item name="android:listDivider">@null</item>
+        <item name="android:listDividerAlertDialog">@null</item>
+        <item name="android:listSeparatorTextViewStyle">@null</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/c27</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/c28</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/c28</item>
+    </style>
+
+    <!-- ALERT DIALOG THEME DARK -->
+    <style name="t" parent="@style/c31">
+        <item name="android:actionModeBackground">@drawable/f29</item>
+        <item name="android:actionModeSplitBackground">@drawable/f29</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/f28</item>
+        <item name="android:windowBackground">?w</item>
+        <item name="android:listDividerAlertDialog">@null</item>
+        <item name="android:windowAnimationStyle">@style/w</item>
+        <item name="android:listDivider">@null</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/c27</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/c28</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/c28</item>
+    </style>
+
+    <!-- DIALOG ANIMATION -->
+    <style name="w">
+        <item name="android:windowEnterAnimation">@anim/a</item>
+        <item name="android:windowExitAnimation">@anim/b</item>
+    </style>
+
+    <!-- MAIN LIGHT -->
+    <style name="a11" parent="@style/h">
+        <item name="android:windowBackground">?f</item>
+        <item name="android:listDivider">@null</item>
+        <item name="android:listDividerAlertDialog">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:actionOverflowButtonStyle">@style/b</item>
+        <item name="android:listChoiceBackgroundIndicator">?v</item>
+        <item name="android:alertDialogTheme">@style/s</item>
+        <item name="android:switchStyle">@style/c15</item>
+        <item name="android:checkboxStyle">@style/c16</item>
+        <item name="android:radioButtonStyle">@style/c17</item>
+        <item name="android:colorEdgeEffect">?r</item>
+        <item name="android:popupMenuStyle">@style/a15</item>
+        <item name="android:actionOverflowMenuStyle">@style/a15</item>
+        <item name="android:preferenceCategoryStyle">@style/c19</item>
+        <!--   <item name="android:preferenceStyle">@style/c20</item>
+         <item name="android:preferenceLayoutChild">@style/c20</item>-->
+        <item name="android:horizontalScrollViewStyle">@style/c22</item>
+        <item name="android:editTextStyle">@style/c26</item>
+        <item name="android:editTextBackground">@drawable/d14</item>
+        <item name="android:textCursorDrawable">?z</item>
+        <item name="android:homeAsUpIndicator">?a</item>
+        <item name="android:buttonStyle">@style/c</item>
+        <item name="android:actionModeBackground">@drawable/f27</item>
+        <item name="android:actionModeSplitBackground">@drawable/f27</item>
+        <item name="android:windowActionModeOverlay">false</item>
+        <item name="android:actionModeCloseDrawable">@drawable/a2</item>
+        <item name="android:actionModeCopyDrawable">@drawable/b16</item>
+        <item name="android:actionModeShareDrawable">@drawable/b15</item>
+        <item name="android:actionModeCutDrawable">@drawable/f16</item>
+        <item name="android:actionModePasteDrawable">@drawable/f15</item>
+        <item name="android:actionModeSelectAllDrawable">@drawable/f14</item>
+        <item name="android:actionModeFindDrawable">@drawable/f13</item>
+        <item name="android:actionModeWebSearchDrawable">@drawable/f12</item>
+        <item name="android:actionModeStyle">@style/d11</item>
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbarThumbVertical">?x</item>
+        <item name="android:scrollbarThumbHorizontal">?x</item>
+        <item name="android:scrollbarTrackVertical">@null</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">false</item>
+        <item name="android:scrollbarTrackHorizontal">@null</item>
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">false</item>
+        <item name="android:scrollbarFadeDuration">1000</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
+        <item name="android:fadeScrollbars">true</item>
+    </style>
+
+    <!-- MAIN DARK -->
+    <style name="a12" parent="@style/i">
+        <item name="android:homeAsUpIndicator">?a1</item>
+        <item name="android:actionOverflowMenuStyle">@style/a15</item>
+        <item name="android:popupMenuStyle">@style/a15</item>
+        <item name="android:colorEdgeEffect">?r</item>
+        <item name="android:windowBackground">?f</item>
+        <item name="android:listDivider">@null</item>
+        <item name="android:listDividerAlertDialog">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:actionOverflowButtonStyle">@style/b</item>
+        <item name="android:listChoiceBackgroundIndicator">?v</item>
+        <item name="android:alertDialogTheme">@style/t</item>
+        <item name="android:switchStyle">@style/c15</item>
+        <item name="android:checkboxStyle">@style/c16</item>
+        <item name="android:radioButtonStyle">@style/c17</item>
+        <item name="android:preferenceCategoryStyle">@style/c19</item>
+        <!--   <item name="android:preferenceStyle">@style/c20</item>
+        <item name="android:preferenceLayoutChild">@style/c20</item>-->
+        <item name="android:horizontalScrollViewStyle">@style/c22</item>
+        <item name="android:editTextStyle">@style/c26</item>
+        <item name="android:editTextBackground">@drawable/d14</item>
+        <item name="android:textCursorDrawable">?z</item>
+        <item name="android:buttonStyle">@style/c</item>
+        <item name="android:actionModeBackground">@drawable/f27</item>
+        <item name="android:actionModeSplitBackground">@drawable/f27</item>
+        <item name="android:windowActionModeOverlay">false</item>
+        <item name="android:actionModeCloseDrawable">@drawable/a2</item>
+        <item name="android:actionModeCopyDrawable">@drawable/b16</item>
+        <item name="android:actionModeShareDrawable">@drawable/b15</item>
+        <item name="android:actionModeCutDrawable">@drawable/f16</item>
+        <item name="android:actionModePasteDrawable">@drawable/f15</item>
+        <item name="android:actionModeSelectAllDrawable">@drawable/f14</item>
+        <item name="android:actionModeFindDrawable">@drawable/f13</item>
+        <item name="android:actionModeWebSearchDrawable">@drawable/f12</item>
+        <item name="android:actionModeStyle">@style/d11</item>
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbarThumbVertical">?x</item>
+        <item name="android:scrollbarThumbHorizontal">?x</item>
+        <item name="android:scrollbarTrackVertical">@null</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">false</item>
+        <item name="android:scrollbarTrackHorizontal">@null</item>
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">false</item>
+        <item name="android:scrollbarFadeDuration">1000</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
+        <item name="android:fadeScrollbars">true</item>
+    </style>
+
+    <style name="a15" parent="@style/c39">
+        <item name="android:overlapAnchor">true</item>
+        <item name="android:popupBackground">?a2</item>
+        <item name="android:dropDownHorizontalOffset">-4dip</item>
+    </style>
+
+    <!--LIGHT THEME CURVE-->
+    <style name="b15" parent="d">
+        <item name="android:windowBackground">?a3</item>
+    </style>
+
+    <!-- DARK THEME CURVE -->
+    <style name="b16" parent="e">
+        <item name="android:windowBackground">?a3</item>
+    </style>
+
+    <!-- CUSTOM BACKGROUND TRANSLUCENT THEME LIGHT CURVE EFFECT -->
+    <style name="b19" parent="a">
+        <item name="android:windowBackground">?a3</item>
+    </style>
+
+    <!-- CUSTOM BACKGROUND TRANSLUCENT THEME DARK CURVE EFFECT -->
+    <style name="c2" parent="g">
+        <item name="android:windowBackground">?a3</item>
+    </style>
+
+    <style name="c15" parent="@style/c40">
+        <item name="android:thumb">?o</item>
+        <item name="android:track">?p</item>
+        <item name="android:showText">false</item>
+    </style>
+
+    <style name="c16" parent="@style/c41">
+        <item name="android:button">?n</item>
+    </style>
+
+    <style name="c17" parent="@style/c34">
+        <item name="android:button">?q</item>
+    </style>
+
+    <style name="c19">
+        <item name="android:layout">@layout/c5</item>
+    </style>
+
+    <style name="c22">
+        <item name="android:scrollbars">none</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="c24" />
+
+    <style name="c26" parent="@style/c33">
+        <item name="android:background">@drawable/d14</item>
+    </style>
+
+    <style name="c27">
+        <item name="android:background">@drawable/c10</item>
+        <item name="android:textColor">@color/a1</item>
+    </style>
+
+    <style name="c28">
+        <item name="android:background">@drawable/d10</item>
+        <item name="android:textColor">@color/a2</item>
+    </style>
+
+
+    <style name="c31" parent="android:Theme.Material.Dialog.Alert" />
+
+    <style name="c32" parent="android:Theme.Material.Light.Dialog.Alert" />
+
+    <style name="c33" parent="@android:style/Widget.Material.EditText" />
+
+    <style name="c34" parent="android:Widget.Material.CompoundButton.RadioButton" />
+
+    <style name="c35" parent="android:Widget.Material.ActionButton.Overflow" />
+
+    <style name="c36" parent="android:Theme.Material.Light" />
+
+    <style name="c37" parent="android:Theme.Material" />
+
+    <style name="c38" parent="android:Widget.Material.ProgressBar.Horizontal" />
+
+    <style name="c39" parent="android:Widget.Material.ListPopupWindow" />
+
+    <style name="c40" parent="android:Widget.Material" />
+
+    <style name="c41" parent="android:Widget.Material.CompoundButton.CheckBox" />
+
+    <style name="c42" parent="android:Widget.Material.Button" />
+
+    <style name="c43" parent="android:Widget.Material.ActionMode" />
+
+    <style name="d1" parent="@style/c36">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="d2" parent="@style/c37">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <!-- MANAGE SPACE LIGHT THEME -->
+    <style name="d3" parent="@style/a11">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/m</item>
+        <item name="android:alertDialogTheme">@style/d7</item>
+    </style>
+
+    <!-- MANAGE SPACE DARK THEME -->
+    <style name="d4" parent="@style/a12">
+        <item name="android:statusBarColor">@color/n</item>
+        <item name="android:navigationBarColor">@color/n</item>
+        <item name="android:alertDialogTheme">@style/d8</item>
+    </style>
+
+    <!--LIGHT THEME CURVE-->
+    <style name="d5" parent="d3">
+        <item name="android:windowBackground">?a3</item>
+        <item name="android:alertDialogTheme">@style/d7</item>
+    </style>
+
+    <!-- DARK THEME CURVE -->
+    <style name="d6" parent="d4">
+        <item name="android:windowBackground">?a3</item>
+        <item name="android:alertDialogTheme">@style/d8</item>
+
+    </style>
+
+    <!-- MANAGE SPACE ALERT DIALOG LIGHT THEME -->
+    <style name="d7" parent="@style/s">
+        <item name="android:buttonBarPositiveButtonStyle">@style/d9</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/d10</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/d10</item>
+    </style>
+
+    <!-- MANAGE SPACE ALERT DIALOG DARK THEME CURVE -->
+    <style name="d8" parent="@style/t">
+        <item name="android:buttonBarPositiveButtonStyle">@style/d9</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/d10</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/d10</item>
+    </style>
+
+    <style name="d9">
+        <item name="android:background">@drawable/e17</item>
+        <item name="android:textColor">@color/a1</item>
+    </style>
+
+    <style name="d10">
+        <item name="android:background">@drawable/e20</item>
+        <item name="android:textColor">@color/e</item>
+    </style>
+
+    <style name="d11" parent="c43">
+        <item name="android:background">@drawable/f27</item>
+        <item name="android:backgroundSplit">@drawable/f27</item>
+        <item name="android:height">@dimen/o</item>
+        <item name="android:titleTextStyle">@style/d12</item>
+        <item name="android:subtitleTextStyle">@style/d13</item>
+    </style>
+
+    <style name="d12">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?a</item>
+    </style>
+
+    <style name="d13">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?a</item>
+    </style>
+
+</resources>

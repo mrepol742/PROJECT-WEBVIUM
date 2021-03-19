@@ -1,0 +1,195 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<!--suppress ALL -->
+
+
+
+<PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
+
+    <com.droidmj.webvium.PREF0 a:title="@string/t21">
+        <com.droidmj.webvium.PREF
+            a:key="clearBook"
+            a:title="@string/i13" />
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="pHistory"
+            a:title="@string/d13" />
+        <com.droidmj.webvium.PREF
+            a:key="clearHistory"
+            a:title="@string/d12" />
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="pSearch"
+            a:title="@string/d15" />
+        <com.droidmj.webvium.PREF
+            a:key="clearSearch"
+            a:title="@string/d14" />
+    </com.droidmj.webvium.PREF0>
+
+    <com.droidmj.webvium.PREF0 a:title="@string/d16">
+        <com.droidmj.webvium.LIST
+            a:defaultValue="1e"
+            a:dialogTitle="@string/d17"
+            a:entries="@array/k"
+            a:entryValues="@array/l"
+            a:key="userA"
+            a:summary="%1$s"
+            a:title="@string/d16" />
+        <com.droidmj.webvium.EDIT0
+            a:key="CustomuserA"
+            a:title="@string/d18" />
+    </com.droidmj.webvium.PREF0>
+    <com.droidmj.webvium.PREF0 a:title="@string/d19">
+
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="true"
+            a:key="showSO"
+            a:summary="@string/e3"
+            a:title="@string/e2" />
+        <com.droidmj.webvium.PREF
+            a:key="clearSSL"
+            a:title="@string/e4" />
+
+    </com.droidmj.webvium.PREF0>
+    <com.droidmj.webvium.PREF0 a:title="@string/e5">
+        <com.droidmj.webvium.PREF
+            a:key="clearHTTP"
+            a:summary="@string/g3"
+            a:title="@string/e6" />
+    </com.droidmj.webvium.PREF0>
+    <com.droidmj.webvium.PREF0 a:title="@string/e7">
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="clearPr"
+            a:summary="@string/e9"
+            a:title="@string/e8" />
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="clearP"
+            a:summary="@string/e11"
+            a:title="@string/e10" />
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="clearH"
+            a:summary="@string/e13"
+            a:title="@string/e12" />
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="clearC"
+            a:summary="@string/e15"
+            a:title="@string/e14" />
+    </com.droidmj.webvium.PREF0>
+    <com.droidmj.webvium.PREF0 a:title="@string/m5">
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:key="nCV"
+            a:summary="@string/x10"
+            a:title="@string/l17" />
+        <com.droidmj.webvium.PREF
+            a:key="clearClipboard"
+            a:title="@string/e14" />
+    </com.droidmj.webvium.PREF0>
+    <com.droidmj.webvium.PREF0 a:title="@string/z">
+        <com.droidmj.webvium.LIST
+            a:defaultValue="7"
+            a:dialogTitle="@string/e16"
+            a:entries="@array/a9"
+            a:entryValues="@array/a10"
+            a:key="cookies"
+            a:summary="%1$s"
+            a:title="@string/a4" />
+        <com.droidmj.webvium.PREF
+            a:key="clearCookies"
+            a:summary="@string/f4"
+            a:title="@string/e17" />
+        <com.droidmj.webvium.PREF
+            a:key="clearSCookies"
+            a:summary="@string/f5"
+            a:title="@string/z6" />
+    </com.droidmj.webvium.PREF0>
+    <com.droidmj.webvium.PREF0
+        a:summary="@string/a15"
+        a:title="@string/a1">
+
+
+        <com.droidmj.webvium.LIST
+            a:defaultValue="1g"
+            a:dialogTitle="@string/e19"
+            a:entries="@array/o"
+            a:entryValues="@array/p"
+            a:key="form"
+            a:summary="%1$s"
+            a:title="@string/e18" />
+
+        <com.droidmj.webvium.PREF
+            a:key="clearForm"
+            a:title="@string/e20" />
+    </com.droidmj.webvium.PREF0>
+    <com.droidmj.webvium.PREF0 a:title="@string/a2">
+
+        <com.droidmj.webvium.LIST
+            a:defaultValue="1h"
+            a:dialogTitle="@string/f2"
+            a:entries="@array/q"
+            a:entryValues="@array/r"
+            a:key="location"
+            a:summary="%1$s"
+            a:title="@string/f1" />
+        <com.droidmj.webvium.PREF
+            a:enabled="false"
+            a:key="clearLocation"
+            a:title="@string/f3" />
+    </com.droidmj.webvium.PREF0>
+
+
+    <com.droidmj.webvium.PREF0 a:title="@string/f6">
+
+        <com.droidmj.webvium.LIST
+            a:defaultValue="1m"
+            a:dialogTitle="@string/f8"
+            a:entries="@array/a1"
+            a:entryValues="@array/a2"
+            a:key="caches"
+            a:summary="%1$s"
+            a:title="@string/f7" />
+        <com.droidmj.webvium.PREF
+            a:key="clearCache"
+            a:title="@string/d11" />
+    </com.droidmj.webvium.PREF0>
+
+    <com.droidmj.webvium.PREF0 a:title="@string/s29">
+
+        <com.droidmj.webvium.PREF
+            a:key="cjsa"
+            a:summary="@string/f17"
+            a:title="@string/a30" />
+    </com.droidmj.webvium.PREF0>
+
+</PreferenceScreen>
+
+
+
+
+
+
+
+
+

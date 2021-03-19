@@ -1,0 +1,33 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<layer-list xmlns:a="http://schemas.android.com/apk/res/android"
+    a:autoMirrored="true"
+    a:opacity="opaque">
+    <item a:drawable="?b" />
+
+    <item>
+        <bitmap
+            a:autoMirrored="true"
+            a:gravity="center"
+            a:src="@mipmap/d" />
+    </item>
+
+</layer-list>

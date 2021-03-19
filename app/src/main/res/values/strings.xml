@@ -1,0 +1,887 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <string name="a">General</string>
+    <string name="b">Privacy</string>
+    <string name="c">Advanced</string>
+    <string name="d">Background</string>
+    <string name="e" translatable="false">Search</string>
+    <string name="f">Downloads</string>
+    <string name="g">Accessibility</string>
+    <string name="h">Dark Theme</string>
+    <string name="i">Videos</string>
+    <string name="j">Source Code</string>
+    <string name="k">Webvium Content</string>
+    <string name="l" translatable="false">About</string>
+    <string name="m">Zoom Controls</string>
+    <string name="n">Homepage</string>
+    <string name="o" translatable="false">UI</string>
+    <string name="p">Screen Orientation</string>
+    <string name="q">Set Homepage</string>
+    <string name="r">Block Images &amp; Video Thumbnails</string>
+    <string name="s">Play videos when you hover over the video thumbnail</string>
+    <string name="t">Tab Queue</string>
+    <string name="u">Copy</string>
+    <string name="v">Continue where you left off</string>
+    <string name="w">Remind Me to Take a Break</string>
+    <string name="x">Set Reminder</string>
+    <string name="y">Mics</string>
+    <string name="z">Cookies</string>
+    <string name="a1">Form Data</string>
+    <string name="a2">Location</string>
+    <string name="a4">Enable Cookies</string>
+    <string name="a5">Set UI</string>
+    <string name="a6">Set Screen Orientation</string>
+    <string name="a8">Share</string>
+    <string name="a9">Show Webpage Title</string>
+    <string name="a10">Always show webpage title in toolbar</string>
+    <string name="a11">Save</string>
+    <string name="a12">Edit</string>
+    <string name="a13">Delete</string>
+    <string name="a14">Details</string>
+    <string name="a15">Clears any saved data for web forms</string>
+    <string name="a16">Screen Timeout</string>
+    <string name="a17">Set Screen Timeout</string>
+    <string name="a18">Hold Back</string>
+    <string name="a19">Set Hold Back Action</string>
+    <string name="a20">Search Providers</string>
+    <string name="b1">Search Engines</string>
+    <string name="b2">Set Search Engines</string>
+    <string name="b3">Voice</string>
+    <string name="b4">Voice Search</string>
+    <string name="b5">Show Search Suggestion</string>
+    <string name="b6">Sort</string>
+    <string name="b7">&lt;b>Title:&lt;/b> %a&lt;br>&lt;b>Link:&lt;/b> %b&lt;br>&lt;br>&lt;b>Issued To:&lt;/b>&lt;br>&lt;b>Common Name:&lt;/b> %c&lt;br>&lt;b>Organization:&lt;/b> %d&lt;br>&lt;b>Organizational Unit:&lt;/b> %e&lt;br>&lt;br>&lt;b>Issued By:&lt;/b>&lt;br>&lt;b>Common Name:&lt;/b> %f&lt;br>&lt;b>Organization:&lt;/b> %g&lt;br>&lt;b>Organizational Unit:&lt;/b> %h&lt;br>&lt;br>&lt;b>Validity:&lt;/b>&lt;br>&lt;b>Issued On:&lt;/b> %i&lt;br>&lt;b>Expires On:&lt;/b> %j</string>
+    <string name="b9">Open Downloads on Start</string>
+    <string name="b10">Download manager will launch when a download started</string>
+    <string name="b11">Open Downloads on Finish</string>
+    <string name="b12">Download manager will launch when a download finished</string>
+    <string name="b13">Download Files Automatically</string>
+    <string name="b14">Download over Wi-Fi Only</string>
+    <string name="b16">Show Demo</string>
+    <string name="b17">Done</string>
+    <string name="b18">Restore Default Settings</string>
+    <string name="b19">Reset to Default</string>
+    <string name="b20">Reset</string>
+    <string name="c1" translatable="false">Webpage Debugging</string>
+    <string name="c2">Do Not Track</string>
+    <string name="c3">Include a DNT header when you load a webpage</string>
+    <string name="c4">Set Security Lock</string>
+    <string name="c5">Enable Security Lock</string>
+    <string name="c6">Set Up Security Lock</string>
+    <string name="c8" translatable="false">JavaScript</string>
+    <string name="c9">Enable JavaScript</string>
+    <string name="c10">Set JavaScript</string>
+    <string name="c11">Prompt</string>
+    <string name="c12">Display a javascript prompt dialog</string>
+    <string name="c13">Alert</string>
+    <string name="c14">Display a javascript alert dialog</string>
+    <string name="c15">Confirm</string>
+    <string name="c16">Display a javascript confirm dialog</string>
+    <string name="c17">Performance &amp; Quality</string>
+    <string name="c18">Set Text Encoding</string>
+    <string name="c19">Text Encoding</string>
+    <string name="c20">Device Media Projection</string>
+    <string name="d1">Overview Mode</string>
+    <string name="d2">WideViewPort</string>
+    <string name="d3">DOM Storage</string>
+    <string name="d4">Database Storage</string>
+    <string name="d5">Load webpage in overview mode</string>
+    <string name="d6">Load webpage in HTML viewport or wideviewport</string>
+    <string name="d7">Allow webpage to use Database Storage APIs</string>
+    <string name="d8">Allow webpage to use DOM Storage APIs</string>
+    <string name="d9">Display a dialog to confirm navigation away from the current page</string>
+    <string name="d10">Before Unload</string>
+    <string name="d11">Clear Cache</string>
+    <string name="d12">Clear Browsing History</string>
+    <string name="d13">Pause Browsing History</string>
+    <string name="d14">Clear Search History</string>
+    <string name="d15">Pause Search History</string>
+    <string name="d16" translatable="false">User-Agent</string>
+    <string name="d17">Set User-Agent</string>
+    <string name="d18">Custom User-Agent</string>
+    <string name="d19">SSL Error</string>
+    <string name="d20">There\'s no console message\'s to show.</string>
+    <string name="e2">Receive SSL Error</string>
+    <string name="e3">SSL error occurred while loading a resource</string>
+    <string name="e4">Clear SSL Preference</string>
+    <string name="e5">Credentials</string>
+    <string name="e6">Clear HTTP Auth Username and Password</string>
+    <string name="e7">Clear on Exit</string>
+    <string name="e8">Clear Private Data</string>
+    <string name="e9">Private data will clear whenever you exit</string>
+    <string name="e10">Clear Cache</string>
+    <string name="e11">Cache will clear whenever you exit</string>
+    <string name="e12">Clear History</string>
+    <string name="e13">History will clear whenever you exit</string>
+    <string name="e14">Clear Clipboard</string>
+    <string name="e15">Clipboard will clear whenever you exit</string>
+    <string name="e16">Set Cookies</string>
+    <string name="e17">Clear Cookies</string>
+    <string name="e18">Remember Form Data</string>
+    <string name="e19">Set Remember Form Data</string>
+    <string name="e20">Clear Remember Form Data</string>
+    <string name="f1">Enable Location</string>
+    <string name="f2">Set Location</string>
+    <string name="f3">Clear Location</string>
+    <string name="f4">Remove all cookies</string>
+    <string name="f5">Remove all cookies that doesn\'t have an expiration date</string>
+    <string name="f6">Cache</string>
+    <string name="f7">Cache Mode</string>
+    <string name="f8">Set Cache Mode</string>
+    <string name="f10">Captions</string>
+    <string name="f11">Content to Captured</string>
+    <string name="f12">Terms &amp; Conditions</string>
+    <string name="f13">Privacy Policy</string>
+    <string name="f14">Feedback</string>
+    <string name="f16">Databases, cache, cookies</string>
+    <string name="f17">Clears all storage currently being used by the JavaScript storage APIs. This includes the Application Cache, Web SQL Database and the HTML5 Web Storage APIs.</string>
+    <string name="f19" translatable="false">Facebook</string>
+    <string name="f20" translatable="false">DROID MJ Facebook Page</string>
+    <string name="g1" translatable="false">Instagram</string>
+    <string name="g2" translatable="false">Gmail</string>
+    <string name="g3">Clears any saved credentials for HTTP authentication</string>
+    <string name="g4">Enables debugging of web contents (HTML / CSS / JavaScript)</string>
+    <string name="g5">These terms and conditions (\"Terms\", \"Conditions\") are condition between DROID MJ (\"DROID MJ\", \"us\", \"we\" or \"our\") and you (\"user\", \"you\" or \"your\")</string>
+    <string name="g6">PIN</string>
+    <string name="g7">Text Selection</string>
+    <string name="g8">DROID MJ(\"DROID MJ\", \"us\", \"we\" or \"our\") operates the mobile application and webpages</string>
+    <string name="g9">Layer Type</string>
+    <string name="g10">Set Layer Type</string>
+    <string name="g11">Zoom Gesture</string>
+    <string name="g12">None</string>
+    <string name="g13">Show zoom controls panel</string>
+    <string name="g14">Text Size</string>
+    <string name="g15">Main Window Background</string>
+    <string name="g16">Custom Background Image</string>
+    <string name="g17">Select custom background image</string>
+    <string name="g18">Battery Optimization</string>
+    <string name="g19">&lt;b>Link:&lt;/b> %a&lt;br>&lt;b>Error Code:&lt;/b> %b</string>
+    <string name="g20">This URL %a contains Ads that was blocked by Webvium AdBlocker.</string>
+    <string name="h1">Safe Browsing</string>
+    <string name="h2">Quit</string>
+    <string name="h3">Settings</string>
+    <string name="h4">Console Message</string>
+    <string name="h5">%a removed.</string>
+    <string name="h6">NSLookup</string>
+    <string name="h7">View IP</string>
+    <string name="h9">Stop</string>
+    <string name="h10">Tools</string>
+    <string name="h11">Bookmarks</string>
+    <string name="h12">Homescreen</string>
+    <string name="h14">Refresh</string>
+    <string name="h15">Disable Security Lock</string>
+    <string name="h16">Downloads</string>
+    <string name="h17">Add to</string>
+    <string name="h18">History</string>
+    <string name="h19">Share</string>
+    <string name="h20">Desktop</string>
+    <string name="i2">Paste and Search</string>
+    <string name="i3">Paste</string>
+    <string name="i4">Save Link</string>
+    <string name="i6" translatable="false">OK</string>
+    <string name="i7">Cancel</string>
+    <string name="i9">Search History</string>
+    <string name="i10">Name:</string>
+    <string name="i11">Clear All History</string>
+    <string name="i12">Clear All Bookmarks</string>
+    <string name="i13">Clear Bookmarks</string>
+    <string name="i14">Continue</string>
+    <string name="i15">NO BROWSING HISTORY TO SHOW</string>
+    <string name="i16">Browsing History</string>
+    <string name="i18">Enabled</string>
+    <string name="i19">Disabled</string>
+    <string name="i20">Enabled only for HTTPS</string>
+    <string name="j1">Enabled, Including 3rd Party</string>
+    <string name="j2" translatable="false">Exit</string>
+    <string name="j3">Load Homepage</string>
+    <string name="j4">Go Back</string>
+    <string name="j5" translatable="false">Latin-1 (ISO-8858-1)</string>
+    <string name="j6" translatable="false">Unicode (UTF-8)</string>
+    <string name="j7" translatable="false">Chinese (GBK)</string>
+    <string name="j8" translatable="false">Chinese (Big5)</string>
+    <string name="j9" translatable="false">Japanese (ISO-2022-JP)</string>
+    <string name="j10" translatable="false">Japanese (SHIFT_JIS)</string>
+    <string name="j11" translatable="false">Japanese (EUC-JP)</string>
+    <string name="j12" translatable="false">Korean (EUC-KR)</string>
+    <string name="j13">Load Default</string>
+    <string name="j14">Default</string>
+    <string name="j15">Load No Cache</string>
+    <string name="j16">Current Webpage</string>
+    <string name="j17">Blank Webpage</string>
+    <string name="j18">Load Cache Only</string>
+    <string name="j19">Load Cache Else Network</string>
+    <string name="j20">Off</string>
+    <string name="k1">Screenshot</string>
+    <string name="k3">Format</string>
+    <string name="k4">Set Format</string>
+    <string name="k5">NO HISTORY</string>
+    <string name="k8">Remove</string>
+    <string name="k9">Copied</string>
+    <string name="l1">Confirm PIN</string>
+    <string name="l2">Incorrect PIN Number.</string>
+    <string name="l3">Security Lock Setup Successfully.</string>
+    <string name="l4">Save Link Service</string>
+    <string name="l5">Download Manager</string>
+    <string name="l7">Confirm to remove %a?</string>
+    <string name="l8">Share %a with:</string>
+    <string name="l10">Security Lock Settings</string>
+    <string name="l11">Confirm to delete %a?</string>
+    <string name="l13" translatable="false">| BETA</string>
+    <string name="l14">Manage Space</string>
+    <string name="l15">Dismiss</string>
+    <string name="l16">Screenshot cleared.</string>
+    <string name="l17">Notify to Open Valid Link</string>
+    <string name="l19">Colorized</string>
+    <string name="l20">Whether the notification should be colorized</string>
+    <string name="m1">Failed to start safe browsing.</string>
+    <string name="m2">Check for Update</string>
+    <string name="m3">Browse</string>
+    <string name="m5">Clipboard</string>
+    <string name="m6">Notification Service</string>
+    <string name="m7">Credits</string>
+    <string name="m8">Set Up Pretend Mode</string>
+    <string name="m10">Video Poster Demo</string>
+    <string name="m11" translatable="false">1</string>
+    <string name="m12" translatable="false">2</string>
+    <string name="m13" translatable="false">3</string>
+    <string name="m14" translatable="false">4</string>
+    <string name="m15" translatable="false">5</string>
+    <string name="m16" translatable="false">6</string>
+    <string name="m17" translatable="false">7</string>
+    <string name="m18" translatable="false">8</string>
+    <string name="m19" translatable="false">9</string>
+    <string name="m20" translatable="false">0</string>
+    <string name="n1">Theme</string>
+    <string name="n2">Hardware</string>
+    <string name="n4" translatable="false">Twitter</string>
+    <string name="n11">Automatically Check for Update</string>
+    <string name="n12">Update</string>
+    <string name="n13">Push Notification</string>
+    <string name="n15">Download Service</string>
+    <string name="n16" translatable="false">Website</string>
+    <string name="o1">Restarting Webvium…</string>
+    <string name="o5">Open</string>
+    <string name="o6">NO BOOKMARKS</string>
+    <string name="o7">IP address above might not change while connecting to VPN.</string>
+    <string name="o8">Text Scaling</string>
+    <string name="o9">Add Bookmarks</string>
+    <string name="o10">Interface</string>
+    <string name="o11" translatable="false">Home</string>
+    <string name="o13">Custom Homepage</string>
+    <string name="o14">Home Shortcut in NavBar</string>
+    <string name="o18">Custom Text Encoding</string>
+    <string name="o19">Slow Whole Document Draw</string>
+    <string name="o20">Reduces memory footprint and increases performance</string>
+    <string name="SWIT">Mixed Content Mode</string>
+    <string name="p2">Set Mixed Content Mode</string>
+    <string name="p3">Webpage favicon.</string>
+    <string name="p4">Renderer Priority Policy</string>
+    <string name="p5">Set Renderer Priority Policy</string>
+    <string name="p11">Clear Source Code</string>
+    <string name="p12">Clear Screenshot</string>
+    <string name="p13">Quality</string>
+    <string name="p14">Set Quality</string>
+    <string name="p15">Zoom</string>
+    <string name="p16">Volume Controls Actions</string>
+    <string name="p17">Volume Up</string>
+    <string name="p18">Volume Down</string>
+    <string name="p19">Set Action for Volume Up</string>
+    <string name="p20" translatable="false">Webvium</string>
+    <string name="q1">Source code cleared.</string>
+    <string name="q2">Require PIN to open Webvium</string>
+    <string name="q3">Security Lock</string>
+    <string name="q4">Disable WiFi after the webpage was been fully loaded</string>
+    <string name="q5">Gesture</string>
+    <string name="q6">Gesture up/down to hide/show elevation</string>
+    <string name="q7">Connection</string>
+    <string name="q8">Gesture up/down to hide/show toolbar</string>
+    <string name="q9">Hide/Show Toolbar</string>
+    <string name="q10">Turn Off Wifi</string>
+    <string name="q11">Enable WiFi before webpage get loaded</string>
+    <string name="q12">Turn On Wifi</string>
+    <string name="q13">Hide/Show Toolbar Elevation</string>
+    <string name="q14">Export</string>
+    <string name="q16">Bookmark</string>
+    <string name="q17">History</string>
+    <string name="q18">Search</string>
+    <string name="q19">Settings</string>
+    <string name="q20">Custom</string>
+    <string name="r1" translatable="false">Duckduckgo</string>
+    <string name="r2" translatable="false">Google</string>
+    <string name="r3" translatable="false">Bing</string>
+    <string name="r4" translatable="false">Yahoo</string>
+    <string name="r5" translatable="false">Ask</string>
+    <string name="r6" translatable="false">AOL</string>
+    <string name="r7" translatable="false">Baidu</string>
+    <string name="r8" translatable="false">Wolframalpha</string>
+    <string name="r9" translatable="false">Discover</string>
+    <string name="r10" translatable="false">Ecosia</string>
+    <string name="r11">Portrait</string>
+    <string name="r12">Landscape</string>
+    <string name="r13">Hide Statusbar</string>
+    <string name="r14" translatable="false">Android Stock</string>
+    <string name="r15" translatable="false">Internet Explorer</string>
+    <string name="r16" translatable="false">Google Chrome</string>
+    <string name="r17" translatable="false">Mozila Firefox</string>
+    <string name="r18" translatable="false">Opera</string>
+    <string name="r19" translatable="false">Safari</string>
+    <string name="r20">Always Screen On</string>
+    <string name="s1">Always Screen On While Charging</string>
+    <string name="s2">15 minutes</string>
+    <string name="s3">30 minutes</string>
+    <string name="s4">1 hour</string>
+    <string name="s5" translatable="false">PNG</string>
+    <string name="s6" translatable="false">JPEG</string>
+    <string name="s7" translatable="false">WEBP</string>
+    <string name="s8">Always Allow</string>
+    <string name="s9">Compatibility Mode</string>
+    <string name="s10">Never Allow</string>
+    <string name="s11">Bound</string>
+    <string name="s12">Important</string>
+    <string name="s13">Waived</string>
+    <string name="s14">Page Up</string>
+    <string name="s15">Zoom In</string>
+    <string name="s16">Page Down</string>
+    <string name="s17">Zoom Out</string>
+    <string name="s18" translatable="false">100%</string>
+    <string name="s19" translatable="false">95%</string>
+    <string name="s20" translatable="false">80%</string>
+    <string name="t1">Browsing History Cleared.</string>
+    <string name="t2">Webpage added on bookmarks</string>
+    <string name="t3">Name</string>
+    <string name="t4" translatable="false">Link</string>
+    <string name="t5">Do you really want to clear All Browsing History?</string>
+    <string name="t6">Backup</string>
+    <string name="t7">Experimental</string>
+    <string name="t8">Home, notification, update</string>
+    <string name="t9">UI, theme, background</string>
+    <string name="t10">Engines, voice, assistant</string>
+    <string name="t11">Battery</string>
+    <string name="t12">Data, user-agent, cache</string>
+    <string name="t13">Zoom, volume controls, text size</string>
+    <string name="t14">Security, javascript, content</string>
+    <string name="t15">Orientation, captions, poster</string>
+    <string name="t16">Source code, screenshot</string>
+    <string name="t19">Gestures, fonts, connection</string>
+    <string name="t20">Clipboard Is Empty.</string>
+    <string name="u1">Bookmarks Added.</string>
+    <string name="u2">Add Bookmark</string>
+    <string name="u3">Bookmarks Cleared.</string>
+    <string name="u4">Do you really want to clear Bookmarks?</string>
+    <string name="u5">Do you really want to clear Cache?</string>
+    <string name="u6">Do you really want to clear Search History?</string>
+    <string name="u7">Do you really want to clear Preferences?</string>
+    <string name="u8">Do you really want to clear Source Codes?</string>
+    <string name="u9">Do you really want to clear Screenshots?</string>
+    <string name="u10">Do you really want to clear Downloads?</string>
+    <string name="u11">All of Webvium Data will be deleted permanently. This includes all files, settings, databases, backups etc.</string>
+    <string name="u12">When Webvium is in list of Optimized Apps in Battery Optimization, Webvium cannot download any files in background when Battery Saver is on.&lt;br>&lt;br>To add Webvium in Battery Optimization WhiteList click the OK button then click All Apps &lt;b>>>&lt;/b> Webvium &lt;b>>>&lt;/b> Don\'t Optimize &lt;b>>>&lt;/b> DONE.</string>
+    <string name="u13">Failed! JavaScript is disabled.</string>
+    <string name="u14">App Info</string>
+    <string name="u15">Storage Permission is needed to write to the SD card</string>
+    <string name="u16">Storage Permission is needed to write to the SD card &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission &lt;b>>>&lt;/b> Storage</string>
+    <string name="u17">Storage Permission is needed to read the contents of your SD card</string>
+    <string name="u18">Storage Permission is needed to read the contents of your SD card &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission >>&lt;b>>>&lt;/b> Storage</string>
+    <string name="u19">File is already exist</string>
+    <string name="u20">Download Successful</string>
+    <string name="v2">&lt;b>Link:&lt;/b> %a&lt;br>&lt;b>Data:&lt;/b> %b&lt;br>&lt;b>Encoding:&lt;/b> %c&lt;/br>&lt;b>MimeType:&lt;/b> %d&lt;/br>&lt;b>Reason Phrase:&lt;/b> e&lt;/br>&lt;b>Response Headers:&lt;/b>/%f&lt;/br>&lt;b>Status Code:&lt;/b> %g&lt;b>Main Frame:&lt;/b> %h&lt;br>&lt;b>Gesture:&lt;/b> %i&lt;br>&lt;b>Time:&lt;/b> %j</string>
+    <string name="v3">Unknown certificate error.</string>
+    <string name="v4">This certificate isn\'t from a trusted authority.</string>
+    <string name="v5">The certificate has expired.</string>
+    <string name="v6">The name of the site doesn\'t match the name on the certificate.</string>
+    <string name="v7">This certificate isn\'t valid yet</string>
+    <string name="v8">This certificate has an invalid date.</string>
+    <string name="v9">This certificate is invalid.</string>
+    <string name="v10">There are problems with the security certificate for this site.</string>
+    <string name="v11">View Certificate</string>
+    <string name="v12">Download Canceled | Wi-Fi not Connected</string>
+    <string name="v13">Loading…</string>
+    <string name="v14">%a want\'s to know your device\'s location</string>
+    <string name="v15">%a can now access your device\'s location.</string>
+    <string name="v16">%a request location permission denied.</string>
+    <string name="v17">Allow</string>
+    <string name="v18">&lt;b>Message:&lt;/b> %a&lt;br>&lt;b>Line:&lt;/b> %b&lt;br>&lt;b>Source ID:&lt;/b> %c</string>
+    <string name="v19">Security Certificate</string>
+    <string name="v20">&lt;b>Link:&lt;/b> %a&lt;br>&lt;b>Error Code:&lt;/b> %b&lt;br>&lt;b>Description:&lt;/b> %c</string>
+    <string name="w1">It\'s time to take a break. You\'ve browsing for about %a minutes.</string>
+    <string name="w2">Reminder</string>
+    <string name="w3">Print</string>
+    <string name="w4">Location Permission is needed to get your precise location using the GPS and network-based</string>
+    <string name="w5">Location Permission is needed to get your precise location using the GPS and network-based &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission &lt;b>>>&lt;/b> Location</string>
+    <string name="w6">Sets whether the Application Caches APIs should be enabled</string>
+    <string name="w8">Set Action for Volume Down</string>
+    <string name="w9">Enabled, Including 3rd Party and File Scheme</string>
+    <string name="w10">Auto Cancel</string>
+    <string name="w11">Automatically removes the notification when it tap</string>
+    <string name="w12">Notification</string>
+    <string name="w14">Something went wrong.</string>
+    <string name="w15">Screenshot Captured.</string>
+    <string name="w16">Screenshot saved.</string>
+    <string name="w17">Pull down to preview, click to view.</string>
+    <string name="w18">Save Image</string>
+    <string name="w19">View Image</string>
+    <string name="w20">Send SMS</string>
+    <string name="x1">Call</string>
+    <string name="x2">Send Email</string>
+    <string name="x3">Copy</string>
+    <string name="x5">Fullscreen</string>
+    <string name="x6">Receives suggested contents and/or notifications from the Developer</string>
+    <string name="x7">Click to Open</string>
+    <string name="x8">Clipboard Service</string>
+    <string name="x9" translatable="false">Links</string>
+    <string name="x10">Show a notification when you copy a url</string>
+    <string name="x11">Package Update</string>
+    <string name="x12">A new version of Webvium is now available to download.</string>
+    <string name="x13">Do you really want to clear Session Cookies?</string>
+    <string name="x14">Open Webvium after an Update</string>
+    <string name="x15">Webvium Search</string>
+    <string name="x16" translatable="false">Tranceroute</string>
+    <string name="x17">Default</string>
+    <string name="x18">High</string>
+    <string name="x19">Low</string>
+    <string name="x20">Max</string>
+    <string name="y1">Min</string>
+    <string name="y2">None</string>
+    <string name="y3">Unspecified</string>
+    <string name="y4">Private</string>
+    <string name="y5">Public</string>
+    <string name="y6">Secret</string>
+    <string name="y7">Priority</string>
+    <string name="y8">Set Priority</string>
+    <string name="y9">Visibility</string>
+    <string name="y10">Set Visibility</string>
+    <string name="y11" translatable="false">NPing</string>
+    <string name="y13">Use System Default</string>
+    <string name="y14" translatable="false">View UA</string>
+    <string name="y15" translatable="false">Headers</string>
+    <string name="y16">Notify you that Webvium is downloading the link you requested.</string>
+    <string name="y17">Notify you that Webvium saved your phone screenshot.</string>
+    <string name="y18">Shortcut to easily access search/assist from notification.</string>
+    <string name="y19">Notify you that Webvium is downloading the link you requested and the app is in foreground.</string>
+    <string name="y20">Notify you about certain actions from Webpages.</string>
+    <string name="z1">Notify you to directly open any valid link you copied.</string>
+    <string name="z2">Notify you that there is new update in Webvium.</string>
+    <string name="z3">Notification from DROID MJ.</string>
+    <string name="z4" translatable="false">Whois</string>
+    <string name="z5">Collapse Search View</string>
+    <string name="z6">Clear Session Cookies</string>
+    <string name="z7">Run Garbage Collector Immediately</string>
+    <string name="z8">Immediately run gc when exiting the activity</string>
+    <string name="z9" translatable="false">Webvium Facebook Page</string>
+    <string name="z10" translatable="false">Stack Overflow</string>
+    <string name="z12" translatable="false">IP Geolocation</string>
+    <string name="z14" translatable="false">Github</string>
+    <string name="z15" translatable="false">Meta Tags</string>
+    <string name="z16" translatable="false">PassGen</string>
+    <string name="z17" translatable="false">IDGen</string>
+    <string name="z18">Assistant</string>
+    <string name="z19">Webvium Search</string>
+    <string name="z20">Make Webvium Search as your default assistant</string>
+    <string name="a21">To make Webvium Search as your default Assistant in your phone, click the OK button then click Assist App &lt;b>>>&lt;/b> Webvium &lt;b>>>&lt;/b> DONE.</string>
+    <string name="a22">Security</string>
+    <string name="a23">Device Admin</string>
+    <string name="a24">Make Webvium as one of your administrator</string>
+    <string name="a25">Click All Apps >> Webvium &lt;b>>>&lt;/b> Don\'t Optimize &lt;b>>>&lt;/b> DONE.</string>
+    <string name="a26">Choose actions:</string>
+    <string name="a27">Cache Cleared.</string>
+    <string name="a28">Do you really want to clear Cookies?</string>
+    <string name="a29">Cookies Cleared.</string>
+    <string name="a30">Clear JavaScript Storage APIs</string>
+    <string name="a31">Do you really want to clear Form Data?</string>
+    <string name="a32">Form Data Cleared.</string>
+    <string name="a33">Do you really want to clear JavaScript Storage APIs?</string>
+    <string name="a34">JavaScript Storage APIs Cleared.</string>
+    <string name="a35" translatable="false">Software</string>
+    <string name="a36">Failed! An error occurred while adding this item to Homescreen</string>
+    <string name="a37">Do you really want to clear SSL Preference?</string>
+    <string name="a38">SSL Preference Cleared.</string>
+    <string name="a39">Failed to Clear SSL Preference.</string>
+    <string name="a40">Search History Cleared.</string>
+    <string name="b21">Do you really want to clear HTTP Auth Username and Password?</string>
+    <string name="b22">HTTP Auth Username and Password Cleared.</string>
+    <string name="b24">Do you really want to revert Settings back to default?</string>
+    <string name="b25">Backup Exported.</string>
+    <string name="b26">Failed to Export.</string>
+    <string name="b27">Backup Imported.</string>
+    <string name="b28">Failed to Import.</string>
+    <string name="b32">Download</string>
+    <string name="b33">Click Assist App &lt;b>>>&lt;/b> Webvium &lt;b>>>&lt;/b> DONE.</string>
+    <string name="b34">Failed to save the source code.</string>
+    <string name="b36">Do you really want to clear Clipboard?</string>
+    <string name="b37">Clipboard Cleared.</string>
+    <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %a/Webvium/Backup/webvium.sgs</string>
+    <string name="b39">Do you really want to import Settings Database\nThis will override your current Settings\n\n%a will restart automatically after importing the database.</string>
+    <string name="b40">&lt;b>We will export:&lt;/b>&lt;br>• All Search History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %a/%b/Backup/Databases/search.%c</string>
+    <string name="c21">Do you really want to import Search Database\nThis will override your Search History</string>
+    <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %a/%b/Backup/Databases/history.%c</string>
+    <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/Databases/bookmark.%c</string>
+    <string name="c26" translatable="false">about:blank</string>
+    <string name="c27">Source Code Copied.</string>
+    <string name="c28" translatable="false">%a | File Saved.</string>
+    <string name="c29">Save File</string>
+    <string name="c30">Name</string>
+    <string name="c31">Saved Path</string>
+    <string name="c32">Invalid Link.</string>
+    <string name="c33">Houston, we have a problem.</string>
+    <string name="c35">Clear Preferences</string>
+    <string name="c36">Clear Downloads</string>
+    <string name="c37">Clear All Data</string>
+    <string name="c38">Size: </string>
+    <string name="c39">Files: </string>
+    <string name="c40">Incorrect PIN</string>
+    <string name="d33">Do you really want to import History Database\nThis will override your Browsing History</string>
+    <string name="d34">Do you really want to import Bookmarks Database\nThis will override your Bookmarks</string>
+    <string name="d37">Downloading %a</string>
+    <string name="d38">Ongoing Download</string>
+    <string name="d39">Searching for %a</string>
+    <string name="d40">Size</string>
+    <string name="e21" translatable="false">Link</string>
+    <string name="e22">Free Space</string>
+    <string name="e23">Free Space After Download</string>
+    <string name="e24">Total Space</string>
+    <string name="e25">Start</string>
+    <string name="e27" translatable="false">%a | Download Started.</string>
+    <string name="e28">Generate</string>
+    <string name="e29" translatable="false">Microsoft Edge</string>
+    <string name="e30" translatable="false">Google Chromium</string>
+    <string name="f21" translatable="false">Mozila Brave</string>
+    <string name="f23">Console Panel</string>
+    <string name="f24">Execute</string>
+    <string name="f25">%a says:</string>
+    <string name="f26" translatable="false">Font</string>
+    <string name="f27">Custom Font File</string>
+    <string name="f28">Primary Font</string>
+    <string name="f29">Secondary Font</string>
+    <string name="f30" translatable="false">Logcat</string>
+    <string name="f31">Examples: \n%a \n%b \n%c</string>
+    <string name="f32" translatable="false">Robots.txt</string>
+    <string name="f33">Webvium - The Revolutionary and Innovative Browser. \nSize: %a\nVersion: %b\nDownload Link: %c\nDownload it For FREE\n\nStay tune in latest update by visiting us on Facebook %d</string>
+    <string name="f34">There\'s no email app that can handle this action.</string>
+    <string name="f37">Font Size</string>
+    <string name="f38">Image Saved.</string>
+    <string name="f39">Your search history appear here</string>
+    <string name="f40" translatable="false">Link:</string>
+    <string name="g21">Your bookmarks appear here</string>
+    <string name="g24">Pretend Mode Settings</string>
+    <string name="g25">&lt;b>Host Name:&lt;/b> %a&lt;br>&lt;b>IP Address:&lt;/b> %b&lt;br>&lt;b>Hash Code:&lt;/b> %c&lt;br>&lt;b>Canonical Hostname:&lt;/b> %d&lt;br>&lt;b>Wildcard Address:&lt;/b> %e&lt;br>&lt;b>Local Address:&lt;/b> %f&lt;br>&lt;b>Loopback Address:&lt;/b> %g&lt;br>&lt;b>Global Scope:&lt;/b> %h&lt;br>&lt;b>Link Scope:&lt;/b> %i&lt;br>&lt;b>Node Scope:&lt;/b> %j&lt;br>&lt;b>Organization Scope:&lt;/b> %k&lt;br>&lt;b>Site Scope:&lt;/b> %l&lt;br>&lt;b>IP Multicast Address:&lt;/b> %m"</string>
+    <string name="g27">Feedback Send.</string>
+    <string name="g28">View %a</string>
+    <string name="g31">Webvium Webpages Notification</string>
+    <string name="g34">The page you\'re trying to view contains data that has already been submitted (\"POSTDATA\"). If you resend the data, any action the form on the page carried out (such as a search or online purchase) will be repeated.</string>
+    <string name="g36">Form Resubmission</string>
+    <string name="g37">Poster</string>
+    <string name="g38">Poster Image</string>
+    <string name="g39">Custom Poster Image</string>
+    <string name="g40">When not playing, video elements are represented by a Poster image</string>
+    <string name="h21">Custom Poster Image was been loaded.</string>
+    <string name="h22">Go Back</string>
+    <string name="h23">Go Forward</string>
+    <string name="h24">A to Z</string>
+    <string name="h25">Z to A</string>
+    <string name="h26">Newer to Older</string>
+    <string name="h27">Older to Newer</string>
+    <string name="h28">Session Cookies Cleared.</string>
+    <string name="h30">Error</string>
+    <string name="h33">Sensor Portrait</string>
+    <string name="h34">Sensor Landscape</string>
+    <string name="h35">Local IP</string>
+    <string name="h36">Received Error</string>
+    <string name="h37">View</string>
+    <string name="h38">Curve Edge Window Effect</string>
+    <string name="h39">%a was been flagged by Safe Browsing. &lt;br>&lt;br>&lt;b>Details:&lt;/b> %b&lt;br>&lt;b>Threat:&lt;/b> %c</string>
+    <string name="h40">Safe Browsing Response</string>
+    <string name="i21">Back to Safety</string>
+    <string name="i22">Process</string>
+    <string name="i23">Unknown</string>
+    <string name="i24">Malware</string>
+    <string name="i25">Phishing</string>
+    <string name="i26">Unwanted Software</string>
+    <string name="i27">Billing</string>
+    <string name="i28">The resource was blocked for an unknown reason.</string>
+    <string name="i29">The resource was blocked because it contains malware.</string>
+    <string name="i30">The resource was blocked because it contains deceptive content.</string>
+    <string name="i31">The resource was blocked because it contains unwanted software.</string>
+    <string name="i32">The resource was blocked because it may trick the user into a billing agreement.</string>
+    <string name="i33">There\'s no received error\'s to show</string>
+    <string name="i34">There\'s no received SSL error\'s to show</string>
+    <string name="i36">Vibrate</string>
+    <string name="i37">Vibration Effect</string>
+    <string name="i38">Allow %a to access your device %b</string>
+    <string name="i39">Deny</string>
+    <string name="i40">%a can now access your device %b</string>
+    <string name="j21">%a request %b permission denied</string>
+    <string name="j22">Camera Permission is needed to take videos and photos</string>
+    <string name="j23">Camera Permission is needed to take videos and photo &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission &lt;b>>>&lt;/b> Camera</string>
+    <string name="j24">Microphone Permission is needed to record audio</string>
+    <string name="j25">Microphone Permission is needed to record audio &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission &lt;b>>>&lt;/b> Microphone</string>
+    <string name="j26">Pretend Mode</string>
+    <string name="j27">Require Answer to open Webvium</string>
+    <string name="j28">Set Pretend Mode</string>
+    <string name="j29">Answer</string>
+    <string name="j30">Confirm Answer</string>
+    <string name="j31">Pretend mode setup successfully.</string>
+    <string name="j32">Enable Pretend Mode</string>
+    <string name="j33">Disable Pretend Mode</string>
+    <string name="j34">Incorrect Answer.</string>
+    <string name="j35" translatable="false">Calculator</string>
+    <string name="j36" translatable="false">Web OSINT</string>
+    <string name="j38">Change PIN</string>
+    <string name="j39">Old PIN</string>
+    <string name="j40">New PIN</string>
+    <string name="k21">Confirm New PIN</string>
+    <string name="k22">PIN Changed.</string>
+    <string name="k23">Clear PIN</string>
+    <string name="k24">PIN Cleared.</string>
+    <string name="k25">Change Security Lock PIN</string>
+    <string name="k26">Clear Security Lock PIN</string>
+    <string name="k27">Change Answer</string>
+    <string name="k28">Old Answer</string>
+    <string name="k29">New Answer</string>
+    <string name="k30">Confirm New Answer</string>
+    <string name="k31">Answer Changed.</string>
+    <string name="k32">Clear Answer</string>
+    <string name="k33">Answer Cleared.</string>
+    <string name="k34">Change Pretend Mode Answer</string>
+    <string name="k35">Clear Pretend Mode Answer</string>
+    <string name="k36">Incorrect Answer.</string>
+    <string name="k37">Set Content to Captured</string>
+    <string name="k38">Only the Content</string>
+    <string name="k39">Force HTTPS</string>
+    <string name="k40">Override URL loading in HTTPS</string>
+    <string name="l22">Certificate is valid</string>
+    <string name="l23">Certificate isn\'t valid</string>
+    <string name="l24">Assist</string>
+    <string name="l25">Suggest Bookmarks</string>
+    <string name="l26">Suggest History</string>
+    <string name="l27">Strict Suggestion to Links</string>
+    <string name="l32">Floating Webvium</string>
+    <string name="l33">Quick Search</string>
+    <string name="l34">Easily browse sites while your using other app.</string>
+    <string name="l35">Uniform Resource Identifier</string>
+    <string name="l36">Such identification enables interaction with representations of the resource over a network, typically the World Wide Web, using specific protocols. &lt;b>Schemes&lt;/b> specifying a concrete syntax and associated protocols define each URI.&lt;br/>&lt;br/>The &lt;b>scheme&lt;/b> identifies the protocol to be used to access the resource on the Internet. It can be &lt;b>HTTP&lt;/b> (without SSL) or &lt;b>HTTPS&lt;/b> (with SSL).&lt;br/>&lt;br/>&lt;b>FILE&lt;/b> typically used to retrieve files from within one\'s own device. </string>
+    <string name="l37">The network acting poorly but will get to you ASAP.</string>
+    <string name="l38">Webpage Loaded</string>
+    <string name="l39">Notify me</string>
+    <string name="l40">Notify you that the webpage was been successfully loaded</string>
+    <string name="m22">Webpage Failed Load</string>
+    <string name="m23">&lt;b>%a %b %c&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %d&lt;br/>&lt;b>Middle Name:&lt;/b> %e&lt;br/>&lt;b>Last Name:&lt;/b> %f&lt;br/>&lt;b>Birthday:&lt;/b> %g&lt;br/>&lt;b>Gender:&lt;/b> %h&lt;br/>&lt;b>Age:&lt;/b> %i&lt;br/>&lt;b>Relationship:&lt;/b> %j&lt;br/>&lt;b>Country:&lt;/b> %k&lt;br/>&lt;b>Eye Color:&lt;/b> %l&lt;br/>&lt;b>Height:&lt;/b> %m Feet&lt;br/>&lt;b>Weight:&lt;/b> %n Pounds&lt;br/>&lt;b>Hobby:&lt;/b> %o&lt;br/>&lt;b>Interested in:&lt;/b> %p&lt;br/>&lt;b>Religion:&lt;/b> %q&lt;br/>&lt;b>Mother Name:&lt;/b> %r&lt;br/>&lt;b>Father Name:&lt;/b> %s</string>
+    <string name="m24">There\'s no Internet Connection</string>
+    <string name="m25">The device is in Airplane Mode</string>
+    <string name="m28">Set Vibration EffectL</string>
+    <string name="m29">Dark Webpage Content</string>
+    <string name="m30">We\'ll notify you if there\'s a new update available.</string>
+    <string name="n21">Update Service</string>
+    <string name="n22">Backup Service</string>
+    <string name="n23">These terms and conditions (\"Terms\", \"Conditions\") are condition between DROID MJ (\"DROID MJ\", \"us\", \"we\" or \"our\") and you (\"user\", \"you\" or \"your\").&lt;br>This Condition set forth the general terms and conditions of your use of our Products and any of it\'s services (collectively, \"Products\" or \"Services\").&lt;br>&lt;br>&lt;b>LINKS TO OTHER APPLICATIONS OR WEBPAGES&lt;/b>&lt;br>Although our Products and its Services may be linked to other applications and webpages, we are not, directly or indirectly, implying any approval, association, sponsorship, endorsement, or affiliation with any linked application and webpage, unless specifically stated herein. We are not responsible for examining or evaluating, and we do not warrant the offerings of, any businesses or individuals or the content of their applications and webpages. We do not assume any responsibility or liability for the actions, products, services, and content of any other third-parties. You should carefully review the legal statements and other conditions of use of any application and webpage which you access through a link from our Products. Your linking to any other off-site mobile applications and webpages is at your own risk.&lt;br>&lt;br>&lt;b>PROHIBITED USES&lt;/b>&lt;br>In addition to other terms as set forth in the Agreement, you are prohibited from using our Products or its Services:&lt;br>• for any unlawful purpose;&lt;br>• to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances;&lt;br>• to infringe upon or violate our intellectual property rights or the intellectual property rights of others;&lt;tbr>• to submit false or misleading information;&lt;br>• to upload or transmit viruses or any other type of malicious code that will or may be use in any way that will affect the functionality or operation of the Service or of any related mobile application and webpages, other mobile applications and webpages, or the Internet;&lt;br>• to interfere with or circumvent the security features of the Service or any related mobile application and webpage. We reserve the right to terminate your use of the Service or any related mobile application and webpage for violating any of the prohibited uses;&lt;br>&lt;br>&lt;b>INTELLECTUAL PROPERTY RIGHTS&lt;/b>&lt;br>This Agreement does not transfer to you any intellectual property owned by DROID MJ or third-parties, and all rights, titles, and interests in and to such property will remain (as between the parties) solely with DROID MJ. All trademarks, service marks, graphics and logos used in connection with our Products or Services, are trademarks or registered trademarks of DROID MJ or DROID MJ licensors. Other trademarks, service marks, graphics and logos used in connection with our Products or Services may be the trademarks of other third-parties. Your use of our Products and Services grants you no right or license to reproduce or otherwise use any DROID MJ or third-party trademarks.&lt;br>&lt;br>&lt;b>LIMITATION OF LIABILITY&lt;/b>&lt;br>To the fullest extent permitted by applicable law, in no event will DROID MJ, its affiliates, officers, directors, employees, agents, suppliers or licensors be liable to any person for &lt;br>(a): any indirect, incidental, special, punitive, cover or consequential damages (including, without limitation, damages for lost profits, revenue, sales, goodwill, use or content, impact on business, business interruption, loss of anticipated savings, loss of business opportunity) however caused, under any theory of liability, including, without limitation, contract, tort, warranty, breach of statutory duty, negligence or otherwise, even if DROID MJ has been advised as to the possibility of such damages or could have foreseen such damages. To the maximum extent permitted by applicable law, the aggregate liability of DROID MJ and its affiliates, officers, employees, agents, suppliers and licensors, relating to the services will be limited to an amount greater of one dollar or any amounts actually paid in cash by you which in all cases is $0 to DROID MJ for the prior one month period prior to the first event or occurrence giving rise to such liability. The limitations and exclusions also apply if this remedy does not fully compensate you for any losses or fails of its essential purpose.&lt;br>&lt;br>&lt;b>INDEMNIFICATION&lt;/b>&lt;br>You agree to indemnify and hold DROID MJ and its affiliates, directors, officers, employees, and agents harmless from and against any liabilities, losses, damages or costs, including reasonable attorneys\' fees, incurred in connection with or arising from any third-party allegations, claims, actions, disputes, or demands asserted against any of them as a result of or relating to your Content, your use of the WebView or Services or any willful misconduct on your part.&lt;br>&lt;br>&lt;b>SEVERABILITY&lt;/b>&lt;br>All rights and restrictions contained in this Agreement may be exercised and shall be applicable and binding only to the extent that they do not violate any applicable laws and are intended to be limited to the extent necessary so that they will not render this Agreement illegal, invalid or unenforceable. If any provision or portion of any provision of this Agreement shall be held to be illegal, invalid or unenforceable by a court of competent jurisdiction, it is the intention of the parties that the remaining provisions or portions thereof shall constitute their agreement with respect to the subject matter hereof, and all such remaining provisions or portions thereof shall remain in full force and effect.&lt;br>&lt;br>&lt;b>DISPUTE RESOLUTION&lt;/b>&lt;br>The formation, interpretation, and performance of this Agreement and any disputes arising out of it shall be governed by the substantive and procedural laws of National Capital Region, The Philippines without regard to its rules on conflicts or choice of law and, to the extent applicable, the laws of The Philippines. The exclusive jurisdiction and venue for actions related to the subject matter hereof shall be the state and federal courts located in National Capital Region, The Philippines, and you hereby submit to the personal jurisdiction of such courts. You hereby waive any right to a jury trial in any proceeding arising out of or related to this Agreement. The United Nations Convention on Contracts for the International Sale of Goods does not apply to this Agreement.&lt;br>&lt;br>&lt;b>CHANGES AND AMENDMENTS&lt;/b>&lt;br>We reserve the right to modify this Agreement or its policies relating to our Products or its Services at any time, effective upon posting of an updated version of this Agreement in this webpage. When we do, we will revise the updated date at the bottom of this page. Continued use of our Products or its Services after any such changes shall constitute your consent to such changes.&lt;br>&lt;br>&lt;b>ACCEPTANCE OF THESE TERMS&lt;/b>&lt;br>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using our Products or its Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access our Products and its Services.&lt;br>&lt;br>This document was last updated on &lt;b>Tuesday, January 28, 2020&lt;/b>.
+</string>
+    <string name="n24" formatted="false">DROID MJ (\"DROID MJ\", \"us\", \"we\" or \"our\") operates the mobile application and webpages.&lt;br>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Products and its Services, and the choices you have associated with that data.&lt;br>We use your data to provide and improve our Products and its Services. By using our Products and its Services, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions&lt;br>&lt;br>&lt;b>INFORMATION COLLECTION AND USE&lt;/b>&lt;br>We collect several different types of information for various purposes to provide and improve our Service to you.&lt;br>&lt;br>&lt;b>TYPES OF DATA COLLECTED&lt;/b>&lt;br>While using our Products or its Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (\"Personal Data\"). Personally identifiable information may include, but is not limited to:&lt;br>• Build Properties&lt;br>• Usage Data&lt;br>&lt;br>&lt;b>BUILD PROPERTIES AND USAGE DATA&lt;/b>&lt;br>When you access our Products and its Services by or through a mobile device, we may collect certain information including, but not limited to, the type of mobile device you use, your mobile operating system, and other diagnostic data (\"Usage Data\").&lt;br>&lt;br>&lt;b>USE OF DATA&lt;/b>&lt;br>DROID MJ uses the collected data for various purposes:&lt;br>• to provide and maintain the Service;&lt;br>• to notify you about changes to our Service;&lt;br>• to provide customer care and support;&lt;br>• to provide analysis or valuable information so that we can improve the Service;&lt;br>• to monitor the usage of the Service;&lt;br>• to detect, prevent and address technical issues;&lt;br>&lt;br>&lt;b>TRANSFER FOR DATA&lt;/b>&lt;br>If you are located outside The Philippines and choose to provide information to us, please note that we transfer the data, to The Philippines via Mail Service and Sync Service.&lt;br>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.&lt;br>DROID MJ will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other information.&lt;br>&lt;br>&lt;b>DISCLOSURE OF DATA AND LEGAL REQUIREMENTS&lt;/b>&lt;br>DROID MJ may disclose your Data in the good faith belief that such action is necessary to:&lt;br>• to comply with a legal obligation;&lt;br>• to protect and defend the rights or property of our Products and its Services;&lt;br>• to prevent or investigate possible wrong doing in connection with our Products and its Services;&lt;br>• to protect the personal safety of users if our Products and its Services;&lt;br>• to protect against legal liability;&lt;br>&lt;br>&lt;b>SECURITY OF DATA&lt;/b>&lt;br>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.&lt;br>&lt;br>&lt;b>CHANGES AND AMENDMENTS&lt;/b>&lt;br>We reserve the right to modify this Agreement or its policies relating to our Products or its Services at any time, effective upon posting of an updated version of this Agreement in this webpage. When we do, we will revise the updated date at the bottom of this page. Continued use of our Products or its Services after any such changes shall constitute your consent to such changes.&lt;br>&lt;br>&lt;b>ACCEPTANCE OF THESE TERMS&lt;/b>&lt;br>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using our Products or its Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access our Products and its Services.&lt;br>&lt;br>This document was last updated on &lt;b>Monday, July 20, 2020&lt;/b>.
+</string>
+    <string name="n25">I Agree</string>
+    <string name="n26">Audio recording error</string>
+    <string name="n27">Other client side errors</string>
+    <string name="n28">Insufficient Permissions</string>
+    <string name="n29">Other network related errors</string>
+    <string name="n30">Network operation timeout</string>
+    <string name="n31">No recognition result matched</string>
+    <string name="n32">RecognitionService is busy</string>
+    <string name="n33">Server sends error status</string>
+    <string name="n34">No speech input</string>
+    <string name="n35">Speak now!</string>
+    <string name="n36">Speech Recognizer is not available on this device.</string>
+    <string name="n37">Speak</string>
+    <string name="n39">Touch to open search</string>
+    <string name="n40">Touch to open Webvium</string>
+    <string name="o29">Custom Background Image was been loaded.</string>
+    <string name="o31">User authentication failed on server</string>
+    <string name="o32">Malformed URL</string>
+    <string name="o33">Failed to connect to the server</string>
+    <string name="o34">Failed to perform SSL handshake</string>
+    <string name="o35">Generic file error</string>
+    <string name="o36">File not found</string>
+    <string name="o37">Server or proxy hostname lookup failed</string>
+    <string name="o38">Failed to read or write to the server</string>
+    <string name="o39">User authentication failed on proxy</string>
+    <string name="o40">Too many redirects</string>
+    <string name="p21">Connection timed out</string>
+    <string name="p22">Too many requests during this load</string>
+    <string name="p23">Generic error</string>
+    <string name="p24">Resource load was canceled by Safe Browsing</string>
+    <string name="p25">Unsupported authentication scheme (not basic or digest)</string>
+    <string name="p26">Unsupported URI scheme</string>
+    <string name="p29">Request Headers</string>
+    <string name="p30">Failed to change poster image.</string>
+    <string name="p33">Failed to change background image.</string>
+    <string name="p34">Click</string>
+    <string name="p35">Double Click</string>
+    <string name="p36">Heavy Click</string>
+    <string name="p37">Tick</string>
+    <string name="p38">Screenshot Preview</string>
+    <string name="p39">Progress bar</string>
+    <string name="q21">Password Length</string>
+    <string name="q22">Bookmarks and Settings Header Icon</string>
+    <string name="q23" translatable="false">javascript:</string>
+    <string name="q24">Internet connectivity status</string>
+    <string name="q25">Clear and close action</string>
+    <string name="q26">Shortcut created.</string>
+    <string name="q27">Scheme Icon</string>
+    <string name="q28">Refresh and stop action</string>
+    <string name="q29">More</string>
+    <string name="q30">History Icon</string>
+    <string name="r22">&lt;br>&lt;b>Main Frame:&lt;/b> %d&lt;br>&lt;b>Gesture:&lt;/b> %e&lt;br>&lt;b>Time:&lt;/b> %f</string>
+    <string name="r23" translatable="false">DEL</string>
+    <string name="r24" translatable="false">C</string>
+    <string name="r25" translatable="false">/</string>
+    <string name="r26" translatable="false">x</string>
+    <string name="r27" translatable="false">-</string>
+    <string name="r28" translatable="false">+</string>
+    <string name="r29" translatable="false">.</string>
+    <string name="r30" translatable="false">=</string>
+    <string name="s21">Clear</string>
+    <string name="s22">Enter</string>
+    <string name="s23">Title</string>
+    <string name="s24">Add to Homescreen</string>
+    <string name="s26">We Need Permission</string>
+    <string name="s27">Block the device media projection from capturing some of this app contents.</string>
+    <string name="s28">Don\'t render the webpage images and video thumbnails to make the load much faster on low memory devices.</string>
+    <string name="s29">JavaScript Storage</string>
+    <string name="s30">Application Storage</string>
+    <string name="t21">Backup</string>
+    <string name="t22">Log appear here</string>
+    <string name="t23">Refreshing…</string>
+    <string name="t24">Cookie</string>
+    <string name="t25">Include Cookie when requesting download</string>
+    <string name="t26">Include User-agent when requesting download</string>
+    <string name="t27">Mime Type</string>
+    <string name="t28">Connection</string>
+    <string name="t29">Metered</string>
+    <string name="t30">Allow to downloads over the metered connection</string>
+    <string name="t31">Roaming</string>
+    <string name="t32">Allow to downloads over the roaming connection</string>
+    <string name="t33">Device</string>
+    <string name="t34">Requires Charging</string>
+    <string name="t35">Allow downloads only when the device is charging</string>
+    <string name="t36">Requires Idle</string>
+    <string name="t37">Allow downloads only when the device is in idle mode</string>
+    <string name="t38">Media Scanning</string>
+    <string name="t39">Allow media scanning when download finish</string>
+    <string name="u21">Download Failed</string>
+    <string name="u22">Name: %a\nLink: %b\nReason: %c</string>
+    <string name="u23">Edit</string>
+    <string name="u24">Query</string>
+    <string name="u25">Manage Space Icon</string>
+    <string name="u26">The Revolutionary and Innovated Browser</string>
+    <string name="u27">Lock Webvium</string>
+    <string name="u28">Possibilities Behind Impossibilities</string>
+    <string name="u29" translatable="false">DROID MJ</string>
+    <string name="u30">Back Navigation</string>
+    <string name="v21" translatable="false">Facebook</string>
+    <string name="v22">NO DOWNLOADS</string>
+    <string name="v23">Download History Cleared.</string>
+    <string name="v24">Do you really want to clear All Downloads History?</string>
+    <string name="v25">Item: </string>
+    <string name="v26">Items: </string>
+    <string name="v27">No item\'s to be cleared</string>
+    <string name="v28">File: </string>
+    <string name="v29">No file\'s to be cleared</string>
+    <string name="v30">Clear All Downloads</string>
+    <string name="w21">Download File</string>
+    <string name="w22">Unknown file size</string>
+    <string name="w24">Dial</string>
+    <string name="w25">Add to Contacts</string>
+    <string name="w26">Phone Permission is needed to directly call phone numbers</string>
+    <string name="w27">Phone Permission is needed to directly call phone numbers &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission &lt;b>>>&lt;/b> Phone</string>
+    <string name="w28">Downloads Icon</string>
+    <string name="w29">When screen goes off Webvium will lock again the activities of webvium that need your security pin</string>
+
+
+    <string name="w30">Transient error occurred but we can\'t resume the download</string>
+    <string name="x21">No external storage device was found</string>
+    <string name="x22">Requested destination file already exists "the download manager will not overwrite an existing file"</string>
+    <string name="x23">A storage issue arises which doesn\'t fit under any other error code handle by download manager</string>
+    <string name="x24">An error receiving or processing data occurred at the HTTP level</string>
+    <string name="x25">Insufficient storage space</string>
+    <string name="x26">There were too many redirects</string>
+    <string name="x27">An HTTP code was received that download manager can\'t handle</string>
+    <string name="x28">Download has completed with an error that doesn\'t fit under any other error code handle by download manager</string>
+    <string name="x29">Download exceeds a size limit for downloads over the mobile network and the download manager is waiting for a Wi-Fi connection to proceed</string>
+    <string name="x30">Download is paused for some other reason</string>
+    <string name="x31">Download is waiting for network connectivity to proceed</string>
+    <string name="x32">Download is paused because some network error occurred and the download manager is waiting before retrying the request</string>
+    <string name="x33">Download has failed and will not be retried</string>
+    <string name="x34">Download has successfully completed</string>
+    <string name="x35">Download Paused</string>
+    <string name="x36">Hide/Show Navbar</string>
+    <string name="x37">Gesture up/down to hide/show navbar</string>
+    <string name="x38">Failed! No Internet Connection</string>
+    <string name="x39">Send Feedback</string>
+    <string name="x40">Subject</string>
+
+    <string name="y21">Tell me, What feature you\'d like to see on next update.</string>
+    <string name="y22">Briefly explain how can i reproduce the problem.</string>
+
+    <string name="y23">Feature Request</string>
+    <string name="y24">Send a Feedback</string>
+    <string name="y25">Report an issue</string>
+    <string name="y26">Message</string>
+    <string name="y27">I\'d like to hear your feedback about Webvium.</string>
+    <string name="y28">Features</string>
+    <string name="y29">Your ID</string>
+    <string name="y30">The developers behind this awesome project</string>
+    <string name="z21">Failed! An Error Occurred</string>
+    <string name="z22">No internet connection detected</string>
+    <string name="z23">Restricted background status is enabled\nClick here to force checking for updates.</string>
+    <string name="z24">Checking…</string>
+    <string name="z25">This may took a while to complete depends on your internet speed.</string>
+    <string name="z26">Version Checked</string>
+    <string name="z27">Your currently using the latest version of webvium</string>
+    <string name="z28">Latest Update</string>
+    <string name="z29">A new update of webvium was now available to download\nClick here to download</string>
+    <string name="z30">Unknown error, couldn\'t check for update</string>
+    <string name="z31">The database doesn\'t contain any item\'s</string>
+
+    <string name="z32">Download</string>
+    <string name="z33">Permission</string>
+    <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/download.%c</string>
+    <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
+    <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/Databases/permission.%c</string>
+    <string name="z37">Do you really want to import Permission Database\nThis will override your Permission Settings</string>
+    <string name="z38" translatable="false">APK</string>
+
+    <string name="z39">Automatically backup %a apk upon installing of new update</string>
+    <string name="z40">New Update</string>
+
+
+    <string name="x41" translatable="false">Youtube</string>
+    <string name="x42" translatable="false">Github</string>
+    <string name="x43" translatable="false">Facebook</string>
+    <string name="x44" translatable="false">Patreon</string>
+    <string name="x45">Export Databases</string>
+    <string name="x46">Import Databases</string>
+    <string name="x47">To Import a Database</string>
+    <string name="x48">Click here and navigate to %a</string>
+    <string name="x49">Queries</string>
+    <string name="x50">Strict Mode</string>
+    <string name="x51">Log</string>
+    <string name="x52">Build</string>
+    <string name="x53">Diagnostic Service</string>
+</resources>

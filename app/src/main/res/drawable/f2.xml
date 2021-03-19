@@ -1,0 +1,29 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<!-- NTC Bg -->
+<ripple xmlns:a="http://schemas.android.com/apk/res/android"
+    a:color="?h">
+    <item>
+        <shape a:shape="oval">
+            <solid a:color="?b" />
+        </shape>
+    </item>
+</ripple>

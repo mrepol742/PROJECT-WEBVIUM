@@ -1,0 +1,27 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<set xmlns:a="http://schemas.android.com/apk/res/android">
+
+    <translate
+        a:duration="500"
+        a:fromYDelta="100%"
+        a:toYDelta="0" />
+</set>

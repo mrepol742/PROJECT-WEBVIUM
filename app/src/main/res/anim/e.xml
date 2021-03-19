@@ -1,0 +1,30 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<set xmlns:a="http://schemas.android.com/apk/res/android">
+    <scale
+        a:duration="1000"
+        a:fromXScale="1.0"
+        a:fromYScale="1.0"
+        a:pivotX="50%"
+        a:pivotY="50%"
+        a:toXScale="0.5"
+        a:toYScale="0.5" />
+</set>

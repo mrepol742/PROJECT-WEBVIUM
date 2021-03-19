@@ -1,0 +1,76 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/a4"
+    a:layout_width="fill_parent"
+    a:layout_height="fill_parent"
+    a:orientation="vertical">
+
+    <include layout="@layout/a20" />
+
+
+    <FrameLayout
+        a:id="@id/t"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:layout_above="@id/a2"
+        a:layout_below="@id/c3" />
+
+    <RelativeLayout
+        a:id="@id/a2"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:layout_alignParentBottom="true"
+        a:layout_margin="10dp">
+
+        <TextView
+            a:id="@id/b17"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:layout_marginTop="5dp"
+            a:textSize="@dimen/c" />
+
+        <SeekBar
+            a:id="@id/a1"
+            a:layout_width="fill_parent"
+            a:layout_height="wrap_content"
+            a:layout_margin="5dp"
+            a:layout_toEndOf="@id/b17"
+            a:indeterminate="false" />
+
+        <TextView
+            a:id="@id/b16"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:layout_below="@id/a1"
+            a:layout_marginTop="5dp"
+            a:textSize="@dimen/c" />
+
+        <SeekBar
+            a:id="@id/b18"
+            a:layout_width="fill_parent"
+            a:layout_height="wrap_content"
+            a:layout_below="@id/a1"
+            a:layout_margin="5dp"
+            a:layout_toEndOf="@id/b16"
+            a:indeterminate="false" />
+    </RelativeLayout>
+</RelativeLayout>

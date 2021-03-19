@@ -1,0 +1,24 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<adaptive-icon xmlns:a="http://schemas.android.com/apk/res/android">
+    <background a:drawable="@color/b" />
+    <foreground a:drawable="@mipmap/d" />
+</adaptive-icon>

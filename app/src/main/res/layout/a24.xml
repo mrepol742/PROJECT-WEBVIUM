@@ -1,0 +1,38 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
+    a:baselineAligned="false"
+    a:orientation="horizontal">
+
+    <include
+        layout="@layout/a18"
+        a:layout_width="0dp"
+        a:layout_height="match_parent"
+        a:layout_weight="0.5" />
+
+    <FrameLayout
+        a:id="@id/i6"
+        a:layout_width="0dp"
+        a:layout_height="match_parent"
+        a:layout_weight="0.7" />
+</LinearLayout>

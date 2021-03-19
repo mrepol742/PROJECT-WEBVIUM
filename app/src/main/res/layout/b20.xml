@@ -1,0 +1,246 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/l10"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
+    a:gravity="center"
+
+    a:orientation="vertical">
+
+    <RelativeLayout
+        a:layout_width="320dp"
+        a:layout_height="wrap_content"
+        a:layout_marginBottom="30dp"
+        a:gravity="center">
+
+        <HorizontalScrollView
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:layout_alignParentStart="true"
+            a:layout_marginStart="7dp"
+            a:layout_marginEnd="10dp"
+            a:layout_toStartOf="@id/n2">
+
+            <TextView
+                a:id="@id/n1"
+                a:layout_width="wrap_content"
+                a:layout_height="wrap_content"
+                a:layout_margin="@dimen/e"
+                a:ellipsize="end"
+                a:maxLines="1"
+                a:padding="@dimen/e"
+                a:scrollHorizontally="true"
+                a:textSize="@dimen/a" />
+
+        </HorizontalScrollView>
+
+        <Button
+            a:id="@id/n2"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_marginStart="10dp"
+            a:layout_toStartOf="@id/n3"
+            a:textSize="@dimen/c" />
+
+        <Button
+            a:id="@id/n3"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_alignParentEnd="true"
+            a:layout_marginStart="10dp"
+            a:textSize="@dimen/c" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        a:layout_width="320dp"
+        a:layout_height="wrap_content"
+        a:gravity="center"
+        a:orientation="horizontal">
+
+        <TextView
+            a:id="@id/n4"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n5"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n6"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n7"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+    </LinearLayout>
+
+    <LinearLayout
+        a:layout_width="320dp"
+        a:layout_height="wrap_content"
+        a:gravity="center"
+        a:orientation="horizontal">
+
+        <TextView
+            a:id="@id/n8"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n9"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n10"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n11"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+    </LinearLayout>
+
+    <LinearLayout
+        a:layout_width="320dp"
+        a:layout_height="wrap_content"
+        a:gravity="center"
+        a:orientation="horizontal">
+
+        <TextView
+            a:id="@id/n12"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n13"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n14"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n15"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+    </LinearLayout>
+
+    <LinearLayout
+        a:layout_width="320dp"
+        a:layout_height="wrap_content"
+        a:gravity="center"
+        a:orientation="horizontal">
+
+        <TextView
+            a:id="@id/n16"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n17"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n18"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+
+        <TextView
+            a:id="@id/n19"
+            a:layout_width="@dimen/g"
+            a:layout_height="@dimen/g"
+            a:layout_margin="@dimen/e"
+            a:gravity="center"
+            a:padding="@dimen/e"
+            a:textSize="@dimen/h" />
+    </LinearLayout>
+</LinearLayout>
+

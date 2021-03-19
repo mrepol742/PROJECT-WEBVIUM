@@ -1,0 +1,29 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<Toolbar xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/b7"
+    a:layout_width="match_parent"
+    a:layout_height="wrap_content"
+    a:elevation="5dp"
+    a:minHeight="@dimen/o">
+
+    <include layout="@layout/a17" />
+</Toolbar>

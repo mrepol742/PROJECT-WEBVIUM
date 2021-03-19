@@ -1,0 +1,29 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<!-- setting floating btn headers -->
+<ripple xmlns:a="http://schemas.android.com/apk/res/android"
+    a:color="@color/b">
+    <item>
+        <shape a:shape="oval">
+            <solid a:color="@color/a" />
+        </shape>
+    </item>
+</ripple>

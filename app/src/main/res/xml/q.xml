@@ -1,0 +1,47 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<!--suppress ALL -->
+<PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
+    <com.droidmj.webvium.SWIT
+        a:defaultValue="false"
+        a:key="lockWn99"
+        a:summary="@string/q2"
+        a:title="@string/q3" />
+    <com.droidmj.webvium.PREF
+        a:dependency="lockWn99"
+        a:key="cHPIN"
+        a:summary="@string/k25"
+        a:title="@string/j38" />
+    <com.droidmj.webvium.PREF
+        a:dependency="lockWn99"
+        a:key="cLPIN"
+        a:summary="@string/k26"
+        a:title="@string/k23" />
+    <com.droidmj.webvium.PREF0 a:title="@string/y">
+        <com.droidmj.webvium.SWIT
+            a:defaultValue="false"
+            a:dependency="lockWn99"
+            a:key="scrON"
+            a:summary="@string/w29"
+            a:title="@string/u27" />
+    </com.droidmj.webvium.PREF0>
+</PreferenceScreen>
+

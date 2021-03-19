@@ -1,0 +1,24 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<selector xmlns:a="http://schemas.android.com/apk/res/android">
+    <item a:color="@color/k" a:state_enabled="false" />
+    <item a:color="@color/b" />
+</selector>

@@ -1,0 +1,59 @@
+// PROJECT-WEBVIUM License Version 1.0 || 18 Fed 2021
+
+
+
+/**
+  ** SECTION 1 **
+  *
+  * The PROJECT-WEBVIUM allows the licensed source codes to be used, studied and modified as long as
+  * they're not sold by themselves. The source codes cannot be embedded, redistributed and/or sold with any other software.
+  *
+**/
+
+/**
+  ** SECTION 2 **
+  *
+  * The source codes and derivatives, however, cannot be released under any other type of license. This
+  * licensed apply to any document in this repository
+  *
+**/
+
+/**
+  ** SECTION 3 **
+  *
+  * Permission is hereby granted to any person belong to this repository, free of charge to obtain
+  * a copy of the Project Webvium source codes, to use, study, copy, modify and merge with this repository, subject
+  * to the following conditions:
+  *
+  * 1) You are not allowed to publish and redistribute this source codes in any way and any means.
+  * 2) You are not allowed to use any other signing configs certificate other than the one that DROID MJ
+  *    provided.
+  * 3) You are not allowed to edit and modify this licensed without any written permissions from DROID MJ.
+  * 4) You are not allowed to publish and redistribute a bundled source codes.
+  * 5) You are not allowed to embedded this source codes to any other software without written permission
+  *    from DROID MJ.
+  *
+**/
+
+/**
+  ** SECTION 4 **
+  * This license becomes null and void if any of the above conditions are
+  * not met.
+  *
+**/
+
+/**
+  ** SECTION 5 **
+  *
+  * THE SOURCE CODES IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+  * OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+  * COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+  * INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+  * DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  * FROM, OUT OF THE USE OR INABILITY TO USE THE SOURCE CODES OR FROM
+  * OTHER DEALINGS IN THE SOURCE CODES.
+  *
+**/
+

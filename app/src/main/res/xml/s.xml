@@ -1,0 +1,53 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<shortcuts xmlns:a="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <shortcut
+        a:enabled="true"
+        a:shortcutId="s78"
+        a:shortcutShortLabel="@string/i2"
+        tools:targetApi="n_mr1">
+        <intent
+            a:action="com.droidmj.webvium.intent.action.PASTE_SEARCH"
+            a:category="com.droidmj.webvium.intent.category.GENIUS"
+            a:targetPackage="com.droidmj.webvium" />
+    </shortcut>
+    <shortcut
+        a:enabled="true"
+        a:shortcutId="lk9"
+        a:shortcutShortLabel="@string/i3"
+        tools:targetApi="n_mr1">
+        <intent
+            a:action="com.droidmj.webvium.intent.action.PASTE"
+            a:category="com.droidmj.webvium.intent.category.GENIUS"
+            a:targetPackage="com.droidmj.webvium" />
+    </shortcut>
+    <shortcut
+        a:enabled="true"
+        a:shortcutId="lk9"
+        a:shortcutShortLabel="@string/l24"
+        tools:targetApi="n_mr1">
+        <intent
+            a:action="com.droidmj.webvium.intent.action.ASSIST"
+            a:category="com.droidmj.webvium.intent.category.GENIUS"
+            a:targetPackage="com.droidmj.webvium" />
+    </shortcut>
+</shortcuts>

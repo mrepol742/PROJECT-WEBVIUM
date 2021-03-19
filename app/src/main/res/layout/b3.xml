@@ -1,0 +1,63 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+    a:layout_height="fill_parent"
+    a:layout_gravity="center_vertical"
+    a:orientation="horizontal"
+
+    a:paddingStart="12dp"
+    a:paddingEnd="12dp">
+
+    <ImageView
+        a:id="@id/e18"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:contentDescription="@string/q22"
+        a:padding="10dp" />
+
+    <LinearLayout
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:orientation="vertical"
+        a:padding="10dp">
+
+        <TextView
+            a:id="@id/e19"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:ellipsize="end"
+            a:maxLines="1"
+            a:textSize="@dimen/b" />
+
+        <TextView
+            a:id="@id/e20"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:ellipsize="end"
+            a:maxLines="1"
+            a:textSize="@dimen/c" />
+
+    </LinearLayout>
+
+</LinearLayout>

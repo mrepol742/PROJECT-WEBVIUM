@@ -1,0 +1,65 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+    a:layout_height="fill_parent"
+    a:orientation="vertical"
+    a:paddingStart="?m"
+
+    a:paddingEnd="?m">
+
+    <TextView
+        a:id="@id/f9"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:layout_marginTop="10dp"
+        a:ellipsize="end"
+        a:labelFor="@id/f10"
+        a:maxLines="1"
+        a:textSize="@dimen/c" />
+
+    <com.droidmj.webvium.EDIT
+        a:id="@id/f10"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:imeOptions="actionGo|flagNoFullscreen"
+        a:inputType="text"
+        a:textSize="@dimen/c" />
+
+    <TextView
+        a:id="@id/f11"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:layout_marginTop="10dp"
+        a:ellipsize="end"
+        a:labelFor="@id/f12"
+        a:maxLines="1"
+        a:textSize="@dimen/c" />
+
+    <com.droidmj.webvium.EDIT
+        a:id="@id/f12"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:imeOptions="actionGo|flagNoFullscreen"
+        a:inputType="text"
+        a:textSize="@dimen/c" />
+
+</LinearLayout>

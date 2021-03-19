@@ -1,0 +1,52 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+    <attr name="a" format="color" />
+    <attr name="b" format="color" />
+    <attr name="c" format="color" />
+    <attr name="d" format="color" />
+    <attr name="e" format="color" />
+    <attr name="f" format="color" />
+    <attr name="g" format="color" />
+    <attr name="h" format="color" />
+    <attr name="i" format="color" />
+    <attr name="j" format="color" />
+    <attr name="k" format="color" />
+    <attr name="l" format="color" />
+    <attr name="m" format="dimension" />
+    <attr name="n" format="reference" />
+    <attr name="o" format="reference" />
+    <attr name="p" format="reference" />
+    <attr name="q" format="reference" />
+    <attr name="r" format="color" />
+    <attr name="s" format="color" />
+    <attr name="t" format="reference" />
+    <attr name="u" format="reference" />
+    <attr name="v" format="reference" />
+    <attr name="w" format="reference" />
+    <attr name="x" format="reference" />
+    <attr name="y" format="reference" />
+    <attr name="z" format="reference" />
+    <attr name="a1" format="reference" />
+    <attr name="a2" format="reference" />
+    <attr name="a3" format="reference" />
+
+</resources>

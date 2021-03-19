@@ -1,0 +1,52 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
+
+    a:gravity="center"
+    a:orientation="vertical"
+    a:paddingStart="?m"
+    a:paddingEnd="?m">
+
+
+    <AutoCompleteTextView
+        a:id="@id/d15"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:layout_marginTop="10dp"
+        a:hint="@string/q23"
+        a:inputType="textMultiLine|textNoSuggestions"
+        a:maxLines="4"
+        a:textSize="@dimen/b" />
+
+    <Button
+        a:id="@id/c1"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_margin="10dp"
+        a:gravity="center"
+        a:paddingStart="10dp"
+        a:paddingEnd="10dp"
+        a:textSize="@dimen/b" />
+
+</LinearLayout>

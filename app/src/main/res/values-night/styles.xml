@@ -1,0 +1,46 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+    <!-- SYSTEM FORCE NIGHT MODE -->
+    <!-- TRANSFER LIGHT TO DARK -->
+    <!-- CUSTOM BACKGROUND TRANSLUCENT THEME LIGHT -->
+    <style name="a" parent="g" />
+    <!-- LIGHT THEME -->
+    <style name="d" parent="e" />
+    <!-- APP THEME LIGHT -->
+    <style name="h" parent="i" />
+    <!-- ASSISTAND THEME LIGHT -->
+    <style name="m" parent="n" />
+
+    <style name="s" parent="t" />
+
+    <style name="a11" parent="a12" />
+
+    <style name="f" parent="d">
+        <item name="b">@color/n</item>
+        <item name="android:statusBarColor">@color/n</item>
+        <item name="android:navigationBarColor">@color/n</item>
+        <item name="android:windowBackground">?u</item>
+    </style>
+
+    <style name="d3" parent="d4" />
+
+</resources>

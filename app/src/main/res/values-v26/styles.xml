@@ -1,0 +1,121 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <!-- APP THEME LIGHT -->
+    <style name="h" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="a">@color/c</item>
+        <item name="b">@color/b</item>
+        <item name="c">@color/b</item>
+        <item name="d">@color/e</item>
+        <item name="e">@color/b</item>
+        <item name="f">@color/p</item>
+        <item name="g">@color/a</item>
+        <item name="h">@color/q</item>
+        <item name="i">@color/b</item>
+        <item name="j">@color/c</item>
+        <item name="k">@color/u</item>
+        <item name="l">@color/b</item>
+        <item name="m">24dp</item>
+        <item name="n">@drawable/f21</item>
+        <item name="o">@drawable/f17</item>
+        <item name="p">@drawable/f20</item>
+        <item name="q">@drawable/f24</item>
+        <item name="r">@color/q</item>
+        <item name="s">@color/d</item>
+        <item name="android:textColorPrimary">?a</item>
+        <item name="android:textColorSecondary">@color/a6</item>
+        <item name="android:textColorPrimaryInverse">?b</item>
+        <item name="android:textColorSecondaryInverse">?b</item>
+        <item name="android:colorPrimary">?f</item>
+        <item name="android:colorPrimaryDark">?f</item>
+        <item name="android:colorAccent">?g</item>
+        <item name="android:colorControlNormal">?a</item>
+        <item name="android:colorControlActivated">?g</item>
+        <item name="android:colorControlHighlight">@color/q</item>
+        <item name="android:colorButtonNormal">@color/p</item>
+        <item name="android:colorError">?d</item>
+        <item name="android:textColorHighlight">@color/a3</item>
+        <item name="android:textColorHighlightInverse">@color/a3</item>
+
+        <item name="t">@drawable/a1</item>
+        <item name="u">@drawable/e5</item>
+        <item name="v">@drawable/f3</item>
+        <item name="w">@drawable/c5</item>
+        <item name="x">@drawable/a7</item>
+        <item name="y">@drawable/k</item>
+        <item name="z">@drawable/d11</item>
+        <item name="a1">@drawable/a2</item>
+        <item name="a2">@drawable/c12</item>
+        <item name="a3">@drawable/e18</item>
+    </style>
+
+    <!-- APP THEME DARK -->
+    <style name="i" parent="android:Theme.Material.NoActionBar">
+        <item name="a">@color/b</item>
+        <item name="b">@color/n</item>
+        <item name="c">@color/d</item>
+        <item name="d">@color/e</item>
+        <item name="e">@color/b</item>
+        <item name="f">@color/m</item>
+        <item name="g">@color/a</item>
+        <item name="h">@color/c</item>
+        <item name="i">@color/m</item>
+        <item name="j">@color/c</item>
+        <item name="k">@color/v</item>
+        <item name="l">@color/m</item>
+        <item name="m">24dp</item>
+        <item name="n">@drawable/f21</item>
+        <item name="o">@drawable/f17</item>
+        <item name="p">@drawable/f20</item>
+        <item name="q">@drawable/f24</item>
+        <item name="r">@color/d</item>
+        <item name="s">@color/q</item>
+
+
+        <item name="t">@drawable/a1</item>
+        <item name="u">@drawable/e5</item>
+        <item name="v">@drawable/f3</item>
+        <item name="w">@drawable/c5</item>
+        <item name="x">@drawable/a7</item>
+        <item name="y">@drawable/k</item>
+        <item name="z">@drawable/d11</item>
+        <item name="a1">@drawable/a2</item>
+        <item name="a2">@drawable/c12</item>
+        <item name="a3">@drawable/e18</item>
+        <item name="android:textColorPrimary">?a</item>
+        <item name="android:textColorSecondary">@color/a7</item>
+        <item name="android:textColorPrimaryInverse">?b</item>
+        <item name="android:textColorSecondaryInverse">?b</item>
+        <item name="android:colorPrimary">?f</item>
+        <item name="android:colorPrimaryDark">?f</item>
+        <item name="android:colorAccent">?g</item>
+        <item name="android:colorControlNormal">?a</item>
+        <item name="android:colorControlActivated">?g</item>
+        <item name="android:colorControlHighlight">@color/m
+        </item>
+        <item name="android:colorButtonNormal">@color/c</item>
+        <item name="android:colorError">?d</item>
+        <item name="android:textColorHighlight">@color/a3</item>
+        <item name="android:textColorHighlightInverse">@color/a3</item>
+    </style>
+
+</resources>

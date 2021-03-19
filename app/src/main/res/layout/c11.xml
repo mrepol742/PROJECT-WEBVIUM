@@ -1,0 +1,99 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<Toolbar xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/o"
+    a:layout_width="fill_parent"
+    a:layout_height="wrap_content"
+    a:minHeight="@dimen/o">
+
+    <RelativeLayout
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content">
+
+        <LinearLayout
+            a:id="@id/y"
+            a:layout_width="match_parent"
+            a:layout_height="wrap_content"
+            a:layout_toStartOf="@id/m13"
+            a:gravity="center_vertical"
+            a:orientation="horizontal"
+            a:padding="10dp">
+
+            <TextView
+                a:id="@id/m11"
+                a:layout_width="wrap_content"
+                a:layout_height="match_parent"
+                a:layout_marginStart="15dp"
+                a:ellipsize="end"
+                a:gravity="center_vertical"
+                a:labelFor="@id/p"
+                a:maxLines="1"
+                a:textColor="?h"
+                a:textSize="@dimen/c" />
+
+            <TextView
+                a:id="@id/e7"
+                a:layout_width="wrap_content"
+                a:layout_height="match_parent"
+                a:layout_marginStart="7dp"
+                a:ellipsize="end"
+                a:gravity="center_vertical"
+                a:maxLines="1"
+                a:textColor="?h"
+                a:textSize="@dimen/c" />
+
+            <AutoCompleteTextView
+                a:id="@id/p"
+                a:layout_width="match_parent"
+                a:layout_height="match_parent"
+                a:layout_marginStart="7dp"
+                a:layout_marginEnd="30dp"
+                a:background="@null"
+                a:ellipsize="end"
+                a:gravity="center_vertical"
+                a:imeOptions="actionSearch|flagNoFullscreen"
+                a:inputType="textAutoCorrect"
+                a:maxLines="1"
+                a:selectAllOnFocus="true"
+                a:textSize="@dimen/c" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            a:id="@id/m13"
+            a:layout_width="24dp"
+            a:layout_height="24dp"
+            a:layout_alignParentEnd="true"
+            a:layout_centerInParent="true"
+            a:layout_marginStart="15dp"
+            a:layout_marginEnd="15dp"
+            a:contentDescription="@string/q25" />
+    </RelativeLayout>
+</Toolbar>
+
+
+
+
+
+
+
+

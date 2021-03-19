@@ -1,0 +1,34 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/n27"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
+    a:gravity="center">
+
+    <ImageView
+        a:id="@id/n28"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:layout_margin="40dp"
+        a:contentDescription="@string/p39"
+        a:padding="40dp" />
+</LinearLayout>

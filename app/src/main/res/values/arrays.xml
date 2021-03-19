@@ -1,0 +1,482 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <string-array name="c">
+        <item name="1a">@string/j14</item>
+        <item name="7a">@string/j5</item>
+        <item name="30a">@string/j6</item>
+        <item name="60a">@string/j7</item>
+        <item name="120a">@string/j8</item>
+        <item name="240a">@string/j9</item>
+        <item name="480a">@string/j10</item>
+        <item name="960a">@string/j11</item>
+        <item name="1920a">@string/j12</item>
+        <item name="3840a">@string/q20</item>
+    </string-array>
+    <string-array name="d">
+        <item name="1a">1a</item>
+        <item name="7a">7a</item>
+        <item name="30a">30a</item>
+        <item name="60a">60a</item>
+        <item name="120a">120a</item>
+        <item name="240a">240a</item>
+        <item name="480a">480a</item>
+        <item name="960a">960a</item>
+        <item name="1920a">1920a</item>
+        <item name="3840a">3840a</item>
+    </string-array>
+
+
+    <string-array name="e">
+        <item name="1b">@string/r1</item>
+        <item name="7b">@string/r2</item>
+        <item name="30b">@string/r3</item>
+        <item name="60b">@string/r4</item>
+        <item name="120b">@string/r5</item>
+        <item name="240b">@string/r6</item>
+        <item name="480b">@string/r7</item>
+        <item name="860b">@string/r8</item>
+        <item name="1720b">@string/r9</item>
+        <item name="3440b">@string/r10</item>
+        <item name="6880b">@string/z10</item>
+        <item name="12b">@string/x41</item>
+        <item name="13b">@string/x42</item>
+        <item name="14b">@string/x43</item>
+    </string-array>
+    <string-array name="f">
+        <item name="1b">1b</item>
+        <item name="7b">7b</item>
+        <item name="30b">30b</item>
+        <item name="60b">60b</item>
+        <item name="120b">120b</item>
+        <item name="240b">240b</item>
+        <item name="480b">480b</item>
+        <item name="860b">860b</item>
+        <item name="1720b">1720b</item>
+        <item name="3440b">3440b</item>
+        <item name="6880b">6880b</item>
+        <item name="12b">12b</item>
+        <item name="13b">13b</item>
+        <item name="14b">14b</item>
+    </string-array>
+
+
+    <string-array name="g">
+        <item name="30c">@string/j14</item>
+        <item name="1c">@string/r11</item>
+        <item name="7c">@string/r12</item>
+    </string-array>
+    <string-array name="h">
+        <item name="30c">30c</item>
+        <item name="1c">1c</item>
+        <item name="7c">7c</item>
+    </string-array>
+
+
+    <string-array name="i">
+        <item name="1d">@string/j14</item>
+        <item name="7d">@string/r13</item>
+        <item name="30d">@string/x5</item>
+    </string-array>
+    <string-array name="j">
+        <item name="1d">1d</item>
+        <item name="7d">7d</item>
+        <item name="30d">30d</item>
+    </string-array>
+
+
+    <string-array name="k">
+        <item name="1e">@string/j14</item>
+        <item name="7e">@string/r14</item>
+        <item name="30e">@string/r15</item>
+        <item name="60e">@string/r16</item>
+        <item name="120e">@string/r17</item>
+        <item name="240e">@string/r18</item>
+        <item name="480e">@string/r19</item>
+        <item name="960e">@string/e29</item>
+        <item name="1920e">@string/e30</item>
+        <item name="3840e">@string/f21</item>
+        <item name="7680e">@string/q20</item>
+    </string-array>
+    <string-array name="l">
+        <item name="1e">1e</item>
+        <item name="7e">7e</item>
+        <item name="30e">30e</item>
+        <item name="60e">60e</item>
+        <item name="120e">120e</item>
+        <item name="240e">240e</item>
+        <item name="480e">480e</item>
+        <item name="960e">960e</item>
+        <item name="1920e">1920e</item>
+        <item name="3840e">3840e</item>
+        <item name="7680e">7680e</item>
+    </string-array>
+
+
+    <string-array name="m">
+        <item name="1f">@string/i18</item>
+        <item name="7f">@string/i19</item>
+        <item name="30f">@string/i20</item>
+    </string-array>
+    <string-array name="n">
+        <item name="1f">1f</item>
+        <item name="7f">7f</item>
+        <item name="30f">30f</item>
+    </string-array>
+
+
+    <string-array name="o">
+        <item name="1g">@string/i18</item>
+        <item name="7g">@string/i20</item>
+        <item name="30g">@string/i19</item>
+
+    </string-array>
+    <string-array name="p">
+        <item name="1g">1g</item>
+        <item name="7g">7g</item>
+        <item name="30g">30g</item>
+
+
+    </string-array>
+
+
+    <string-array name="q">
+        <item name="1h">@string/i18</item>
+        <item name="7h">@string/i20</item>
+        <item name="30h">@string/i19</item>
+
+    </string-array>
+    <string-array name="r">
+        <item name="1h">1h</item>
+        <item name="7h">7h</item>
+        <item name="30h">30h</item>
+
+
+    </string-array>
+
+
+    <string-array name="u">
+        <item name="1j">@string/j14</item>
+        <item name="7j">@string/r20</item>
+        <item name="30j">@string/s1</item>
+    </string-array>
+    <string-array name="v">
+        <item name="1j">1j</item>
+        <item name="7j">7j</item>
+        <item name="30j">30j</item>
+
+
+    </string-array>
+
+
+    <string-array name="w">
+        <item name="1k">@string/j20</item>
+        <item name="7k">@string/s2</item>
+        <item name="30k">@string/s3</item>
+        <item name="60k">@string/s4</item>
+    </string-array>
+    <string-array name="x">
+        <item name="1k">1k</item>
+        <item name="7k">7k</item>
+        <item name="30k">30k</item>
+        <item name="60k">60k</item>
+
+    </string-array>
+
+
+    <string-array name="y">
+        <item name="1l">@string/g12</item>
+        <item name="7l">@string/n2</item>
+        <item name="30l">@string/a35</item>
+
+    </string-array>
+    <string-array name="z">
+        <item name="1l">1l</item>
+        <item name="7l">7l</item>
+        <item name="30l">30l</item>
+
+
+    </string-array>
+
+
+    <string-array name="a1">
+        <item name="1m">@string/j13</item>
+        <item name="7m">@string/j18</item>
+        <item name="30m">@string/j19</item>
+        <item name="60m">@string/j15</item>
+
+    </string-array>
+    <string-array name="a2">
+        <item name="1m">1m</item>
+        <item name="7m">7m</item>
+        <item name="30m">30m</item>
+        <item name="60m">60m</item>
+
+    </string-array>
+
+
+    <string-array name="a5">
+        <item name="1o">@string/j14</item>
+        <item name="7o">@string/j16</item>
+        <item name="30o">@string/j17</item>
+        <item name="60o">@string/q20</item>
+
+    </string-array>
+    <string-array name="a6">
+        <item name="1o">1o</item>
+        <item name="7o">7o</item>
+        <item name="30o">30o</item>
+        <item name="60o">60o</item>
+    </string-array>
+
+
+    <string-array name="a7">
+        <item name="1p">@string/j2</item>
+        <item name="7p">@string/j3</item>
+        <item name="30p">@string/h14</item>
+        <item name="60p">@string/j4</item>
+    </string-array>
+    <string-array name="a8">
+        <item name="1p">1p</item>
+        <item name="7p">7p</item>
+        <item name="30p">30p</item>
+        <item name="60p">60p</item>
+    </string-array>
+
+    <string-array name="a9">
+        <item name="1">@string/i18</item>
+        <item name="7">@string/j1</item>
+        <item name="30">@string/i19</item>
+        <item name="60">@string/w9</item>
+        <item name="120">@string/i20</item>
+    </string-array>
+    <string-array name="a10">
+        <item name="1">1</item>
+        <item name="7">7</item>
+        <item name="30">30</item>
+
+        <item name="60">60</item>
+        <item name="120">120</item>
+    </string-array>
+
+
+    <string-array name="a11">
+        <item name="1q">@string/s5</item>
+        <item name="7q">@string/s6</item>
+
+        <item name="30q">@string/s7</item>
+    </string-array>
+    <string-array name="a12">
+        <item name="1q">1q</item>
+        <item name="7q">7q</item>
+        <item name="30q">30q</item>
+
+    </string-array>
+
+    <string-array name="a13">
+        <item name="1r">@string/s8</item>
+        <item name="7r">@string/s9</item>
+        <item name="30r">@string/s10</item>
+
+    </string-array>
+    <string-array name="a14">
+        <item name="1r">1r</item>
+        <item name="7r">7r</item>
+        <item name="30r">30r</item>
+
+    </string-array>
+
+
+    <string-array name="a17">
+        <item name="1t">@string/s11</item>
+        <item name="7t">@string/s12</item>
+        <item name="30t">@string/s13</item>
+
+    </string-array>
+    <string-array name="a18">
+        <item name="1t">1t</item>
+        <item name="7t">7t</item>
+        <item name="30t">30t</item>
+
+    </string-array>
+
+    <string-array name="a19">
+        <item name="1u">@string/j14</item>
+        <item name="7u">@string/s14</item>
+        <item name="30u">@string/s15</item>
+
+        <item name="60u">@string/h22</item>
+        <item name="120u">@string/h14</item>
+        <item name="140u">@string/h11</item>
+
+    </string-array>
+    <string-array name="a20">
+        <item name="1u">1u</item>
+        <item name="7u">7u</item>
+        <item name="30u">30u</item>
+        <item name="60u">60u</item>
+        <item name="120u">120u</item>
+        <item name="140u">140u</item>
+    </string-array>
+
+    <string-array name="b1">
+        <item name="1v">@string/j14</item>
+        <item name="7v">@string/s16</item>
+        <item name="30v">@string/s17</item>
+        <item name="60v">@string/h23</item>
+        <item name="120v">@string/h9</item>
+        <item name="140v">@string/h18</item>
+    </string-array>
+    <string-array name="b2">
+        <item name="1v">1v</item>
+        <item name="7v">7v</item>
+        <item name="30v">30v</item>
+        <item name="60v">60v</item>
+        <item name="120v">120v</item>
+        <item name="140v">140v</item>
+    </string-array>
+
+
+    <string-array name="b3">
+        <item name="1w">@string/s18</item>
+        <item name="7w">@string/s19</item>
+        <item name="30w">@string/s20</item>
+
+    </string-array>
+    <string-array name="b4">
+        <item name="1w">1w</item>
+        <item name="7w">7w</item>
+        <item name="30w">30w</item>
+
+    </string-array>
+
+
+    <string-array name="b5">
+        <item name="1x">@string/x17</item>
+        <item name="7x">@string/x18</item>
+        <item name="30x">@string/x19</item>
+        <item name="60x">@string/x20</item>
+        <item name="120x">@string/y1</item>
+
+
+    </string-array>
+    <string-array name="b6">
+        <item name="1x">1x</item>
+        <item name="7w">7x</item>
+        <item name="30w">30x</item>
+        <item name="60x">60x</item>
+        <item name="120x">120x</item>
+
+    </string-array>
+
+    <string-array name="b7">
+        <item name="1y">@string/y4</item>
+        <item name="7y">@string/y5</item>
+        <item name="30y">@string/y6</item>
+
+    </string-array>
+    <string-array name="b8">
+        <item name="1y">1y</item>
+        <item name="7y">7y</item>
+        <item name="30y">30y</item>
+
+    </string-array>
+
+
+    <string-array name="b9">
+        <item name="1z">@string/h24</item>
+        <item name="7z">@string/h25</item>
+        <item name="30z">@string/h26</item>
+        <item name="60z">@string/h27</item>
+
+    </string-array>
+    <string-array name="b10">
+        <item name="1z">1z</item>
+        <item name="7z">7z</item>
+        <item name="30z">30z</item>
+        <item name="60z">60z</item>
+    </string-array>
+
+
+    <string-array name="b11">
+        <item name="1a1">@string/r11</item>
+        <item name="7a1">@string/h33</item>
+        <item name="30a1">@string/r12</item>
+        <item name="60a1">@string/h34</item>
+
+    </string-array>
+    <string-array name="b12">
+        <item name="1a1">1a1</item>
+        <item name="7a1">7a1</item>
+        <item name="30a1">30a1</item>
+        <item name="60a1">60a1</item>
+    </string-array>
+
+    <string-array name="b13">
+        <item name="1a2">@string/j14</item>
+        <item name="7a2">@string/k38</item>
+
+
+    </string-array>
+    <string-array name="b14">
+        <item name="1a2">1a2</item>
+        <item name="7a2">7a2</item>
+
+    </string-array>
+
+    <string-array name="b15">
+        <item name="1x">@string/x17</item>
+        <item name="7x">@string/x18</item>
+        <item name="30x">@string/x19</item>
+        <item name="60x">@string/x20</item>
+        <item name="120x">@string/y1</item>
+        <item name="240x">@string/y2</item>
+        <item name="480x">@string/y3</item>
+
+    </string-array>
+    <string-array name="b16">
+        <item name="1x">1x</item>
+        <item name="7w">7x</item>
+        <item name="30w">30x</item>
+        <item name="60x">60x</item>
+        <item name="120x">120x</item>
+        <item name="240x">240x</item>
+        <item name="480x">480x</item>
+    </string-array>
+
+    <string-array name="b17">
+        <item name="1y">@string/j14</item>
+        <item name="7y">@string/p34</item>
+        <item name="30y">@string/p35</item>
+        <item name="60y">@string/p36</item>
+        <item name="120y">@string/p37</item>
+    </string-array>
+    <string-array name="b18">
+        <item name="1y">1y</item>
+        <item name="7y">7y</item>
+        <item name="30y">30y</item>
+        <item name="60y">60y</item>
+        <item name="120y">120y</item>
+
+    </string-array>
+
+</resources>

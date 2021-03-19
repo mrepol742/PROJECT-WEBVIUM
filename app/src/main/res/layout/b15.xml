@@ -1,0 +1,40 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="match_parent"
+
+    a:layout_height="match_parent"
+    a:orientation="vertical"
+    a:paddingStart="?m"
+    a:paddingEnd="?m">
+
+
+    <TextView
+        a:id="@id/k6"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_marginTop="10dp"
+        a:layout_marginBottom="10dp"
+        a:textIsSelectable="true"
+        a:textSize="@dimen/c" />
+
+
+</LinearLayout>

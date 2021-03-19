@@ -1,0 +1,251 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<resources>
+
+    <item name="a" type="id" />
+    <item name="b" type="id" />
+    <item name="c" type="id" />
+    <item name="d" type="id" />
+    <item name="e" type="id" />
+    <item name="f" type="id" />
+    <item name="g" type="id" />
+    <item name="h" type="id" />
+    <item name="i" type="id" />
+    <item name="j" type="id" />
+    <item name="k" type="id" />
+    <item name="l" type="id" />
+    <item name="m" type="id" />
+    <item name="n" type="id" />
+    <item name="o" type="id" />
+    <item name="p" type="id" />
+    <item name="q" type="id" />
+    <item name="r" type="id" />
+    <item name="s" type="id" />
+    <item name="t" type="id" />
+    <item name="u" type="id" />
+    <item name="v" type="id" />
+    <item name="w" type="id" />
+    <item name="x" type="id" />
+    <item name="y" type="id" />
+    <item name="z" type="id" />
+    <item name="a1" type="id" />
+    <item name="a2" type="id" />
+    <item name="a3" type="id" />
+    <item name="a4" type="id" />
+    <item name="a5" type="id" />
+    <item name="a6" type="id" />
+
+    <item name="a12" type="id" />
+    <item name="a13" type="id" />
+    <item name="b1" type="id" />
+    <item name="b3" type="id" />
+    <item name="b6" type="id" />
+    <item name="b7" type="id" />
+    <item name="b8" type="id" />
+    <item name="b9" type="id" />
+    <item name="b10" type="id" />
+    <item name="b11" type="id" />
+    <item name="b12" type="id" />
+    <item name="b13" type="id" />
+    <item name="b14" type="id" />
+    <item name="b15" type="id" />
+    <item name="b16" type="id" />
+    <item name="b17" type="id" />
+    <item name="b18" type="id" />
+    <item name="b19" type="id" />
+    <item name="b20" type="id" />
+    <item name="c1" type="id" />
+    <item name="c3" type="id" />
+    <item name="c4" type="id" />
+    <item name="c5" type="id" />
+    <item name="c6" type="id" />
+    <item name="c8" type="id" />
+    <item name="c9" type="id" />
+    <item name="c10" type="id" />
+    <item name="c11" type="id" />
+    <item name="c12" type="id" />
+    <item name="c13" type="id" />
+    <item name="c15" type="id" />
+    <item name="c16" type="id" />
+    <item name="c17" type="id" />
+    <item name="c18" type="id" />
+    <item name="c19" type="id" />
+    <item name="c20" type="id" />
+    <item name="d1" type="id" />
+    <item name="d2" type="id" />
+    <item name="d3" type="id" />
+    <item name="d4" type="id" />
+    <item name="d15" type="id" />
+    <item name="d16" type="id" />
+    <item name="d17" type="id" />
+    <item name="d18" type="id" />
+    <item name="d19" type="id" />
+    <item name="d20" type="id" />
+    <item name="e1" type="id" />
+    <item name="e2" type="id" />
+    <item name="e3" type="id" />
+    <item name="e7" type="id" />
+    <item name="e8" type="id" />
+    <item name="e9" type="id" />
+    <item name="e10" type="id" />
+    <item name="e11" type="id" />
+    <item name="e12" type="id" />
+    <item name="e13" type="id" />
+    <item name="e14" type="id" />
+    <item name="e15" type="id" />
+    <item name="e16" type="id" />
+    <item name="e18" type="id" />
+    <item name="e19" type="id" />
+    <item name="e20" type="id" />
+    <item name="f1" type="id" />
+    <item name="f2" type="id" />
+    <item name="f3" type="id" />
+    <item name="f4" type="id" />
+    <item name="f6" type="id" />
+    <item name="f7" type="id" />
+    <item name="f8" type="id" />
+    <item name="f9" type="id" />
+    <item name="f10" type="id" />
+    <item name="f11" type="id" />
+    <item name="f12" type="id" />
+    <item name="f13" type="id" />
+    <item name="f14" type="id" />
+    <item name="f15" type="id" />
+    <item name="f16" type="id" />
+    <item name="f17" type="id" />
+
+    <item name="g1" type="id" />
+    <item name="g4" type="id" />
+    <item name="g7" type="id" />
+    <item name="g8" type="id" />
+    <item name="g9" type="id" />
+    <item name="h9" type="id" />
+    <item name="h10" type="id" />
+    <item name="h11" type="id" />
+    <item name="h14" type="id" />
+    <item name="h15" type="id" />
+    <item name="h16" type="id" />
+    <item name="h17" type="id" />
+    <item name="h18" type="id" />
+    <item name="h19" type="id" />
+    <item name="h20" type="id" />
+    <item name="i1" type="id" />
+    <item name="i2" type="id" />
+    <item name="i3" type="id" />
+
+
+    <item name="i6" type="id" />
+    <item name="i7" type="id" />
+    <item name="i9" type="id" />
+    <item name="i10" type="id" />
+    <item name="i11" type="id" />
+    <item name="i12" type="id" />
+    <item name="i13" type="id" />
+    <item name="i14" type="id" />
+    <item name="i15" type="id" />
+    <item name="i16" type="id" />
+    <item name="i17" type="id" />
+    <item name="i18" type="id" />
+    <item name="i19" type="id" />
+    <item name="i20" type="id" />
+    <item name="j1" type="id" />
+    <item name="j2" type="id" />
+    <item name="j3" type="id" />
+    <item name="k3" type="id" />
+    <item name="k6" type="id" />
+    <item name="k9" type="id" />
+    <item name="k10" type="id" />
+    <item name="k11" type="id" />
+    <item name="k12" type="id" />
+    <item name="k13" type="id" />
+    <item name="k14" type="id" />
+    <item name="k19" type="id" />
+    <item name="k20" type="id" />
+
+    <item name="l3" type="id" />
+    <item name="l4" type="id" />
+    <item name="l5" type="id" />
+    <item name="l6" type="id" />
+    <item name="l7" type="id" />
+    <item name="l8" type="id" />
+    <item name="l10" type="id" />
+    <item name="l11" type="id" />
+    <item name="l13" type="id" />
+    <item name="l14" type="id" />
+    <item name="l15" type="id" />
+    <item name="l16" type="id" />
+    <item name="l17" type="id" />
+
+
+    <item name="m1" type="id" />
+    <item name="m2" type="id" />
+    <item name="m3" type="id" />
+    <item name="m4" type="id" />
+    <item name="m5" type="id" />
+    <item name="m6" type="id" />
+    <item name="m7" type="id" />
+    <item name="m8" type="id" />
+    <item name="m9" type="id" />
+    <item name="m10" type="id" />
+    <item name="m11" type="id" />
+    <item name="m13" type="id" />
+    <item name="m15" type="id" />
+    <item name="m16" type="id" />
+    <item name="m17" type="id" />
+    <item name="m18" type="id" />
+    <item name="m19" type="id" />
+    <item name="m20" type="id" />
+    <item name="n1" type="id" />
+    <item name="n2" type="id" />
+    <item name="n3" type="id" />
+    <item name="n4" type="id" />
+    <item name="n5" type="id" />
+    <item name="n6" type="id" />
+    <item name="n7" type="id" />
+    <item name="n8" type="id" />
+    <item name="n9" type="id" />
+    <item name="n10" type="id" />
+    <item name="n11" type="id" />
+    <item name="n12" type="id" />
+    <item name="n13" type="id" />
+    <item name="n14" type="id" />
+    <item name="n15" type="id" />
+    <item name="n16" type="id" />
+    <item name="n17" type="id" />
+    <item name="n18" type="id" />
+    <item name="n19" type="id" />
+    <item name="n20" type="id" />
+    <item name="n21" type="id" />
+    <item name="n22" type="id" />
+    <item name="n23" type="id" />
+    <item name="n24" type="id" />
+    <item name="n27" type="id" />
+    <item name="n28" type="id" />
+    <item name="n29" type="id" />
+    <item name="o21" type="id" />
+    <item name="o22" type="id" />
+    <item name="o23" type="id" />
+    <item name="o24" type="id" />
+    <item name="o25" type="id" />
+    <item name="o26" type="id" />
+    <item name="o27" type="id" />
+
+</resources>

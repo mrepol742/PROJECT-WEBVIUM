@@ -1,0 +1,88 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="fill_parent"
+    a:layout_height="fill_parent"
+    a:layout_gravity="center_vertical"
+    a:orientation="horizontal"
+
+    a:paddingStart="12dp"
+    a:paddingEnd="12dp">
+
+    <ImageView
+        a:id="@id/n20"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:contentDescription="@string/w28"
+        a:padding="10dp" />
+
+    <LinearLayout
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:layout_gravity="center_vertical"
+        a:orientation="vertical"
+        a:padding="10dp">
+
+        <TextView
+            a:id="@id/m15"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:ellipsize="end"
+            a:maxLines="1"
+            a:textSize="@dimen/c" />
+
+        <LinearLayout
+            a:layout_width="match_parent"
+            a:layout_height="wrap_content">
+
+            <TextView
+                a:id="@id/b11"
+                a:layout_width="0dp"
+                a:layout_height="wrap_content"
+                a:layout_weight="1.0"
+                a:ellipsize="end"
+                a:maxLines="1"
+                a:textSize="@dimen/c" />
+
+            <TextView
+                a:id="@id/b12"
+                a:layout_width="0dp"
+                a:layout_height="wrap_content"
+                a:layout_weight="1.0"
+                a:ellipsize="end"
+                a:maxLines="1"
+                a:textSize="@dimen/c" />
+
+            <TextView
+                a:id="@id/b13"
+                a:layout_width="0dp"
+                a:layout_height="wrap_content"
+                a:layout_weight=".5"
+                a:ellipsize="end"
+                a:maxLines="1"
+                a:textSize="@dimen/c" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

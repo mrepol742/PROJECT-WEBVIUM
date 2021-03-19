@@ -1,0 +1,196 @@
+<!--
+  ~
+  ~
+  ~
+  ~ DROID MJ Property || Confidential
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  ~
+  -->
+
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:id="@id/e"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent">
+
+    <Toolbar
+        a:id="@id/f"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:minHeight="@dimen/o">
+
+        <ImageView
+            a:id="@id/q"
+            a:layout_width="24dp"
+            a:layout_height="24dp"
+            a:layout_marginStart="0dp"
+            a:layout_marginEnd="15dp"
+            a:contentDescription="@string/p3" />
+
+        <RelativeLayout
+            a:id="@id/v"
+            a:layout_width="match_parent"
+            a:layout_height="match_parent"
+            a:layout_gravity="center_vertical"
+            a:gravity="center"
+            a:padding="10dp">
+
+            <ImageView
+                a:id="@id/d20"
+                a:layout_width="wrap_content"
+                a:layout_height="wrap_content"
+                a:layout_alignParentStart="true"
+                a:layout_centerInParent="true"
+                a:layout_marginStart="10dp"
+                a:contentDescription="@string/q27" />
+
+            <TextView
+                a:id="@id/m9"
+                a:layout_width="wrap_content"
+                a:layout_height="wrap_content"
+                a:layout_centerInParent="true"
+                a:layout_marginStart="7dp"
+                a:layout_toEndOf="@id/d20"
+                a:ellipsize="end"
+                a:gravity="center_vertical"
+                a:maxLines="1"
+                a:textColor="?h"
+                a:textSize="@dimen/c" />
+
+            <include
+                layout="@layout/a15"
+                a:layout_width="fill_parent"
+                a:layout_height="wrap_content"
+                a:layout_toEndOf="@id/m9" />
+
+            <HorizontalScrollView
+                a:id="@id/c13"
+                a:layout_width="match_parent"
+                a:layout_height="wrap_content"
+                a:layout_below="@id/h"
+                a:layout_centerInParent="true"
+                a:layout_marginStart="7dp"
+                a:layout_marginEnd="10dp"
+                a:layout_toEndOf="@id/m9">
+
+                <TextView
+                    a:id="@id/g"
+                    a:layout_width="wrap_content"
+                    a:layout_height="wrap_content"
+                    a:ellipsize="end"
+                    a:gravity="center_vertical"
+                    a:maxLines="1"
+                    a:scrollHorizontally="true"
+                    a:textSize="@dimen/c" />
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+    </Toolbar>
+
+    <FrameLayout
+        a:id="@id/i"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:layout_above="@id/m4"
+        a:layout_below="@id/f" />
+
+    <TextView
+        a:id="@id/f7"
+        a:layout_width="1dp"
+        a:layout_height="1dp"
+        a:layout_centerInParent="true"
+        a:visibility="invisible" />
+
+    <ImageView
+        a:id="@id/d19"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_above="@id/m4"
+        a:layout_alignParentEnd="true"
+        a:layout_marginEnd="15dp"
+        a:layout_marginBottom="20dp"
+        a:contentDescription="@string/q24"
+        a:elevation="5dp"
+        a:padding="10dp" />
+
+    <LinearLayout
+        a:id="@id/m4"
+        a:layout_width="fill_parent"
+        a:layout_height="40dp"
+        a:layout_alignParentBottom="true"
+        a:elevation="5dp"
+        a:gravity="center"
+        a:orientation="horizontal"
+        a:paddingTop="5dp">
+
+        <ImageView
+            a:id="@id/b1"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/o11" />
+
+        <ImageView
+            a:id="@id/z"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/b3" />
+
+        <ImageView
+            a:id="@id/r"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/q28"
+            a:paddingStart="7dp"
+            a:paddingEnd="7dp" />
+
+        <ImageView
+            a:id="@id/m5"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/h22" />
+
+        <ImageView
+            a:id="@id/s"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/h23" />
+
+        <ImageView
+            a:id="@id/m6"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/q29" />
+
+        <ImageView
+            a:id="@id/m7"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/h18" />
+
+        <ImageView
+            a:id="@id/m8"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.5"
+            a:contentDescription="@string/h11" />
+    </LinearLayout>
+
+</RelativeLayout>
