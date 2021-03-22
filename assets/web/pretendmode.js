@@ -1,1 +1,0 @@
-(function() { return eval("%a"); })();
