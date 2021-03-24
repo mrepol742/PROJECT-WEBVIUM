@@ -24,7 +24,7 @@ android {
 
     signingConfigs {
 
-        // TODO: Remove this section your default signingConfigs is Github
+        // TODO: Remove this section your default signingConfigs is github
         debug {
             storeFile file(System.getenv("DEBUG_STORE_FILE"))
             storePassword System.getenv("DEBUG_STORE_PASSWORD")
@@ -32,7 +32,7 @@ android {
             keyPassword System.getenv("DEBUG_KEY_PASSWORD")
         }
 
-        // TODO: Remove this section your default signingConfigs is Github
+        // TODO: Remove this section your default signingConfigs is github
         release {
             storeFile file(System.getenv("RELEASE_STORE_FILE"))
             storePassword System.getenv("RELEASE_STORE_PASSWORD")
@@ -67,6 +67,11 @@ android {
             debuggable false
             minifyEnabled true
             signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
+                }
+            }
         }
 
         // TODO: Remove this section your default buildTypes is github
@@ -74,6 +79,11 @@ android {
             debuggable true
             minifyEnabled false
             signingConfig signingConfigs.debug
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
+                }
+            }
         }
 
         // TODO: Remove this section your default buildTypes is github
@@ -81,18 +91,28 @@ android {
             debuggable true
             minifyEnabled true
             signingConfig signingConfigs.debug
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
+                }
+            }
         }
 
         github {
             debuggable true
             minifyEnabled false
             signingConfig signingConfigs.github
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
+                }
+            }
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-
     }
 }
 
@@ -107,4 +127,5 @@ static def getVersionName() {
 static def getVersionCode() {
     return Integer.parseInt(new Date().format("HHmmss"))
 }
+
 
