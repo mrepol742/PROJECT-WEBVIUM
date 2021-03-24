@@ -18,58 +18,33 @@
  *
  */
 
-/*
- * *
- *  *
- *  * DROID MJ Property || Confidential
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- *  *
- */
-
 apply plugin: 'com.android.application'
 
 android {
+
     signingConfigs {
 
-        // TODO: Remove this section your default signingConfigs is github
-        release {
-            storeFile file('D:\\signing\\configs\\release\\webvium-keystore.jks')
-            storePassword 'ac01e7f8865b81e750ef397f86a32811d9fa3c32'
-            keyAlias 'Webvium'
-            keyPassword '31eaeb36428c9d61b301d697f1381cb254e7185c'
+        // TODO: Remove this section your default signingConfigs is Github
+        debug {
+            storeFile file(System.getenv("DEBUG_STORE_FILE"))
+            storePassword System.getenv("DEBUG_STORE_PASSWORD")
+            keyAlias System.getenv("DEBUG_KEY_ALIAS")
+            keyPassword System.getenv("DEBUG_KEY_PASSWORD")
         }
 
-        // TODO: Remove this section your default signingConfigs is github
-        debug {
-            storeFile file('D:\\signing\\configs\\debug\\webvium-keystore.jks')
-            storePassword '25956ea28f4fc39465e726da6f3cfb4804c215d8'
-            keyAlias 'Webvium'
-            keyPassword '99cb3e129f413dfea2ba8144c9a51963b5e08a7e'
+        // TODO: Remove this section your default signingConfigs is Github
+        release {
+            storeFile file(System.getenv("RELEASE_STORE_FILE"))
+            storePassword System.getenv("RELEASE_STORE_PASSWORD")
+            keyAlias System.getenv("RELEASE_KEY_ALIAS")
+            keyPassword System.getenv("RELEASE_KEY_PASSWORD")
         }
 
         github {
-            // TODO: Change the storeFile url into the location where this repository located the config file
-            // TODO: was located in folder signing/config/github/webvium-keystore.jks
-            storeFile file('D:\\2021\\com.droidmj.webvium\\signing\\configs\\github\\webvium-keystore.jks')
-            storePassword 'b22821e32b94ce5c2cfa202552f9c6b53a4b7e84'
-            keyAlias 'Webvium'
-            keyPassword '08c8a719ae2f45bb33cc480d880551f7e8683c30'
+            storeFile file("webvium-keystore.jks")
+            storePassword "b22821e32b94ce5c2cfa202552f9c6b53a4b7e84"
+            keyAlias "Webvium"
+            keyPassword "08c8a719ae2f45bb33cc480d880551f7e8683c30"
         }
 
     }
@@ -82,7 +57,7 @@ android {
         targetSdkVersion 30
         versionCode getVersionCode()
         versionName getVersionName()
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.rules'
+        proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard.rules"
     }
 
     buildTypes {
@@ -126,10 +101,10 @@ dependencies {
 }
 
 static def getVersionName() {
-    return new Date().format('yy.MM.dd')
+    return new Date().format("yy.MM.dd")
 }
 
 static def getVersionCode() {
-    return Integer.parseInt(new Date().format('HHmmss'))
+    return Integer.parseInt(new Date().format("HHmmss"))
 }
 
