@@ -3,6 +3,10 @@
 
 Webvium was made possible by the Webview and Chromium open source project.
 
+Light Theme                |  Dark Theme
+:-------------------------:|:-------------------------:
+![](https://raw.githubusercontent.com/mrepol742/PROJECT-WEBVIUM/master/assets/webvium_light_main.png)  |  ![](https://raw.githubusercontent.com/mrepol742/PROJECT-WEBVIUM/master/assets/webvium_dark_main.png)
+
 # Installation
 ## Requirements
 
