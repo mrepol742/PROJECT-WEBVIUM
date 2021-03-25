@@ -4806,7 +4806,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
-        a.add(0, 0, 0, getString(R.string.h20)).setCheckable(true);
+        a.add(0, 24, 0, getString(R.string.h20)).setCheckable(true);
         // web osint
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
         sm.add(0, 1, 0, getString(R.string.y15));
@@ -4842,7 +4842,7 @@ public class MAIN extends MainBaseActivity implements Format {
     @Override
     public boolean onPrepareOptionsMenu(Menu a) {
         if (ua) {
-            a.findItem(0).setChecked(true);
+            a.findItem(24).setChecked(true);
         }
         return super.onPrepareOptionsMenu(a);
     }
@@ -4855,14 +4855,14 @@ public class MAIN extends MainBaseActivity implements Format {
                 c119();
                 return true;
             case 10:
-                if (cm0.length() >= 10) {
+                if (cm0.length() >= 10 && cm != null) {
                     c164();
                 } else {
                     c7(getString(R.string.i33));
                 }
                 return true;
             case 11:
-                if (cm2.length() >= 10) {
+                if (cm2.length() >= 10 && cm != null) {
                     c165();
                 } else {
                     c7(getString(R.string.i34));
@@ -4905,7 +4905,7 @@ public class MAIN extends MainBaseActivity implements Format {
             case 8:
                 c112(h.getUrl(), 7);
                 return true;
-            case 0:
+            case 24:
                 if (a.isChecked()) {
                     a.setChecked(false);
                     ua = false;
@@ -4917,7 +4917,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
                 return true;
             case 13:
-                if (cm.length() >= 10) {
+                if (cm.length() >= 10 && cm != null) {
                     c47();
                 } else {
                     c7(getString(R.string.d20));

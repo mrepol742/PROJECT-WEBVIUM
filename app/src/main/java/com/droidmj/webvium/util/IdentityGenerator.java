@@ -508,7 +508,43 @@ public class IdentityGenerator {
             "Islam",
             "Roman Catholic"
     };
-    private static final String[] hobbies = {"3D Modeling", "Acting", "Animation", "Arcade Games", "Art", "Badminton", "Baking", "Baseball", "Basketball", "Blogging", "Coding", "Comedy", "Comics", "Cosplay", "Dance", "Drawing", "Fishing", "Fitness", "Golf", "Hiking", "Illustration", "Learning", "Learning to Code", "Listening to Music", "Memes", "Napping", "Photography", "Reading", "Shopping", "Singing", "Sleeping", "Studying", "Swimming", "Video Games", "Watching Movies", "Watching Television", "Writting"};
+    private static final String[] hobbies = {"3D Modeling",
+            "Acting",
+            "Animation",
+            "Arcade Games",
+            "Art",
+            "Badminton",
+            "Baking",
+            "Baseball",
+            "Basketball",
+            "Blogging",
+            "Coding",
+            "Comedy",
+            "Comics",
+            "Cosplay",
+            "Dance",
+            "Drawing",
+            "Fishing",
+            "Fitness",
+            "Golf",
+            "Hiking",
+            "Illustration",
+            "Learning",
+            "Learning to Code",
+            "Listening to Music",
+            "Memes",
+            "Napping",
+            "Photography",
+            "Reading",
+            "Shopping",
+            "Singing",
+            "Sleeping",
+            "Studying",
+            "Swimming",
+            "Video Games",
+            "Watching Movies",
+            "Watching Television",
+            "Writing"};
 
     @Keep
     private IdentityGenerator() {
@@ -529,19 +565,13 @@ public class IdentityGenerator {
             int m = d.nextInt(12);
             int o = d.nextInt(28 - 1) + 1;
             int p = d.nextInt(2);
-            int q = d.nextInt(8 - 5) + 5;
-            int r = d.nextInt(9);
-            String s = q + "." + r;
-            int t = d.nextInt(24 - 18) + 18;
-            int u = d.nextInt(9 - 5) + 5;
-            String v = t + "." + u;
             int w = d.nextInt(99);
             int x = d.nextInt(99);
             int y = d.nextInt(99);
             int z = d.nextInt(11);
             int a1 = d.nextInt(99);
             int a2 = d.nextInt(hobbies.length);
-            SimpleDateFormat sdf = new SimpleDateFormat("yy", Locale.US);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy", Locale.US);
             int date = Integer.parseInt(sdf.format(new Date()));
             if (e == 0) {
                 return data.replace("%a", male[f])
@@ -556,8 +586,9 @@ public class IdentityGenerator {
                         .replace("%j", status[l])
                         .replace("%k", countries[k])
                         .replace("%l", eyeColor[p])
-                        .replace("%m", s)
-                        .replace("%n", v)
+                        .replace("%m", Integer.toString(getHeight()))
+                        .replace("%m2", Integer.toString(meterToCentimeter()))
+                        .replace("%n", Integer.toString(getWeight()))
                         .replace("%o", hobbies[a2])
                         .replace("%p", "Women")
                         .replace("%q", religion[z])
@@ -577,8 +608,9 @@ public class IdentityGenerator {
                     .replace("%j", status[l])
                     .replace("%k", countries[k])
                     .replace("%l", eyeColor[p])
-                    .replace("%m", s)
-                    .replace("%n", v)
+                    .replace("%m", Integer.toString(getHeight()))
+                    .replace("%m2", Integer.toString(meterToCentimeter()))
+                    .replace("%n", Integer.toString(getWeight()))
                     .replace("%o", hobbies[a2])
                     .replace("%p", "Men")
                     .replace("%q", religion[z])
@@ -589,5 +621,22 @@ public class IdentityGenerator {
             return a(data);
         }
     }
+
+    private static int getHeight() {
+        Random random = new Random();
+        int limit = 195;
+        int low = 165;
+        return random.nextInt(limit-low) + low;
+    }
+
+    private static int meterToCentimeter() {
+        return getHeight() * 1000;
+    }
+
+    private static int getWeight() {
+        return getHeight() / 2 + 13;
+    }
+
+
 
 }

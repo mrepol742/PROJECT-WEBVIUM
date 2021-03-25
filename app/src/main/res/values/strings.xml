@@ -684,7 +684,7 @@
     <string name="l39">Notify me</string>
     <string name="l40">Notify you that the webpage was been successfully loaded</string>
     <string name="m22">Webpage Failed Load</string>
-    <string name="m23">&lt;b>%a %b %c&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %d&lt;br/>&lt;b>Middle Name:&lt;/b> %e&lt;br/>&lt;b>Last Name:&lt;/b> %f&lt;br/>&lt;b>Birthday:&lt;/b> %g&lt;br/>&lt;b>Gender:&lt;/b> %h&lt;br/>&lt;b>Age:&lt;/b> %i&lt;br/>&lt;b>Relationship:&lt;/b> %j&lt;br/>&lt;b>Country:&lt;/b> %k&lt;br/>&lt;b>Eye Color:&lt;/b> %l&lt;br/>&lt;b>Height:&lt;/b> %m Feet&lt;br/>&lt;b>Weight:&lt;/b> %n Pounds&lt;br/>&lt;b>Hobby:&lt;/b> %o&lt;br/>&lt;b>Interested in:&lt;/b> %p&lt;br/>&lt;b>Religion:&lt;/b> %q&lt;br/>&lt;b>Mother Name:&lt;/b> %r&lt;br/>&lt;b>Father Name:&lt;/b> %s</string>
+    <string name="m23">&lt;b>%a %b %c&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %d&lt;br/>&lt;b>Middle Name:&lt;/b> %e&lt;br/>&lt;b>Last Name:&lt;/b> %f&lt;br/>&lt;b>Birthday:&lt;/b> %g&lt;br/>&lt;b>Gender:&lt;/b> %h&lt;br/>&lt;b>Age:&lt;/b> %i&lt;br/>&lt;b>Relationship:&lt;/b> %j&lt;br/>&lt;b>Country:&lt;/b> %k&lt;br/>&lt;b>Eye Color:&lt;/b> %l&lt;br/>&lt;b>Height:&lt;/b> %mm | %m2cm&lt;br/>&lt;b>Weight:&lt;/b> %n Pounds&lt;br/>&lt;b>Hobby:&lt;/b> %o&lt;br/>&lt;b>Interested in:&lt;/b> %p&lt;br/>&lt;b>Religion:&lt;/b> %q&lt;br/>&lt;b>Mother Name:&lt;/b> %r&lt;br/>&lt;b>Father Name:&lt;/b> %s</string>
     <string name="m24">There\'s no Internet Connection</string>
     <string name="m25">The device is in Airplane Mode</string>
     <string name="m28">Set Vibration EffectL</string>
