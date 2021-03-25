@@ -26,13 +26,30 @@ Required
 git clone https://github.com/mrepol742/PROJECT-WEBVIUM
 
 # Updating
-
 The project is under heavy development, new improvements and features comes up. Be sure to update often.
+
+## Updating Source Code
+
 ```
 cd PROJECT-WEBVIUM
 git pull
 ```
 
+## Updating The App
+Visit [PROJECT-WEBVIUM](https://mrepol742.github.io/PROJECT-WEBVIUM) and download the latest version
+```
+or
+```
+* Open Webvium app
+* Go to Settings
+* Then About
+* And Check Update
+
 # License
 The PROJECT-WEBVIUM is under a GPL v3.0 license.
 Please see [LICENSE](LICENSE) for more details.
+
+# Project
+* [PROJECT-WEBVIUM](https://github.com/mrepol742/PROJECT-WEBVIUM)
+* [mrepol742.github.io](https://github.com/mrepol742/mrepol742.github.io)
+* [Server](https://github.com/mrepol742/Server)
