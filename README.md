@@ -21,8 +21,12 @@ Required
 git clone https://github.com/mrepol742/PROJECT-WEBVIUM
 
 # Updating
+
+The project is under heavy development, new improvements and features comes up. Be sure to update often.
+```
 cd PROJECT-WEBVIUM
 git pull
+```
 
 # License
 The PROJECT-WEBVIUM is under a GPL v3.0 license.
