@@ -1,4 +1,5 @@
 # Webvium | Ultra lightweight, material design and full-featured Android Browser.
+![Java 8](https://img.shields.io/badge/Java-8-blue.svg) ![XML](https://img.shields.io/badge/Java-8-blue.svg) ![HTML](https://img.shields.io/badge/HTML-blue.svg) ![CSS](https://img.shields.io/badge/CSS-blue.svg) ![JavaScript](https://img.shields.io/badge/JavaScript-blue.svg) ![PHP](https://img.shields.io/badge/PHP-blue.svg) ![SQLite](https://img.shields.io/badge/SQLite-blue.svg) 
 
 Webvium was made possible by the Webview and Chromium open source project.
 
