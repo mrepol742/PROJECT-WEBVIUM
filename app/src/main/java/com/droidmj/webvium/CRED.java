@@ -292,7 +292,6 @@ public class CRED extends BaseActivity {
             super.onReceive(a, b);
             try {
                 String sg = b.getAction();
-                assert sg != null;
                 if (sg.equals("android.intent.action.BATTERY_CHANGED")) {
                     f();
                 }

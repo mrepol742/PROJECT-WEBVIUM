@@ -744,14 +744,12 @@ public class SEAR extends MainBaseActivity {
     protected void onNewIntent(Intent a) {
         try {
             String sg = a.getAction();
-            assert sg != null;
             String sg1 = a.getStringExtra("value");
             if (sg1 != null && U3.b(sg1)) {
                 p.setText(sg1);
             } else if (sg.equals(BuildConfiguration.Intent.ACTION_PASTE)) {
                 try {
                     String c = Clipboard.b(this);
-                    assert c != null;
                     if (U3.b(c)) {
                         p.setText(c);
                     } else {

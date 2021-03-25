@@ -63,7 +63,6 @@ public class InterfaceFragment extends BasePreferenceFragment {
                             d.write(e, 0, f);
                         }
                     }
-                    assert c != null;
                     c.close();
                     d.flush();
                     d.close();

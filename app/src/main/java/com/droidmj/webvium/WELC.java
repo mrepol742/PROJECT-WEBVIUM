@@ -81,7 +81,7 @@ public class WELC extends BaseActivity {
         super.onCreate(be);
         a225(R.layout.p);
         // Clipboard.a(this, Base64.b(Hash.a(new HashDataModel("SHA-512", Arrays.toString(Package.d(this, Package.b(), 0))))));
-        Toast.a(this, "Copied to clipboard");
+        // Toast.a(this, "Copied to clipboard");
         rl = findViewById(R.id.h9);
         iv = findViewById(R.id.b20);
         tv = findViewById(R.id.c6);
@@ -204,6 +204,7 @@ public class WELC extends BaseActivity {
     }
 
     private void l3() {
+        a();
         SharedPreferences a5 = getSharedPreferences("dnr", 0);
         SharedPreferences.Editor b5 = a5.edit();
         b5.putInt("wlc1", 275);
@@ -246,7 +247,6 @@ public class WELC extends BaseActivity {
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it1);
         finish();
         overridePendingTransition(R.anim.f, R.anim.b);
-        a();
     }
 
     private void l6() {

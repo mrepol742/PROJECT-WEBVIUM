@@ -5152,7 +5152,6 @@ public class MAIN extends MainBaseActivity implements Format {
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
-            assert sg != null;
             if (sg.equals(Intent.ACTION_SCREEN_ON)) {
                 if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
                     a225("aso", true);
@@ -5165,7 +5164,6 @@ public class MAIN extends MainBaseActivity implements Format {
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
-            assert sg != null;
             if (sg.equals("android.net.conn.CONNECTIVITY_CHANGE") || sg.equals("android.net.wifi.WIFI_STATE_CHANGED") || sg.equals("android.intent.action.AIRPLANE_MODE")) {
                 c180();
                 if (Objects.equals(h.getTitle(), getSharedPreferences("di", 0).getString("di", "742"))) {
@@ -5182,7 +5180,6 @@ public class MAIN extends MainBaseActivity implements Format {
             super.onReceive(a, b);
             try {
                 String sg = b.getAction();
-                assert sg != null;
                 if (sg.equals("android.intent.action.BATTERY_CHANGED")) {
                     if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
                         int d = b.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
@@ -5206,7 +5203,6 @@ public class MAIN extends MainBaseActivity implements Format {
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
-            assert sg != null;
             if (sg.equals(BuildConfiguration.Intent.ACTION_INVALIDATE)) {
                 c149();
             }

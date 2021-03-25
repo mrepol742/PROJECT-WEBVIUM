@@ -958,7 +958,6 @@ public class MANG extends BaseActivity {
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
-            assert sg != null;
             if (sg.equals(Intent.ACTION_SCREEN_ON)) {
                 if (a221().getBoolean("lockWn99", false)) {
                     Intent it = new Intent(a, LOCK.class);
