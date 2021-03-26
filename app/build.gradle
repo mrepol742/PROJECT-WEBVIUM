@@ -127,5 +127,3 @@ static def getVersionName() {
 static def getVersionCode() {
     return Integer.parseInt(new Date().format("HHmmss"))
 }
-
-
