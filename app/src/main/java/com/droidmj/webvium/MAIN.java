@@ -4860,7 +4860,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 } else {
                     c7(getString(R.string.i33));
                 }
-                return true;
+                return true; 
             case 11:
                 if (cm2.length() >= 10 && cm2 != null) {
                     c165();
