@@ -4855,14 +4855,14 @@ public class MAIN extends MainBaseActivity implements Format {
                 c119();
                 return true;
             case 10:
-                if (cm0.length() >= 10 && cm != null) {
+                if (cm0.length() >= 10 && cm0 != null) {
                     c164();
                 } else {
                     c7(getString(R.string.i33));
                 }
                 return true;
             case 11:
-                if (cm2.length() >= 10 && cm != null) {
+                if (cm2.length() >= 10 && cm2 != null) {
                     c165();
                 } else {
                     c7(getString(R.string.i34));
