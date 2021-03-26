@@ -39,14 +39,13 @@ git pull
 ```
 
 ## Updating The App
-Visit [PROJECT-WEBVIUM](https://mrepol742.github.io/PROJECT-WEBVIUM) and download the latest version
-```
-or
+Visit [PROJECT-WEBVIUM](https://mrepol742.github.io/PROJECT-WEBVIUM) and download the latest version or
 ```
 * Open Webvium app
 * Go to Settings
 * Then About
 * And Check Update
+```
 
 # License
 The PROJECT-WEBVIUM is under a GPL v3.0 license.
