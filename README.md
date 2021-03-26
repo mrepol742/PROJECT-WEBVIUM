@@ -20,7 +20,6 @@ Required:
 ## Requirements
 
 Required
-* Android Studio version 4.1.3
 * Android Gradle Plugin version 4.1.3
 * Android SDK version 30
 * Gradle version 6.8.1
