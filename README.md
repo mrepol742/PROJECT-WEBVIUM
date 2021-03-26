@@ -3,6 +3,8 @@
 
 Webvium was made possible by the Webview and Chromium open source project.
 
+![Build Workflow](https://github.com/mrepol742/PROJECT-WEBVIUM/actions/workflows/gradle.yml/badge.svg)
+
 Light Theme                |  Dark Theme
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/mrepol742/PROJECT-WEBVIUM/master/assets/webvium_light_main.png)  |  ![](https://raw.githubusercontent.com/mrepol742/PROJECT-WEBVIUM/master/assets/webvium_dark_main.png)
