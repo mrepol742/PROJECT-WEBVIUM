@@ -19,7 +19,8 @@ Required:
 
 Required
 * Android Studio version 4.1.3
-* Gradle Build Tools version 4.1.3
+* Android Gradle Plugin version 4.1.3
+* Android SDK version 30
 * Gradle version 6.8.1
 
 # Downloading
@@ -27,6 +28,7 @@ git clone https://github.com/mrepol742/PROJECT-WEBVIUM
 
 # Updating
 The project is under heavy development, new improvements and features comes up. Be sure to update often.
+Occasionally we release update weekly.
 
 ## Updating Source Code
 
