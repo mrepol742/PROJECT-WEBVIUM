@@ -21,34 +21,6 @@
 apply plugin: 'com.android.application'
 
 android {
-
-    signingConfigs {
-
-        // TODO: Remove this section your default signingConfigs is github
-        debug {
-            storeFile file(System.getenv("DEBUG_STORE_FILE"))
-            storePassword System.getenv("DEBUG_STORE_PASSWORD")
-            keyAlias System.getenv("DEBUG_KEY_ALIAS")
-            keyPassword System.getenv("DEBUG_KEY_PASSWORD")
-        }
-
-        // TODO: Remove this section your default signingConfigs is github
-        release {
-            storeFile file(System.getenv("RELEASE_STORE_FILE"))
-            storePassword System.getenv("RELEASE_STORE_PASSWORD")
-            keyAlias System.getenv("RELEASE_KEY_ALIAS")
-            keyPassword System.getenv("RELEASE_KEY_PASSWORD")
-        }
-
-        github {
-            storeFile file("webvium-keystore.jks")
-            storePassword "b22821e32b94ce5c2cfa202552f9c6b53a4b7e84"
-            keyAlias "Webvium"
-            keyPassword "08c8a719ae2f45bb33cc480d880551f7e8683c30"
-        }
-
-    }
-
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -61,52 +33,9 @@ android {
     }
 
     buildTypes {
-
-        // TODO: Remove this section your default buildTypes is github
-        release {
-            debuggable false
-            minifyEnabled true
-            signingConfig signingConfigs.release
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
-                }
-            }
-        }
-
-        // TODO: Remove this section your default buildTypes is github
         debug {
             debuggable true
             minifyEnabled false
-            signingConfig signingConfigs.debug
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
-                }
-            }
-        }
-
-        // TODO: Remove this section your default buildTypes is github
-        debugWithMinify {
-            debuggable true
-            minifyEnabled true
-            signingConfig signingConfigs.debug
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
-                }
-            }
-        }
-
-        github {
-            debuggable true
-            minifyEnabled false
-            signingConfig signingConfigs.github
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    outputFileName = "Webvium_v-${getVersionName()}_c-${ getVersionCode()}.apk"
-                }
-            }
         }
     }
 
