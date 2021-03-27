@@ -41,6 +41,12 @@ android {
             debuggable true
             minifyEnabled false
         }
+
+        release {
+            debuggable false
+            shrinkResources true
+            minifyEnabled true
+        }
     }
 
     compileOptions {
