@@ -37,6 +37,13 @@ captures/
 # Android Studio assets folder
 assets/
 
+# Android Studio proguard files
+*.dic
+app/proguard.rules
+
+# Webvium App Icon for PLaystore
+app/src/main/c-playstore.png
+
 # IntelliJ
 *.iml
 .idea/workspace.xml
