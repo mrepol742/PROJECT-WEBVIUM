@@ -16,7 +16,7 @@ Required:
 * Android System Webview and/or Chrome
 * Android version 5 or newer
 
-# Building
+# Build
 ## Requirements
 
 Required
@@ -24,21 +24,21 @@ Required
 * Android SDK version 30
 * Gradle version 6.8.1
 
-# Downloading
+# Download
 git clone https://github.com/mrepol742/PROJECT-WEBVIUM
 
-# Updating
+# Update
 The project is under heavy development, new improvements and features comes up. Be sure to update often.
 Occasionally we release update weekly.
 
-## Updating Source Code
+## Update Source Code
 
 ```
 cd PROJECT-WEBVIUM
 git pull
 ```
 
-## Updating The App
+## Update The App
 Visit [PROJECT-WEBVIUM](https://mrepol742.github.io/PROJECT-WEBVIUM) and download the latest version or
 ```
 * Open Webvium app
