@@ -34,7 +34,10 @@ import com.droidmj.webvium.MAIN;
 import com.droidmj.webvium.R;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BasePreferenceFragment;
+import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Resources;
+import com.droidmj.webvium.io.Files;
+import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.os.CountDownTimer;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.util.cache.BitmapCache;
@@ -55,7 +58,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             Runnable p15 = () -> {
                 try {
                     InputStream c = getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
-                    OutputStream d = new FileOutputStream(getActivity().getFilesDir() + BuildConfiguration.Files.background);
+                    OutputStream d = new FileOutputStream(StorageDirectory.getBackground(getActivity()));
                     byte[] e = new byte[1024];
                     int f;
                     if (c != null) {
@@ -66,9 +69,9 @@ public class InterfaceFragment extends BasePreferenceFragment {
                     c.close();
                     d.flush();
                     d.close();
-                    BitmapCache.getInstance().b(getActivity().getFilesDir() + BuildConfiguration.Files.background);
+                    BitmapCache.getInstance().b(StorageDirectory.getBackground(getActivity()));
                     try {
-                        File fe = new File(getActivity().getFilesDir() + BuildConfiguration.Files.background);
+                        File fe = new File(StorageDirectory.getBackground(getActivity()));
                         if (BuildConfiguration.Application.isDevelopment) {
                             if (fe.setReadOnly()) {
                                 DiagnosticData.a("READ ONLY = " + fe.toString());
@@ -82,7 +85,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
                     } catch (Exception en) {
                         DiagnosticData.a(en);
                     }
-                    Intent it = new Intent(BuildConfiguration.Intent.ACTION_INVALIDATE);
+                    Intent it = new Intent(Intents.ACTION_INVALIDATE);
                     getActivity().sendBroadcast(it);
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.o29)));
                 } catch (Exception en) {

@@ -56,6 +56,7 @@ import com.droidmj.webvium.content.Clipboard;
 import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Resources;
 import com.droidmj.webvium.history.HistoryHelper;
+import com.droidmj.webvium.io.Files;
 import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.search.SearchAdapter;
 import com.droidmj.webvium.search.SearchHelper;
@@ -297,12 +298,12 @@ public class SEAR extends MainBaseActivity {
         }
         p.setTypeface(type(Typeface.NORMAL));
         m11.setTypeface(type(Typeface.BOLD));
-        final File fe = new File(getFilesDir() + BuildConfiguration.Files.background);
+        final File fe = new File(StorageDirectory.getBackground(this));
         cd.setBackgroundResource(R.drawable.w);
         if (a221().getBoolean("webviumB", false) && fe.exists()) {
             o.setBackgroundColor(Resources.b(this, android.R.color.transparent));
             Runnable p155 = () -> {
-                Bitmap bp = BitmapCache.getInstance().a(getFilesDir() + BuildConfiguration.Files.background);
+                Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(this));
                 runOnUiThread(() -> b19.setBackground(new BitmapDrawable(getResources(), bp)));
             };
             new Thread(p155).start();
@@ -747,7 +748,7 @@ public class SEAR extends MainBaseActivity {
             String sg1 = a.getStringExtra("value");
             if (sg1 != null && U3.b(sg1)) {
                 p.setText(sg1);
-            } else if (sg.equals(BuildConfiguration.Intent.ACTION_PASTE)) {
+            } else if (sg.equals(Intents.ACTION_PASTE)) {
                 try {
                     String c = Clipboard.b(this);
                     if (U3.b(c)) {

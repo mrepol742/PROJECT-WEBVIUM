@@ -37,6 +37,7 @@ import com.droidmj.webvium.LOCK;
 import com.droidmj.webvium.LIST;
 import com.droidmj.webvium.PREF;
 import com.droidmj.webvium.R;
+import com.droidmj.webvium.app.Notifications;
 import com.droidmj.webvium.app.main.MainReceiver;
 import com.droidmj.webvium.SETT;
 import com.droidmj.webvium.SWIT;
@@ -58,11 +59,11 @@ public class AdvancedFragment extends BasePreferenceFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 345 && resultCode == Activity.RESULT_OK) {
-            Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_SECURITY_LOCK, SETT.class);
+            Intents.e(getActivity(), "search", SETT.FRAGMENT_SECURITY_LOCK, SETT.class);
 
         }
         if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
-            Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_PRETEND_MODE, SETT.class);
+            Intents.e(getActivity(), "search", SETT.FRAGMENT_PRETEND_MODE, SETT.class);
         }
         if (requestCode == 246 && resultCode != Activity.RESULT_OK) {
             getActivity().getFragmentManager().popBackStack();
@@ -98,7 +99,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
                 } else {
 
                     Intents.i(getActivity(), FLOA.class);
-                    MainNotification.a(getActivity(), BuildConfiguration.Notification.e);
+                    MainNotification.a(getActivity(), Notifications.e);
                 }
                 return true;
             });
@@ -119,7 +120,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
                     Intent it = new Intent(getActivity(), LOCK.class);
                     startActivityForResult(it, 345);
                 } else {
-                    Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_SECURITY_LOCK, SETT.class);
+                    Intents.e(getActivity(), "search", SETT.FRAGMENT_SECURITY_LOCK, SETT.class);
                 }
                 return true;
             });
@@ -130,7 +131,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
                     Intent it = new Intent(getActivity(), LOCK.class);
                     startActivityForResult(it, 123);
                 } else {
-                    Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_PRETEND_MODE, SETT.class);
+                    Intents.e(getActivity(), "search", SETT.FRAGMENT_PRETEND_MODE, SETT.class);
                 }
                 return true;
             });

@@ -49,6 +49,8 @@ import com.droidmj.webvium.content.Clipboard;
 import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Package;
 import com.droidmj.webvium.content.Resources;
+import com.droidmj.webvium.io.Files;
+import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.os.CountDownTimer;
 import com.droidmj.webvium.security.AppID;
 import com.droidmj.webvium.security.Hash;
@@ -56,6 +58,7 @@ import com.droidmj.webvium.security.HashDataModel;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.text.Html;
 import com.droidmj.webvium.util.Base64;
+import com.droidmj.webvium.util.cache.FontCache;
 import com.droidmj.webvium.widget.Toast;
 
 import java.io.File;
@@ -77,7 +80,7 @@ public class WELC extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle be) {
-        theme(BuildConfiguration.Theme.WELCOME_SCREEN);
+        theme(T_WELCOME_SCREEN);
         super.onCreate(be);
         a225(R.layout.p);
         // Clipboard.a(this, Base64.b(Hash.a(new HashDataModel("SHA-512", Arrays.toString(Package.d(this, Package.b(), 0))))));
@@ -216,8 +219,8 @@ public class WELC extends BaseActivity {
         }
         Runnable re = () -> {
             try {
-                InputStream fos = getAssets().open(BuildConfiguration.Font.MAVEN_PRO);
-                OutputStream d = new FileOutputStream(getFilesDir() + BuildConfiguration.Files.classes);
+                InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
+                OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
                 byte[] e = new byte[1024];
                 int f;
                 while ((f = fos.read(e)) != -1) {
@@ -226,7 +229,7 @@ public class WELC extends BaseActivity {
                 d.flush();
                 d.close();
                 fos.close();
-                File fea = new File(getFilesDir() + BuildConfiguration.Files.classes);
+                File fea = new File(StorageDirectory.getClasses(this));
                 fea.setReadOnly();
             } catch (Exception en) {
                 DiagnosticData.a(en);
@@ -251,8 +254,8 @@ public class WELC extends BaseActivity {
 
     private void l6() {
         try {
-            Intent e = new Intent(BuildConfiguration.Intent.ACTION_LAUNCH);
-            e.addCategory(BuildConfiguration.Intent.CATEGORY_GENIUS);
+            Intent e = new Intent(Intents.ACTION_LAUNCH);
+            e.addCategory(Intents.CATEGORY_GENIUS);
             e.setPackage(Package.b());
             e.putExtra("duplicate", false);
             Intent f = new Intent();

@@ -162,7 +162,7 @@ public class HIST extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.i);
         Toolbar a1 = findViewById(R.id.b7);

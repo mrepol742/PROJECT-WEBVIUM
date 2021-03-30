@@ -75,7 +75,7 @@ public class CRED extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.c20);
         TextView tv = findViewById(R.id.f13);

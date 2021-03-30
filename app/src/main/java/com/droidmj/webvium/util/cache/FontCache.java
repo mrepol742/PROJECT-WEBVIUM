@@ -30,11 +30,12 @@ public class FontCache {
     public static FontCache U7;
     public LruCache<Integer, Typeface> cac;
     private Typeface main;
+    public static final String MAVEN_PRO = "classes";
 
     private FontCache(Context ct) {
         if (cac == null) {
             cac = new LruCache<>(32);
-            main = Typeface.createFromAsset(ct.getAssets(), BuildConfiguration.Font.MAVEN_PRO);
+            main = Typeface.createFromAsset(ct.getAssets(), MAVEN_PRO);
         }
     }
 

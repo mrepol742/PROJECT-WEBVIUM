@@ -153,7 +153,7 @@ public class BOOK extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.y);
         Toolbar c = findViewById(R.id.b7);

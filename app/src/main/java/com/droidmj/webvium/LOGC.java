@@ -49,7 +49,7 @@ public class LOGC extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         try {
             a225(R.layout.n);

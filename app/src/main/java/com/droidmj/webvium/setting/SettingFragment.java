@@ -61,20 +61,20 @@ public class SettingFragment extends BaseFragment {
         if (requestCode == 345) {
             if (resultCode == Activity.RESULT_OK) {
                 if (!bn)
-                    Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_PRIVACY, SETT.class);
+                    Intents.e(getActivity(), "search", SETT.FRAGMENT_PRIVACY, SETT.class);
 
             }
         }
         if (requestCode == 346) {
             if (resultCode == Activity.RESULT_OK) {
                 if (!bn)
-                    Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_DATABASE, SETT.class);
+                    Intents.e(getActivity(), "search", SETT.FRAGMENT_DATABASE, SETT.class);
             }
         }
         if (requestCode == 456) {
             if (resultCode == Activity.RESULT_OK) {
                 if (!bn)
-                    Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_ADVANCED, SETT.class);
+                    Intents.e(getActivity(), "search", SETT.FRAGMENT_ADVANCED, SETT.class);
             }
         }
     }
@@ -133,48 +133,48 @@ public class SettingFragment extends BaseFragment {
         switch (a) {
 
             case 0:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_GENERAL, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_GENERAL, SETT.class);
                 break;
             case 1:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_INTERFACE, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_INTERFACE, SETT.class);
                 break;
             case 2:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_SEARCH, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_SEARCH, SETT.class);
                 break;
             case 3:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_DOWNLOAD, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_DOWNLOAD, SETT.class);
                 break;
             case 4:
                 if (a221().getBoolean("lockWn99", false)) {
                     Intent it = new Intent(getActivity(), LOCK.class);
                     startActivityForResult(it, 345);
                 } else {
-                    Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_PRIVACY, SETT.class);
+                    Intents.e(getActivity(), "search", SETT.FRAGMENT_PRIVACY, SETT.class);
                 }
                 break;
             case 5:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_DOWNLOAD, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_DOWNLOAD, SETT.class);
                 break;
             case 6:
                 if (a221().getBoolean("lockWn99", false)) {
                     Intent it = new Intent(getActivity(), LOCK.class);
                     startActivityForResult(it, 456);
                 } else {
-                    Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_ADVANCED, SETT.class);
+                    Intents.e(getActivity(), "search", SETT.FRAGMENT_ADVANCED, SETT.class);
                 }
                 break;
             case 7:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_VIDEO, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_VIDEO, SETT.class);
                 break;
             case 8:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_TOOL, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_TOOL, SETT.class);
                 break;
             case 9:
                 Intents.a(getActivity(), MANG.class);
                 break;
 
             case 10:
-                Intents.e(getActivity(), "search", BuildConfiguration.Setting.FRAGMENT_EXPERIMENTAL, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_EXPERIMENTAL, SETT.class);
                 break;
         }
     }

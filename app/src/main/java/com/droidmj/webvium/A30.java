@@ -46,7 +46,7 @@ public class A30 extends BaseActivity {
     @Override
     @SuppressLint("SetTextI18n")
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.test);
        /* Toolbar tb = findViewById(R.id.c3);

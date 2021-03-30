@@ -96,7 +96,7 @@ public class SAVE extends MainService {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        MainNotification.a(this, BuildConfiguration.Notification.f);
+        MainNotification.a(this, Notifications.f);
         s2();
     }
 
@@ -117,7 +117,7 @@ public class SAVE extends MainService {
         }
         m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.c2));
-        startForeground(BuildConfiguration.Notification.f, m.build());
+        startForeground(Notifications.f, m.build());
 
     }
 

@@ -56,7 +56,7 @@ public class DOWN extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.c3);
         Toolbar a1 = findViewById(R.id.b7);

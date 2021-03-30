@@ -131,7 +131,7 @@ public class UPDA extends MainService {
         m.addAction(new android.app.Notification.Action(R.drawable.c2, getString(R.string.b32), pi23));
 
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nmc.notify(BuildConfiguration.Notification.c, m.build());
+        nmc.notify(Notifications.c, m.build());
     }
 
 

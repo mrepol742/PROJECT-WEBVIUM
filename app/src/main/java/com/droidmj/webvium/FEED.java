@@ -70,7 +70,7 @@ public class FEED extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.d2);
         rl = findViewById(R.id.o24);

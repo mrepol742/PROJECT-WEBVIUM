@@ -29,6 +29,13 @@ import com.droidmj.webvium.annotation.release.Keep;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 
 public class Intents {
+
+    public static final String ACTION_INVALIDATE = "com.droidmj.webvium.intent.action.INVALIDATE";
+    public static final String CATEGORY_GENIUS = "com.droidmj.webvium.intent.category.GENIUS";
+    public static final String ACTION_LAUNCH = "com.droidmj.webvium.intent.action.LAUNCH";
+    public static final String ACTION_PASTE_SEARCH = "com.droidmj.webvium.action.PASTE_SEARCH";
+    public static final String ACTION_PASTE = "com.droidmj.webvium.action.PASTE";
+
     @Keep
     private Intents() {
 

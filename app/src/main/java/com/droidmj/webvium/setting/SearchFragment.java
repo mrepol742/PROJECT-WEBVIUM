@@ -29,6 +29,7 @@ import com.droidmj.webvium.QUIC;
 import com.droidmj.webvium.R;
 import com.droidmj.webvium.SWIT;
 import com.droidmj.webvium.app.BuildConfiguration;
+import com.droidmj.webvium.app.Notifications;
 import com.droidmj.webvium.app.base.BasePreferenceFragment;
 import com.droidmj.webvium.app.main.MainNotification;
 import com.droidmj.webvium.content.Intents;
@@ -58,7 +59,7 @@ public class SearchFragment extends BasePreferenceFragment {
                     Intents.b(SearchFragment.this.getActivity(), QUIC.class);
                 } else {
                     Intents.i(SearchFragment.this.getActivity(), QUIC.class);
-                    MainNotification.a(SearchFragment.this.getActivity(), BuildConfiguration.Notification.d);
+                    MainNotification.a(SearchFragment.this.getActivity(), Notifications.d);
                 }
                 return true;
             });

@@ -297,6 +297,32 @@ public class MAIN extends MainBaseActivity implements Format {
     private HistoryHelper d1;
     private SearchHelper d2;
     private BookmarkHelper d3;
+    public static final String UA_DEFAULT = "1e";
+    public static final String UA_ANDROID_STOCK = "7e";
+    public static final String UA_INTERNET_EXPLORER = "30e";
+    public static final String UA_GOOGLE_CHROME = "60e";
+    public static final String UA_MOZILA_FIREFOX = "120e";
+    public static final String UA_OPERA = "240e";
+    public static final String UA_SAFARI = "480e";
+    public static final String UA_MICROSOFT_EDGE = "960e";
+    public static final String UA_GOOGLE_CHROMIUM = "1920e";
+    public static final String UA_MOZILA_BRAVE = "3840e";
+    public static final String UA_CUSTOM = "7680e";
+    public static final String SE_GOOGLE = "7b";
+    public static final String SE_DUCKDUCKGO = "1b";
+    public static final String SE_BING = "30b";
+    public static final String SE_YAHOO = "60b";
+    public static final String SE_ASK = "120b";
+    public static final String SE_AOL = "240b";
+    public static final String SE_BAIDU = "480b";
+    public static final String SE_WOLFRAMALPHA = "860b";
+    public static final String SE_DISCOVERAPP = "1720b"; // updated from freebasics
+    public static final String SE_ECOSIA = "3440b";
+    public static final String SE_STACKOVERFLOW = "6880b";
+    public static final String SE_YOUTUBE = "12b";
+    public static final String SE_GITHUB = "13b";
+    public static final String SE_FACEBOOK = "14b";
+
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
             case 0:
@@ -667,7 +693,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         if (a221().getBoolean("webviumB", false)) {
             br4 = new ca149();
-            ift3.act(BuildConfiguration.Intent.ACTION_INVALIDATE);
+            ift3.act(Intents.ACTION_INVALIDATE);
             registerReceiver(br4, ift3);
         }
         pm = (PowerManager) getSystemService(POWER_SERVICE);
@@ -1820,8 +1846,8 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c37(String a, String c) {
         try {
-            Intent e = new Intent(BuildConfiguration.Intent.ACTION_LAUNCH);
-            e.addCategory(BuildConfiguration.Intent.CATEGORY_GENIUS);
+            Intent e = new Intent(Intents.ACTION_LAUNCH);
+            e.addCategory(Intents.CATEGORY_GENIUS);
             e.putExtra("duplicate", false);
             e.putExtra("webvium", c);
             Intent f = new Intent();
@@ -1999,34 +2025,34 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public String c48() {
         switch (Objects.requireNonNull(a221().getString("searchP", "7b"))) {
-            case BuildConfiguration.SearchEngines.DUCKDUCKGO:
+            case SE_DUCKDUCKGO:
                 return searchEngine[1];
             default:
-            case BuildConfiguration.SearchEngines.GOOGLE:
+            case SE_GOOGLE:
                 return searchEngine[0];
-            case BuildConfiguration.SearchEngines.BING:
+            case SE_BING:
                 return searchEngine[2];
-            case BuildConfiguration.SearchEngines.YAHOO:
+            case SE_YAHOO:
                 return searchEngine[3];
-            case BuildConfiguration.SearchEngines.ASK:
+            case SE_ASK:
                 return searchEngine[4];
-            case BuildConfiguration.SearchEngines.AOL:
+            case SE_AOL:
                 return searchEngine[5];
-            case BuildConfiguration.SearchEngines.BAIDU:
+            case SE_BAIDU:
                 return searchEngine[6];
-            case BuildConfiguration.SearchEngines.WOLFRAMALPHA:
+            case SE_WOLFRAMALPHA:
                 return searchEngine[7];
-            case BuildConfiguration.SearchEngines.DISCOVERAPP:
+            case SE_DISCOVERAPP:
                 return searchEngine[8];
-            case BuildConfiguration.SearchEngines.ECOSIA:
+            case SE_ECOSIA:
                 return searchEngine[9];
-            case BuildConfiguration.SearchEngines.STACKOVERFLOW:
+            case SE_STACKOVERFLOW:
                 return searchEngine[10];
-            case BuildConfiguration.SearchEngines.YOUTUBE:
+            case SE_YOUTUBE:
                 return searchEngine[11];
-            case BuildConfiguration.SearchEngines.GITHUB:
+            case SE_GITHUB:
                 return searchEngine[12];
-            case BuildConfiguration.SearchEngines.FACEBOOK:
+            case SE_FACEBOOK:
                 return searchEngine[13];
         }
     }
@@ -2514,7 +2540,7 @@ public class MAIN extends MainBaseActivity implements Format {
             e.setContentIntent(k);
             e.addAction(new android.app.Notification.Action(R.drawable.e, getString(R.string.a8), g));
             NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            nmc.notify(BuildConfiguration.Notification.b, e.build());
+            nmc.notify(Notifications.b, e.build());
         } catch (Exception ex) {
             DiagnosticData.a(ex);
         }
@@ -2892,8 +2918,8 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public Bitmap c84() {
-        if (new java.io.File(getFilesDir() + BuildConfiguration.Files.videoPoster).exists()) {
-            return BitmapCache.getInstance().a(getFilesDir() + BuildConfiguration.Files.videoPoster);
+        if (new java.io.File(StorageDirectory.getVideoPoster(this)).exists()) {
+            return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(this));
         }
         return BitmapFactory.decodeResource(getResources(), R.drawable.e3);
     }
@@ -3231,39 +3257,39 @@ public class MAIN extends MainBaseActivity implements Format {
         if (!ua) {
             switch (Objects.requireNonNull(a221().getString("userA", ""))) {
                 default:
-                case BuildConfiguration.UserAgents.DEFAULT:
+                case UA_DEFAULT:
                     ws.setUserAgentString(userAgents[0]
                             .replace("%a", Package.e(this))
                             .replace("%b", Package.c()));
                     break;
-                case BuildConfiguration.UserAgents.ANDROID_STOCK:
+                case UA_ANDROID_STOCK:
                     ws.setUserAgentString(this.h.getUserAgent());
                     break;
-                case BuildConfiguration.UserAgents.INTERNET_EXPLORER:
+                case UA_INTERNET_EXPLORER:
                     ws.setUserAgentString(userAgents[1]);
                     break;
-                case BuildConfiguration.UserAgents.GOOGLE_CHROME:
+                case UA_GOOGLE_CHROME:
                     ws.setUserAgentString(userAgents[2]);
                     break;
-                case BuildConfiguration.UserAgents.MOZILA_FIREFOX:
+                case UA_MOZILA_FIREFOX:
                     ws.setUserAgentString(userAgents[3]);
                     break;
-                case BuildConfiguration.UserAgents.OPERA:
+                case UA_OPERA:
                     ws.setUserAgentString(userAgents[4]);
                     break;
-                case BuildConfiguration.UserAgents.SAFARI:
+                case UA_SAFARI:
                     ws.setUserAgentString(userAgents[5]);
                     break;
-                case BuildConfiguration.UserAgents.MICROSOFT_EDGE:
+                case UA_MICROSOFT_EDGE:
                     ws.setUserAgentString(userAgents[6]);
                     break;
-                case BuildConfiguration.UserAgents.GOOGLE_CHROMIUM:
+                case UA_GOOGLE_CHROMIUM:
                     ws.setUserAgentString(userAgents[7]);
                     break;
-                case BuildConfiguration.UserAgents.MOZILA_BRAVE:
+                case UA_MOZILA_BRAVE:
                     ws.setUserAgentString(userAgents[8]);
                     break;
-                case BuildConfiguration.UserAgents.CUSTOM:
+                case UA_CUSTOM:
                     ws.setUserAgentString(a221().getString("CustomuserA", userAgents[0]
                             .replace("%a", Package.e(this))
                             .replace("%b", Package.c())));
@@ -3673,47 +3699,47 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c124(String tg) {
         switch (Objects.requireNonNull(a221().getString("searchP", ""))) {
-            case BuildConfiguration.SearchEngines.DUCKDUCKGO:
+            case SE_DUCKDUCKGO:
                 c3(searchEngine[1] + tg);
                 break;
             default:
-            case BuildConfiguration.SearchEngines.GOOGLE:
+            case SE_GOOGLE:
                 c3(searchEngine[0] + searchPath[0] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.BING:
+            case SE_BING:
                 c3(searchEngine[2] + searchPath[0] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.YAHOO:
+            case SE_YAHOO:
                 c3(searchPath[1] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.ASK:
+            case SE_ASK:
                 c3(searchPath[2] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.AOL:
+            case SE_AOL:
                 c3(searchPath[3] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.BAIDU:
+            case SE_BAIDU:
                 c3(searchEngine[6] + searchPath[4] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.WOLFRAMALPHA:
+            case SE_WOLFRAMALPHA:
                 c3(searchEngine[7] + searchPath[5] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.DISCOVERAPP:
+            case SE_DISCOVERAPP:
                 c3(searchEngine[8] + searchPath[6] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.ECOSIA:
+            case SE_ECOSIA:
                 c3(searchEngine[9] + searchPath[0] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.STACKOVERFLOW:
+            case SE_STACKOVERFLOW:
                 c3(searchEngine[10] + searchPath[0] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.YOUTUBE:
+            case SE_YOUTUBE:
                 c3(searchEngine[11] + searchPath[7] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.GITHUB:
+            case SE_GITHUB:
                 c3(searchEngine[12] + searchPath[0] + tg);
                 break;
-            case BuildConfiguration.SearchEngines.FACEBOOK:
+            case SE_FACEBOOK:
                 c3(searchEngine[13] + searchPath[8] + tg);
                 break;
         }
@@ -3944,7 +3970,7 @@ public class MAIN extends MainBaseActivity implements Format {
         m.setContentIntent(k567);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.f8));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nmc.notify(BuildConfiguration.Notification.h, m.build());
+        nmc.notify(Notifications.h, m.build());
     }
 
     public void c143(String sg, String sg1) {
@@ -3996,7 +4022,7 @@ public class MAIN extends MainBaseActivity implements Format {
         m.setContentIntent(k567);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.r));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nmc.notify(BuildConfiguration.Notification.i, m.build());
+        nmc.notify(Notifications.i, m.build());
     }
 
     public void c144() {
@@ -4054,12 +4080,12 @@ public class MAIN extends MainBaseActivity implements Format {
                         fe.createNewFile();
                         FileWriter fw = new FileWriter(fe, false);
                         BufferedWriter br = new BufferedWriter(fw);
-                        br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + getFilesDir() + BuildConfiguration.Files.classes + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.f39) + "</b></h1></center></body></html>");
+                        br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.f39) + "</b></h1></center></body></html>");
                         br.close();
                         fw.close();
                         runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getCacheDir(this) + "/sh.htm"));
                     } else {
-                        StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + getFilesDir() + BuildConfiguration.Files.classes + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.x49) + "</th></tr>");
+                        StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.x49) + "</th></tr>");
                         while (cs.moveToNext()) {
                             sg.append("<tr><td>").append(cs.getString(1)).append("</td></tr>");
                         }
@@ -4124,7 +4150,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c149() {
-        java.io.File fe = new java.io.File(getFilesDir() + BuildConfiguration.Files.background);
+        java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
         cd.setBackgroundResource(R.drawable.w);
         tv.setBackgroundResource(R.drawable.f2);
         if (a221().getBoolean("webviumB", false)) {
@@ -4139,7 +4165,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a221().getBoolean("webviumB", false) && fe.exists()) {
             this.o.setBackgroundColor(Resources.b(this, android.R.color.transparent));
             Runnable p15 = () -> {
-                Bitmap bp = BitmapCache.getInstance().a(getFilesDir() + BuildConfiguration.Files.background);
+                Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(MAIN.this));
                 runOnUiThread(() -> MAIN.this.back23.setBackground(new BitmapDrawable(MAIN.this.getResources(), bp)));
             };
             new Thread(p15).start();
@@ -5055,7 +5081,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         c49(sb.toString());
                     }
                 }
-            } else if (sg1.equals(BuildConfiguration.Intent.ACTION_PASTE_SEARCH)) {
+            } else if (sg1.equals(Intents.ACTION_PASTE_SEARCH)) {
                 try {
                     String c = Clipboard.b(this);
                     if (c != null && U3.b(c)) {
@@ -5069,7 +5095,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     DiagnosticData.a(ex);
                     Toast.c(this, getString(R.string.t20));
                 }
-            } else if (sg1.equals(BuildConfiguration.Intent.ACTION_LAUNCH)) {
+            } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
                 c3(sg);
                 a.removeExtra("webvium");
             } else {
@@ -5203,7 +5229,7 @@ public class MAIN extends MainBaseActivity implements Format {
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
-            if (sg.equals(BuildConfiguration.Intent.ACTION_INVALIDATE)) {
+            if (sg.equals(Intents.ACTION_INVALIDATE)) {
                 c149();
             }
         }

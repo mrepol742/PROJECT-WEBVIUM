@@ -73,7 +73,7 @@ public class FLOA extends MainService {
         m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.c));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nmc.notify(BuildConfiguration.Notification.e, m.build());
+        nmc.notify(Notifications.e, m.build());
         s1();
         return super.onStartCommand(a, c, f);
     }

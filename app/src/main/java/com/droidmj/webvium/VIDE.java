@@ -38,6 +38,8 @@ import com.droidmj.webvium.app.base.BaseActivity;
 import com.droidmj.webvium.app.main.MainWebView;
 import com.droidmj.webvium.app.main.MainWebViewClient;
 import com.droidmj.webvium.content.Resources;
+import com.droidmj.webvium.io.Files;
+import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.util.Base64;
 import com.droidmj.webvium.util.cache.BitmapCache;
 
@@ -51,7 +53,7 @@ public class VIDE extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
 
         a225(R.layout.c9);
@@ -123,8 +125,8 @@ public class VIDE extends BaseActivity {
     }
 
     public Bitmap a() {
-        if (new File(getFilesDir() + BuildConfiguration.Files.videoPoster).exists()) {
-            return BitmapCache.getInstance().a(getFilesDir() + BuildConfiguration.Files.videoPoster);
+        if (new File(StorageDirectory.getVideoPoster(this)).exists()) {
+            return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(this));
         }
         return BitmapFactory.decodeResource(getResources(), R.drawable.e3);
     }

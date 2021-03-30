@@ -130,95 +130,6 @@ public class BuildConfiguration {
         }
     }
 
-    @Remove
-    public static final class URLs {
-        public static final String FILE = "file://";
-        public static final String CONTENT = "content://";
-        public static final String HTTP = "http://";
-        public static final String HTTPS = "https://";
-
-        @Remove
-        public static final class Internal {
-
-
-            @Remove
-            private Internal() {
-
-            }
-        }
-
-        @Remove
-        private URLs() {
-
-        }
-    }
-
-    @Remove
-    public static final class UserAgents {
-        public static final String DEFAULT = "1e";
-        public static final String ANDROID_STOCK = "7e";
-        public static final String INTERNET_EXPLORER = "30e";
-        public static final String GOOGLE_CHROME = "60e";
-        public static final String MOZILA_FIREFOX = "120e";
-        public static final String OPERA = "240e";
-        public static final String SAFARI = "480e";
-        public static final String MICROSOFT_EDGE = "960e";
-        public static final String GOOGLE_CHROMIUM = "1920e";
-        public static final String MOZILA_BRAVE = "3840e";
-        public static final String CUSTOM = "7680e";
-
-        @Remove
-        private UserAgents() {
-
-        }
-    }
-
-    @Remove
-    public static final class SearchEngines {
-        public static final String GOOGLE = "7b";
-        public static final String DUCKDUCKGO = "1b";
-        public static final String BING = "30b";
-        public static final String YAHOO = "60b";
-        public static final String ASK = "120b";
-        public static final String AOL = "240b";
-        public static final String BAIDU = "480b";
-        public static final String WOLFRAMALPHA = "860b";
-        public static final String DISCOVERAPP = "1720b"; // updated from freebasics
-        public static final String ECOSIA = "3440b";
-        public static final String STACKOVERFLOW = "6880b";
-        public static final String YOUTUBE = "12b";
-        public static final String GITHUB = "13b";
-        public static final String FACEBOOK = "14b";
-
-        @Remove
-        private SearchEngines() {
-
-        }
-    }
-
-    @Remove
-    public static final class Font {
-        public static final String MAVEN_PRO = "classes";
-
-        @Remove
-        private Font() {
-
-        }
-    }
-
-    @Remove
-    public static final class Theme {
-        public static final int MAIN = 0;
-        public static final int MANAGE_SPACE = 1;
-        public static final int DEFAULT = 2;
-        public static final int WELCOME_SCREEN = 3;
-        public static final int ASSISTANT = 4;
-
-        @Remove
-        private Theme() {
-
-        }
-    }
 
     @Remove
     public static final class Database {
@@ -269,76 +180,6 @@ public class BuildConfiguration {
     }
 
     @Remove
-    public static final class Setting {
-        public static final int FRAGMENT_TOOL = 1;
-        public static final int FRAGMENT_GENERAL = 2;
-        public static final int FRAGMENT_VIDEO = 3;
-        public static final int FRAGMENT_SEARCH = 4;
-        public static final int FRAGMENT_DOWNLOAD = 5;
-        public static final int FRAGMENT_INTERFACE = 6;
-        public static final int FRAGMENT_PRIVACY = 7;
-        public static final int FRAGMENT_ADVANCED = 8;
-        public static final int FRAGMENT_ACCESSIBILITY = 9;
-        public static final int FRAGMENT_ABOUT = 10;
-        public static final int FRAGMENT_EXPERIMENTAL = 11;
-        public static final int FRAGMENT_DATABASE = 12;
-        public static final int FRAGMENT_SECURITY_LOCK = 13;
-        public static final int FRAGMENT_PRETEND_MODE = 14;
-        public static final int FRAGMENT_DEFAULT = 742;
-
-        @Remove
-        private Setting() {
-
-        }
-    }
-
-    @Remove
-    public static final class Intent {
-        public static final String ACTION_INVALIDATE = "com.droidmj.webvium.intent.action.INVALIDATE";
-        public static final String CATEGORY_GENIUS = "com.droidmj.webvium.intent.category.GENIUS";
-        public static final String ACTION_LAUNCH = "com.droidmj.webvium.intent.action.LAUNCH";
-        public static final String ACTION_VOICE = "com.droidmj.webvium.intent.action.VOICE";
-        public static final String ACTION_PASTE_SEARCH = "com.droidmj.webvium.action.PASTE_SEARCH";
-        public static final String ACTION_PASTE = "com.droidmj.webvium.action.PASTE";
-        public static final String ACTION_ASSIST = "com.droidmj.webvium.action.ASSIST";
-        public static final String ACTION_SEARCH = "com.droidmj.webvium.action.SEARCH";
-        public static final String ACTION_LOGCAT = "com.droidmj.webvium.action.LOGCAT";
-        public static final String ACTION_FEEDBACK = "com.droidmj.webvium.action.FEEDBACK";
-
-        @Remove
-        private Intent() {
-
-        }
-    }
-
-    @Remove
-    public static final class Manifest {
-
-        @Remove
-        private Manifest() {
-
-        }
-    }
-
-    @Remove
-    public static final class Notification {
-        public static final int a = 1;
-        public static final int b = 2;
-        public static final int c = 3;
-        public static final int d = 4;
-        public static final int e = 5;
-        public static final int f = 6;
-        public static final int g = 7;
-        public static final int h = 8;
-        public static final int i = 9;
-
-        @Remove
-        private Notification() {
-
-        }
-    }
-
-    @Remove
     public static final class Application {
         public static final boolean isDevelopment = true;
         public static final String downloadSize = "600KB";
@@ -351,16 +192,5 @@ public class BuildConfiguration {
         }
     }
 
-    @Remove
-    public static final class Files {
-        public static final String classes = "/b";
-        public static final String videoPoster = "/e";
-        public static final String background = "/a";
-
-        @Remove
-        private Files() {
-
-        }
-    }
 
 }

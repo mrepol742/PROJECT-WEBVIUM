@@ -41,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.droidmj.webvium.app.BuildConfiguration;
+import com.droidmj.webvium.app.Notifications;
 import com.droidmj.webvium.app.base.BaseActivity;
 import com.droidmj.webvium.app.main.MainNotification;
 import com.droidmj.webvium.app.main.MainWebView;
@@ -63,7 +64,7 @@ public class SCRE extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.a7);
         Toolbar h17 = findViewById(R.id.h17);
@@ -138,7 +139,7 @@ public class SCRE extends BaseActivity {
                 return true;
             case 3:
                 f(h18.getText().toString());
-                Intents.e(this, "search", BuildConfiguration.Setting.FRAGMENT_TOOL, SETT.class);
+                Intents.e(this, "search", SETT.FRAGMENT_TOOL, SETT.class);
 
                 return true;
             default:
@@ -176,7 +177,7 @@ public class SCRE extends BaseActivity {
 
             Files.delete(st + b);
             finish();
-            MainNotification.a(SCRE.this, BuildConfiguration.Notification.b);
+            MainNotification.a(SCRE.this, Notifications.b);
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
         a.create().show();

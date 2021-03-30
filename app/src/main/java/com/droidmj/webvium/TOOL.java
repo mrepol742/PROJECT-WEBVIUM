@@ -78,7 +78,7 @@ public class TOOL extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.d);
         k = findViewById(R.id.l);
@@ -166,7 +166,7 @@ public class TOOL extends BaseActivity {
                 b();
                 return true;
             case 4:
-                Intents.e(this, "search", BuildConfiguration.Setting.FRAGMENT_TOOL, SETT.class);
+                Intents.e(this, "search", SETT.FRAGMENT_TOOL, SETT.class);
 
                 return true;
             default:

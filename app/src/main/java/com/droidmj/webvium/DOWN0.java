@@ -73,7 +73,7 @@ public class DOWN0 extends MainService {
         }
         m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.c2));
-        startForeground(BuildConfiguration.Notification.g, m.build());
+        startForeground(Notifications.g, m.build());
     }
 
     private void b(String jk, String ghg, String name, String url) {
@@ -360,7 +360,7 @@ public class DOWN0 extends MainService {
         super.onDestroy();
         unregisterReceiver(br);
         unregisterReceiver(br1);
-        MainNotification.a(this, BuildConfiguration.Notification.g);
+        MainNotification.a(this, Notifications.g);
         s2();
     }
 

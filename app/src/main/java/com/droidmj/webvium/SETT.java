@@ -60,10 +60,25 @@ import java.util.Objects;
 public class SETT extends BaseActivity {
 
     private TextView h18;
+    public static final int FRAGMENT_TOOL = 1;
+    public static final int FRAGMENT_GENERAL = 2;
+    public static final int FRAGMENT_VIDEO = 3;
+    public static final int FRAGMENT_SEARCH = 4;
+    public static final int FRAGMENT_DOWNLOAD = 5;
+    public static final int FRAGMENT_INTERFACE = 6;
+    public static final int FRAGMENT_PRIVACY = 7;
+    public static final int FRAGMENT_ADVANCED = 8;
+    public static final int FRAGMENT_ACCESSIBILITY = 9;
+    public static final int FRAGMENT_ABOUT = 10;
+    public static final int FRAGMENT_EXPERIMENTAL = 11;
+    public static final int FRAGMENT_DATABASE = 12;
+    public static final int FRAGMENT_SECURITY_LOCK = 13;
+    public static final int FRAGMENT_PRETEND_MODE = 14;
+    public static final int FRAGMENT_DEFAULT = 742;
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(a);
 
         a225(R.layout.a9);
@@ -130,65 +145,65 @@ public class SETT extends BaseActivity {
             if (Objects.equals(a.getAction(), Intent.ACTION_MAIN) && a.getCategories().contains("android.intent.category.NOTIFICATION_PREFERENCES")) {
                 return;
             }
-            int val = a.getIntExtra("search", BuildConfiguration.Setting.FRAGMENT_DEFAULT);
-            if (val == BuildConfiguration.Setting.FRAGMENT_DEFAULT) {
+            int val = a.getIntExtra("search", FRAGMENT_DEFAULT);
+            if (val == FRAGMENT_DEFAULT) {
                 finishAndRemoveTask();
             }
             int i = R.id.i6;
             switch (val) {
-                case BuildConfiguration.Setting.FRAGMENT_TOOL:
+                case FRAGMENT_TOOL:
                     as(i, new ToolFragment());
                     h18.setText(getString(R.string.h10));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_GENERAL:
+                case FRAGMENT_GENERAL:
                     as(i, new GeneralFragment());
                     h18.setText(getString(R.string.a));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_VIDEO:
+                case FRAGMENT_VIDEO:
                     as(i, new VideoFragment());
                     h18.setText(getString(R.string.i));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_SEARCH:
+                case FRAGMENT_SEARCH:
                     as(i, new SearchFragment());
                     h18.setText(getString(R.string.e));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_DOWNLOAD:
+                case FRAGMENT_DOWNLOAD:
                     as(i, new DownloadFragment());
                     h18.setText(getString(R.string.f));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_INTERFACE:
+                case FRAGMENT_INTERFACE:
                     as(i, new InterfaceFragment());
                     h18.setText(getString(R.string.o10));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_PRIVACY:
+                case FRAGMENT_PRIVACY:
                     as(i, new PrivacyFragment());
                     h18.setText(getString(R.string.b));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_ADVANCED:
+                case FRAGMENT_ADVANCED:
                     as(i, new AdvancedFragment());
                     h18.setText(getString(R.string.c));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_ACCESSIBILITY:
+                case FRAGMENT_ACCESSIBILITY:
                     as(i, new AccessibilityFragment());
                     h18.setText(getString(R.string.g));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_ABOUT:
+                case FRAGMENT_ABOUT:
                     as(i, new AboutFragment());
                     h18.setText(getString(R.string.l));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_EXPERIMENTAL:
+                case FRAGMENT_EXPERIMENTAL:
                     as(i, new ExperimentalFragment());
                     h18.setText(getString(R.string.t7));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_DATABASE:
+                case FRAGMENT_DATABASE:
                     as(i, new DatabaseFragment());
                     h18.setText(getString(R.string.t6));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_SECURITY_LOCK:
+                case FRAGMENT_SECURITY_LOCK:
                     as(i, new SecurityLockFragment());
                     h18.setText(getString(R.string.l10));
                     break;
-                case BuildConfiguration.Setting.FRAGMENT_PRETEND_MODE:
+                case FRAGMENT_PRETEND_MODE:
                     as(i, new PretendModeFragment());
                     h18.setText(getString(R.string.g24));
                     break;

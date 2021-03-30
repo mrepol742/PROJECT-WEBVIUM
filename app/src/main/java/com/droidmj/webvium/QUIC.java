@@ -56,7 +56,7 @@ public class QUIC extends MainService {
         m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.b));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nmc.notify(BuildConfiguration.Notification.d, m.build());
+        nmc.notify(Notifications.d, m.build());
         s1();
         return super.onStartCommand(a1, c555, c);
     }

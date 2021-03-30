@@ -120,7 +120,7 @@ public class MANG extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a22) {
-        theme(BuildConfiguration.Theme.MANAGE_SPACE);
+        theme(T_MANAGE_SPACE);
         super.onCreate(a22);
         if (a221().getBoolean("lockWn99", false)) {
             Intent it12 = new Intent(this, LOCK.class);

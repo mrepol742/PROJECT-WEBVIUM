@@ -41,7 +41,7 @@ public class EULA extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        theme(BuildConfiguration.Theme.DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(savedInstanceState);
 
         a225(R.layout.o);

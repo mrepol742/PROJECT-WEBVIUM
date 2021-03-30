@@ -29,7 +29,7 @@ public class MainBaseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle be) {
-        theme(BuildConfiguration.Theme.MAIN);
+        theme(T_MAIN);
         super.onCreate(be);
     }
 }

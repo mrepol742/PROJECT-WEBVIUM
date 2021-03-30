@@ -31,6 +31,8 @@ import com.droidmj.webvium.VIDE;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BasePreferenceFragment;
 import com.droidmj.webvium.content.Intents;
+import com.droidmj.webvium.io.Files;
+import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.util.cache.BitmapCache;
 import com.droidmj.webvium.widget.Toast;
@@ -79,7 +81,7 @@ public class VideoFragment extends BasePreferenceFragment {
             Runnable p15 = () -> {
                 try {
                     InputStream c5 = getActivity().getContentResolver().openInputStream(uri);
-                    OutputStream d5 = new FileOutputStream(getActivity().getFilesDir() + BuildConfiguration.Files.videoPoster);
+                    OutputStream d5 = new FileOutputStream(StorageDirectory.getVideoPoster(getActivity()));
                     byte[] e5 = new byte[1024];
                     int f5;
                     if (c5 != null) {
@@ -91,7 +93,7 @@ public class VideoFragment extends BasePreferenceFragment {
                     d5.flush();
                     d5.close();
                     try {
-                        File fe = new File(getActivity().getFilesDir() + BuildConfiguration.Files.videoPoster);
+                        File fe = new File(StorageDirectory.getVideoPoster(getActivity()));
                         if (BuildConfiguration.Application.isDevelopment) {
                             if (fe.setReadOnly()) {
                                 DiagnosticData.a("READ ONLY = " + fe.toString());
@@ -105,7 +107,7 @@ public class VideoFragment extends BasePreferenceFragment {
                     } catch (Exception en) {
                         DiagnosticData.a(en);
                     }
-                    BitmapCache.getInstance().b(getActivity().getFilesDir() + BuildConfiguration.Files.videoPoster);
+                    BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(getActivity()));
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.h21)));
                 } catch (Exception en) {
                     DiagnosticData.a(en);

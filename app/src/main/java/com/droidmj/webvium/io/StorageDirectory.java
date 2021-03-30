@@ -55,6 +55,18 @@ public class StorageDirectory {
         return getWebviumDir() + "/Tools";
     }
 
+    public static String getClasses(Context context) {
+        return getFileDir(context) + "/b";
+    }
+
+    public static String getVideoPoster(Context context) {
+        return getFileDir(context) + "/e";
+    }
+
+    public static String getBackground(Context context) {
+        return getFileDir(context) + "/a";
+    }
+
     public static File getCacheDir(Context context) {
         File fe = context.getCacheDir();
         if (fe.getAbsolutePath().contains("com.droidmj.webvium")) {

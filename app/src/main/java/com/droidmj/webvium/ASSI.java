@@ -56,7 +56,7 @@ public class ASSI extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a) {
-        theme(BuildConfiguration.Theme.ASSISTANT);
+        theme(T_ASSISTANT);
         super.onCreate(a);
 
         a225(R.layout.a2);

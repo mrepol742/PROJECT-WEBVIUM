@@ -42,6 +42,8 @@ import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.NoSuchObjectToReturn;
 import com.droidmj.webvium.app.main.MainBaseActivity;
 import com.droidmj.webvium.content.Resources;
+import com.droidmj.webvium.io.Files;
+import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.os.Vibrate;
 import com.droidmj.webvium.security.Hash;
 import com.droidmj.webvium.telemetry.DiagnosticData;
@@ -114,10 +116,10 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 }
             }
 
-            final File fe = new File(getFilesDir() + BuildConfiguration.Files.background);
+            final File fe = new File(StorageDirectory.getBackground(this));
             if (a221().getBoolean("webviumB", false) && fe.exists()) {
                 Runnable p155 = () -> {
-                    Bitmap bp = BitmapCache.getInstance().a(getFilesDir() + BuildConfiguration.Files.background);
+                    Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(this));
                     runOnUiThread(() -> ll.setBackground(new BitmapDrawable(getResources(), bp)));
                 };
                 new Thread(p155).start();

@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import com.droidmj.webvium.R;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.W6;
+import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.os.StrictMode;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.util.cache.FontCache;
@@ -47,6 +48,11 @@ public class BaseActivity extends Activity {
     public FontCache U7;
     private SharedPreferences sharedPreferences;
     private SharedPreferences exclusive;
+    public static final int T_MAIN = 0;
+    public static final int T_MANAGE_SPACE = 1;
+    public static final int T_DEFAULT = 2;
+    public static final int T_WELCOME_SCREEN = 3;
+    public static final int T_ASSISTANT = 4;
 
     @Override
     protected void onCreate(Bundle be) {
@@ -144,8 +150,8 @@ public class BaseActivity extends Activity {
 
     public void shrt(String name, String data, int icon) {
         try {
-            Intent e = new Intent(BuildConfiguration.Intent.ACTION_LAUNCH);
-            e.addCategory(BuildConfiguration.Intent.CATEGORY_GENIUS);
+            Intent e = new Intent(Intents.ACTION_LAUNCH);
+            e.addCategory(Intents.CATEGORY_GENIUS);
             e.putExtra("duplicate", false);
             e.putExtra("webvium", data);
             Intent f = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
@@ -185,7 +191,7 @@ public class BaseActivity extends Activity {
 
 
     public void theme(int i) {
-        if (i == BuildConfiguration.Theme.MAIN) {
+        if (i == T_MAIN) {
             if (!a221().getBoolean("autoUpdate", false)) {
                 if (!a221().getBoolean("webviumB", false)) {
                     if (!a221().getBoolean("autoUpdate742", false)) {
@@ -215,7 +221,7 @@ public class BaseActivity extends Activity {
                     }
                 }
             }
-        } else if (i == BuildConfiguration.Theme.MANAGE_SPACE) {
+        } else if (i == T_MANAGE_SPACE) {
             if (!a221().getBoolean("autoUpdate", false)) {
                 if (!a221().getBoolean("autoUpdate742", false)) {
                     setTheme(R.style.d3);
@@ -229,7 +235,7 @@ public class BaseActivity extends Activity {
                     setTheme(R.style.d6);
                 }
             }
-        } else if (i == BuildConfiguration.Theme.DEFAULT) {
+        } else if (i == T_DEFAULT) {
             if (!a221().getBoolean("autoUpdate", false)) {
                 if (!a221().getBoolean("autoUpdate742", false)) {
                     setTheme(R.style.d);
@@ -243,13 +249,13 @@ public class BaseActivity extends Activity {
                     setTheme(R.style.b16);
                 }
             }
-        } else if (i == BuildConfiguration.Theme.WELCOME_SCREEN) {
+        } else if (i == T_WELCOME_SCREEN) {
             if (!a221().getBoolean("autoUpdate", false)) {
                 setTheme(R.style.d);
             } else {
                 setTheme(R.style.e);
             }
-        } else if (i == BuildConfiguration.Theme.ASSISTANT) {
+        } else if (i == T_ASSISTANT) {
             if (!a221().getBoolean("autoUpdate", false)) {
                 setTheme(R.style.m);
             } else {
