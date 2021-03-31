@@ -24,51 +24,59 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.droidmj.webvium.BuildConfig;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 
 public class DownloadDatabase extends SQLiteOpenHelper {
 
+    public static final String DATA_DOWNLOAD = "jo";
+    public static final int VERSION_DOWNLOAD = 1;
+    public static final String TABLE_DOWNLOAD = "A";
+    public static final String COL1_DOWNLOAD = "B";
+    public static final String COL2_DOWNLOAD = "C";
+    public static final String COL3_DOWNLOAD = "D";
+    public static final String COL4_DOWNLOAD = "E";
+    public static final String COL5_DOWNLOAD = "F";
+
     public DownloadDatabase(Context context) {
-        super(context, BuildConfiguration.Database.DATA_DOWNLOAD, null, BuildConfiguration.Database.VERSION_DOWNLOAD);
+        super(context, DATA_DOWNLOAD, null, VERSION_DOWNLOAD);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +
-                BuildConfiguration.Database.TABLE_DOWNLOAD +
+                TABLE_DOWNLOAD +
                 " ( " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " INTEGER PRIMARY KEY, " +
-                BuildConfiguration.Database.COL1_DOWNLOAD +
+                COL1_DOWNLOAD +
                 " TEXT, " +
-                BuildConfiguration.Database.COL2_DOWNLOAD +
+                COL2_DOWNLOAD +
                 " TEXT, " +
-                BuildConfiguration.Database.COL3_DOWNLOAD +
+                COL3_DOWNLOAD +
                 " INTEGER, " +
-                BuildConfiguration.Database.COL4_DOWNLOAD +
+                COL4_DOWNLOAD +
                 " TEXT, " +
-                BuildConfiguration.Database.COL5_DOWNLOAD +
+                COL5_DOWNLOAD +
                 " TEXT ) ");
-        if (BuildConfiguration.Application.isDevelopment)
+        if (BuildConfiguration.isDevelopment)
             DiagnosticData.a("Webvium.onCreate =" + db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +
-                BuildConfiguration.Database.TABLE_DOWNLOAD);
+                TABLE_DOWNLOAD);
         onCreate(db);
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onUpgrade =" + db);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onUpgrade =" + db);
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onDowngrade =" + db);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onDowngrade =" + db);
     }
 
 }

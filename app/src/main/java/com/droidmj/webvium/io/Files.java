@@ -67,7 +67,7 @@ public class Files {
     public static boolean createNewFolder(java.io.File a) {
         if (!a.exists()) {
             if (a.mkdir()) {
-                if (BuildConfiguration.Application.isDevelopment) {
+                if (BuildConfiguration.isDevelopment) {
                     DiagnosticData.a("MKDIR = " + a);
                 }
                 return true;
@@ -93,7 +93,7 @@ public class Files {
     public static boolean delete(java.io.File fe) {
         if (fe.exists()) {
             if (fe.delete()) {
-                if (BuildConfiguration.Application.isDevelopment) {
+                if (BuildConfiguration.isDevelopment) {
                     DiagnosticData.a("DELETE = " + fe);
                 }
                 return true;
@@ -137,7 +137,7 @@ public class Files {
             fw.close();
             if (readOnly) {
                 boolean bn = location.setReadOnly();
-                if (BuildConfiguration.Application.isDevelopment) {
+                if (BuildConfiguration.isDevelopment) {
                     DiagnosticData.a("READ ONLY = " + bn + " FILE = " + location);
                 }
             }
@@ -170,7 +170,7 @@ public class Files {
                 d.close();
                 if (readOnly) {
                     boolean bn = fe2.setReadOnly();
-                    if (BuildConfiguration.Application.isDevelopment) {
+                    if (BuildConfiguration.isDevelopment) {
                         DiagnosticData.a("READ ONLY = " + bn + " FILE = " + fe2);
                     }
                 }

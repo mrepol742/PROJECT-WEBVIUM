@@ -48,8 +48,8 @@ public class AppID {
                 Build.TAGS.length() % 10 +
                 Build.TYPE.length() % 10 +
                 Build.USER.length() % 10 +
-                BuildConfiguration.Application.downloadSize.length() % 20 +
-                Boolean.toString(BuildConfiguration.Application.isDevelopment).length() % 30;
+                BuildConfiguration.downloadSize.length() % 20 +
+                Boolean.toString(BuildConfiguration.isDevelopment).length() % 30;
         String b = Settings.Secure.getString(ct.getContentResolver(), Settings.Secure.ANDROID_ID);
         BluetoothAdapter d = BluetoothAdapter.getDefaultAdapter();
         String c = "";

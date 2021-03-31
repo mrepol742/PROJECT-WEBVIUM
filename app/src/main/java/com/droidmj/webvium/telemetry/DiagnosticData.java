@@ -38,13 +38,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.OutputStreamWriter;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 @Test
-@Deprecated
 public class DiagnosticData {
 
     private static final String st = " ============= ";
@@ -68,7 +66,7 @@ public class DiagnosticData {
 
     @Development
     public static void a(String a) {
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             b(a, "Log");
         }
     }
@@ -76,7 +74,7 @@ public class DiagnosticData {
     @Development
     private static void b(String log, String category) {
         if (a1 == null) {
-            if (BuildConfiguration.Application.isDevelopment) {
+            if (BuildConfiguration.isDevelopment) {
                 android.util.Log.d(Package.b(), log);
             }
             return;

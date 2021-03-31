@@ -709,7 +709,7 @@ public class MANG extends BaseActivity {
                 b.add(getString(R.string.v26) + cont11); // search history db
             }
 
-            b.add(getString(R.string.c38) + c(b(Base64.a("Ly9kYXRhL 2RhdGEvY29tLmRyb2 lkbWoud2Vidml 1bS9zaGFyZWRfcHJlZnMv"))));
+            b.add(getString(R.string.c38) + c(b(Base64.decode("Ly9kYXRhL 2RhdGEvY29tLmRyb2 lkbWoud2Vidml 1bS9zaGFyZWRfcHJlZnMv"))));
             rest1.close();
             res.close();
             rest.close();
@@ -819,7 +819,7 @@ public class MANG extends BaseActivity {
                 b.add(getString(R.string.v26) + cont11); // search history db
             }
 
-            b.add(getString(R.string.c38) + c(b(Base64.a("Ly9kYX RhL2RhdGEvY29 tLmRyb2lkbWoud2Vidml1bS 9zaGFyZWRfcHJlZnMv"))));
+            b.add(getString(R.string.c38) + c(b(Base64.decode("Ly9kYX RhL2RhdGEvY29 tLmRyb2lkbWoud2Vidml1bS 9zaGFyZWRfcHJlZnMv"))));
             rest1.close();
             res.close();
             rest.close();
@@ -903,7 +903,7 @@ public class MANG extends BaseActivity {
     private void a3() throws PackageManager.NameNotFoundException {
         Intent b = new Intent("android.intent.action.SEND");
         b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", getString(R.string.f33).replaceAll("%a", BuildConfiguration.Application.downloadSize).replaceAll("%b", Package.e(this)).replaceAll("%c", Base64.a("a HR0cHM6Ly9n  aXRodWIuY2 9tL21yZXBvbDc 0Mg==")).replaceAll("%d", Base64.a("aHR0 cHM6Ly9mYi  5tZS9 tcmVwb2w3 NDI =")));
+        b.putExtra("android.intent.extra.TEXT", getString(R.string.f33).replaceAll("%a", BuildConfiguration.downloadSize).replaceAll("%b", Package.e(this)).replaceAll("%c", Base64.decode("a HR0cHM6Ly9n  aXRodWIuY2 9tL21yZXBvbDc 0Mg==")).replaceAll("%d", Base64.decode("aHR0 cHM6Ly9mYi  5tZS9 tcmVwb2w3 NDI =")));
         String c = getString(R.string.l8);
         String d = c.replaceAll("%a", "\"" + Package.c() + "\"");
         startActivity(Intent.createChooser(b, d));

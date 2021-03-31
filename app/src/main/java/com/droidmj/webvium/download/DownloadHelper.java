@@ -71,22 +71,22 @@ public class DownloadHelper implements WebviumDatabase {
     @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_DOWNLOAD, null, null);
+            sld.delete(DownloadDatabase.TABLE_DOWNLOAD, null, null);
         }
     }
 
     public void b(DownloadDataModel w2) {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_DOWNLOAD,
-                    BuildConfiguration.Database.COL1_DOWNLOAD +
+            sld.delete(DownloadDatabase.TABLE_DOWNLOAD,
+                    DownloadDatabase.COL1_DOWNLOAD +
                             " =? AND " +
-                            BuildConfiguration.Database.COL2_DOWNLOAD +
+                            DownloadDatabase.COL2_DOWNLOAD +
                             " =? AND " +
-                            BuildConfiguration.Database.COL3_DOWNLOAD +
+                            DownloadDatabase.COL3_DOWNLOAD +
                             " =? AND " +
-                            BuildConfiguration.Database.COL4_DOWNLOAD +
+                            DownloadDatabase.COL4_DOWNLOAD +
                             " =? AND " +
-                            BuildConfiguration.Database.COL5_DOWNLOAD +
+                            DownloadDatabase.COL5_DOWNLOAD +
                             " =? ", new String[]{w2.b,
                             w2.a,
                             Integer.toString(w2.c),
@@ -98,12 +98,12 @@ public class DownloadHelper implements WebviumDatabase {
     public void c(DownloadNewDataModel downloadNewDataModel) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_DOWNLOAD, h(downloadNewDataModel.a));
-            values.put(BuildConfiguration.Database.COL2_DOWNLOAD, downloadNewDataModel.b);
-            values.put(BuildConfiguration.Database.COL3_DOWNLOAD, downloadNewDataModel.s);
-            values.put(BuildConfiguration.Database.COL4_DOWNLOAD, f(downloadNewDataModel.d));
-            values.put(BuildConfiguration.Database.COL5_DOWNLOAD, g());
-            sld.insert(BuildConfiguration.Database.TABLE_DOWNLOAD, null, values);
+            values.put(DownloadDatabase.COL1_DOWNLOAD, h(downloadNewDataModel.a));
+            values.put(DownloadDatabase.COL2_DOWNLOAD, downloadNewDataModel.b);
+            values.put(DownloadDatabase.COL3_DOWNLOAD, downloadNewDataModel.s);
+            values.put(DownloadDatabase.COL4_DOWNLOAD, f(downloadNewDataModel.d));
+            values.put(DownloadDatabase.COL5_DOWNLOAD, g());
+            sld.insert(DownloadDatabase.TABLE_DOWNLOAD, null, values);
         }
     }
 
@@ -111,12 +111,12 @@ public class DownloadHelper implements WebviumDatabase {
     public void d(DDMS w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_DOWNLOAD, w7.b);
-            values.put(BuildConfiguration.Database.COL2_DOWNLOAD, w7.d);
-            values.put(BuildConfiguration.Database.COL3_DOWNLOAD, w7.f);
-            values.put(BuildConfiguration.Database.COL4_DOWNLOAD, w7.g);
-            values.put(BuildConfiguration.Database.COL5_DOWNLOAD, w7.e4);
-            sld.insert(BuildConfiguration.Database.TABLE_DOWNLOAD, null, values);
+            values.put(DownloadDatabase.COL1_DOWNLOAD, w7.b);
+            values.put(DownloadDatabase.COL2_DOWNLOAD, w7.d);
+            values.put(DownloadDatabase.COL3_DOWNLOAD, w7.f);
+            values.put(DownloadDatabase.COL4_DOWNLOAD, w7.g);
+            values.put(DownloadDatabase.COL5_DOWNLOAD, w7.e4);
+            sld.insert(DownloadDatabase.TABLE_DOWNLOAD, null, values);
         }
     }
 
@@ -152,21 +152,21 @@ public class DownloadHelper implements WebviumDatabase {
     public void i(DownloadOldDataModel downloadOldDataModel, DownloadNewDataModel downloadNewDataModel) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_DOWNLOAD, h(downloadNewDataModel.a));
-            values.put(BuildConfiguration.Database.COL2_DOWNLOAD, downloadNewDataModel.b);
-            values.put(BuildConfiguration.Database.COL3_DOWNLOAD, downloadNewDataModel.s);
-            values.put(BuildConfiguration.Database.COL4_DOWNLOAD, f(downloadNewDataModel.d));
-            values.put(BuildConfiguration.Database.COL5_DOWNLOAD, downloadOldDataModel.oldTime);
-            sld.update(BuildConfiguration.Database.TABLE_DOWNLOAD, values,
-                    BuildConfiguration.Database.COL1_DOWNLOAD +
+            values.put(DownloadDatabase.COL1_DOWNLOAD, h(downloadNewDataModel.a));
+            values.put(DownloadDatabase.COL2_DOWNLOAD, downloadNewDataModel.b);
+            values.put(DownloadDatabase.COL3_DOWNLOAD, downloadNewDataModel.s);
+            values.put(DownloadDatabase.COL4_DOWNLOAD, f(downloadNewDataModel.d));
+            values.put(DownloadDatabase.COL5_DOWNLOAD, downloadOldDataModel.oldTime);
+            sld.update(DownloadDatabase.TABLE_DOWNLOAD, values,
+                    DownloadDatabase.COL1_DOWNLOAD +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL2_DOWNLOAD +
+                            DownloadDatabase.COL2_DOWNLOAD +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL3_DOWNLOAD +
+                            DownloadDatabase.COL3_DOWNLOAD +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL4_DOWNLOAD +
+                            DownloadDatabase.COL4_DOWNLOAD +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL5_DOWNLOAD +
+                            DownloadDatabase.COL5_DOWNLOAD +
                             " LIKE ? ", new String[]{downloadOldDataModel.oldTitle, downloadOldDataModel.oldUrl, String.valueOf(downloadOldDataModel.oldDrawable), downloadOldDataModel.oldTime, downloadOldDataModel.oldSize});
         }
 

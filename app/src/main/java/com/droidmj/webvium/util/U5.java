@@ -33,7 +33,8 @@ public class U5 {
         for (String sg5 : Inapproriate.inapproriateData) {
             if (sg.toLowerCase().trim().contains(sg5)) {
                 StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < sg5.length(); i++) {
+                int length = sg5.length();
+                for (int i = 0; i < length; i++) {
                     sb.append("*");
                 }
                 return a(sg.replaceAll(sg5, sb.toString()));

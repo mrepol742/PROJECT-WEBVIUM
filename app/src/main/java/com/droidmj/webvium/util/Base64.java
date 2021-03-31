@@ -24,43 +24,32 @@ import com.droidmj.webvium.annotation.release.Keep;
 
 import java.util.Arrays;
 
-@Deprecated
 public class Base64 {
     @Keep
     private Base64() {
     }
 
-    @Deprecated
-    public static String a(String a) {
-        byte[] b = d(a.replaceAll(" ", "").getBytes(), android.util.Base64.DEFAULT);
-        return new String(b);
+    public static String decode(String a) {
+        return new String(formatDecode(a.replaceAll(" ", "").getBytes(), android.util.Base64.DEFAULT));
     }
 
-    @Deprecated
-    public static String a(char[] a) {
-        byte[] b = d(Arrays.toString(a).replaceAll(" ", "").getBytes(), android.util.Base64.DEFAULT);
-        return new String(b);
+    public static String decode(char[] a) {
+        return new String(formatDecode(Arrays.toString(a).replaceAll(" ", "").getBytes(), android.util.Base64.DEFAULT));
     }
 
-    @Deprecated
-    public static String b(String a) {
-        byte[] b = e(a.getBytes());
-        return new String(b);
+    public static String encode(String a) {
+        return new String(formatEncode(a.getBytes()));
     }
 
-    @Deprecated
     public static String c(String a) {
-        byte[] b = d(a.trim().getBytes(), android.util.Base64.URL_SAFE);
-        return new String(b);
+        return new String(formatDecode(a.trim().getBytes(), android.util.Base64.URL_SAFE));
     }
 
-    @Deprecated
-    private static byte[] d(byte[] input, int flags) {
+    private static byte[] formatDecode(byte[] input, int flags) {
         return android.util.Base64.decode(input, 0, input.length, flags);
     }
 
-    @Deprecated
-    private static byte[] e(byte[] input) {
+    private static byte[] formatEncode(byte[] input) {
         return android.util.Base64.encode(input, 0, input.length, android.util.Base64.DEFAULT);
     }
 

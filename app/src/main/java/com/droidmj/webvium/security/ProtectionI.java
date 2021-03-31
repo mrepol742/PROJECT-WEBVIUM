@@ -36,7 +36,7 @@ public class ProtectionI {
 
     public static int initializeProtectionScanning(Context context) {
         if (Debug.isDebuggable(context) != 0) {
-            if (BuildConfiguration.Application.isDevelopment) {
+            if (BuildConfiguration.isDevelopment) {
                 return 0;
             } else {
                 return 1;

@@ -35,7 +35,6 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.main.MainReceiver;
 import com.droidmj.webvium.app.base.BaseActivity;
 import com.droidmj.webvium.content.IntentsFilter;
@@ -107,7 +106,7 @@ public class CRED extends BaseActivity {
 
         tv2 = findViewById(R.id.d18);
 
-        tv2.setText(Base64.a("U2FtaXVuI E5hZmlz "));
+        tv2.setText(Base64.decode("U2FtaXVuI E5hZmlz "));
         tv2.setTypeface(type(Typeface.BOLD));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -121,7 +120,7 @@ public class CRED extends BaseActivity {
 
         tv4 = findViewById(R.id.o27);
 
-        tv4.setText(Base64.a("QW1vcyBBeW9taWRl"));
+        tv4.setText(Base64.decode("QW1vcyBBeW9taWRl"));
         tv4.setTypeface(type(Typeface.BOLD));
         tv4.setCompoundDrawablePadding(10);
         tv4.setOnClickListener(this::g);
@@ -160,34 +159,34 @@ public class CRED extends BaseActivity {
             MenuItem.OnMenuItemClickListener e = a1 -> {
                 switch (a1.getItemId()) {
                     case 0:
-                        a(Base64.a(accounts[0] + "="));
+                        a(Base64.decode(accounts[0] + "="));
                         return true;
                     case 1:
-                        a(Base64.a(accounts[1] + "="));
+                        a(Base64.decode(accounts[1] + "="));
                         return true;
                     case 2:
-                        a(Base64.a(accounts[2] + "="));
+                        a(Base64.decode(accounts[2] + "="));
                         return true;
                     case 3:
-                        a(Base64.a(accounts[3] + "=="));
+                        a(Base64.decode(accounts[3] + "=="));
                         return true;
                     case 4:
-                        a(Base64.a(accounts[4] + "=="));
+                        a(Base64.decode(accounts[4] + "=="));
                         return true;
                     case 5:
-                        a(Base64.a(accounts[5] + "="));
+                        a(Base64.decode(accounts[5] + "="));
                         return true;
                     case 6:
-                        a(Base64.a(accounts[6]));
+                        a(Base64.decode(accounts[6]));
                         return true;
                     case 7:
-                        c(Base64.a(accounts[7] + "=="));
+                        c(Base64.decode(accounts[7] + "=="));
                         return true;
                     case 8:
-                        c(Base64.a(accounts[8] + "="));
+                        c(Base64.decode(accounts[8] + "="));
                         return true;
                     case 9:
-                        c(Base64.a(accounts[9]));
+                        c(Base64.decode(accounts[9]));
                         return true;
 
                 }
@@ -215,16 +214,16 @@ public class CRED extends BaseActivity {
             MenuItem.OnMenuItemClickListener e = a1 -> {
                 switch (a1.getItemId()) {
                     case 0:
-                        a(Base64.a(accounts[10]));
+                        a(Base64.decode(accounts[10]));
                         return true;
                     case 2:
-                        a(Base64.a(accounts[11]));
+                        a(Base64.decode(accounts[11]));
                         return true;
                     case 3:
-                        a(Base64.a(accounts[12]));
+                        a(Base64.decode(accounts[12]));
                         return true;
                     case 4:
-                        a(Base64.a(accounts[13]));
+                        a(Base64.decode(accounts[13]));
                         return true;
 
                 }
@@ -269,10 +268,10 @@ public class CRED extends BaseActivity {
             MenuItem.OnMenuItemClickListener e = a1 -> {
                 switch (a1.getItemId()) {
                     case 0:
-                        a(Base64.a(accounts[14]));
+                        a(Base64.decode(accounts[14]));
                         return true;
                     case 2:
-                        a(Base64.a(accounts[15] + "="));
+                        a(Base64.decode(accounts[15] + "="));
                         return true;
                 }
                 return false;

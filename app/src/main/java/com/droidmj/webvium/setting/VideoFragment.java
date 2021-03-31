@@ -31,7 +31,6 @@ import com.droidmj.webvium.VIDE;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BasePreferenceFragment;
 import com.droidmj.webvium.content.Intents;
-import com.droidmj.webvium.io.Files;
 import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.util.cache.BitmapCache;
@@ -94,7 +93,7 @@ public class VideoFragment extends BasePreferenceFragment {
                     d5.close();
                     try {
                         File fe = new File(StorageDirectory.getVideoPoster(getActivity()));
-                        if (BuildConfiguration.Application.isDevelopment) {
+                        if (BuildConfiguration.isDevelopment) {
                             if (fe.setReadOnly()) {
                                 DiagnosticData.a("READ ONLY = " + fe.toString());
                             }

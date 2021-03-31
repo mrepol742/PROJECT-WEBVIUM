@@ -251,7 +251,7 @@ public class SETT0 extends BaseActivity {
     private void b23() throws PackageManager.NameNotFoundException {
         Intent b = new Intent("android.intent.action.SEND");
         b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", getString(R.string.f33).replaceAll("%a", BuildConfiguration.Application.downloadSize).replaceAll("%b", Package.e(this)).replaceAll("%c", Base64.a("a HR0cHM6Ly9n  aXRodWIuY2 9tL21yZXBvbDc 0Mg ==")).replaceAll("%d", Base64.a("aHR0 cHM6Ly9mYi  5tZS9 tcmVwb2w3 NDI =")));
+        b.putExtra("android.intent.extra.TEXT", getString(R.string.f33).replaceAll("%a", BuildConfiguration.downloadSize).replaceAll("%b", Package.e(this)).replaceAll("%c", Base64.decode("a HR0cHM6Ly9n  aXRodWIuY2 9tL21yZXBvbDc 0Mg ==")).replaceAll("%d", Base64.decode("aHR0 cHM6Ly9mYi  5tZS9 tcmVwb2w3 NDI =")));
         String c = getString(R.string.l8);
         String d = c.replaceAll("%a", "\"" + Package.c() + "\"");
         startActivity(Intent.createChooser(b, d));

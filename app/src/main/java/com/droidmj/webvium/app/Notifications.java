@@ -57,7 +57,7 @@ public class Notifications {
 
     public static int getRandomizeNotificationId(int a) {
         Random random = new Random();
-        return a + random.nextInt(BuildConfiguration.Application.NOTIFICATION_DEFAULT_ID_MULTIPLIER);
+        return a + random.nextInt(BuildConfiguration.NOTIFICATION_DEFAULT_ID_MULTIPLIER);
 
     }
 

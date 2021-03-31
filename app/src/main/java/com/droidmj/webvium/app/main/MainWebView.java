@@ -44,7 +44,7 @@ public class MainWebView extends WebView {
     @Keep
     public MainWebView(Context ct) {
         super(ct);
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a(ct + " Initialize");
         }
         WebSettings ws = getSettings();
@@ -68,7 +68,7 @@ public class MainWebView extends WebView {
     public void setWebViewClient(WebViewClient webViewClient) {
         super.setWebViewClient(webViewClient);
         this.webViewClient = webViewClient;
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a("WebViewClient was been set");
         }
     }
@@ -77,7 +77,7 @@ public class MainWebView extends WebView {
     public void setWebChromeClient(WebChromeClient webChromeClient) {
         super.setWebChromeClient(webChromeClient);
         this.webChromeClient = webChromeClient;
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a("WebChromeClient was been set");
         }
     }

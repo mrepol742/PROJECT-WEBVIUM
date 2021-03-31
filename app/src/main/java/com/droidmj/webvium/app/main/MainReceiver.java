@@ -31,7 +31,7 @@ public class MainReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onReceive =" + context + " action =" + intent.getAction());
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onReceive =" + context + " action =" + intent.getAction());
     }
 }

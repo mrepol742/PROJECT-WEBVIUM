@@ -36,7 +36,6 @@ import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BasePreferenceFragment;
 import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Resources;
-import com.droidmj.webvium.io.Files;
 import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.os.CountDownTimer;
 import com.droidmj.webvium.telemetry.DiagnosticData;
@@ -72,7 +71,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
                     BitmapCache.getInstance().b(StorageDirectory.getBackground(getActivity()));
                     try {
                         File fe = new File(StorageDirectory.getBackground(getActivity()));
-                        if (BuildConfiguration.Application.isDevelopment) {
+                        if (BuildConfiguration.isDevelopment) {
                             if (fe.setReadOnly()) {
                                 DiagnosticData.a("READ ONLY = " + fe.toString());
                             }

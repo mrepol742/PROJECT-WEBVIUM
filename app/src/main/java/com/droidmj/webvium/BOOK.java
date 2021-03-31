@@ -46,6 +46,7 @@ import android.widget.Toolbar;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BaseActivity;
 import com.droidmj.webvium.bookmark.BookmarkAdapter;
+import com.droidmj.webvium.bookmark.BookmarkDatabase;
 import com.droidmj.webvium.bookmark.BookmarkHelper;
 import com.droidmj.webvium.content.Clipboard;
 import com.droidmj.webvium.content.Intents;
@@ -198,9 +199,9 @@ public class BOOK extends BaseActivity {
         c.setNavigationOnClickListener(view -> finish());
         d3 = BookmarkHelper.getInstance(getApplicationContext());
         Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                BuildConfiguration.Database.TABLE_BOOKMARK +
+                BookmarkDatabase.TABLE_BOOKMARK +
                 " ORDER BY " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " DESC", null);
         if (res.getCount() == 0) {
             runOnUiThread(() -> {
@@ -472,9 +473,9 @@ public class BOOK extends BaseActivity {
         Runnable p15 = () -> {
             ArrayList<String> itemIdsh = new ArrayList<>();
             Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    BuildConfiguration.Database.TABLE_BOOKMARK +
+                    BookmarkDatabase.TABLE_BOOKMARK +
                     " ORDER BY " +
-                    BuildConfiguration.Database.ID +
+                    BuildConfiguration.DB_ID +
                     " DESC", null);
             if (res.getCount() == 0) {
                 runOnUiThread(() -> {

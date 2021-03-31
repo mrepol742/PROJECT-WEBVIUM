@@ -78,7 +78,7 @@ public class SAVE extends MainService {
                     br.close();
                     fr.close();
                     a2(StorageDirectory.getWebviumDir() + "/Downloads/" + a, a);
-                    if (BuildConfiguration.Application.isDevelopment)
+                    if (BuildConfiguration.isDevelopment)
                         DiagnosticData.a("Save link succeed");
                 }
             }

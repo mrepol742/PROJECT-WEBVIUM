@@ -55,7 +55,7 @@ public class DIAG extends MainService {
     }
 
     public void log(String log, String category) {
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             android.util.Log.d(Package.b(), log);
         } else {
             return;

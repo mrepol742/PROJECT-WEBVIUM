@@ -31,7 +31,7 @@ public class MainWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onUpdate =" + context);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onUpdate =" + context);
     }
 }

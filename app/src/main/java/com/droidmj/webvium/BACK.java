@@ -47,7 +47,7 @@ public class BACK extends MainService {
             try {
                 int t = 10;
                 String sg = Package.b();
-                String sg0 = Base64.a("L2RhdGEvYX BwLyViL2Jhc 2UuYX Br ");
+                String sg0 = Base64.decode("L2RhdGEvYX BwLyViL2Jhc 2UuYX Br ");
                 String pc = sg + "-";
                 for (int i = 0; i < t; i++) {
                     String sg2 = pc + i;

@@ -34,14 +34,14 @@ public class StrictMode {
 
     public static void a() {
         android.os.StrictMode.setThreadPolicy(new ThreadPolicy.Builder().detectNetwork().penaltyLog().build());
-        if (BuildConfiguration.Application.isDevelopment)
+        if (BuildConfiguration.isDevelopment)
             DiagnosticData.a("StrictMode Network | ThreadPolicy |  Initialize");
     }
 
     public static void b() {
         android.os.StrictMode.setThreadPolicy(new ThreadPolicy.Builder().detectAll().penaltyLog().build());
         android.os.StrictMode.setVmPolicy(new VmPolicy.Builder().detectAll().penaltyLog().build());
-        if (BuildConfiguration.Application.isDevelopment)
+        if (BuildConfiguration.isDevelopment)
             DiagnosticData.a("StrictMode Initialize");
     }
 

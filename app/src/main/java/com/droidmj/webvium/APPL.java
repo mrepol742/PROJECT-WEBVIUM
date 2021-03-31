@@ -44,16 +44,16 @@ public class APPL extends Application {
     @Override
     public void onCreate() {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (BuildConfiguration.Application.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("stM12", false))) {
+        if (BuildConfiguration.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("stM12", false))) {
             StrictMode.b();
         }
         super.onCreate();
         try {
             Intents.m(this);
-            if (BuildConfiguration.Application.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("og67", false))) {
+            if (BuildConfiguration.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("og67", false))) {
                 DiagnosticData.getInstance(getApplicationContext());
             }
-            if (BuildConfiguration.Application.isDevelopment) {
+            if (BuildConfiguration.isDevelopment) {
                 DiagnosticData.a("APN.onCreate =" + this);
             }
             if (sp.getBoolean("autoUpdate55", false)) {
@@ -84,7 +84,7 @@ public class APPL extends Application {
         if (i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
             W6.b();
             W6.c();
-            if (BuildConfiguration.Application.isDevelopment)
+            if (BuildConfiguration.isDevelopment)
                 DiagnosticData.a(Package.c() + ".onTrimMemory =" + this + " value = " + i);
         }
         super.onTrimMemory(i);

@@ -21,7 +21,6 @@
 package com.droidmj.webvium.app.base;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -56,13 +55,13 @@ public class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle be) {
-        if (BuildConfiguration.Application.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false))) {
+        if (BuildConfiguration.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false))) {
             StrictMode.b();
             DiagnosticData.a("Webvium.onCreate()");
         }
         super.onCreate(be);
         U7 = FontCache.getInstance(getApplicationContext());
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             if (!spr()) {
                 DiagnosticData.a("Speech Recognition was not available");
             }
@@ -76,7 +75,7 @@ public class BaseActivity extends Activity {
         if (a221().getBoolean("qwe73", false)) {
             W6.c();
         }
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a("Webvium.onResume()");
         }
     }
@@ -84,7 +83,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a("Webvium.onDestroy()");
         }
     }
@@ -92,8 +91,8 @@ public class BaseActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (BuildConfiguration.Application.isDevelopment) {
-            DiagnosticData.a("BuildConfiguration.onPause()");
+        if (BuildConfiguration.isDevelopment) {
+            DiagnosticData.a("Webvium.onPause()");
         }
     }
 
@@ -136,13 +135,13 @@ public class BaseActivity extends Activity {
 
     public void a225(int i) {
         setContentView(i);
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a("Webvium.setContentView("+ i +")");
         }
         if (Build.VERSION.SDK_INT == 21 || Build.VERSION.SDK_INT == 22 || a221().getBoolean("webviumB", false)) {
             ViewGroup vg = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
             vg.setFitsSystemWindows(true);
-            if (BuildConfiguration.Application.isDevelopment)
+            if (BuildConfiguration.isDevelopment)
                 DiagnosticData.a("Webvium.setFitsSystemWindow(true)");
         }
 

@@ -65,14 +65,14 @@ public class SearchHelper implements WebviumDatabase {
     @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_SEARCH, null, null);
+            sld.delete(SearchDatabase.TABLE_SEARCH, null, null);
         }
     }
 
     public void b(final String a) {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_SEARCH,
-                    BuildConfiguration.Database.COL1_SEARCH +
+            sld.delete(SearchDatabase.TABLE_SEARCH,
+                    SearchDatabase.COL1_SEARCH +
                             " =? ", new String[]{a});
         }
     }
@@ -82,8 +82,8 @@ public class SearchHelper implements WebviumDatabase {
             if (sld != null && sld.isOpen()) {
                 if (com.droidmj.webvium.util.Inapproriate.isInapproriate(a.toLowerCase())) {
                     ContentValues values = new ContentValues();
-                    values.put(BuildConfiguration.Database.COL1_SEARCH, a);
-                    sld.insert(BuildConfiguration.Database.TABLE_SEARCH, null, values);
+                    values.put(SearchDatabase.COL1_SEARCH, a);
+                    sld.insert(SearchDatabase.TABLE_SEARCH, null, values);
                 }
             }
         }
@@ -92,9 +92,9 @@ public class SearchHelper implements WebviumDatabase {
     public void f(final String oldData, final String newData) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_SEARCH, newData);
-            sld.update(BuildConfiguration.Database.TABLE_SEARCH, values,
-                    BuildConfiguration.Database.COL1_SEARCH +
+            values.put(SearchDatabase.COL1_SEARCH, newData);
+            sld.update(SearchDatabase.TABLE_SEARCH, values,
+                    SearchDatabase.COL1_SEARCH +
                             " LIKE ? ", new String[]{oldData});
         }
     }

@@ -38,7 +38,7 @@ public class WebViews extends MainWebView {
     @Keep
     public WebViews(Context ct) {
         super(ct);
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a("WebView Initialize");
         }
     }

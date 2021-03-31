@@ -40,7 +40,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BaseActivity;
 import com.droidmj.webvium.app.main.MainWebView;
 import com.droidmj.webvium.app.main.MainWebViewClient;
@@ -232,13 +231,13 @@ public class FEED extends BaseActivity {
                 }
             });
         }
-        String sg = Base64.a(config[2] + "=");
-        String sg0 = sg.replace("%a ", Base64.a(config[3] + "="));
-        String sg1 = sg0.replaceAll("%b", Base64.a(config[4] + "="));
-        String sg2 = sg1.replace("%c", Base64.a(config[5] + "==").replaceAll("%20", " ").replaceAll("%21", "."));
-        String sg3 = sg2.replace("%d", Base64.a(config[6] + "==")).replace("%f", url).replace("%g", a);
+        String sg = Base64.decode(config[2] + "=");
+        String sg0 = sg.replace("%a ", Base64.decode(config[3] + "="));
+        String sg1 = sg0.replaceAll("%b", Base64.decode(config[4] + "="));
+        String sg2 = sg1.replace("%c", Base64.decode(config[5] + "==").replaceAll("%20", " ").replaceAll("%21", "."));
+        String sg3 = sg2.replace("%d", Base64.decode(config[6] + "==")).replace("%f", url).replace("%g", a);
 
-        String sg11 = Base64.a(config[0] + "+").replace("%b", sg3).replace("%a", Base64.a(config[1] + "="));
+        String sg11 = Base64.decode(config[0] + "+").replace("%b", sg3).replace("%a", Base64.decode(config[1] + "="));
         b.loadDataWithBaseURL("null", sg11, "text/html", "UTF-8", "null");
         /*
         Runnable p15 = () -> Stream.e(Base64.a(W5.a2()) + a);

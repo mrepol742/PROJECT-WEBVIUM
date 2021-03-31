@@ -45,16 +45,12 @@ import com.droidmj.webvium.annotation.Test;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.W6;
 import com.droidmj.webvium.app.base.BaseActivity;
-import com.droidmj.webvium.content.Clipboard;
 import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Package;
 import com.droidmj.webvium.content.Resources;
-import com.droidmj.webvium.io.Files;
 import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.os.CountDownTimer;
 import com.droidmj.webvium.security.AppID;
-import com.droidmj.webvium.security.Hash;
-import com.droidmj.webvium.security.HashDataModel;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.text.Html;
 import com.droidmj.webvium.util.Base64;
@@ -65,7 +61,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.Calendar;
 
 // @Class WelcomeScreen
@@ -77,6 +72,11 @@ public class WELC extends BaseActivity {
     private A17a timer;
     private boolean bn = false;
     private Animation d;
+    public static final String TEMP_UPDATE_URL = "a";
+    public static final String TEMP_UPDATE_VERSION = "b";
+    public static final String TEMP_NOTIFICATION_STATE = "c";
+    public static final String TEMP_NOTIFICATION_DATA = "d";
+    public static final String TEMP_B = "e";
 
     @Override
     protected void onCreate(Bundle be) {
@@ -133,11 +133,12 @@ public class WELC extends BaseActivity {
     private void a() {
         SharedPreferences sp3 = getSharedPreferences("b", 0);
         SharedPreferences.Editor editor = sp3.edit();
-        String formatter = "aHR0cHM6Ly9naXRodWIuY29tL21yZXBvbDc0Mi9hL2Jsb2IvbWFpbi8";
-        editor.putString("a", Base64.b(Base64.a(formatter) + "a")); // update
-        editor.putString("b", Base64.b(Base64.a(formatter) + "b")); // update version
-        editor.putString("c", Base64.b(Base64.a(formatter) + "c")); // notification status
-        editor.putString("d", Base64.b(Base64.a(formatter) + "d")); // notification url
+        String formatter = "aHR0cHM6Ly9naXRodWIuY29tL21yZXBvbDc0Mi9TZXJ2ZXIv";
+        editor.putString(TEMP_UPDATE_URL, Base64.encode(Base64.decode(formatter) + "update_url.txt")); // update
+        editor.putString(TEMP_UPDATE_VERSION, Base64.encode(Base64.decode(formatter) + "update_version.txt")); // update version
+        editor.putString(TEMP_NOTIFICATION_STATE, Base64.encode(Base64.decode(formatter) + "notification_state.txt")); // notification status
+        editor.putString(TEMP_NOTIFICATION_DATA, Base64.encode(Base64.decode(formatter) + "notification_data.txt")); // notification url
+        editor.putString(TEMP_B, Base64.encode(Base64.decode(formatter) + "b.txt")); // B
         editor.apply();
     }
 
@@ -214,7 +215,7 @@ public class WELC extends BaseActivity {
         b5.apply();
         Intents.b(this, BACK.class);
         String sg = AppID.getAppID(this);
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a("Webvium ID = " + sg);
         }
         Runnable re = () -> {

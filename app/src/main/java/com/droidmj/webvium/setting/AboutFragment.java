@@ -112,11 +112,11 @@ public class AboutFragment extends BasePreferenceFragment {
                         e.setTitle(getString(R.string.z28));
                         e.setSummary(getString(R.string.z29));
                         e.setOnPreferenceClickListener(a -> {
-                            Intents.e(getActivity(), "value", Base64.a(string0 + "= = "), MAIN.class);
+                            Intents.e(getActivity(), "value", Base64.decode(string0 + "= = "), MAIN.class);
                             return true;
                         });
                     });
-                    if (BuildConfiguration.Application.isDevelopment)
+                    if (BuildConfiguration.isDevelopment)
                         DiagnosticData.a("Package Update =" + newUpdate);
                 } else {
                     getActivity().runOnUiThread(() -> {

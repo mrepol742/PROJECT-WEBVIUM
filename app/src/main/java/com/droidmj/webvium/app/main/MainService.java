@@ -36,34 +36,34 @@ public class MainService extends Service {
     @Override
     public void onCreate() {
 
-        if (BuildConfiguration.Application.isDevelopment)
+        if (BuildConfiguration.isDevelopment)
             DiagnosticData.a("Webvium.onCreate =" + this);
 
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (BuildConfiguration.Application.isDevelopment) {
-            DiagnosticData.a("BuildConfiguration.onStartCommand =" + this);
+        if (BuildConfiguration.isDevelopment) {
+            DiagnosticData.a("Webvium.onStartCommand =" + this);
         }
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        if (BuildConfiguration.Application.isDevelopment)
+        if (BuildConfiguration.isDevelopment)
             DiagnosticData.a("Webvium.onDestroy =" + this);
     }
 
     public void s1() {
         stopSelf();
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.stopSelf =" + this);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.stopSelf =" + this);
     }
 
     public void s2() {
         stopForeground(true);
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.stopForeground =" + this);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.stopForeground =" + this);
     }
 }

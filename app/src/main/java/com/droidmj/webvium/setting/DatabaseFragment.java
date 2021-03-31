@@ -397,7 +397,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                     fos.close();
                     try {
                         java.io.File fe = new java.io.File(fos.toString());
-                        if (BuildConfiguration.Application.isDevelopment) {
+                        if (BuildConfiguration.isDevelopment) {
                             if (fe.setReadOnly()) {
                                 DiagnosticData.a("READ ONLY = " + sg);
                             }

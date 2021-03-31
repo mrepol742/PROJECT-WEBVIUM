@@ -31,21 +31,21 @@ public class IntentsFilter extends IntentFilter {
 
     public IntentsFilter(String ac) {
         super(ac);
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a(ac);
         }
     }
 
     public void act(String sg) {
         addAction(sg);
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a(sg);
         }
     }
 
     public void cat(String sg) {
         addCategory(sg);
-        if (BuildConfiguration.Application.isDevelopment) {
+        if (BuildConfiguration.isDevelopment) {
             DiagnosticData.a(sg);
         }
     }

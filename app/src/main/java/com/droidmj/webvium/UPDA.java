@@ -68,10 +68,10 @@ public class UPDA extends MainService {
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
             int b = Integer.parseInt(Package.e(this).replaceAll("\\.", ""));
-            int newUpdate = Stream.i(Base64.a(sharedPreferences.getString("b", "")) + "?raw=true");
+            int newUpdate = Stream.i(Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "")) + "?raw=true");
             if (newUpdate > b) {
-                f(getString(R.string.x11), getString(R.string.x12), Base64.a(sharedPreferences.getString("a", "") + "= = ") + "?raw=true");
-                if (BuildConfiguration.Application.isDevelopment)
+                f(getString(R.string.x11), getString(R.string.x12), Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "")) + "?raw=true");
+                if (BuildConfiguration.isDevelopment)
                     DiagnosticData.a("Package Update =" + newUpdate);
             }
         } catch (PackageManager.NameNotFoundException w) {

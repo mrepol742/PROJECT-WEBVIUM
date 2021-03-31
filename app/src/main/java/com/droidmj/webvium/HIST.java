@@ -50,6 +50,7 @@ import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Resources;
 import com.droidmj.webvium.history.HistoryAdapter;
 import com.droidmj.webvium.history.HistoryDataModel;
+import com.droidmj.webvium.history.HistoryDatabase;
 import com.droidmj.webvium.history.HistoryHelper;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.text.TextWatcher;
@@ -177,9 +178,9 @@ public class HIST extends BaseActivity {
         d1 = HistoryHelper.getInstance(getApplicationContext());
         a1.setElevation(5);
         Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                BuildConfiguration.Database.TABLE_HISTORY +
+                HistoryDatabase.TABLE_HISTORY +
                 " ORDER BY " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " DESC", null);
         if (res.getCount() == 0) {
             runOnUiThread(() -> {
@@ -473,9 +474,9 @@ public class HIST extends BaseActivity {
         Runnable p15 = () -> {
             ArrayList<HistoryDataModel> al = new ArrayList<>();
             Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    BuildConfiguration.Database.TABLE_HISTORY +
+                    HistoryDatabase.TABLE_HISTORY +
                     " ORDER BY " +
-                    BuildConfiguration.Database.ID +
+                    BuildConfiguration.DB_ID +
                     " DESC", null);
             if (res.getCount() == 0) {
                 runOnUiThread(() -> {

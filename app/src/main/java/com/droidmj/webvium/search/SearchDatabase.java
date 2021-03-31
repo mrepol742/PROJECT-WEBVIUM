@@ -29,38 +29,42 @@ import com.droidmj.webvium.telemetry.DiagnosticData;
 
 public class SearchDatabase extends SQLiteOpenHelper {
 
-
+    public static final String DATA_SEARCH = "as";
+    public static final int VERSION_SEARCH = 1;
+    public static final String TABLE_SEARCH = "A";
+    public static final String COL1_SEARCH = "B";
+    
     public SearchDatabase(Context context) {
-        super(context, BuildConfiguration.Database.DATA_SEARCH, null, BuildConfiguration.Database.VERSION_SEARCH);
+        super(context, DATA_SEARCH, null, VERSION_SEARCH);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +
-                BuildConfiguration.Database.TABLE_SEARCH +
+                TABLE_SEARCH +
                 " ( " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " INTEGER PRIMARY KEY, " +
-                BuildConfiguration.Database.COL1_SEARCH +
+                COL1_SEARCH +
                 " TEXT )");
-        if (BuildConfiguration.Application.isDevelopment)
+        if (BuildConfiguration.isDevelopment)
             DiagnosticData.a("Webvium.onCreate =" + db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +
-                BuildConfiguration.Database.TABLE_SEARCH);
+                TABLE_SEARCH);
         onCreate(db);
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onUpgrade()");
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onUpgrade()");
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onDowngrade()");
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onDowngrade()");
     }
 
 }

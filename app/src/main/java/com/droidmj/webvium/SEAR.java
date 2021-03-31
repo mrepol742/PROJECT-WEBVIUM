@@ -51,14 +51,16 @@ import android.widget.Toolbar;
 
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.main.MainBaseActivity;
+import com.droidmj.webvium.bookmark.BookmarkDatabase;
 import com.droidmj.webvium.bookmark.BookmarkHelper;
 import com.droidmj.webvium.content.Clipboard;
 import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Resources;
+import com.droidmj.webvium.history.HistoryDatabase;
 import com.droidmj.webvium.history.HistoryHelper;
-import com.droidmj.webvium.io.Files;
 import com.droidmj.webvium.io.StorageDirectory;
 import com.droidmj.webvium.search.SearchAdapter;
+import com.droidmj.webvium.search.SearchDatabase;
 import com.droidmj.webvium.search.SearchHelper;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.text.TextWatcher;
@@ -168,9 +170,9 @@ public class SEAR extends MainBaseActivity {
         iv1.setBackgroundResource(R.drawable.b17);
         d2 = SearchHelper.getInstance(getApplicationContext());
         Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                BuildConfiguration.Database.TABLE_SEARCH +
+                SearchDatabase.TABLE_SEARCH +
                 " ORDER BY " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " DESC ", null);
         if (res.getCount() == 0) {
             runOnUiThread(() -> d.setVisibility(View.GONE));
@@ -186,9 +188,9 @@ public class SEAR extends MainBaseActivity {
         if (a221().getBoolean("showHTT", false)) {
             HistoryHelper d1 = HistoryHelper.getInstance(getApplicationContext());
             Cursor rest = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    BuildConfiguration.Database.TABLE_HISTORY +
+                    HistoryDatabase.TABLE_HISTORY +
                     " ORDER BY " +
-                    BuildConfiguration.Database.ID +
+                    BuildConfiguration.DB_ID +
                     " DESC ", null);
             if (rest.getCount() != 0) {
                 if (ls == null) {
@@ -206,9 +208,9 @@ public class SEAR extends MainBaseActivity {
             if (a221().getBoolean("showBKM", false)) {
                 BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
                 Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        BuildConfiguration.Database.TABLE_BOOKMARK +
+                        BookmarkDatabase.TABLE_BOOKMARK +
                         " ORDER BY " +
-                        BuildConfiguration.Database.ID +
+                        BuildConfiguration.DB_ID +
                         " DESC ", null);
                 if (rest1.getCount() != 0) {
                     if (ls == null) {
@@ -445,9 +447,9 @@ public class SEAR extends MainBaseActivity {
         Runnable p15 = () -> {
             ArrayList<String> itemIdsh = new ArrayList<>();
             Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    BuildConfiguration.Database.TABLE_SEARCH +
+                    SearchDatabase.TABLE_SEARCH +
                     " ORDER BY " +
-                    BuildConfiguration.Database.ID +
+                    BuildConfiguration.DB_ID +
                     " DESC ", null);
             if (res.getCount() == 0) {
                 runOnUiThread(() -> d.setVisibility(View.GONE));

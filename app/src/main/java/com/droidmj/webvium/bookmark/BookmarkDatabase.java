@@ -28,39 +28,46 @@ import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 
 public class BookmarkDatabase extends SQLiteOpenHelper {
+
+    public static final String DATA_BOOKMARK = "zx";
+    public static final int VERSION_BOOKMARK = 1;
+    public static final String TABLE_BOOKMARK = "A";
+    public static final String COL1_BOOKMARK = "B";
+    public static final String COL2_BOOKMARK = "C";
+
     public BookmarkDatabase(Context context) {
-        super(context, BuildConfiguration.Database.DATA_BOOKMARK, null, BuildConfiguration.Database.VERSION_BOOKMARK);
+        super(context, DATA_BOOKMARK, null, VERSION_BOOKMARK);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +
-                BuildConfiguration.Database.TABLE_BOOKMARK +
+                TABLE_BOOKMARK +
                 " ( " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " INTEGER PRIMARY KEY, " +
-                BuildConfiguration.Database.COL1_BOOKMARK +
+                COL1_BOOKMARK +
                 " TEXT, " +
-                BuildConfiguration.Database.COL2_BOOKMARK +
+                COL2_BOOKMARK +
                 " TEXT ) ");
-        if (BuildConfiguration.Application.isDevelopment)
+        if (BuildConfiguration.isDevelopment)
             DiagnosticData.a("Webvium.onCreate =" + db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +
-                BuildConfiguration.Database.TABLE_BOOKMARK);
+                TABLE_BOOKMARK);
         onCreate(db);
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onUpgrade =" + db);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onUpgrade =" + db);
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.onDowngrade =" + db);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.onDowngrade =" + db);
     }
 
 }

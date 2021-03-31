@@ -64,7 +64,7 @@ public class Zip {
             int length = (int) longLength;
             if (length != longLength)
                 throw new UnsupportedActions();
-            if (BuildConfiguration.Application.isDevelopment) {
+            if (BuildConfiguration.isDevelopment) {
                 DiagnosticData.a("FILE SIZE >= 2 GB");
             }
             byte[] data = new byte[length];

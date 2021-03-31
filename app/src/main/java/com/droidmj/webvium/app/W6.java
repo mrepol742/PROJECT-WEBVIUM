@@ -38,8 +38,8 @@ public class W6 {
     public static void b() {
 
         int a = SQLiteDatabase.releaseMemory();
-        if (BuildConfiguration.Application.isDevelopment)
-            DiagnosticData.a("BuildConfiguration.SqliteDatabase release memory =" + a);
+        if (BuildConfiguration.isDevelopment)
+            DiagnosticData.a("Webvium.SQLiteDatabase release memory =" + a);
     }
 
     public static void c() {

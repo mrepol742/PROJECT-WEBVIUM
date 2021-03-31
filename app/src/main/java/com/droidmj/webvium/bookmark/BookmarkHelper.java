@@ -49,15 +49,13 @@ public class BookmarkHelper implements WebviumDatabase {
     }
 
     public void b(final String a, final String b) {
-
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_BOOKMARK,
-                    BuildConfiguration.Database.COL1_BOOKMARK +
+            sld.delete(BookmarkDatabase.TABLE_BOOKMARK,
+                    BookmarkDatabase.COL1_BOOKMARK +
                             "=? AND " +
-                            BuildConfiguration.Database.COL2_BOOKMARK +
+                            BookmarkDatabase.COL2_BOOKMARK +
                             "=? ", new String[]{b, a});
         }
-
     }
 
     @Override
@@ -75,16 +73,16 @@ public class BookmarkHelper implements WebviumDatabase {
     @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_BOOKMARK, null, null);
+            sld.delete(BookmarkDatabase.TABLE_BOOKMARK, null, null);
         }
     }
 
     public void c(final String a, final String b) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_BOOKMARK, a);
-            values.put(BuildConfiguration.Database.COL2_BOOKMARK, b);
-            sld.insert(BuildConfiguration.Database.TABLE_BOOKMARK, null, values);
+            values.put(BookmarkDatabase.COL1_BOOKMARK, a);
+            values.put(BookmarkDatabase.COL2_BOOKMARK, b);
+            sld.insert(BookmarkDatabase.TABLE_BOOKMARK, null, values);
         }
     }
 
@@ -92,21 +90,21 @@ public class BookmarkHelper implements WebviumDatabase {
     public void d(BDMS a) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_BOOKMARK, a.sg);
-            values.put(BuildConfiguration.Database.COL2_BOOKMARK, a.sg0);
-            sld.insert(BuildConfiguration.Database.TABLE_BOOKMARK, null, values);
+            values.put(BookmarkDatabase.COL1_BOOKMARK, a.sg);
+            values.put(BookmarkDatabase.COL2_BOOKMARK, a.sg0);
+            sld.insert(BookmarkDatabase.TABLE_BOOKMARK, null, values);
         }
     }
 
     public void f(final String oldTitle, final String oldURl, final String newTitle, final String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_BOOKMARK, newTitle);
-            values.put(BuildConfiguration.Database.COL2_BOOKMARK, newUrl);
-            sld.update(BuildConfiguration.Database.TABLE_BOOKMARK, values,
-                    BuildConfiguration.Database.COL1_BOOKMARK +
+            values.put(BookmarkDatabase.COL1_BOOKMARK, newTitle);
+            values.put(BookmarkDatabase.COL2_BOOKMARK, newUrl);
+            sld.update(BookmarkDatabase.TABLE_BOOKMARK, values,
+                    BookmarkDatabase.COL1_BOOKMARK +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL2_BOOKMARK +
+                            BookmarkDatabase.COL2_BOOKMARK +
                             " LIKE ?", new String[]{oldTitle, oldURl});
         }
     }

@@ -63,20 +63,20 @@ public class PermissionHelper implements WebviumDatabase {
     @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_PERMISSION, null, null);
+            sld.delete(PermissionDatabase.TABLE_PERMISSION, null, null);
         }
     }
 
     public void b(PermissionObjectDataModel w2) {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BuildConfiguration.Database.TABLE_PERMISSION,
-                    BuildConfiguration.Database.COL1_PERMISSION +
+            sld.delete(PermissionDatabase.TABLE_PERMISSION,
+                    PermissionDatabase.COL1_PERMISSION +
                             " =? AND " +
-                            BuildConfiguration.Database.COL2_PERMISSION +
+                            PermissionDatabase.COL2_PERMISSION +
                             " =? AND " +
-                            BuildConfiguration.Database.COL3_PERMISSION +
+                            PermissionDatabase.COL3_PERMISSION +
                             " =? AND " +
-                            BuildConfiguration.Database.COL4_PERMISSION +
+                            PermissionDatabase.COL4_PERMISSION +
                             " =? ", new String[]{w2.nm, w2.pm, w2.gt, w2.dnt});
         }
     }
@@ -84,11 +84,11 @@ public class PermissionHelper implements WebviumDatabase {
     public void c(PermissionObjectDataModel w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_PERMISSION, w7.nm);
-            values.put(BuildConfiguration.Database.COL2_PERMISSION, w7.pm);
-            values.put(BuildConfiguration.Database.COL3_PERMISSION, w7.gt);
-            values.put(BuildConfiguration.Database.COL4_PERMISSION, w7.dnt);
-            sld.insert(BuildConfiguration.Database.TABLE_PERMISSION, null, values);
+            values.put(PermissionDatabase.COL1_PERMISSION, w7.nm);
+            values.put(PermissionDatabase.COL2_PERMISSION, w7.pm);
+            values.put(PermissionDatabase.COL3_PERMISSION, w7.gt);
+            values.put(PermissionDatabase.COL4_PERMISSION, w7.dnt);
+            sld.insert(PermissionDatabase.TABLE_PERMISSION, null, values);
         }
     }
 
@@ -96,29 +96,29 @@ public class PermissionHelper implements WebviumDatabase {
     public void d(PDMS w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_PERMISSION, w7.nm);
-            values.put(BuildConfiguration.Database.COL2_PERMISSION, w7.pm);
-            values.put(BuildConfiguration.Database.COL3_PERMISSION, w7.gt);
-            values.put(BuildConfiguration.Database.COL4_PERMISSION, w7.dnt);
-            sld.insert(BuildConfiguration.Database.TABLE_PERMISSION, null, values);
+            values.put(PermissionDatabase.COL1_PERMISSION, w7.nm);
+            values.put(PermissionDatabase.COL2_PERMISSION, w7.pm);
+            values.put(PermissionDatabase.COL3_PERMISSION, w7.gt);
+            values.put(PermissionDatabase.COL4_PERMISSION, w7.dnt);
+            sld.insert(PermissionDatabase.TABLE_PERMISSION, null, values);
         }
     }
 
     public void i(PermissionObjectDataModel old, PermissionObjectDataModel w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BuildConfiguration.Database.COL1_PERMISSION, w7.nm);
-            values.put(BuildConfiguration.Database.COL2_PERMISSION, w7.pm);
-            values.put(BuildConfiguration.Database.COL3_PERMISSION, w7.gt);
-            values.put(BuildConfiguration.Database.COL4_PERMISSION, w7.dnt);
-            sld.update(BuildConfiguration.Database.TABLE_PERMISSION, values,
-                    BuildConfiguration.Database.COL1_PERMISSION +
+            values.put(PermissionDatabase.COL1_PERMISSION, w7.nm);
+            values.put(PermissionDatabase.COL2_PERMISSION, w7.pm);
+            values.put(PermissionDatabase.COL3_PERMISSION, w7.gt);
+            values.put(PermissionDatabase.COL4_PERMISSION, w7.dnt);
+            sld.update(PermissionDatabase.TABLE_PERMISSION, values,
+                    PermissionDatabase.COL1_PERMISSION +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL2_PERMISSION +
+                            PermissionDatabase.COL2_PERMISSION +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL3_PERMISSION +
+                            PermissionDatabase.COL3_PERMISSION +
                             " LIKE ? AND " +
-                            BuildConfiguration.Database.COL4_PERMISSION +
+                            PermissionDatabase.COL4_PERMISSION +
                             " LIKE ? ", new String[]{old.nm, old.pm, old.gt, old.dnt});
         }
     }

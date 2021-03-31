@@ -127,14 +127,14 @@ public class NOTI extends MainService {
     public void g() {
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-            int notif = Stream.g(Base64.a(sharedPreferences.getString("c", "") + "= =") + "?raw=true");
+            int notif = Stream.g(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_STATE, "")) + "?raw=true");
             if (notif > 0) {
-                String neTf = Stream.f(Base64.a(sharedPreferences.getString("d", "") + "=") + "?raw=true", getString(R.string.c33));
+                String neTf = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) + "?raw=true", getString(R.string.c33));
                 String[] sp = neTf.split(";");
                 SharedPreferences j988 = getSharedPreferences("wv,", 0);
                 if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {
                     f(sp[0], sp[1], sp[2]);
-                    if (BuildConfiguration.Application.isDevelopment) {
+                    if (BuildConfiguration.isDevelopment) {
                         DiagnosticData.a("Push Notifications =" + sp[0] + " " + sp[1] + " " + sp[2]);
                     }
                     SharedPreferences.Editor gujh = j988.edit();

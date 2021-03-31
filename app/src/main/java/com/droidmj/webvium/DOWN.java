@@ -39,6 +39,7 @@ import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.Resources;
 import com.droidmj.webvium.download.DownloadAdapter;
 import com.droidmj.webvium.download.DownloadArrayDataModel;
+import com.droidmj.webvium.download.DownloadDatabase;
 import com.droidmj.webvium.download.DownloadHelper;
 import com.droidmj.webvium.view.Animation;
 import com.droidmj.webvium.widget.Toast;
@@ -98,9 +99,9 @@ public class DOWN extends BaseActivity {
         a1.setNavigationOnClickListener(view -> finish());
         a3 = findViewById(R.id.a3);
         Cursor res = d10.getReadableDatabase().rawQuery("SELECT * FROM " +
-                BuildConfiguration.Database.TABLE_DOWNLOAD +
+                DownloadDatabase.TABLE_DOWNLOAD +
                 " ORDER BY " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " DESC", null);
         if (res.getCount() == 0) {
             runOnUiThread(() -> {

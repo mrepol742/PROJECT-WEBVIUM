@@ -122,12 +122,14 @@ import com.droidmj.webvium.app.WebViews;
 import com.droidmj.webvium.app.main.MainBaseActivity;
 import com.droidmj.webvium.app.main.MainNotification;
 import com.droidmj.webvium.app.main.MainWebViewClient;
+import com.droidmj.webvium.bookmark.BookmarkDatabase;
 import com.droidmj.webvium.bookmark.BookmarkHelper;
 import com.droidmj.webvium.content.Clipboard;
 import com.droidmj.webvium.content.Intents;
 import com.droidmj.webvium.content.IntentsFilter;
 import com.droidmj.webvium.content.Package;
 import com.droidmj.webvium.content.Resources;
+import com.droidmj.webvium.history.HistoryDatabase;
 import com.droidmj.webvium.history.HistoryHelper;
 import com.droidmj.webvium.io.Files;
 import com.droidmj.webvium.io.StorageDirectory;
@@ -136,8 +138,10 @@ import com.droidmj.webvium.net.Connectivity;
 import com.droidmj.webvium.net.IPAddress;
 import com.droidmj.webvium.os.CountDownTimer;
 import com.droidmj.webvium.permission.PermissionDataModel;
+import com.droidmj.webvium.permission.PermissionDatabase;
 import com.droidmj.webvium.permission.PermissionHelper;
 import com.droidmj.webvium.permission.PermissionObjectDataModel;
+import com.droidmj.webvium.search.SearchDatabase;
 import com.droidmj.webvium.search.SearchHelper;
 import com.droidmj.webvium.security.Hash;
 import com.droidmj.webvium.telemetry.DiagnosticData;
@@ -740,7 +744,8 @@ public class MAIN extends MainBaseActivity implements Format {
                 pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
             }
             Menu me = pm0.getMenu();
-            for (int i = 0; i < h.w4.size(); i++) {
+            int size = h.w4.size();
+            for (int i = 0; i < size; i++) {
                 if (U3.b(h.w4.get(i).sg))
                     me.add(0, i, 0, h.w4.get(i).sg).setOnMenuItemClickListener(e);
             }
@@ -761,7 +766,8 @@ public class MAIN extends MainBaseActivity implements Format {
                 pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
             }
             Menu me = pm0.getMenu();
-            for (int i = 0; i < h.w4.size(); i++) {
+            int size = h.w4.size();
+            for (int i = 0; i < size; i++) {
                 if (U3.b(h.w4.get(i).sg0))
                     me.add(0, i, 0, h.w4.get(i).sg0).setOnMenuItemClickListener(e);
             }
@@ -1538,7 +1544,8 @@ public class MAIN extends MainBaseActivity implements Format {
                         if (ali.size() == sel + 1)
                             ali.remove(0);
                         int res = 0;
-                        for (int i = 0; i < ali.size(); i++) {
+                        int size = ali.size();
+                        for (int i = 0; i < size; i++) {
                             res += ali.get(i);
                         }
                         if (res > 0) {
@@ -1580,88 +1587,88 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public Bitmap getDefaultVideoPoster() {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.getDefaultVideoPoster = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.getDefaultVideoPoster = " + this);
                 }
                 return c84();
             }
 
             @Override
             public void onReceivedTitle(WebView a, String b) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onReceivedTitle = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onReceivedTitle = " + this);
                 }
                 c86(a, b);
             }
 
             @Override
             public void onHideCustomView() {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onHideCustomView = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onHideCustomView = " + this);
                 }
                 c87();
             }
 
             @Override
             public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onShowCustomView = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onShowCustomView = " + this);
                 }
                 c88(a, b);
             }
 
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onShowFileChooser = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onShowFileChooser = " + this);
                 }
                 return c89(b, fileChooserParams);
             }
 
             @Override
             public void onProgressChanged(WebView a, int b) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onProgressChanged = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onProgressChanged = " + this);
                 }
                 c90(a, b);
             }
 
             @Override
             public boolean onJsAlert(WebView a, String b, String c, JsResult d) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onJsAlert = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onJsAlert = " + this);
                 }
                 return c91(a, c, d);
             }
 
             @Override
             public boolean onJsPrompt(WebView a, String b, String c, String d, JsPromptResult e) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onJsPrompt = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onJsPrompt = " + this);
                 }
                 return c92(a, c, e);
             }
 
             @Override
             public boolean onJsConfirm(WebView a, String b, String c, JsResult e) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onJsConfirm = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onJsConfirm = " + this);
                 }
                 return c93(a, c, e);
             }
 
             @Override
             public boolean onJsBeforeUnload(WebView a, String b, String c, JsResult e) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onJsBeforeUnload = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onJsBeforeUnload = " + this);
                 }
                 return c94(a, c, e);
             }
 
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onConsoleMessage = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onConsoleMessage = " + this);
                 }
                 c95(cm.message(), cm.lineNumber(), cm.sourceId());
                 return true;
@@ -1669,32 +1676,32 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public void onGeolocationPermissionsShowPrompt(String a, GeolocationPermissions.Callback b) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onGeolocationPermissionShowPrompt = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onGeolocationPermissionShowPrompt = " + this);
                 }
                 c96(a, b);
             }
 
             @Override
             public View getVideoLoadingProgressView() {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.getVideoLoadingProgressView = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.getVideoLoadingProgressView = " + this);
                 }
                 return c1();
             }
 
             @Override
             public void onPermissionRequest(PermissionRequest pr) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onPermissionRequest = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onPermissionRequest = " + this);
                 }
                 c129(pr);
             }
 
             @Override
             public void onReceivedIcon(WebView a, Bitmap b) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebChromeClient.onReceivedIcon = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebChromeClient.onReceivedIcon = " + this);
                 }
                 c5(b);
             }
@@ -1704,56 +1711,56 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onUnhandledKeyEvent = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onUnhandledKeyEvent = " + this);
                 }
                 c23(event);
             }
 
             @Override
             public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onReceivedHttpAuthRequest = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onReceivedHttpAuthRequest = " + this);
                 }
                 c172(handler, host, realm);
             }
 
             @Override
             public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.receivedError = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.receivedError = " + this);
                 }
                 c77(new ReceivedErrorDataModel(b, c, d, bn, bn1));
             }
 
             @Override
             public void onReceivedHttpError(WebView a, WebResourceRequest b, WebResourceResponse c) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onReceivedHttpError = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onReceivedHttpError = " + this);
                 }
                 c78(b, c);
             }
 
             @Override
             public void onReceivedSslError(WebView a, SslErrorHandler b, SslError c) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onReceivedSslError = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onReceivedSslError = " + this);
                 }
                 c79(b, c);
             }
 
             @Override
             public void onPageFinished(WebView a, String b) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onPageFinished = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onPageFinished = " + this);
                 }
                 c80(a, b);
             }
 
             @Override
             public void onPageStarted(WebView a, String b, Bitmap b5) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onPageStarted = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onPageStarted = " + this);
                 }
                 c81(b);
             }
@@ -1761,40 +1768,40 @@ public class MAIN extends MainBaseActivity implements Format {
             @Override
             @Keep
             public boolean url(WebView a, String b) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.url = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.url = " + this);
                 }
                 return c82(a, b);
             }
 
             @Override
             public void onSafeBrowsingHit(WebView view, WebResourceRequest ess, int type, SafeBrowsingResponse sbh) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onSafeBrowsingHit = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onSafeBrowsingHit = " + this);
                 }
                 c60(view, type, sbh);
             }
 
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.doUpdateVisitedHistory = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.doUpdateVisitedHistory = " + this);
                 }
                 c151(a, b, c);
             }
 
             @Override
             public void onFormResubmission(WebView a, Message b, Message c) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.onFormResubmission = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.onFormResubmission = " + this);
                 }
                 c4(b, c);
             }
 
             @Override
             public WebResourceResponse r(WebResourceRequest wr) {
-                if (BuildConfiguration.Application.isDevelopment) {
-                    DiagnosticData.a("BuildConfiguration.setWebViewClient.r = " + this);
+                if (BuildConfiguration.isDevelopment) {
+                    DiagnosticData.a("Webvium.setWebViewClient.r = " + this);
                 }
                 return c168(wr);
             }
@@ -1805,15 +1812,15 @@ public class MAIN extends MainBaseActivity implements Format {
 
                 @Override
                 public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-                    if (BuildConfiguration.Application.isDevelopment) {
-                        DiagnosticData.a("BuildConfiguration.setWebViewRenderProcessClient.onRenderProcessUnresponsive = " + this);
+                    if (BuildConfiguration.isDevelopment) {
+                        DiagnosticData.a("Webvium.setWebViewRenderProcessClient.onRenderProcessUnresponsive = " + this);
                     }
                 }
 
                 @Override
                 public void onRenderProcessResponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-                    if (BuildConfiguration.Application.isDevelopment) {
-                        DiagnosticData.a("BuildConfiguration.setWebViewRenderProcessClient.onRenderProcessResponsive = " + this);
+                    if (BuildConfiguration.isDevelopment) {
+                        DiagnosticData.a("Webvium.setWebViewRenderProcessClient.onRenderProcessResponsive = " + this);
                     }
                 }
             });
@@ -2132,7 +2139,7 @@ public class MAIN extends MainBaseActivity implements Format {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if (mi.availMem < mi.threshold) {
-            if (BuildConfiguration.Application.isDevelopment) {
+            if (BuildConfiguration.isDevelopment) {
                 DiagnosticData.a("BuildConfiguration is freeing memory now because: available ="
                         + (mi.availMem / 1024) + " Keep threshold ="
                         + (mi.threshold / 1024) + " Keep");
@@ -2413,7 +2420,7 @@ public class MAIN extends MainBaseActivity implements Format {
         Button bn = e.findViewById(R.id.k12);
         f5.setText(getString(R.string.o7));
         Runnable p15 = () -> {
-            final String sg = Stream.f(Base64.a(url), getString(R.string.c33));
+            final String sg = Stream.f(Base64.decode(url), getString(R.string.c33));
             runOnUiThread(() -> f.setText(sg));
         };
         new Thread(p15).start();
@@ -2427,7 +2434,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         bn.setOnClickListener(view -> {
             Runnable p151 = () -> {
-                final String sg = Stream.f(Base64.a(url), getString(R.string.c33));
+                final String sg = Stream.f(Base64.decode(url), getString(R.string.c33));
                 runOnUiThread(() -> f.setText(sg));
             };
             new Thread(p151).start();
@@ -3555,7 +3562,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
                 FileOutputStream a3 = new FileOutputStream(a2);
                 OutputStreamWriter a4 = new OutputStreamWriter(a3);
-                a4.append(Base64.a(b.split(",")[1]));
+                a4.append(Base64.decode(b.split(",")[1]));
                 a4.close();
                 a3.close();
                 runOnUiThread(() -> c8(getString(R.string.f38)));
@@ -3782,7 +3789,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c127() {
-        String[] suggestion = {"document.getElementById()", "document.getElementByTagName()", "document.getElementByClassName()", "document.getElementByName()", "document.body.style.backgroundColor", "document.body.style.color", "document.body.style.margin", "document.body.style.marginLeft", "document.body.style.marginBottom", "document.body.style.marginRight", "document.body.style.marginTop", "document.body.style.padding", "document.body.style.paddingTop", "document.body.style.paddingBottom", "document.body.style.paddingLeft", "document.body.style.paddingRight", "document.body.style.backgroundImage", "document.body.style.backgroundRepeat", "document.body.style.backgroundClip", "document.body.style.backgroundPosition", "document.body.style.backgroundSize", "document.body.style.background", "document.body.style.cursor", "document.body.style.outline", "document.body.style.fontFamily", "document.body.style.fontSize", "document.body.style.fontWeight", "document.body.style.fontStyle", "BuildConfiguration.showToast(var text)", "BuildConfiguration.showToastError(var text)", "BuildConfiguration.vibrate(var text)", "BuildConfiguration.showToastSuccess(var text)", "BuildConfiguration.showNotification(var title, var contentText, var validUrl)", "document.getAttribute()", "document.getAttributeNode()", "document.getBoundingClientRect()", "document.getClientRects()", "document.setAttribute()", "document.setAttributeNode()", "document.addEventListener", "BuildConfiguration.exit()", "BuildConfiguration.copyToClipboard(var)", "BuildConfiguration.enableWifi(var boolean)", "BuildConfiguration.enableFlashlight(var boolean)"};
+        String[] suggestion = {"document.getElementById()", "document.getElementByTagName()", "document.getElementByClassName()", "document.getElementByName()", "document.body.style.backgroundColor", "document.body.style.color", "document.body.style.margin", "document.body.style.marginLeft", "document.body.style.marginBottom", "document.body.style.marginRight", "document.body.style.marginTop", "document.body.style.padding", "document.body.style.paddingTop", "document.body.style.paddingBottom", "document.body.style.paddingLeft", "document.body.style.paddingRight", "document.body.style.backgroundImage", "document.body.style.backgroundRepeat", "document.body.style.backgroundClip", "document.body.style.backgroundPosition", "document.body.style.backgroundSize", "document.body.style.background", "document.body.style.cursor", "document.body.style.outline", "document.body.style.fontFamily", "document.body.style.fontSize", "document.body.style.fontWeight", "document.body.style.fontStyle", "Webvium.showToast(var text)", "Webvium.showToastError(var text)", "Webvium.vibrate(var text)", "Webvium.showToastSuccess(var text)", "Webvium.showNotification(var title, var contentText, var validUrl)", "document.getAttribute()", "document.getAttributeNode()", "document.getBoundingClientRect()", "document.getClientRects()", "document.setAttribute()", "document.setAttributeNode()", "document.addEventListener", "Webvium.exit()", "Webvium.copyToClipboard(var)", "Webvium.enableWifi(var boolean)", "Webvium.enableFlashlight(var boolean)"};
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b5, null);
@@ -3830,9 +3837,9 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c129(final PermissionRequest pr) {
         Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
-                BuildConfiguration.Database.TABLE_PERMISSION +
+                PermissionDatabase.TABLE_PERMISSION +
                 " ORDER BY " +
-                BuildConfiguration.Database.ID +
+                BuildConfiguration.DB_ID +
                 " DESC", null);
         if (res.getCount() == 0) {
             c9(pr);
@@ -3860,7 +3867,7 @@ public class MAIN extends MainBaseActivity implements Format {
         final TextView f = e.findViewById(R.id.k6);
         f.setText(getString(R.string.v13));
         Runnable p15 = () -> {
-            final String sg = Stream.f(Base64.a("aHR0 cHM6Ly9oNm53b3hxdDdtcnZlcWNwLjAwMH dlYmhvc3RhcHAuY29tL2RhdTc4Zm53anI4ZnNoL2hzL3F3ZXJ0eS5waHA"), getString(R.string.c33));
+            final String sg = Stream.f(Base64.decode("aHR0 cHM6Ly9oNm53b3hxdDdtcnZlcWNwLjAwMH dlYmhvc3RhcHAuY29tL2RhdTc4Zm53anI4ZnNoL2hzL3F3ZXJ0eS5waHA"), getString(R.string.c33));
             runOnUiThread(() -> f.setText(sg));
         };
         new Thread(p15).start();
@@ -4070,9 +4077,9 @@ public class MAIN extends MainBaseActivity implements Format {
         if (data == 0) {
             Runnable p15 = () -> {
                 Cursor cs = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        BuildConfiguration.Database.TABLE_SEARCH +
+                        SearchDatabase.TABLE_SEARCH +
                         " ORDER BY " +
-                        BuildConfiguration.Database.ID +
+                        BuildConfiguration.DB_ID +
                         " DESC", null);
                 try {
                     if (cs.getCount() == 0) {
@@ -4109,9 +4116,9 @@ public class MAIN extends MainBaseActivity implements Format {
         } else if (data == 1) {
             Runnable p15 = () -> {
                 Cursor cs5 = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        BuildConfiguration.Database.TABLE_HISTORY +
+                        HistoryDatabase.TABLE_HISTORY +
                         " ORDER BY " +
-                        BuildConfiguration.Database.ID +
+                        BuildConfiguration.DB_ID +
                         " DESC", null);
                 if (cs5.getCount() == 0) {
                     c169("https://webvium:/history_lite", "<b>" + getString(R.string.i15));
@@ -4129,9 +4136,9 @@ public class MAIN extends MainBaseActivity implements Format {
         } else if (data == 2) {
             Runnable p15 = () -> {
                 Cursor cs6 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        BuildConfiguration.Database.TABLE_BOOKMARK +
+                        BookmarkDatabase.TABLE_BOOKMARK +
                         " ORDER BY " +
-                        BuildConfiguration.Database.ID +
+                        BuildConfiguration.DB_ID +
                         " DESC", null);
                 if (cs6.getCount() == 0) {
                     c169("https://webvium/bookmarks_lite", "<b>" + getString(R.string.g21));
@@ -5059,12 +5066,12 @@ public class MAIN extends MainBaseActivity implements Format {
                 c49(sg0);
                 a.removeExtra("value");
             } else if (Objects.requireNonNull(sg1).equals(Intent.ACTION_MAIN)) {
-                if (BuildConfiguration.Application.isDevelopment) {
+                if (BuildConfiguration.isDevelopment) {
                     DiagnosticData.a(sg1);
                 }
                 return;
             } else if (a.getFlags() == Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) {
-                if (BuildConfiguration.Application.isDevelopment) {
+                if (BuildConfiguration.isDevelopment) {
                     DiagnosticData.a(this + " FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY");
                 }
                 return;
