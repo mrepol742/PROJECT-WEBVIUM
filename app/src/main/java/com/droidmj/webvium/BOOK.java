@@ -163,6 +163,10 @@ public class BOOK extends BaseActivity {
         f6 = findViewById(R.id.f6);
         f6.setBackgroundResource(R.drawable.b17);
         f8 = findViewById(R.id.f8);
+        iv = findViewById(R.id.j2);
+        iv.setBackgroundResource(R.drawable.c6);
+        iv.setImageResource(R.drawable.a23);
+        iv.setOnClickListener(view -> d());
         setActionBar(c);
         ActionBar ab = getActionBar();
         if (ab != null) {
@@ -171,9 +175,7 @@ public class BOOK extends BaseActivity {
             ab.setDisplayShowTitleEnabled(false);
         }
         int f = Resources.b(this, R.color.c);
-
         int g = Resources.b(this, R.color.b);
-
         if (a221().getBoolean("blockSV", true)) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         } else {
@@ -192,7 +194,6 @@ public class BOOK extends BaseActivity {
         } else {
             d.setTextColor(g);
             f8.setTextColor(g);
-
         }
         c.setBackgroundResource(R.drawable.p);
         c.setNavigationIcon(R.drawable.a2);
@@ -204,11 +205,10 @@ public class BOOK extends BaseActivity {
                 BuildConfiguration.DB_ID +
                 " DESC", null);
         if (res.getCount() == 0) {
-            runOnUiThread(() -> {
-                f8.setVisibility(View.VISIBLE);
-                e.setVisibility(View.GONE);
-                f6.setClickable(true);
-            });
+            f8.setVisibility(View.VISIBLE);
+            e.setVisibility(View.GONE);
+            f6.setClickable(true);
+            iv.setVisibility(View.GONE);
         } else {
             ls = new ArrayList<>();
             ls0 = new ArrayList<>();
@@ -216,12 +216,8 @@ public class BOOK extends BaseActivity {
                 ls.add(res.getString(1));
                 ls0.add(res.getString(2));
             }
-            runOnUiThread(() -> {
-                iv.setVisibility(View.VISIBLE);
-                f8.setVisibility(View.GONE);
-                Animation.animate(BOOK.this, R.anim.i, iv);
-            });
-
+            f8.setVisibility(View.GONE);
+            Animation.animate(BOOK.this, R.anim.i, iv);
         }
         res.close();
         if (ls != null) {
@@ -236,18 +232,11 @@ public class BOOK extends BaseActivity {
                 return true;
             });
         }
-        iv = findViewById(R.id.j2);
-        iv.setBackgroundResource(R.drawable.c6);
-        iv.setImageResource(R.drawable.a23);
-        iv.setOnClickListener(view -> d());
-        iv.setVisibility(View.GONE);
-
         iv1 = findViewById(R.id.j3);
         iv1.setBackgroundResource(R.drawable.c6);
         iv1.setImageResource(R.drawable.c16);
         iv1.setOnClickListener(view -> c("", ""));
         e.setNumColumns(p(getResources().getConfiguration().orientation));
-        Intents.m(this);
     }
 
     @Override
@@ -466,7 +455,6 @@ public class BOOK extends BaseActivity {
 
     private void k5(String a) {
         Toast.b(this, a);
-
     }
 
     private void k() {

@@ -49,7 +49,7 @@ public class APPL extends Application {
         }
         super.onCreate();
         try {
-            Intents.m(this);
+
             if (BuildConfiguration.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("og67", false))) {
                 DiagnosticData.getInstance(getApplicationContext());
             }

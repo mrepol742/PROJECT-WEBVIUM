@@ -31,21 +31,22 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode getVersionCode()
-        versionName getVersionName()
-        proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard.rules"
+        versionCode Integer.parseInt(new Date().format("Hmmss"))
+        versionName new Date().format("yy.MM.dd")
+        proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
     }
 
     buildTypes {
         debug {
             debuggable true
             minifyEnabled false
+            resValue "bool", "wv", "true"
         }
 
         release {
             debuggable false
-            shrinkResources true
             minifyEnabled true
+            resValue "bool", "wv", "false"
         }
     }
 
@@ -53,16 +54,4 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-}
-
-dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-}
-
-static def getVersionName() {
-    return new Date().format("yy.MM.dd")
-}
-
-static def getVersionCode() {
-    return Integer.parseInt(new Date().format("HHmmss"))
 }

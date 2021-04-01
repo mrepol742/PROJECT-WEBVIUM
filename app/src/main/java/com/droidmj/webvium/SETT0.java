@@ -199,7 +199,7 @@ public class SETT0 extends BaseActivity {
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);
         b24(true);
-        Intents.m(this);
+
     }
 
     @Override

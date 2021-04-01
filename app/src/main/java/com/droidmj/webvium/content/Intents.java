@@ -191,15 +191,6 @@ public class Intents {
         }
     }
 
-    public static void m(Context a) {
-        Intent it = new Intent("com.droidmj.webvium.action.SHOW_ADS");
-        it.addCategory("com.droidmj.webvium.category.ADS");
-        it.setPackage("com.droidmj.webviumdevsupport");
-        if (check(a, it)) {
-            a.startService(it);
-        }
-    }
-
     public static boolean check(Context a, Intent c) {
         return c.resolveActivity(a.getPackageManager()) != null;
     }

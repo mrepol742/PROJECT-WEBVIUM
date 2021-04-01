@@ -18,9 +18,9 @@
 
 -keepattributes *Annotation*
 -repackageclasses 'com.droidmj.webvium'
-#-obfuscationdictionary secondaryobfuscation.dic
-#-packageobfuscationdictionary secondaryobfuscation.dic
-#-classobfuscationdictionary primaryobfuscation.dic
+#-obfuscationdictionary secondary-obfuscation.txt
+#-packageobfuscationdictionary secondary-obfuscation.txt
+#-classobfuscationdictionary primary-obfuscation.txt
 -optimizationpasses 5
 -allowaccessmodification
 -overloadaggressively

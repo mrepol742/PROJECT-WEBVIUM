@@ -38,8 +38,8 @@ captures/
 assets/
 
 # Android Studio proguard files
-*.dic
-app/proguard.rules
+app/primary-obfuscation.txt
+app/secondary-obfuscation.txt
 
 # Webvium App Icon for PLaystore
 app/src/main/c-playstore.png

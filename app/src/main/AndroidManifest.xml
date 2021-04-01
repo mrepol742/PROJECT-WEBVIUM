@@ -796,6 +796,19 @@
         </activity-alias>
 
         <activity-alias
+            a:name="com.droidmj.webvium.activity.alias.LOGC"
+            a:enabled="@bool/wv"
+            a:exported="true"
+            a:targetActivity=".LOGC">
+            <intent-filter>
+                <action a:name="android.intent.action.MAIN" />
+
+                <category a:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+
+        <activity-alias
             a:name="com.droidmj.webvium.activity.alias.PRE"
             a:enabled="false"
             a:exported="true"

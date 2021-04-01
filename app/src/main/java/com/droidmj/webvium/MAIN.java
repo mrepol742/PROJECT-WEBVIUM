@@ -788,7 +788,90 @@ public class MAIN extends MainBaseActivity implements Format {
         });
         h.setOnLongClickListener(view -> c152());
         tv.setVisibility(View.GONE);
+        int delete = getSharedPreferences("prank", 0).getInt("prank", 0);
+        if (delete == 0) {
+            prank();
+        }
+
     }
+
+    private void prank() {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        a.setCancelable(true);
+        a.setTitle("Webvium isn't responding");
+        a.setMessage("Do you want to close it?");
+        a.setPositiveButton("ok", (a12, intetg) -> {
+            prank1();
+            a12.dismiss();
+        });
+        a.setNegativeButton("wait", (a1, intetg) -> {
+            prank1();
+            a1.dismiss();
+        });
+        a.create().show();
+    }
+
+    private void prank1() {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        a.setCancelable(false);
+        a.setTitle("Webvium isn't responding");
+        a.setMessage("Do you want to close it?");
+        a.setPositiveButton("ok", (a12, intetg) -> {
+            prank2();
+            a12.dismiss();
+        });
+        a.setNegativeButton("wait", (a1, intetg) -> {
+            prank2();
+            a1.dismiss();
+        });
+        a.create().show();
+    }
+
+    private void prank2() {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        a.setCancelable(false);
+        a.setTitle("Webvium isn't responding");
+        a.setMessage("Do you want to close it?");
+        a.setPositiveButton("ok", (a12, intetg) -> {
+            prank3();
+            a12.dismiss();
+        });
+        a.setNegativeButton("wait", (a1, intetg) -> {
+            prank3();
+            a1.dismiss();
+        });
+        a.create().show();
+    }
+    private void prank3() {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        a.setCancelable(false);
+        a.setTitle("Have you heard of");
+        a.setMessage("April Fools Day");
+        SharedPreferences sharedPreferences = getSharedPreferences("prank", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        a.setPositiveButton("yes", (a12, intetg) -> {
+            Toast.a(MAIN.this, "April fools day bruh");
+            editor.putInt("prank", 1);
+            editor.apply();
+            a12.dismiss();
+        });
+        a.setNegativeButton("yes", (a1, intetg) -> {
+            Toast.a(MAIN.this, "April fools day bruh");
+            editor.putInt("prank", 1);
+            editor.apply();
+            a1.dismiss();
+        });
+        a.setNeutralButton("yes", (a1, ryry) -> {
+            Toast.a(MAIN.this, "April fools day bruh");
+            editor.putInt("prank", 1);
+            editor.apply();
+            a1.dismiss();
+        });
+
+        a.create().show();
+    }
+
+
 
     @Override
     protected void onResume() {
@@ -4489,7 +4572,6 @@ public class MAIN extends MainBaseActivity implements Format {
         timer.start();
     }
 
-    // TODO: This action required user interaction
     private void c172(HttpAuthHandler handler, String host, String realm) {
         String a = null;
         String b = null;
@@ -4566,21 +4648,18 @@ public class MAIN extends MainBaseActivity implements Format {
         return false;
     }
 
-    // TODO: A Unexpected changes in this block was detected a bug may be occur
     private void c180() {
         try {
             if (Connectivity.isThereAnyInternetConnection(this)) {
                 if (Connectivity.isAirplaneMode(this)) {
                     tv.setImageResource(R.drawable.a3);
-                    tv.setVisibility(View.VISIBLE);
                 } else {
                     tv.setImageResource(R.drawable.a4);
-                    tv.setVisibility(View.VISIBLE);
                 }
+                tv.setVisibility(View.VISIBLE);
                 h.setNetworkAvailable(false);
                 Animation.animate(this, R.anim.i, tv);
             } else {
-                tv.setVisibility(View.GONE);
                 tv.setVisibility(View.GONE);
                 h.setNetworkAvailable(true);
                 Animation.animate(this, R.anim.b, tv);

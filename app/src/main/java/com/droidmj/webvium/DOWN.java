@@ -136,9 +136,6 @@ public class DOWN extends BaseActivity {
             DownloadAdapter w12 = new DownloadAdapter(this, downloadArrayDataModel);
             a3.setAdapter(w12);
         }
-        Intents.m(this);
-
-
     }
 
     private void i() {
