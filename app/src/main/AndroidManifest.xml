@@ -798,7 +798,7 @@
         <activity-alias
             a:name="com.droidmj.webvium.activity.alias.LOGC"
             a:enabled="@bool/wv"
-            a:exported="true"
+            a:exported="true" a:label="@string/x54"
             a:targetActivity=".LOGC">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />

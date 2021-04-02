@@ -23,6 +23,7 @@ package com.droidmj.webvium;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -139,8 +140,8 @@ public class BACK0 extends BaseActivity {
                     }
                 }
                 spe.apply();
-                C10.a(this, "com.droidmj.webvium.activity.alias.PRE", 2);
-                C10.a(this, "com.droidmj.webvium.activity.alias.MAY", 1);
+                C10.a(this, "com.droidmj.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                C10.a(this, "com.droidmj.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
                 getSharedPreferences("a", 0).edit().putString("ajGjbduTwibdi", "").putString("gsJsGsKSIgPes", "").apply();
                 g(getString(R.string.b27));
                 t();

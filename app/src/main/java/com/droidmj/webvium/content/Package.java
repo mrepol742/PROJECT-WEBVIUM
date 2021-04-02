@@ -72,4 +72,12 @@ public class Package {
         return pi.versionCode;
     }
 
+    public static long g(Context a) throws NameNotFoundException {
+        return a.getPackageManager().getPackageInfo(b(), 0).firstInstallTime;
+    }
+
+    public static long h(Context a) throws NameNotFoundException {
+        return a.getPackageManager().getPackageInfo(b(), 0).lastUpdateTime;
+    }
+
 }

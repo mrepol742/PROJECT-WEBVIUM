@@ -27,6 +27,10 @@
     <com.droidmj.webvium.PREF
         a:key="ydi"
         a:title="@string/y29" />
+    <com.droidmj.webvium.PREF
+        a:key="ins12" />
+    <com.droidmj.webvium.PREF
+        a:key="ins13" />
 
     <com.droidmj.webvium.PREF
         a:key="g5"

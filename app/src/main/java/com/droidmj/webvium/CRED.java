@@ -25,10 +25,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -77,6 +79,9 @@ public class CRED extends BaseActivity {
         theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.c20);
+        if (Build.VERSION.SDK_INT == 21) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
         TextView tv = findViewById(R.id.f13);
         RelativeLayout rl = findViewById(R.id.c3);
         if (!a221().getBoolean("autoUpdate", false)) {

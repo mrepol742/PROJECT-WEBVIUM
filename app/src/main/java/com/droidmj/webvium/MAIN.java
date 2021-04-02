@@ -797,7 +797,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void prank() {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
+        a.setCancelable(false);
         a.setTitle("Webvium isn't responding");
         a.setMessage("Do you want to close it?");
         a.setPositiveButton("ok", (a12, intetg) -> {

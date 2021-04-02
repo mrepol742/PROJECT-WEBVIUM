@@ -31,6 +31,7 @@ import com.droidmj.webvium.CRED;
 import com.droidmj.webvium.MAIN;
 import com.droidmj.webvium.R;
 import com.droidmj.webvium.EULA;
+import com.droidmj.webvium.WELC;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BasePreferenceFragment;
 import com.droidmj.webvium.content.Intents;
@@ -38,13 +39,10 @@ import com.droidmj.webvium.content.Package;
 import com.droidmj.webvium.net.Connectivity;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 import com.droidmj.webvium.util.Base64;
+import com.droidmj.webvium.util.Long;
 import com.droidmj.webvium.util.Stream;
 
 public class AboutFragment extends BasePreferenceFragment {
-    private static final String[] links = {
-            "aHR0cHM 6Ly9naXRodWIuY29tL21yZXBvbDc0Mi8l YS9ibG9iL21hc3Rlci 8lYi93ZWJ2aXVtLmFwaw",
-            "aHR0cHM6Ly9naXRodWIuY29tL21yZXBvbDc0Mi8lYS9ibG9iL21hc3Rlci8lYi9h"
-    };
 
     @Override
     public void onCreate(Bundle b1) {
@@ -93,6 +91,21 @@ public class AboutFragment extends BasePreferenceFragment {
                 a51.setSummary(getString(R.string.z25));
                 a(a51);
             }
+            Preference preference = findPreference("ins12");
+            Preference preference13 = findPreference("ins13");
+            try {
+                preference.setTitle(getString(R.string.x56).replace("%a", (CharSequence) Long.toDate(Package.g(getActivity()))));
+            } catch (Exception exception) {
+                DiagnosticData.a(exception);
+                preference.setTitle(getString(R.string.x58));
+            }
+            try {
+                preference13.setTitle(getString(R.string.x57).replace("%a", (CharSequence) Long.toDate(Package.h(getActivity()))));
+            } catch (Exception exception) {
+                DiagnosticData.a(exception);
+                preference13.setTitle(getString(R.string.x59));
+            }
+
 
         } catch (Exception ex) {
             DiagnosticData.a(ex);
@@ -101,8 +114,8 @@ public class AboutFragment extends BasePreferenceFragment {
 
     private void a(Preference e) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("b", 0);
-        String string = sharedPreferences.getString("b", "");
-        String string0 = sharedPreferences.getString("a", "");
+        String string = sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "");
+        String string0 = sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "");
         Runnable re = () -> {
             try {
                 int b = Integer.parseInt(Package.e(getActivity()).replaceAll("\\.", ""));
@@ -112,7 +125,7 @@ public class AboutFragment extends BasePreferenceFragment {
                         e.setTitle(getString(R.string.z28));
                         e.setSummary(getString(R.string.z29));
                         e.setOnPreferenceClickListener(a -> {
-                            Intents.e(getActivity(), "value", Base64.decode(string0 + "= = "), MAIN.class);
+                            Intents.e(getActivity(), "value", Base64.decode(string0), MAIN.class);
                             return true;
                         });
                     });

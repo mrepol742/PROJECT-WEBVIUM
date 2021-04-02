@@ -596,15 +596,13 @@ public class MANG extends BaseActivity {
 
     private void x(String a1, String b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
         a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
 
-            C10.a(this, "com.droidmj.webvium.activity.alias.PRE", 1);
-            C10.a(this, "com.droidmj.webvium.activity.alias.MAY", 2);
+            C10.a(this, "com.droidmj.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+            C10.a(this, "com.droidmj.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
             getSharedPreferences("a", 0).edit().clear().apply();
             a221().edit().clear().apply();
             getSharedPreferences("wv,", 0).edit().clear().apply();
@@ -624,9 +622,8 @@ public class MANG extends BaseActivity {
         a.setTitle(a1);
         a.setMessage(b1);
         a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-
-            C10.a(this, "com.droidmj.webvium.activity.alias.PRE", 1);
-            C10.a(this, "com.droidmj.webvium.activity.alias.MAY", 2);
+            C10.a(this, "com.droidmj.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+            C10.a(this, "com.droidmj.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
             getSharedPreferences("a", 0).edit().clear().apply();
             a221().edit().clear().apply();
             getSharedPreferences("wv,", 0).edit().clear().apply();

@@ -28,6 +28,7 @@ import com.droidmj.webvium.annotation.release.Keep;
 import com.droidmj.webvium.telemetry.DiagnosticData;
 
 public class C10 {
+
     @Keep
     private C10() {
     }

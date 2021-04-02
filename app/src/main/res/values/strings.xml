@@ -789,9 +789,9 @@
     <string name="u23">Edit</string>
     <string name="u24">Query</string>
     <string name="u25">Manage Space Icon</string>
-    <string name="u26">The Revolutionary and Innovated Browser</string>
+    <string name="u26">Weightless, Modern and Full-Featured</string>
     <string name="u27">Lock Webvium</string>
-    <string name="u28">Possibilities Behind Impossibilities</string>
+    <string name="u28">Decentralized Programmers Group</string>
     <string name="u29" translatable="false">DROID MJ</string>
     <string name="u30">Back Navigation</string>
     <string name="v21" translatable="false">Facebook</string>
@@ -869,8 +869,6 @@
 
     <string name="z39">Automatically backup %a apk upon installing of new update</string>
     <string name="z40">New Update</string>
-
-
     <string name="x41" translatable="false">Youtube</string>
     <string name="x42" translatable="false">Github</string>
     <string name="x43" translatable="false">Facebook</string>
@@ -884,4 +882,9 @@
     <string name="x51">Log</string>
     <string name="x52">Build</string>
     <string name="x53">Diagnostic Service</string>
+    <string name="x54" translatable="false">Webvium Logcat</string>
+    <string name="x56">Last Installed on: %a</string>
+    <string name="x57">Last Update on: %a</string>
+    <string name="x58">An error was happened while getting the last install time</string>
+    <string name="x59">An error was happened while getting the last update time</string>
 </resources>

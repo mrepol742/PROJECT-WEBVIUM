@@ -21,12 +21,19 @@
 package com.droidmj.webvium;
 
 import android.annotation.SuppressLint;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import com.droidmj.webvium.annotation.Test;
 import com.droidmj.webvium.app.BuildConfiguration;
 import com.droidmj.webvium.app.base.BaseActivity;
+import com.droidmj.webvium.content.Package;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Test
 public class A30 extends BaseActivity {
