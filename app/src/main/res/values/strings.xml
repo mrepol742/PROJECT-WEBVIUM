@@ -883,8 +883,8 @@
     <string name="x52">Build</string>
     <string name="x53">Diagnostic Service</string>
     <string name="x54" translatable="false">Webvium Logcat</string>
-    <string name="x56">Last Installed on: %a</string>
-    <string name="x57">Last Update on: %a</string>
+    <string name="x56">Last Installed on:</string>
+    <string name="x57">Last Update on:</string>
     <string name="x58">An error was happened while getting the last install time</string>
     <string name="x59">An error was happened while getting the last update time</string>
 </resources>

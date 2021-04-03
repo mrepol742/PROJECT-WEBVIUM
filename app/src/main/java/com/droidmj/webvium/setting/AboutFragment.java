@@ -42,6 +42,9 @@ import com.droidmj.webvium.util.Base64;
 import com.droidmj.webvium.util.Long;
 import com.droidmj.webvium.util.Stream;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class AboutFragment extends BasePreferenceFragment {
 
     @Override
@@ -93,17 +96,20 @@ public class AboutFragment extends BasePreferenceFragment {
             }
             Preference preference = findPreference("ins12");
             Preference preference13 = findPreference("ins13");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, yyyy | hh:mm:ss", Locale.US);
             try {
-                preference.setTitle(getString(R.string.x56).replace("%a", (CharSequence) Long.toDate(Package.g(getActivity()))));
+                preference.setTitle(getString(R.string.x56));
+                preference.setSummary(simpleDateFormat.format(Long.toDate(Package.g(getActivity()))));
             } catch (Exception exception) {
                 DiagnosticData.a(exception);
-                preference.setTitle(getString(R.string.x58));
+                preference.setSummary(getString(R.string.x58));
             }
             try {
-                preference13.setTitle(getString(R.string.x57).replace("%a", (CharSequence) Long.toDate(Package.h(getActivity()))));
+                preference13.setTitle(getString(R.string.x57));
+                preference.setSummary(simpleDateFormat.format(Long.toDate(Package.h(getActivity()))));
             } catch (Exception exception) {
                 DiagnosticData.a(exception);
-                preference13.setTitle(getString(R.string.x59));
+                preference13.setSummary(getString(R.string.x59));
             }
 
 

@@ -158,13 +158,17 @@ public class Stream {
             } else {
                 URL u = new URL(url);
                 URLConnection is = u.openConnection();
-                BufferedReader c = new BufferedReader(new InputStreamReader(is.getInputStream()));
+                InputStream inputStream = is.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader c = new BufferedReader(inputStreamReader);
                 String tf5;
                 StringBuilder cd = new StringBuilder();
                 while ((tf5 = c.readLine()) != null) {
                     cd.append(tf5).append("\n");
                 }
                 c.close();
+                inputStreamReader.close();
+                inputStream.close();
                 return cd.toString();
             }
         } catch (Exception ex) {
@@ -178,13 +182,17 @@ public class Stream {
             StrictMode.a();
             URL u = new URL(url);
             URLConnection is = u.openConnection();
-            BufferedReader c = new BufferedReader(new InputStreamReader(is.getInputStream()));
+            InputStream inputStream = is.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader c = new BufferedReader(inputStreamReader);
             String tf5;
             StringBuilder sb = new StringBuilder();
             while ((tf5 = c.readLine()) != null) {
                 sb.append(tf5.trim());
             }
             c.close();
+            inputStreamReader.close();
+            inputStream.close();
             try {
                 return Integer.parseInt(sb.toString());
             } catch (NumberFormatException nfe) {
@@ -211,13 +219,17 @@ public class Stream {
             StrictMode.a();
             URL u = new URL(url);
             URLConnection is = u.openConnection();
-            BufferedReader c = new BufferedReader(new InputStreamReader(is.getInputStream()));
+            InputStream inputStream = is.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader c = new BufferedReader(inputStreamReader);
             String tf5;
             StringBuilder sb = new StringBuilder();
             while ((tf5 = c.readLine()) != null) {
                 sb.append(tf5.trim());
             }
             c.close();
+            inputStreamReader.close();
+            inputStream.close();
             try {
                 return Integer.parseInt(sb.toString());
             } catch (NumberFormatException nfe) {
