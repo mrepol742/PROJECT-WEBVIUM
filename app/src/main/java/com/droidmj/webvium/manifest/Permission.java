@@ -41,28 +41,32 @@ public class Permission {
     }
 
     public static boolean check(Activity ay, String sg, int it) {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 29) {
+            return false;
+        } else if (Build.VERSION.SDK_INT >= 23) {
             if (ay.checkSelfPermission(sg) == PackageManager.PERMISSION_GRANTED) {
                 return true;
-            } else {
-                ay.requestPermissions(new String[]{sg}, it);
-                return false;
             }
-        } else {
-            return true;
+            ay.requestPermissions(new String[]{sg}, it);
+            return false;
         }
+        return true;
     }
 
     public static boolean checkOnly(Activity ay, String sg) {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 29) {
+            return false;
+        } else if (Build.VERSION.SDK_INT >= 23) {
             return ay.checkSelfPermission(sg) == PackageManager.PERMISSION_GRANTED;
-        } else {
-            return true;
         }
+        return true;
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     public static boolean checkOnly(Service ay, String sg) {
+        if (Build.VERSION.SDK_INT >= 29 || Build.VERSION.SDK_INT < 23) {
+            return false;
+        }
         return ay.checkSelfPermission(sg) != PackageManager.PERMISSION_GRANTED;
     }
 }
