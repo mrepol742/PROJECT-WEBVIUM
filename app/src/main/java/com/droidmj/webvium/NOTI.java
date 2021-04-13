@@ -119,7 +119,7 @@ public class NOTI extends MainService {
         Intent j55 = new Intent(this, MAIN.class);
         j55.putExtra("webvium", url);
         PendingIntent pi235 = PendingIntent.getActivity(this, 2, j55, PendingIntent.FLAG_UPDATE_CURRENT);
-        m.addAction(new android.app.Notification.Action(R.drawable.q, getString(R.string.g28).replaceAll("%a", Objects.requireNonNull(Uri.parse(url).getHost())), pi235));
+        m.addAction(new android.app.Notification.Action(R.drawable.q, getString(R.string.g28)+ Objects.requireNonNull(Uri.parse(url).getHost()), pi235));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nmc.notify(Notifications.a, m.build());
     }

@@ -133,7 +133,7 @@ public class WELC extends BaseActivity {
     private void a() {
         SharedPreferences sp3 = getSharedPreferences("b", 0);
         SharedPreferences.Editor editor = sp3.edit();
-        String formatter = "aHR0cHM6Ly9naXRodWIuY29tL21yZXBvbDc0Mi9TZXJ2ZXIv";
+        String formatter = "aHR0cHM6Ly9naXRodWIuY29tL21yZXBvbDc0Mi9TZXJ2ZXIvYmxvYi9tYXN0ZXIv";
         editor.putString(TEMP_UPDATE_URL, Base64.encode(Base64.decode(formatter) + "update_url.txt")); // update
         editor.putString(TEMP_UPDATE_VERSION, Base64.encode(Base64.decode(formatter) + "update_version.txt")); // update version
         editor.putString(TEMP_NOTIFICATION_STATE, Base64.encode(Base64.decode(formatter) + "notification_state.txt")); // notification status

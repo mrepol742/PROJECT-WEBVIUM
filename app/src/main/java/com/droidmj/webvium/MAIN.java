@@ -537,7 +537,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a == 742) {
             if (b == Activity.RESULT_OK && null != c) {
                 String query = c.getStringExtra("a");
-                c8(getString(R.string.d39).replace("%a", Objects.requireNonNull(query)));
+                c8(getString(R.string.d39) + Objects.requireNonNull(query));
                 c49(query);
                 d2.c(query);
                 c.removeExtra("a");
@@ -788,90 +788,7 @@ public class MAIN extends MainBaseActivity implements Format {
         });
         h.setOnLongClickListener(view -> c152());
         tv.setVisibility(View.GONE);
-        int delete = getSharedPreferences("prank", 0).getInt("prank", 0);
-        if (delete == 0) {
-            prank();
-        }
-
     }
-
-    private void prank() {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(false);
-        a.setTitle("Webvium isn't responding");
-        a.setMessage("Do you want to close it?");
-        a.setPositiveButton("ok", (a12, intetg) -> {
-            prank1();
-            a12.dismiss();
-        });
-        a.setNegativeButton("wait", (a1, intetg) -> {
-            prank1();
-            a1.dismiss();
-        });
-        a.create().show();
-    }
-
-    private void prank1() {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(false);
-        a.setTitle("Webvium isn't responding");
-        a.setMessage("Do you want to close it?");
-        a.setPositiveButton("ok", (a12, intetg) -> {
-            prank2();
-            a12.dismiss();
-        });
-        a.setNegativeButton("wait", (a1, intetg) -> {
-            prank2();
-            a1.dismiss();
-        });
-        a.create().show();
-    }
-
-    private void prank2() {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(false);
-        a.setTitle("Webvium isn't responding");
-        a.setMessage("Do you want to close it?");
-        a.setPositiveButton("ok", (a12, intetg) -> {
-            prank3();
-            a12.dismiss();
-        });
-        a.setNegativeButton("wait", (a1, intetg) -> {
-            prank3();
-            a1.dismiss();
-        });
-        a.create().show();
-    }
-    private void prank3() {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(false);
-        a.setTitle("Have you heard of");
-        a.setMessage("April Fools Day");
-        SharedPreferences sharedPreferences = getSharedPreferences("prank", 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        a.setPositiveButton("yes", (a12, intetg) -> {
-            Toast.a(MAIN.this, "April fools day bruh");
-            editor.putInt("prank", 1);
-            editor.apply();
-            a12.dismiss();
-        });
-        a.setNegativeButton("yes", (a1, intetg) -> {
-            Toast.a(MAIN.this, "April fools day bruh");
-            editor.putInt("prank", 1);
-            editor.apply();
-            a1.dismiss();
-        });
-        a.setNeutralButton("yes", (a1, ryry) -> {
-            Toast.a(MAIN.this, "April fools day bruh");
-            editor.putInt("prank", 1);
-            editor.apply();
-            a1.dismiss();
-        });
-
-        a.create().show();
-    }
-
-
 
     @Override
     protected void onResume() {
@@ -1179,7 +1096,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c.setPositiveButton(getString(R.string.e25), (a34, m1) -> {
                 try {
                     String c1 = s.getText().toString();
-                    c8(getString(R.string.e27).replaceAll("%a", c1));
+                    c8(getString(R.string.e27));
                     if (a221().getBoolean("launch", false)) {
                         Intents.a(MAIN.this, DOWN.class);
                     }
@@ -3124,8 +3041,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a221().getBoolean("Java10", true)) {
             new AlertDialog.Builder(this)
                     .setCancelable(true)
-                    .setTitle(getString(R.string.f25)
-                            .replace("%a", Objects.requireNonNull(a.getTitle())))
+                    .setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()))
                     .setMessage(c).setPositiveButton(getString(R.string.i6), (a12, intetg) -> d.confirm())
                     .setOnCancelListener(a1 -> {
                         d.confirm();
@@ -3142,7 +3058,7 @@ public class MAIN extends MainBaseActivity implements Format {
             LayoutInflater b54 = getLayoutInflater();
             View c34 = b54.inflate(R.layout.x, null);
             a89.setCancelable(true);
-            a89.setTitle(getString(R.string.f25).replace("%a", Objects.requireNonNull(a.getTitle())));
+            a89.setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()));
             a89.setView(c34);
             TextView sjs1 = c34.findViewById(R.id.e1);
             final EDIT sjs = c34.findViewById(R.id.e3);
@@ -3189,8 +3105,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a221().getBoolean("Java11", true)) {
             new AlertDialog.Builder(this)
                     .setCancelable(true)
-                    .setTitle(getString(R.string.f25)
-                            .replace("%a", Objects.requireNonNull(a.getTitle())))
+                    .setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()))
                     .setMessage(c)
                     .setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
                         e.confirm();
@@ -3212,8 +3127,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a221().getBoolean("Java12", true)) {
             new AlertDialog.Builder(this)
                     .setCancelable(false)
-                    .setTitle(getString(R.string.f25)
-                            .replace("%a", Objects.requireNonNull(a.getTitle())))
+                    .setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()))
                     .setMessage(c).setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
                         e.confirm();
                         a12.dismiss();

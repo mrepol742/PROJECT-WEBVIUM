@@ -105,7 +105,7 @@ public class SAVE extends MainService {
         MainNotification.c(this, "a", getString(R.string.y16));
         android.app.Notification.Builder m = Notifications.a(this, "a");
         m.setSmallIcon(R.drawable.c2);
-        m.setContentTitle(getResources().getString(R.string.d37).replaceAll("%a", a));
+        m.setContentTitle(a);
         if (!com.droidmj.webvium.util.Inapproriate.isInapproriate(b)) {
             m.setContentTitle(b);
         }

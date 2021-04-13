@@ -53,7 +53,7 @@
     <uses-permission a:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission a:name="android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
     <uses-permission a:name="android.permission.VIBRATE" />
-    <uses-permission a:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+    <uses-permission a:name="android.permission.WRITE_EXTERNAL_STORAGE" a:maxSdkVersion="28" />
     <uses-permission a:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission a:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission a:name="android.permission.WAKE_LOCK" />
@@ -161,7 +161,13 @@
             a:name=".EULA"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
-            a:windowSoftInputMode="stateHidden" /> <!-- backup auto immport -->
+            a:windowSoftInputMode="stateHidden" />
+        <!-- EXPRIREMENT-->
+        <activity
+        a:name=".EXPI"
+        a:configChanges="keyboardHidden|orientation|screenSize"
+        a:exported="false"
+        a:windowSoftInputMode="stateHidden" />  <!-- backup auto immport -->
         <activity
             a:name=".BACK0"
             a:configChanges="keyboardHidden|orientation|screenSize"
@@ -800,6 +806,18 @@
             a:enabled="@bool/wv"
             a:exported="true" a:label="@string/x54"
             a:targetActivity=".LOGC">
+            <intent-filter>
+                <action a:name="android.intent.action.MAIN" />
+
+                <category a:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            a:name="com.droidmj.webvium.activity.alias.EXPI"
+            a:enabled="@bool/wv"
+            a:exported="true" a:label="@string/x60"
+            a:targetActivity=".EXPI">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
 

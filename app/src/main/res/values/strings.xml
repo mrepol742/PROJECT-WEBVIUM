@@ -24,17 +24,17 @@
     <string name="b">Privacy</string>
     <string name="c">Advanced</string>
     <string name="d">Background</string>
-    <string name="e" translatable="false">Search</string>
+    <string name="e">Search</string>
     <string name="f">Downloads</string>
     <string name="g">Accessibility</string>
     <string name="h">Dark Theme</string>
     <string name="i">Videos</string>
     <string name="j">Source Code</string>
     <string name="k">Webvium Content</string>
-    <string name="l" translatable="false">About</string>
+    <string name="l">About</string>
     <string name="m">Zoom Controls</string>
     <string name="n">Homepage</string>
-    <string name="o" translatable="false">UI</string>
+    <string name="o">UI</string>
     <string name="p">Screen Orientation</string>
     <string name="q">Set Homepage</string>
     <string name="r">Block Images &amp; Video Thumbnails</string>
@@ -82,13 +82,13 @@
     <string name="b18">Restore Default Settings</string>
     <string name="b19">Reset to Default</string>
     <string name="b20">Reset</string>
-    <string name="c1" translatable="false">Webpage Debugging</string>
+    <string name="c1">Webpage Debugging</string>
     <string name="c2">Do Not Track</string>
     <string name="c3">Include a DNT header when you load a webpage</string>
     <string name="c4">Set Security Lock</string>
     <string name="c5">Enable Security Lock</string>
     <string name="c6">Set Up Security Lock</string>
-    <string name="c8" translatable="false">JavaScript</string>
+    <string name="c8">JavaScript</string>
     <string name="c9">Enable JavaScript</string>
     <string name="c10">Set JavaScript</string>
     <string name="c11">Prompt</string>
@@ -116,7 +116,7 @@
     <string name="d13">Pause Browsing History</string>
     <string name="d14">Clear Search History</string>
     <string name="d15">Pause Search History</string>
-    <string name="d16" translatable="false">User-Agent</string>
+    <string name="d16">User-Agent</string>
     <string name="d17">Set User-Agent</string>
     <string name="d18">Custom User-Agent</string>
     <string name="d19">SSL Error</string>
@@ -155,10 +155,10 @@
     <string name="f14">Feedback</string>
     <string name="f16">Databases, cache, cookies</string>
     <string name="f17">Clears all storage currently being used by the JavaScript storage APIs. This includes the Application Cache, Web SQL Database and the HTML5 Web Storage APIs.</string>
-    <string name="f19" translatable="false">Facebook</string>
-    <string name="f20" translatable="false">DROID MJ Facebook Page</string>
-    <string name="g1" translatable="false">Instagram</string>
-    <string name="g2" translatable="false">Gmail</string>
+    <string name="f19">Facebook</string>
+    <string name="f20">DROID MJ Facebook Page</string>
+    <string name="g1">Instagram</string>
+    <string name="g2">Gmail</string>
     <string name="g3">Clears any saved credentials for HTTP authentication</string>
     <string name="g4">Enables debugging of web contents (HTML / CSS / JavaScript)</string>
     <string name="g5">These terms and conditions (\"Terms\", \"Conditions\") are condition between DROID MJ (\"DROID MJ\", \"us\", \"we\" or \"our\") and you (\"user\", \"you\" or \"your\")</string>
@@ -198,7 +198,7 @@
     <string name="i2">Paste and Search</string>
     <string name="i3">Paste</string>
     <string name="i4">Save Link</string>
-    <string name="i6" translatable="false">OK</string>
+    <string name="i6">OK</string>
     <string name="i7">Cancel</string>
     <string name="i9">Search History</string>
     <string name="i10">Name:</string>
@@ -212,17 +212,17 @@
     <string name="i19">Disabled</string>
     <string name="i20">Enabled only for HTTPS</string>
     <string name="j1">Enabled, Including 3rd Party</string>
-    <string name="j2" translatable="false">Exit</string>
+    <string name="j2">Exit</string>
     <string name="j3">Load Homepage</string>
     <string name="j4">Go Back</string>
-    <string name="j5" translatable="false">Latin-1 (ISO-8858-1)</string>
-    <string name="j6" translatable="false">Unicode (UTF-8)</string>
-    <string name="j7" translatable="false">Chinese (GBK)</string>
-    <string name="j8" translatable="false">Chinese (Big5)</string>
-    <string name="j9" translatable="false">Japanese (ISO-2022-JP)</string>
-    <string name="j10" translatable="false">Japanese (SHIFT_JIS)</string>
-    <string name="j11" translatable="false">Japanese (EUC-JP)</string>
-    <string name="j12" translatable="false">Korean (EUC-KR)</string>
+    <string name="j5">Latin-1 (ISO-8858-1)</string>
+    <string name="j6">Unicode (UTF-8)</string>
+    <string name="j7">Chinese (GBK)</string>
+    <string name="j8">Chinese (Big5)</string>
+    <string name="j9">Japanese (ISO-2022-JP)</string>
+    <string name="j10">Japanese (SHIFT_JIS)</string>
+    <string name="j11">Japanese (EUC-JP)</string>
+    <string name="j12">Korean (EUC-KR)</string>
     <string name="j13">Load Default</string>
     <string name="j14">Default</string>
     <string name="j15">Load No Cache</string>
@@ -246,7 +246,7 @@
     <string name="l8">Share %a with:</string>
     <string name="l10">Security Lock Settings</string>
     <string name="l11">Confirm to delete %a?</string>
-    <string name="l13" translatable="false">| BETA</string>
+    <string name="l13">| BETA</string>
     <string name="l14">Manage Space</string>
     <string name="l15">Dismiss</string>
     <string name="l16">Screenshot cleared.</string>
@@ -261,24 +261,24 @@
     <string name="m7">Credits</string>
     <string name="m8">Set Up Pretend Mode</string>
     <string name="m10">Video Poster Demo</string>
-    <string name="m11" translatable="false">1</string>
-    <string name="m12" translatable="false">2</string>
-    <string name="m13" translatable="false">3</string>
-    <string name="m14" translatable="false">4</string>
-    <string name="m15" translatable="false">5</string>
-    <string name="m16" translatable="false">6</string>
-    <string name="m17" translatable="false">7</string>
-    <string name="m18" translatable="false">8</string>
-    <string name="m19" translatable="false">9</string>
-    <string name="m20" translatable="false">0</string>
+    <string name="m11">1</string>
+    <string name="m12">2</string>
+    <string name="m13">3</string>
+    <string name="m14">4</string>
+    <string name="m15">5</string>
+    <string name="m16">6</string>
+    <string name="m17">7</string>
+    <string name="m18">8</string>
+    <string name="m19">9</string>
+    <string name="m20">0</string>
     <string name="n1">Theme</string>
     <string name="n2">Hardware</string>
-    <string name="n4" translatable="false">Twitter</string>
+    <string name="n4">Twitter</string>
     <string name="n11">Automatically Check for Update</string>
     <string name="n12">Update</string>
     <string name="n13">Push Notification</string>
     <string name="n15">Download Service</string>
-    <string name="n16" translatable="false">Website</string>
+    <string name="n16">Website</string>
     <string name="o1">Restarting Webvium…</string>
     <string name="o5">Open</string>
     <string name="o6">NO BOOKMARKS</string>
@@ -286,7 +286,7 @@
     <string name="o8">Text Scaling</string>
     <string name="o9">Add Bookmarks</string>
     <string name="o10">Interface</string>
-    <string name="o11" translatable="false">Home</string>
+    <string name="o11">Home</string>
     <string name="o13">Custom Homepage</string>
     <string name="o14">Home Shortcut in NavBar</string>
     <string name="o18">Custom Text Encoding</string>
@@ -306,7 +306,7 @@
     <string name="p17">Volume Up</string>
     <string name="p18">Volume Down</string>
     <string name="p19">Set Action for Volume Up</string>
-    <string name="p20" translatable="false">Webvium</string>
+    <string name="p20">Webvium</string>
     <string name="q1">Source code cleared.</string>
     <string name="q2">Require PIN to open Webvium</string>
     <string name="q3">Security Lock</string>
@@ -326,33 +326,33 @@
     <string name="q18">Search</string>
     <string name="q19">Settings</string>
     <string name="q20">Custom</string>
-    <string name="r1" translatable="false">Duckduckgo</string>
-    <string name="r2" translatable="false">Google</string>
-    <string name="r3" translatable="false">Bing</string>
-    <string name="r4" translatable="false">Yahoo</string>
-    <string name="r5" translatable="false">Ask</string>
-    <string name="r6" translatable="false">AOL</string>
-    <string name="r7" translatable="false">Baidu</string>
-    <string name="r8" translatable="false">Wolframalpha</string>
-    <string name="r9" translatable="false">Discover</string>
-    <string name="r10" translatable="false">Ecosia</string>
+    <string name="r1">Duckduckgo</string>
+    <string name="r2">Google</string>
+    <string name="r3">Bing</string>
+    <string name="r4">Yahoo</string>
+    <string name="r5">Ask</string>
+    <string name="r6">AOL</string>
+    <string name="r7">Baidu</string>
+    <string name="r8">Wolframalpha</string>
+    <string name="r9">Discover</string>
+    <string name="r10">Ecosia</string>
     <string name="r11">Portrait</string>
     <string name="r12">Landscape</string>
     <string name="r13">Hide Statusbar</string>
-    <string name="r14" translatable="false">Android Stock</string>
-    <string name="r15" translatable="false">Internet Explorer</string>
-    <string name="r16" translatable="false">Google Chrome</string>
-    <string name="r17" translatable="false">Mozila Firefox</string>
-    <string name="r18" translatable="false">Opera</string>
-    <string name="r19" translatable="false">Safari</string>
+    <string name="r14">Android Stock</string>
+    <string name="r15">Internet Explorer</string>
+    <string name="r16">Google Chrome</string>
+    <string name="r17">Mozila Firefox</string>
+    <string name="r18">Opera</string>
+    <string name="r19">Safari</string>
     <string name="r20">Always Screen On</string>
     <string name="s1">Always Screen On While Charging</string>
     <string name="s2">15 minutes</string>
     <string name="s3">30 minutes</string>
     <string name="s4">1 hour</string>
-    <string name="s5" translatable="false">PNG</string>
-    <string name="s6" translatable="false">JPEG</string>
-    <string name="s7" translatable="false">WEBP</string>
+    <string name="s5">PNG</string>
+    <string name="s6">JPEG</string>
+    <string name="s7">WEBP</string>
     <string name="s8">Always Allow</string>
     <string name="s9">Compatibility Mode</string>
     <string name="s10">Never Allow</string>
@@ -363,13 +363,13 @@
     <string name="s15">Zoom In</string>
     <string name="s16">Page Down</string>
     <string name="s17">Zoom Out</string>
-    <string name="s18" translatable="false">100%</string>
-    <string name="s19" translatable="false">95%</string>
-    <string name="s20" translatable="false">80%</string>
+    <string name="s18">100%</string>
+    <string name="s19">95%</string>
+    <string name="s20">80%</string>
     <string name="t1">Browsing History Cleared.</string>
     <string name="t2">Webpage added on bookmarks</string>
     <string name="t3">Name</string>
-    <string name="t4" translatable="false">Link</string>
+    <string name="t4">Link</string>
     <string name="t5">Do you really want to clear All Browsing History?</string>
     <string name="t6">Backup</string>
     <string name="t7">Experimental</string>
@@ -448,14 +448,14 @@
     <string name="x6">Receives suggested contents and/or notifications from the Developer</string>
     <string name="x7">Click to Open</string>
     <string name="x8">Clipboard Service</string>
-    <string name="x9" translatable="false">Links</string>
+    <string name="x9">Links</string>
     <string name="x10">Show a notification when you copy a url</string>
     <string name="x11">Package Update</string>
     <string name="x12">A new version of Webvium is now available to download.</string>
     <string name="x13">Do you really want to clear Session Cookies?</string>
     <string name="x14">Open Webvium after an Update</string>
     <string name="x15">Webvium Search</string>
-    <string name="x16" translatable="false">Tranceroute</string>
+    <string name="x16">Tranceroute</string>
     <string name="x17">Default</string>
     <string name="x18">High</string>
     <string name="x19">Low</string>
@@ -470,10 +470,10 @@
     <string name="y8">Set Priority</string>
     <string name="y9">Visibility</string>
     <string name="y10">Set Visibility</string>
-    <string name="y11" translatable="false">NPing</string>
+    <string name="y11">NPing</string>
     <string name="y13">Use System Default</string>
-    <string name="y14" translatable="false">View UA</string>
-    <string name="y15" translatable="false">Headers</string>
+    <string name="y14">View UA</string>
+    <string name="y15">Headers</string>
     <string name="y16">Notify you that Webvium is downloading the link you requested.</string>
     <string name="y17">Notify you that Webvium saved your phone screenshot.</string>
     <string name="y18">Shortcut to easily access search/assist from notification.</string>
@@ -482,18 +482,18 @@
     <string name="z1">Notify you to directly open any valid link you copied.</string>
     <string name="z2">Notify you that there is new update in Webvium.</string>
     <string name="z3">Notification from DROID MJ.</string>
-    <string name="z4" translatable="false">Whois</string>
+    <string name="z4">Whois</string>
     <string name="z5">Collapse Search View</string>
     <string name="z6">Clear Session Cookies</string>
     <string name="z7">Run Garbage Collector Immediately</string>
     <string name="z8">Immediately run gc when exiting the activity</string>
-    <string name="z9" translatable="false">Webvium Facebook Page</string>
-    <string name="z10" translatable="false">Stack Overflow</string>
-    <string name="z12" translatable="false">IP Geolocation</string>
-    <string name="z14" translatable="false">Github</string>
-    <string name="z15" translatable="false">Meta Tags</string>
-    <string name="z16" translatable="false">PassGen</string>
-    <string name="z17" translatable="false">IDGen</string>
+    <string name="z9">Webvium Facebook Page</string>
+    <string name="z10">Stack Overflow</string>
+    <string name="z12">IP Geolocation</string>
+    <string name="z14">Github</string>
+    <string name="z15">Meta Tags</string>
+    <string name="z16">PassGen</string>
+    <string name="z17">IDGen</string>
     <string name="z18">Assistant</string>
     <string name="z19">Webvium Search</string>
     <string name="z20">Make Webvium Search as your default assistant</string>
@@ -511,7 +511,7 @@
     <string name="a32">Form Data Cleared.</string>
     <string name="a33">Do you really want to clear JavaScript Storage APIs?</string>
     <string name="a34">JavaScript Storage APIs Cleared.</string>
-    <string name="a35" translatable="false">Software</string>
+    <string name="a35">Software</string>
     <string name="a36">Failed! An error occurred while adding this item to Homescreen</string>
     <string name="a37">Do you really want to clear SSL Preference?</string>
     <string name="a38">SSL Preference Cleared.</string>
@@ -535,9 +535,10 @@
     <string name="c21">Do you really want to import Search Database\nThis will override your Search History</string>
     <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %a/%b/Backup/Databases/history.%c</string>
     <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/Databases/bookmark.%c</string>
-    <string name="c26" translatable="false">about:blank</string>
+    <string name="c26">about:blank</string>
     <string name="c27">Source Code Copied.</string>
-    <string name="c28" translatable="false">%a | File Saved.</string>
+    <!-- A data is going to append on this string remain the last digit blank as space -->
+    <string name="c28">File Saved | </string>
     <string name="c29">Save File</string>
     <string name="c30">Name</string>
     <string name="c31">Saved Path</string>
@@ -551,41 +552,44 @@
     <string name="c40">Incorrect PIN</string>
     <string name="d33">Do you really want to import History Database\nThis will override your Browsing History</string>
     <string name="d34">Do you really want to import Bookmarks Database\nThis will override your Bookmarks</string>
-    <string name="d37">Downloading %a</string>
+
     <string name="d38">Ongoing Download</string>
-    <string name="d39">Searching for %a</string>
+    <!-- A data is going to append on this string remain the last digit blank as space -->
+    <string name="d39">Searching for </string>
     <string name="d40">Size</string>
-    <string name="e21" translatable="false">Link</string>
+    <string name="e21">Link</string>
     <string name="e22">Free Space</string>
     <string name="e23">Free Space After Download</string>
     <string name="e24">Total Space</string>
     <string name="e25">Start</string>
-    <string name="e27" translatable="false">%a | Download Started.</string>
+    <string name="e27">Download is on progress.</string>
     <string name="e28">Generate</string>
-    <string name="e29" translatable="false">Microsoft Edge</string>
-    <string name="e30" translatable="false">Google Chromium</string>
-    <string name="f21" translatable="false">Mozila Brave</string>
+    <string name="e29">Microsoft Edge</string>
+    <string name="e30">Google Chromium</string>
+    <string name="f21">Mozila Brave</string>
     <string name="f23">Console Panel</string>
     <string name="f24">Execute</string>
-    <string name="f25">%a says:</string>
-    <string name="f26" translatable="false">Font</string>
+    <!-- A data is going to append on this string remain the last digit blank as space -->
+    <string name="f25">Says: </string>
+    <string name="f26">Font</string>
     <string name="f27">Custom Font File</string>
     <string name="f28">Primary Font</string>
     <string name="f29">Secondary Font</string>
-    <string name="f30" translatable="false">Logcat</string>
+    <string name="f30">Logcat</string>
     <string name="f31">Examples: \n%a \n%b \n%c</string>
-    <string name="f32" translatable="false">Robots.txt</string>
+    <string name="f32">Robots.txt</string>
     <string name="f33">Webvium - The Revolutionary and Innovative Browser. \nSize: %a\nVersion: %b\nDownload Link: %c\nDownload it For FREE\n\nStay tune in latest update by visiting us on Facebook %d</string>
     <string name="f34">There\'s no email app that can handle this action.</string>
     <string name="f37">Font Size</string>
     <string name="f38">Image Saved.</string>
     <string name="f39">Your search history appear here</string>
-    <string name="f40" translatable="false">Link:</string>
+    <string name="f40">Link:</string>
     <string name="g21">Your bookmarks appear here</string>
     <string name="g24">Pretend Mode Settings</string>
     <string name="g25">&lt;b>Host Name:&lt;/b> %a&lt;br>&lt;b>IP Address:&lt;/b> %b&lt;br>&lt;b>Hash Code:&lt;/b> %c&lt;br>&lt;b>Canonical Hostname:&lt;/b> %d&lt;br>&lt;b>Wildcard Address:&lt;/b> %e&lt;br>&lt;b>Local Address:&lt;/b> %f&lt;br>&lt;b>Loopback Address:&lt;/b> %g&lt;br>&lt;b>Global Scope:&lt;/b> %h&lt;br>&lt;b>Link Scope:&lt;/b> %i&lt;br>&lt;b>Node Scope:&lt;/b> %j&lt;br>&lt;b>Organization Scope:&lt;/b> %k&lt;br>&lt;b>Site Scope:&lt;/b> %l&lt;br>&lt;b>IP Multicast Address:&lt;/b> %m"</string>
     <string name="g27">Feedback Send.</string>
-    <string name="g28">View %a</string>
+    <!-- A data is going to append on this string remain the last digit blank as space -->
+    <string name="g28">View </string>
     <string name="g31">Webvium Webpages Notification</string>
     <string name="g34">The page you\'re trying to view contains data that has already been submitted (\"POSTDATA\"). If you resend the data, any action the form on the page carried out (such as a search or online purchase) will be repeated.</string>
     <string name="g36">Form Resubmission</string>
@@ -643,8 +647,8 @@
     <string name="j32">Enable Pretend Mode</string>
     <string name="j33">Disable Pretend Mode</string>
     <string name="j34">Incorrect Answer.</string>
-    <string name="j35" translatable="false">Calculator</string>
-    <string name="j36" translatable="false">Web OSINT</string>
+    <string name="j35">Calculator</string>
+    <string name="j36">Web OSINT</string>
     <string name="j38">Change PIN</string>
     <string name="j39">Old PIN</string>
     <string name="j40">New PIN</string>
@@ -739,7 +743,7 @@
     <string name="p39">Progress bar</string>
     <string name="q21">Password Length</string>
     <string name="q22">Bookmarks and Settings Header Icon</string>
-    <string name="q23" translatable="false">javascript:</string>
+    <string name="q23">javascript:</string>
     <string name="q24">Internet connectivity status</string>
     <string name="q25">Clear and close action</string>
     <string name="q26">Shortcut created.</string>
@@ -748,14 +752,14 @@
     <string name="q29">More</string>
     <string name="q30">History Icon</string>
     <string name="r22">&lt;br>&lt;b>Main Frame:&lt;/b> %d&lt;br>&lt;b>Gesture:&lt;/b> %e&lt;br>&lt;b>Time:&lt;/b> %f</string>
-    <string name="r23" translatable="false">DEL</string>
-    <string name="r24" translatable="false">C</string>
-    <string name="r25" translatable="false">/</string>
-    <string name="r26" translatable="false">x</string>
-    <string name="r27" translatable="false">-</string>
-    <string name="r28" translatable="false">+</string>
-    <string name="r29" translatable="false">.</string>
-    <string name="r30" translatable="false">=</string>
+    <string name="r23">DEL</string>
+    <string name="r24">C</string>
+    <string name="r25">/</string>
+    <string name="r26">x</string>
+    <string name="r27">-</string>
+    <string name="r28">+</string>
+    <string name="r29">.</string>
+    <string name="r30">=</string>
     <string name="s21">Clear</string>
     <string name="s22">Enter</string>
     <string name="s23">Title</string>
@@ -792,9 +796,9 @@
     <string name="u26">Weightless, Modern and Full-Featured</string>
     <string name="u27">Lock Webvium</string>
     <string name="u28">Decentralized Programmers Group</string>
-    <string name="u29" translatable="false">DROID MJ</string>
+    <string name="u29">DROID MJ</string>
     <string name="u30">Back Navigation</string>
-    <string name="v21" translatable="false">Facebook</string>
+    <string name="v21">Facebook</string>
     <string name="v22">NO DOWNLOADS</string>
     <string name="v23">Download History Cleared.</string>
     <string name="v24">Do you really want to clear All Downloads History?</string>
@@ -812,8 +816,6 @@
     <string name="w27">Phone Permission is needed to directly call phone numbers &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission &lt;b>>>&lt;/b> Phone</string>
     <string name="w28">Downloads Icon</string>
     <string name="w29">When screen goes off Webvium will lock again the activities of webvium that need your security pin</string>
-
-
     <string name="w30">Transient error occurred but we can\'t resume the download</string>
     <string name="x21">No external storage device was found</string>
     <string name="x22">Requested destination file already exists "the download manager will not overwrite an existing file"</string>
@@ -865,14 +867,14 @@
     <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
     <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/Databases/permission.%c</string>
     <string name="z37">Do you really want to import Permission Database\nThis will override your Permission Settings</string>
-    <string name="z38" translatable="false">APK</string>
+    <string name="z38">APK</string>
 
     <string name="z39">Automatically backup %a apk upon installing of new update</string>
     <string name="z40">New Update</string>
-    <string name="x41" translatable="false">Youtube</string>
-    <string name="x42" translatable="false">Github</string>
-    <string name="x43" translatable="false">Facebook</string>
-    <string name="x44" translatable="false">Patreon</string>
+    <string name="x41">Youtube</string>
+    <string name="x42">Github</string>
+    <string name="x43">Facebook</string>
+    <string name="x44">Patreon</string>
     <string name="x45">Export Databases</string>
     <string name="x46">Import Databases</string>
     <string name="x47">To Import a Database</string>
@@ -882,9 +884,10 @@
     <string name="x51">Log</string>
     <string name="x52">Build</string>
     <string name="x53">Diagnostic Service</string>
-    <string name="x54" translatable="false">Webvium Logcat</string>
+    <string name="x54">Webvium Logcat</string>
     <string name="x56">Last Installed on:</string>
     <string name="x57">Last Update on:</string>
     <string name="x58">An error was happened while getting the last install time</string>
     <string name="x59">An error was happened while getting the last update time</string>
+    <string name="x60">Webvium Experiments</string>
 </resources>

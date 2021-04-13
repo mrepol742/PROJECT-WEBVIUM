@@ -242,7 +242,7 @@ public class TOOL extends BaseActivity {
                         a4.append(sg1);
                         a4.close();
                         a3.close();
-                        runOnUiThread(() -> h(getString(R.string.c28).replaceAll("%a", ko)));
+                        runOnUiThread(() -> h(getString(R.string.c28) + ko));
                     }
                 }
             } catch (FileNotFoundException a) {

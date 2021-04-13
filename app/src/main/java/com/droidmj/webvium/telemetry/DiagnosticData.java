@@ -161,5 +161,4 @@ public class DiagnosticData {
         };
         new Thread(p).start();
     }
-
 }

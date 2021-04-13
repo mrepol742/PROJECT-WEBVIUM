@@ -41,7 +41,7 @@ public class Permission {
     }
 
     public static boolean check(Activity ay, String sg, int it) {
-        if (Build.VERSION.SDK_INT >= 29) {
+        if (Build.VERSION.SDK_INT >= 29 && STORAGE.equals(sg)) {
             return false;
         } else if (Build.VERSION.SDK_INT >= 23) {
             if (ay.checkSelfPermission(sg) == PackageManager.PERMISSION_GRANTED) {
@@ -54,7 +54,7 @@ public class Permission {
     }
 
     public static boolean checkOnly(Activity ay, String sg) {
-        if (Build.VERSION.SDK_INT >= 29) {
+        if (Build.VERSION.SDK_INT >= 29  && STORAGE.equals(sg)) {
             return false;
         } else if (Build.VERSION.SDK_INT >= 23) {
             return ay.checkSelfPermission(sg) == PackageManager.PERMISSION_GRANTED;
@@ -64,7 +64,7 @@ public class Permission {
 
     @TargetApi(Build.VERSION_CODES.M)
     public static boolean checkOnly(Service ay, String sg) {
-        if (Build.VERSION.SDK_INT >= 29 || Build.VERSION.SDK_INT < 23) {
+        if ((Build.VERSION.SDK_INT >= 29  && STORAGE.equals(sg)) || Build.VERSION.SDK_INT < 23) {
             return false;
         }
         return ay.checkSelfPermission(sg) != PackageManager.PERMISSION_GRANTED;

@@ -158,7 +158,7 @@ bigText.bigText(a.getResources().getString(R.string.g29));
             Intent j = new Intent(a, MAIN.class);
             j.putExtra("webvium", d);
             PendingIntent pi23 = PendingIntent.getActivity(a, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
-            m.addAction(new android.app.Notification.Action(R.drawable.q, a.getResources().getString(R.string.g28).replaceAll("%a", Objects.requireNonNull(Uri.parse(d).getHost())), pi23));
+            m.addAction(new android.app.Notification.Action(R.drawable.q, a.getResources().getString(R.string.g28) + Objects.requireNonNull(Uri.parse(d).getHost()), pi23));
         }
 
         NotificationManager nmc = (NotificationManager) a.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
