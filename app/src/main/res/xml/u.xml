@@ -21,60 +21,60 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
-    <com.droidmj.webvium.PREF0 a:title="@string/q5">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/q5">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="hst"
             a:summary="@string/q8"
             a:title="@string/q9" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="hste"
             a:summary="@string/q6"
             a:title="@string/q13" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="hste0"
             a:summary="@string/x37"
             a:title="@string/x36" />
 
-    </com.droidmj.webvium.PREF0>
-    <com.droidmj.webvium.PREF0 a:title="@string/x52">
-        <com.droidmj.webvium.SWIT
+    </com.mrepol742.webvium.PREF0>
+    <com.mrepol742.webvium.PREF0 a:title="@string/x52">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="stM12"
             a:title="@string/x50" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="og67"
             a:title="@string/x51" />
 
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
-    <com.droidmj.webvium.PREF0 a:title="@string/q7">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/q7">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="tow"
             a:summary="@string/q11"
             a:title="@string/q12" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="tow2"
             a:summary="@string/q4"
             a:title="@string/q10" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
-    <com.droidmj.webvium.PREF0 a:title="@string/y">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/y">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="qwe73"
             a:summary="@string/z8"
             a:title="@string/z7" />
 
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="asd71"
             a:title="@string/x14" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
 </PreferenceScreen>

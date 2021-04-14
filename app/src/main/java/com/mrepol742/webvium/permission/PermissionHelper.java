@@ -1,0 +1,124 @@
+/*
+ *
+ *
+ *
+ * DROID MJ Property || Confidential
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+package com.mrepol742.webvium.permission;
+
+// PERMISSIONS DATABASE
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.mrepol742.webvium.PDMS;
+import com.mrepol742.webvium.annotation.ObjectSerializability;
+import com.mrepol742.webvium.app.WebviumDatabase;
+
+public class PermissionHelper implements WebviumDatabase {
+
+    private static PermissionHelper d10;
+    private final SQLiteDatabase sld;
+
+    private PermissionHelper(Context ct) {
+        PermissionDatabase d9 = new PermissionDatabase(ct);
+        sld = d9.getWritableDatabase();
+    }
+
+    public static PermissionHelper getInstance(Context ctx) {
+        if (d10 == null) {
+            d10 = new PermissionHelper(ctx);
+        }
+        return d10;
+    }
+
+    @Override
+    public SQLiteDatabase getReadableDatabase() {
+        return sld;
+    }
+
+    @Override
+    public void finish() {
+        if (sld != null && sld.isOpen()) {
+            sld.close();
+        }
+    }
+
+    @Override
+    public void delete() {
+        if (sld != null && sld.isOpen()) {
+            sld.delete(PermissionDatabase.TABLE_PERMISSION, null, null);
+        }
+    }
+
+    public void b(PermissionObjectDataModel w2) {
+        if (sld != null && sld.isOpen()) {
+            sld.delete(PermissionDatabase.TABLE_PERMISSION,
+                    PermissionDatabase.COL1_PERMISSION +
+                            " =? AND " +
+                            PermissionDatabase.COL2_PERMISSION +
+                            " =? AND " +
+                            PermissionDatabase.COL3_PERMISSION +
+                            " =? AND " +
+                            PermissionDatabase.COL4_PERMISSION +
+                            " =? ", new String[]{w2.nm, w2.pm, w2.gt, w2.dnt});
+        }
+    }
+
+    public void c(PermissionObjectDataModel w7) {
+        if (sld != null && sld.isOpen()) {
+            ContentValues values = new ContentValues();
+            values.put(PermissionDatabase.COL1_PERMISSION, w7.nm);
+            values.put(PermissionDatabase.COL2_PERMISSION, w7.pm);
+            values.put(PermissionDatabase.COL3_PERMISSION, w7.gt);
+            values.put(PermissionDatabase.COL4_PERMISSION, w7.dnt);
+            sld.insert(PermissionDatabase.TABLE_PERMISSION, null, values);
+        }
+    }
+
+    @ObjectSerializability
+    public void d(PDMS w7) {
+        if (sld != null && sld.isOpen()) {
+            ContentValues values = new ContentValues();
+            values.put(PermissionDatabase.COL1_PERMISSION, w7.nm);
+            values.put(PermissionDatabase.COL2_PERMISSION, w7.pm);
+            values.put(PermissionDatabase.COL3_PERMISSION, w7.gt);
+            values.put(PermissionDatabase.COL4_PERMISSION, w7.dnt);
+            sld.insert(PermissionDatabase.TABLE_PERMISSION, null, values);
+        }
+    }
+
+    public void i(PermissionObjectDataModel old, PermissionObjectDataModel w7) {
+        if (sld != null && sld.isOpen()) {
+            ContentValues values = new ContentValues();
+            values.put(PermissionDatabase.COL1_PERMISSION, w7.nm);
+            values.put(PermissionDatabase.COL2_PERMISSION, w7.pm);
+            values.put(PermissionDatabase.COL3_PERMISSION, w7.gt);
+            values.put(PermissionDatabase.COL4_PERMISSION, w7.dnt);
+            sld.update(PermissionDatabase.TABLE_PERMISSION, values,
+                    PermissionDatabase.COL1_PERMISSION +
+                            " LIKE ? AND " +
+                            PermissionDatabase.COL2_PERMISSION +
+                            " LIKE ? AND " +
+                            PermissionDatabase.COL3_PERMISSION +
+                            " LIKE ? AND " +
+                            PermissionDatabase.COL4_PERMISSION +
+                            " LIKE ? ", new String[]{old.nm, old.pm, old.gt, old.dnt});
+        }
+    }
+}

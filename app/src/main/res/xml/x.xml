@@ -20,47 +20,47 @@
 
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
-    <com.droidmj.webvium.PREF0 a:title="@string/z38">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/z38">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="true"
             a:key="bcP"
             a:title="@string/z40" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
-    <com.droidmj.webvium.PREF0 a:title="@string/x45">
+    <com.mrepol742.webvium.PREF0 a:title="@string/x45">
 
-        <com.droidmj.webvium.PREF
+        <com.mrepol742.webvium.PREF
             a:key="ets"
             a:title="@string/q19" />
-        <com.droidmj.webvium.PREF
+        <com.mrepol742.webvium.PREF
             a:key="se"
             a:title="@string/q18" />
-        <com.droidmj.webvium.PREF
+        <com.mrepol742.webvium.PREF
             a:key="he"
             a:title="@string/q17" />
-        <com.droidmj.webvium.PREF
+        <com.mrepol742.webvium.PREF
             a:key="be"
             a:title="@string/q16" />
-        <com.droidmj.webvium.PREF
+        <com.mrepol742.webvium.PREF
             a:key="do"
             a:title="@string/z32" />
-        <com.droidmj.webvium.PREF
+        <com.mrepol742.webvium.PREF
             a:key="pe"
             a:title="@string/z33" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
-    <com.droidmj.webvium.PREF0 a:title="@string/x46">
-        <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF0 a:title="@string/x46">
+        <com.mrepol742.webvium.PREF
             a:key="se23"
             a:summary="@string/x48"
             a:title="@string/x47" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
 
-    <com.droidmj.webvium.PREF0 a:title="@string/b20">
-        <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF0 a:title="@string/b20">
+        <com.mrepol742.webvium.PREF
             a:key="res"
             a:summary="@string/b18"
             a:title="@string/b19" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 </PreferenceScreen>

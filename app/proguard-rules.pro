@@ -3,21 +3,21 @@
 }
 
 -keepclassmembers class * {
-    @com.droidmj.webvium.annotation.release.Keep <methods>;
+    @com.mrepol742.webvium.annotation.release.Keep <methods>;
 }
 
 -keep class * {
-    @com.droidmj.webvium.annotation.release.Keep <methods>;
+    @com.mrepol742.webvium.annotation.release.Keep <methods>;
 }
 
--keep class com.droidmj.webvium.BDMS
--keep class com.droidmj.webvium.DDMS
--keep class com.droidmj.webvium.PDMS
--keep class com.droidmj.webvium.SDMS
--keep class com.droidmj.webvium.HDMS
+-keep class com.mrepol742.webvium.BDMS
+-keep class com.mrepol742.webvium.DDMS
+-keep class com.mrepol742.webvium.PDMS
+-keep class com.mrepol742.webvium.SDMS
+-keep class com.mrepol742.webvium.HDMS
 
 -keepattributes *Annotation*
--repackageclasses 'com.droidmj.webvium'
+-repackageclasses 'com.mrepol742.webvium'
 -obfuscationdictionary secondary-obfuscation.txt
 -packageobfuscationdictionary secondary-obfuscation.txt
 -classobfuscationdictionary primary-obfuscation.txt

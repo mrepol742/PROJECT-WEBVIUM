@@ -21,32 +21,32 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="p20"
         a:title="@string/p20" />
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="ydi"
         a:title="@string/y29" />
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="ins12" />
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="ins13" />
 
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="g5"
         a:summary="@string/g5"
         a:title="@string/f12" />
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="g8"
         a:summary="@string/g8"
         a:title="@string/f13" />
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="m7"
         a:summary="@string/y30"
         a:title="@string/m7" />
-    <com.droidmj.webvium.PREF0 a:title="@string/n12">
-        <com.droidmj.webvium.PREF a:key="ml1" />
-    </com.droidmj.webvium.PREF0>
+    <com.mrepol742.webvium.PREF0 a:title="@string/n12">
+        <com.mrepol742.webvium.PREF a:key="ml1" />
+    </com.mrepol742.webvium.PREF0>
 
 </PreferenceScreen>
 

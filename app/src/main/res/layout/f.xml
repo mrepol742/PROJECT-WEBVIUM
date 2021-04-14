@@ -41,7 +41,7 @@
             a:maxLines="1"
             a:textSize="@dimen/c" />
 
-        <com.droidmj.webvium.EDIT
+        <com.mrepol742.webvium.EDIT
             a:id="@id/b3"
             a:layout_width="fill_parent"
             a:layout_height="wrap_content"
@@ -80,7 +80,7 @@
 
     <LinearLayout xmlns:a="http://schemas.android.com/apk/res/android" a:gravity="center_horizontal" a:orientation="vertical" a:padding="@dimen/d" a:layout_width="fill_parent"  a:layout_height="fill_parent">
 
-        <com.droidmj.webvium.EDIT a:textSize="@dimen/c" a:id="@id/b3"
+        <com.mrepol742.webvium.EDIT a:textSize="@dimen/c" a:id="@id/b3"
     a:layout_margin="12dp" a:layout_width="fill_parent" a:layout_height="wrap_content"  a:maxLines="1" a:ellipsize="end" a:inputType="textNoSuggestions" a:imeOptions="actionDone"  />
 
     </LinearLayout>

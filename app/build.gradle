@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.droidmj.webvium"
+        applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode Integer.parseInt(new Date().format("Hmmss"))

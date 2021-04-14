@@ -20,21 +20,21 @@
 
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
-    <com.droidmj.webvium.PREF0 a:title="@string/p15">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/p15">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="true"
             a:key="enableZ"
             a:title="@string/g11" />
 
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="zoom"
             a:summary="@string/g13"
             a:title="@string/m" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
-    <com.droidmj.webvium.PREF0 a:title="@string/p16">
-        <com.droidmj.webvium.LIST
+    <com.mrepol742.webvium.PREF0 a:title="@string/p16">
+        <com.mrepol742.webvium.LIST
             a:defaultValue="1u"
             a:dialogTitle="@string/p19"
             a:entries="@array/a19"
@@ -43,7 +43,7 @@
             a:summary="%1$s"
             a:title="@string/p17" />
 
-        <com.droidmj.webvium.LIST
+        <com.mrepol742.webvium.LIST
             a:defaultValue="1v"
             a:dialogTitle="@string/w8"
             a:entries="@array/b1"
@@ -52,10 +52,10 @@
             a:summary="%1$s"
             a:title="@string/p18" />
 
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
 
-    <com.droidmj.webvium.LIST
+    <com.mrepol742.webvium.LIST
         a:defaultValue="1p"
         a:dialogTitle="@string/a19"
         a:entries="@array/a7"
@@ -63,7 +63,7 @@
         a:key="longP"
         a:summary="%1$s"
         a:title="@string/a18" />
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="textS"
         a:title="@string/g14" />
 </PreferenceScreen>

@@ -20,7 +20,7 @@
 
 <manifest xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.droidmj.webvium"
+    package="com.mrepol742.webvium"
     a:installLocation="internalOnly">
 
     <supports-screens
@@ -83,31 +83,31 @@
     <uses-feature a:name="android.hardware.nfc" a:required="false" />
 
     <application
-        a:name=".APPL"
+        a:name="com.mrepol742.webvium.APPL"
         a:allowBackup="false"
         a:appCategory="productivity"
         a:hasFragileUserData="true"
         a:icon="@mipmap/c"
         a:label="@string/p20"
         a:largeHeap="true"
-        a:manageSpaceActivity=".MANG"
+        a:manageSpaceActivity="com.mrepol742.webvium.MANG"
         a:roundIcon="@mipmap/c"
         a:supportsRtl="true"
         a:theme="@style/f"
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
         <activity
-            a:name=".A30"
+            a:name="com.mrepol742.webvium.A30"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
             a:launchMode="singleTask" a:exported="false"
             a:windowSoftInputMode="stateHidden"/>
 
         <!-- Bug Report -->
         <activity
-            a:name=".FEED"
+            a:name="com.mrepol742.webvium.FEED"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
-            a:taskAffinity="com.droidmj.webvium.task.FED"
+            a:taskAffinity="com.mrepol742.webvium.task.FED"
             a:process=":fed"
             a:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -117,59 +117,59 @@
         </activity>
         <!-- DOWNLOADS -->
         <activity
-            a:name=".DOWN"
+            a:name="com.mrepol742.webvium.DOWN"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="adjustResize" />
 
         <!-- HISTORY -->
         <activity
-            a:name=".HIST"
+            a:name="com.mrepol742.webvium.HIST"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="adjustResize" />
         <!-- SEARCH -->
         <activity
-            a:name=".SEAR"
+            a:name="com.mrepol742.webvium.SEAR"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
             a:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action a:name="com.droidmj.webvium.intent.action.PASTE" />
+                <action a:name="com.mrepol742.webvium.intent.action.PASTE" />
 
-                <category a:name="com.droidmj.webvium.intent.category.GENIUS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <action a:name="com.droidmj.webvium.intent.action.SEARCH" />
+                <action a:name="com.mrepol742.webvium.intent.action.SEARCH" />
 
-                <category a:name="com.droidmj.webvium.intent.category.GENIUS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
         </activity>
         <!-- SCREENSHOT -->
-        <activity
-            a:name=".SCRE"
+        <activity 
+            a:name="com.mrepol742.webvium.SCRE"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:launchMode="singleTask"
-            a:taskAffinity="com.droidmj.webvium.task.SCT"
+            a:taskAffinity="com.mrepol742.webvium.task.SCT"
             a:windowSoftInputMode="stateHidden" />
         <!-- TERMS.. / PRIVACY.. -->
         <activity
-            a:name=".EULA"
+            a:name="com.mrepol742.webvium.EULA"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="stateHidden" />
         <!-- EXPRIREMENT-->
         <activity
-        a:name=".EXPI"
+        a:name="com.mrepol742.webvium.EXPI"
         a:configChanges="keyboardHidden|orientation|screenSize"
         a:exported="false"
         a:windowSoftInputMode="stateHidden" />  <!-- backup auto immport -->
         <activity
-            a:name=".BACK0"
+            a:name="com.mrepol742.webvium.BACK0"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:excludeFromRecents="true"
             a:launchMode="singleTask"
@@ -203,11 +203,11 @@
         <!-- DATABASE ERROR -->
         <!-- ASSISTANT -->
         <activity
-            a:name=".ASSI"
+            a:name="com.mrepol742.webvium.ASSI"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:excludeFromRecents="true"
             a:launchMode="singleTask"
-            a:taskAffinity="com.droidmj.webvium.task.ASY"
+            a:taskAffinity="com.mrepol742.webvium.task.ASY"
             a:theme="@style/m"
             a:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -215,16 +215,16 @@
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <action a:name="com.droidmj.webvium.intent.action.ASSIST" />
+                <action a:name="com.mrepol742.webvium.intent.action.ASSIST" />
 
-                <category a:name="com.droidmj.webvium.intent.category.GENIUS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <!-- SETTINGS LAUNCHER -->
         <activity
-            a:name=".SETT"
+            a:name="com.mrepol742.webvium.SETT"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
             a:windowSoftInputMode="adjustResize">
@@ -235,22 +235,22 @@
         </activity>
         <!-- TEXT SIZE SETTINGS -->
         <activity
-            a:name=".TEXT"
+            a:name="com.mrepol742.webvium.TEXT"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="stateHidden" />  <!-- VIDEO POSTER IMAGE -->
         <activity
-            a:name=".VIDE"
+            a:name="com.mrepol742.webvium.VIDE"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="stateHidden" /> <!-- BOOKMARK -->
         <activity
-            a:name=".BOOK"
+            a:name="com.mrepol742.webvium.BOOK"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout"
             a:exported="false"
             a:windowSoftInputMode="adjustResize" /> <!-- SOURCE CODE -->
         <activity
-            a:name=".TOOL"
+            a:name="com.mrepol742.webvium.TOOL"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:windowSoftInputMode="adjustResize" >
             <intent-filter a:label="@string/h10">
@@ -437,19 +437,19 @@
         </activity>
         <!-- WELCOME SCREEN -->
         <activity
-            a:name=".WELC"
+            a:name="com.mrepol742.webvium.WELC"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="stateHidden" /> <!-- MANAGE SPACE -->
         <activity
-            a:name=".MANG"
+            a:name="com.mrepol742.webvium.MANG"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:launchMode="singleTask"
-            a:taskAffinity="com.droidmj.webvium.task.MAE"
+            a:taskAffinity="com.mrepol742.webvium.task.MAE"
             a:windowSoftInputMode="adjustResize" /> <!-- SETTINGS HEADERS -->
         <activity
-            a:name=".SETT0"
+            a:name="com.mrepol742.webvium.SETT0"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
             a:windowSoftInputMode="adjustResize" >
@@ -467,7 +467,7 @@
         </activity>
         <!-- MAIN ACTIVITY -->
         <activity
-            a:name=".MAIN"
+            a:name="com.mrepol742.webvium.MAIN"
             a:alwaysRetainTaskState="true"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
             a:launchMode="singleTask"
@@ -660,9 +660,9 @@
                 <data a:scheme="about" />
             </intent-filter>
             <intent-filter>
-                <action a:name="com.droidmj.webvium.intent.action.LAUNCH" />
+                <action a:name="com.mrepol742.webvium.intent.action.LAUNCH" />
 
-                <category a:name="com.droidmj.webvium.intent.category.GENIUS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -742,37 +742,37 @@
                 <data a:host="*" />
             </intent-filter>
             <intent-filter>
-                <action a:name="com.droidmj.webvium.intent.action.PASTE_SEARCH" />
+                <action a:name="com.mrepol742.webvium.intent.action.PASTE_SEARCH" />
 
-                <category a:name="com.droidmj.webvium.intent.category.GENIUS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- LOGCAT -->
         <activity
-            a:name=".LOGC"
+            a:name="com.mrepol742.webvium.LOGC"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
-            a:taskAffinity="com.droidmj.webvium.task.LOT"
+            a:taskAffinity="com.mrepol742.webvium.task.LOT"
             a:process=":lot"
             a:windowSoftInputMode="stateHidden"/>
 
         <!-- VOICE SPEECH RECOGNITION -->
         <activity
-            a:name=".VOIC"
+            a:name="com.mrepol742.webvium.VOIC"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
             a:windowSoftInputMode="stateHidden"/>
         <!-- PRETEND MODE -->
         <activity
-            a:name=".PRET"
+            a:name="com.mrepol742.webvium.PRET"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:launchMode="singleTask"
             a:windowSoftInputMode="stateHidden" /> <!-- PRETEND MODE LAUNCHER -->
         <!-- LOCK INTERFACE -->
         <activity
-            a:name=".LOCK"
+            a:name="com.mrepol742.webvium.LOCK"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:launchMode="singleTask"
@@ -780,17 +780,17 @@
 
    <!-- CREDITS -->
         <activity
-            a:name=".CRED"
+            a:name="com.mrepol742.webvium.CRED"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:launchMode="singleTask"
             a:windowSoftInputMode="stateHidden" />
 
         <activity-alias
-            a:name="com.droidmj.webvium.activity.alias.MAY"
+            a:name="com.mrepol742.webvium.activity.alias.MAY"
             a:enabled="true"
             a:exported="true"
-            a:targetActivity=".MAIN">
+            a:targetActivity="com.mrepol742.webvium.MAIN">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
 
@@ -802,10 +802,10 @@
         </activity-alias>
 
         <activity-alias
-            a:name="com.droidmj.webvium.activity.alias.LOGC"
+            a:name="com.mrepol742.webvium.activity.alias.LOGC"
             a:enabled="@bool/wv"
             a:exported="true" a:label="@string/x54"
-            a:targetActivity=".LOGC">
+            a:targetActivity="com.mrepol742.webvium.LOGC">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
 
@@ -814,10 +814,10 @@
         </activity-alias>
 
         <activity-alias
-            a:name="com.droidmj.webvium.activity.alias.EXPI"
+            a:name="com.mrepol742.webvium.activity.alias.EXPI"
             a:enabled="@bool/wv"
             a:exported="true" a:label="@string/x60"
-            a:targetActivity=".EXPI">
+            a:targetActivity="com.mrepol742.webvium.EXPI">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
 
@@ -827,11 +827,11 @@
 
 
         <activity-alias
-            a:name="com.droidmj.webvium.activity.alias.PRE"
+            a:name="com.mrepol742.webvium.activity.alias.PRE"
             a:enabled="false"
             a:exported="true"
             a:label="@string/j35"
-            a:targetActivity=".PRET">
+            a:targetActivity="com.mrepol742.webvium.PRET">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
                 <category a:name="android.intent.category.LAUNCHER" />
@@ -845,14 +845,14 @@
             a:value="true" />
 
         <receiver
-            a:name=".MYPA" >
+            a:name="com.mrepol742.webvium.MYPA" >
             <intent-filter>
                 <action a:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
 
         <receiver
-            a:name=".BOOT"
+            a:name="com.mrepol742.webvium.BOOT"
             a:exported="true"
             a:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
@@ -862,7 +862,7 @@
         </receiver>
 
         <receiver
-            a:name=".DEVI"
+            a:name="com.mrepol742.webvium.DEVI"
             a:label="@string/p20"
             a:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
@@ -877,62 +877,62 @@
 
 
         <service
-            a:name=".SAVE"
+            a:name="com.mrepol742.webvium.SAVE"
             a:exported="false"
             a:foregroundServiceType="dataSync"
             a:label="@string/l4"
             a:process=":sav" />
 
         <service
-            a:name=".QUIC"
+            a:name="com.mrepol742.webvium.QUIC"
             a:exported="false"
             a:label="@string/l33"
             a:process=":qui" />
 
         <service
-            a:name=".DOWN0"
+            a:name="com.mrepol742.webvium.DOWN0"
             a:exported="false"
             a:foregroundServiceType="dataSync"
             a:label="@string/n15" 
             a:process=":dow" />
 
         <service
-            a:name=".CLIP"
+            a:name="com.mrepol742.webvium.CLIP"
             a:exported="false"
             a:label="@string/x8" 
             a:process=":cli" />
 
         <service
-            a:name=".NOTI"
+            a:name="com.mrepol742.webvium.NOTI"
             a:exported="false"
             a:label="@string/m6" 
             a:process=":not" />
 
         <service
-            a:name=".FLOA"
+            a:name="com.mrepol742.webvium.FLOA"
             a:exported="false" 
             a:label="@string/l32"
             a:process=":flo"/>
 
         <service
-            a:name=".UPDA"
+            a:name="com.mrepol742.webvium.UPDA"
             a:label="@string/n21" 
             a:process=":upd"
             tools:ignore="ExportedService"/>
 
         <service
             tools:ignore="ExportedService"
-            a:name=".BACK"
+            a:name="com.mrepol742.webvium.BACK"
             a:label="@string/n22"/>
 
         <service
-            a:name=".DIAG"
+            a:name="com.mrepol742.webvium.DIAG"
             a:exported="false"
             a:label="@string/x53"
             a:process=":dia" />
 
         <service
-            a:name=".UPDA0"
+            a:name="com.mrepol742.webvium.UPDA0"
             a:exported="false"
             a:label="@string/n21"
             a:process=":upd" />

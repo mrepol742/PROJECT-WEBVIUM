@@ -26,7 +26,7 @@
 
     a:paddingEnd="?m">
 
-    <com.droidmj.webvium.EDIT
+    <com.mrepol742.webvium.EDIT
         a:id="@id/e14"
         a:layout_width="fill_parent"
         a:layout_height="wrap_content"

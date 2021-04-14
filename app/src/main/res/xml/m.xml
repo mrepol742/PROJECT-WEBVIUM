@@ -21,65 +21,65 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
-    <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.SWIT
         a:defaultValue="false"
         a:key="autoD"
         a:title="@string/b13" />
-    <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.SWIT
         a:defaultValue="false"
         a:key="wifi"
         a:title="@string/b14" />
-    <com.droidmj.webvium.PREF
+    <com.mrepol742.webvium.PREF
         a:key="batt"
         a:title="@string/g18" />
-    <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.SWIT
         a:defaultValue="true"
         a:key="wifi2"
         a:summary="@string/t39"
         a:title="@string/t38" />
 
-    <com.droidmj.webvium.PREF0 a:title="@string/t28">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/t28">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="true"
             a:key="drh2"
             a:summary="@string/t30"
             a:title="@string/t29" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="drh3"
             a:summary="@string/t32"
             a:title="@string/t31" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
-    <com.droidmj.webvium.PREF0 a:title="@string/p29">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/p29">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="true"
             a:key="drh"
             a:summary="@string/t25"
             a:title="@string/t24" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="true"
             a:key="drh0"
             a:summary="@string/t26"
             a:title="@string/d16" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
-    <com.droidmj.webvium.PREF0 a:title="@string/y">
-        <com.droidmj.webvium.SWIT
+    <com.mrepol742.webvium.PREF0 a:title="@string/y">
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="true"
             a:key="drh1"
             a:title="@string/t27" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="launch"
             a:summary="@string/b10"
             a:title="@string/b9" />
-        <com.droidmj.webvium.SWIT
+        <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="launchF"
             a:summary="@string/b12"
             a:title="@string/b11" />
-    </com.droidmj.webvium.PREF0>
+    </com.mrepol742.webvium.PREF0>
 
 </PreferenceScreen>
 
