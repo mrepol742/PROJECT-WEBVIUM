@@ -1,21 +1,12 @@
 /*
  *
+ * Created by Melvin Jones Repol on 4/17/21 10:27 AM
+ * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
+ * Last modified 4/17/21 10:26 AM
  *
- *
- * DROID MJ Property || Confidential
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
+ *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ *  https://www.gnu.org/licenses/gpl-3.0.en.html
+ *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
 package com.mrepol742.webvium;
@@ -171,7 +162,7 @@ public class WELC extends BaseActivity {
         ed.setTypeface(type(Typeface.NORMAL));
         Html.a(ed, getString(R.string.n23));
         fl.addView(c);
-
+        Toast.a(this, getString(R.string.y62));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -205,6 +196,7 @@ public class WELC extends BaseActivity {
         Html.a(ed, getString(R.string.n24));
         ed.setTypeface(type(Typeface.NORMAL));
         fl.addView(c);
+        Toast.a(this, getString(R.string.y62));
     }
 
     private void l3() {
@@ -249,7 +241,18 @@ public class WELC extends BaseActivity {
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
         PendingIntent it1 = PendingIntent.getService(this, 0, new Intent(this, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it1);
+        PendingIntent it2 = PendingIntent.getService(this, 0, new Intent(this, UPDA0.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it2);
         finish();
+        Intent intent = new Intent(this, UPDA.class);
+        intent.putExtra("sta", "non");
+        startService(intent);
+        Intent intent2 = new Intent(this, NOTI.class);
+        intent2.putExtra("sta", "non");
+        startService(intent2);
+        Intent intent3 = new Intent(this, UPDA0.class);
+        intent3.putExtra("sta", "non");
+        startService(intent3);
         overridePendingTransition(R.anim.f, R.anim.b);
     }
 
@@ -266,9 +269,7 @@ public class WELC extends BaseActivity {
             f.putExtra("duplicate", false);
             f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
             sendBroadcast(f);
-            Toast.b(this, getString(R.string.b17));
         } catch (Exception et) {
-            Toast.e(this, getString(R.string.a36), 2);
             DiagnosticData.a(et);
         }
     }

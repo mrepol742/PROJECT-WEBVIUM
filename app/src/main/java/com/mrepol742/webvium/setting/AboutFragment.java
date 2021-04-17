@@ -1,21 +1,12 @@
 /*
  *
+ * Created by Melvin Jones Repol on 4/17/21 10:27 AM
+ * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
+ * Last modified 4/17/21 10:26 AM
  *
- *
- * DROID MJ Property || Confidential
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
+ *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ *  https://www.gnu.org/licenses/gpl-3.0.en.html
+ *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
 package com.mrepol742.webvium.setting;
@@ -43,6 +34,7 @@ import com.mrepol742.webvium.util.Long;
 import com.mrepol742.webvium.util.Stream;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class AboutFragment extends BasePreferenceFragment {
@@ -99,14 +91,14 @@ public class AboutFragment extends BasePreferenceFragment {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, yyyy | hh:mm:ss", Locale.US);
             try {
                 preference.setTitle(getString(R.string.x56));
-                preference.setSummary(simpleDateFormat.format(Long.toDate(Package.g(getActivity()))));
+                preference.setSummary(simpleDateFormat.format(new Date(Package.g(getActivity()))));
             } catch (Exception exception) {
                 DiagnosticData.a(exception);
                 preference.setSummary(getString(R.string.x58));
             }
             try {
                 preference13.setTitle(getString(R.string.x57));
-                preference.setSummary(simpleDateFormat.format(Long.toDate(Package.h(getActivity()))));
+                preference.setSummary(simpleDateFormat.format(new Date(Package.h(getActivity()))));
             } catch (Exception exception) {
                 DiagnosticData.a(exception);
                 preference13.setSummary(getString(R.string.x59));
@@ -143,7 +135,7 @@ public class AboutFragment extends BasePreferenceFragment {
                         e.setSummary(getString(R.string.z27));
                     });
                 }
-            } catch (PackageManager.NameNotFoundException w) {
+            } catch (Exception w) {
                 DiagnosticData.a(w);
                 getActivity().runOnUiThread(() -> {
                     e.setTitle(getString(R.string.z21));

@@ -1,110 +1,56 @@
 <!--
   ~
+  ~ Created by Melvin Jones Repol on 4/17/21 10:27 AM
+  ~ Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
+  ~ Last modified 4/17/21 10:17 AM
   ~
-  ~
-  ~ DROID MJ Property || Confidential
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
+  ~  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+  ~  https://www.gnu.org/licenses/gpl-3.0.en.html
+  ~  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    a:id="@id/c3"
-    a:layout_width="match_parent"
-    a:layout_height="match_parent">
+        <LinearLayout android:layout_alignParentTop="true"
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/test">
+            <ImageView android:src="@mipmap/c"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+            <TextView
+                android:id="@+id/textview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Mushi Mushi 👋"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
 
-    <LinearLayout
-        a:id="@id/c9"
-        a:layout_width="match_parent"
-        a:layout_height="400dp"
-        a:layout_alignParentTop="true"
-        a:gravity="center"
-        a:orientation="vertical">
-
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SIGN IN" android:layout_margin="20dp"
+            android:textSize="14sp" android:layout_alignParentBottom="true"
+            android:textColor="#ffffff"
+            android:background="@drawable/test1"/>
         <TextView
-            a:id="@id/c10"
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content"
-            a:gravity="center"
-            a:text="DROID MJ"
-            a:textSize="25sp" />
+            android:id="@+id/textview2" android:layout_above="@id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_centerHorizontal="true"
+            android:text="Don't have an account\? Then fuck off!"
+            android:textSize="12sp"
+            android:textColor="#424242"/>
 
-        <TextView
-            a:id="@id/c15"
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content"
-            a:gravity="center"
-            a:padding="10dp"
-            a:text="Possibilities Behind Impossibilities" />
-
-    </LinearLayout>
-
-    <ImageView
-        a:id="@id/c16"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content"
-        a:layout_alignParentStart="true"
-        a:layout_alignParentTop="true"
-        a:layout_marginStart="15dp"
-        a:layout_marginTop="10dp"
-        a:contentDescription="@string/u30"
-        a:padding="10dp" />
-
-    <FrameLayout
-        a:layout_width="match_parent"
-        a:layout_height="match_parent"
-        a:layout_above="@id/f13"
-        a:layout_below="@id/c9" />
-
-
-    <TextView
-        a:id="@id/f13"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content"
-        a:layout_alignParentBottom="true"
-        a:layout_centerHorizontal="true"
-        a:gravity="center"
-        a:padding="15dp"
-        a:textSize="16sp" />
 </RelativeLayout>
-
-
-    <!--
-
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
-
-        a:layout_width="match_parent"
-        a:layout_height="match_parent"
-       >
-
-    <include  layout="@layout/a20"/>
-
-    <LinearLayout
-        a:layout_width="match_parent" a:layout_below="@id/c3" a:layout_centerHorizontal="true"
-        a:layout_height="match_parent"  a:gravity="center"
-        a:orientation="vertical">
-        <TextView a:background="@drawable/test" a:elevation="5dp" a:paddingTop="20dp" a:paddingBottom="20dp" a:paddingLeft="30dp" a:paddingRight="30dp" a:gravity="center" a:textSize="25sp" a:textColor="?g" a:layout_width="wrap_content" a:layout_height="wrap_content" a:text="DROID MJ" />
-
-        <TextView a:textSize="20sp" a:layout_margin="10dp" a:layout_width="wrap_content" a:layout_height="wrap_content" a:drawableStart="@drawable/z" a:text="Samiun Nafis" a:gravity="center" a:padding="10dp" />
-        <TextView a:textSize="20sp" a:layout_margin="10dp" a:layout_width="wrap_content" a:layout_height="wrap_content" a:drawableStart="@drawable/z" a:text="John Oye" a:gravity="center" a:padding="10dp" />
-    </LinearLayout>
-        <TextView a:layout_alignParentBottom="true" a:layout_centerHorizontal="true"
-            a:layout_width="wrap_content"  a:gravity="center" a:padding="15dp"  a:textSize="16sp"
-            a:layout_height="wrap_content" a:text="BuildConfiguration | The revolutionary browser"/>
-    </RelativeLayout>
-
-
-    -->
