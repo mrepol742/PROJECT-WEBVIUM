@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium.setting;
@@ -126,8 +132,10 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             });
 
             SWIT SWIT = (SWIT) findPreference("bcP");
-            SWIT.setSummary(getString(R.string.z39).replace("%a", Package.c()));
+            SWIT.setSummary(getString(R.string.z39));
+
             Preference l114 = findPreference("se23");
+            l114.setSummary(String.format(getActivity().getString(R.string.x48), StorageDirectory.getWebviumDir() + "/Backup"));
             l114.setOnPreferenceClickListener(a -> {
                 Intent it = new Intent(getActivity(), BACK0.class);
                 it.putExtra("a", "a");
@@ -187,18 +195,19 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(getString(R.string.b38).replaceAll("%a", StorageDirectory.a())));
+        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Settings_" + format() + ".bac";
+        a.setMessage(Html.b(String.format(getString(R.string.b38), StorageDirectory.a(), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
             Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
             Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-            write(StorageDirectory.getWebviumDir() + "/Backup/Databases/Settings_" + format() + ".bac", PreferenceManager.getDefaultSharedPreferences(getActivity()).getAll());
+            write(file, PreferenceManager.getDefaultSharedPreferences(getActivity()).getAll());
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
         a.create().show();
     }
 
-    private void a16() {
+    private void a16(String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
         Runnable p15 = () -> {
@@ -211,7 +220,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 while (res.moveToNext()) {
                     al.add(new SDMS(res.getString(1)));
                 }
-                write(StorageDirectory.getWebviumDir() + "/Backup/Databases/Search_" + format() + ".bac", al);
+                write(file, al);
             }
             res.close();
         };
@@ -222,16 +231,17 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(getString(R.string.b40).replace("%a", StorageDirectory.a()).replace("%b", Package.c()).replace("%c", Package.c().toLowerCase())));
+        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Search_" + format() + ".bac";
+        a.setMessage(Html.b(String.format(getString(R.string.b40), StorageDirectory.a(), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            a16();
+            a16(file);
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
         a.create().show();
     }
 
-    private void a20() {
+    private void a20(String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
         Runnable p15 = () -> {
@@ -244,7 +254,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 while (res.moveToNext()) {
                     al.add(new HDMS(res.getString(1), res.getString(2), res.getString(3)));
                 }
-                write(StorageDirectory.getWebviumDir() + "/Backup/Databases/History_" + format() + ".bac", al);
+                write(file, al);
             }
             res.close();
         };
@@ -255,16 +265,17 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(getString(R.string.c22).replace("%a", StorageDirectory.a()).replace("%b", Package.c()).replace("%c", Package.c().toLowerCase())));
+        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/History_" + format() + ".bac";
+        a.setMessage(Html.b(String.format(getString(R.string.c22), StorageDirectory.a(), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            a20();
+            a20(file);
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
         a.create().show();
     }
 
-    private void b4() {
+    private void b4(String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
         Runnable p15 = () -> {
@@ -277,7 +288,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 while (res.moveToNext()) {
                     al.add(new BDMS(res.getString(1), res.getString(2)));
                 }
-                write(StorageDirectory.getWebviumDir() + "/Backup/Databases/Bookmarks_" + format() + ".bac", al);
+                write(file, al);
             }
             res.close();
         };
@@ -288,16 +299,17 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(getString(R.string.c24).replace("%a", StorageDirectory.a()).replace("%b", Package.c().replace("%c", Package.c().toLowerCase()))));
+        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Bookmarks_" + format() + ".bac";
+        a.setMessage(Html.b(String.format(getString(R.string.c24), StorageDirectory.a(), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            b4();
+            b4(file);
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
         a.create().show();
     }
 
-    private void b8() {
+    private void b8(String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
         Runnable p15 = () -> {
@@ -310,7 +322,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 while (res.moveToNext()) {
                     al.add(new DDMS(res.getString(1), res.getString(2), res.getInt(3), res.getString(4), res.getString(5)));
                 }
-                write(StorageDirectory.getWebviumDir() + "/Backup/Databases/Downloads_" + format() + ".bac", al);
+                write(file, al);
             }
             res.close();
         };
@@ -321,16 +333,17 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(getString(R.string.z34).replace("%a", StorageDirectory.a()).replace("%b", Package.c()).replace("%c", Package.c().toLowerCase())));
+        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Downloads_" + format() + ".bac";
+        a.setMessage(Html.b(String.format(getString(R.string.z34), StorageDirectory.a(), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            b8();
+            b8(file);
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
         a.create().show();
     }
 
-    private void b12() {
+    private void b12(String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
         Runnable p15 = () -> {
@@ -343,7 +356,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 while (res.moveToNext()) {
                     al.add(new PDMS(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
                 }
-                write(StorageDirectory.getWebviumDir() + "/Backup/Databases/Permissions_" + format() + ".bac", al);
+                write(file, al);
             }
             res.close();
         };
@@ -354,9 +367,10 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(getString(R.string.z36).replace("%a", StorageDirectory.a()).replace("%b", Package.c()).replace("%c", Package.c().toLowerCase())));
+        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Permissions_" + format() + ".bac";
+        a.setMessage(Html.b(String.format(getString(R.string.z36), StorageDirectory.a(), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            b12();
+            b12(file);
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());

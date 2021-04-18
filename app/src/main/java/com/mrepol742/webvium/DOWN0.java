@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium;
@@ -72,9 +78,10 @@ public class DOWN0 extends MainService {
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
         bigText.setSummaryText(Package.c());
         bigText.setBigContentTitle(ghg);
-        bigText.bigText(getString(R.string.u22).replace("%a", name).replace("%b", url).replace("%c", jk));
+        String text = String.format(getString(R.string.u22), name, url, jk);
+        bigText.bigText(text);
         m.setContentTitle(ghg);
-        m.setContentText(getString(R.string.u22).replace("%a", name).replace("%b", url).replace("%c", jk));
+        m.setContentText(text);
         m.setColor(Resources.b(this, R.color.e));
         m.setStyle(bigText);
         m.setAutoCancel(sp.getBoolean("eac", true));

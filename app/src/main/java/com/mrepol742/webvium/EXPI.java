@@ -1,19 +1,32 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -24,8 +37,11 @@ import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Package;
+import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 

@@ -1,12 +1,18 @@
 <!--
   ~
-  ~ Created by Melvin Jones Repol on 4/17/21 10:27 AM
-  ~ Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
-  ~ Last modified 4/17/21 10:27 AM
+  ~ Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
   ~
-  ~  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-  ~  https://www.gnu.org/licenses/gpl-3.0.en.html
-  ~  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+  ~ License under the GNU General Public License, Version 3.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.gnu.org/licenses/gpl-3.0.en.html
+  ~
+  ~ Unless required by the applicable law or agreed in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
   -->
 
 <manifest xmlns:a="http://schemas.android.com/apk/res/android"
@@ -45,7 +51,9 @@
     <uses-permission a:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission a:name="android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
     <uses-permission a:name="android.permission.VIBRATE" />
-    <uses-permission a:name="android.permission.WRITE_EXTERNAL_STORAGE" a:maxSdkVersion="28" />
+    <uses-permission
+        a:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        a:maxSdkVersion="28" />
     <uses-permission a:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission a:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission a:name="android.permission.WAKE_LOCK" />
@@ -72,7 +80,9 @@
     <uses-feature
         a:name="android.hardware.wifi"
         a:required="false" />
-    <uses-feature a:name="android.hardware.nfc" a:required="false" />
+    <uses-feature
+        a:name="android.hardware.nfc"
+        a:required="false" />
 
     <application
         a:name="com.mrepol742.webvium.APPL"
@@ -88,11 +98,6 @@
         a:theme="@style/f"
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
-        <activity
-            a:name="com.mrepol742.webvium.A30"
-            a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
-            a:launchMode="singleTask" a:exported="false"
-            a:windowSoftInputMode="stateHidden"/>
 
         <!-- Bug Report -->
         <activity
@@ -141,7 +146,7 @@
 
         </activity>
         <!-- SCREENSHOT -->
-        <activity 
+        <activity
             a:name="com.mrepol742.webvium.SCRE"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
@@ -156,10 +161,10 @@
             a:windowSoftInputMode="stateHidden" />
         <!-- EXPRIREMENT-->
         <activity
-        a:name="com.mrepol742.webvium.EXPI"
-        a:configChanges="keyboardHidden|orientation|screenSize"
-        a:exported="false"
-        a:windowSoftInputMode="stateHidden" />  <!-- backup auto immport -->
+            a:name="com.mrepol742.webvium.EXPI"
+            a:configChanges="keyboardHidden|orientation|screenSize"
+            a:exported="false"
+            a:windowSoftInputMode="stateHidden" />  <!-- backup auto immport -->
         <activity
             a:name="com.mrepol742.webvium.BACK0"
             a:configChanges="keyboardHidden|orientation|screenSize"
@@ -169,8 +174,10 @@
             a:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
+
                 <category a:name="android.intent.category.BROWSABLE" />
                 <category a:name="android.intent.category.DEFAULT" />
+
                 <data a:scheme="file" />
                 <data a:scheme="content" />
                 <data a:mimeType="*/*" />
@@ -244,7 +251,7 @@
         <activity
             a:name="com.mrepol742.webvium.TOOL"
             a:configChanges="keyboardHidden|orientation|screenSize"
-            a:windowSoftInputMode="adjustResize" >
+            a:windowSoftInputMode="adjustResize">
             <intent-filter a:label="@string/h10">
                 <action a:name="android.intent.action.VIEW" />
 
@@ -415,16 +422,25 @@
                 <data a:mimeType="application/xhtml+xml" />
                 <data a:mimeType="application/vnd.wap.xhtml+xml" />
             </intent-filter>
-            <intent-filter a:label="@string/h10"
-                a:autoVerify="true">
+            <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
 
                 <category a:name="android.intent.category.DEFAULT" />
                 <category a:name="android.intent.category.BROWSABLE" />
 
-                <data a:scheme="http" />
-                <data a:scheme="https" />
-                <data a:host="*" />
+                <data
+                    a:scheme="http"
+                    a:host="*" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="https"
+                    a:host="*" />
             </intent-filter>
         </activity>
         <!-- WELCOME SCREEN -->
@@ -444,7 +460,7 @@
             a:name="com.mrepol742.webvium.SETT0"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
-            a:windowSoftInputMode="adjustResize" >
+            a:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action a:name="android.intent.action.APPLICATION_PREFERENCES" />
 
@@ -463,16 +479,7 @@
             a:alwaysRetainTaskState="true"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
             a:launchMode="singleTask"
-            a:windowSoftInputMode="adjustResize" >
-            <intent-filter a:autoVerify="true">
-                <action a:name="android.intent.action.VIEW"/>
-                <category a:name="android.intent.category.BROWSABLE"/>
-                <category a:name="android.intent.category.DEFAULT"/>
-                <data a:scheme="http"/>
-                <data a:scheme="https"/>
-                <data a:host="mrepol742.github.io"/>
-                <data a:pathPattern="/launch" />
-            </intent-filter>
+            a:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
 
@@ -670,26 +677,22 @@
                 <data a:mimeType="application/xhtml+xml" />
                 <data a:mimeType="application/vnd.wap.xhtml+xml" />
             </intent-filter>
-            <intent-filter
-                a:label="@string/x15">
+            <intent-filter a:label="@string/x15">
                 <action a:name="android.intent.action.MEDIA_SEARCH" />
 
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter
-                a:label="@string/x15">
+            <intent-filter a:label="@string/x15">
                 <action a:name="android.intent.action.SEARCH" />
 
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter
-                a:label="@string/x15">
+            <intent-filter a:label="@string/x15">
                 <action a:name="android.speech.action.VOICE_SPEECH_RESULTS" />
 
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter
-                a:label="@string/x15">
+            <intent-filter a:label="@string/x15">
                 <action a:name="android.intent.action.WEB_SEARCH" />
 
                 <category a:name="android.intent.category.DEFAULT" />
@@ -715,8 +718,7 @@
                 <category a:name="android.intent.category.DEFAULT" />
                 <data a:mimeType="text/plain" />
             </intent-filter>
-            <intent-filter
-                a:label="@string/x15">
+            <intent-filter a:label="@string/x15">
                 <action a:name="android.intent.action.SEND" />
 
                 <category a:name="android.intent.category.DEFAULT" />
@@ -724,20 +726,74 @@
                 <data a:mimeType="text/plain" />
             </intent-filter>
             <intent-filter>
+                <action a:name="com.mrepol742.webvium.intent.action.PASTE_SEARCH" />
+
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
 
                 <category a:name="android.intent.category.DEFAULT" />
                 <category a:name="android.intent.category.BROWSABLE" />
 
-                <data a:scheme="http" />
-                <data a:scheme="https" />
-                <data a:host="*" />
+                <data
+                    a:scheme="http"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/webvium" />
             </intent-filter>
             <intent-filter>
-                <action a:name="com.mrepol742.webvium.intent.action.PASTE_SEARCH" />
+                <action a:name="android.intent.action.VIEW" />
 
-                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="http"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/PROJECT-WEBVIUM" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="https"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/webvium" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="https"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/PROJECT-WEBVIUM" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="http"
+                    a:host="*" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="https"
+                    a:host="*" />
             </intent-filter>
         </activity>
         <!-- LOGCAT -->
@@ -747,14 +803,14 @@
             a:launchMode="singleTask"
             a:taskAffinity="com.mrepol742.webvium.task.LOT"
             a:process=":lot"
-            a:windowSoftInputMode="stateHidden"/>
+            a:windowSoftInputMode="stateHidden" />
 
         <!-- VOICE SPEECH RECOGNITION -->
         <activity
             a:name="com.mrepol742.webvium.VOIC"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
-            a:windowSoftInputMode="stateHidden"/>
+            a:windowSoftInputMode="stateHidden" />
         <!-- PRETEND MODE -->
         <activity
             a:name="com.mrepol742.webvium.PRET"
@@ -770,7 +826,7 @@
             a:launchMode="singleTask"
             a:windowSoftInputMode="stateHidden" />
 
-   <!-- CREDITS -->
+        <!-- CREDITS -->
         <activity
             a:name="com.mrepol742.webvium.CRED"
             a:configChanges="keyboardHidden|orientation|screenSize"
@@ -796,7 +852,8 @@
         <activity-alias
             a:name="com.mrepol742.webvium.activity.alias.LOGC"
             a:enabled="@bool/wv"
-            a:exported="true" a:label="@string/x54"
+            a:exported="true"
+            a:label="@string/x54"
             a:targetActivity="com.mrepol742.webvium.LOGC">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
@@ -808,7 +865,8 @@
         <activity-alias
             a:name="com.mrepol742.webvium.activity.alias.EXPI"
             a:enabled="@bool/wv"
-            a:exported="true" a:label="@string/x60"
+            a:exported="true"
+            a:label="@string/x60"
             a:targetActivity="com.mrepol742.webvium.EXPI">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
@@ -826,6 +884,7 @@
             a:targetActivity="com.mrepol742.webvium.PRET">
             <intent-filter>
                 <action a:name="android.intent.action.MAIN" />
+
                 <category a:name="android.intent.category.LAUNCHER" />
                 <category a:name="android.intent.category.APP_CALCULATOR" />
             </intent-filter>
@@ -836,8 +895,7 @@
             a:name="android.webkit.WebView.MetricsOptOut"
             a:value="true" />
 
-        <receiver
-            a:name="com.mrepol742.webvium.MYPA" >
+        <receiver a:name="com.mrepol742.webvium.MYPA">
             <intent-filter>
                 <action a:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
@@ -867,7 +925,6 @@
         </receiver>
 
 
-
         <service
             a:name="com.mrepol742.webvium.SAVE"
             a:exported="false"
@@ -885,37 +942,37 @@
             a:name="com.mrepol742.webvium.DOWN0"
             a:exported="false"
             a:foregroundServiceType="dataSync"
-            a:label="@string/n15" 
+            a:label="@string/n15"
             a:process=":dow" />
 
         <service
             a:name="com.mrepol742.webvium.CLIP"
             a:exported="false"
-            a:label="@string/x8" 
+            a:label="@string/x8"
             a:process=":cli" />
 
         <service
             a:name="com.mrepol742.webvium.NOTI"
             a:exported="false"
-            a:label="@string/m6" 
+            a:label="@string/m6"
             a:process=":not" />
 
         <service
             a:name="com.mrepol742.webvium.FLOA"
-            a:exported="false" 
+            a:exported="false"
             a:label="@string/l32"
-            a:process=":flo"/>
+            a:process=":flo" />
 
         <service
             a:name="com.mrepol742.webvium.UPDA"
-            a:label="@string/n21" 
+            a:label="@string/n21"
             a:process=":upd"
-            tools:ignore="ExportedService"/>
+            tools:ignore="ExportedService" />
 
         <service
             tools:ignore="ExportedService"
             a:name="com.mrepol742.webvium.BACK"
-            a:label="@string/n22"/>
+            a:label="@string/n22" />
 
         <service
             a:name="com.mrepol742.webvium.DIAG"

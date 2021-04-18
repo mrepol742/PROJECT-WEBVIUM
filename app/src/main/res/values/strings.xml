@@ -1,32 +1,18 @@
 <!--
   ~
-  ~ Created by Melvin Jones Repol on 4/17/21 10:27 AM
-  ~ Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
-  ~ Last modified 4/17/21 10:17 AM
+  ~ Copyright (c) 2021 Melvin Jones Repol (Melvin Jones Repol.github.io). All rights reserved.
   ~
-  ~  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-  ~  https://www.gnu.org/licenses/gpl-3.0.en.html
-  ~  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-  -->
-
-<!--
+  ~ License under the GNU General Public License, Version 3.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
   ~
+  ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
-  ~
-  ~ Mrepol742 Property || Confidential
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
-  ~
+  ~ Unless required by the applicable law or agreed in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
   -->
 
 <resources>
@@ -81,7 +67,7 @@
     <string name="b4">Voice Search</string>
     <string name="b5">Show Search Suggestion</string>
     <string name="b6">Sort</string>
-    <string name="b7">&lt;b>Title:&lt;/b> %a&lt;br>&lt;b>Link:&lt;/b> %b&lt;br>&lt;br>&lt;b>Issued To:&lt;/b>&lt;br>&lt;b>Common Name:&lt;/b> %c&lt;br>&lt;b>Organization:&lt;/b> %d&lt;br>&lt;b>Organizational Unit:&lt;/b> %e&lt;br>&lt;br>&lt;b>Issued By:&lt;/b>&lt;br>&lt;b>Common Name:&lt;/b> %f&lt;br>&lt;b>Organization:&lt;/b> %g&lt;br>&lt;b>Organizational Unit:&lt;/b> %h&lt;br>&lt;br>&lt;b>Validity:&lt;/b>&lt;br>&lt;b>Issued On:&lt;/b> %i&lt;br>&lt;b>Expires On:&lt;/b> %j</string>
+    <string name="b7">&lt;b>Title:&lt;/b> %1$s&lt;br>&lt;b>Link:&lt;/b> %2$s&lt;br>&lt;br>&lt;b>Issued To:&lt;/b>&lt;br>&lt;b>Common Name:&lt;/b> %3$s&lt;br>&lt;b>Organization:&lt;/b> %4$s&lt;br>&lt;b>Organizational Unit:&lt;/b> %5$s&lt;br>&lt;br>&lt;b>Issued By:&lt;/b>&lt;br>&lt;b>Common Name:&lt;/b> %6$s&lt;br>&lt;b>Organization:&lt;/b> %7$s&lt;br>&lt;b>Organizational Unit:&lt;/b> %8$s&lt;br>&lt;br>&lt;b>Validity:&lt;/b>&lt;br>&lt;b>Issued On:&lt;/b> %9$s&lt;br>&lt;b>Expires On:&lt;/b> %10$s</string>
     <string name="b9">Open Downloads on Start</string>
     <string name="b10">Download manager will launch when a download started</string>
     <string name="b11">Open Downloads on Finish</string>
@@ -167,15 +153,15 @@
     <string name="f16">Databases, cache, cookies</string>
     <string name="f17">Clears all storage currently being used by the JavaScript storage APIs. This includes the Application Cache, Web SQL Database and the HTML5 Web Storage APIs.</string>
     <string name="f19">Facebook</string>
-    <string name="f20">Mrepol742 Facebook Page</string>
+    <string name="f20">Melvin Jones Repol Facebook Page</string>
     <string name="g1">Instagram</string>
     <string name="g2">Gmail</string>
     <string name="g3">Clears any saved credentials for HTTP authentication</string>
     <string name="g4">Enables debugging of web contents (HTML / CSS / JavaScript)</string>
-    <string name="g5">These terms and conditions (\"Terms\", \"Conditions\") are condition between Mrepol742 (\"Mrepol742\", \"us\", \"we\" or \"our\") and you (\"user\", \"you\" or \"your\")</string>
+    <string name="g5">These terms and conditions (\"Terms\", \"Conditions\") are condition between Melvin Jones Repol (\"Melvin Jones Repol\", \"us\", \"we\" or \"our\") and you (\"user\", \"you\" or \"your\")</string>
     <string name="g6">PIN</string>
     <string name="g7">Text Selection</string>
-    <string name="g8">Mrepol742(\"Mrepol742\", \"us\", \"we\" or \"our\") operates the Webvium</string>
+    <string name="g8">Melvin Jones Repol(\"Melvin Jones Repol\", \"us\", \"we\" or \"our\") operates the Webvium</string>
     <string name="g9">Layer Type</string>
     <string name="g10">Set Layer Type</string>
     <string name="g11">Zoom Gesture</string>
@@ -186,13 +172,13 @@
     <string name="g16">Custom Background Image</string>
     <string name="g17">Select custom background image</string>
     <string name="g18">Battery Optimization</string>
-    <string name="g19">&lt;b>Link:&lt;/b> %a&lt;br>&lt;b>Error Code:&lt;/b> %b</string>
-    <string name="g20">This URL %a contains Ads that was blocked by Webvium AdBlocker.</string>
+    <string name="g19">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d</string>
+    <string name="g20">This URL %1$s contains Ads that was blocked by Webvium AdBlocker.</string>
     <string name="h1">Safe Browsing</string>
     <string name="h2">Quit</string>
     <string name="h3">Settings</string>
     <string name="h4">Console Message</string>
-    <string name="h5">%a removed.</string>
+    <string name="h5">%1$s removed.</string>
     <string name="h6">NSLookup</string>
     <string name="h7">View IP</string>
     <string name="h9">Stop</string>
@@ -226,7 +212,7 @@
     <string name="j2">Exit</string>
     <string name="j3">Load Homepage</string>
     <string name="j4">Go Back</string>
-    <string name="j5">Latin-1 (ISO-8858-1)</string>
+    <string name="j5">Latin–1 (ISO–8858–1)</string>
     <string name="j6">Unicode (UTF-8)</string>
     <string name="j7">Chinese (GBK)</string>
     <string name="j8">Chinese (Big5)</string>
@@ -253,10 +239,10 @@
     <string name="l3">Security Lock Setup Successfully.</string>
     <string name="l4">Save Link Service</string>
     <string name="l5">Download Manager</string>
-    <string name="l7">Confirm to remove %a?</string>
-    <string name="l8">Share %a with:</string>
+    <string name="l7">Confirm to remove %1$s?</string>
+    <string name="l8">Share %1$s with:</string>
     <string name="l10">Security Lock Settings</string>
-    <string name="l11">Confirm to delete %a?</string>
+    <string name="l11">Confirm to delete %1$s?</string>
     <string name="l13">| BETA</string>
     <string name="l14">Manage Space</string>
     <string name="l15">Dismiss</string>
@@ -415,7 +401,7 @@
     <string name="u18">Storage Permission is needed to read the contents of your SD card &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission >>&lt;b>>>&lt;/b> Storage</string>
     <string name="u19">File is already exist</string>
     <string name="u20">Download Successful</string>
-    <string name="v2">&lt;b>Link:&lt;/b> %a&lt;br>&lt;b>Data:&lt;/b> %b&lt;br>&lt;b>Encoding:&lt;/b> %c&lt;/br>&lt;b>MimeType:&lt;/b> %d&lt;/br>&lt;b>Reason Phrase:&lt;/b> e&lt;/br>&lt;b>Response Headers:&lt;/b>/%f&lt;/br>&lt;b>Status Code:&lt;/b> %g&lt;b>Main Frame:&lt;/b> %h&lt;br>&lt;b>Gesture:&lt;/b> %i&lt;br>&lt;b>Time:&lt;/b> %j</string>
+    <string name="v2">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Data:&lt;/b> %2$s&lt;br>&lt;b>Encoding:&lt;/b> %3$s&lt;/br>&lt;b>MimeType:&lt;/b> %4$s&lt;/br>&lt;b>Reason Phrase:&lt;/b> %5$s&lt;/br>&lt;b>Response Headers:&lt;/b> %6$s&lt;/br>&lt;b>Status Code:&lt;/b> %7$d&lt;b>Main Frame:&lt;/b> %8$b&lt;br>&lt;b>Gesture:&lt;/b> %9$b&lt;br>&lt;b>Time:&lt;/b> %10$s</string>
     <string name="v3">Unknown certificate error.</string>
     <string name="v4">This certificate isn\'t from a trusted authority.</string>
     <string name="v5">The certificate has expired.</string>
@@ -427,14 +413,14 @@
     <string name="v11">View Certificate</string>
     <string name="v12">Download Canceled | Wi-Fi not Connected</string>
     <string name="v13">Loading…</string>
-    <string name="v14">%a want\'s to know your device\'s location</string>
-    <string name="v15">%a can now access your device\'s location.</string>
-    <string name="v16">%a request location permission denied.</string>
+    <string name="v14">%1$s want\'s to know your device\'s location</string>
+    <string name="v15">%1$s can now access your device\'s location.</string>
+    <string name="v16">%1$s request location permission denied.</string>
     <string name="v17">Allow</string>
-    <string name="v18">&lt;b>Message:&lt;/b> %a&lt;br>&lt;b>Line:&lt;/b> %b&lt;br>&lt;b>Source ID:&lt;/b> %c</string>
+    <string name="v18">&lt;b>Message:&lt;/b> %1$s&lt;br>&lt;b>Line:&lt;/b> %2$d&lt;br>&lt;b>Source ID:&lt;/b> %3$s</string>
     <string name="v19">Security Certificate</string>
-    <string name="v20">&lt;b>Link:&lt;/b> %a&lt;br>&lt;b>Error Code:&lt;/b> %b&lt;br>&lt;b>Description:&lt;/b> %c</string>
-    <string name="w1">It\'s time to take a break. You\'ve browsing for about %a minutes.</string>
+    <string name="v20">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d&lt;br>&lt;b>Description:&lt;/b> %3$s</string>
+    <string name="w1">It\'s time to take a break. You\'ve browsing for about %1$d minutes.</string>
     <string name="w2">Reminder</string>
     <string name="w3">Print</string>
     <string name="w4">Location Permission is needed to get your precise location using the GPS and network-based</string>
@@ -492,7 +478,7 @@
     <string name="y20">Notify you about certain actions from Webpages.</string>
     <string name="z1">Notify you to directly open any valid link you copied.</string>
     <string name="z2">Notify you that there is new update in Webvium.</string>
-    <string name="z3">Notification from Mrepol742.</string>
+    <string name="z3">Notification from Melvin Jones Repol.</string>
     <string name="z4">Whois</string>
     <string name="z5">Collapse Search View</string>
     <string name="z6">Clear Session Cookies</string>
@@ -540,16 +526,15 @@
     <string name="b34">Failed to save the source code.</string>
     <string name="b36">Do you really want to clear Clipboard?</string>
     <string name="b37">Clipboard Cleared.</string>
-    <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %a/Webvium/Backup/webvium.sgs</string>
-    <string name="b39">Do you really want to import Settings Database\nThis will override your current Settings\n\n%a will restart automatically after importing the database.</string>
-    <string name="b40">&lt;b>We will export:&lt;/b>&lt;br>• All Search History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %a/%b/Backup/Databases/search.%c</string>
+    <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s/Webvium/Backup/Databases/%2$s</string>
+    <string name="b39">Do you really want to import Settings Database\nThis will override your current Settings\n\nnWebvium will restart automatically after importing the database.</string>
+    <string name="b40">&lt;b>We will export:&lt;/b>&lt;br>• All Search History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s/Webvium/Backup/Databases/%2$s</string>
     <string name="c21">Do you really want to import Search Database\nThis will override your Search History</string>
-    <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %a/%b/Backup/Databases/history.%c</string>
-    <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/Databases/bookmark.%c</string>
+    <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s/Webvium/Backup/Databases/%2$s</string>
+    <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s/Webvium/Backup/Databases/%2$s</string>
     <string name="c26">about:blank</string>
     <string name="c27">Source Code Copied.</string>
-    <!-- A data is going to append on this string remain the last digit blank as space -->
-    <string name="c28">File Saved | </string>
+    <string name="c28">File Saved | %1$s</string>
     <string name="c29">Save File</string>
     <string name="c30">Name</string>
     <string name="c31">Saved Path</string>
@@ -565,8 +550,7 @@
     <string name="d34">Do you really want to import Bookmarks Database\nThis will override your Bookmarks</string>
 
     <string name="d38">Ongoing Download</string>
-    <!-- A data is going to append on this string remain the last digit blank as space -->
-    <string name="d39">Searching for </string>
+    <string name="d39">Searching for %1$s</string>
     <string name="d40">Size</string>
     <string name="e21">Link</string>
     <string name="e22">Free Space</string>
@@ -580,16 +564,15 @@
     <string name="f21">Mozila Brave</string>
     <string name="f23">Console Panel</string>
     <string name="f24">Execute</string>
-    <!-- A data is going to append on this string remain the last digit blank as space -->
-    <string name="f25">Says: </string>
+    <string name="f25">Says: %1$s</string>
     <string name="f26">Font</string>
     <string name="f27">Custom Font File</string>
     <string name="f28">Primary Font</string>
     <string name="f29">Secondary Font</string>
     <string name="f30">Logcat</string>
-    <string name="f31">Examples: \n%a \n%b \n%c</string>
+    <string name="f31">Examples: \n%1$s \n%2$s \n%3$s</string>
     <string name="f32">Robots.txt</string>
-    <string name="f33">Webvium - The Revolutionary and Innovative Browser. \nSize: %a\nVersion: %b\nDownload Link: %c\nDownload it For FREE\n\nStay tune in latest update by visiting us on Facebook %d</string>
+    <string name="f33">Webvium - Lightweight, Fast, Material and Full-Featured Android Web Browser.\n\nWebvium is a weightless android app that size about 600KB. It\'s Fast, Material Design and Full-Featured Web Browser for Android. Download the latest version here: \n%1$s</string>
     <string name="f34">There\'s no email app that can handle this action.</string>
     <string name="f37">Font Size</string>
     <string name="f38">Image Saved.</string>
@@ -597,10 +580,9 @@
     <string name="f40">Link:</string>
     <string name="g21">Your bookmarks appear here</string>
     <string name="g24">Pretend Mode Settings</string>
-    <string name="g25">&lt;b>Host Name:&lt;/b> %a&lt;br>&lt;b>IP Address:&lt;/b> %b&lt;br>&lt;b>Hash Code:&lt;/b> %c&lt;br>&lt;b>Canonical Hostname:&lt;/b> %d&lt;br>&lt;b>Wildcard Address:&lt;/b> %e&lt;br>&lt;b>Local Address:&lt;/b> %f&lt;br>&lt;b>Loopback Address:&lt;/b> %g&lt;br>&lt;b>Global Scope:&lt;/b> %h&lt;br>&lt;b>Link Scope:&lt;/b> %i&lt;br>&lt;b>Node Scope:&lt;/b> %j&lt;br>&lt;b>Organization Scope:&lt;/b> %k&lt;br>&lt;b>Site Scope:&lt;/b> %l&lt;br>&lt;b>IP Multicast Address:&lt;/b> %m"</string>
+    <string name="g25">&lt;b>Host Name:&lt;/b> %1$s&lt;br>&lt;b>IP Address:&lt;/b> %2$s&lt;br>&lt;b>Hash Code:&lt;/b> %3$d&lt;br>&lt;b>Canonical Hostname:&lt;/b> %4$s&lt;br>&lt;b>Wildcard Address:&lt;/b> %5$b&lt;br>&lt;b>Local Address:&lt;/b> %6$b&lt;br>&lt;b>Loopback Address:&lt;/b> %7$b&lt;br>&lt;b>Global Scope:&lt;/b> %8$b&lt;br>&lt;b>Link Scope:&lt;/b> %9$b&lt;br>&lt;b>Node Scope:&lt;/b> %10$b&lt;br>&lt;b>Organization Scope:&lt;/b> %11$b&lt;br>&lt;b>Site Scope:&lt;/b> %12$b&lt;br>&lt;b>IP Multicast Address:&lt;/b> %13$b</string>
     <string name="g27">Feedback Send.</string>
-    <!-- A data is going to append on this string remain the last digit blank as space -->
-    <string name="g28">View </string>
+    <string name="g28">View %1$s</string>
     <string name="g31">Webvium Webpages Notification</string>
     <string name="g34">The page you\'re trying to view contains data that has already been submitted (\"POSTDATA\"). If you resend the data, any action the form on the page carried out (such as a search or online purchase) will be repeated.</string>
     <string name="g36">Form Resubmission</string>
@@ -623,7 +605,7 @@
     <string name="h36">Received Error</string>
     <string name="h37">View</string>
     <string name="h38">Curve Edge Window Effect</string>
-    <string name="h39">%a was been flagged by Safe Browsing. &lt;br>&lt;br>&lt;b>Details:&lt;/b> %b&lt;br>&lt;b>Threat:&lt;/b> %c</string>
+    <string name="h39">%1$s was been flagged by Safe Browsing. &lt;br>&lt;br>&lt;b>Details:&lt;/b> %2$s&lt;br>&lt;b>Threat:&lt;/b> %3$s</string>
     <string name="h40">Safe Browsing Response</string>
     <string name="i21">Back to Safety</string>
     <string name="i22">Process</string>
@@ -641,10 +623,10 @@
     <string name="i34">There\'s no received SSL error\'s to show</string>
     <string name="i36">Vibrate</string>
     <string name="i37">Vibration Effect</string>
-    <string name="i38">Allow %a to access your device %b</string>
+    <string name="i38">Allow %1$s to access your device %2$s</string>
     <string name="i39">Deny</string>
-    <string name="i40">%a can now access your device %b</string>
-    <string name="j21">%a request %b permission denied</string>
+    <string name="i40">%1$s can now access your device %2$s</string>
+    <string name="j21">%1$s request %2$s permission denied</string>
     <string name="j22">Camera Permission is needed to take videos and photos</string>
     <string name="j23">Camera Permission is needed to take videos and photo &lt;br>To allow click App Info &lt;b>>>&lt;/b> Permission &lt;b>>>&lt;/b> Camera</string>
     <string name="j24">Microphone Permission is needed to record audio</string>
@@ -699,7 +681,7 @@
     <string name="l39">Notify me</string>
     <string name="l40">Notify you that the webpage was been successfully loaded</string>
     <string name="m22">Webpage Failed Load</string>
-    <string name="m23">&lt;b>%a %b %c&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %d&lt;br/>&lt;b>Middle Name:&lt;/b> %e&lt;br/>&lt;b>Last Name:&lt;/b> %f&lt;br/>&lt;b>Birthday:&lt;/b> %g&lt;br/>&lt;b>Gender:&lt;/b> %h&lt;br/>&lt;b>Age:&lt;/b> %i&lt;br/>&lt;b>Relationship:&lt;/b> %j&lt;br/>&lt;b>Country:&lt;/b> %k&lt;br/>&lt;b>Eye Color:&lt;/b> %l&lt;br/>&lt;b>Height:&lt;/b> %mm | %m2cm&lt;br/>&lt;b>Weight:&lt;/b> %n Pounds&lt;br/>&lt;b>Hobby:&lt;/b> %o&lt;br/>&lt;b>Interested in:&lt;/b> %p&lt;br/>&lt;b>Religion:&lt;/b> %q&lt;br/>&lt;b>Mother Name:&lt;/b> %r&lt;br/>&lt;b>Father Name:&lt;/b> %s</string>
+    <string name="m23">&lt;b>%1$s&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %2$s&lt;br/>&lt;b>Middle Name:&lt;/b> %3$s&lt;br/>&lt;b>Last Name:&lt;/b> %4$s&lt;br/>&lt;b>Birthday:&lt;/b> %5$s&lt;br/>&lt;b>Gender:&lt;/b> %6$s&lt;br/>&lt;b>Age:&lt;/b> %7$d&lt;br/>&lt;b>Relationship:&lt;/b> %8$s&lt;br/>&lt;b>Country:&lt;/b> %9$s&lt;br/>&lt;b>Eye Color:&lt;/b> %10$s&lt;br/>&lt;b>Height:&lt;/b> %11$s&lt;br/>&lt;b>Weight:&lt;/b> %12$d Pounds&lt;br/>&lt;b>Hobby:&lt;/b> %13$s&lt;br/>&lt;b>Interested in:&lt;/b> %14$s&lt;br/>&lt;b>Religion:&lt;/b> %15$s&lt;br/>&lt;b>Mother Name:&lt;/b> %16$s&lt;br/>&lt;b>Father Name:&lt;/b> %17$s</string>
     <string name="m24">There\'s no Internet Connection</string>
     <string name="m25">The device is in Airplane Mode</string>
     <string name="m28">Set Vibration EffectL</string>
@@ -707,9 +689,9 @@
     <string name="m30">We\'ll notify you if there\'s a new update available.</string>
     <string name="n21">Update Service</string>
     <string name="n22">Backup Service</string>
-    <string name="n23">These terms and conditions (\"Terms\", \"Conditions\") are condition between Mrepol742 (\"Mrepol742\", \"us\", \"we\" or \"our\") and you (\"user\", \"you\" or \"your\").&lt;br>This Condition set forth the general terms and conditions of your use of Webvium (collectively, \"Webvium\").&lt;br>&lt;br>&lt;b>LINKS TO OTHER APPLICATIONS OR WEBPAGES&lt;/b>&lt;br>Although Webvium may be linked to other applications and webpages, we are not, directly or indirectly, implying any approval, association, sponsorship, endorsement, or affiliation with any linked application and webpage, unless specifically stated herein. We are not responsible for examining or evaluating, and we do not warrant the offerings of, any businesses or individuals or the content of their applications and webpages. We do not assume any responsibility or liability for the actions, products, services, and content of any other third-parties. You should carefully review the legal statements and other conditions of use of any application and webpage. Your linking to any other applications and webpages is at your own risk.&lt;br>&lt;br>&lt;b>PROHIBITED USES&lt;/b>&lt;br>In addition to other terms as set forth in the Agreement, you are prohibited from using Webvium:&lt;br>• for any unlawful purpose;&lt;br>• to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances;&lt;br>• to infringe upon or violate our intellectual property rights or the intellectual property rights of others;&lt;tbr>• to submit false or misleading information;&lt;br>• to upload or transmit viruses or any other type of malicious code that will or may be use in any way that will affect the functionality or operation of Webvium or of any related mobile application and webpages, other mobile applications and webpages, or the Internet;&lt;br>• to interfere with or circumvent the security features of Webvium or any related mobile application and webpage. We reserve the right to terminate your use of Webvium or any related mobile application and webpage for violating any of the prohibited uses;&lt;br>&lt;br>&lt;b>INTELLECTUAL PROPERTY RIGHTS&lt;/b>&lt;br>This Agreement does not transfer to you any intellectual property owned by Mrepol742 or third-parties, and all rights, titles, and interests in and to such property will remain (as between the parties) solely with Mrepol742. All trademarks, service marks, graphics and logos used in connection with Webvium, are trademarks or registered trademarks of Mrepol742 or Mrepol742 licensor. Other trademarks, service marks, graphics and logos used in connection with Webvium may be the trademarks of other third-parties. Your use of Webvium grants you no right or license to reproduce or otherwise use any Mrepol742 or third-party trademarks.&lt;br>&lt;br>&lt;b>LIMITATION OF LIABILITY&lt;/b>&lt;br>To the fullest extent permitted by applicable law, in no event will Mrepol742, its affiliates, officers, directors, employees, agents, suppliers or licensor be liable to any person for &lt;br>(a): any indirect, incidental, special, punitive, cover or consequential damages (including, without limitation, damages for lost profits, revenue, sales, goodwill, use or content, impact on business, business interruption, loss of anticipated savings, loss of business opportunity) however caused, under any theory of liability, including, without limitation, contract, tort, warranty, breach of statutory duty, negligence or otherwise, even if Mrepol742 has been advised as to the possibility of such damages or could have foreseen such damages. To the maximum extent permitted by applicable law, the aggregate liability of Mrepol742 and its affiliates, officers, employees, agents, suppliers and licensor, relating to the services will be limited to an amount greater of one dollar or any amounts actually paid in cash by you which in all cases is $0 to Mrepol742 for the prior one month period prior to the first event or occurrence giving rise to such liability. The limitations and exclusions also apply if this remedy does not fully compensate you for any losses or fails of its essential purpose.&lt;br>&lt;br>&lt;b>INDEMNIFICATION&lt;/b>&lt;br>You agree to indemnify and hold Mrepol742 and its affiliates, directors, officers, employees, and agents harmless from and against any liabilities, losses, damages or costs, including reasonable attorneys\' fees, incurred in connection with or arising from any third-party allegations, claims, actions, disputes, or demands asserted against any of them as a result of or relating to your Content, your use of the WebView or Services or any willful misconduct on your part.&lt;br>&lt;br>&lt;b>SEVERABILITY&lt;/b>&lt;br>All rights and restrictions contained in this Agreement may be exercised and shall be applicable and binding only to the extent that they do not violate any applicable laws and are intended to be limited to the extent necessary so that they will not render this Agreement illegal, invalid or unenforceable. If any provision or portion of any provision of this Agreement shall be held to be illegal, invalid or unenforceable by a court of competent jurisdiction, it is the intention of the parties that the remaining provisions or portions thereof shall constitute their agreement with respect to the subject matter hereof, and all such remaining provisions or portions thereof shall remain in full force and effect.&lt;br>&lt;br>&lt;b>DISPUTE RESOLUTION&lt;/b>&lt;br>The formation, interpretation, and performance of this Agreement and any disputes arising out of it shall be governed by the substantive and procedural laws of National Capital Region, The Philippines without regard to its rules on conflicts or choice of law and, to the extent applicable, the laws of The Philippines. The exclusive jurisdiction and venue for actions related to the subject matter hereof shall be the state and federal courts located in National Capital Region, The Philippines, and you hereby submit to the personal jurisdiction of such courts. You hereby waive any right to a jury trial in any proceeding arising out of or related to this Agreement. The United Nations Convention on Contracts for the International Sale of Goods does not apply to this Agreement.&lt;br>&lt;br>&lt;b>CHANGES AND AMENDMENTS&lt;/b>&lt;br>We reserve the right to modify this Agreement or its policies relating to Webvium at any time, effective upon posting of an updated version of this Agreement in this webpage. When we do, we will revise the updated date at the bottom of this page. Continued use of Webvium after any such changes shall constitute your consent to such changes.&lt;br>&lt;br>&lt;b>ACCEPTANCE OF THESE TERMS&lt;/b>&lt;br>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using Webvium you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access Webvium.&lt;br>&lt;br>This document was last updated on &lt;b>Sunday, March 28, 2021&lt;/b>.
+    <string name="n23">These terms and conditions (\"Terms\", \"Conditions\") are condition between Melvin Jones Repol (\"Melvin Jones Repol\", \"us\", \"we\" or \"our\") and you (\"user\", \"you\" or \"your\").&lt;br>This Condition set forth the general terms and conditions of your use of Webvium (collectively, \"Webvium\").&lt;br>&lt;br>&lt;b>LINKS TO OTHER APPLICATIONS OR WEBPAGES&lt;/b>&lt;br>Although Webvium may be linked to other applications and webpages, we are not, directly or indirectly, implying any approval, association, sponsorship, endorsement, or affiliation with any linked application and webpage, unless specifically stated herein. We are not responsible for examining or evaluating, and we do not warrant the offerings of, any businesses or individuals or the content of their applications and webpages. We do not assume any responsibility or liability for the actions, products, services, and content of any other third-parties. You should carefully review the legal statements and other conditions of use of any application and webpage. Your linking to any other applications and webpages is at your own risk.&lt;br>&lt;br>&lt;b>PROHIBITED USES&lt;/b>&lt;br>In addition to other terms as set forth in the Agreement, you are prohibited from using Webvium:&lt;br>• for any unlawful purpose;&lt;br>• to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances;&lt;br>• to infringe upon or violate our intellectual property rights or the intellectual property rights of others;&lt;tbr>• to submit false or misleading information;&lt;br>• to upload or transmit viruses or any other type of malicious code that will or may be use in any way that will affect the functionality or operation of Webvium or of any related mobile application and webpages, other mobile applications and webpages, or the Internet;&lt;br>• to interfere with or circumvent the security features of Webvium or any related mobile application and webpage. We reserve the right to terminate your use of Webvium or any related mobile application and webpage for violating any of the prohibited uses;&lt;br>&lt;br>&lt;b>INTELLECTUAL PROPERTY RIGHTS&lt;/b>&lt;br>This Agreement does not transfer to you any intellectual property owned by Melvin Jones Repol or third-parties, and all rights, titles, and interests in and to such property will remain (as between the parties) solely with Melvin Jones Repol. All trademarks, service marks, graphics and logos used in connection with Webvium, are trademarks or registered trademarks of Melvin Jones Repol or Melvin Jones Repol licensor. Other trademarks, service marks, graphics and logos used in connection with Webvium may be the trademarks of other third-parties. Your use of Webvium grants you no right or license to reproduce or otherwise use any Melvin Jones Repol or third-party trademarks.&lt;br>&lt;br>&lt;b>LIMITATION OF LIABILITY&lt;/b>&lt;br>To the fullest extent permitted by applicable law, in no event will Melvin Jones Repol, its affiliates, officers, directors, employees, agents, suppliers or licensor be liable to any person for &lt;br>(a): any indirect, incidental, special, punitive, cover or consequential damages (including, without limitation, damages for lost profits, revenue, sales, goodwill, use or content, impact on business, business interruption, loss of anticipated savings, loss of business opportunity) however caused, under any theory of liability, including, without limitation, contract, tort, warranty, breach of statutory duty, negligence or otherwise, even if Melvin Jones Repol has been advised as to the possibility of such damages or could have foreseen such damages. To the maximum extent permitted by applicable law, the aggregate liability of Melvin Jones Repol and its affiliates, officers, employees, agents, suppliers and licensor, relating to the services will be limited to an amount greater of one dollar or any amounts actually paid in cash by you which in all cases is $0 to Melvin Jones Repol for the prior one month period prior to the first event or occurrence giving rise to such liability. The limitations and exclusions also apply if this remedy does not fully compensate you for any losses or fails of its essential purpose.&lt;br>&lt;br>&lt;b>INDEMNIFICATION&lt;/b>&lt;br>You agree to indemnify and hold Melvin Jones Repol and its affiliates, directors, officers, employees, and agents harmless from and against any liabilities, losses, damages or costs, including reasonable attorneys\' fees, incurred in connection with or arising from any third-party allegations, claims, actions, disputes, or demands asserted against any of them as a result of or relating to your Content, your use of the WebView or Services or any willful misconduct on your part.&lt;br>&lt;br>&lt;b>SEVERABILITY&lt;/b>&lt;br>All rights and restrictions contained in this Agreement may be exercised and shall be applicable and binding only to the extent that they do not violate any applicable laws and are intended to be limited to the extent necessary so that they will not render this Agreement illegal, invalid or unenforceable. If any provision or portion of any provision of this Agreement shall be held to be illegal, invalid or unenforceable by a court of competent jurisdiction, it is the intention of the parties that the remaining provisions or portions thereof shall constitute their agreement with respect to the subject matter hereof, and all such remaining provisions or portions thereof shall remain in full force and effect.&lt;br>&lt;br>&lt;b>DISPUTE RESOLUTION&lt;/b>&lt;br>The formation, interpretation, and performance of this Agreement and any disputes arising out of it shall be governed by the substantive and procedural laws of National Capital Region, The Philippines without regard to its rules on conflicts or choice of law and, to the extent applicable, the laws of The Philippines. The exclusive jurisdiction and venue for actions related to the subject matter hereof shall be the state and federal courts located in National Capital Region, The Philippines, and you hereby submit to the personal jurisdiction of such courts. You hereby waive any right to a jury trial in any proceeding arising out of or related to this Agreement. The United Nations Convention on Contracts for the International Sale of Goods does not apply to this Agreement.&lt;br>&lt;br>&lt;b>CHANGES AND AMENDMENTS&lt;/b>&lt;br>We reserve the right to modify this Agreement or its policies relating to Webvium at any time, effective upon posting of an updated version of this Agreement in this webpage. When we do, we will revise the updated date at the bottom of this page. Continued use of Webvium after any such changes shall constitute your consent to such changes.&lt;br>&lt;br>&lt;b>ACCEPTANCE OF THESE TERMS&lt;/b>&lt;br>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using Webvium you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access Webvium.&lt;br>&lt;br>This document was last updated on &lt;b>Sunday, April 18, 2021&lt;/b>.
 </string>
-    <string name="n24" formatted="false">Mrepol742 (\"Mrepol742\", \"us\", \"we\" or \"our\") operates the Webvium.&lt;br>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use Webvium, and the choices you have associated with that data.&lt;br>We use your data to provide and improve Webvium. By using Webvium, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions&lt;br>&lt;br>&lt;b>INFORMATION COLLECTION AND USE&lt;/b>&lt;br>We collect several different types of information for various purposes to provide and improve Webvium for you.&lt;br>&lt;br>&lt;b>TYPES OF DATA COLLECTED&lt;/b>&lt;br>While using Webvium, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (\"Personal Data\"). Personally identifiable information may include, but is not limited to:&lt;br>• Build Properties&lt;br>• Usage Data&lt;br>&lt;br>&lt;b>BUILD PROPERTIES AND USAGE DATA&lt;/b>&lt;br>When you access Webvium, we may collect certain information including, but not limited to, the type of mobile device you use, your mobile operating system, and other diagnostic data (\"Usage Data\").&lt;br>&lt;br>&lt;b>USE OF DATA&lt;/b>&lt;br>Mrepol742 uses the collected data for various purposes:&lt;br>• to provide and maintain Webvium;&lt;br>• to notify you about changes to Webvium;&lt;br>• to provide customer care and support;&lt;br>• to provide analysis or valuable information so that we can improve the Webvium;&lt;&lt;br>• to detect, prevent and address technical issues;&lt;br>&lt;br>&lt;b>TRANSFER FOR DATA&lt;/b>&lt;br>If you are located outside The Philippines and choose to provide information to us, please note that we transfer the data, to The Philippines via Mail Service and Sync Service.&lt;br>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.&lt;br>Mrepol742 will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other information.&lt;br>&lt;br>&lt;b>DISCLOSURE OF DATA AND LEGAL REQUIREMENTS&lt;/b>&lt;br>Mrepol742 may disclose your Data in the good faith belief that such action is necessary to:&lt;br>• to comply with a legal obligation;&lt;br>• to protect and defend the rights or property of Webvium;&lt;br>• to prevent or investigate possible wrong doing in connection with Webvium;&lt;br>• to protect the personal safety of users of Webvium;&lt;br>• to protect against legal liability;&lt;br>&lt;br>&lt;b>SECURITY OF DATA&lt;/b>&lt;br>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.&lt;br>&lt;br>&lt;b>CHANGES AND AMENDMENTS&lt;/b>&lt;br>We reserve the right to modify this Agreement or its policies relating to Webvium at any time. When we do, we will revise the updated date at the bottom of this page. Continued use of Webvium after any such changes shall constitute your consent to such changes.&lt;br>&lt;br>&lt;b>ACCEPTANCE OF THESE TERMS&lt;/b>&lt;br>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using Webvium you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access Webvium.&lt;br>&lt;br>This document was last updated on &lt;b>Sunday, March 28, 2021&lt;/b>.
+    <string name="n24" formatted="false">Melvin Jones Repol (\"Melvin Jones Repol\", \"us\", \"we\" or \"our\") operates the Webvium.&lt;br>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use Webvium, and the choices you have associated with that data.&lt;br>We use your data to provide and improve Webvium. By using Webvium, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions&lt;br>&lt;br>&lt;b>INFORMATION COLLECTION AND USE&lt;/b>&lt;br>We collect several different types of information for various purposes to provide and improve Webvium for you.&lt;br>&lt;br>&lt;b>TYPES OF DATA COLLECTED&lt;/b>&lt;br>While using Webvium, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (\"Personal Data\"). Personally identifiable information may include, but is not limited to:&lt;br>• Build Properties&lt;br>• Usage Data&lt;br>&lt;br>&lt;b>BUILD PROPERTIES AND USAGE DATA&lt;/b>&lt;br>When you access Webvium, we may collect certain information including, but not limited to, the type of mobile device you use, your mobile operating system, and other diagnostic data (\"Usage Data\").&lt;br>&lt;br>&lt;b>USE OF DATA&lt;/b>&lt;br>Melvin Jones Repol uses the collected data for various purposes:&lt;br>• to provide and maintain Webvium;&lt;br>• to notify you about changes to Webvium;&lt;br>• to provide customer care and support;&lt;br>• to provide analysis or valuable information so that we can improve the Webvium;&lt;&lt;br>• to detect, prevent and address technical issues;&lt;br>&lt;br>&lt;b>TRANSFER FOR DATA&lt;/b>&lt;br>If you are located outside The Philippines and choose to provide information to us, please note that we transfer the data, to The Philippines via Mail Service and Sync Service.&lt;br>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.&lt;br>Melvin Jones Repol will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other information.&lt;br>&lt;br>&lt;b>DISCLOSURE OF DATA AND LEGAL REQUIREMENTS&lt;/b>&lt;br>Melvin Jones Repol may disclose your Data in the good faith belief that such action is necessary to:&lt;br>• to comply with a legal obligation;&lt;br>• to protect and defend the rights or property of Webvium;&lt;br>• to prevent or investigate possible wrong doing in connection with Webvium;&lt;br>• to protect the personal safety of users of Webvium;&lt;br>• to protect against legal liability;&lt;br>&lt;br>&lt;b>SECURITY OF DATA&lt;/b>&lt;br>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.&lt;br>&lt;br>&lt;b>CHANGES AND AMENDMENTS&lt;/b>&lt;br>We reserve the right to modify this Agreement or its policies relating to Webvium at any time. When we do, we will revise the updated date at the bottom of this page. Continued use of Webvium after any such changes shall constitute your consent to such changes.&lt;br>&lt;br>&lt;b>ACCEPTANCE OF THESE TERMS&lt;/b>&lt;br>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using Webvium you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access Webvium.&lt;br>&lt;br>This document was last updated on &lt;b>Sunday, April 18, 2021&lt;/b>.
 </string>
     <string name="n25">I Agree</string>
     <string name="n26">Audio recording error</string>
@@ -762,7 +744,7 @@
     <string name="q28">Refresh and stop action</string>
     <string name="q29">More</string>
     <string name="q30">History Icon</string>
-    <string name="r22">&lt;br>&lt;b>Main Frame:&lt;/b> %d&lt;br>&lt;b>Gesture:&lt;/b> %e&lt;br>&lt;b>Time:&lt;/b> %f</string>
+    <string name="r22">&lt;br>&lt;b>Main Frame:&lt;/b> %1$b&lt;br>&lt;b>Gesture:&lt;/b> %2$b&lt;br>&lt;b>Time:&lt;/b> %3$s</string>
     <string name="r23">DEL</string>
     <string name="r24">C</string>
     <string name="r25">/</string>
@@ -800,7 +782,7 @@
     <string name="t38">Media Scanning</string>
     <string name="t39">Allow media scanning when download finish</string>
     <string name="u21">Download Failed</string>
-    <string name="u22">Name: %a\nLink: %b\nReason: %c</string>
+    <string name="u22">Name: %1$s\nLink: %2$s\nReason: %3$s</string>
     <string name="u23">Edit</string>
     <string name="u24">Query</string>
     <string name="u25">Manage Space Icon</string>
@@ -874,13 +856,13 @@
 
     <string name="z32">Download</string>
     <string name="z33">Permission</string>
-    <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/download.%c</string>
+    <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s/Webvium/Backup/Databases/%2$s</string>
     <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
-    <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %a/%b/Backup/Databases/permission.%c</string>
+    <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s/Webvium/Backup/Databases/%2$s</string>
     <string name="z37">Do you really want to import Permission Database\nThis will override your Permission Settings</string>
     <string name="z38">APK</string>
 
-    <string name="z39">Automatically backup %a apk upon installing of new update</string>
+    <string name="z39">Automatically backup Webvium apk upon installing of new update</string>
     <string name="z40">New Update</string>
     <string name="x41">Youtube</string>
     <string name="x42">Github</string>
@@ -889,7 +871,7 @@
     <string name="x45">Export Databases</string>
     <string name="x46">Import Databases</string>
     <string name="x47">To Import a Database</string>
-    <string name="x48">Click here and navigate to %a</string>
+    <string name="x48">Click here to open File Picker and navigate to default backup location %1$s then choose the backup you want to import.</string>
     <string name="x49">Queries</string>
     <string name="x50">Strict Mode</string>
     <string name="x51">Log</string>

@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium.util;
@@ -565,48 +571,41 @@ public class IdentityGenerator {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy", Locale.US);
             int date = Integer.parseInt(sdf.format(new Date()));
             if (e == 0) {
-                return data.replace("%a", male[f])
-                        .replace("%b", male[g])
-                        .replace("%c", male[h])
-                        .replace("%d", male[f])
-                        .replace("%e", male[g])
-                        .replace("%f", male[h])
-                        .replace("%g", month[m] + " " + o + " " + (date - i))
-                        .replace("%h", "Male")
-                        .replace("%i", Integer.toString(i))
-                        .replace("%j", status[l])
-                        .replace("%k", countries[k])
-                        .replace("%l", eyeColor[p])
-                        .replace("%m", Integer.toString(getHeight()))
-                        .replace("%m2", Integer.toString(meterToCentimeter()))
-                        .replace("%n", Integer.toString(getWeight()))
-                        .replace("%o", hobbies[a2])
-                        .replace("%p", "Women")
-                        .replace("%q", religion[z])
-                        .replace("%r", female[w] + " " + female[x] + " " + male[g])
-                        .replace("%s", male[y] + " " + female[a1] + " " + male[h]);
-
+                return String.format(data, male[f] + " " + male[g] + " " + male[h], // Full Name
+                        male[f], // First Name
+                        male[g], // Middle Name
+                        male[h], // Last Name
+                        month[m] + " " + o + " " + (date - i), // Birthday Format MMDDYYY
+                        "Male", // Gender
+                        i, // Age
+                        status[l], // Relationship
+                        countries[k], // Country
+                        eyeColor[p], // Eye Color
+                        getHeight() + "m/" + meterToCentimeter() + "cm", // Height Meter and Centimeter
+                        getWeight(), // Weight Pounds
+                        hobbies[a2], // Hobbies
+                        "Women", // Interested in
+                        religion[z], // Religion
+                        female[w] + " " + female[x] + " " + male[g], // Mother Name
+                        male[y] + " " + female[a1] + " " + male[h]); // Father Name
             }
-            return data.replace("%a", female[f])
-                    .replace("%b", female[g])
-                    .replace("%c", male[h])
-                    .replace("%d", female[f])
-                    .replace("%e", female[g])
-                    .replace("%f", male[h])
-                    .replace("%g", month[m] + " " + o + " " + (date - i))
-                    .replace("%h", "Female")
-                    .replace("%i", Integer.toString(i))
-                    .replace("%j", status[l])
-                    .replace("%k", countries[k])
-                    .replace("%l", eyeColor[p])
-                    .replace("%m", Integer.toString(getHeight()))
-                    .replace("%m2", Integer.toString(meterToCentimeter()))
-                    .replace("%n", Integer.toString(getWeight()))
-                    .replace("%o", hobbies[a2])
-                    .replace("%p", "Men")
-                    .replace("%q", religion[z])
-                    .replace("%r", female[w] + " " + female[x] + " " + female[g])
-                    .replace("%s", male[y] + " " + female[a1] + " " + male[h]);
+            return String.format(data, female[f] + " " + female[g] + " " + male[h],
+                    female[f],
+                    female[g],
+                    male[h],
+                    month[m] + " " + o + " " + (date - i),
+                    "Female",
+                    i,
+                    status[l],
+                    countries[k],
+                    eyeColor[p],
+                    getHeight() + "m/" + meterToCentimeter() + "cm",
+                    getWeight(),
+                    hobbies[a2],
+                    "Men",
+                    religion[z],
+                    female[w] + " " + female[x] + " " + female[g],
+                    male[y] + " " + female[a1] + " " + male[h]);
 
         } catch (Exception ex) {
             return a(data);

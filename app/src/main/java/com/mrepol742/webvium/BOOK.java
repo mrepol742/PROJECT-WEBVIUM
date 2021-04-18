@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium;
@@ -320,9 +326,7 @@ public class BOOK extends BaseActivity {
         Intent b = new Intent("android.intent.action.SEND");
         b.setType("text/plain");
         b.putExtra("android.intent.extra.TEXT", a);
-        String c = getString(R.string.l8);
-        String d = c.replaceAll("%a", "\"" + a + "\"");
-        startActivity(Intent.createChooser(b, d));
+        startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + a + "\"")));
     }
 
     public void c(String a23, String asd) {
@@ -423,21 +427,12 @@ public class BOOK extends BaseActivity {
 
     public void k2(final String b, final String c5) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(getString(R.string.h11));
-        String c = getString(R.string.l7);
-        String dy = c.replaceAll("%a", "\"" + b + "\"");
-        a.setMessage(dy);
+        a.setMessage(String.format(getString(R.string.l7), "\"" + b + "\""));
         a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-
             d3.b(b, c5);
-
-
-            String a56 = getString(R.string.h5).replaceAll("%a", b);
-
-            k5(a56);
+            k5(String.format(getString(R.string.h5), b));
             k();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
@@ -555,7 +550,7 @@ public class BOOK extends BaseActivity {
         }
         bn.setText(getString(R.string.i6));
 
-        ti.setText(getString(R.string.f31).replaceAll("%a", "\nhttps://example.com").replaceAll("%b", "http://example.com").replaceAll("%c", "example.com"));
+        ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io", "mrepol742.github.io"));
         final AlertDialog g = a.create();
         bn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

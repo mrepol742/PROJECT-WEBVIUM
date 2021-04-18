@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium;
@@ -874,11 +880,7 @@ public class MANG extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem a) {
         switch (a.getItemId()) {
             case 0:
-                try {
-                    a3();
-                } catch (PackageManager.NameNotFoundException e) {
-                    DiagnosticData.a(e);
-                }
+                a3();
                 return true;
             case 1:
                 Intents.a(this, FEED.class);
@@ -888,19 +890,15 @@ public class MANG extends BaseActivity {
         }
     }
 
-    private void a3() throws PackageManager.NameNotFoundException {
+    private void a3() {
         Intent b = new Intent("android.intent.action.SEND");
         b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", getString(R.string.f33).replaceAll("%a", BuildConfiguration.downloadSize).replaceAll("%b", Package.e(this)).replaceAll("%c", Base64.decode("a HR0cHM6Ly9n  aXRodWIuY2 9tL21yZXBvbDc 0Mg==")).replaceAll("%d", Base64.decode("aHR0 cHM6Ly9mYi  5tZS9 tcmVwb2w3 NDI =")));
-        String c = getString(R.string.l8);
-        String d = c.replaceAll("%a", "\"" + Package.c() + "\"");
-        startActivity(Intent.createChooser(b, d));
+        b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
+        startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
     }
 
     public void a6(int vr) {
         AlertDialog.Builder c = new AlertDialog.Builder(this);
-
-
         LayoutInflater d = getLayoutInflater();
         View e = d.inflate(R.layout.a12, null);
         c.setCancelable(false);
@@ -921,7 +919,6 @@ public class MANG extends BaseActivity {
             }
         }
         AlertDialog j5 = c.create();
-
         O5 timer = new O5(2000, 2000, j5);
         timer.start();
         j5.show();

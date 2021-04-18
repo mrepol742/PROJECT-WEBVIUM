@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium;
@@ -148,22 +154,15 @@ public class SCRE extends BaseActivity {
         f.setType("image/*");
         f.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +
                 StorageDirectory.a() + st + a));
-        String c = getString(R.string.l8);
-        String d = c.replaceAll("%a", "\"" + a + "\"");
-        startActivity(Intent.createChooser(f, d));
+        startActivity(Intent.createChooser(f, String.format(getString(R.string.l8), "\"" + a + "\"")));
     }
 
     private void d(final String b) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(getString(R.string.k1));
-        String c = getString(R.string.l11);
-        String d = c.replaceAll("%a", "\"" + b + "\"");
-        a.setMessage(d);
+        a.setMessage(String.format(getString(R.string.l11), "\"" + b + "\""));
         a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-
             Files.delete(st + b);
             finish();
             MainNotification.a(SCRE.this, Notifications.b);
@@ -197,7 +196,6 @@ public class SCRE extends BaseActivity {
         PrintManager aa = (PrintManager) getSystemService(Context.PRINT_SERVICE);
         aa.print(a, w4.createPrintDocumentAdapter(a), null);
         w4.destroy();
-
     }
 
     @Override

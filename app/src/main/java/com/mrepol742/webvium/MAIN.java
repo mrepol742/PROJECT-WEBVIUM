@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium;
@@ -528,7 +534,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a == 742) {
             if (b == Activity.RESULT_OK && null != c) {
                 String query = c.getStringExtra("a");
-                c8(getString(R.string.d39) + Objects.requireNonNull(query));
+                c8(String.format(getString(R.string.d39), Objects.requireNonNull(query)));
                 c49(query);
                 d2.c(query);
                 c.removeExtra("a");
@@ -955,7 +961,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c9(PermissionRequest pr) {
         AlertDialog.Builder d = new AlertDialog.Builder(this);
-        d.setMessage(getString(R.string.i38).replace("%a", Objects.requireNonNull(pr.getOrigin().getHost())).replace("%b", Arrays.toString(pr.getResources())));
+        d.setMessage(String.format(getString(R.string.i38), Objects.requireNonNull(pr.getOrigin().getHost()), Arrays.toString(pr.getResources())));
         d.setCancelable(false);
         d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
             if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
@@ -967,7 +973,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             Arrays.toString(pr.getResources()),
                             "true",
                             "false"));
-                    c8(getString(R.string.i40).replace("%a", pr.getOrigin().getHost()).replace("%b", Arrays.toString(pr.getResources())));
+                    c8(String.format(getString(R.string.i40), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
                 }
             } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
                 if (!Permission.check(this, Permission.MICROPHONE, 7)) {
@@ -978,15 +984,14 @@ public class MAIN extends MainBaseActivity implements Format {
                             Arrays.toString(pr.getResources()),
                             "true",
                             "false"));
-                    c8(getString(R.string.i40).replace("%a", pr.getOrigin().getHost()).replace("%b", Arrays.toString(pr.getResources())));
-
+                    c8(String.format(getString(R.string.i40), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
                 }
             }
             a1.dismiss();
         });
         d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
             pr.deny();
-            c7(getString(R.string.j21).replace("%a", pr.getOrigin().getHost()).replace("%b", Arrays.toString(pr.getResources())));
+            c7(String.format(getString(R.string.j21), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
             a1.dismiss();
         });
         AlertDialog e = d.create();
@@ -1411,9 +1416,9 @@ public class MAIN extends MainBaseActivity implements Format {
         b.setType("text/plain");
         b.putExtra("android.intent.extra.TEXT", a);
         String c = getString(R.string.l8);
-        String c45 = c.replace("%a", "\"" + a + "\"");
+        String c45 = String.format(c, "\"" + a + "\"");
         if (c11 == 0) {
-            c45 = c.replace("%a", "\"" + h.getTitle() + "\"");
+            c45 = String.format(c, "\"" + h.getTitle() + "\"");
         }
         startActivity(Intent.createChooser(b, c45));
     }
@@ -1934,7 +1939,7 @@ public class MAIN extends MainBaseActivity implements Format {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.w2));
-        a.setMessage(getString(R.string.w1).replace("%a", Integer.toString(timeset / 60000)));
+        a.setMessage(String.format(getString(R.string.w1), timeset / 60000));
         a.setPositiveButton(getString(R.string.i6), (dialog, i) -> {
             c41();
             dialog.dismiss();
@@ -2370,7 +2375,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 AlertDialog.Builder a = new AlertDialog.Builder(this);
                 a.setCancelable(false);
                 a.setTitle(getString(R.string.h40));
-                a.setMessage(Html.b(getString(R.string.h39).replace("%a", Objects.requireNonNull(Uri.parse(view.getUrl()).getHost())).replace("%b", wde).replace("%c", type)));
+                a.setMessage(Html.b(String.format(getString(R.string.h39), Objects.requireNonNull(Uri.parse(view.getUrl()).getHost()), wde, type)));
                 a.setPositiveButton(getString(R.string.i21), (a2, i) -> {
                     sbh.backToSafety(true);
                     a2.dismiss();
@@ -2605,19 +2610,19 @@ public class MAIN extends MainBaseActivity implements Format {
             return;
         }
         SslCertificate ce = h.getCertificate();
-        String ag = getString(R.string.b7);
         SslCertificate.DName ssl = ce.getIssuedTo();
         SslCertificate.DName ssl0 = ce.getIssuedBy();
-        String ag0 = ag.replace("%a", Objects.requireNonNull(h.getTitle()));
-        String ag1 = ag0.replace("%b", Objects.requireNonNull(url));
-        String ag2 = ag1.replace("%c", ssl.getCName());
-        String ag3 = ag2.replace("%d", ssl.getOName());
-        String ag4 = ag3.replace("%e", ssl.getUName());
-        String ag5 = ag4.replace("%i", ce.getValidNotBeforeDate().toString());
-        String ag6 = ag5.replace("%j", ce.getValidNotAfterDate().toString());
-        String ag7 = ag6.replace("%f", ssl0.getCName());
-        String ag8 = ag7.replace("%g", ssl0.getOName());
-        String ag9 = ag8.replace("%h", ssl0.getUName());
+        String ag9 = String.format(getString(R.string.b7),
+                Objects.requireNonNull(h.getTitle()),
+                Objects.requireNonNull(url),
+                ssl.getCName(),
+                ssl.getOName(),
+                ssl.getUName(),
+                ce.getValidNotBeforeDate().toString(),
+                ce.getValidNotAfterDate().toString(),
+                ssl0.getCName(),
+                ssl0.getOName(),
+                ssl0.getUName());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyddMMHHmmss", Locale.US);
         String vnbd = sdf.format(ce.getValidNotAfterDate());
         String ndt = sdf.format(new Date());
@@ -2672,16 +2677,16 @@ public class MAIN extends MainBaseActivity implements Format {
             if (cm0 == null) {
                 cm0 = new StringBuilder();
             }
-            String sg = getString(R.string.v20)
-                    .replace("%a", receivedErrorDataModel.c)
-                    .replace("%b", Integer.toString(receivedErrorDataModel.b))
-                    .replace("%c", receivedErrorDataModel.d);
+            String sg = String.format(getString(R.string.v20),
+                    receivedErrorDataModel.c,
+                    receivedErrorDataModel.b,
+                    receivedErrorDataModel.d);
             cm0.append(sg);
             if (Build.VERSION.SDK_INT >= 23) {
-                cm0.append(getString(R.string.r22)
-                        .replace("%d", Boolean.toString(receivedErrorDataModel.bn))
-                        .replace("%e", Boolean.toString(receivedErrorDataModel.bn1))
-                        .replace("%f", c175()));
+                cm0.append(String.format(getString(R.string.r22),
+                        receivedErrorDataModel.bn,
+                        receivedErrorDataModel.bn1,
+                        c175()));
             }
             cm0.append("<br><br>");
            /* if (bn || Build.VERSION.SDK_INT == 21) {
@@ -2699,23 +2704,23 @@ public class MAIN extends MainBaseActivity implements Format {
             if (b == null || c == null || b.getUrl() == null || c.getData() == null || c.getResponseHeaders() == null) {
                 return;
             }
-            String sg9 = getString(R.string.v2)
-                    .replace("%a", b.getUrl().toString())
-                    .replace("%b", c.getData().toString())
-                    .replace("%c", c.getEncoding())
-                    .replace("%d", c.getMimeType())
-                    .replace("%e", c.getReasonPhrase())
-                    .replace("%f", c.getResponseHeaders().toString())
-                    .replace("%g", Integer.toString(c.getStatusCode()))
-                    .replace("%h", Boolean.toString(b.isForMainFrame()))
-                    .replace("%i", Boolean.toString(b.hasGesture()))
-                    .replace("%j", c175());
-          /*  if (cm0 ==null) {
+            String sg9 = String.format(getString(R.string.v2),
+                    b.getUrl().toString(),
+                    c.getData().toString(),
+                    c.getEncoding(),
+                    c.getMimeType(),
+                    c.getReasonPhrase(),
+                    c.getResponseHeaders().toString(),
+                    c.getStatusCode(),
+                    b.isForMainFrame(),
+                    b.hasGesture(),
+                    c175());
+            if (cm0 ==null) {
                 cm0 = new StringBuilder(sg9);
                 cm0.append("<br><br>");
             } else {
                 cm0.append(sg9).append("<br><br>");
-            }*/
+            }
         } catch (Exception e) {
             DiagnosticData.a(e);
         }
@@ -2728,9 +2733,9 @@ public class MAIN extends MainBaseActivity implements Format {
         if (cm2 == null) {
             cm2 = new StringBuilder();
         }
-        String sg = getString(R.string.g19)
-                .replace("%a", c.getUrl())
-                .replace("%b", Integer.toString(c.getPrimaryError()));
+        String sg = String.format(getString(R.string.g19),
+                c.getUrl(),
+                c.getPrimaryError());
         cm2.append(sg);
         cm2.append("<br><br>");
         SpannableString xjendndj = new SpannableString(c.getUrl());
@@ -3034,7 +3039,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a221().getBoolean("Java10", true)) {
             new AlertDialog.Builder(this)
                     .setCancelable(true)
-                    .setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()))
+                    .setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())))
                     .setMessage(c).setPositiveButton(getString(R.string.i6), (a12, intetg) -> d.confirm())
                     .setOnCancelListener(a1 -> {
                         d.confirm();
@@ -3051,7 +3056,7 @@ public class MAIN extends MainBaseActivity implements Format {
             LayoutInflater b54 = getLayoutInflater();
             View c34 = b54.inflate(R.layout.x, null);
             a89.setCancelable(true);
-            a89.setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()));
+            a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
             a89.setView(c34);
             TextView sjs1 = c34.findViewById(R.id.e1);
             final EDIT sjs = c34.findViewById(R.id.e3);
@@ -3098,7 +3103,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a221().getBoolean("Java11", true)) {
             new AlertDialog.Builder(this)
                     .setCancelable(true)
-                    .setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()))
+                    .setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())))
                     .setMessage(c)
                     .setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
                         e.confirm();
@@ -3120,7 +3125,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a221().getBoolean("Java12", true)) {
             new AlertDialog.Builder(this)
                     .setCancelable(false)
-                    .setTitle(getString(R.string.f25) + Objects.requireNonNull(a.getTitle()))
+                    .setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())))
                     .setMessage(c).setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
                         e.confirm();
                         a12.dismiss();
@@ -3134,10 +3139,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c95(String a, int b, String c) {
-        String sg = getString(R.string.v18)
-                .replace("%a", a)
-                .replace("%b", Integer.toString(b))
-                .replace("%c", c);
+        String sg = String.format(getString(R.string.v18), a, b, c);
         if (cm == null) {
             cm = new StringBuilder();
         }
@@ -3147,12 +3149,12 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c96(final String a, final GeolocationPermissions.Callback b) {
         final boolean c = false;
         AlertDialog.Builder d = new AlertDialog.Builder(this);
-        d.setMessage(getString(R.string.v14).replace("%a", a));
+        d.setMessage(String.format(getString(R.string.v14), a));
         d.setCancelable(false);
         d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
             if (Permission.check(this, Permission.LOCATION, 5)) {
                 b.invoke(a, true, c);
-                c8(getString(R.string.v15).replace("%a", a));
+                c8(String.format(getString(R.string.v15), a));
             } else {
                 w6 = new GeolocationDataModel(a, b);
             }
@@ -3160,7 +3162,7 @@ public class MAIN extends MainBaseActivity implements Format {
         });
         d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
             b.invoke(a, false, c);
-            c7(getString(R.string.v16).replace("%a", a));
+            c7(String.format(getString(R.string.v16), a));
             a1.dismiss();
         });
         AlertDialog e = d.create();
@@ -3449,7 +3451,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setText(Objects.requireNonNull(Uri.parse(url).getHost()).replace("www.", ""));
         }
         bn.setText(getString(R.string.i6));
-        ti.setText(getString(R.string.f31).replace("%a", "\nhttps://example.com").replace("%b", "http://example.com").replace("%c", "example.com"));
+        ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io", "mrepol742.github.io"));
         final AlertDialog g = a.create();
         bn.setOnClickListener(new View.OnClickListener() {
 
@@ -4448,7 +4450,7 @@ public class MAIN extends MainBaseActivity implements Format {
             if (url.contains(sg)) {
                 return new WebResourceResponse("text/plain",
                         "UTF-8",
-                        new ByteArrayInputStream(getString(R.string.g20).getBytes()));
+                        new ByteArrayInputStream(String.format(getString(R.string.g20), url).getBytes()));
             }
         }
         return null;
@@ -4647,7 +4649,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
                     if (w6 != null) {
                         w6.b.invoke(w6.a, true, false);
-                        c8(getString(R.string.v15).replaceAll("%a", w6.a));
+                        c8(String.format(getString(R.string.v15),w6.a));
                         w6 = null;
                     } else {
                         h.reload();
@@ -4669,7 +4671,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         w8.pr.grant(w8.pr.getResources());
                         d12.c(new PermissionObjectDataModel(w8.pr.getOrigin().getHost(), Arrays.toString(w8.pr.getResources()), "true", "false"));
 
-                        c8(getString(R.string.i40).replaceAll("%a", Objects.requireNonNull(w8.pr.getOrigin().getHost())).replaceAll("%b", Arrays.toString(w8.pr.getResources())));
+                        c8(String.format(getString(R.string.i40), Objects.requireNonNull(w8.pr.getOrigin().getHost()), Arrays.toString(w8.pr.getResources())));
                         w8 = null;
                     } else {
                         h.reload();
@@ -4691,7 +4693,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     if (w8 != null) {
                         w8.pr.grant(w8.pr.getResources());
                         d12.c(new PermissionObjectDataModel(w8.pr.getOrigin().getHost(), Arrays.toString(w8.pr.getResources()), "true", "false"));
-                        c8(getString(R.string.i40).replaceAll("%a", Objects.requireNonNull(w8.pr.getOrigin().getHost())).replaceAll("%b", Arrays.toString(w8.pr.getResources())));
+                        c8(String.format(getString(R.string.i40), Objects.requireNonNull(w8.pr.getOrigin().getHost()), Arrays.toString(w8.pr.getResources())));
                         w8 = null;
                     } else {
                         h.reload();

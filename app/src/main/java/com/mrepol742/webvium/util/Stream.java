@@ -1,12 +1,18 @@
 /*
  *
- * Created by Melvin Jones Repol on 4/17/21 10:27 AM
- * Copyright (c) 2021 . All rights reserved. Melvin Jones Repol(mrepol742.github.io)
- * Last modified 4/17/21 10:26 AM
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
  *
- *  License under the GNU General Public License, Version 3.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
- *  https://www.gnu.org/licenses/gpl-3.0.en.html
- *  Unless required by the applicable law or agreed in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mrepol742.webvium.util;
@@ -50,23 +56,22 @@ public class Stream {
             boolean n = c.isMulticastAddress();
             String o = c.getCanonicalHostName();
             String p = c.getHostAddress();
-            return main.replace("%a", d)
-                    .replace("%b", p)
-                    .replace("%c", Integer.toString(e))
-                    .replace("%d", o)
-                    .replace("%e", Boolean.toString(f))
-                    .replace("%f", Boolean.toString(g))
-                    .replace("%g", Boolean.toString(h))
-                    .replace("%h", Boolean.toString(i))
-                    .replace("%i", Boolean.toString(j))
-                    .replace("%j", Boolean.toString(k))
-                    .replace("%k", Boolean.toString(l))
-                    .replace("%l", Boolean.toString(m))
-                    .replace("%m", Boolean.toString(n));
+            return String.format(main, c.getHostName(),
+                    c.getHostAddress(),
+                    c.hashCode(),
+                    c.getCanonicalHostName(),
+                    c.isAnyLocalAddress(),
+                    c.isLinkLocalAddress(),
+                    c.isLoopbackAddress(),
+                    c.isMCGlobal(),
+                    c.isMCLinkLocal(),
+                    c.isMCNodeLocal(),
+                    c.isMCOrgLocal(),
+                    c.isMCSiteLocal(),
+                    c.isMulticastAddress());
         } catch (Exception ex) {
             DiagnosticData.a(ex.getClass().getName());
         }
-
         return problem;
     }
 
