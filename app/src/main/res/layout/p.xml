@@ -25,9 +25,8 @@
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
         a:layout_centerInParent="true"
-        a:paddingStart="20dp"
-        a:paddingEnd="20dp">
-
+        a:paddingStart="25dp"
+        a:paddingEnd="25dp">
 
         <ImageView
             a:id="@id/b20"
@@ -41,7 +40,7 @@
             a:layout_width="wrap_content"
             a:layout_height="wrap_content"
             a:layout_centerVertical="true"
-            a:layout_margin="10dp"
+            a:layout_margin="5dp"
             a:layout_toEndOf="@id/b20"
             a:padding="10dp"
             a:textSize="25sp" />

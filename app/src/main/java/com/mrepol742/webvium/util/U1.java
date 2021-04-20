@@ -27,15 +27,17 @@ public class U1 {
     }
 
     public static String a(int targetStringLength) {
-        int leftLimit = 65;
-        int rightLimit = 122;
+        return aN(targetStringLength, 64, 122);
+    }
+
+    public static String aN(int targetStringLength, int leftLimit, int rightLimit) {
         StringBuilder buffer = new StringBuilder(targetStringLength);
         int i = 0;
         Random random = new Random();
         while (i < targetStringLength) {
-            int randomLimitedInt = leftLimit + (int) (random.nextInt() * (rightLimit - leftLimit + 1));
+            int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
             if (randomLimitedInt <= 90 || randomLimitedInt >= 98) {
-                buffer.append((char) randomLimitedInt);
+                buffer.append((char)randomLimitedInt);
             }
             i++;
         }

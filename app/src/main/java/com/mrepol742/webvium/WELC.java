@@ -86,7 +86,7 @@ public class WELC extends BaseActivity {
         iv = findViewById(R.id.b20);
         tv = findViewById(R.id.c6);
         fl = findViewById(R.id.h10);
-        tv.setText(Package.c());
+        tv.setText(getString(R.string.y63));
         rl.setBackgroundResource(R.drawable.a11);
         rl.setElevation(5);
         iv.setImageResource(R.drawable.b14);
@@ -144,7 +144,9 @@ public class WELC extends BaseActivity {
         View c = View.inflate(this, R.layout.a3, null);
         TextView ed = c.findViewById(R.id.n23);
         final Button bn = c.findViewById(R.id.n24);
-        bn.setText(getString(R.string.n25));
+        bn.setBackgroundResource(R.drawable.c11);
+        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+        bn.setText(getString(R.string.y62));
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(Resources.b(this, R.color.c));
         } else {
@@ -157,6 +159,9 @@ public class WELC extends BaseActivity {
                 .addOnScrollChangedListener(() -> {
                     if (sv.getChildAt(0).getBottom()
                             <= (sv.getHeight() + sv.getScrollY())) {
+                        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+                        bn.setText(getString(R.string.n25));
+                        bn.setBackgroundResource(R.drawable.c10);
                         bn.setOnClickListener(view -> {
                             b();
                             fl.removeView(c);
@@ -168,7 +173,6 @@ public class WELC extends BaseActivity {
         ed.setTypeface(type(Typeface.NORMAL));
         Html.a(ed, getString(R.string.n23));
         fl.addView(c);
-        Toast.a(this, getString(R.string.y62));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -176,14 +180,17 @@ public class WELC extends BaseActivity {
         View c = View.inflate(this, R.layout.a3, null);
         TextView ed = c.findViewById(R.id.n23);
         final Button bn = c.findViewById(R.id.n24);
+        bn.setBackgroundResource(R.drawable.c11);
+        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
         ScrollView sv = c.findViewById(R.id.j);
-
         sv.getViewTreeObserver()
                 .addOnScrollChangedListener(() -> {
                     if (sv.getChildAt(0).getBottom()
                             <= (sv.getHeight() + sv.getScrollY())) {
+                        bn.setText(getString(R.string.n25));
+                        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+                        bn.setBackgroundResource(R.drawable.c10);
                         bn.setOnClickListener(view -> {
-
                             fl.removeView(c);
                             l3();
                             l6();
@@ -191,7 +198,7 @@ public class WELC extends BaseActivity {
                     }
                 });
         sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        bn.setText(getString(R.string.n25));
+        bn.setText(getString(R.string.y62));
         bn.setAllCaps(true);
         bn.setTypeface(type(Typeface.BOLD));
         if (!a221().getBoolean("autoUpdate", false)) {
@@ -202,7 +209,6 @@ public class WELC extends BaseActivity {
         Html.a(ed, getString(R.string.n24));
         ed.setTypeface(type(Typeface.NORMAL));
         fl.addView(c);
-        Toast.a(this, getString(R.string.y62));
     }
 
     private void l3() {
@@ -289,6 +295,19 @@ public class WELC extends BaseActivity {
         return false;
     }
 
+    public void check() {
+        Runnable runnable = () -> {
+            File fe = new File(StorageDirectory.a() + "/.ignore");
+            if (fe.exists()) {
+                runOnUiThread(this::l3);
+            } else {
+                runOnUiThread(this::a2);
+            }
+        };
+        new Thread(runnable).start();
+    }
+
+
     class A17a extends CountDownTimer {
 
         public A17a(long a, long b) {
@@ -299,7 +318,7 @@ public class WELC extends BaseActivity {
         @Override
         public void onFinish() {
             WELC.this.rl.setVisibility(View.GONE);
-            WELC.this.a2();
+            WELC.this.check();
             WELC.this.bn = true;
         }
     }

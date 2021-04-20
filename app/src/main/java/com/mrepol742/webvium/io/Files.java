@@ -74,17 +74,13 @@ public class Files {
     }
 
     public static void createNewFolder(String a) {
-        Thread thread = new Thread(() -> {
-            createNewFolder(new java.io.File(a));
-        });
-        thread.start();
+       Runnable runnable = () -> createNewFolder(new File(a));
+      new Thread(runnable).start();
     }
 
     public static void delete(String a) {
-        Thread thread = new Thread(() -> {
-            delete(new java.io.File(a));
-        });
-        thread.start();
+        Runnable runnable = () -> delete(new File(a));
+        new Thread(runnable).start();
     }
 
     public static boolean delete(java.io.File fe) {
@@ -146,10 +142,8 @@ public class Files {
     }
 
     public static void write(String location, String data, boolean readOnly) {
-        Thread thread = new Thread(() -> {
-            write(new java.io.File(location), data, readOnly);
-        });
-        thread.start();
+        Runnable runnable = () -> write(new File(location), data, readOnly);
+        new Thread(runnable).start();
     }
 
     public static boolean copy(java.io.File fe, java.io.File fe2, boolean readOnly) {
@@ -181,11 +175,7 @@ public class Files {
     }
 
     public static void copy(String sg, String sg0, boolean readOnly) {
-        Runnable re = new Runnable() {
-            public void run() {
-                copy(new File(sg), new File(sg0), readOnly);
-            }
-        };
+        Runnable re = () -> copy(new File(sg), new File(sg0), readOnly);
         new Thread(re).start();
     }
 }

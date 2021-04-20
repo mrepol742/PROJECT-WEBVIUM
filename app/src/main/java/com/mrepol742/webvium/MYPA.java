@@ -53,7 +53,7 @@ public class MYPA extends MainReceiver {
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
                 Intents.a(a, MAIN.class);
             }
-            Toast.b(a, a.getString(R.string.y61));
+            Toast.d(a, a.getString(R.string.y61));
             Intent intent = new Intent(a, UPDA.class);
             intent.putExtra("sta", "non");
             a.startService(intent);

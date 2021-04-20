@@ -6,10 +6,6 @@
     @com.mrepol742.webvium.annotation.release.Keep <methods>;
 }
 
--keep class * {
-    @com.mrepol742.webvium.annotation.release.Keep <methods>;
-}
-
 -keep class com.mrepol742.webvium.BDMS
 -keep class com.mrepol742.webvium.DDMS
 -keep class com.mrepol742.webvium.PDMS
@@ -24,4 +20,4 @@
 -optimizationpasses 5
 -allowaccessmodification
 -overloadaggressively
--renamesourcefileattribute "PROPERTY_OF_MELVIN_JONES_REPOL"
+-renamesourcefileattribute "Copyright-2021-Melvin-Jones-Repol"
