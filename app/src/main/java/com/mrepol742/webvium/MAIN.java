@@ -2064,6 +2064,8 @@ public class MAIN extends MainBaseActivity implements Format {
         String a5 = a.trim().toLowerCase();
         if (a.equals("webvium://log")) {
             h.loadUrl(StorageDirectory.getCacheDir(this) + "/log");
+        } else if (a.equals("webvium://logcat")) {
+            Intents.a(this, TERM.class);
         } else if (IPAddress.isValidIpAddress(a)) {
             h.loadUrl(a);
         } else if (URLUtil.isValidUrl(a5)) {

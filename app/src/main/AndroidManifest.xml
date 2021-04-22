@@ -155,7 +155,7 @@
             a:windowSoftInputMode="stateHidden" />
         <!-- TERMS.. / PRIVACY.. -->
         <activity
-            a:name="com.mrepol742.webvium.EULA"
+            a:name="com.mrepol742.webvium.TERM"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="stateHidden" />

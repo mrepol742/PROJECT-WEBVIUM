@@ -678,7 +678,7 @@ public class SEAR extends MainBaseActivity {
     }
 
     public void v(String b) {
-        Intent a = new Intent(this, EULA.class);
+        Intent a = new Intent(this, TERM.class);
         a.putExtra("a", b);
         startActivity(a);
     }

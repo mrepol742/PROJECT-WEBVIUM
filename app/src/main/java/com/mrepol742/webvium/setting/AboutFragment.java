@@ -18,7 +18,6 @@
 package com.mrepol742.webvium.setting;
 
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -27,7 +26,7 @@ import android.provider.Settings;
 import com.mrepol742.webvium.CRED;
 import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.EULA;
+import com.mrepol742.webvium.TERM;
 import com.mrepol742.webvium.WELC;
 import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
@@ -36,7 +35,6 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.telemetry.DiagnosticData;
 import com.mrepol742.webvium.util.Base64;
-import com.mrepol742.webvium.util.Long;
 import com.mrepol742.webvium.util.Stream;
 
 import java.text.SimpleDateFormat;
@@ -59,12 +57,7 @@ public class AboutFragment extends BasePreferenceFragment {
             j512.setSummary(getActivity().getSharedPreferences("di", 0).getString("di", "742"));
             Preference a7 = findPreference("g5");
             a7.setOnPreferenceClickListener(a -> {
-                Intents.e(getActivity(), "a", "a", EULA.class);
-                return true;
-            });
-            Preference a8 = findPreference("g8");
-            a8.setOnPreferenceClickListener(a -> {
-                Intents.e(getActivity(), "a", "b", EULA.class);
+                Intents.a(getActivity(), TERM.class);
                 return true;
             });
             Preference a5 = findPreference("p20");
@@ -93,7 +86,6 @@ public class AboutFragment extends BasePreferenceFragment {
                 a(a51);
             }
             Preference preference = findPreference("ins12");
-            Preference preference13 = findPreference("ins13");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, yyyy | hh:mm:ss", Locale.US);
             try {
                 preference.setTitle(getString(R.string.x56));
@@ -101,13 +93,6 @@ public class AboutFragment extends BasePreferenceFragment {
             } catch (Exception exception) {
                 DiagnosticData.a(exception);
                 preference.setSummary(getString(R.string.x58));
-            }
-            try {
-                preference13.setTitle(getString(R.string.x57));
-                preference.setSummary(simpleDateFormat.format(new Date(Package.h(getActivity()))));
-            } catch (Exception exception) {
-                DiagnosticData.a(exception);
-                preference13.setSummary(getString(R.string.x59));
             }
 
 

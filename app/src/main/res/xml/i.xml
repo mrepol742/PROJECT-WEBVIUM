@@ -27,16 +27,10 @@
     <com.mrepol742.webvium.PREF
         a:key="ins12" />
     <com.mrepol742.webvium.PREF
-        a:key="ins13" />
-
-    <com.mrepol742.webvium.PREF
         a:key="g5"
         a:summary="@string/g5"
         a:title="@string/f12" />
-    <com.mrepol742.webvium.PREF
-        a:key="g8"
-        a:summary="@string/g8"
-        a:title="@string/f13" />
+
     <com.mrepol742.webvium.PREF
         a:key="m7"
         a:summary="@string/y30"

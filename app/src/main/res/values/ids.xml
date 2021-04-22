@@ -177,6 +177,7 @@
     <item name="k19" type="id" />
     <item name="k20" type="id" />
 
+    <item name="l1" type="id" />
     <item name="l3" type="id" />
     <item name="l4" type="id" />
     <item name="l5" type="id" />
@@ -244,5 +245,6 @@
     <item name="o25" type="id" />
     <item name="o26" type="id" />
     <item name="o27" type="id" />
+    <item name="o28" type="id" />
 
 </resources>

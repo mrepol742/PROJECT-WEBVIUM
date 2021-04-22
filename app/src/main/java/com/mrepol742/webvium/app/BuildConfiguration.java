@@ -24,8 +24,6 @@ public class BuildConfiguration {
 
 
     public static final boolean isDevelopment = false;
-    public static final String downloadSize = "600KB";
-    public static final int NOTIFICATION_DEFAULT_ID_MULTIPLIER = 5000;
     public static final String DB_ID = "_id";
 
     @Remove

@@ -59,6 +59,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
+import java.util.Date;
 
 // @Class WelcomeScreen
 public class WELC extends BaseActivity {
@@ -144,13 +145,17 @@ public class WELC extends BaseActivity {
         View c = View.inflate(this, R.layout.a3, null);
         TextView ed = c.findViewById(R.id.n23);
         final Button bn = c.findViewById(R.id.n24);
+        TextView ed1 = c.findViewById(R.id.o28);
+        ed1.setText(getString(R.string.f12).toUpperCase());
         bn.setBackgroundResource(R.drawable.c11);
         com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
         bn.setText(getString(R.string.y62));
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(Resources.b(this, R.color.c));
+            ed1.setTextColor(Resources.b(this, R.color.c));
         } else {
             ed.setTextColor(Resources.b(this, R.color.b));
+            ed1.setTextColor(Resources.b(this, R.color.b));
         }
         ScrollView sv = c.findViewById(R.id.j);
         bn.setTypeface(type(Typeface.BOLD));
@@ -161,53 +166,23 @@ public class WELC extends BaseActivity {
                             <= (sv.getHeight() + sv.getScrollY())) {
                         com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
                         bn.setText(getString(R.string.n25));
-                        bn.setBackgroundResource(R.drawable.c10);
-                        bn.setOnClickListener(view -> {
-                            b();
-                            fl.removeView(c);
-                        });
-
-                    }
-                });
-        sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        ed.setTypeface(type(Typeface.NORMAL));
-        Html.a(ed, getString(R.string.n23));
-        fl.addView(c);
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    public void b() {
-        View c = View.inflate(this, R.layout.a3, null);
-        TextView ed = c.findViewById(R.id.n23);
-        final Button bn = c.findViewById(R.id.n24);
-        bn.setBackgroundResource(R.drawable.c11);
-        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-        ScrollView sv = c.findViewById(R.id.j);
-        sv.getViewTreeObserver()
-                .addOnScrollChangedListener(() -> {
-                    if (sv.getChildAt(0).getBottom()
-                            <= (sv.getHeight() + sv.getScrollY())) {
-                        bn.setText(getString(R.string.n25));
-                        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
                         bn.setBackgroundResource(R.drawable.c10);
                         bn.setOnClickListener(view -> {
                             fl.removeView(c);
                             l3();
                             l6();
+                            SharedPreferences sp = getSharedPreferences("ag233", 0);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putLong("ag233", new Date().getTime());
+                            editor.apply();
                         });
+
                     }
                 });
         sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        bn.setText(getString(R.string.y62));
-        bn.setAllCaps(true);
-        bn.setTypeface(type(Typeface.BOLD));
-        if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.b(this, R.color.c));
-        } else {
-            ed.setTextColor(Resources.b(this, R.color.b));
-        }
-        Html.a(ed, getString(R.string.n24));
         ed.setTypeface(type(Typeface.NORMAL));
+        ed1.setTypeface(type(Typeface.BOLD));
+        Html.a(ed, getString(R.string.n23));
         fl.addView(c);
     }
 
