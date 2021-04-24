@@ -44,6 +44,7 @@ import com.mrepol742.webvium.widget.Toast;
 
 import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public interface MainJavascriptInterface {
 
 

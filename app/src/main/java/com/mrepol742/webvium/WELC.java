@@ -52,7 +52,6 @@ import com.mrepol742.webvium.telemetry.DiagnosticData;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.cache.FontCache;
-import com.mrepol742.webvium.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -190,7 +189,7 @@ public class WELC extends BaseActivity {
         a();
         SharedPreferences a5 = getSharedPreferences("dnr", 0);
         SharedPreferences.Editor b5 = a5.edit();
-        b5.putInt("wlc1", 275);
+        b5.putInt("noid", 275);
         b5.apply();
         Intents.b(this, BACK.class);
         String sg = AppID.getAppID(this);

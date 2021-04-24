@@ -79,10 +79,8 @@ public class SAVE extends MainService {
                         DiagnosticData.a("Save link succeed");
                 }
             }
-        } catch (MalformedURLException mu) {
+        } catch (IOException mu) {
             DiagnosticData.a(mu);
-        } catch (IOException io) {
-            DiagnosticData.a(io);
         }
 
 

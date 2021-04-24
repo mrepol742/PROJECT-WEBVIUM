@@ -113,6 +113,7 @@ public class TOOL extends BaseActivity {
 
     }
 
+    @SuppressLint("AlwaysShowAction")
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 0, 0, getString(R.string.a11)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -123,6 +124,7 @@ public class TOOL extends BaseActivity {
         return super.onCreateOptionsMenu(a);
     }
 
+    @SuppressLint("AlwaysShowAction")
     @Override
     public boolean onPrepareOptionsMenu(Menu a) {
         MenuItem b1 = a.findItem(1);

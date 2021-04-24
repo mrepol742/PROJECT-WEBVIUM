@@ -17,6 +17,7 @@
 
 package com.mrepol742.webvium.app.main;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
@@ -65,6 +66,7 @@ public class MainBaseAdapter extends BaseAdapter implements View.OnTouchListener
         v.getRootView().setLayoutParams(params);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         ClipData.Item item = new ClipData.Item(view.getTag().toString());

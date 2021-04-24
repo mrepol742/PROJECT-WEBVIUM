@@ -30,6 +30,7 @@ import com.mrepol742.webvium.telemetry.DiagnosticData;
 
 import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class Vibrate {
 
     @Keep

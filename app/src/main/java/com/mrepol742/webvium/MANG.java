@@ -42,7 +42,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.W6;
 import com.mrepol742.webvium.app.base.BaseActivity;
@@ -62,7 +61,6 @@ import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.view.Animation;

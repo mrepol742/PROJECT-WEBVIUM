@@ -53,7 +53,8 @@
     <uses-permission a:name="android.permission.VIBRATE" />
     <uses-permission
         a:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        a:maxSdkVersion="28" />
+        a:maxSdkVersion="28"
+        tools:ignore="ScopedStorage" />
     <uses-permission a:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission a:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission a:name="android.permission.WAKE_LOCK" />

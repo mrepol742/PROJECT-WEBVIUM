@@ -75,7 +75,6 @@
     <string name="b13">Download Files Automatically</string>
     <string name="b14">Download over Wi-Fi Only</string>
     <string name="b16">Show Demo</string>
-    <string name="b17">Done</string>
     <string name="b18">Restore Default Settings</string>
     <string name="b19">Reset to Default</string>
     <string name="b20">Reset</string>
@@ -153,7 +152,7 @@
     <string name="f16">Databases, cache, cookies</string>
     <string name="f17">Clears all storage currently being used by the JavaScript storage APIs. This includes the Application Cache, Web SQL Database and the HTML5 Web Storage APIs.</string>
     <string name="f19">Facebook</string>
-    <string name="f20">Melvin Jones Repol Facebook Page</string>
+    <string name="f20">Facebook Page (DROID MJ)</string>
     <string name="g1">Instagram</string>
     <string name="g2">Gmail</string>
     <string name="g3">Clears any saved credentials for HTTP authentication</string>
@@ -484,7 +483,7 @@
     <string name="z6">Clear Session Cookies</string>
     <string name="z7">Run Garbage Collector Immediately</string>
     <string name="z8">Immediately run gc when exiting the activity</string>
-    <string name="z9">Webvium Facebook Page</string>
+    <string name="z9">Facebook Page (Webvium)</string>
     <string name="z10">Stack Overflow</string>
     <string name="z12">IP Geolocation</string>
     <string name="z14">Github</string>
@@ -785,9 +784,9 @@
     <string name="u23">Edit</string>
     <string name="u24">Query</string>
     <string name="u25">Manage Space Icon</string>
-    <string name="u26">Lightweight, Fast, Material and Full-Featured Android Web Browser</string>
+    <string name="u26">©2021 All rights reserved.</string>
     <string name="u27">Lock Webvium</string>
-    <string name="u28">I\'m a native android developer on Java with a sound of knowledge in Web Designing.\nThere are people in this world that go out of their way to make things difficult for themselves just to prove that those things can be done.. And I\'m one of them.</string>
+    <string name="u28">There is always only one truth!\nI am programmer, and i have no life!</string>
     <string name="u29">Melvin Jones Repol</string>
     <string name="u30">Back Navigation</string>
     <string name="v21">Facebook</string>
@@ -866,7 +865,7 @@
     <string name="x41">Youtube</string>
     <string name="x42">Github</string>
     <string name="x43">Facebook</string>
-    <string name="x44">Patreon</string>
+
     <string name="x45">Export Databases</string>
     <string name="x46">Import Databases</string>
     <string name="x47">To Import a Database</string>
@@ -878,11 +877,11 @@
     <string name="x53">Diagnostic Service</string>
     <string name="x54">Webvium Logcat</string>
     <string name="x56">Last Installed on:</string>
-
+    <string name="x57">Webvium</string>
     <string name="x58">An error was happened while getting the last install time</string>
-    <string name="x59">An error was happened while getting the last update time</string>
     <string name="x60">Webvium Experiments</string>
     <string name="y61">Thanks for keeping me up to date. ❤❤</string>
     <string name="y62">Scroll Down to Continue</string>
     <string name="y63">Hello World</string>
+
 </resources>

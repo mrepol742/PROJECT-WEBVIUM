@@ -104,33 +104,3 @@
         a:padding="15dp"
         a:textSize="16sp" />
 </RelativeLayout>
-
-
-    <!--
-
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
-
-        a:layout_width="match_parent"
-        a:layout_height="match_parent"
-       >
-
-    <include  layout="@layout/a20"/>
-
-    <LinearLayout
-        a:layout_width="match_parent" a:layout_below="@id/c3" a:layout_centerHorizontal="true"
-        a:layout_height="match_parent"  a:gravity="center"
-        a:orientation="vertical">
-        <TextView a:background="@drawable/test" a:elevation="5dp" a:paddingTop="20dp" a:paddingBottom="20dp" a:paddingLeft="30dp" a:paddingRight="30dp" a:gravity="center" a:textSize="25sp" a:textColor="?g" a:layout_width="wrap_content" a:layout_height="wrap_content" a:text="DROID MJ" />
-
-        <TextView a:textSize="20sp" a:layout_margin="10dp" a:layout_width="wrap_content" a:layout_height="wrap_content" a:drawableStart="@drawable/z" a:text="Samiun Nafis" a:gravity="center" a:padding="10dp" />
-        <TextView a:textSize="20sp" a:layout_margin="10dp" a:layout_width="wrap_content" a:layout_height="wrap_content" a:drawableStart="@drawable/z" a:text="John Oye" a:gravity="center" a:padding="10dp" />
-    </LinearLayout>
-        <TextView a:layout_alignParentBottom="true" a:layout_centerHorizontal="true"
-            a:layout_width="wrap_content"  a:gravity="center" a:padding="15dp"  a:textSize="16sp"
-            a:layout_height="wrap_content" a:text="BuildConfiguration | The revolutionary browser"/>
-    </RelativeLayout>
-
-
-    -->

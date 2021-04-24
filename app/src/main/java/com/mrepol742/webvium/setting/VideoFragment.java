@@ -85,6 +85,7 @@ public class VideoFragment extends BasePreferenceFragment {
                             d5.write(e5, 0, f5);
                         }
                     }
+                    assert c5 != null;
                     c5.close();
                     d5.flush();
                     d5.close();

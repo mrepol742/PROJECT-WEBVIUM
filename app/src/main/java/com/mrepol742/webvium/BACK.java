@@ -92,6 +92,7 @@ public class BACK extends MainService {
         String sg = getFilesDir() + "/Backup/Application/";
         java.io.File fe = new java.io.File(sg);
         String[] qw = fe.list();
+        assert qw != null;
         if (qw.length != 0) {
             for (String sg2 : qw) {
                 FileInputStream fos = new FileInputStream(getFilesDir() + "/Backup/Application/" + sg2);

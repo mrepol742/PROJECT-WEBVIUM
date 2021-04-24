@@ -21,6 +21,7 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+@SuppressWarnings("deprecation")
 public class BaseFragment extends Fragment {
 
     private SharedPreferences sharedPreferences;

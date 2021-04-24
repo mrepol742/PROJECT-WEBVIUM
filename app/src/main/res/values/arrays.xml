@@ -232,6 +232,7 @@
 
 
     <string-array name="a5">
+        <item name="x57">@string/x57</item>
         <item name="1o">@string/j14</item>
         <item name="7o">@string/j16</item>
         <item name="30o">@string/j17</item>
@@ -239,6 +240,7 @@
 
     </string-array>
     <string-array name="a6">
+        <item name="x57">x57</item>
         <item name="1o">1o</item>
         <item name="7o">7o</item>
         <item name="30o">30o</item>

@@ -16,6 +16,7 @@
   -->
 
 <LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     a:layout_width="fill_parent"
 
     a:layout_height="fill_parent"
@@ -31,7 +32,8 @@
         a:layout_gravity="center_vertical"
         a:layout_marginTop="10dp"
         a:labelFor="@id/g8"
-        a:textSize="@dimen/c" />
+        a:textSize="@dimen/c"
+        tools:ignore="LabelFor" />
 
     <com.mrepol742.webvium.EDIT
         a:id="@id/g8"

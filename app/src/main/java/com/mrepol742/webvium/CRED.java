@@ -188,16 +188,13 @@ public class CRED extends BaseActivity {
                     case 8:
                         c(Base64.decode(accounts[8] + "="));
                         return true;
-                    case 9:
-                        c(Base64.decode(accounts[9]));
-                        return true;
 
                 }
                 return false;
             };
             Menu me = pm0.getMenu();
-            me.add(0, 0, 0, getString(R.string.f20)).setOnMenuItemClickListener(e);
             me.add(0, 1, 0, getString(R.string.f19)).setOnMenuItemClickListener(e);
+            me.add(0, 0, 0, getString(R.string.f20)).setOnMenuItemClickListener(e);
             me.add(0, 2, 0, getString(R.string.z9)).setOnMenuItemClickListener(e);
             me.add(0, 3, 0, getString(R.string.g1)).setOnMenuItemClickListener(e);
             me.add(0, 4, 0, getString(R.string.z14)).setOnMenuItemClickListener(e);
@@ -205,7 +202,7 @@ public class CRED extends BaseActivity {
             me.add(0, 6, 0, getString(R.string.n16)).setOnMenuItemClickListener(e);
             me.add(0, 7, 0, getString(R.string.g2)).setOnMenuItemClickListener(e);
             me.add(0, 8, 0, getString(R.string.x41)).setOnMenuItemClickListener(e);
-            me.add(0, 9, 0, getString(R.string.x44)).setOnMenuItemClickListener(e);
+
         }
         pm0.show();
     }

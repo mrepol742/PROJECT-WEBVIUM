@@ -46,7 +46,6 @@ import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.IntentsFilter;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;

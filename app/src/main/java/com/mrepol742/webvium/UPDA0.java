@@ -31,12 +31,10 @@ import com.mrepol742.webvium.util.Stream;
 
 // @Class UpdateService
 public class UPDA0 extends MainService {
-    private SharedPreferences sp;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     // TODO: I temporarily stopped this service for a cuz

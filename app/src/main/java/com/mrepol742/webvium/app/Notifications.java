@@ -24,6 +24,7 @@ import android.os.Build;
 
 import java.util.Random;
 
+@SuppressWarnings("ALL")
 public class Notifications {
     public static final int DEFAULT = 10;
     public static final int FOREGROUND = 20;

@@ -736,6 +736,7 @@ public class SEAR extends MainBaseActivity {
             } else if (sg.equals(Intents.ACTION_PASTE)) {
                 try {
                     String c = Clipboard.b(this);
+                    assert c != null;
                     if (U3.b(c)) {
                         p.setText(c);
                     } else {

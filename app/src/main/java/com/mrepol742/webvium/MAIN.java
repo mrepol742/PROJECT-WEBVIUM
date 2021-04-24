@@ -583,7 +583,7 @@ public class MAIN extends MainBaseActivity implements Format {
     protected void onCreate(Bundle a) {
 
         super.onCreate(a);
-        int k5 = getSharedPreferences("dnr", 0).getInt("wlc1", 0);
+        int k5 = getSharedPreferences("dnr", 0).getInt("noid", 0);
         if (k5 != 275) {
             Intents.a(this, WELC.class);
             overridePendingTransition(R.anim.f, R.anim.b);
@@ -1825,7 +1825,6 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c35(SpannableString ssb, String url, int it) {
         try {
-
             if (url.startsWith("https://")) {
                 ssb.setSpan(this.A, it, 8, 0);
             } else if (url.startsWith("http://")) {
@@ -2008,6 +2007,40 @@ public class MAIN extends MainBaseActivity implements Format {
         g.show();
     }
 
+    public String c46() {
+        switch (Objects.requireNonNull(a221().getString("searchP", ""))) {
+            case SE_DUCKDUCKGO:
+                return searchEngine[1];
+            default:
+            case SE_GOOGLE:
+                return searchEngine[0] + searchPath[0];
+            case SE_BING:
+                return searchEngine[2] + searchPath[0];
+            case SE_YAHOO:
+                return searchPath[1];
+            case SE_ASK:
+                return searchPath[2];
+            case SE_AOL:
+                return searchPath[3];
+            case SE_BAIDU:
+                return searchEngine[6] + searchPath[4];
+            case SE_WOLFRAMALPHA:
+                return searchEngine[7] + searchPath[5];
+            case SE_DISCOVERAPP:
+                return searchEngine[8] + searchPath[6];
+            case SE_ECOSIA:
+                return searchEngine[9] + searchPath[0];
+            case SE_STACKOVERFLOW:
+                return searchEngine[10] + searchPath[0];
+            case SE_YOUTUBE:
+                return searchEngine[11] + searchPath[7];
+            case SE_GITHUB:
+                return searchEngine[12] + searchPath[0];
+            case SE_FACEBOOK:
+                return searchEngine[13] + searchPath[8];
+        }
+    }
+
     public void c47() {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
@@ -2111,6 +2144,9 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c51() {
         switch (Objects.requireNonNull(a221().getString("general", "1o"))) {
             default:
+            case "x57":
+                c3("https://mrepol742.github.io/PROJECT-WEBVIUM/Search/index.html?00OOOO0O0OO0=" + c46());
+                break;
             case "1o":
                 c3(c48());
                 break;
@@ -3560,11 +3596,8 @@ public class MAIN extends MainBaseActivity implements Format {
                 a4.close();
                 a3.close();
                 runOnUiThread(() -> c8(getString(R.string.f38)));
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 DiagnosticData.a(e);
-                runOnUiThread(() -> c7(getString(R.string.w14)));
-            } catch (IOException ie) {
-                DiagnosticData.a(ie);
                 runOnUiThread(() -> c7(getString(R.string.w14)));
             }
         };
@@ -3699,51 +3732,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c124(String tg) {
-        switch (Objects.requireNonNull(a221().getString("searchP", ""))) {
-            case SE_DUCKDUCKGO:
-                c3(searchEngine[1] + tg);
-                break;
-            default:
-            case SE_GOOGLE:
-                c3(searchEngine[0] + searchPath[0] + tg);
-                break;
-            case SE_BING:
-                c3(searchEngine[2] + searchPath[0] + tg);
-                break;
-            case SE_YAHOO:
-                c3(searchPath[1] + tg);
-                break;
-            case SE_ASK:
-                c3(searchPath[2] + tg);
-                break;
-            case SE_AOL:
-                c3(searchPath[3] + tg);
-                break;
-            case SE_BAIDU:
-                c3(searchEngine[6] + searchPath[4] + tg);
-                break;
-            case SE_WOLFRAMALPHA:
-                c3(searchEngine[7] + searchPath[5] + tg);
-                break;
-            case SE_DISCOVERAPP:
-                c3(searchEngine[8] + searchPath[6] + tg);
-                break;
-            case SE_ECOSIA:
-                c3(searchEngine[9] + searchPath[0] + tg);
-                break;
-            case SE_STACKOVERFLOW:
-                c3(searchEngine[10] + searchPath[0] + tg);
-                break;
-            case SE_YOUTUBE:
-                c3(searchEngine[11] + searchPath[7] + tg);
-                break;
-            case SE_GITHUB:
-                c3(searchEngine[12] + searchPath[0] + tg);
-                break;
-            case SE_FACEBOOK:
-                c3(searchEngine[13] + searchPath[8] + tg);
-                break;
-        }
+        c3(c46() + tg);
     }
 
     private void c125(int type) {
@@ -4715,15 +4704,14 @@ public class MAIN extends MainBaseActivity implements Format {
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
                     if (cll != null)
                         c106(cll);
-                    cll = null;
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)) {
                         c7(getString(R.string.w26));
                     } else {
                         c53(getString(R.string.w27));
                     }
-                    cll = null;
                 }
+                cll = null;
 
                 break;
 
@@ -4993,7 +4981,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         if (a.getItemId() == R.id.g9) {
 //new tab
-            return super.onOptionsItemSelected(a);
+            return true;
         }
         return super.onOptionsItemSelected(a);
     }

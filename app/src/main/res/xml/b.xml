@@ -19,10 +19,10 @@
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
     <com.mrepol742.webvium.PREF0 a:title="@string/o11">
         <com.mrepol742.webvium.LIST
-            a:defaultValue="1o"
+            a:defaultValue="x57"
             a:dialogTitle="@string/q"
             a:entries="@array/a5"
-            a:entryValues="@array/a6"
+            a:entryValues="@array/a6" a:summary="%1$s"
             a:key="general"
             a:title="@string/n" />
         <com.mrepol742.webvium.EDIT0

@@ -17,6 +17,7 @@
 
 <ScrollView xmlns:a="http://schemas.android.com/apk/res/android"
 
+    xmlns:tools="http://schemas.android.com/tools"
     a:layout_width="fill_parent"
 
     a:layout_height="wrap_content">
@@ -36,7 +37,8 @@
             a:ellipsize="end"
             a:labelFor="@id/d1"
             a:maxLines="1"
-            a:textSize="@dimen/c" />
+            a:textSize="@dimen/c"
+            tools:ignore="LabelFor" />
 
         <com.mrepol742.webvium.EDIT
             a:id="@id/d1"

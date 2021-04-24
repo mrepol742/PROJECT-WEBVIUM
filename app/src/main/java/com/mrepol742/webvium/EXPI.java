@@ -18,15 +18,8 @@
 package com.mrepol742.webvium;
 
 import android.annotation.TargetApi;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -37,11 +30,8 @@ import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Package;
-import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 
@@ -76,11 +66,10 @@ public class EXPI extends BaseActivity {
             int newUpdate = Stream.i(Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "")) + "?raw=true");
             if (newUpdate > b) {
                 tv.append("There's new update available\n");
-                tv.append("Version parsed is " + newUpdate +"\n");
             } else {
                 tv.append("Update check failed!\n");
-                tv.append("Version parsed is " + newUpdate +"\n");
             }
+            tv.append("Version parsed is " + newUpdate +"\n");
         } catch (Exception w) {
             tv.append("Update checks Failed!\n");
             tv.append(Log.getStackTraceString(w) + "\n");

@@ -23,7 +23,7 @@ import java.io.Serializable;
 
 @ObjectSerializability
 public class SDMS implements Serializable {
-    public String sg;
+    public final String sg;
 
     public SDMS(String sg) {
         this.sg = sg;

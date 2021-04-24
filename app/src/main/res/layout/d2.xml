@@ -16,6 +16,7 @@
   -->
 
 <LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     a:id="@id/o24"
     a:layout_width="match_parent"
     a:layout_height="match_parent"
@@ -68,7 +69,8 @@
         a:maxLines="1"
         a:paddingStart="?m"
         a:paddingEnd="?m"
-        a:textSize="@dimen/c" />
+        a:textSize="@dimen/c"
+        tools:ignore="LabelFor" />
 
     <AutoCompleteTextView
         a:id="@id/b15"
@@ -88,7 +90,8 @@
         a:labelFor="@id/h16"
         a:paddingStart="?m"
         a:paddingEnd="?m"
-        a:textSize="@dimen/c" />
+        a:textSize="@dimen/c"
+        tools:ignore="LabelFor" />
 
     <EditText
         a:id="@id/h16"
@@ -99,7 +102,8 @@
         a:gravity="top"
         a:imeOptions="flagNoFullscreen"
         a:inputType="textMultiLine"
-        a:textSize="@dimen/c" />
+        a:textSize="@dimen/c"
+        a:autofillHints="no" />
 
 
 </LinearLayout>

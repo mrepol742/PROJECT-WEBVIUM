@@ -20,8 +20,8 @@
     <item>
         <shape a:shape="rectangle">
             <corners
-                a:bottomLeftRadius="50dp"
-                a:bottomRightRadius="50dp"
+                a:bottomLeftRadius="10dp"
+                a:bottomRightRadius="10dp"
                 a:topLeftRadius="0dp"
                 a:topRightRadius="0dp" />
             <solid a:color="@color/g" />

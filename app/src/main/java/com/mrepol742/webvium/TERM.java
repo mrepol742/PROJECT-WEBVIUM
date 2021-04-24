@@ -18,7 +18,6 @@
 package com.mrepol742.webvium;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
 import com.mrepol742.webvium.text.Html;
 
 import java.text.SimpleDateFormat;

@@ -25,6 +25,7 @@ import android.os.Build;
 
 import com.mrepol742.webvium.annotation.release.Keep;
 
+@SuppressWarnings("ALL")
 public class Package {
     @Keep
     private Package() {

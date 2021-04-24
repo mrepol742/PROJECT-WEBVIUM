@@ -53,7 +53,7 @@ public class IPAddress {
     }
 
     private static int parseInt(String[] dots, int line) throws NumberFormatException {
-        return Integer.parseInt(dots[line].replaceAll(" ", "").replaceAll(".", ""));
+        return Integer.parseInt(dots[line].replaceAll(" ", "").replaceAll("\\.", ""));
     }
 
 }

@@ -29,6 +29,7 @@ import com.mrepol742.webvium.telemetry.DiagnosticData;
 
 import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class MainNotification {
     public static void a(Context ctx, int notifyId) {
         NotificationManager nMgr = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
