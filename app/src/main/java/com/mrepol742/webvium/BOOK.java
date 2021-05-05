@@ -40,7 +40,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkAdapter;
 import com.mrepol742.webvium.bookmark.BookmarkDatabase;
@@ -171,15 +170,15 @@ public class BOOK extends BaseActivity {
             // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
-        int f = Resources.b(this, R.color.c);
-        int g = Resources.b(this, R.color.b);
+        int f = Resources.getColor(this, R.color.c);
+        int g = Resources.getColor(this, R.color.b);
         if (a221().getBoolean("blockSV", true)) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
         c.setElevation(5);
-        f8.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(this, R.drawable.a30), null, null);
+        f8.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.a30), null, null);
         f8.setCompoundDrawablePadding(40);
         d.setTypeface(type(Typeface.BOLD));
         f8.setTypeface(type(Typeface.BOLD));
@@ -199,7 +198,7 @@ public class BOOK extends BaseActivity {
         Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
                 BookmarkDatabase.TABLE_BOOKMARK +
                 " ORDER BY " +
-                BuildConfiguration.DB_ID +
+                "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
             f8.setVisibility(View.VISIBLE);
@@ -259,8 +258,8 @@ public class BOOK extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -342,8 +341,8 @@ public class BOOK extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -449,7 +448,7 @@ public class BOOK extends BaseActivity {
             Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
                     BookmarkDatabase.TABLE_BOOKMARK +
                     " ORDER BY " +
-                    BuildConfiguration.DB_ID +
+                    "_id" +
                     " DESC", null);
             if (res.getCount() == 0) {
                 runOnUiThread(() -> {
@@ -528,10 +527,10 @@ public class BOOK extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.g8);
         final TextView ti = c.findViewById(R.id.e2);
         final Button bn = c.findViewById(R.id.k20);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
-        int e3 = Resources.b(this, R.color.j);
-        int f3 = Resources.b(this, R.color.k);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        int e3 = Resources.getColor(this, R.color.j);
+        int f3 = Resources.getColor(this, R.color.k);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             bn.setTextColor(e);
@@ -544,7 +543,11 @@ public class BOOK extends BaseActivity {
         if (type == 0 || type == 4 || type == 5 || type == 7 || type == 6) {
             ed.setText(url);
         } else if (type == 8) {
-            ed.setText(Stream.c(url, getString(R.string.c33)));
+            Runnable runnable = () -> {
+                String sg = Stream.c(url, getString(R.string.c33));
+                runOnUiThread(() -> ed.setText(sg));
+            };
+            new Thread(runnable).start();
         } else {
             ed.setText(Objects.requireNonNull(Uri.parse(url).getHost()).replaceAll("www.", ""));
         }
@@ -672,8 +675,8 @@ public class BOOK extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);

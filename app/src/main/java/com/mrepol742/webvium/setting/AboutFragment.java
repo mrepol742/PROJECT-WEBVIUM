@@ -28,12 +28,11 @@ import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.TERM;
 import com.mrepol742.webvium.WELC;
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 
@@ -91,13 +90,13 @@ public class AboutFragment extends BasePreferenceFragment {
                 preference.setTitle(getString(R.string.x56));
                 preference.setSummary(simpleDateFormat.format(new Date(Package.g(getActivity()))));
             } catch (Exception exception) {
-                DiagnosticData.a(exception);
+                Log.a(exception);
                 preference.setSummary(getString(R.string.x58));
             }
 
 
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -118,8 +117,6 @@ public class AboutFragment extends BasePreferenceFragment {
                             return true;
                         });
                     });
-                    if (BuildConfiguration.isDevelopment)
-                        DiagnosticData.a("Package Update =" + newUpdate);
                 } else {
                     getActivity().runOnUiThread(() -> {
                         e.setTitle(getString(R.string.z26));
@@ -127,7 +124,7 @@ public class AboutFragment extends BasePreferenceFragment {
                     });
                 }
             } catch (Exception w) {
-                DiagnosticData.a(w);
+                Log.a(w);
                 getActivity().runOnUiThread(() -> {
                     e.setTitle(getString(R.string.z21));
                     e.setSummary(getString(R.string.z30));

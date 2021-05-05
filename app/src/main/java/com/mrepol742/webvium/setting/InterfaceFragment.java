@@ -29,13 +29,12 @@ import android.widget.TextView;
 
 import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -62,31 +61,24 @@ public class InterfaceFragment extends BasePreferenceFragment {
                             d.write(e, 0, f);
                         }
                     }
-                    assert c != null;
-                    c.close();
+                    Objects.requireNonNull(c).close();
                     d.flush();
                     d.close();
                     BitmapCache.getInstance().b(StorageDirectory.getBackground(getActivity()));
                     try {
                         File fe = new File(StorageDirectory.getBackground(getActivity()));
-                        if (BuildConfiguration.isDevelopment) {
-                            if (fe.setReadOnly()) {
-                                DiagnosticData.a("READ ONLY = " + fe.toString());
-                            }
-                        } else {
-                            fe.setReadOnly();
-                        }
+                        fe.setReadOnly();
                         Process p;
                         p = Runtime.getRuntime().exec("attrib +h " + fe.getPath());
                         p.waitFor();
                     } catch (Exception en) {
-                        DiagnosticData.a(en);
+                        Log.a(en);
                     }
                     Intent it = new Intent(Intents.ACTION_INVALIDATE);
                     getActivity().sendBroadcast(it);
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.o29)));
                 } catch (Exception en) {
-                    DiagnosticData.a(en);
+                    Log.a(en);
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.p33)));
                 }
             };
@@ -126,7 +118,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             });
 
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -140,15 +132,15 @@ public class InterfaceFragment extends BasePreferenceFragment {
         f.setText(getString(R.string.o1));
         if (!a221().getBoolean("autoUpdate", false)) {
             if (vr == 1) {
-                f.setTextColor(Resources.b(getActivity(), R.color.b));
+                f.setTextColor(Resources.getColor(getActivity(), R.color.b));
             } else {
-                f.setTextColor(Resources.b(getActivity(), R.color.c));
+                f.setTextColor(Resources.getColor(getActivity(), R.color.c));
             }
         } else {
             if (vr == 1) {
-                f.setTextColor(Resources.b(getActivity(), R.color.c));
+                f.setTextColor(Resources.getColor(getActivity(), R.color.c));
             } else {
-                f.setTextColor(Resources.b(getActivity(), R.color.b));
+                f.setTextColor(Resources.getColor(getActivity(), R.color.b));
             }
         }
         AlertDialog j5 = c.create();

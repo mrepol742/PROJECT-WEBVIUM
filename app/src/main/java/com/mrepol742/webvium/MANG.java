@@ -43,7 +43,6 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.main.MainReceiver;
-import com.mrepol742.webvium.app.W6;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.C10;
@@ -134,8 +133,8 @@ public class MANG extends BaseActivity {
         if (ab != null) {
             ab.setDisplayShowTitleEnabled(false);
         }
-        int it = Resources.b(this, R.color.c);
-        int it2 = Resources.b(this, R.color.b);
+        int it = Resources.getColor(this, R.color.c);
+        int it2 = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             g6.setTextColor(it);
         } else {
@@ -596,13 +595,13 @@ public class MANG extends BaseActivity {
         a.setMessage(b1);
         a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
 
-            C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-            C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+            C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+            C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
             getSharedPreferences("a", 0).edit().clear().apply();
             a221().edit().clear().apply();
             getSharedPreferences("wv,", 0).edit().clear().apply();
             a22.dismiss();
-            W6.a();
+            System.exit(0);
 
         });
         a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
@@ -617,8 +616,8 @@ public class MANG extends BaseActivity {
         a.setTitle(a1);
         a.setMessage(b1);
         a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-            C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+            C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+            C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
             getSharedPreferences("a", 0).edit().clear().apply();
             a221().edit().clear().apply();
             getSharedPreferences("wv,", 0).edit().clear().apply();
@@ -637,7 +636,7 @@ public class MANG extends BaseActivity {
                 MAIN.c63();
             }
             a22.dismiss();
-            W6.a();
+            System.exit(0);
         });
         a.setNegativeButton(getString(R.string.i7), (a2, inetg) -> a2.dismiss());
         a.create().show();
@@ -905,15 +904,15 @@ public class MANG extends BaseActivity {
         f.setText(getString(R.string.o1));
         if (!a221().getBoolean("autoUpdate", false)) {
             if (vr == 1) {
-                f.setTextColor(Resources.b(this, R.color.b));
+                f.setTextColor(Resources.getColor(this, R.color.b));
             } else {
-                f.setTextColor(Resources.b(this, R.color.c));
+                f.setTextColor(Resources.getColor(this, R.color.c));
             }
         } else {
             if (vr == 1) {
-                f.setTextColor(Resources.b(this, R.color.c));
+                f.setTextColor(Resources.getColor(this, R.color.c));
             } else {
-                f.setTextColor(Resources.b(this, R.color.b));
+                f.setTextColor(Resources.getColor(this, R.color.b));
             }
         }
         AlertDialog j5 = c.create();

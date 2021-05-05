@@ -29,7 +29,7 @@ import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -52,16 +52,16 @@ public class SearchFragment extends BasePreferenceFragment {
             SWIT cbf = (SWIT) findPreference("qckS");
             cbf.setOnPreferenceChangeListener((preference, newValue) -> {
                 if (newValue.toString().equals("true")) {
-                    Intents.b(SearchFragment.this.getActivity(), QUIC.class);
+                    Intents.b(getActivity(), QUIC.class);
                 } else {
-                    Intents.i(SearchFragment.this.getActivity(), QUIC.class);
-                    MainNotification.a(SearchFragment.this.getActivity(), Notifications.d);
+                    Intents.i(getActivity(), QUIC.class);
+                    MainNotification.a(getActivity(), Notifications.d);
                 }
                 return true;
             });
 
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 

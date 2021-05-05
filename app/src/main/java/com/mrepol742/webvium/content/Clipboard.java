@@ -22,7 +22,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.U3;
 
 public class Clipboard {
@@ -36,7 +36,7 @@ public class Clipboard {
             ClipData d = ClipData.newPlainText("text", b);
             c.setPrimaryClip(d);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -52,7 +52,7 @@ public class Clipboard {
                 return d.getText().toString();
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         return null;
     }

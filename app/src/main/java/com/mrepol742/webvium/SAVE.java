@@ -27,7 +27,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainService;
@@ -35,7 +34,7 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,7 +42,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -52,7 +50,7 @@ public class SAVE extends MainService {
 
     @Override
     public int onStartCommand(final Intent b34, int c5, int fl) {
-        if (Connectivity.isThereAnyInternetConnection(this) && Connectivity.isRestrictBackground(this)) {
+        if (Connectivity.isThereAnyInternetConnection(this)) {
             s1();
         }
 
@@ -75,12 +73,10 @@ public class SAVE extends MainService {
                     br.close();
                     fr.close();
                     a2(StorageDirectory.getWebviumDir() + "/Downloads/" + a, a);
-                    if (BuildConfiguration.isDevelopment)
-                        DiagnosticData.a("Save link succeed");
                 }
             }
         } catch (IOException mu) {
-            DiagnosticData.a(mu);
+            Log.a(mu);
         }
 
 
@@ -105,7 +101,7 @@ public class SAVE extends MainService {
             m.setContentTitle(b);
         }
         m.setOngoing(true);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(false);
         if (Build.VERSION.SDK_INT <= 26) {
             m.setPriority(android.app.Notification.PRIORITY_LOW);
@@ -133,7 +129,7 @@ public class SAVE extends MainService {
             m.setContentTitle(getResources().getString(R.string.u20));
         }
         m.setStyle(bigText);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
 
         SharedPreferences sq = PreferenceManager.getDefaultSharedPreferences(this);
         m.setAutoCancel(sq.getBoolean("eac", true));

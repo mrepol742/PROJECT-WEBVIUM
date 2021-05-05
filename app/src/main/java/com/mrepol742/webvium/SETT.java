@@ -46,7 +46,7 @@ import com.mrepol742.webvium.setting.SearchFragment;
 import com.mrepol742.webvium.setting.SecurityLockFragment;
 import com.mrepol742.webvium.setting.ToolFragment;
 import com.mrepol742.webvium.setting.VideoFragment;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 
 import java.util.Objects;
@@ -94,11 +94,11 @@ public class SETT extends BaseActivity {
         }
 
         if (!a221().getBoolean("autoUpdate", false)) {
-            h18.setTextColor(Resources.b(this, R.color.c));
-            k8.setTextColor(Resources.b(this, R.color.c));
+            h18.setTextColor(Resources.getColor(this, R.color.c));
+            k8.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            h18.setTextColor(Resources.b(this, R.color.b));
-            k8.setTextColor(Resources.b(this, R.color.b));
+            h18.setTextColor(Resources.getColor(this, R.color.b));
+            k8.setTextColor(Resources.getColor(this, R.color.b));
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
@@ -208,7 +208,7 @@ public class SETT extends BaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 

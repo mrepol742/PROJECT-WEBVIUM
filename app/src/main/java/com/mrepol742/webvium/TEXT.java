@@ -87,19 +87,19 @@ public class TEXT extends BaseActivity {
             }
         });
         if (!a221().getBoolean("autoUpdate", false)) {
-            h18.setTextColor(Resources.b(this, R.color.c));
-            a11.setTextColor(Resources.b(this, R.color.c));
-            a9.setTextColor(Resources.b(this, R.color.c));
-            k8.setTextColor(Resources.b(this, R.color.c));
-            w4.setBackgroundColor(Resources.b(this, R.color.p));
+            h18.setTextColor(Resources.getColor(this, R.color.c));
+            a11.setTextColor(Resources.getColor(this, R.color.c));
+            a9.setTextColor(Resources.getColor(this, R.color.c));
+            k8.setTextColor(Resources.getColor(this, R.color.c));
+            w4.setBackgroundColor(Resources.getColor(this, R.color.p));
             w4.loadDataWithBaseURL(null, "<!DOCTYPE html><html><style name=\"text/css\">@font-face { font-family: classes; src: url(\"file:///android_asset/classes\"); } * { color: #212121; font-family: classes;} ::selection { background-color: #4285f4; color: #ffffff}  </style></html><body><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><p>Paragraph</p></body></html>", "text/html", w4.getTextEncoding(), null);
 
         } else {
-            h18.setTextColor(Resources.b(this, R.color.b));
-            k8.setTextColor(Resources.b(this, R.color.b));
-            a11.setTextColor(Resources.b(this, R.color.b));
-            a9.setTextColor(Resources.b(this, R.color.b));
-            w4.setBackgroundColor(Resources.b(this, R.color.m));
+            h18.setTextColor(Resources.getColor(this, R.color.b));
+            k8.setTextColor(Resources.getColor(this, R.color.b));
+            a11.setTextColor(Resources.getColor(this, R.color.b));
+            a9.setTextColor(Resources.getColor(this, R.color.b));
+            w4.setBackgroundColor(Resources.getColor(this, R.color.m));
             w4.loadDataWithBaseURL(null, "<!DOCTYPE html><html><style name=\"text/css\">@font-face { font-family: classes; src: url(\"file:///android_asset/classes\"); } * { color: #ffffff; font-family: classes;} ::selection { background-color: #4285f4; color: #ffffff} </style></html><body><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><p>Paragraph</p></body></html>", "text/html", w4.getTextEncoding(), null);
 
         }

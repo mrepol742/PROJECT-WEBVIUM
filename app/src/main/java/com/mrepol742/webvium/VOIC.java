@@ -60,8 +60,8 @@ public class VOIC extends BaseActivity {
         super.onCreate(a);
         a225(R.layout.q);
         tv = findViewById(R.id.n21);
-        int f = Resources.b(this, R.color.c);
-        int g = Resources.b(this, R.color.b);
+        int f = Resources.getColor(this, R.color.c);
+        int g = Resources.getColor(this, R.color.b);
         sv = findViewById(R.id.n);
         RelativeLayout rl = findViewById(R.id.w);
 
@@ -72,8 +72,8 @@ public class VOIC extends BaseActivity {
             sv.setBackgroundColor(g);
         } else {
             tv.setTextColor(g);
-            rl.setBackgroundColor(Resources.b(this, R.color.n));
-            sv.setBackgroundColor(Resources.b(this, R.color.n));
+            rl.setBackgroundColor(Resources.getColor(this, R.color.n));
+            sv.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
         if (spr()) {
             Toast.c(this, getString(R.string.n36));

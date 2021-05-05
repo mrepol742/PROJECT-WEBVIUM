@@ -36,7 +36,7 @@ import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.io.FileInputStream;
@@ -58,7 +58,7 @@ public class BACK0 extends BaseActivity {
                 a(getContentResolver().openInputStream(data.getData()));
             } catch (Exception en) {
                 Toast.c(BACK0.this, getString(R.string.z21));
-                DiagnosticData.a(en);
+                Log.a(en);
                 finishAndRemoveTask();
             }
         } else {
@@ -104,7 +104,7 @@ public class BACK0 extends BaseActivity {
             }
         } catch (Exception en) {
             Toast.c(BACK0.this, getString(R.string.z21));
-            DiagnosticData.a(en);
+            Log.a(en);
             finishAndRemoveTask();
         }
     }
@@ -143,7 +143,7 @@ public class BACK0 extends BaseActivity {
                 g(getString(R.string.b27));
                 t();
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
                 d(getString(R.string.b28));
             }
             a12.dismiss();
@@ -176,7 +176,7 @@ public class BACK0 extends BaseActivity {
                 }
                 g(getString(R.string.b27));
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
                 d(getString(R.string.b28));
             }
             a12.dismiss();
@@ -205,7 +205,7 @@ public class BACK0 extends BaseActivity {
                 }
                 g(getString(R.string.b27));
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
                 d(getString(R.string.b28));
             }
             a12.dismiss();
@@ -238,7 +238,7 @@ public class BACK0 extends BaseActivity {
                 }
                 g(getString(R.string.b27));
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
                 d(getString(R.string.b28));
             }
 
@@ -268,7 +268,7 @@ public class BACK0 extends BaseActivity {
                 }
                 g(getString(R.string.b27));
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
                 d(getString(R.string.b28));
             }
             a12.dismiss();
@@ -319,9 +319,9 @@ public class BACK0 extends BaseActivity {
         TextView f = e.findViewById(R.id.g1);
         f.setText(getString(R.string.o1));
         if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.b(this, R.color.c));
+            f.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            f.setTextColor(Resources.b(this, R.color.b));
+            f.setTextColor(Resources.getColor(this, R.color.b));
         }
         AlertDialog j5 = c.create();
         O5 timer = new O5(2000, 2000, j5);
@@ -345,7 +345,7 @@ public class BACK0 extends BaseActivity {
                     a(new FileInputStream(URLDecoder.decode(data.replace("file://", ""), "UTF-8")));
                 } catch (Exception en) {
                     Toast.c(BACK0.this, getString(R.string.z21));
-                    DiagnosticData.a(en);
+                    Log.a(en);
                     finishAndRemoveTask();
                 }
             }
@@ -354,7 +354,7 @@ public class BACK0 extends BaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
             finishAndRemoveTask();
         }
     }

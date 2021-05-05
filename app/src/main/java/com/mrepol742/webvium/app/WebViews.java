@@ -24,7 +24,7 @@ import android.view.View;
 import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.main.MainWebView;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 import java.util.ArrayList;
 
@@ -35,9 +35,6 @@ public class WebViews extends MainWebView {
     @Keep
     public WebViews(Context ct) {
         super(ct);
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("WebView Initialize");
-        }
     }
 
     @Keep

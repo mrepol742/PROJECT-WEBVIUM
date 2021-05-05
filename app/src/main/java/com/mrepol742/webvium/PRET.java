@@ -32,12 +32,11 @@ import android.widget.TextView;
 
 import com.mrepol742.webvium.app.NoSuchObjectToReturn;
 import com.mrepol742.webvium.app.NoSuchStringToReturn;
-import com.mrepol742.webvium.app.W6;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 // @Class Pretend
@@ -77,15 +76,15 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             a225(R.layout.b20);
         }
         tv = findViewById(R.id.n1);
-        int f = Resources.b(this, R.color.c);
-        int g = Resources.b(this, R.color.b);
+        int f = Resources.getColor(this, R.color.c);
+        int g = Resources.getColor(this, R.color.b);
         LinearLayout ll = findViewById(R.id.l10);
         tv.setTextColor(f);
         w4 = new MainWebView(this);
         if (!a221().getBoolean("autoUpdate", false)) {
-            ll.setBackgroundColor(Resources.b(this, R.color.b));
+            ll.setBackgroundColor(Resources.getColor(this, R.color.b));
         } else {
-            ll.setBackgroundColor(Resources.b(this, R.color.n));
+            ll.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
         for (int i : ids) {
             TextView tv4 = findViewById(i);
@@ -94,7 +93,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             try {
                 tv4.setText(n(i));
             } catch (NoSuchObjectToReturn l1) {
-                DiagnosticData.a(l1);
+                Log.a(l1);
             }
             if (i == R.id.n2) {
                 tv4.setBackgroundResource(R.drawable.a27);
@@ -114,7 +113,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
     @Override
     public boolean onKeyDown(int a5, KeyEvent b) {
         if (b.getAction() == KeyEvent.ACTION_DOWN && a5 == KeyEvent.KEYCODE_BACK) {
-            W6.a();
+            System.exit(0);
             return true;
         }
         return false;
@@ -128,7 +127,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
                 PRET.this.b(s);
                 tv.setText("s");
             } catch (NoSuchStringToReturn l2) {
-                DiagnosticData.a(l2);
+                Log.a(l2);
             }
         });
     }

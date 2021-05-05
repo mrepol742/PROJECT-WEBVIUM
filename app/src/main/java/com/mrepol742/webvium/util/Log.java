@@ -15,20 +15,15 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.telemetry;
+package com.mrepol742.webvium.util;
 
 import android.content.Context;
-import android.os.Build;
-import android.util.Log;
 
-import com.mrepol742.webvium.BuildConfig;
 import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.util.AndroidVersion;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,40 +35,36 @@ import java.util.Date;
 import java.util.Locale;
 
 @Test
-public class DiagnosticData {
+public class Log {
 
-    private static final String st = " ============= ";
+    private static final String st = " ~~~~~~~~~~~~~ ";
     private static String sg;
-    private static DiagnosticData a1;
+    private static Log a1;
 
     @Keep
-    private DiagnosticData(Context context) {
-        sg = StorageDirectory.getCacheDir(context) + "/log";
+    private Log(Context context) {
+        sg = StorageDirectory.getFileDir(context) + "/main.log";
     }
 
     public static void getInstance(Context context) {
         if (a1 == null) {
-            a1 = new DiagnosticData(context);
+            a1 = new Log(context);
         }
     }
 
     public static void a(Exception a1) {
-        b(Log.getStackTraceString(a1), a1.getClass().getName());
+        b(android.util.Log.getStackTraceString(a1), a1.getClass().getName());
     }
 
     @Development
     public static void a(String a) {
-        if (BuildConfiguration.isDevelopment) {
-            b(a, "Log");
-        }
+        b(a, "Log");
     }
 
     @Development
     private static void b(String log, String category) {
         if (a1 == null) {
-            if (BuildConfiguration.isDevelopment) {
-                android.util.Log.d(Package.b(), log);
-            }
+            android.util.Log.d(Package.b(), log);
             return;
         }
         Runnable p = () -> {
@@ -86,35 +77,6 @@ public class DiagnosticData {
                         FileOutputStream fileOutputStream = new FileOutputStream(logFile);
                         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
                         outputStreamWriter.append(st)
-                                .append("Device Properties")
-                                .append(st)
-                                .append("\n")
-                                .append("Operating System: ")
-                                .append(AndroidVersion.getVersionName(Build.VERSION.SDK_INT))
-                                .append("\n")
-                                .append("SDK Version: ")
-                                .append(Integer.toString(Build.VERSION.SDK_INT))
-                                .append("\n")
-                                .append("Manufacturer: ")
-                                .append(Build.MANUFACTURER)
-                                .append("\n")
-                                .append("Model: ")
-                                .append(Build.MODEL)
-                                .append("\n\n\n")
-                                .append(st)
-                                .append("Webvium Properties")
-                                .append(st)
-                                .append("\n")
-                                .append("Version Name: ")
-                                .append(BuildConfig.VERSION_NAME)
-                                .append("\n")
-                                .append("Version Code: ")
-                                .append(Integer.toString(BuildConfig.VERSION_CODE))
-                                .append("\n")
-                                .append("Build Type: ")
-                                .append(BuildConfig.BUILD_TYPE)
-                                .append("\n\n\n")
-                                .append(st)
                                 .append(simpleDateFormat.format(new Date()))
                                 .append(st)
                                 .append("\n")
@@ -153,7 +115,7 @@ public class DiagnosticData {
                     fileWriter.close();
                 }
             } catch (Exception ex) {
-                Log.d(Package.b(), log);
+                android.util.Log.d(Package.b(), log);
             }
         };
         new Thread(p).start();

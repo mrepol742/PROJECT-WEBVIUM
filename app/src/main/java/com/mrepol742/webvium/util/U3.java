@@ -35,19 +35,8 @@ public class U3 {
         return !b.isEmpty();
     }
 
-    public static boolean c(String a, String b) {
-        return a.startsWith(b);
+    public static boolean c(String sg, String w) {
+        return sg.equals(w);
     }
 
-    public static boolean d(String a, String b) {
-        return a.endsWith(b);
-    }
-
-    public static boolean e(String a, String b) {
-        return !a.equals(b);
-    }
-
-    public static boolean e(String a, char[] b) {
-        return !a.equals(String.valueOf(b));
-    }
 }

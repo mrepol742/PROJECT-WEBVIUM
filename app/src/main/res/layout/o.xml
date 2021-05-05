@@ -30,8 +30,8 @@
             a:id="@id/u"
             a:layout_width="match_parent"
             a:layout_height="wrap_content"
-            a:layout_marginStart="10dp"
-            a:layout_marginEnd="10dp"
+            a:layout_marginStart="15dp"
+            a:layout_marginEnd="15dp"
             a:textIsSelectable="true"
             a:textSize="@dimen/b" />
     </ScrollView>

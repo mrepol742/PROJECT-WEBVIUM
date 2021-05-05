@@ -72,9 +72,9 @@ public class ASSI extends BaseActivity {
         f2.setFitsSystemWindows(true);
         f2.setBackgroundResource(R.drawable.b17);
         f2.setClickable(true);
-        int d = Resources.b(this, R.color.c);
+        int d = Resources.getColor(this, R.color.c);
 
-        int f = Resources.b(this, R.color.j);
+        int f = Resources.getColor(this, R.color.j);
         setActionBar(o);
         o.setElevation(5);
         p.setTextColor(d);

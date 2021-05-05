@@ -108,12 +108,12 @@ public class SettingAdapter extends MainBaseAdapter {
                 w17.c = e.findViewById(R.id.e18);
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
                 if (!sp.getBoolean("autoUpdate", false)) {
-                    w17.a.setTextColor(Resources.b(a, R.color.c));
-                    w17.b.setTextColor(Resources.b(a, R.color.c));
+                    w17.a.setTextColor(Resources.getColor(a, R.color.c));
+                    w17.b.setTextColor(Resources.getColor(a, R.color.c));
                     w17.c.setBackgroundResource(R.drawable.v);
                 } else {
-                    w17.a.setTextColor(Resources.b(a, R.color.b));
-                    w17.b.setTextColor(Resources.b(a, R.color.b));
+                    w17.a.setTextColor(Resources.getColor(a, R.color.b));
+                    w17.b.setTextColor(Resources.getColor(a, R.color.b));
                     w17.c.setBackgroundResource(R.drawable.y);
                 }
                 w17.a.setTypeface(type(Typeface.BOLD));

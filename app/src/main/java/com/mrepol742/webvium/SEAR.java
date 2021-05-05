@@ -46,7 +46,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkDatabase;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
@@ -59,7 +58,7 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.search.SearchAdapter;
 import com.mrepol742.webvium.search.SearchDatabase;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.cache.BitmapCache;
@@ -169,7 +168,7 @@ public class SEAR extends MainBaseActivity {
         Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
                 SearchDatabase.TABLE_SEARCH +
                 " ORDER BY " +
-                BuildConfiguration.DB_ID +
+                "_id" +
                 " DESC ", null);
         if (res.getCount() == 0) {
             runOnUiThread(() -> d.setVisibility(View.GONE));
@@ -187,7 +186,7 @@ public class SEAR extends MainBaseActivity {
             Cursor rest = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
                     HistoryDatabase.TABLE_HISTORY +
                     " ORDER BY " +
-                    BuildConfiguration.DB_ID +
+                    "_id" +
                     " DESC ", null);
             if (rest.getCount() != 0) {
                 if (ls == null) {
@@ -207,7 +206,7 @@ public class SEAR extends MainBaseActivity {
                 Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
                         BookmarkDatabase.TABLE_BOOKMARK +
                         " ORDER BY " +
-                        BuildConfiguration.DB_ID +
+                        "_id" +
                         " DESC ", null);
                 if (rest1.getCount() != 0) {
                     if (ls == null) {
@@ -272,10 +271,10 @@ public class SEAR extends MainBaseActivity {
             d.setVisibility(View.GONE);
         }
 
-        int d1 = Resources.b(this, R.color.c);
-        int e = Resources.b(this, R.color.b);
-        int f = Resources.b(this, R.color.j);
-        int g = Resources.b(this, R.color.k);
+        int d1 = Resources.getColor(this, R.color.c);
+        int e = Resources.getColor(this, R.color.b);
+        int f = Resources.getColor(this, R.color.j);
+        int g = Resources.getColor(this, R.color.k);
         if (Objects.equals(a221().getString("hori", "30c"), "1c")) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
@@ -300,7 +299,7 @@ public class SEAR extends MainBaseActivity {
         final File fe = new File(StorageDirectory.getBackground(this));
         cd.setBackgroundResource(R.drawable.w);
         if (a221().getBoolean("webviumB", false) && fe.exists()) {
-            o.setBackgroundColor(Resources.b(this, android.R.color.transparent));
+            o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
             Runnable p155 = () -> {
                 Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(this));
                 runOnUiThread(() -> b19.setBackground(new BitmapDrawable(getResources(), bp)));
@@ -349,7 +348,7 @@ public class SEAR extends MainBaseActivity {
                     android.R.layout.simple_dropdown_item_1line, securedUrls);
             p.setAdapter(adapter);
             p.setThreshold(4);
-            p.setDropDownBackgroundDrawable(Resources.a(this, R.drawable.c12));
+            p.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
         }
         iv1.setOnClickListener(view -> {
             if (p.getText().toString().length() == 0) {
@@ -432,7 +431,7 @@ public class SEAR extends MainBaseActivity {
             Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
                     SearchDatabase.TABLE_SEARCH +
                     " ORDER BY " +
-                    BuildConfiguration.DB_ID +
+                    "_id" +
                     " DESC ", null);
             if (res.getCount() == 0) {
                 runOnUiThread(() -> d.setVisibility(View.GONE));
@@ -476,9 +475,9 @@ public class SEAR extends MainBaseActivity {
 
         } else if (a.equals(securedUrls[13]) && d78) {
             if (getCallingActivity() != null) {
-                Intents.d("value", "file://" + StorageDirectory.getCacheDir(this) + "/log", SEAR.this);
+                Intents.d("value", "file://" + StorageDirectory.getFileDir(this) + "/main.log", SEAR.this);
             } else {
-                Intents.e(this, "value", "file://" + StorageDirectory.getCacheDir(this) + "/log", MAIN.class);
+                Intents.e(this, "value", "file://" + StorageDirectory.getFileDir(this) + "/main.log", MAIN.class);
             }
             // "webvium://search_history_lite", "webvium://history_lite", "webvium://bookmarks_lite", 10
         } else if (a.equals("webvium://search")) {
@@ -524,8 +523,8 @@ public class SEAR extends MainBaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -615,8 +614,8 @@ public class SEAR extends MainBaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -692,8 +691,8 @@ public class SEAR extends MainBaseActivity {
         a.setView(c);
         final TextView ti = c.findViewById(R.id.e1);
         final EDIT ed = c.findViewById(R.id.e3);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -736,14 +735,13 @@ public class SEAR extends MainBaseActivity {
             } else if (sg.equals(Intents.ACTION_PASTE)) {
                 try {
                     String c = Clipboard.b(this);
-                    assert c != null;
-                    if (U3.b(c)) {
+                    if (U3.b(Objects.requireNonNull(c))) {
                         p.setText(c);
                     } else {
                         Toast.c(this, getString(R.string.t20));
                     }
                 } catch (Exception ex) {
-                    DiagnosticData.a(ex);
+                    Log.a(ex);
                     Toast.c(this, getString(R.string.t20));
                 }
             }
@@ -752,7 +750,7 @@ public class SEAR extends MainBaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 

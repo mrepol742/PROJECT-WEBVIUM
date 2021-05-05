@@ -29,15 +29,19 @@ android {
         applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode Integer.parseInt(new Date().format("Hmmss"))
-        versionName new Date().format("yy.MM.dd")
+        versionCode Integer.parseInt(new Date().format("ddMMyyyy"))
+        versionName "1.2"
     }
 
     buildTypes {
         debug {
             debuggable true
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             resValue "bool", "wv", "true"
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
         }
 
         release {

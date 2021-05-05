@@ -36,9 +36,9 @@ public class Hardware {
     public static String c(Context a1) {
         boolean a = Hardware.isTablet(a1);
         if (a) {
-            return U4.a(E2.Tablet);
+            return E2.Tablet.toString();
         }
-        return U4.a(E2.Phone);
+        return E2.Phone.toString();
     }
 
     public static Object isNightMode(Context a) {

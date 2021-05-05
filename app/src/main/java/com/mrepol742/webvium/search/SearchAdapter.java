@@ -114,10 +114,10 @@ public class SearchAdapter extends MainBaseAdapter {
                 w18.a = vw.findViewById(R.id.d16);
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
                 if (!sp.getBoolean("autoUpdate", false)) {
-                    w18.a.setTextColor(Resources.b(a, R.color.c));
+                    w18.a.setTextColor(Resources.getColor(a, R.color.c));
 
                 } else {
-                    w18.a.setTextColor(Resources.b(a, R.color.b));
+                    w18.a.setTextColor(Resources.getColor(a, R.color.b));
                 }
 
                 w18.a.setTypeface(type(Typeface.NORMAL));

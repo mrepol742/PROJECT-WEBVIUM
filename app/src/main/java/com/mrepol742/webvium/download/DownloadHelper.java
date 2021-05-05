@@ -29,7 +29,7 @@ import com.mrepol742.webvium.DDMS;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.ObjectSerializability;
 import com.mrepol742.webvium.app.WebviumDatabase;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -138,7 +138,7 @@ public class DownloadHelper implements WebviumDatabase {
                 Uri uri = Uri.parse(sg);
                 return uri.getHost();
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
             }
             return sg;
         }

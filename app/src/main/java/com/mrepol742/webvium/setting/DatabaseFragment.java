@@ -19,14 +19,18 @@ package com.mrepol742.webvium.setting;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -42,7 +46,6 @@ import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.SDMS;
 import com.mrepol742.webvium.SWIT;
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.IntentsFilter;
@@ -54,13 +57,14 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Format;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -142,7 +146,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 return true;
             });
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -180,9 +184,9 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         TextView f = e.findViewById(R.id.g1);
         f.setText(getString(R.string.o1));
         if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.b(getActivity(), R.color.c));
+            f.setTextColor(Resources.getColor(getActivity(), R.color.c));
         } else {
-            f.setTextColor(Resources.b(getActivity(), R.color.b));
+            f.setTextColor(Resources.getColor(getActivity(), R.color.b));
         }
         AlertDialog j5 = c.create();
         O5 timer = new O5(2000, 2000, j5);
@@ -195,7 +199,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
         String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Settings_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.b38), StorageDirectory.a(), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.b38), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
             Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
             Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
@@ -231,7 +235,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
         String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Search_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.b40), StorageDirectory.a(), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.b40), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
             a16(file);
             a12.dismiss();
@@ -265,7 +269,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
         String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/History_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.c22), StorageDirectory.a(), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.c22), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
             a20(file);
             a12.dismiss();
@@ -299,7 +303,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
         String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Bookmarks_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.c24), StorageDirectory.a(), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.c24), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
             b4(file);
             a12.dismiss();
@@ -333,7 +337,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
         String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Downloads_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.z34), StorageDirectory.a(), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.z34), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
             b8(file);
             a12.dismiss();
@@ -367,7 +371,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
         String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Permissions_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.z36), StorageDirectory.a(), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.z36), file)));
         a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
             b12(file);
             a12.dismiss();
@@ -392,39 +396,21 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
 
     private void write(String sg, Object al) {
         Runnable re = () -> {
-            if (Build.VERSION.SDK_INT <= 29) {
-                try {
+            try {
+                if (Build.VERSION.SDK_INT <= 29) {
                     FileOutputStream fos = new FileOutputStream(sg);
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     oos.writeObject(al);
                     oos.close();
                     fos.close();
-                    try {
-                        java.io.File fe = new java.io.File(fos.toString());
-                        if (BuildConfiguration.isDevelopment) {
-                            if (fe.setReadOnly()) {
-                                DiagnosticData.a("READ ONLY = " + sg);
-                            }
-                        } else {
-                            fe.setReadOnly();
-                        }
-                        Process p;
-                        p = Runtime.getRuntime().exec("attrib +h " + fe.getPath());
-                        p.waitFor();
-                    } catch (Exception en) {
-                        DiagnosticData.a(en);
-                    }
                     getActivity().runOnUiThread(() -> g(getString(R.string.b25)));
-                } catch (Exception en) {
-                    DiagnosticData.a(en);
-                    getActivity().runOnUiThread(() -> d(getString(R.string.b26)));
                 }
-            } else {
-                // media store
+            } catch (Exception en) {
+                Log.a(en);
+                getActivity().runOnUiThread(() -> d(getString(R.string.b26)));
             }
         };
         new Thread(re).start();
-
     }
 
     private class R7 extends MainReceiver {

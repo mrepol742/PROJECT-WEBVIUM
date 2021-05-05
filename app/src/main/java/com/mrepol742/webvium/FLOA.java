@@ -57,7 +57,7 @@ public class FLOA extends MainService {
         m.setContentTitle(getString(R.string.l32));
         m.setContentText(getString(R.string.n40));
         m.setOngoing(true);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(false);
         Intent j11 = new Intent(this, MAIN.class);
 

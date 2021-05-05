@@ -38,7 +38,7 @@ import com.mrepol742.webvium.setting.AboutFragment;
 import com.mrepol742.webvium.setting.DatabaseFragment;
 import com.mrepol742.webvium.setting.FeatureFragment;
 import com.mrepol742.webvium.setting.SettingFragment;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.view.Animation;
@@ -60,8 +60,8 @@ public class SETT0 extends BaseActivity {
         TextView c1 = findViewById(R.id.c5);
         b.setTypeface(type(Typeface.BOLD));
         c1.setTypeface(type(Typeface.BOLD));
-        int k = Resources.b(this, R.color.c);
-        int l = Resources.b(this, R.color.b);
+        int k = Resources.getColor(this, R.color.c);
+        int l = Resources.getColor(this, R.color.b);
         ActionBar ab = getActionBar();
         if (ab != null) {
             ab.setDisplayShowTitleEnabled(false);
@@ -88,7 +88,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.h3));
 
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
             }
             Animation.animate(this, R.anim.i, tv);
             as(R.id.m10, new SettingFragment());
@@ -105,7 +105,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.y28));
 
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
             }
             as(R.id.m10, new FeatureFragment());
             id = "a3";
@@ -121,7 +121,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.t21));
 
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
             }
             as(R.id.m10, new DatabaseFragment());
             id = "a2";
@@ -137,7 +137,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.l));
 
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
             }
             as(R.id.m10, new AboutFragment());
             id = "a1";
@@ -175,10 +175,10 @@ public class SETT0 extends BaseActivity {
         tv0.setBackgroundResource(R.drawable.b17);
         tv1.setBackgroundResource(R.drawable.b17);
         tv2.setBackgroundResource(R.drawable.b17);
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.a(this, R.drawable.g9), null, null);
-        tv0.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.a(this, R.drawable.g10), null, null);
-        tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.a(this, R.drawable.g11), null, null);
-        tv2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.a(this, R.drawable.g12), null, null);
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g9), null, null);
+        tv0.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g10), null, null);
+        tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g11), null, null);
+        tv2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g12), null, null);
         iv = findViewById(R.id.o25);
         iv0 = findViewById(R.id.o26);
         iv.setBackgroundResource(R.drawable.c6);

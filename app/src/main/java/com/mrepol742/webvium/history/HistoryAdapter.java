@@ -35,7 +35,7 @@ import com.mrepol742.webvium.app.NoSuchItemToGet;
 import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 import java.util.ArrayList;
 
@@ -54,11 +54,11 @@ public class HistoryAdapter extends MainBaseAdapter {
         this.a = ct;
         this.w3 = w3;
         this.sp = PreferenceManager.getDefaultSharedPreferences(ct);
-        this.A = new ForegroundColorSpan(Resources.b(ct, R.color.a));
-        this.E = new ForegroundColorSpan(Resources.b(ct, R.color.e));
-        this.S = new ForegroundColorSpan(Resources.b(ct, R.color.s));
-        this.I = new ForegroundColorSpan(Resources.b(ct, R.color.i));
-        this.B = new ForegroundColorSpan(Resources.b(ct, R.color.b));
+        this.A = new ForegroundColorSpan(Resources.getColor(ct, R.color.a));
+        this.E = new ForegroundColorSpan(Resources.getColor(ct, R.color.e));
+        this.S = new ForegroundColorSpan(Resources.getColor(ct, R.color.s));
+        this.I = new ForegroundColorSpan(Resources.getColor(ct, R.color.i));
+        this.B = new ForegroundColorSpan(Resources.getColor(ct, R.color.b));
     }
 
     public static int d(String b) {
@@ -99,7 +99,7 @@ public class HistoryAdapter extends MainBaseAdapter {
             }
             return ssb;
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         throw new NoSuchSpannableStringBuilderToReturn();
     }
@@ -145,14 +145,14 @@ public class HistoryAdapter extends MainBaseAdapter {
                 w17.c = e.findViewById(R.id.e18);
                 w17.d = e.findViewById(R.id.n29);
                 if (!this.sp.getBoolean("autoUpdate", false)) {
-                    w17.a.setTextColor(Resources.b(a, R.color.c));
-                    w17.b.setTextColor(Resources.b(a, R.color.c));
-                    w17.d.setTextColor(Resources.b(a, R.color.c));
+                    w17.a.setTextColor(Resources.getColor(a, R.color.c));
+                    w17.b.setTextColor(Resources.getColor(a, R.color.c));
+                    w17.d.setTextColor(Resources.getColor(a, R.color.c));
                     w17.c.setBackgroundResource(R.drawable.v);
                 } else {
-                    w17.a.setTextColor(Resources.b(a, R.color.b));
-                    w17.b.setTextColor(Resources.b(a, R.color.b));
-                    w17.d.setTextColor(Resources.b(a, R.color.b));
+                    w17.a.setTextColor(Resources.getColor(a, R.color.b));
+                    w17.b.setTextColor(Resources.getColor(a, R.color.b));
+                    w17.d.setTextColor(Resources.getColor(a, R.color.b));
                     w17.c.setBackgroundResource(R.drawable.y);
                 }
                 w17.a.setTypeface(type(Typeface.BOLD));

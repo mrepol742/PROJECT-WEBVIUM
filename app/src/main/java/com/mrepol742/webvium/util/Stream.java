@@ -21,7 +21,6 @@ import android.net.Uri;
 
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.os.StrictMode;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -43,19 +42,6 @@ public class Stream {
         try {
             Uri b = Uri.parse(url);
             InetAddress c = InetAddress.getByName(b.getHost());
-            String d = c.getHostName();
-            int e = c.hashCode();
-            boolean f = c.isAnyLocalAddress();
-            boolean g = c.isLinkLocalAddress();
-            boolean h = c.isLoopbackAddress();
-            boolean i = c.isMCGlobal();
-            boolean j = c.isMCLinkLocal();
-            boolean k = c.isMCNodeLocal();
-            boolean l = c.isMCOrgLocal();
-            boolean m = c.isMCSiteLocal();
-            boolean n = c.isMulticastAddress();
-            String o = c.getCanonicalHostName();
-            String p = c.getHostAddress();
             return String.format(main, c.getHostName(),
                     c.getHostAddress(),
                     c.hashCode(),
@@ -70,7 +56,7 @@ public class Stream {
                     c.isMCSiteLocal(),
                     c.isMulticastAddress());
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return problem;
     }
@@ -82,18 +68,17 @@ public class Stream {
             InetAddress ia = InetAddress.getLocalHost();
             return ia.getHostAddress();
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return problem;
     }
 
     public static String c(String url, String problem) {
         try {
-            StrictMode.a();
             InetAddress c = InetAddress.getByName(Uri.parse(url).getHost());
             return c.getHostAddress();
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return problem;
     }
@@ -115,17 +100,16 @@ public class Stream {
             }
             return sb0.toString().replaceAll("\\[", "").replaceAll("]", "");
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return problem;
     }
 
     public static void e(String a) {
         try {
-            StrictMode.a();
             new URL(a).openConnection();
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
     }
 
@@ -162,14 +146,13 @@ public class Stream {
                 return cd.toString();
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return problem;
     }
 
     public static int g(String url) {
         try {
-            StrictMode.a();
             URL u = new URL(url);
             URLConnection is = u.openConnection();
             InputStream inputStream = is.getInputStream();
@@ -186,10 +169,10 @@ public class Stream {
             try {
                 return Integer.parseInt(sb.toString());
             } catch (NumberFormatException nfe) {
-                DiagnosticData.a(nfe);
+                Log.a(nfe);
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return 0;
     }
@@ -199,14 +182,13 @@ public class Stream {
             InetAddress ia = InetAddress.getLocalHost();
             return ia.getHostName();
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return problem;
     }
 
     public static int i(String url) {
         try {
-            StrictMode.a();
             URL u = new URL(url);
             URLConnection is = u.openConnection();
             InputStream inputStream = is.getInputStream();
@@ -223,10 +205,10 @@ public class Stream {
             try {
                 return Integer.parseInt(sb.toString());
             } catch (NumberFormatException nfe) {
-                DiagnosticData.a(nfe);
+                Log.a(nfe);
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex.getClass().getName());
+            Log.a(ex.getClass().getName());
         }
         return Integer.parseInt("742");
     }

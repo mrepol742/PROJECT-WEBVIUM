@@ -34,6 +34,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -107,14 +108,12 @@ import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.annotation.Unused;
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.GeolocationDataModel;
-import com.mrepol742.webvium.app.JavascriptInterfaces;
+import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
-import com.mrepol742.webvium.app.W6;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainNotification;
@@ -141,7 +140,7 @@ import com.mrepol742.webvium.permission.PermissionObjectDataModel;
 import com.mrepol742.webvium.search.SearchDatabase;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
@@ -161,7 +160,6 @@ import com.mrepol742.webvium.widget.W11;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -204,26 +202,7 @@ public class MAIN extends MainBaseActivity implements Format {
             "https://github.com",
             "https://facebook.com"
     };
-    private static final String[] securedUrls = {
-            "webvium://robots.txt",
-            "about:blank",
-            "webvium://blank",
-            "webvium://launch",
-            "webvium://beta",
-            "webvium://manage_space",
-            "webvium://logcat",
-            "webvium://assist",
-            "file://",
-            "http://",
-            "webvium://search_history_lite",
-            "webvium://history_lite",
-            "webvium://bookmarks_lite",
-            "webvium://log",
-            "webvium://calculator",
-            "webvium://credits",
-            "webvium://terms",
-            "webvium://privacy"
-    };
+
     private static final String[] ads = {
             "adservice.google.com",
             "media.net",
@@ -246,7 +225,7 @@ public class MAIN extends MainBaseActivity implements Format {
             "/search/top/?q="
     };
     private static final String[] userAgents = {
-            "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) %b/%a Mobile Safari/537.36",
+            "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) %1$s/%2$s Mobile Safari/537.36",
             "Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 635) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537",
             "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36",
             "Mozilla/5.0 (Android 8.0.0; Mobile; rv:61.0) Gecko/61.0 Firefox/68.0",
@@ -263,6 +242,7 @@ public class MAIN extends MainBaseActivity implements Format {
             "Big5",
             "ISO-2022-JP",
             "SHIFT_JIS",
+            "EUC-JP",
             "EUC-KR"
     };
     public static boolean bl = false;
@@ -583,7 +563,7 @@ public class MAIN extends MainBaseActivity implements Format {
     protected void onCreate(Bundle a) {
 
         super.onCreate(a);
-        int k5 = getSharedPreferences("dnr", 0).getInt("noid", 0);
+        int k5 = getSharedPreferences("ddnrr", 0).getInt("noid", 0);
         if (k5 != 275) {
             Intents.a(this, WELC.class);
             overridePendingTransition(R.anim.f, R.anim.b);
@@ -617,11 +597,11 @@ public class MAIN extends MainBaseActivity implements Format {
         tv7 = findViewById(R.id.m6);
         tv8 = findViewById(R.id.m7);
         tv9 = findViewById(R.id.m8);
-        this.A = new ForegroundColorSpan(Resources.b(this, R.color.a));
-        this.E = new ForegroundColorSpan(Resources.b(this, R.color.e));
-        this.S = new ForegroundColorSpan(Resources.b(this, R.color.s));
-        this.I = new ForegroundColorSpan(Resources.b(this, R.color.i));
-        this.B = new ForegroundColorSpan(Resources.b(this, R.color.b));
+        this.A = new ForegroundColorSpan(Resources.getColor(this, R.color.a));
+        this.E = new ForegroundColorSpan(Resources.getColor(this, R.color.e));
+        this.S = new ForegroundColorSpan(Resources.getColor(this, R.color.s));
+        this.I = new ForegroundColorSpan(Resources.getColor(this, R.color.i));
+        this.B = new ForegroundColorSpan(Resources.getColor(this, R.color.b));
         this.cd = findViewById(R.id.v);
         HorizontalScrollView hsv = findViewById(R.id.c13);
         this.iw = findViewById(R.id.d20);
@@ -642,9 +622,9 @@ public class MAIN extends MainBaseActivity implements Format {
             c140();
             return true;
         });
-        this.a7 = Resources.b(this, R.color.c);
-        this.a8 = Resources.b(this, R.color.b);
-        this.a9 = Resources.b(this, R.color.a);
+        this.a7 = Resources.getColor(this, R.color.c);
+        this.a8 = Resources.getColor(this, R.color.b);
+        this.a9 = Resources.getColor(this, R.color.a);
         this.cd.setOnClickListener(view -> c22());
         this.cd.setOnLongClickListener(view -> {
             c12();
@@ -677,7 +657,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             c149();
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         this.cm1 = CookieManager.getInstance();
         if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
@@ -858,7 +838,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c99();
             c108();
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -876,7 +856,7 @@ public class MAIN extends MainBaseActivity implements Format {
             h.pauseTimers();
             h.onPause();
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -1113,7 +1093,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         spe.apply();
                     }
                 } catch (Exception d4) {
-                    DiagnosticData.a(d4);
+                    Log.a(d4);
                 }
                 a34.dismiss();
             });
@@ -1123,7 +1103,7 @@ public class MAIN extends MainBaseActivity implements Format {
             final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
             s.addTextChangedListener(new TextWatcher() {
 
-
+                @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     String jhh56 = s.getText().toString();
                     String sg78 = StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56;
@@ -1153,7 +1133,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
             }
         } catch (Exception haha) {
-            DiagnosticData.a(haha);
+            Log.a(haha);
         }
     }
 
@@ -1189,7 +1169,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c7(getString(R.string.t20));
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
             c7(getString(R.string.t20));
         }
     }
@@ -1205,8 +1185,8 @@ public class MAIN extends MainBaseActivity implements Format {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ed1.setTextColor(e);
@@ -1433,7 +1413,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c7(getString(R.string.t20));
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
             c7(getString(R.string.t20));
         }
     }
@@ -1452,7 +1432,7 @@ public class MAIN extends MainBaseActivity implements Format {
             Intents.h(this, SEAR.class, 911, "value", h.getUrl());
             overridePendingTransition(R.anim.a, R.anim.f);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -1505,7 +1485,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -1583,122 +1563,77 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public Bitmap getDefaultVideoPoster() {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.getDefaultVideoPoster = " + this);
-                }
                 return c84();
             }
 
             @Override
             public void onReceivedTitle(WebView a, String b) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onReceivedTitle = " + this);
-                }
                 c86(a, b);
             }
 
             @Override
             public void onHideCustomView() {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onHideCustomView = " + this);
-                }
                 c87();
             }
 
             @Override
             public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onShowCustomView = " + this);
-                }
                 c88(a, b);
             }
 
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onShowFileChooser = " + this);
-                }
                 return c89(b, fileChooserParams);
             }
 
             @Override
             public void onProgressChanged(WebView a, int b) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onProgressChanged = " + this);
-                }
                 c90(a, b);
             }
 
             @Override
             public boolean onJsAlert(WebView a, String b, String c, JsResult d) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onJsAlert = " + this);
-                }
                 return c91(a, c, d);
             }
 
             @Override
             public boolean onJsPrompt(WebView a, String b, String c, String d, JsPromptResult e) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onJsPrompt = " + this);
-                }
                 return c92(a, c, e);
             }
 
             @Override
             public boolean onJsConfirm(WebView a, String b, String c, JsResult e) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onJsConfirm = " + this);
-                }
                 return c93(a, c, e);
             }
 
             @Override
             public boolean onJsBeforeUnload(WebView a, String b, String c, JsResult e) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onJsBeforeUnload = " + this);
-                }
                 return c94(a, c, e);
             }
 
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onConsoleMessage = " + this);
-                }
                 c95(cm.message(), cm.lineNumber(), cm.sourceId());
                 return true;
             }
 
             @Override
             public void onGeolocationPermissionsShowPrompt(String a, GeolocationPermissions.Callback b) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onGeolocationPermissionShowPrompt = " + this);
-                }
                 c96(a, b);
             }
 
             @Override
             public View getVideoLoadingProgressView() {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.getVideoLoadingProgressView = " + this);
-                }
                 return c1();
             }
 
             @Override
             public void onPermissionRequest(PermissionRequest pr) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onPermissionRequest = " + this);
-                }
                 c129(pr);
             }
 
             @Override
             public void onReceivedIcon(WebView a, Bitmap b) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebChromeClient.onReceivedIcon = " + this);
-                }
                 c5(b);
             }
         });
@@ -1707,117 +1642,77 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onUnhandledKeyEvent = " + this);
-                }
                 c23(event);
             }
 
             @Override
             public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onReceivedHttpAuthRequest = " + this);
-                }
                 c172(handler, host, realm);
             }
 
             @Override
             public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.receivedError = " + this);
-                }
                 c77(new ReceivedErrorDataModel(b, c, d, bn, bn1));
             }
 
             @Override
             public void onReceivedHttpError(WebView a, WebResourceRequest b, WebResourceResponse c) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onReceivedHttpError = " + this);
-                }
                 c78(b, c);
             }
 
             @Override
             public void onReceivedSslError(WebView a, SslErrorHandler b, SslError c) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onReceivedSslError = " + this);
-                }
                 c79(b, c);
             }
 
             @Override
             public void onPageFinished(WebView a, String b) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onPageFinished = " + this);
-                }
                 c80(a, b);
             }
 
             @Override
             public void onPageStarted(WebView a, String b, Bitmap b5) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onPageStarted = " + this);
-                }
                 c81(b);
             }
 
             @Override
             @Keep
             public boolean url(WebView a, String b) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.url = " + this);
-                }
                 return c82(a, b);
             }
 
             @Override
             public void onSafeBrowsingHit(WebView view, WebResourceRequest ess, int type, SafeBrowsingResponse sbh) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onSafeBrowsingHit = " + this);
-                }
                 c60(view, type, sbh);
             }
 
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.doUpdateVisitedHistory = " + this);
-                }
                 c151(a, b, c);
             }
 
             @Override
             public void onFormResubmission(WebView a, Message b, Message c) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.onFormResubmission = " + this);
-                }
                 c4(b, c);
             }
 
             @Override
             public WebResourceResponse r(WebResourceRequest wr) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("Webvium.setWebViewClient.r = " + this);
-                }
                 return c168(wr);
             }
         });
-        h.addJavascriptInterface(new JavascriptInterfaces(this), Package.c());
+        h.addJavascriptInterface(new WebviumJSI(this), Package.c());
         if (Build.VERSION.SDK_INT >= 29) {
             h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
 
                 @Override
                 public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-                    if (BuildConfiguration.isDevelopment) {
-                        DiagnosticData.a("Webvium.setWebViewRenderProcessClient.onRenderProcessUnresponsive = " + this);
-                    }
+
                 }
 
                 @Override
                 public void onRenderProcessResponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-                    if (BuildConfiguration.isDevelopment) {
-                        DiagnosticData.a("Webvium.setWebViewRenderProcessClient.onRenderProcessResponsive = " + this);
-                    }
+
                 }
             });
         }
@@ -1842,7 +1737,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             this.u.setText(ssb, TextView.BufferType.SPANNABLE);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -1904,7 +1799,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -1960,8 +1855,8 @@ public class MAIN extends MainBaseActivity implements Format {
         final EDIT ed = c.findViewById(R.id.g8);
         final TextView ti = c.findViewById(R.id.e2);
         final Button bn = c.findViewById(R.id.k20);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ti.setTextColor(e);
@@ -2050,9 +1945,9 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setView(c);
         final TextView ed = c.findViewById(R.id.l8);
         if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.b(this, R.color.c));
+            ed.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            ed.setTextColor(Resources.b(this, R.color.b));
+            ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm.toString()));
         final AlertDialog g = a.create();
@@ -2096,7 +1991,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c49(String a) {
         String a5 = a.trim().toLowerCase();
         if (a.equals("webvium://log")) {
-            h.loadUrl(StorageDirectory.getCacheDir(this) + "/log");
+            h.loadUrl(StorageDirectory.getFileDir(this) + "/main.log");
         } else if (a.equals("webvium://logcat")) {
             Intents.a(this, TERM.class);
         } else if (IPAddress.isValidIpAddress(a)) {
@@ -2111,7 +2006,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     try {
                         c124(URLEncoder.encode(a, "UTF-8"));
                     } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                        DiagnosticData.a(unsupportedEncodingException);
+                        Log.a(unsupportedEncodingException);
                         c124(a);
                     }
                 }
@@ -2122,7 +2017,7 @@ public class MAIN extends MainBaseActivity implements Format {
             try {
                 c124(URLEncoder.encode(a, "UTF-8"));
             } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                DiagnosticData.a(unsupportedEncodingException);
+                Log.a(unsupportedEncodingException);
                 c124(a);
             }
         }
@@ -2142,10 +2037,15 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c51() {
-        switch (Objects.requireNonNull(a221().getString("general", "1o"))) {
+        switch (Objects.requireNonNull(a221().getString("general", "x57"))) {
             default:
             case "x57":
-                c3("https://mrepol742.github.io/PROJECT-WEBVIUM/Search/index.html?00OOOO0O0OO0=" + c46());
+                if (h.getSettings().getJavaScriptEnabled()) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
+                    c3(Base64.decode(sharedPreferences.getString(WELC.TEMP_SEARCH, "")) +"?00OOOO0O0OO0=" + c46());
+                } else {
+                    c3(c48());
+                }
                 break;
             case "1o":
                 c3(c48());
@@ -2175,13 +2075,11 @@ public class MAIN extends MainBaseActivity implements Format {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if (mi.availMem < mi.threshold) {
-            if (BuildConfiguration.isDevelopment) {
-                DiagnosticData.a("BuildConfiguration is freeing memory now because: available ="
+                Log.a("Webvium is freeing memory now because: available ="
                         + (mi.availMem / 1024) + " Keep threshold ="
                         + (mi.threshold / 1024) + " Keep");
-            }
-            W6.b();
-            W6.c();
+            SQLiteDatabase.releaseMemory();
+            System.gc();
             h.clearCache(false);
         }
     }
@@ -2237,8 +2135,8 @@ public class MAIN extends MainBaseActivity implements Format {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ed1.setTextColor(e);
@@ -2327,8 +2225,8 @@ public class MAIN extends MainBaseActivity implements Format {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ed1.setTextColor(e);
@@ -2462,11 +2360,11 @@ public class MAIN extends MainBaseActivity implements Format {
         new Thread(p15).start();
         bn.setText(getString(R.string.h14));
         if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.b(this, R.color.c));
-            f5.setTextColor(Resources.b(this, R.color.c));
+            f.setTextColor(Resources.getColor(this, R.color.c));
+            f5.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            f.setTextColor(Resources.b(this, R.color.b));
-            f5.setTextColor(Resources.b(this, R.color.b));
+            f.setTextColor(Resources.getColor(this, R.color.b));
+            f5.setTextColor(Resources.getColor(this, R.color.b));
         }
         bn.setOnClickListener(view -> {
             Runnable p151 = () -> {
@@ -2508,20 +2406,25 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c74(Bitmap.CompressFormat format, int quality, View ll, String st) {
         try {
             FileOutputStream c = new FileOutputStream(new java.io.File(st));
-            ll.setDrawingCacheEnabled(true);
-            ll.getDrawingCache().compress(format, quality, c);
+            getWebviumCurrentView(ll).compress(format, quality, c);
             c.flush();
             c.close();
-            ll.setDrawingCacheEnabled(false);
             c8(getString(R.string.w16));
         } catch (Exception e) {
-            DiagnosticData.a(e);
+            Log.a(e);
             c7(getString(R.string.w14));
         }
         c69(st);
         Runnable p15 = () -> c70(st);
         new Thread(p15).start();
         c171(st);
+    }
+
+    public static Bitmap getWebviumCurrentView(View view) {
+        view.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+        return bitmap;
     }
 
     private void c69(String a) {
@@ -2536,7 +2439,7 @@ public class MAIN extends MainBaseActivity implements Format {
             Bitmap bit = BitmapFactory.decodeFile(a);
             MainNotification.b(this, "b", getString(R.string.y17));
             android.app.Notification.Builder e = Notifications.a(this, "b");
-            e.setColor(Resources.b(this, R.color.a));
+            e.setColor(Resources.getColor(this, R.color.a));
             e.setSmallIcon(R.drawable.a13);
             e.setLargeIcon(bit);
             e.setDefaults(android.app.Notification.DEFAULT_ALL);
@@ -2585,7 +2488,7 @@ public class MAIN extends MainBaseActivity implements Format {
             NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             nmc.notify(Notifications.b, e.build());
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -2638,7 +2541,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -2678,26 +2581,26 @@ public class MAIN extends MainBaseActivity implements Format {
             if (nb1 <= nb0) {
                 ed1.setText(getString(R.string.l22));
                 ed1.setCompoundDrawablesWithIntrinsicBounds(null,
-                        Resources.a(this, R.drawable.f5),
+                        Resources.getDrawable(this, R.drawable.f5),
                         null,
                         null);
             } else {
                 ed1.setText(getString(R.string.l23));
                 ed1.setCompoundDrawablesWithIntrinsicBounds(null,
-                        Resources.a(this, R.drawable.f7),
+                        Resources.getDrawable(this, R.drawable.f7),
                         null,
                         null);
             }
             ed1.setCompoundDrawablePadding(40);
         } catch (NumberFormatException nfe) {
-            DiagnosticData.a(nfe);
+            Log.a(nfe);
         }
         if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.b(this, R.color.c));
-            ed1.setTextColor(Resources.b(this, R.color.c));
+            ed.setTextColor(Resources.getColor(this, R.color.c));
+            ed1.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            ed.setTextColor(Resources.b(this, R.color.b));
-            ed1.setTextColor(Resources.b(this, R.color.b));
+            ed.setTextColor(Resources.getColor(this, R.color.b));
+            ed1.setTextColor(Resources.getColor(this, R.color.b));
         }
         Html.a(ed, ag9);
         a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> a12.dismiss());
@@ -2731,7 +2634,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 h.load((c, Base64.a(W5.a7()).replace("%a", getString(R.string.c33)).replace("%b", getString(R.string.g23)).replace("%c", getString(R.string.r21)).replace("%d", c).replace("%e", c).replace("%f", c160(b)).replace("%g", d));
             }*/
         } catch (Exception e) {
-            DiagnosticData.a(e);
+            Log.a(e);
         }
     }
 
@@ -2760,7 +2663,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 cm0.append(sg9).append("<br><br>");
             }
         } catch (Exception e) {
-            DiagnosticData.a(e);
+            Log.a(e);
         }
     }
 
@@ -2839,7 +2742,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c54(b);
             c52();
         } catch (Exception e) {
-            DiagnosticData.a(e);
+            Log.a(e);
         }
     }
 
@@ -2861,7 +2764,7 @@ public class MAIN extends MainBaseActivity implements Format {
             Animation.animate(MAIN.this, R.anim.c, this.iw);
             this.cd.setBackgroundResource(R.drawable.w);
         } catch (Exception e) {
-            DiagnosticData.a(e);
+            Log.a(e);
         }
     }
 
@@ -2892,7 +2795,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     c3(fa);
                     return true;
                 } catch (URISyntaxException use) {
-                    DiagnosticData.a(use);
+                    Log.a(use);
                 }
             } else if (!b.startsWith("market://") && !b.startsWith("geo:") && b.contains("/store/apps/details?id=")) {
                 return c179(b);
@@ -2904,7 +2807,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception e) {
-            DiagnosticData.a(e);
+            Log.a(e);
         }
         return false;
     }
@@ -2956,7 +2859,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -2988,7 +2891,7 @@ public class MAIN extends MainBaseActivity implements Format {
             this.cvc.onCustomViewHidden();
             this.cvc = null;
         } catch (Exception asd) {
-            DiagnosticData.a(asd);
+            Log.a(asd);
         }
     }
 
@@ -3010,7 +2913,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ((FrameLayout) getWindow().getDecorView()).addView(this.cv, new FrameLayout.LayoutParams(-1, -1));
             getWindow().getDecorView().setSystemUiVisibility(3846);
         } catch (Exception asd) {
-            DiagnosticData.a(asd);
+            Log.a(asd);
         }
     }
 
@@ -3098,10 +3001,10 @@ public class MAIN extends MainBaseActivity implements Format {
             a89.setView(c34);
             TextView sjs1 = c34.findViewById(R.id.e1);
             final EDIT sjs = c34.findViewById(R.id.e3);
-            int e78 = Resources.b(this, R.color.c);
-            int f = Resources.b(this, R.color.b);
-            int f1 = Resources.b(this, R.color.j);
-            int g1 = Resources.b(this, R.color.k);
+            int e78 = Resources.getColor(this, R.color.c);
+            int f = Resources.getColor(this, R.color.b);
+            int f1 = Resources.getColor(this, R.color.j);
+            int g1 = Resources.getColor(this, R.color.k);
             if (!a221().getBoolean("autoUpdate", false)) {
                 sjs1.setTextColor(e78);
                 sjs.setTextColor(e78);
@@ -3217,7 +3120,7 @@ public class MAIN extends MainBaseActivity implements Format {
             if (!a221().getBoolean("autoUpdate", false)) {
                 if (!a221().getBoolean("webviumB", false)) {
                     getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    getWindow().setStatusBarColor(Resources.b(this, R.color.b));
+                    getWindow().setStatusBarColor(Resources.getColor(this, R.color.b));
                 }
             }
         }
@@ -3248,7 +3151,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -3295,9 +3198,9 @@ public class MAIN extends MainBaseActivity implements Format {
             switch (Objects.requireNonNull(a221().getString("userA", ""))) {
                 default:
                 case UA_DEFAULT:
-                    ws.setUserAgentString(userAgents[0]
-                            .replace("%a", Package.e(this))
-                            .replace("%b", Package.c()));
+                    ws.setUserAgentString(String.format(userAgents[0],
+                            Package.c(),
+                            Package.e(this)));
                     break;
                 case UA_ANDROID_STOCK:
                     ws.setUserAgentString(this.h.getUserAgent());
@@ -3327,12 +3230,11 @@ public class MAIN extends MainBaseActivity implements Format {
                     ws.setUserAgentString(userAgents[8]);
                     break;
                 case UA_CUSTOM:
-                    ws.setUserAgentString(a221().getString("CustomuserA", userAgents[0]
-                            .replace("%a", Package.e(this))
-                            .replace("%b", Package.c())));
+                    ws.setUserAgentString(a221().getString("CustomuserA",  String.format(userAgents[0],
+                            Package.c(),
+                            Package.e(this))));
                     break;
             }
-
         }
     }
 
@@ -3364,8 +3266,8 @@ public class MAIN extends MainBaseActivity implements Format {
         final EDIT ed = c.findViewById(R.id.l4);
         final TextView ti2 = c.findViewById(R.id.l5);
         final TextView ti3 = c.findViewById(R.id.l6);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ti.setTextColor(e);
@@ -3463,10 +3365,10 @@ public class MAIN extends MainBaseActivity implements Format {
         final EDIT ed = c.findViewById(R.id.g8);
         final TextView ti = c.findViewById(R.id.e2);
         final Button bn = c.findViewById(R.id.k20);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
-        int e3 = Resources.b(this, R.color.j);
-        int f3 = Resources.b(this, R.color.k);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        int e3 = Resources.getColor(this, R.color.j);
+        int f3 = Resources.getColor(this, R.color.k);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
 
@@ -3588,7 +3490,7 @@ public class MAIN extends MainBaseActivity implements Format {
             try {
                 java.io.File a2 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
                 if (a2.createNewFile()) {
-                    DiagnosticData.a("CREATE NEW FILE = " + a);
+                    Log.a("CREATE NEW FILE = " + a);
                 }
                 FileOutputStream a3 = new FileOutputStream(a2);
                 OutputStreamWriter a4 = new OutputStreamWriter(a3);
@@ -3597,7 +3499,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 a3.close();
                 runOnUiThread(() -> c8(getString(R.string.f38)));
             } catch (IOException e) {
-                DiagnosticData.a(e);
+                Log.a(e);
                 runOnUiThread(() -> c7(getString(R.string.w14)));
             }
         };
@@ -3614,9 +3516,9 @@ public class MAIN extends MainBaseActivity implements Format {
         TextView f = e.findViewById(R.id.k6);
         f.setText(ws.getUserAgentString());
         if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.b(this, R.color.c));
+            f.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            f.setTextColor(Resources.b(this, R.color.b));
+            f.setTextColor(Resources.getColor(this, R.color.b));
         }
         AlertDialog dd = a.create();
         Objects.requireNonNull(dd.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
@@ -3634,8 +3536,8 @@ public class MAIN extends MainBaseActivity implements Format {
         ed.setHint(getString(R.string.q21));
         final TextView ti = c.findViewById(R.id.k10);
         Button bn = c.findViewById(R.id.k11);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
 
@@ -3662,7 +3564,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     }
 
                 } catch (NumberFormatException nfe) {
-                    DiagnosticData.a(nfe);
+                    Log.a(nfe);
                 }
             };
             new Thread(p15).start();
@@ -3679,7 +3581,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         runOnUiThread(() -> c7("Too many inputs."));
                     }
                 } catch (NumberFormatException nfe) {
-                    DiagnosticData.a(nfe);
+                    Log.a(nfe);
                 }
             };
             new Thread(p15).start();
@@ -3698,8 +3600,8 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setView(c);
         final TextView ti = c.findViewById(R.id.k13);
         Button bn = c.findViewById(R.id.k14);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ti.setTextColor(e);
@@ -3750,7 +3652,7 @@ public class MAIN extends MainBaseActivity implements Format {
             mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) - 1, AudioManager.FLAG_PLAY_SOUND);
         }
         Runnable p15 = () -> {
-            final Bitmap pp = Resources.c(MAIN.this, R.drawable.a6);
+            final Bitmap pp = Resources.getBitmapFromResource(MAIN.this, R.drawable.a6);
             runOnUiThread(() -> c2.setThumb(new BitmapDrawable(getResources(), pp)));
         };
         new Thread(p15).start();
@@ -3783,10 +3685,10 @@ public class MAIN extends MainBaseActivity implements Format {
                 android.R.layout.simple_dropdown_item_1line, suggestion);
         final AutoCompleteTextView ed = c.findViewById(R.id.d15);
         ed.setAdapter(adapter);
-        ed.setDropDownBackgroundDrawable(Resources.a(this, R.drawable.c12));
+        ed.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
         Button bn = c.findViewById(R.id.c1);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -3822,7 +3724,7 @@ public class MAIN extends MainBaseActivity implements Format {
         Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
                 PermissionDatabase.TABLE_PERMISSION +
                 " ORDER BY " +
-                BuildConfiguration.DB_ID +
+                "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
             c9(pr);
@@ -3855,9 +3757,9 @@ public class MAIN extends MainBaseActivity implements Format {
         };
         new Thread(p15).start();
         if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.b(this, R.color.c));
+            f.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            f.setTextColor(Resources.b(this, R.color.b));
+            f.setTextColor(Resources.getColor(this, R.color.b));
         }
         final AlertDialog g = a.create();
         g.show();
@@ -3925,7 +3827,7 @@ public class MAIN extends MainBaseActivity implements Format {
         bigText.setBigContentTitle(getString(R.string.l38));
         bigText.setSummaryText(sg);
         m.setStyle(bigText);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(a221().getBoolean("eac", true));
         m.setDefaults(android.app.Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT <= 26) {
@@ -3978,7 +3880,7 @@ public class MAIN extends MainBaseActivity implements Format {
         bigText.setBigContentTitle(getString(R.string.m22));
         bigText.setSummaryText(sg);
         m.setStyle(bigText);
-        m.setColor(Resources.b(this, R.color.e));
+        m.setColor(Resources.getColor(this, R.color.e));
         m.setAutoCancel(a221().getBoolean("eac", true));
         m.setDefaults(android.app.Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT <= 26) {
@@ -4062,37 +3964,36 @@ public class MAIN extends MainBaseActivity implements Format {
                 Cursor cs = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
                         SearchDatabase.TABLE_SEARCH +
                         " ORDER BY " +
-                        BuildConfiguration.DB_ID +
+                        "_id" +
                         " DESC", null);
                 try {
                     if (cs.getCount() == 0) {
-                        java.io.File fe = new java.io.File(StorageDirectory.getCacheDir(this) + "/sh.htm");
+                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/sh.htm");
                         fe.createNewFile();
                         FileWriter fw = new FileWriter(fe, false);
                         BufferedWriter br = new BufferedWriter(fw);
                         br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.f39) + "</b></h1></center></body></html>");
                         br.close();
                         fw.close();
-                        runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getCacheDir(this) + "/sh.htm"));
                     } else {
                         StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.x49) + "</th></tr>");
                         while (cs.moveToNext()) {
                             sg.append("<tr><td>").append(cs.getString(1)).append("</td></tr>");
                         }
                         sg.append("</table></center></body></html>");
-                        java.io.File fe1 = new java.io.File(StorageDirectory.getCacheDir(this) + "/sh.htm");
+                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/sh.htm");
                         fe1.createNewFile();
                         FileWriter fw1 = new FileWriter(fe1, false);
                         BufferedWriter br1 = new BufferedWriter(fw1);
                         br1.write(sg.toString());
                         br1.close();
                         fw1.close();
-                        runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getCacheDir(this) + "/sh.htm"));
 
                     }
+                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/sh.htm"));
                     cs.close();
                 } catch (Exception en) {
-                    DiagnosticData.a(en);
+                    Log.a(en);
                 }
             };
             new Thread(p15).start();
@@ -4101,7 +4002,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 Cursor cs5 = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
                         HistoryDatabase.TABLE_HISTORY +
                         " ORDER BY " +
-                        BuildConfiguration.DB_ID +
+                        "_id" +
                         " DESC", null);
                 if (cs5.getCount() == 0) {
                     c169("https://webvium:/history_lite", "<b>" + getString(R.string.i15));
@@ -4121,7 +4022,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 Cursor cs6 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
                         BookmarkDatabase.TABLE_BOOKMARK +
                         " ORDER BY " +
-                        BuildConfiguration.DB_ID +
+                        "_id" +
                         " DESC", null);
                 if (cs6.getCount() == 0) {
                     c169("https://webvium/bookmarks_lite", "<b>" + getString(R.string.g21));
@@ -4144,16 +4045,16 @@ public class MAIN extends MainBaseActivity implements Format {
         cd.setBackgroundResource(R.drawable.w);
         tv.setBackgroundResource(R.drawable.f2);
         if (a221().getBoolean("webviumB", false)) {
-            h.setBackgroundColor(Resources.b(this, android.R.color.transparent));
+            h.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
         } else {
             if (!a221().getBoolean("autoUpdate", false)) {
-                h.setBackgroundColor(Resources.b(this, R.color.p));
+                h.setBackgroundColor(Resources.getColor(this, R.color.p));
             } else {
-                h.setBackgroundColor(Resources.b(this, R.color.m));
+                h.setBackgroundColor(Resources.getColor(this, R.color.m));
             }
         }
         if (a221().getBoolean("webviumB", false) && fe.exists()) {
-            this.o.setBackgroundColor(Resources.b(this, android.R.color.transparent));
+            this.o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
             Runnable p15 = () -> {
                 Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(MAIN.this));
                 runOnUiThread(() -> MAIN.this.back23.setBackground(new BitmapDrawable(MAIN.this.getResources(), bp)));
@@ -4335,11 +4236,11 @@ public class MAIN extends MainBaseActivity implements Format {
         new Thread(p15).start();
         bn.setText(getString(R.string.h14));
         if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.b(this, R.color.c));
-            f5.setTextColor(Resources.b(this, R.color.c));
+            f.setTextColor(Resources.getColor(this, R.color.c));
+            f5.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            f.setTextColor(Resources.b(this, R.color.b));
-            f5.setTextColor(Resources.b(this, R.color.b));
+            f.setTextColor(Resources.getColor(this, R.color.b));
+            f5.setTextColor(Resources.getColor(this, R.color.b));
         }
         bn.setOnClickListener(view -> {
             Runnable p151 = () -> {
@@ -4402,9 +4303,9 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setView(c);
         final TextView ed = c.findViewById(R.id.l8);
         if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.b(this, R.color.c));
+            ed.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            ed.setTextColor(Resources.b(this, R.color.b));
+            ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm0.toString()));
         final AlertDialog g = a.create();
@@ -4420,9 +4321,9 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setView(c);
         final TextView ed = c.findViewById(R.id.l8);
         if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.b(this, R.color.c));
+            ed.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            ed.setTextColor(Resources.b(this, R.color.b));
+            ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm2.toString()));
 
@@ -4452,7 +4353,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c170(String sg) {
-        h.evaluateJavascript(sg, s -> DiagnosticData.a(sg));
+        h.evaluateJavascript(sg, s -> Log.a(sg));
     }
 
     private void c171(final String sg) {
@@ -4460,7 +4361,7 @@ public class MAIN extends MainBaseActivity implements Format {
         View c = View.inflate(this, R.layout.a8, null);
         final LinearLayout ll = c.findViewById(R.id.h20);
         final ImageView iv = c.findViewById(R.id.c19);
-        ll.setBackgroundColor(Resources.b(this, android.R.color.transparent));
+        ll.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
         Runnable p15 = () -> {
             final Bitmap bp = BitmapFactory.decodeFile(sg);
             runOnUiThread(() -> iv.setImageBitmap(bp));
@@ -4565,7 +4466,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 Animation.animate(this, R.anim.b, tv);
             }
         } catch (Exception rx) {
-            DiagnosticData.a(rx);
+            Log.a(rx);
         }
     }
 
@@ -5006,7 +4907,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         try {
                             pe = URLDecoder.decode(sg12, "UTF-8");
                         } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                            DiagnosticData.a(unsupportedEncodingException);
+                            Log.a(unsupportedEncodingException);
                             pe = sg12;
                         }
                         java.io.File fe = new java.io.File(pe.replace("file://", ""));
@@ -5028,7 +4929,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             }
                         }
                     } catch (Exception en3) {
-                        DiagnosticData.a(en3);
+                        Log.a(en3);
                     }
                 };
                 new Thread(re).start();
@@ -5044,14 +4945,8 @@ public class MAIN extends MainBaseActivity implements Format {
                 c49(sg0);
                 a.removeExtra("value");
             } else if (Objects.requireNonNull(sg1).equals(Intent.ACTION_MAIN)) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a(sg1);
-                }
                 return;
             } else if (a.getFlags() == Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a(this + " FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY");
-                }
                 return;
             } else if (nfc != null) {
                 if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(sg1)) {
@@ -5077,7 +4972,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         Toast.c(this, getString(R.string.t20));
                     }
                 } catch (Exception ex) {
-                    DiagnosticData.a(ex);
+                    Log.a(ex);
                     Toast.c(this, getString(R.string.t20));
                 }
             } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
@@ -5102,7 +4997,7 @@ public class MAIN extends MainBaseActivity implements Format {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -5202,7 +5097,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     }
                 }
             } catch (Exception ex) {
-                DiagnosticData.a(ex);
+                Log.a(ex);
             }
         }
 

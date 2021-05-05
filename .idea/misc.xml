@@ -8,8 +8,8 @@
     <option name="OPEN_IN_BROWSER" value="false" />
   </component>
   <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/primary-obfuscation.txt" />
-    <file url="file://$PROJECT_DIR$/app/secondary-obfuscation.txt" />
+    <file url="file://$PROJECT_DIR$/app/primary-dictionary.txt" />
+    <file url="file://$PROJECT_DIR$/app/secondary-dictionary.txt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

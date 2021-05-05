@@ -25,11 +25,10 @@ import android.provider.Settings;
 
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.VIDE;
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -37,6 +36,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -65,7 +65,7 @@ public class VideoFragment extends BasePreferenceFragment {
                 return true;
             });
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -85,29 +85,22 @@ public class VideoFragment extends BasePreferenceFragment {
                             d5.write(e5, 0, f5);
                         }
                     }
-                    assert c5 != null;
-                    c5.close();
+                    Objects.requireNonNull(c5).close();
                     d5.flush();
                     d5.close();
                     try {
                         File fe = new File(StorageDirectory.getVideoPoster(getActivity()));
-                        if (BuildConfiguration.isDevelopment) {
-                            if (fe.setReadOnly()) {
-                                DiagnosticData.a("READ ONLY = " + fe.toString());
-                            }
-                        } else {
-                            fe.setReadOnly();
-                        }
+                        fe.setReadOnly();
                         Process p;
                         p = Runtime.getRuntime().exec("attrib +h " + fe.getPath());
                         p.waitFor();
                     } catch (Exception en) {
-                        DiagnosticData.a(en);
+                        Log.a(en);
                     }
                     BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(getActivity()));
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.h21)));
                 } catch (Exception en) {
-                    DiagnosticData.a(en);
+                    Log.a(en);
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.p30)));
                 }
             };

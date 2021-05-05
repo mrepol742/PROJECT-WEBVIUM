@@ -32,7 +32,7 @@ import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.os.CountDownTimer;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 @Development
 public class ExperimentalFragment extends BasePreferenceFragment {
@@ -59,7 +59,7 @@ public class ExperimentalFragment extends BasePreferenceFragment {
             });
 
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -72,9 +72,9 @@ public class ExperimentalFragment extends BasePreferenceFragment {
         TextView f = e.findViewById(R.id.g1);
         f.setText(getString(R.string.o1));
         if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.b(getActivity(), R.color.c));
+            f.setTextColor(Resources.getColor(getActivity(), R.color.c));
         } else {
-            f.setTextColor(Resources.b(getActivity(), R.color.b));
+            f.setTextColor(Resources.getColor(getActivity(), R.color.b));
         }
         AlertDialog j5 = c.create();
         O5 timer = new O5(2000, 2000, j5);

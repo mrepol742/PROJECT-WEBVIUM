@@ -72,14 +72,14 @@ public class VIDE extends BaseActivity {
             ab.setDisplayShowTitleEnabled(false);
         }
         if (!a221().getBoolean("autoUpdate", false)) {
-            h18.setTextColor(Resources.b(this, R.color.c));
+            h18.setTextColor(Resources.getColor(this, R.color.c));
 
-            k8.setTextColor(Resources.b(this, R.color.c));
-            w4.setBackgroundColor(Resources.b(this, R.color.p));
+            k8.setTextColor(Resources.getColor(this, R.color.c));
+            w4.setBackgroundColor(Resources.getColor(this, R.color.p));
         } else {
-            h18.setTextColor(Resources.b(this, R.color.b));
-            k8.setTextColor(Resources.b(this, R.color.b));
-            w4.setBackgroundColor(Resources.b(this, R.color.m));
+            h18.setTextColor(Resources.getColor(this, R.color.b));
+            k8.setTextColor(Resources.getColor(this, R.color.b));
+            w4.setBackgroundColor(Resources.getColor(this, R.color.m));
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);

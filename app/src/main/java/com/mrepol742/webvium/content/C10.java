@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 public class C10 {
 
@@ -36,7 +36,7 @@ public class C10 {
             ComponentName cn = new ComponentName(a, b);
             pm.setComponentEnabledSetting(cn, c, PackageManager.DONT_KILL_APP);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 }

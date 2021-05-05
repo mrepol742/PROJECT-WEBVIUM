@@ -15,17 +15,15 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.app.main;
+package com.mrepol742.webvium.app;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
@@ -34,52 +32,84 @@ import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.Notifications;
-import com.mrepol742.webvium.app.W6;
+import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.os.Vibrate;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
-public interface MainJavascriptInterface {
+public class WebviumJSI {
+    private Context a;
+    private Camera camera;
+    private Camera.Parameters params;
 
-
-    default void mainShowToast(Context a, String b, int c, int d) {
-        try {
-            if (c == 0) {
-                Toast.a(a, b, d);
-            } else if (c == 1) {
-                Toast.c(a, b);
-            } else if (c == 2) {
-                Toast.b(a, b);
-            }
-        } catch (Exception ex) {
-            DiagnosticData.a(ex);
-        }
+    public WebviumJSI(Context c) {
+        a = c;
     }
 
-    default void mainCopyToClipboard(Context a, String b) {
-        Clipboard.a(a, b);
+    @Keep
+    private WebviumJSI() {
     }
 
-    default void mainVibrate(Context a, int b) {
-        Vibrate.a(a, b);
+    @android.webkit.JavascriptInterface
+    public void showToast(String c) {
+        mainShowToast(a, c, 0, 0);
     }
 
-    default void mainEnableWifi(Context a, boolean b) {
+    @android.webkit.JavascriptInterface
+    public void showToastError(String c) {
+        mainShowToast(a, c, 1, 0);
+    }
+
+    @android.webkit.JavascriptInterface
+    public void showToastSuccess(String c) {
+        mainShowToast(a, c, 2, 0);
+    }
+
+    @android.webkit.JavascriptInterface
+    public void showToast(String c, int b) {
+        mainShowToast(a, c, 0, b);
+    }
+
+    @android.webkit.JavascriptInterface
+    public void showToastError(String c, int b) {
+        mainShowToast(a, c, 1, b);
+    }
+
+    @android.webkit.JavascriptInterface
+    public void showToastSuccess(String c, int b) {
+        mainShowToast(a, c, 2, b);
+    }
+
+    @android.webkit.JavascriptInterface
+    public void copyToClipboard(String c) {
+        Clipboard.a(a, c);
+    }
+
+    @android.webkit.JavascriptInterface
+    public void vibrate(int c) {
+        Vibrate.a(a, c);
+    }
+
+    @android.webkit.JavascriptInterface
+    public void enableWifi(boolean c) {
         WifiManager wifiManager = (WifiManager) a.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        wifiManager.setWifiEnabled(b);
+        wifiManager.setWifiEnabled(c);
     }
 
-    default void mainExit() {
-        W6.a();
+
+    @android.webkit.JavascriptInterface
+    public void exit() {
+        System.exit(0);
     }
 
-    default void mainShowNotification(Context a, String b, String c, String d) {
+    @android.webkit.JavascriptInterface
+    public void showNotification(String b, String c, String d) {
         MainNotification.b(a, Uri.parse(d).getHost(), a.getResources().getString(R.string.y20));
         android.app.Notification.Builder m =
                 Notifications.a(a, Uri.parse(d).getHost());
@@ -106,7 +136,7 @@ bigText.bigText(a.getResources().getString(R.string.g29));
         }*/
         m.setStyle(bigText);
 
-        m.setColor(Resources.b(a, R.color.a));
+        m.setColor(Resources.getColor(a, R.color.a));
 
         SharedPreferences sq = PreferenceManager.getDefaultSharedPreferences(a);
 
@@ -163,32 +193,45 @@ bigText.bigText(a.getResources().getString(R.string.g29));
         nmc.notify(Notifications.getRandomizeNotificationId(Notifications.DEFAULT), m.build());
     }
 
-    default void mainEnableFlashlight(Context a, boolean b) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            try {
+    @android.webkit.JavascriptInterface
+    public void enableFlashlight(boolean c) {
+        try {
+            if (Build.VERSION.SDK_INT > 23) {
                 CameraManager cm = (CameraManager) a.getSystemService(Context.CAMERA_SERVICE);
-                cm.setTorchMode(cm.getCameraIdList()[0], b);
-            } catch (CameraAccessException c5a) {
-                DiagnosticData.a(c5a);
-            }
-        } else {
-            try {
-                if (a.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-                    Camera ca = Camera.open();
-                    if (b) {
-                        Camera.Parameters p = ca.getParameters();
-                        p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-                        ca.setParameters(p);
-                        ca.startPreview();
-                    } else {
-                        ca.stopPreview();
-                        ca.release();
-                    }
+                cm.setTorchMode(cm.getCameraIdList()[0], c);
+            } else {
+                if (c) {
+                    camera = Camera.open();
+                    params = camera.getParameters();
+                    params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                    camera.setParameters(params);
+                    camera.startPreview();
+                } else {
+                    params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                    camera.setParameters(params);
+                    camera.stopPreview();
+                    camera.release();
+                    camera = null;
+                    params = null;
                 }
-            } catch (Exception e) {
-                DiagnosticData.a(e);
             }
+        } catch (Exception c5a) {
+            Log.a(c5a);
         }
     }
 
+    private void mainShowToast(Context a, String b, int c, int d) {
+        switch (c) {
+            default:
+            case 0:
+                Toast.a(a, b, d);
+            break;
+            case 1:
+                Toast.c(a, b);
+            break;
+            case 2:
+                Toast.b(a, b);
+            break;
+        }
+    }
 }

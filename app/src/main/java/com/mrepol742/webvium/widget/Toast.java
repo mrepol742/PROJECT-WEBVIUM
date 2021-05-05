@@ -36,7 +36,7 @@ public class Toast {
     public static void a(Context a, String b55, int c5) {
         View b = View.inflate(a, R.layout.h, null);
         TextView tv = b.findViewById(R.id.b14);
-        tv.setTextColor(Resources.b(a, R.color.c));
+        tv.setTextColor(Resources.getColor(a, R.color.c));
         tv.setMaxLines(2);
         tv.setBackgroundResource(R.drawable.e11);
         FontCache u7 = FontCache.getInstance(a.getApplicationContext());
@@ -56,7 +56,7 @@ public class Toast {
     public static void b(Context a, String b55) {
         View b = View.inflate(a, R.layout.h, null);
         TextView tv = b.findViewById(R.id.b14);
-        tv.setTextColor(Resources.b(a, R.color.b));
+        tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.o);
         FontCache u7 = FontCache.getInstance(a.getApplicationContext());
         tv.setTypeface(u7.a(Typeface.NORMAL));
@@ -72,7 +72,7 @@ public class Toast {
     public static void c(Context a, String bgg) {
         View b = View.inflate(a, R.layout.h, null);
         TextView tv = b.findViewById(R.id.b14);
-        tv.setTextColor(Resources.b(a, R.color.b));
+        tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.n);
         FontCache u7 = FontCache.getInstance(a.getApplicationContext());
         tv.setTypeface(u7.a(Typeface.NORMAL));
@@ -87,7 +87,7 @@ public class Toast {
     public static void d(Context a, String b55) {
         View b = View.inflate(a, R.layout.h, null);
         TextView tv = b.findViewById(R.id.b14);
-        tv.setTextColor(Resources.b(a, R.color.b));
+        tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.o);
         FontCache u7 = FontCache.getInstance(a.getApplicationContext());
         tv.setTypeface(u7.a(Typeface.NORMAL));
@@ -103,7 +103,7 @@ public class Toast {
     public static void e(Context a, String bgg, int bb) {
         View b = View.inflate(a, R.layout.h, null);
         TextView tv = b.findViewById(R.id.b14);
-        tv.setTextColor(Resources.b(a, R.color.b));
+        tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.n);
         FontCache u7 = FontCache.getInstance(a.getApplicationContext());
         tv.setTypeface(u7.a(Typeface.NORMAL));
@@ -114,6 +114,22 @@ public class Toast {
         d.setView(b);
         d.show();
 
+    }
+
+    // success
+    public static void f(Context a, String b55, int i) {
+        View b = View.inflate(a, R.layout.h, null);
+        TextView tv = b.findViewById(R.id.b14);
+        tv.setTextColor(Resources.getColor(a, R.color.b));
+        tv.setBackgroundResource(R.drawable.o);
+        FontCache u7 = FontCache.getInstance(a.getApplicationContext());
+        tv.setTypeface(u7.a(Typeface.NORMAL));
+        tv.setText(b55);
+        tv.setMaxLines(2);
+        android.widget.Toast d = new android.widget.Toast(a);
+        d.setDuration(i);
+        d.setView(b);
+        d.show();
     }
 
 

@@ -18,9 +18,7 @@
 package com.mrepol742.webvium.util;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.UnsupportedActions;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,7 +48,7 @@ public class Zip {
             zos.close();
             return true;
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         return false;
     }
@@ -61,9 +59,6 @@ public class Zip {
             int length = (int) longLength;
             if (length != longLength)
                 throw new UnsupportedActions();
-            if (BuildConfiguration.isDevelopment) {
-                DiagnosticData.a("FILE SIZE >= 2 GB");
-            }
             byte[] data = new byte[length];
             f.readFully(data);
             return data;
@@ -87,7 +82,7 @@ public class Zip {
             zos.close();
             return true;
         } catch (IOException ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         return false;
     }

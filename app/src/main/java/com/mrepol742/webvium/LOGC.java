@@ -29,7 +29,7 @@ import android.widget.Toolbar;
 import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.io.BufferedReader;
@@ -63,17 +63,17 @@ public class LOGC extends BaseActivity {
                 // ab.setDisplayShowHomeEnabled(false);
                 ab.setDisplayShowTitleEnabled(false);
             }
-            int f = Resources.b(this, R.color.c);
-            int g = Resources.b(this, R.color.b);
+            int f = Resources.getColor(this, R.color.c);
+            int g = Resources.getColor(this, R.color.b);
             a2.setTypeface(type(Typeface.BOLD));
             tv.setTypeface(type(Typeface.NORMAL));
             a2.setText(getString(R.string.f30));
             if (!a221().getBoolean("autoUpdate", false)) {
                 a2.setTextColor(f);
                 tv.setTextColor(f);
-                tv.setBackgroundColor(Resources.b(this, R.color.p));
+                tv.setBackgroundColor(Resources.getColor(this, R.color.p));
             } else {
-                tv.setBackgroundColor(Resources.b(this, R.color.m));
+                tv.setBackgroundColor(Resources.getColor(this, R.color.m));
                 a2.setTextColor(g);
                 tv.setTextColor(g);
             }
@@ -89,7 +89,7 @@ public class LOGC extends BaseActivity {
             });
 
         } catch (Exception rx) {
-            DiagnosticData.a(rx);
+            Log.a(rx);
         }
     }
 
@@ -116,7 +116,7 @@ public class LOGC extends BaseActivity {
                     sv.post(() -> sv.fullScroll(View.FOCUS_DOWN));
                 });
             } catch (IOException e1) {
-                DiagnosticData.a(e1);
+                Log.a(e1);
             }
         };
         new Thread(e).start();

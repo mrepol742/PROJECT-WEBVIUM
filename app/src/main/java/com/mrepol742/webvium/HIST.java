@@ -38,7 +38,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.NoSuchItemToGet;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
@@ -49,7 +48,7 @@ import com.mrepol742.webvium.history.HistoryAdapter;
 import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Stream;
@@ -153,7 +152,7 @@ public class HIST extends BaseActivity {
                     break;
             }
         } catch (NoSuchItemToGet l4) {
-            DiagnosticData.a(l4);
+            Log.a(l4);
         }
         return false;
     };
@@ -177,7 +176,7 @@ public class HIST extends BaseActivity {
         Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
                 HistoryDatabase.TABLE_HISTORY +
                 " ORDER BY " +
-                BuildConfiguration.DB_ID +
+                "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
             runOnUiThread(() -> {
@@ -204,15 +203,15 @@ public class HIST extends BaseActivity {
         if (ab != null) {
             ab.setDisplayShowTitleEnabled(false);
         }
-        int f = Resources.b(this, R.color.c);
-        int g = Resources.b(this, R.color.b);
+        int f = Resources.getColor(this, R.color.c);
+        int g = Resources.getColor(this, R.color.b);
         if (a221().getBoolean("blockSV", true)) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
         f4.setCompoundDrawablesWithIntrinsicBounds(null,
-                Resources.a(this, R.drawable.a28),
+                Resources.getDrawable(this, R.drawable.a28),
                 null,
                 null);
         f4.setCompoundDrawablePadding(40);
@@ -238,7 +237,7 @@ public class HIST extends BaseActivity {
                 try {
                     Intents.d("value", w15.c(c).ls0, HIST.this);
                 } catch (NoSuchItemToGet a34) {
-                    DiagnosticData.a(a34);
+                    Log.a(a34);
                 }
                 finish();
             });
@@ -276,8 +275,8 @@ public class HIST extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -379,8 +378,8 @@ public class HIST extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
@@ -465,7 +464,7 @@ public class HIST extends BaseActivity {
             Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
                     HistoryDatabase.TABLE_HISTORY +
                     " ORDER BY " +
-                    BuildConfiguration.DB_ID +
+                    "_id" +
                     " DESC", null);
             if (res.getCount() == 0) {
                 runOnUiThread(() -> {
@@ -539,10 +538,10 @@ public class HIST extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.g8);
         final TextView ti = c.findViewById(R.id.e2);
         final Button bn = c.findViewById(R.id.k20);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
-        int e3 = Resources.b(this, R.color.j);
-        int f3 = Resources.b(this, R.color.k);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        int e3 = Resources.getColor(this, R.color.j);
+        int f3 = Resources.getColor(this, R.color.k);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             bn.setTextColor(e);
@@ -687,8 +686,8 @@ public class HIST extends BaseActivity {
         final EDIT ed = c.findViewById(R.id.f10);
         final TextView ti1 = c.findViewById(R.id.f11);
         final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.b(this, R.color.c);
-        int f = Resources.b(this, R.color.b);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
 
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);

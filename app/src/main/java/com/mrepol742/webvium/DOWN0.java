@@ -43,7 +43,7 @@ import com.mrepol742.webvium.download.DownloadServiceDataModel;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.Objects;
@@ -62,7 +62,7 @@ public class DOWN0 extends MainService {
         m.setSmallIcon(R.drawable.c2);
         m.setContentTitle(getResources().getString(R.string.d38));
         m.setOngoing(true);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(false);
         if (Build.VERSION.SDK_INT <= 26) {
             m.setPriority(android.app.Notification.PRIORITY_LOW);
@@ -82,7 +82,7 @@ public class DOWN0 extends MainService {
         bigText.bigText(text);
         m.setContentTitle(ghg);
         m.setContentText(text);
-        m.setColor(Resources.b(this, R.color.e));
+        m.setColor(Resources.getColor(this, R.color.e));
         m.setStyle(bigText);
         m.setAutoCancel(sp.getBoolean("eac", true));
         m.setDefaults(android.app.Notification.DEFAULT_ALL);
@@ -265,7 +265,7 @@ public class DOWN0 extends MainService {
             }
             cursor.close();
         } catch (Exception en) {
-            DiagnosticData.a(en);
+            Log.a(en);
         }
     }
 
@@ -284,7 +284,7 @@ public class DOWN0 extends MainService {
             m.setContentTitle(ct.getResources().getString(R.string.u20));
         }*/
         m.setStyle(bigText);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(sp.getBoolean("eac", true));
         m.setDefaults(android.app.Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT <= 26) {
@@ -371,7 +371,7 @@ public class DOWN0 extends MainService {
                     Intents.a(a, DOWN.class);
                 }
             } catch (Exception ex) {
-                DiagnosticData.a(ex);
+                Log.a(ex);
             }
         }
     }

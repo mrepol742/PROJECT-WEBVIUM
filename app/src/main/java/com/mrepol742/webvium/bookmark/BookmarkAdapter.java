@@ -83,8 +83,8 @@ public class BookmarkAdapter extends MainBaseAdapter {
                 w20.tv = e.findViewById(R.id.f1);
                 w20.ll = e.findViewById(R.id.o23);
                 w20.tv.setCompoundDrawablePadding(20);
-                w20.tv.setTextColor(Resources.b(a, R.color.b));
-                w20.tv.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(a, R.drawable.a9), null, null);
+                w20.tv.setTextColor(Resources.getColor(a, R.color.b));
+                w20.tv.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(a, R.drawable.a9), null, null);
                 w20.tv.setTypeface(type(Typeface.BOLD));
                 e.setTag(w20);
             } else {

@@ -40,7 +40,7 @@ public class QUIC extends MainService {
         m.setContentTitle(getString(R.string.l33));
         m.setContentText(getString(R.string.n39));
         m.setOngoing(true);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(false);
         Intent j11 = new Intent(this, SEAR.class);
 

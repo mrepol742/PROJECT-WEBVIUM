@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 public class Animation {
     @Keep
@@ -51,7 +51,7 @@ public class Animation {
             });
             c.startAnimation(d);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 

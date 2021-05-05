@@ -27,14 +27,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 
@@ -53,7 +52,7 @@ public class NOTI extends MainService {
 
     @Override
     public int onStartCommand(Intent a, int c, int d) {
-        if (Connectivity.isThereAnyInternetConnection(this) && Connectivity.isRestrictBackground(this)) {
+        if (Connectivity.isThereAnyInternetConnection(this)) {
             if (a.getStringExtra("sta") == null || a.getStringExtra("sta").isEmpty())
                 s1();
         }
@@ -73,7 +72,7 @@ public class NOTI extends MainService {
         m.setContentTitle(title);
         m.setContentText(text);
         m.setStyle(bigText);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(sp.getBoolean("eac", true));
         m.setDefaults(android.app.Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT < 26) {
@@ -123,27 +122,27 @@ public class NOTI extends MainService {
     }
 
     public void g() {
-        try {
-            SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-            int notif = Stream.g(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_STATE, "")) + "?raw=true");
-            if (notif > 0) {
-                String neTf = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) + "?raw=true", getString(R.string.c33));
-                String[] sp = neTf.split(";");
-                SharedPreferences j988 = getSharedPreferences("wv,", 0);
-                if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {
-                    f(sp[0], sp[1], sp[2]);
-                    if (BuildConfiguration.isDevelopment) {
-                        DiagnosticData.a("Push Notifications =" + sp[0] + " " + sp[1] + " " + sp[2]);
+        Runnable runnable = () -> {
+            try {
+                SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
+                int notif = Stream.g(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_STATE, "")) + "?raw=true");
+                if (notif > 0) {
+                    String neTf = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) + "?raw=true", getString(R.string.c33));
+                    String[] sp = neTf.split(";");
+                    SharedPreferences j988 = getSharedPreferences("wv,", 0);
+                    if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {
+                        f(sp[0], sp[1], sp[2]);
+                        SharedPreferences.Editor gujh = j988.edit();
+                        gujh.putString("notif1", sp[0]);
+                        gujh.putString("notif2", sp[1]);
+                        gujh.apply();
                     }
-                    SharedPreferences.Editor gujh = j988.edit();
-                    gujh.putString("notif1", sp[0]);
-                    gujh.putString("notif2", sp[1]);
-                    gujh.apply();
                 }
+            } catch (Exception en) {
+                Log.a(en);
             }
-        } catch (Exception en) {
-            DiagnosticData.a(en);
-        }
+        };
+        new Thread(runnable).start();
     }
 
 }

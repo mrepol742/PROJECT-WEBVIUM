@@ -58,15 +58,15 @@ public class TERM extends BaseActivity {
         }
         c.setNavigationIcon(R.drawable.a14);
         if (!a221().getBoolean("autoUpdate", false)) {
-            d.setTextColor(Resources.b(this, R.color.c));
-            e.setTextColor(Resources.b(this, R.color.c));
-            tv.setTextColor(Resources.b(this, R.color.c));
-            findViewById(R.id.l11).setBackgroundColor(Resources.b(this, R.color.p));
+            d.setTextColor(Resources.getColor(this, R.color.c));
+            e.setTextColor(Resources.getColor(this, R.color.c));
+            tv.setTextColor(Resources.getColor(this, R.color.c));
+            findViewById(R.id.l11).setBackgroundColor(Resources.getColor(this, R.color.p));
         } else {
-            d.setTextColor(Resources.b(this, R.color.b));
-            e.setTextColor(Resources.b(this, R.color.b));
-            tv.setTextColor(Resources.b(this, R.color.b));
-            findViewById(R.id.l11).setBackgroundColor(Resources.b(this, R.color.m));
+            d.setTextColor(Resources.getColor(this, R.color.b));
+            e.setTextColor(Resources.getColor(this, R.color.b));
+            tv.setTextColor(Resources.getColor(this, R.color.b));
+            findViewById(R.id.l11).setBackgroundColor(Resources.getColor(this, R.color.m));
         }
         c.setBackgroundResource(R.drawable.p);
         c.setNavigationOnClickListener(view -> finish());

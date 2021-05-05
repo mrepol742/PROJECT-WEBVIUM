@@ -24,7 +24,7 @@
         tools:targetApi="n_mr1">
         <intent
             a:action="com.mrepol742.webvium.intent.action.PASTE_SEARCH"
-            a:category="com.mrepol742.webvium.intent.category.GENIUS"
+            a:category="com.mrepol742.webvium.intent.category.LEGENDS"
             a:targetPackage="com.mrepol742.webvium" />
     </shortcut>
     <shortcut
@@ -34,7 +34,7 @@
         tools:targetApi="n_mr1">
         <intent
             a:action="com.mrepol742.webvium.intent.action.PASTE"
-            a:category="com.mrepol742.webvium.intent.category.GENIUS"
+            a:category="com.mrepol742.webvium.intent.category.LEGENDS"
             a:targetPackage="com.mrepol742.webvium" />
     </shortcut>
     <shortcut
@@ -44,7 +44,7 @@
         tools:targetApi="n_mr1">
         <intent
             a:action="com.mrepol742.webvium.intent.action.ASSIST"
-            a:category="com.mrepol742.webvium.intent.category.GENIUS"
+            a:category="com.mrepol742.webvium.intent.category.LEGENDS"
             a:targetPackage="com.mrepol742.webvium" />
     </shortcut>
 </shortcuts>

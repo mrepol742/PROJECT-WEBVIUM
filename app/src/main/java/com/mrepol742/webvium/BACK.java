@@ -18,65 +18,68 @@
 package com.mrepol742.webvium;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 // @Class BackupService
 public class BACK extends MainService {
 
     @Override
     public int onStartCommand(Intent a, int flag, int c) {
-        try {
-            String sg1 = dt();
-            if (new java.io.File(sg1).exists()) {
-                s1();
-            }
+        Runnable runnable = () -> {
             try {
-                int t = 10;
-                String sg = Package.b();
-                String sg0 = Base64.decode("L2RhdGEvYX BwLyViL2Jhc 2UuYX Br ");
-                String pc = sg + "-";
-                for (int i = 0; i < t; i++) {
-                    String sg2 = pc + i;
-                    java.io.File fe = new java.io.File(sg0.replace("%b", sg2));
-                    if (fe.exists()) {
-                        FileInputStream fos = new FileInputStream(fe.toString());
-                        OutputStream d = new FileOutputStream(sg1);
-                        byte[] e = new byte[1024];
-                        int f;
-                        while ((f = fos.read(e)) != -1) {
-                            d.write(e, 0, f);
-                        }
-                        d.flush();
-                        d.close();
-                        fos.close();
-                        java.io.File fe1 = new java.io.File(sg1);
-                        fe1.setReadOnly();
-                        break;
-                    }
+                String sg1 = dt();
+                if (new java.io.File(sg1).exists()) {
+                    s1();
                 }
-            } catch (Exception e) {
-                DiagnosticData.a(e);
-            }
+                try {
+                    int t = 10;
+                    String sg = Package.b();
+                    String sg0 = Base64.decode("L2Rhd  GEvYXB   wLyUx      JHMvYm FzZS5hcGs");
+                    String pc = sg + "-";
+                    for (int i = 0; i < t; i++) {
+                        String sg2 = pc + i;
+                        java.io.File fe = new java.io.File(String.format(sg0, sg2));
+                        if (fe.exists()) {
+                            FileInputStream fos = new FileInputStream(fe.toString());
+                            OutputStream d = new FileOutputStream(sg1);
+                            byte[] e = new byte[1024];
+                            int f;
+                            while ((f = fos.read(e)) != -1) {
+                                d.write(e, 0, f);
+                            }
+                            d.flush();
+                            d.close();
+                            fos.close();
+                            break;
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.a(e);
+                }
 
-        } catch (Exception e) {
-            DiagnosticData.a(e);
-        }
+            } catch (Exception e) {
+                Log.a(e);
+            }
+        };
+        new Thread(runnable).start();
         s1();
         return super.onStartCommand(a, flag, c);
     }
 
-    private String dt() throws Exception {
+    private String dt() throws PackageManager.NameNotFoundException {
         if (!Permission.checkOnly(this, Permission.STORAGE)) {
             Files.createNewFolder(getFilesDir() + "/Backup");
             Files.createNewFolder(getFilesDir() + "/Backup/Application");
@@ -88,27 +91,31 @@ public class BACK extends MainService {
         return StorageDirectory.getWebviumDir() + "/Backup/Application/Base_" + Package.e(this) + ".apk";
     }
 
-    private void h() throws Exception {
-        String sg = getFilesDir() + "/Backup/Application/";
-        java.io.File fe = new java.io.File(sg);
-        String[] qw = fe.list();
-        assert qw != null;
-        if (qw.length != 0) {
-            for (String sg2 : qw) {
-                FileInputStream fos = new FileInputStream(getFilesDir() + "/Backup/Application/" + sg2);
-                OutputStream d = new FileOutputStream(StorageDirectory.getWebviumDir() + "/Backup/Application/" + sg2);
-                byte[] e = new byte[1024];
-                int f;
-                while ((f = fos.read(e)) != -1) {
-                    d.write(e, 0, f);
+    private void h() {
+        Runnable runnable = () -> {
+            try {
+                String sg = getFilesDir() + "/Backup/Application/";
+                java.io.File fe = new java.io.File(sg);
+                String[] qw = fe.list();
+                if (Objects.requireNonNull(qw).length != 0) {
+                    for (String sg2 : qw) {
+                        FileInputStream fos = new FileInputStream(getFilesDir() + "/Backup/Application/" + sg2);
+                        OutputStream d = new FileOutputStream(StorageDirectory.getWebviumDir() + "/Backup/Application/" + sg2);
+                        byte[] e = new byte[1024];
+                        int f;
+                        while ((f = fos.read(e)) != -1) {
+                            d.write(e, 0, f);
+                        }
+                        d.flush();
+                        d.close();
+                        fos.close();
+                    }
                 }
-                d.flush();
-                d.close();
-                fos.close();
-                java.io.File fea = new java.io.File(StorageDirectory.getWebviumDir() + "/Backup/Application/" + sg2);
-                fea.setReadOnly();
+            } catch (Exception en) {
+                Log.a(en);
             }
-        }
+        };
+        new Thread(runnable).start();
     }
 
 

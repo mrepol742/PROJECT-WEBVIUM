@@ -29,7 +29,7 @@ import android.webkit.URLUtil;
 
 import com.mrepol742.webvium.HDMS;
 import com.mrepol742.webvium.app.WebviumDatabase;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -126,7 +126,7 @@ public class HistoryHelper implements WebviumDatabase {
                 Uri uri = Uri.parse(sg);
                 return uri.getHost();
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
             }
             return sg;
         }

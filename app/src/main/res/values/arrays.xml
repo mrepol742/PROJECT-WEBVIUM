@@ -478,4 +478,90 @@
 
     </string-array>
 
+
+    <string-array name="bbb17">
+        <item name="a">86</item>
+        <item name="b">50</item>
+        <item name="c">86</item>
+        <item name="d">105</item>
+        <item name="e">100</item>
+        <item name="f">109</item>
+        <item name="g">108</item>
+        <item name="h">49</item>
+        <item name="i">98</item>
+        <item name="j">81</item>
+    </string-array>
+    <string-array name="bbb18">
+        <item name="a">a</item>
+        <item name="b">b</item>
+        <item name="c">c</item>
+        <item name="d">d</item>
+        <item name="e">e</item>
+        <item name="f">f</item>
+        <item name="g">g</item>
+        <item name="h">h</item>
+        <item name="i">i</item>
+        <item name="j">j</item>
+
+    </string-array>
+    <string-array name="bbbb17">
+        <item name="a">89</item>
+        <item name="b">50</item>
+        <item name="c">57</item>
+        <item name="d">116</item>
+        <item name="e">76</item>
+        <item name="f">109</item>
+        <item name="g">49</item>
+        <item name="h">121</item>
+        <item name="i">90</item>
+        <item name="j">88</item>
+        <item name="k">66</item>
+        <item name="l">118</item>
+        <item name="m">98</item>
+        <item name="n">68</item>
+        <item name="o">99</item>
+        <item name="p">48</item>
+        <item name="q">77</item>
+        <item name="r">105</item>
+        <item name="s">53</item>
+        <item name="t">51</item>
+        <item name="u">90</item>
+        <item name="v">87</item>
+        <item name="w">74</item>
+        <item name="x">50</item>
+        <item name="y">97</item>
+        <item name="z">88</item>
+        <item name="a1">86</item>
+        <item name="a2">116</item>
+    </string-array>
+    <string-array name="bbbb18">
+        <item name="a">a</item>
+        <item name="b">b</item>
+        <item name="c">c</item>
+        <item name="d">d</item>
+        <item name="e">e</item>
+        <item name="f">f</item>
+        <item name="g">g</item>
+        <item name="h">h</item>
+        <item name="i">i</item>
+        <item name="j">j</item>
+        <item name="k">k</item>
+        <item name="l">l</item>
+        <item name="m">m</item>
+        <item name="n">n</item>
+        <item name="o">o</item>
+        <item name="p">p</item>
+        <item name="q">q</item>
+        <item name="r">r</item>
+        <item name="s">s</item>
+        <item name="t">t</item>
+        <item name="u">u</item>
+        <item name="v">v</item>
+        <item name="w">w</item>
+        <item name="x">x</item>
+        <item name="y">y</item>
+        <item name="z">z</item>
+        <item name="a1">a1</item>
+        <item name="a2">a2</item>
+    </string-array>
 </resources>

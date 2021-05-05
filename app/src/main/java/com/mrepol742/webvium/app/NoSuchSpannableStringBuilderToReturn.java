@@ -18,11 +18,10 @@
 package com.mrepol742.webvium.app;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.util.U4;
 
 @Keep
 public class NoSuchSpannableStringBuilderToReturn extends NoSuchObjectToReturn {
-    private static final String sg = U4.a(E1.NoSuchSpannableStringBuilderToReturn);
+    private static final String sg = E1.NoSuchSpannableStringBuilderToReturn.toString();
 
     public NoSuchSpannableStringBuilderToReturn() {
         throw new java.lang.RuntimeException(sg);

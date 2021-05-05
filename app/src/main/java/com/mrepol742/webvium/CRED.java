@@ -39,7 +39,7 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.view.Animation;
@@ -82,23 +82,23 @@ public class CRED extends BaseActivity {
         TextView tv = findViewById(R.id.f13);
         RelativeLayout rl = findViewById(R.id.c3);
         if (!a221().getBoolean("autoUpdate", false)) {
-            tv.setTextColor(Resources.b(this, R.color.c));
-            rl.setBackgroundColor(Resources.b(this, R.color.b));
+            tv.setTextColor(Resources.getColor(this, R.color.c));
+            rl.setBackgroundColor(Resources.getColor(this, R.color.b));
         } else {
-            tv.setTextColor(Resources.b(this, R.color.b));
-            rl.setBackgroundColor(Resources.b(this, R.color.n));
+            tv.setTextColor(Resources.getColor(this, R.color.b));
+            rl.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
         tv.setText(getString(R.string.u26));
         tv.setTypeface(type(Typeface.NORMAL));
         TextView tv0 = findViewById(R.id.c15);
         tv0.setText(getString(R.string.u28));
-        tv0.setTextColor(Resources.b(this, R.color.b));
+        tv0.setTextColor(Resources.getColor(this, R.color.b));
         tv0.setTypeface(type(Typeface.NORMAL));
         TextView tv1 = findViewById(R.id.c10);
-        tv1.setTextColor(Resources.b(this, R.color.b));
+        tv1.setTextColor(Resources.getColor(this, R.color.b));
         tv1.setTypeface(type(Typeface.BOLD));
         tv1.setText(getString(R.string.u29));
-        tv1.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(this, R.drawable.e9), null, null);
+        tv1.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.e9), null, null);
         tv1.setCompoundDrawablePadding(10);
         iv = findViewById(R.id.c16);
         iv.setImageResource(R.drawable.a2);
@@ -241,23 +241,23 @@ public class CRED extends BaseActivity {
     private void f() {
         boolean bn = Hardware.isBatterySaveMode(this);
         if (!bn) {
-            getWindow().setStatusBarColor(Resources.b(this, R.color.a));
+            getWindow().setStatusBarColor(Resources.getColor(this, R.color.a));
         }
         if (bn) {
-            tv2.setTextColor(Resources.b(this, R.color.g));
+            tv2.setTextColor(Resources.getColor(this, R.color.g));
             fl.setBackgroundResource(R.drawable.f30);
-            tv2.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(this, R.drawable.g1), null, null);
+            tv2.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g1), null, null);
             tv2.setBackgroundResource(R.drawable.g2);
-            tv4.setTextColor(Resources.b(this, R.color.g));
-            tv4.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(this, R.drawable.g1), null, null);
+            tv4.setTextColor(Resources.getColor(this, R.color.g));
+            tv4.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g1), null, null);
             tv4.setBackgroundResource(R.drawable.g2);
         } else {
-            tv2.setTextColor(Resources.b(this, R.color.a));
+            tv2.setTextColor(Resources.getColor(this, R.color.a));
             fl.setBackgroundResource(R.drawable.e7);
-            tv2.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(this, R.drawable.z), null, null);
+            tv2.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.z), null, null);
             tv2.setBackgroundResource(R.drawable.e8);
-            tv4.setTextColor(Resources.b(this, R.color.a));
-            tv4.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(this, R.drawable.z), null, null);
+            tv4.setTextColor(Resources.getColor(this, R.color.a));
+            tv4.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.z), null, null);
             tv4.setBackgroundResource(R.drawable.e8);
         }
     }
@@ -295,7 +295,7 @@ public class CRED extends BaseActivity {
                     f();
                 }
             } catch (Exception ex) {
-                DiagnosticData.a(ex);
+                Log.a(ex);
             }
         }
     }

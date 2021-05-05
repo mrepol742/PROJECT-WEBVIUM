@@ -18,11 +18,10 @@
 package com.mrepol742.webvium.app;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.util.U4;
 
 @Keep
 public class UnsupportedActions extends RuntimeException {
-    private static final String sg = U4.a(NoSuchObjectToReturn.E1.UnsupportedActions);
+    private static final String sg = NoSuchObjectToReturn.E1.UnsupportedActions.toString();
 
     public UnsupportedActions() {
         throw new java.lang.RuntimeException(sg);

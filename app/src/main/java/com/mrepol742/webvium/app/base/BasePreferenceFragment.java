@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.os.StrictMode;
 
 @SuppressWarnings("deprecation")
@@ -32,7 +31,7 @@ public class BasePreferenceFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle b1) {
-        if (BuildConfiguration.isDevelopment || (getActivity().getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false))) {
+        if (false || (getActivity().getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false))) {
             StrictMode.b();
         }
         super.onCreate(b1);

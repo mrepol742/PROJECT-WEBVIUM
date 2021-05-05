@@ -21,8 +21,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 public class PermissionDatabase extends SQLiteOpenHelper {
 
@@ -43,7 +42,7 @@ public class PermissionDatabase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " +
                 TABLE_PERMISSION +
                 " ( " +
-                BuildConfiguration.DB_ID +
+                "_id" +
                 " INTEGER PRIMARY KEY, " +
                 COL1_PERMISSION +
                 " TEXT, " +
@@ -53,8 +52,6 @@ public class PermissionDatabase extends SQLiteOpenHelper {
                 " TEXT, " +
                 COL4_PERMISSION +
                 " TEXT )");
-        if (BuildConfiguration.isDevelopment)
-            DiagnosticData.a("Webvium.onCreate()");
     }
 
     @Override
@@ -62,14 +59,10 @@ public class PermissionDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " +
                 TABLE_PERMISSION);
         onCreate(db);
-        if (BuildConfiguration.isDevelopment)
-            DiagnosticData.a("Webvium.onUpgrade()");
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-        if (BuildConfiguration.isDevelopment)
-            DiagnosticData.a("Webvium.onDowngrade()");
     }
 }

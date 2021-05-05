@@ -27,14 +27,13 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 
@@ -53,7 +52,7 @@ public class UPDA extends MainService {
 
     @Override
     public int onStartCommand(Intent a, int c, int d) {
-        if (Connectivity.isThereAnyInternetConnection(this) && Connectivity.isRestrictBackground(this)) {
+        if (Connectivity.isThereAnyInternetConnection(this)) {
             if (a.getStringExtra("sta") == null || a.getStringExtra("sta").isEmpty())
             s1();
 
@@ -70,11 +69,9 @@ public class UPDA extends MainService {
             int newUpdate = Stream.i(Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "")) + "?raw=true");
             if (newUpdate > b) {
                 f(getString(R.string.x11), getString(R.string.x12), Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "")) + "?raw=true");
-                if (BuildConfiguration.isDevelopment)
-                    DiagnosticData.a("Package Update =" + newUpdate);
             }
         } catch (PackageManager.NameNotFoundException w) {
-            DiagnosticData.a(w);
+            Log.a(w);
         }
 
     }
@@ -90,7 +87,7 @@ public class UPDA extends MainService {
         m.setContentTitle(title);
         m.setContentText(text);
         m.setStyle(bigText);
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(sp.getBoolean("eac", true));
         m.setDefaults(android.app.Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT < 26) {

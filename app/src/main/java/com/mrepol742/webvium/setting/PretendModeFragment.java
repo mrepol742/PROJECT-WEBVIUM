@@ -44,7 +44,7 @@ import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
@@ -96,7 +96,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 return true;
             });
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -130,8 +130,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
         final EDIT a67 = a7.findViewById(R.id.a6);
         e15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
         a67.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        int c = Resources.b(getActivity(), R.color.c);
-        int d1 = Resources.b(getActivity(), R.color.b);
+        int c = Resources.getColor(getActivity(), R.color.c);
+        int d1 = Resources.getColor(getActivity(), R.color.b);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
             a67.setTextColor(c);
@@ -229,8 +229,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
 
         e15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
 
-        int a15 = Resources.b(getActivity(), R.color.c);
-        int a16 = Resources.b(getActivity(), R.color.b);
+        int a15 = Resources.getColor(getActivity(), R.color.c);
+        int a16 = Resources.getColor(getActivity(), R.color.b);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
@@ -292,8 +292,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
         final EDIT e16 = a7.findViewById(R.id.e16);
 
         e16.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        int a15 = Resources.b(getActivity(), R.color.c);
-        int a16 = Resources.b(getActivity(), R.color.b);
+        int a15 = Resources.getColor(getActivity(), R.color.c);
+        int a16 = Resources.getColor(getActivity(), R.color.b);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
@@ -396,8 +396,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
         a67.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
         l15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        int c = Resources.b(getActivity(), R.color.c);
-        int d1 = Resources.b(getActivity(), R.color.b);
+        int c = Resources.getColor(getActivity(), R.color.c);
+        int d1 = Resources.getColor(getActivity(), R.color.b);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
             a67.setTextColor(c);
@@ -527,8 +527,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
         final EDIT e16 = a7.findViewById(R.id.e16);
 
 
-        int a15 = Resources.b(getActivity(), R.color.c);
-        int a16 = Resources.b(getActivity(), R.color.b);
+        int a15 = Resources.getColor(getActivity(), R.color.c);
+        int a16 = Resources.getColor(getActivity(), R.color.b);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {

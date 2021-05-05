@@ -94,16 +94,16 @@ public class DownloadAdapter extends MainBaseAdapter {
                 w20.e = e.findViewById(R.id.b13);
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
                 if (!sp.getBoolean("autoUpdate", false)) {
-                    w20.a.setTextColor(Resources.b(a, R.color.c));
-                    w20.b.setTextColor(Resources.b(a, R.color.c));
-                    w20.d.setTextColor(Resources.b(a, R.color.c));
-                    w20.e.setTextColor(Resources.b(a, R.color.c));
+                    w20.a.setTextColor(Resources.getColor(a, R.color.c));
+                    w20.b.setTextColor(Resources.getColor(a, R.color.c));
+                    w20.d.setTextColor(Resources.getColor(a, R.color.c));
+                    w20.e.setTextColor(Resources.getColor(a, R.color.c));
                     w20.c.setBackgroundResource(R.drawable.v);
                 } else {
-                    w20.a.setTextColor(Resources.b(a, R.color.b));
-                    w20.b.setTextColor(Resources.b(a, R.color.b));
-                    w20.d.setTextColor(Resources.b(a, R.color.b));
-                    w20.e.setTextColor(Resources.b(a, R.color.b));
+                    w20.a.setTextColor(Resources.getColor(a, R.color.b));
+                    w20.b.setTextColor(Resources.getColor(a, R.color.b));
+                    w20.d.setTextColor(Resources.getColor(a, R.color.b));
+                    w20.e.setTextColor(Resources.getColor(a, R.color.b));
                     w20.c.setBackgroundResource(R.drawable.y);
                 }
                 w20.a.setTypeface(type(Typeface.BOLD));

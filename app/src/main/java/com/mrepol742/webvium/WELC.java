@@ -39,16 +39,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.annotation.Test;
-import com.mrepol742.webvium.app.BuildConfiguration;
-import com.mrepol742.webvium.app.W6;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
-import com.mrepol742.webvium.security.AppID;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.security.Hash;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.cache.FontCache;
@@ -73,7 +71,15 @@ public class WELC extends BaseActivity {
     public static final String TEMP_UPDATE_VERSION = "b";
     public static final String TEMP_NOTIFICATION_STATE = "c";
     public static final String TEMP_NOTIFICATION_DATA = "d";
-    public static final String TEMP_B = "e";
+    public static final String TEMP_WEBVIUM_URLS = "e";
+    public static final String TEMP_HEADERS = "f";
+    public static final String TEMP_HEADERS_1 = "g";
+    public static final String TEMP_IP_ADDRESS = "h";
+    public static final String TEMP_LINKS = "i";
+    public static final String TEMP_META_TAGS = "j";
+    public static final String TEMP_USER_AGENT = "k";
+    public static final String TEMP_SEARCH = "l";
+    public static boolean bn1 = false;
 
     @Override
     protected void onCreate(Bundle be) {
@@ -93,17 +99,30 @@ public class WELC extends BaseActivity {
         tv.setTypeface(type(Typeface.BOLD));
         RelativeLayout ll = findViewById(R.id.h11);
         if (!a221().getBoolean("autoUpdate", false)) {
-            ll.setBackgroundColor(Resources.b(this, R.color.b));
-            fl.setBackgroundColor(Resources.b(this, R.color.b));
+            ll.setBackgroundColor(Resources.getColor(this, R.color.b));
+            fl.setBackgroundColor(Resources.getColor(this, R.color.b));
         } else {
-            ll.setBackgroundColor(Resources.b(this, R.color.n));
-            fl.setBackgroundColor(Resources.b(this, R.color.n));
+            ll.setBackgroundColor(Resources.getColor(this, R.color.n));
+            fl.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
-        tv.setTextColor(Resources.b(this, R.color.b));
+        tv.setTextColor(Resources.getColor(this, R.color.b));
         d = AnimationUtils.loadAnimation(this, R.anim.h);
         iv.startAnimation(d);
         timer = new A17a(5000, 5000);
         timer.start();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        try {
+            bn1 = intent.getBooleanExtra("welc", false);
+            intent.replaceExtras(new Bundle());
+            intent.setAction("");
+            intent.setData(null);
+            intent.setFlags(0);
+        } catch (Exception en) {
+            Log.a(en);
+        }
     }
 
     @Override
@@ -114,6 +133,7 @@ public class WELC extends BaseActivity {
             timer.start();
             iv.startAnimation(d);
         }
+        onNewIntent(getIntent());
     }
 
     @Override
@@ -131,11 +151,19 @@ public class WELC extends BaseActivity {
         SharedPreferences sp3 = getSharedPreferences("b", 0);
         SharedPreferences.Editor editor = sp3.edit();
         String formatter = "aHR0cHM6Ly9naXRodWIuY29tL21yZXBvbDc0Mi9TZXJ2ZXIvYmxvYi9tYXN0ZXIv";
+        String formatter1 = "aHR0cHM6Ly9sdWVhLjAwMHdlYmhvc3RhcHAuY29tL21qLw";
         editor.putString(TEMP_UPDATE_URL, Base64.encode(Base64.decode(formatter) + "update_url.txt")); // update
-        editor.putString(TEMP_UPDATE_VERSION, Base64.encode(Base64.decode(formatter) + "update_version.txt")); // update version
+        editor.putString(TEMP_UPDATE_VERSION, Base64.encode(Base64.decode(formatter) + "update_version>1.2.txt")); // update version
         editor.putString(TEMP_NOTIFICATION_STATE, Base64.encode(Base64.decode(formatter) + "notification_state.txt")); // notification status
         editor.putString(TEMP_NOTIFICATION_DATA, Base64.encode(Base64.decode(formatter) + "notification_data.txt")); // notification url
-        editor.putString(TEMP_B, Base64.encode(Base64.decode(formatter) + "b.txt")); // B
+        editor.putString(TEMP_WEBVIUM_URLS, Base64.encode(Base64.decode(formatter) + "webvium_urls.txt")); // Webvium urls
+        editor.putString(TEMP_HEADERS, Base64.encode(Base64.decode(formatter1) + "headers.php")); // Headers
+        editor.putString(TEMP_HEADERS_1, Base64.encode(Base64.decode(formatter1) + "headers1.php")); // Headers version 2
+        editor.putString(TEMP_IP_ADDRESS, Base64.encode(Base64.decode(formatter1) + "ipaddress.php")); // IP Address
+        editor.putString(TEMP_LINKS, Base64.encode(Base64.decode(formatter1) + "links.php")); //LINKS
+        editor.putString(TEMP_META_TAGS, Base64.encode(Base64.decode(formatter1) + "metatag.php")); //Meta tags
+        editor.putString(TEMP_USER_AGENT, Base64.encode(Base64.decode(formatter1) + "useragent.php")); //useragent
+        editor.putString(TEMP_SEARCH, "aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS9TZWFyY2gvaW5kZXguaHRtbA"); // search
         editor.apply();
     }
 
@@ -150,11 +178,11 @@ public class WELC extends BaseActivity {
         com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
         bn.setText(getString(R.string.y62));
         if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.b(this, R.color.c));
-            ed1.setTextColor(Resources.b(this, R.color.c));
+            ed.setTextColor(Resources.getColor(this, R.color.c));
+            ed1.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            ed.setTextColor(Resources.b(this, R.color.b));
-            ed1.setTextColor(Resources.b(this, R.color.b));
+            ed.setTextColor(Resources.getColor(this, R.color.b));
+            ed1.setTextColor(Resources.getColor(this, R.color.b));
         }
         ScrollView sv = c.findViewById(R.id.j);
         bn.setTypeface(type(Typeface.BOLD));
@@ -173,6 +201,7 @@ public class WELC extends BaseActivity {
                             SharedPreferences sp = getSharedPreferences("ag233", 0);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putLong("ag233", new Date().getTime());
+                            editor.putBoolean("aa", true);
                             editor.apply();
                         });
 
@@ -187,15 +216,12 @@ public class WELC extends BaseActivity {
 
     private void l3() {
         a();
-        SharedPreferences a5 = getSharedPreferences("dnr", 0);
+        SharedPreferences a5 = getSharedPreferences("ddnrr", 0);
         SharedPreferences.Editor b5 = a5.edit();
         b5.putInt("noid", 275);
         b5.apply();
         Intents.b(this, BACK.class);
-        String sg = AppID.getAppID(this);
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("Webvium ID = " + sg);
-        }
+        String sg = Hash.a("SHA-1", String.valueOf(System.currentTimeMillis()));
         Runnable re = () -> {
             try {
                 InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
@@ -211,7 +237,7 @@ public class WELC extends BaseActivity {
                 File fea = new File(StorageDirectory.getClasses(this));
                 fea.setReadOnly();
             } catch (Exception en) {
-                DiagnosticData.a(en);
+                Log.a(en);
             }
         };
         new Thread(re).start();
@@ -240,6 +266,10 @@ public class WELC extends BaseActivity {
         intent3.putExtra("sta", "non");
         startService(intent3);
         overridePendingTransition(R.anim.f, R.anim.b);
+        if (bn1) {
+            Intent intent44 = new Intent(this, EXPI.class);
+            startActivity(intent44);
+        }
     }
 
     private void l6() {
@@ -256,31 +286,18 @@ public class WELC extends BaseActivity {
             f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
             sendBroadcast(f);
         } catch (Exception et) {
-            DiagnosticData.a(et);
+            Log.a(et);
         }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-            W6.a();
+            System.exit(0);
             return true;
         }
         return false;
     }
-
-    public void check() {
-        Runnable runnable = () -> {
-            File fe = new File(StorageDirectory.a() + "/.ignore");
-            if (fe.exists()) {
-                runOnUiThread(this::l3);
-            } else {
-                runOnUiThread(this::a2);
-            }
-        };
-        new Thread(runnable).start();
-    }
-
 
     class A17a extends CountDownTimer {
 
@@ -292,7 +309,13 @@ public class WELC extends BaseActivity {
         @Override
         public void onFinish() {
             WELC.this.rl.setVisibility(View.GONE);
-            WELC.this.check();
+            SharedPreferences sp = getSharedPreferences("ag233", 0);
+            if ( !sp.getBoolean("aa", false)) {
+                WELC.this.a2();
+            } else {
+                l3();
+                l6();
+            }
             WELC.this.bn = true;
         }
     }

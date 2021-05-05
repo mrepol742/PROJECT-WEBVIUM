@@ -41,7 +41,7 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.Vibrate;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -80,8 +80,8 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
         tv1 = findViewById(R.id.i10);
         ll = findViewById(R.id.i7);
         tv1.setTypeface(type(Typeface.BOLD));
-        int f = Resources.b(this, R.color.c);
-        int g = Resources.b(this, R.color.b);
+        int f = Resources.getColor(this, R.color.c);
+        int g = Resources.getColor(this, R.color.b);
         tv1.setTextColor(f);
         for (int it2 : ids) {
             if (it2 == R.id.i9) {
@@ -107,7 +107,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 try {
                     tv.setText(a(it2));
                 } catch (NoSuchObjectToReturn l1) {
-                    DiagnosticData.a(l1);
+                    Log.a(l1);
                 }
             }
 
@@ -120,9 +120,9 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 new Thread(p155).start();
             } else {
                 if (!a221().getBoolean("autoUpdate", false)) {
-                    ll.setBackgroundColor(Resources.b(this, R.color.b));
+                    ll.setBackgroundColor(Resources.getColor(this, R.color.b));
                 } else {
-                    ll.setBackgroundColor(Resources.b(this, R.color.n));
+                    ll.setBackgroundColor(Resources.getColor(this, R.color.n));
                 }
             }
         }
@@ -248,7 +248,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             try {
                 b(sb.toString());
             } catch (NoSuchObjectToReturn l2) {
-                DiagnosticData.a(l2);
+                Log.a(l2);
             }
         } else if (id == R.id.i9) {
             String sg5 = tv1.getText().toString();
@@ -317,7 +317,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             try {
                 b(sb.toString());
             } catch (NoSuchObjectToReturn l2) {
-                DiagnosticData.a(l2);
+                Log.a(l2);
             }
             return true;
         } else if (id == R.id.i9) {

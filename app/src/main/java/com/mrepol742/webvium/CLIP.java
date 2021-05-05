@@ -106,7 +106,7 @@ public class CLIP extends MainService {
 
         m.setStyle(bigText);
 
-        m.setColor(Resources.b(this, R.color.a));
+        m.setColor(Resources.getColor(this, R.color.a));
         SharedPreferences sq = PreferenceManager.getDefaultSharedPreferences(this);
 
         m.setAutoCancel(sq.getBoolean("eac", true));

@@ -30,7 +30,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadAdapter;
@@ -64,8 +63,8 @@ public class DOWN extends BaseActivity {
         a1.setElevation(5);
         a1.setBackgroundResource(R.drawable.p);
         ActionBar ab = getActionBar();
-        int f = Resources.b(this, R.color.c);
-        int g = Resources.b(this, R.color.b);
+        int f = Resources.getColor(this, R.color.c);
+        int g = Resources.getColor(this, R.color.b);
         f2 = findViewById(R.id.l16);
         f2.setBackgroundResource(R.drawable.b17);
         f2.setClickable(true);
@@ -78,7 +77,7 @@ public class DOWN extends BaseActivity {
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
-        f4.setCompoundDrawablesWithIntrinsicBounds(null, Resources.a(this, R.drawable.f9), null, null);
+        f4.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.f9), null, null);
         f4.setCompoundDrawablePadding(40);
         f4.setText(getString(R.string.v22));
         if (!a221().getBoolean("autoUpdate", false)) {
@@ -97,7 +96,7 @@ public class DOWN extends BaseActivity {
         Cursor res = d10.getReadableDatabase().rawQuery("SELECT * FROM " +
                 DownloadDatabase.TABLE_DOWNLOAD +
                 " ORDER BY " +
-                BuildConfiguration.DB_ID +
+                "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
             runOnUiThread(() -> {

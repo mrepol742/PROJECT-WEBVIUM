@@ -26,8 +26,7 @@ import android.webkit.WebViewClient;
 
 import com.mrepol742.webvium.annotation.Default;
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.app.BuildConfiguration;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 public class MainWebView extends WebView {
 
@@ -41,9 +40,6 @@ public class MainWebView extends WebView {
     @Keep
     public MainWebView(Context ct) {
         super(ct);
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a(ct + " Initialize");
-        }
         WebSettings ws = getSettings();
         fontSize = ws.getDefaultFontSize();
         userAgent = ws.getUserAgentString();
@@ -65,18 +61,12 @@ public class MainWebView extends WebView {
     public void setWebViewClient(WebViewClient webViewClient) {
         super.setWebViewClient(webViewClient);
         this.webViewClient = webViewClient;
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("WebViewClient was been set");
-        }
     }
 
     @Override
     public void setWebChromeClient(WebChromeClient webChromeClient) {
         super.setWebChromeClient(webChromeClient);
         this.webChromeClient = webChromeClient;
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("WebChromeClient was been set");
-        }
     }
 
     public WebViewClient getFirstClient() {

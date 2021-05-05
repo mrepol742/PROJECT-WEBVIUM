@@ -25,7 +25,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 import java.util.Objects;
 
@@ -71,7 +71,7 @@ public class MainNotification {
             NotificationManager nm = ctx.getSystemService(NotificationManager.class);
             nm.createNotificationChannel(nc);
         } catch (Exception ec) {
-            DiagnosticData.a(ec);
+            Log.a(ec);
         }
     }
 
@@ -86,7 +86,7 @@ public class MainNotification {
             NotificationManager nm = c.getSystemService(NotificationManager.class);
             nm.createNotificationChannel(nc);
         } catch (Exception ec) {
-            DiagnosticData.a(ec);
+            Log.a(ec);
         }
     }
 

@@ -50,7 +50,7 @@ import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.os.StrictMode;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Stream;
@@ -82,8 +82,8 @@ public class TOOL extends BaseActivity {
         Toolbar i = findViewById(R.id.k);
         k.setTypeface(type(Typeface.BOLD));
         tv.setTypeface(type(Typeface.NORMAL));
-        int o = Resources.b(this, R.color.c);
-        int p = Resources.b(this, R.color.b);
+        int o = Resources.getColor(this, R.color.c);
+        int p = Resources.getColor(this, R.color.b);
 
         k.setText(getString(R.string.j));
         if (!a221().getBoolean("autoUpdate", false)) {
@@ -91,12 +91,12 @@ public class TOOL extends BaseActivity {
             k.setTextColor(o);
             tv.setTextColor(o);
 
-            tv.setBackgroundColor(Resources.b(this, R.color.p));
+            tv.setBackgroundColor(Resources.getColor(this, R.color.p));
         } else {
             k.setTextColor(p);
             tv.setTextColor(p);
 
-            tv.setBackgroundColor(Resources.b(this, R.color.m));
+            tv.setBackgroundColor(Resources.getColor(this, R.color.m));
         }
         i.setBackgroundResource(R.drawable.p);
         setActionBar(i);
@@ -131,15 +131,15 @@ public class TOOL extends BaseActivity {
         MenuItem c1 = a.findItem(0);
         MenuItem d1 = a.findItem(3);
         MenuItem e1 = a.findItem(2);
-        b1.setIcon(Resources.a(this, R.drawable.i));
-        c1.setIcon(Resources.a(this, R.drawable.g));
+        b1.setIcon(Resources.getDrawable(this, R.drawable.i));
+        c1.setIcon(Resources.getDrawable(this, R.drawable.g));
         if (on == Configuration.ORIENTATION_LANDSCAPE) {
             e1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             d1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             MenuItem f1 = a.findItem(4);
             f1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            d1.setIcon(Resources.a(this, R.drawable.b15));
-            e1.setIcon(Resources.a(this, R.drawable.b16));
+            d1.setIcon(Resources.getDrawable(this, R.drawable.b15));
+            e1.setIcon(Resources.getDrawable(this, R.drawable.b16));
         }
         return true;
     }
@@ -243,9 +243,9 @@ public class TOOL extends BaseActivity {
                 }
             } catch (FileNotFoundException a) {
                 runOnUiThread(() -> Permission.check(TOOL.this, Permission.STORAGE, 1));
-                DiagnosticData.a(a);
+                Log.a(a);
             } catch (IOException ie) {
-                DiagnosticData.a(ie);
+                Log.a(ie);
                 runOnUiThread(() -> g(getString(R.string.b34)));
             }
         };
@@ -264,10 +264,10 @@ public class TOOL extends BaseActivity {
         TextView f14 = a7.findViewById(R.id.f14);
         TextView f15 = a7.findViewById(R.id.f15);
         final TextView f17 = a7.findViewById(R.id.f17);
-        int a15 = Resources.b(this, R.color.c);
-        int a16 = Resources.b(this, R.color.b);
-        int f = Resources.b(this, R.color.j);
-        int g = Resources.b(this, R.color.k);
+        int a15 = Resources.getColor(this, R.color.c);
+        int a16 = Resources.getColor(this, R.color.b);
+        int f = Resources.getColor(this, R.color.j);
+        int g = Resources.getColor(this, R.color.k);
         if (!a221().getBoolean("autoUpdate", false)) {
             a8.setTextColor(a15);
             f14.setTextColor(a15);
@@ -340,7 +340,6 @@ public class TOOL extends BaseActivity {
     private void j(final String a) {
         tv.setText(getString(R.string.v13));
         Runnable p = () -> {
-            StrictMode.a();
             final String cd = Stream.f(a, getString(R.string.c33));
             runOnUiThread(() -> tv.setText(Html.b(cd)));
         };
@@ -427,7 +426,7 @@ public class TOOL extends BaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 }

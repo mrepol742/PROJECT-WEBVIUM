@@ -525,12 +525,12 @@
     <string name="b34">Failed to save the source code.</string>
     <string name="b36">Do you really want to clear Clipboard?</string>
     <string name="b37">Clipboard Cleared.</string>
-    <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s/Webvium/Backup/Databases/%2$s</string>
+    <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
     <string name="b39">Do you really want to import Settings Database\nThis will override your current Settings\n\nnWebvium will restart automatically after importing the database.</string>
-    <string name="b40">&lt;b>We will export:&lt;/b>&lt;br>• All Search History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s/Webvium/Backup/Databases/%2$s</string>
+    <string name="b40">&lt;b>Wze will export:&lt;/b>&lt;br>• All Search History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
     <string name="c21">Do you really want to import Search Database\nThis will override your Search History</string>
-    <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s/Webvium/Backup/Databases/%2$s</string>
-    <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s/Webvium/Backup/Databases/%2$s</string>
+    <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
+    <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="c26">about:blank</string>
     <string name="c27">Source Code Copied.</string>
     <string name="c28">File Saved | %1$s</string>
@@ -854,9 +854,9 @@
 
     <string name="z32">Download</string>
     <string name="z33">Permission</string>
-    <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s/Webvium/Backup/Databases/%2$s</string>
+    <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
-    <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s/Webvium/Backup/Databases/%2$s</string>
+    <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="z37">Do you really want to import Permission Database\nThis will override your Permission Settings</string>
     <string name="z38">APK</string>
 
@@ -874,7 +874,7 @@
     <string name="x50">Strict Mode</string>
     <string name="x51">Log</string>
     <string name="x52">Build</string>
-    <string name="x53">Diagnostic Service</string>
+
     <string name="x54">Webvium Logcat</string>
     <string name="x56">Last Installed on:</string>
     <string name="x57">Webvium</string>

@@ -103,10 +103,10 @@ public class FEED extends BaseActivity {
                     break;
             }
         });
-        act.setDropDownBackgroundDrawable(Resources.a(this, R.drawable.c12));
+        act.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
 
-        int f = Resources.b(this, R.color.c);
-        int g = Resources.b(this, R.color.b);
+        int f = Resources.getColor(this, R.color.c);
+        int g = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             a2.setTextColor(f);
             act.setTextColor(f);

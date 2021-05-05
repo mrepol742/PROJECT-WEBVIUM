@@ -18,8 +18,7 @@
 package com.mrepol742.webvium.io;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.app.BuildConfiguration;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -64,9 +63,6 @@ public class Files {
     public static boolean createNewFolder(java.io.File a) {
         if (!a.exists()) {
             if (a.mkdir()) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("MKDIR = " + a);
-                }
                 return true;
             }
         }
@@ -86,9 +82,6 @@ public class Files {
     public static boolean delete(java.io.File fe) {
         if (fe.exists()) {
             if (fe.delete()) {
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("DELETE = " + fe);
-                }
                 return true;
             }
         }
@@ -130,13 +123,10 @@ public class Files {
             fw.close();
             if (readOnly) {
                 boolean bn = location.setReadOnly();
-                if (BuildConfiguration.isDevelopment) {
-                    DiagnosticData.a("READ ONLY = " + bn + " FILE = " + location);
-                }
             }
             return true;
         } catch (Exception exception) {
-            DiagnosticData.a(exception);
+            Log.a(exception);
         }
         return false;
     }
@@ -160,16 +150,13 @@ public class Files {
                 d.flush();
                 d.close();
                 if (readOnly) {
-                    boolean bn = fe2.setReadOnly();
-                    if (BuildConfiguration.isDevelopment) {
-                        DiagnosticData.a("READ ONLY = " + bn + " FILE = " + fe2);
-                    }
+                    fe2.setReadOnly();
                 }
                 return true;
             }
             return false;
         } catch (Exception exception) {
-            DiagnosticData.a(exception);
+            Log.a(exception);
         }
         return false;
     }

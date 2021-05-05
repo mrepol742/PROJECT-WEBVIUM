@@ -46,7 +46,7 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.view.Animation;
 
 // @Class Screenshot
@@ -68,8 +68,8 @@ public class SCRE extends BaseActivity {
         h18.setTypeface(type(Typeface.BOLD));
         setActionBar(h17);
         h17.setElevation(5);
-        int d = Resources.b(this, R.color.c);
-        int e = Resources.b(this, R.color.b);
+        int d = Resources.getColor(this, R.color.c);
+        int e = Resources.getColor(this, R.color.b);
         ActionBar ab = getActionBar();
         if (ab != null) {
             // ab.setDisplayHomeAsUpEnabled(true);
@@ -107,8 +107,8 @@ public class SCRE extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu a) {
 
         if (on == Configuration.ORIENTATION_LANDSCAPE) {
-            a.add(0, 0, 0, getString(R.string.a13)).setIcon(Resources.a(this, R.drawable.b10)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            a.add(0, 1, 0, getString(R.string.a14)).setIcon(Resources.a(this, R.drawable.c4)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            a.add(0, 0, 0, getString(R.string.a13)).setIcon(Resources.getDrawable(this, R.drawable.b10)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            a.add(0, 1, 0, getString(R.string.a14)).setIcon(Resources.getDrawable(this, R.drawable.c4)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         } else {
             a.add(0, 0, 0, getString(R.string.a13));
             a.add(0, 1, 0, getString(R.string.a14));
@@ -186,7 +186,7 @@ public class SCRE extends BaseActivity {
             a.setPositiveButton("Close", (a1, intetg) -> a1.dismiss());
             a.create().show();
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -224,7 +224,7 @@ public class SCRE extends BaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 }

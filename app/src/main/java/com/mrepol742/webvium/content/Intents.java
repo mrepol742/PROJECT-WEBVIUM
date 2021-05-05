@@ -23,12 +23,12 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 
 public class Intents {
 
     public static final String ACTION_INVALIDATE = "com.mrepol742.webvium.intent.action.INVALIDATE";
-    public static final String CATEGORY_GENIUS = "com.mrepol742.webvium.intent.category.GENIUS";
+    public static final String CATEGORY_GENIUS = "com.mrepol742.webvium.intent.category.LEGENDS";
     public static final String ACTION_LAUNCH = "com.mrepol742.webvium.intent.action.LAUNCH";
     public static final String ACTION_PASTE_SEARCH = "com.mrepol742.webvium.action.PASTE_SEARCH";
     public static final String ACTION_PASTE = "com.mrepol742.webvium.action.PASTE";
@@ -44,7 +44,7 @@ public class Intents {
             c.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(c);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -53,7 +53,7 @@ public class Intents {
             Intent c = new Intent(a, b);
             a.startService(c);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -69,7 +69,7 @@ public class Intents {
                 return true;
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         return false;
     }
@@ -82,7 +82,7 @@ public class Intents {
             e.setResult(Activity.RESULT_OK, d);
 
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -93,7 +93,7 @@ public class Intents {
             d.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(d);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -104,7 +104,7 @@ public class Intents {
             d.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(d);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -113,7 +113,7 @@ public class Intents {
             Intent e = new Intent(b, c);
             b.startActivityForResult(e, d);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -127,7 +127,7 @@ public class Intents {
                 return true;
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         return false;
     }
@@ -138,7 +138,7 @@ public class Intents {
             e.putExtra(h, i);
             b.startActivityForResult(e, d);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -148,7 +148,7 @@ public class Intents {
             c.setPackage(Package.b());
             a.stopService(c);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -161,7 +161,7 @@ public class Intents {
                 return true;
             }
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
         return false;
     }
@@ -173,7 +173,7 @@ public class Intents {
             c.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(c);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 
@@ -184,7 +184,7 @@ public class Intents {
             c.setData(data);
             a.startActivity(c);
         } catch (Exception ex) {
-            DiagnosticData.a(ex);
+            Log.a(ex);
         }
     }
 

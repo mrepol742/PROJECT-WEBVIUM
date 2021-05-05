@@ -31,11 +31,9 @@ import android.speech.SpeechRecognizer;
 import android.view.ViewGroup;
 
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.BuildConfiguration;
-import com.mrepol742.webvium.app.W6;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.os.StrictMode;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.FontCache;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -52,45 +50,29 @@ public class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle be) {
-        if (BuildConfiguration.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false))) {
+        if (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false)) {
             StrictMode.b();
-            DiagnosticData.a("Webvium.onCreate()");
         }
         super.onCreate(be);
         U7 = FontCache.getInstance(getApplicationContext());
-        if (BuildConfiguration.isDevelopment) {
-            if (!spr()) {
-                DiagnosticData.a("Speech Recognition was not available");
-            }
-        }
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (a221().getBoolean("qwe73", false)) {
-            W6.c();
-        }
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("Webvium.onResume()");
+            System.gc();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("Webvium.onDestroy()");
-        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("Webvium.onPause()");
-        }
     }
 
     public SharedPreferences a221() {
@@ -132,14 +114,9 @@ public class BaseActivity extends Activity {
 
     public void a225(int i) {
         setContentView(i);
-        if (BuildConfiguration.isDevelopment) {
-            DiagnosticData.a("Webvium.setContentView("+ i +")");
-        }
         if (Build.VERSION.SDK_INT == 21 || Build.VERSION.SDK_INT == 22 || a221().getBoolean("webviumB", false)) {
             ViewGroup vg = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
             vg.setFitsSystemWindows(true);
-            if (BuildConfiguration.isDevelopment)
-                DiagnosticData.a("Webvium.setFitsSystemWindow(true)");
         }
 
     }
@@ -159,7 +136,7 @@ public class BaseActivity extends Activity {
             Toast.b(this, getString(R.string.q26));
         } catch (Exception et) {
             Toast.e(this, getString(R.string.a36), 2);
-            DiagnosticData.a(et);
+            Log.a(et);
         }
     }
 

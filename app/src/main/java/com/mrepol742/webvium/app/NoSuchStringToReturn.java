@@ -18,11 +18,10 @@
 package com.mrepol742.webvium.app;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.util.U4;
 
 @Keep
 public class NoSuchStringToReturn extends NoSuchObjectToReturn {
-    private static final String sg = U4.a(E1.NoSuchStringToReturn);
+    private static final String sg = E1.NoSuchStringToReturn.toString();
 
     public NoSuchStringToReturn() {
         throw new java.lang.RuntimeException(sg);

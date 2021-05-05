@@ -21,13 +21,11 @@ package com.mrepol742.webvium;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.app.BuildConfiguration;
-import com.mrepol742.webvium.app.W6;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.os.StrictMode;
-import com.mrepol742.webvium.telemetry.DiagnosticData;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Hardware;
 
 // @class Application
@@ -40,17 +38,13 @@ public class APPL extends Application {
     @Override
     public void onCreate() {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (BuildConfiguration.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("stM12", false))) {
+        if (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("stM12", false)) {
             StrictMode.b();
         }
         super.onCreate();
         try {
-
-            if (BuildConfiguration.isDevelopment || (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("og67", false))) {
-                DiagnosticData.getInstance(getApplicationContext());
-            }
-            if (BuildConfiguration.isDevelopment) {
-                DiagnosticData.a("APN.onCreate =" + this);
+            if (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("og67", false)) {
+                Log.getInstance(getApplicationContext());
             }
             if (sp.getBoolean("autoUpdate55", false)) {
                 boolean bn = Hardware.isNightMode(this) == Hardware.E1.Yes;
@@ -65,7 +59,7 @@ public class APPL extends Application {
                 }
             }
         } catch (Exception ex5) {
-            DiagnosticData.a(ex5);
+            Log.a(ex5);
         }
     }
 
@@ -78,10 +72,8 @@ public class APPL extends Application {
     @Override
     public void onTrimMemory(int i) {
         if (i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
-            W6.b();
-            W6.c();
-            if (BuildConfiguration.isDevelopment)
-                DiagnosticData.a(Package.c() + ".onTrimMemory =" + this + " value = " + i);
+            SQLiteDatabase.releaseMemory();
+            System.gc();
         }
         super.onTrimMemory(i);
     }
