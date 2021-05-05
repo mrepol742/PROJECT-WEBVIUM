@@ -94,7 +94,7 @@
         a:hasFragileUserData="true"
         a:icon="@mipmap/c"
         a:label="@string/p20"
-        a:largeHeap="true"  a:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        a:largeHeap="true"
         a:manageSpaceActivity="com.mrepol742.webvium.MANG"
         a:roundIcon="@mipmap/c"
         a:supportsRtl="true"
