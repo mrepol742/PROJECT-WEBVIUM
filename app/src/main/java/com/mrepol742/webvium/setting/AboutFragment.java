@@ -25,6 +25,7 @@ import android.provider.Settings;
 
 import com.mrepol742.webvium.CRED;
 import com.mrepol742.webvium.MAIN;
+import com.mrepol742.webvium.PRIV;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.TERM;
 import com.mrepol742.webvium.WELC;
@@ -57,6 +58,11 @@ public class AboutFragment extends BasePreferenceFragment {
             Preference a7 = findPreference("g5");
             a7.setOnPreferenceClickListener(a -> {
                 Intents.a(getActivity(), TERM.class);
+                return true;
+            });
+            Preference a722 = findPreference("g6");
+            a722.setOnPreferenceClickListener(a -> {
+                Intents.a(getActivity(), PRIV.class);
                 return true;
             });
             Preference a5 = findPreference("p20");
