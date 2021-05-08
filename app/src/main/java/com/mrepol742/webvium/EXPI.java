@@ -35,8 +35,11 @@ import android.widget.TextView;
 import com.mrepol742.webvium.A.AppName;
 import com.mrepol742.webvium.A.AppNameChecker;
 import com.mrepol742.webvium.A.CheckerSequence;
+import com.mrepol742.webvium.A.MainSecurity;
 import com.mrepol742.webvium.A.PackageName;
 import com.mrepol742.webvium.A.PackageNameChecker;
+import com.mrepol742.webvium.A.Security.Responder;
+import com.mrepol742.webvium.A.Signature;
 import com.mrepol742.webvium.A.SignatureChecker;
 import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.app.base.BaseActivity;
@@ -63,7 +66,7 @@ public class EXPI extends BaseActivity {
     protected void onCreate(Bundle be) {
         theme(T_DEFAULT);
         super.onCreate(be);
-        int k5 = getSharedPreferences("ddnrr", 0).getInt("noid", 0);
+        int k5 = getSharedPreferences("ddnrr2", 0).getInt("noid", 0);
         if (k5 != 275) {
             Intent it = new Intent(this, WELC.class);
             it.putExtra("welc", true);
@@ -82,25 +85,16 @@ public class EXPI extends BaseActivity {
        //TODO: this line is meeant only for testing
         // and to be deleted upon building
        append("CurrentThreadName: " + Thread.currentThread().getName());
-       try {
-           if (AppNameChecker.check(this, AppName.a(new CheckerSequence(50, 49, 98, 81)))) {
-               append("AppNameChecker: Valid");
-           } else {
-               append("AppNameChecker: Invalid");
-           }
-           if (!PackageNameChecker.check(this, PackageName.a(new CheckerSequence(50, 49, 98, 105)))) {
-               append("PackageNameChecker: Valid");
-           } else {
-               append("PackageNameChecker: Invalid");
-           }
-           try {
-               tv.append("SignatureChecker: " + SignatureChecker.check(this));
-           } catch (PackageManager.NameNotFoundException e) {
-               runOnUiThread(()-> append(Log.getStackTraceString(e)));
-           }
-       } catch(Exception en) {
-           runOnUiThread(()-> append(Log.getStackTraceString(en)));
-       }
+        MainSecurity mainSecurity = new MainSecurity(this);
+        mainSecurity.addListener(new Responder() {
+            @Override
+            public boolean isValid(boolean bn) {
+               if (!bn) {
+                   // faked app installed
+               }
+               return bn;
+            }
+        });
 
        if (Build.VERSION.SDK_INT >= 29 ) {
             write();

@@ -53,17 +53,21 @@ public class UPDA0 extends MainService {
         Runnable runnable = () -> {
             try {
                 SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-                String sg = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_WEBVIUM_URLS, ""))+ "?raw=true", "404");
+                String sg = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_WEBVIUM_URLS, ""))+ "?raw=true", "404")
+                        .replaceAll("\\[", "")
+                        .replaceAll("]", "")
+                        .replaceAll("\\{", "")
+                        .replaceAll("}", "")
+                        .replaceAll("\"", "");
                 if (sg.equals("404")) {
                     return;
                 }
-                String[] arr = sg.trim().split(";");
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
                 editor.clear();
-                int length = arr.length;
-                for (int i = 0; i < length; i++) {
-                    editor.putString(abc[i], arr[i] + abc[i]);
+                String[] firstSplit = sg.split(",");
+                for (String split: firstSplit) {
+                    String[] secondSplit = split.split(":");
+                    editor.putString(secondSplit[0], Base64.encode(secondSplit[1]));
                 }
                 editor.apply();
             } catch (Exception en) {
@@ -72,5 +76,4 @@ public class UPDA0 extends MainService {
         };
         new Thread(runnable).start();
     }
-
 }

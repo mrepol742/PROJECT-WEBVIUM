@@ -563,7 +563,7 @@ public class MAIN extends MainBaseActivity implements Format {
     protected void onCreate(Bundle a) {
 
         super.onCreate(a);
-        int k5 = getSharedPreferences("ddnrr", 0).getInt("noid", 0);
+        int k5 = getSharedPreferences("ddnrr2", 0).getInt("noid", 0);
         if (k5 != 275) {
             Intents.a(this, WELC.class);
             overridePendingTransition(R.anim.f, R.anim.b);
@@ -2380,27 +2380,27 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c68(View a) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Screenshot");
-        String h;
-        int it0 = 100;
-        if (Objects.requireNonNull(a221().getString("shotQq", "1w")).equals("7w")) {
-            it0 = 95;
-        }
-        if (Objects.requireNonNull(a221().getString("shotQq", "1w")).equals("30w")) {
-            it0 = 80;
-        }
         if (Objects.requireNonNull(a221().getString("shotSs", "1q")).equals("1q")) {
-            h = StorageDirectory.getWebviumDir() + "/Screenshot/Screenshot_" + format() + ".png";
-            c74(Bitmap.CompressFormat.PNG, it0, a, h);
+            c74(Bitmap.CompressFormat.PNG, c69(), a, StorageDirectory.getWebviumDir() + "/Screenshot/Screenshot_" + format() + ".png");
         }
-
         if (Objects.requireNonNull(a221().getString("shotSs", "1q")).equals("7q")) {
-            h = StorageDirectory.getWebviumDir() + "/Screenshot/Screenshot_" + format() + ".jpeg";
-            c74(Bitmap.CompressFormat.JPEG, it0, a, h);
+            c74(Bitmap.CompressFormat.JPEG, c69(), a, StorageDirectory.getWebviumDir() + "/Screenshot/Screenshot_" + format() + ".jpeg");
         }
         if (Objects.requireNonNull(a221().getString("shotSs", "1q")).equals("30q")) {
-            h = StorageDirectory.getWebviumDir() + "/Screenshot/Screenshot_" + format() + ".webp";
-            c74(Bitmap.CompressFormat.WEBP, it0, a, h);
+            c74(Bitmap.CompressFormat.WEBP, c69(), a, StorageDirectory.getWebviumDir() + "/Screenshot/Screenshot_" + format() + ".webp");
         }
+    }
+
+    private int c69() {
+        if (Objects.requireNonNull(a221().getString("shotQq", "1w")).equals("7w")) {
+        return 95;
+    }
+        if (Objects.requireNonNull(a221().getString("shotQq", "1w")).equals("30w"))
+
+    {
+        return 80;
+    }
+        return 100;
     }
 
     private void c74(Bitmap.CompressFormat format, int quality, View ll, String st) {

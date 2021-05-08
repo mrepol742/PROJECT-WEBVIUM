@@ -32,8 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-// @Class Terms And Condition
-public class TERM extends BaseActivity {
+// @Class Privacy Policy
+public class PRIV extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +70,10 @@ public class TERM extends BaseActivity {
         }
         c.setBackgroundResource(R.drawable.p);
         c.setNavigationOnClickListener(view -> finish());
-        d.setText(getString(R.string.f12));
-        e.setText(Html.b(getString(R.string.n23)));
+        d.setText(getString(R.string.x44));
+        e.setText(Html.b(getString(R.string.n24)));
         SharedPreferences sp = getSharedPreferences("ag233", 0);
-        long data = sp.getLong("ag233", 0);
+        long data = sp.getLong("ag466", 0);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, yyyy | hh:mm:ss", Locale.US);
         String newDate = simpleDateFormat.format(new Date(data));
         tv.setText(String.format(getString(R.string.f13), newDate));

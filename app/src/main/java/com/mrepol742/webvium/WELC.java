@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 
 import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
@@ -110,6 +112,9 @@ public class WELC extends BaseActivity {
         iv.startAnimation(d);
         timer = new A17a(5000, 5000);
         timer.start();
+        if (!BuildConfig.DEBUG) {
+            C10.a(this, "com.mrepol742.webvium.EXPI", PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
+        }
     }
 
     @Override
@@ -191,20 +196,11 @@ public class WELC extends BaseActivity {
                 .addOnScrollChangedListener(() -> {
                     if (sv.getChildAt(0).getBottom()
                             <= (sv.getHeight() + sv.getScrollY())) {
-                        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-                        bn.setText(getString(R.string.n25));
-                        bn.setBackgroundResource(R.drawable.c10);
-                        bn.setOnClickListener(view -> {
-                            fl.removeView(c);
-                            l3();
-                            l6();
-                            SharedPreferences sp = getSharedPreferences("ag233", 0);
-                            SharedPreferences.Editor editor = sp.edit();
-                            editor.putLong("ag233", new Date().getTime());
-                            editor.putBoolean("aa", true);
-                            editor.apply();
-                        });
-
+                       a3();
+                        SharedPreferences sp = getSharedPreferences("ag233", 0);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putLong("ag233", new Date().getTime());
+                        editor.apply();
                     }
                 });
         sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
@@ -214,9 +210,56 @@ public class WELC extends BaseActivity {
         fl.addView(c);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    public void a3() {
+        View c = View.inflate(this, R.layout.a3, null);
+        TextView ed = c.findViewById(R.id.n23);
+        final Button bn = c.findViewById(R.id.n24);
+        TextView ed1 = c.findViewById(R.id.o28);
+        ed1.setText(getString(R.string.x44).toUpperCase());
+        bn.setBackgroundResource(R.drawable.c11);
+        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+        bn.setText(getString(R.string.y62));
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(Resources.getColor(this, R.color.c));
+            ed1.setTextColor(Resources.getColor(this, R.color.c));
+        } else {
+            ed.setTextColor(Resources.getColor(this, R.color.b));
+            ed1.setTextColor(Resources.getColor(this, R.color.b));
+        }
+        ScrollView sv = c.findViewById(R.id.j);
+        bn.setTypeface(type(Typeface.BOLD));
+        bn.setAllCaps(true);
+        sv.getViewTreeObserver()
+                .addOnScrollChangedListener(() -> {
+                    if (sv.getChildAt(0).getBottom()
+                            <= (sv.getHeight() + sv.getScrollY())) {
+                        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+                        bn.setText(getString(R.string.n25));
+                        bn.setBackgroundResource(R.drawable.c10);
+                        bn.setOnClickListener(view -> {
+                            fl.removeView(c);
+                            l3();
+                            l6();
+                            SharedPreferences sp = getSharedPreferences("ag233", 0);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putLong("ag466", new Date().getTime());
+                            editor.putBoolean("aa", true);
+                            editor.apply();
+                        });
+
+                    }
+                });
+        sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        ed.setTypeface(type(Typeface.NORMAL));
+        ed1.setTypeface(type(Typeface.BOLD));
+        Html.a(ed, getString(R.string.n24));
+        fl.addView(c);
+    }
+
     private void l3() {
         a();
-        SharedPreferences a5 = getSharedPreferences("ddnrr", 0);
+        SharedPreferences a5 = getSharedPreferences("ddnrr2", 0);
         SharedPreferences.Editor b5 = a5.edit();
         b5.putInt("noid", 275);
         b5.apply();
