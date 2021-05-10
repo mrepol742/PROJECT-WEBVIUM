@@ -37,10 +37,7 @@
 
     </com.mrepol742.webvium.PREF0>
     <com.mrepol742.webvium.PREF0 a:title="@string/x52">
-        <com.mrepol742.webvium.SWIT
-            a:defaultValue="false"
-            a:key="stM12"
-            a:title="@string/x50" />
+
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="og67"

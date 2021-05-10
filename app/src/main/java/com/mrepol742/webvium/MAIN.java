@@ -160,6 +160,7 @@ import com.mrepol742.webvium.widget.W11;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -4470,6 +4471,15 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
+    private String c181(String sg) {
+        try {
+            return URLDecoder.decode(sg, "UTF-8");
+        } catch (UnsupportedEncodingException unsupportedEncodingException) {
+            Log.a(unsupportedEncodingException);
+        }
+        return sg;
+    }
+
     @Override
     @TargetApi(Build.VERSION_CODES.M)
     public void onRequestPermissionsResult(int a, String[] b, int[] c) {
@@ -4900,17 +4910,25 @@ public class MAIN extends MainBaseActivity implements Format {
             String sg0 = a.getStringExtra("value");
             String sg1 = a.getAction();
             String sg12 = a.getDataString();
-            if (sg12.startsWith("file://") && sg12.endsWith(".url")) {
+            String pe;
+            try {
+                pe = URLDecoder.decode(sg12, "UTF-8");
+            } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                Log.a(unsupportedEncodingException);
+                pe = sg12;
+            }
+            File fe2 = new File(pe.replace("file://", ""));
+            if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile() ) {
                 Runnable re = () -> {
                     try {
-                        String pe;
+                        String pe1;
                         try {
-                            pe = URLDecoder.decode(sg12, "UTF-8");
+                            pe1 = URLDecoder.decode(sg12, "UTF-8");
                         } catch (UnsupportedEncodingException unsupportedEncodingException) {
                             Log.a(unsupportedEncodingException);
-                            pe = sg12;
+                            pe1 = sg12;
                         }
-                        java.io.File fe = new java.io.File(pe.replace("file://", ""));
+                        java.io.File fe = new java.io.File(pe1.replace("file://", ""));
                         FileReader fr = new FileReader(fe);
                         BufferedReader br = new BufferedReader(fr);
                         StringBuilder sb = new StringBuilder();
@@ -4944,10 +4962,108 @@ public class MAIN extends MainBaseActivity implements Format {
             } else if (sg0 != null) {
                 c49(sg0);
                 a.removeExtra("value");
-            } else if (Objects.requireNonNull(sg1).equals(Intent.ACTION_MAIN)) {
-                return;
-            } else if (a.getFlags() == Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) {
-                return;
+            } else if (nfc != null) {
+                if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(sg1)) {
+                    Parcelable[] rawMessages = a.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+                    if (rawMessages != null) {
+                        //NdefMessage[] messages = new NdefMessage[rawMessages.length];
+                        StringBuilder sb = new StringBuilder();
+                        for (Parcelable rawMessage : rawMessages) {
+                            //messages[i] = (NdefMessage) rawMessages[i];
+                            sb.append(rawMessage);
+                        }
+                        c49(sb.toString());
+                    }
+                }
+            } else if (sg1.equals(Intents.ACTION_PASTE_SEARCH)) {
+                try {
+                    String c = Clipboard.b(this);
+                    if (c != null && U3.b(c)) {
+                        SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
+                        d2.c(c);
+                        c49(c);
+                    } else {
+                        Toast.c(this, getString(R.string.t20));
+                    }
+                } catch (Exception ex) {
+                    Log.a(ex);
+                    Toast.c(this, getString(R.string.t20));
+                }
+            } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
+                c3(sg);
+                a.removeExtra("webvium");
+            } else {
+                String sg2 = a.getStringExtra(Intent.EXTRA_TEXT);
+                String sg3 = a.getDataString();
+                if (sg1.equals(Intent.ACTION_SEND) && sg2 != null) {
+                    c49(sg2);
+                } else if (sg1.equals(Intent.ACTION_VIEW) && sg3 != null) {
+                    c3(sg3);
+
+                } else if (sg1.equals(Intent.ACTION_SEARCH) || sg1.equals(Intent.ACTION_WEB_SEARCH) || sg1.equals("android.speech.action.VOICE_SPEECH_RESULTS")) {
+                    c49(SearchManager.QUERY);
+                } else if (sg1.equals(MediaStore.INTENT_ACTION_MEDIA_SEARCH)) {
+                    c49(a.getStringExtra(MediaStore.EXTRA_MEDIA_ARTIST) + " " + a.getStringExtra(MediaStore.EXTRA_MEDIA_TITLE));
+                }
+            }
+            a.replaceExtras(new Bundle());
+            a.setAction("");
+            a.setData(null);
+            a.setFlags(0);
+        } catch (Exception ex) {
+            Log.a(ex);
+        }
+    }
+
+    protected void onNewIntent1(Intent a) {
+        try {
+            String sg = a.getStringExtra("webvium");
+            String sg0 = a.getStringExtra("value");
+            String sg1 = a.getAction();
+            try {
+                String sg12 = a.getDataString();
+                String pe = c181(sg12);
+                File fe2 = new File(pe.replace("file://", ""));
+                if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile()) {
+                    Runnable re = () -> {
+                        try {
+                            java.io.File fe = new java.io.File(pe.replace("file://", ""));
+                            FileReader fr = new FileReader(fe);
+                            BufferedReader br = new BufferedReader(fr);
+                            StringBuilder sb = new StringBuilder();
+                            String ln;
+                            while ((ln = br.readLine()) != null) {
+                                sb.append(ln);
+                                sb.append("<br>");
+                            }
+                            fr.close();
+                            br.close();
+                            String[] sgdd = sb.toString().split("<br>");
+                            for (String dt : sgdd) {
+                                if (dt.startsWith("URL=")) {
+                                    runOnUiThread(() -> c3(dt.replace("URL=", "")));
+                                    return;
+                                }
+                            }
+                        } catch (Exception en3) {
+                            Log.a(en3);
+                        }
+                    };
+                    new Thread(re).start();
+                }
+            } catch (Exception en) {
+                Log.a(en);
+            }
+            String queryq = a.getStringExtra("b");
+            if (queryq != null) {
+                c146(0);
+                a.removeExtra("b");
+            } else if (sg != null) {
+                c3(sg);
+                a.removeExtra("webvium");
+            } else if (sg0 != null) {
+                c49(sg0);
+                a.removeExtra("value");
             } else if (nfc != null) {
                 if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(sg1)) {
                     Parcelable[] rawMessages = a.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);

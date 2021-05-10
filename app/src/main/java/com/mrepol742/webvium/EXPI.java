@@ -21,6 +21,7 @@ import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -85,16 +86,38 @@ public class EXPI extends BaseActivity {
        //TODO: this line is meeant only for testing
         // and to be deleted upon building
        append("CurrentThreadName: " + Thread.currentThread().getName());
-        MainSecurity mainSecurity = new MainSecurity(this);
-        mainSecurity.addListener(new Responder() {
-            @Override
-            public boolean isValid(boolean bn) {
-               if (!bn) {
-                   // faked app installed
+       try {
+           MainSecurity mainSecurity = new MainSecurity(this);
+           mainSecurity.addListener(new Responder() {
+               @Override
+               public boolean isValid(boolean bn) {
+                   if (!bn) {
+                       append("The Webvium installed on your phone was invalid.");
+                   } else {
+                       append("The Webvium installed on your phone is original");
+                   }
+                   return bn;
                }
-               return bn;
-            }
-        });
+           });
+       } catch (Exception en) {
+           append(Log.getStackTraceString(en));
+       }
+       try {
+           ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+           Bundle bundle = ai.metaData;
+           append("API_KEY: " + bundle.getString("com.mrepol742.webvium.FEED.API_KEY"));
+           append("AUTH_DOMAIN: " + bundle.getString("com.mrepol742.webvium.FEED.AUTH_DOMAIN"));
+           append("PROJECT_ID: " + bundle.getString("com.mrepol742.webvium.FEED.PROJECT_ID"));
+           append("STORAGE_BUCKET: " + bundle.getString("com.mrepol742.webvium.FEED.STORAGE_BUCKET"));
+           append("MESSAGING_SENDER_ID: " + bundle.getString("com.mrepol742.webvium.FEED.MESSAGING_SENDER_ID"));
+           append("APP_ID: " + bundle.getString("com.mrepol742.webvium.FEED.APP_ID"));
+           append("MEASUREMENT_ID: " + bundle.getString("com.mrepol742.webvium.FEED.MEASUREMENT_ID"));
+           // rules
+//?a=AIzaSyAmuYgXpDNti7SXnq_T3yNqJvVP1dJDo_8&b=mrepol-e2ed6.firebaseapp.com&c=mrepol-e2ed6&d=&d=mrepol-e2ed6.appspot.com&e=541029821490&f=1:541029821490:web:3713defdb0f0d8a939e02b&g=G-YYV1BV578J&h=Test%20Mj&i=SubjectMj
+
+       } catch (Exception en) {
+           append(Log.getStackTraceString(en));
+       }
 
        if (Build.VERSION.SDK_INT >= 29 ) {
             write();
@@ -115,8 +138,6 @@ public class EXPI extends BaseActivity {
            }
            try {
                SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-               int notif = Stream.g(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_STATE, "")) + "?raw=true");
-               if (notif > 0) {
                    String neTf = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) + "?raw=true", getString(R.string.c33));
                    String[] sp = neTf.split(";");
                    SharedPreferences j988 = getSharedPreferences("wv,", 0);
@@ -135,7 +156,6 @@ public class EXPI extends BaseActivity {
                            append("NotificationService:\nTitle: " + j988.getString("notif1", "") + "\nContent: " + j988.getString("notif2", ""));
                        });
                    }
-               }
            } catch (Exception en) {
                runOnUiThread(()->  tv.append(Log.getStackTraceString(en)));
            }
@@ -147,43 +167,13 @@ public class EXPI extends BaseActivity {
                     "\nDecoded Update URL: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "")) +
                     "\n\nNotification Data: " + sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "") +
                     "\nDecoded Notification Data: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) +
-                    "\n\nNotification State: " + sharedPreferences.getString(WELC.TEMP_NOTIFICATION_STATE, "") +
-                    "\nDecoded Notification State: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_STATE, "")) +
                     "\n\nUpdate Version: " + sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "") +
                     "\nDecoded Update Version: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "")) +
-                    "\n\nWebvium urls: " + sharedPreferences.getString(WELC.TEMP_WEBVIUM_URLS, "") +
-                    "\nDecoded Webvium urls: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_WEBVIUM_URLS, "")) +
                     "\n\nWebvium Search: " + sharedPreferences.getString(WELC.TEMP_SEARCH, "") +
                     "\nDecoded Webvium Search: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_SEARCH, "")));
         } catch (Exception en) {
             append(Log.getStackTraceString(en));
         }
-        Runnable runnable = () -> {
-            try {
-                String name = Thread.currentThread().getName();
-                runOnUiThread(()-> append("CurrentThreadName:" + name));
-                SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-                String sg = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_WEBVIUM_URLS, "")) + "?raw=true", "404");
-                if (sg.equals("404")) {
-                    runOnUiThread(()->  append("Houston we have a problem."));
-                    return;
-                }
-                String[] arr = sg.trim().split(";");
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-                editor.clear();
-                int length = arr.length;
-                for (int i = 0; i < length; i++) {
-                    editor.putString(abc[i], arr[i] + abc[i]);
-                }
-                editor.apply();
-                runOnUiThread(()-> append("Update0Service: Pass"));
-                runOnUiThread(()-> append("Update0Service: Data parse is \n" + Arrays.toString(arr)));
-            } catch (Exception en) {
-                runOnUiThread(()-> append(Log.getStackTraceString(en)));
-            }
-        };
-        new Thread(runnable).start();
 
         Runnable runnable2 = () -> {
             String name = Thread.currentThread().getName();

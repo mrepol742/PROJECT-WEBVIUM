@@ -50,9 +50,6 @@ public class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle be) {
-        if (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false)) {
-            StrictMode.b();
-        }
         super.onCreate(be);
         U7 = FontCache.getInstance(getApplicationContext());
     }
@@ -223,10 +220,10 @@ public class BaseActivity extends Activity {
                 }
             }
         } else if (i == T_WELCOME_SCREEN) {
-            if (!a221().getBoolean("autoUpdate", false)) {
-                setTheme(R.style.d);
+            if (!a221().getBoolean("autoUpdate742", false)) {
+                setTheme(R.style.a);
             } else {
-                setTheme(R.style.e);
+                setTheme(R.style.b19);
             }
         } else if (i == T_ASSISTANT) {
             if (!a221().getBoolean("autoUpdate", false)) {

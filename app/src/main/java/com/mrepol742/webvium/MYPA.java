@@ -46,9 +46,6 @@ public class MYPA extends MainReceiver {
             Intent intent2 = new Intent(a, NOTI.class);
             intent2.putExtra("sta", "non");
             a.startService(intent2);
-            Intent intent3 = new Intent(a, UPDA0.class);
-            intent3.putExtra("sta", "non");
-            a.startService(intent3);
         }
         super.onReceive(a, b);
     }

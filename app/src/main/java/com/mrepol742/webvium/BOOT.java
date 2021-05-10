@@ -68,8 +68,6 @@ public class BOOT extends MainReceiver {
                 if (sp.getBoolean("acu", true)) {
                     PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
                     alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
-                    PendingIntent it2 = PendingIntent.getService(a, 0, new Intent(a, UPDA0.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                    alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it2);
                 }
                 if (sp.getBoolean("pnd", true)) {
                     PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);

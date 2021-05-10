@@ -59,8 +59,6 @@
     <uses-permission a:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission a:name="android.permission.WAKE_LOCK" />
     <uses-permission a:name="android.permission.NFC" />
-    <permission a:name="com.mrepol742.webvium.LEGENDS" a:protectionLevel="signature"/>
-    <uses-permission a:name="com.mrepol742.webvium.LEGENDS"/>
 
     <uses-feature
         a:name="android.hardware.camera"
@@ -102,6 +100,7 @@
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
 
+        <!-- FIREBASE CONFIGURATIONS -->
         <meta-data a:name="com.mrepol742.webvium.FEED.API_KEY" a:value="YOUR_FIREBASE_API_KEY_HERE" />
         <meta-data a:name="com.mrepol742.webvium.FEED.AUTH_DOMAIN" a:value="YOUR_FIREBASE_AUTH_DOMAIN_HERE" />
         <meta-data a:name="com.mrepol742.webvium.FEED.PROJECT_ID" a:value="YOUR_FIREBASE_PROJECT_ID" />
@@ -109,6 +108,19 @@
         <meta-data a:name="com.mrepol742.webvium.FEED.MESSAGING_SENDER_ID" a:value="YOUR_FIREBASE_MESSAGING_SENDER_ID_HERE" />
         <meta-data a:name="com.mrepol742.webvium.FEED.APP_ID" a:value="YOUR_FIREBASE_APP_ID_HERE" />
         <meta-data a:name="com.mrepol742.webvium.FEED.MEASUREMENT_ID" a:value="YOUR_FIREBASE_MEASUREMENT_ID_HERE" />
+
+        <!-- GITHUB CONFIGURATIONS -->
+        <meta-data a:name="com.mrepol742.webvium.GIT.USERNAME" a:value="mrepol742" />
+        <meta-data a:name="com.mrepol742.webvium.GIT.REPOSITORY" a:value="Server" />
+        <meta-data a:name="com.mrepol742.webvium.GIT.BRANCH" a:value="master" />
+        <meta-data a:name="com.mrepol742.webvium.GIT.PATH" a:value="/" />
+
+        <!-- SERVER CONFIGURATIONS -->
+        <!-- ex: mrepol742.github.io -->
+        <meta-data a:name="com.mrepol742.webvium.SERVER.DOMAIN" a:value="YOUR_SERVER_DOMAIN_HERE" />
+        <!-- ex: phpFiles -->
+        <meta-data a:name="com.mrepol742.webvium.SERVER.PATH" a:value="THE_FILE_PATH_HERE" />
+
 
         <!-- Bug Report -->
         <activity
@@ -176,12 +188,7 @@
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
             a:windowSoftInputMode="stateHidden" />
-        <!-- EXPRIREMENT-->
-        <activity
-            a:name="com.mrepol742.webvium.EXPI"
-            a:configChanges="keyboardHidden|orientation|screenSize"
-            a:exported="false"
-            a:windowSoftInputMode="stateHidden" />  <!-- backup auto immport -->
+        <!-- backup auto immport -->
         <activity
             a:name="com.mrepol742.webvium.BACK0"
             a:configChanges="keyboardHidden|orientation|screenSize"
@@ -867,33 +874,6 @@
         </activity-alias>
 
         <activity-alias
-            a:name="com.mrepol742.webvium.activity.alias.LOGC"
-            a:enabled="@bool/wv"
-            a:exported="true"
-            a:label="@string/x54"
-            a:targetActivity="com.mrepol742.webvium.LOGC">
-            <intent-filter>
-                <action a:name="android.intent.action.MAIN" />
-
-                <category a:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <activity-alias
-            a:name="com.mrepol742.webvium.activity.alias.EXPI"
-            a:enabled="@bool/wv"
-            a:exported="true"
-            a:label="@string/x60"
-            a:targetActivity="com.mrepol742.webvium.EXPI">
-            <intent-filter>
-                <action a:name="android.intent.action.MAIN" />
-
-                <category a:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-
-        <activity-alias
             a:name="com.mrepol742.webvium.activity.alias.PRE"
             a:enabled="false"
             a:exported="true"
@@ -991,11 +971,6 @@
             a:name="com.mrepol742.webvium.BACK"
             a:label="@string/n22" />
 
-        <service
-            a:name="com.mrepol742.webvium.UPDA0"
-            a:exported="false"
-            a:label="@string/n21"
-            a:process=":upd" />
 
     </application>
 

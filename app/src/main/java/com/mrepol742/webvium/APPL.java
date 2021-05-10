@@ -18,8 +18,12 @@
 package com.mrepol742.webvium;
 // WEBVIEW
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.ComponentCallbacks2;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
@@ -28,19 +32,34 @@ import com.mrepol742.webvium.os.StrictMode;
 import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Hardware;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+
 // @class Application
 // NOTE: This class must be instantiated in fraction of a second so this won't cause any slow loading of
 // activities, broadcast receivers, and services
 
 public class APPL extends Application {
     private SharedPreferences sp;
+    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+
 
     @Override
     public void onCreate() {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("stM12", false)) {
-            StrictMode.b();
-        }
+        this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
+            Intent intent = new Intent(getApplicationContext(), EXCE.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("error", getStackTrace(ex));
+            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT);
+            AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(2);
+            uncaughtExceptionHandler.uncaughtException(thread, ex);
+        });
         super.onCreate();
         try {
             if (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("og67", false)) {
@@ -76,6 +95,23 @@ public class APPL extends Application {
             System.gc();
         }
         super.onTrimMemory(i);
+    }
+
+
+    private String getStackTrace(Throwable th){
+        final Writer result = new StringWriter();
+
+        final PrintWriter printWriter = new PrintWriter(result);
+        Throwable cause = th;
+
+        while(cause != null){
+            cause.printStackTrace(printWriter);
+            cause = cause.getCause();
+        }
+        final String stacktraceAsString = result.toString();
+        printWriter.close();
+
+        return stacktraceAsString;
     }
 }
 

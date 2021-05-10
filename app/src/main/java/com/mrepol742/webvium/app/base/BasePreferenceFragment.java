@@ -31,9 +31,6 @@ public class BasePreferenceFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle b1) {
-        if (false || (getActivity().getSharedPreferences("wv,", 0).getBoolean("webDa", false) && a221().getBoolean("stM12", false))) {
-            StrictMode.b();
-        }
         super.onCreate(b1);
     }
 

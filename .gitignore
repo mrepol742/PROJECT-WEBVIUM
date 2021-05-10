@@ -46,7 +46,10 @@ app/quaternary-dictionary.txt
 # Webvium
 app/src/main/c-playstore.png
 app/src/main/java/com/mrepol742/webvium/A
+app/src/main/java/com/mrepol742/webvium/EXPI.java
 app/src/release/
+app/src/debugWithMinify/
+app/src/debug/
 
 # IntelliJ
 *.iml

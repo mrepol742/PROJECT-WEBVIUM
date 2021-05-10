@@ -24,8 +24,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -51,6 +55,7 @@ import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Base64;
+import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.util.cache.FontCache;
 
 import java.io.File;
@@ -71,49 +76,75 @@ public class WELC extends BaseActivity {
     private Animation d;
     public static final String TEMP_UPDATE_URL = "a";
     public static final String TEMP_UPDATE_VERSION = "b";
-    public static final String TEMP_NOTIFICATION_STATE = "c";
-    public static final String TEMP_NOTIFICATION_DATA = "d";
-    public static final String TEMP_WEBVIUM_URLS = "e";
-    public static final String TEMP_HEADERS = "f";
-    public static final String TEMP_HEADERS_1 = "g";
-    public static final String TEMP_IP_ADDRESS = "h";
-    public static final String TEMP_LINKS = "i";
-    public static final String TEMP_META_TAGS = "j";
-    public static final String TEMP_USER_AGENT = "k";
-    public static final String TEMP_SEARCH = "l";
+    public static final String TEMP_NOTIFICATION_DATA = "c";
+    public static final String TEMP_HEADERS = "d";
+    public static final String TEMP_HEADERS_1 = "e";
+    public static final String TEMP_IP_ADDRESS = "f";
+    public static final String TEMP_LINKS = "g";
+    public static final String TEMP_META_TAGS = "h";
+    public static final String TEMP_USER_AGENT = "i";
+    public static final String TEMP_SEARCH = "j";
     public static boolean bn1 = false;
+    private RelativeLayout ll;
+    private TextView cop;
 
     @Override
     protected void onCreate(Bundle be) {
-        theme(T_WELCOME_SCREEN);
+        setTheme(T_WELCOME_SCREEN);
         super.onCreate(be);
         a225(R.layout.p);
-        // Clipboard.a(this, Base64.b(Hash.a(new HashDataModel("SHA-512", Arrays.toString(Package.d(this, Package.b(), 0))))));
-        // Toast.a(this, "Copied to clipboard");
         rl = findViewById(R.id.h9);
         iv = findViewById(R.id.b20);
         tv = findViewById(R.id.c6);
         fl = findViewById(R.id.h10);
+        cop = findViewById(R.id.o29);
         tv.setText(getString(R.string.y63));
         rl.setBackgroundResource(R.drawable.a11);
         rl.setElevation(5);
         iv.setImageResource(R.drawable.b14);
         tv.setTypeface(type(Typeface.BOLD));
-        RelativeLayout ll = findViewById(R.id.h11);
+        cop.setTypeface(type(Typeface.NORMAL));
+        ll = findViewById(R.id.h11);
         if (!a221().getBoolean("autoUpdate", false)) {
-            ll.setBackgroundColor(Resources.getColor(this, R.color.b));
             fl.setBackgroundColor(Resources.getColor(this, R.color.b));
+            cop.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            ll.setBackgroundColor(Resources.getColor(this, R.color.n));
             fl.setBackgroundColor(Resources.getColor(this, R.color.n));
+            cop.setTextColor(Resources.getColor(this, R.color.b));
         }
         tv.setTextColor(Resources.getColor(this, R.color.b));
         d = AnimationUtils.loadAnimation(this, R.anim.h);
         iv.startAnimation(d);
         timer = new A17a(5000, 5000);
         timer.start();
-        if (!BuildConfig.DEBUG) {
-            C10.a(this, "com.mrepol742.webvium.EXPI", PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
+        Runnable re = () -> {
+            try {
+                InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
+                OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
+                byte[] e = new byte[1024];
+                int f;
+                while ((f = fos.read(e)) != -1) {
+                    d.write(e, 0, f);
+                }
+                d.flush();
+                d.close();
+                fos.close();
+                File fea = new File(StorageDirectory.getClasses(this));
+                fea.setReadOnly();
+            } catch (Exception en) {
+                Log.a(en);
+            }
+        };
+        new Thread(re).start();
+        ll.setBackgroundResource(R.drawable.f10);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!a221().getBoolean("autoUpdate", false)) {
+                if (!a221().getBoolean("webviumB", false)) {
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    getWindow().setStatusBarColor(Resources.getColor(this, R.color.b));
+                }
+            }
         }
     }
 
@@ -152,22 +183,31 @@ public class WELC extends BaseActivity {
     }
 
     @Test
-    private void a() {
+    private void a() throws PackageManager.NameNotFoundException {
         SharedPreferences sp3 = getSharedPreferences("b", 0);
         SharedPreferences.Editor editor = sp3.edit();
-        String formatter = "aHR0cHM6Ly9naXRodWIuY29tL21yZXBvbDc0Mi9TZXJ2ZXIvYmxvYi9tYXN0ZXIv";
-        String formatter1 = "aHR0cHM6Ly9sdWVhLjAwMHdlYmhvc3RhcHAuY29tL21qLw";
-        editor.putString(TEMP_UPDATE_URL, Base64.encode(Base64.decode(formatter) + "update_url.txt")); // update
-        editor.putString(TEMP_UPDATE_VERSION, Base64.encode(Base64.decode(formatter) + "update_version>1.2.txt")); // update version
-        editor.putString(TEMP_NOTIFICATION_STATE, Base64.encode(Base64.decode(formatter) + "notification_state.txt")); // notification status
-        editor.putString(TEMP_NOTIFICATION_DATA, Base64.encode(Base64.decode(formatter) + "notification_data.txt")); // notification url
-        editor.putString(TEMP_WEBVIUM_URLS, Base64.encode(Base64.decode(formatter) + "webvium_urls.txt")); // Webvium urls
-        editor.putString(TEMP_HEADERS, Base64.encode(Base64.decode(formatter1) + "headers.php")); // Headers
-        editor.putString(TEMP_HEADERS_1, Base64.encode(Base64.decode(formatter1) + "headers1.php")); // Headers version 2
-        editor.putString(TEMP_IP_ADDRESS, Base64.encode(Base64.decode(formatter1) + "ipaddress.php")); // IP Address
-        editor.putString(TEMP_LINKS, Base64.encode(Base64.decode(formatter1) + "links.php")); //LINKS
-        editor.putString(TEMP_META_TAGS, Base64.encode(Base64.decode(formatter1) + "metatag.php")); //Meta tags
-        editor.putString(TEMP_USER_AGENT, Base64.encode(Base64.decode(formatter1) + "useragent.php")); //useragent
+        ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+        Bundle bundle = ai.metaData;
+        String gitUsername = bundle.getString("com.mrepol742.webvium.GIT.USERNAME");
+        String gitRepository = bundle.getString("com.mrepol742.webvium.GIT.REPOSITORY");
+        String gitBranch = bundle.getString("com.mrepol742.webvium.GIT.BRANCH");
+        String gitPath = bundle.getString("com.mrepol742.webvium.GIT.PATH");
+
+        String serverDomain = bundle.getString("com.mrepol742.webvium.SERVER.DOMAIN");
+        String serverPath = bundle.getString("com.mrepol742.webvium.SERVER.PATH");
+
+        String location = "https://github.com/" + gitUsername + "/" + gitRepository + "/blob/" + gitBranch + "/" + gitPath;
+        String location1 = "https://" + serverDomain + "/" + serverPath;
+
+        editor.putString(TEMP_UPDATE_URL, Base64.encode(location + "/update_url.txt")); // update
+        editor.putString(TEMP_UPDATE_VERSION, Base64.encode(location + "/update_version>1.2.txt")); // update version
+        editor.putString(TEMP_NOTIFICATION_DATA, Base64.encode(location + "/notification_data.txt")); // notification url
+        editor.putString(TEMP_HEADERS, Base64.encode(location1 + "/headers.php")); // Headers
+        editor.putString(TEMP_HEADERS_1, Base64.encode(location1 + "/headers1.php")); // Headers version 2
+        editor.putString(TEMP_IP_ADDRESS, Base64.encode(location1 + "/ipaddress.php")); // IP Address
+        editor.putString(TEMP_LINKS, Base64.encode(location1 + "/links.php")); //LINKS
+        editor.putString(TEMP_META_TAGS, Base64.encode(location1 + "/metatag.php")); //Meta tags
+        editor.putString(TEMP_USER_AGENT, Base64.encode(location1 + "/useragent.php")); //useragent
         editor.putString(TEMP_SEARCH, "aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS9TZWFyY2gvaW5kZXguaHRtbA"); // search
         editor.apply();
     }
@@ -196,11 +236,17 @@ public class WELC extends BaseActivity {
                 .addOnScrollChangedListener(() -> {
                     if (sv.getChildAt(0).getBottom()
                             <= (sv.getHeight() + sv.getScrollY())) {
-                       a3();
-                        SharedPreferences sp = getSharedPreferences("ag233", 0);
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putLong("ag233", new Date().getTime());
-                        editor.apply();
+                         com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+                        bn.setText(getString(R.string.n25));
+                        bn.setBackgroundResource(R.drawable.c10);
+                        bn.setOnClickListener(view -> {
+                            fl.removeView(c);
+                            a3();
+                            SharedPreferences sp = getSharedPreferences("ag233", 0);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putLong("ag233", new Date().getTime());
+                            editor.apply();
+                        });
                     }
                 });
         sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
@@ -244,7 +290,7 @@ public class WELC extends BaseActivity {
                             SharedPreferences sp = getSharedPreferences("ag233", 0);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putLong("ag466", new Date().getTime());
-                            editor.putBoolean("aa", true);
+                            editor.putBoolean("aaa", true);
                             editor.apply();
                         });
 
@@ -258,32 +304,17 @@ public class WELC extends BaseActivity {
     }
 
     private void l3() {
-        a();
+        try {
+            a();
+        } catch (Exception en) {
+            throw new SecurityException();
+        }
         SharedPreferences a5 = getSharedPreferences("ddnrr2", 0);
         SharedPreferences.Editor b5 = a5.edit();
         b5.putInt("noid", 275);
         b5.apply();
         Intents.b(this, BACK.class);
         String sg = Hash.a("SHA-1", String.valueOf(System.currentTimeMillis()));
-        Runnable re = () -> {
-            try {
-                InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
-                OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
-                byte[] e = new byte[1024];
-                int f;
-                while ((f = fos.read(e)) != -1) {
-                    d.write(e, 0, f);
-                }
-                d.flush();
-                d.close();
-                fos.close();
-                File fea = new File(StorageDirectory.getClasses(this));
-                fea.setReadOnly();
-            } catch (Exception en) {
-                Log.a(en);
-            }
-        };
-        new Thread(re).start();
         SharedPreferences a52 = getSharedPreferences("di", 0);
         SharedPreferences.Editor b52 = a52.edit();
         b52.putString("di", sg);
@@ -296,8 +327,6 @@ public class WELC extends BaseActivity {
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
         PendingIntent it1 = PendingIntent.getService(this, 0, new Intent(this, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it1);
-        PendingIntent it2 = PendingIntent.getService(this, 0, new Intent(this, UPDA0.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it2);
         finish();
         Intent intent = new Intent(this, UPDA.class);
         intent.putExtra("sta", "non");
@@ -305,9 +334,6 @@ public class WELC extends BaseActivity {
         Intent intent2 = new Intent(this, NOTI.class);
         intent2.putExtra("sta", "non");
         startService(intent2);
-        Intent intent3 = new Intent(this, UPDA0.class);
-        intent3.putExtra("sta", "non");
-        startService(intent3);
         overridePendingTransition(R.anim.f, R.anim.b);
         if (bn1) {
             Intent intent44 = new Intent(this, EXPI.class);
@@ -353,13 +379,20 @@ public class WELC extends BaseActivity {
         public void onFinish() {
             WELC.this.rl.setVisibility(View.GONE);
             SharedPreferences sp = getSharedPreferences("ag233", 0);
-            if ( !sp.getBoolean("aa", false)) {
+            if ( !sp.getBoolean("aaa", false)) {
                 WELC.this.a2();
             } else {
                 l3();
                 l6();
             }
             WELC.this.bn = true;
+            if (!a221().getBoolean("autoUpdate", false)) {
+                ll.setBackgroundColor(Resources.getColor(WELC.this, R.color.b));
+            } else {
+                ll.setBackgroundColor(Resources.getColor(WELC.this, R.color.n));
+            }
+            cop.setVisibility(View.GONE);
+
         }
     }
 }

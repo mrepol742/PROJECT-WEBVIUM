@@ -31,27 +31,27 @@ android {
         targetSdkVersion 30
         versionCode Integer.parseInt(new Date().format("ddMMyyyy"))
         versionName "1.2"
+        proguardFiles getDefaultProguardFile(
+                'proguard-android-optimize.txt'),
+                'proguard-rules.pro'
     }
 
     buildTypes {
         debug {
             debuggable true
+            minifyEnabled false
+        }
+
+        debugWithMinify {
+            debuggable true
             minifyEnabled true
             shrinkResources true
-            resValue "bool", "wv", "true"
-            proguardFiles getDefaultProguardFile(
-                    'proguard-android-optimize.txt'),
-                    'proguard-rules.pro'
         }
 
         release {
             debuggable false
             minifyEnabled true
             shrinkResources true
-            resValue "bool", "wv", "false"
-            proguardFiles getDefaultProguardFile(
-                    'proguard-android-optimize.txt'),
-                    'proguard-rules.pro'
         }
     }
 

