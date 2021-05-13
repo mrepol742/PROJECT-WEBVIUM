@@ -22,8 +22,6 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.os.StrictMode;
-
 @SuppressWarnings("deprecation")
 public class BasePreferenceFragment extends PreferenceFragment {
 

@@ -75,13 +75,10 @@
     <item name="c5" type="id" />
     <item name="c6" type="id" />
     <item name="c8" type="id" />
-    <item name="c9" type="id" />
     <item name="c10" type="id" />
     <item name="c11" type="id" />
     <item name="c12" type="id" />
     <item name="c13" type="id" />
-    <item name="c15" type="id" />
-    <item name="c16" type="id" />
     <item name="c17" type="id" />
     <item name="c18" type="id" />
     <item name="c19" type="id" />
@@ -93,7 +90,6 @@
     <item name="d15" type="id" />
     <item name="d16" type="id" />
     <item name="d17" type="id" />
-    <item name="d18" type="id" />
     <item name="d19" type="id" />
     <item name="d20" type="id" />
     <item name="e1" type="id" />
@@ -123,7 +119,6 @@
     <item name="f10" type="id" />
     <item name="f11" type="id" />
     <item name="f12" type="id" />
-    <item name="f13" type="id" />
     <item name="f14" type="id" />
     <item name="f15" type="id" />
     <item name="f16" type="id" />
@@ -244,7 +239,6 @@
     <item name="o24" type="id" />
     <item name="o25" type="id" />
     <item name="o26" type="id" />
-    <item name="o27" type="id" />
     <item name="o28" type="id" />
-    <item name="o29" type="id" />
+
 </resources>

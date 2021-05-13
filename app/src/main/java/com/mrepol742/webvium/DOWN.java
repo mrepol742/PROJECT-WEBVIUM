@@ -72,7 +72,7 @@ public class DOWN extends BaseActivity {
         if (ab != null) {
             ab.setDisplayShowTitleEnabled(false);
         }
-        if (a221().getBoolean("blockSV", true)) {
+        if (a221().getBoolean("blocksv", false)) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);

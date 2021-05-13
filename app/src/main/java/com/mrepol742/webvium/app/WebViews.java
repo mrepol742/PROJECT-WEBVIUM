@@ -24,7 +24,6 @@ import android.view.View;
 import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.main.MainWebView;
-import com.mrepol742.webvium.util.Log;
 
 import java.util.ArrayList;
 

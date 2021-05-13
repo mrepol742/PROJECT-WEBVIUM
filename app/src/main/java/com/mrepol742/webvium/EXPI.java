@@ -19,7 +19,6 @@ package com.mrepol742.webvium;
 
 import android.annotation.TargetApi;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -33,15 +32,8 @@ import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.A.AppName;
-import com.mrepol742.webvium.A.AppNameChecker;
-import com.mrepol742.webvium.A.CheckerSequence;
-import com.mrepol742.webvium.A.MainSecurity;
-import com.mrepol742.webvium.A.PackageName;
-import com.mrepol742.webvium.A.PackageNameChecker;
-import com.mrepol742.webvium.A.Security.Responder;
-import com.mrepol742.webvium.A.Signature;
-import com.mrepol742.webvium.A.SignatureChecker;
+import com.mrepol742.webvium.a.MainSecurity;
+import com.mrepol742.webvium.a.sec.Responder;
 import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Clipboard;
@@ -56,7 +48,6 @@ import com.mrepol742.webvium.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.Objects;
 
 @Development
@@ -67,15 +58,6 @@ public class EXPI extends BaseActivity {
     protected void onCreate(Bundle be) {
         theme(T_DEFAULT);
         super.onCreate(be);
-        int k5 = getSharedPreferences("ddnrr2", 0).getInt("noid", 0);
-        if (k5 != 275) {
-            Intent it = new Intent(this, WELC.class);
-            it.putExtra("welc", true);
-            startActivity(it);
-            overridePendingTransition(R.anim.f, R.anim.b);
-            finish();
-            Toast.b(this, "Initiating Webvium...");
-        }
         ScrollView scrollView = new ScrollView(this);
         tv = new TextView(this);
         scrollView.addView(tv);
@@ -102,23 +84,6 @@ public class EXPI extends BaseActivity {
        } catch (Exception en) {
            append(Log.getStackTraceString(en));
        }
-       try {
-           ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
-           Bundle bundle = ai.metaData;
-           append("API_KEY: " + bundle.getString("com.mrepol742.webvium.FEED.API_KEY"));
-           append("AUTH_DOMAIN: " + bundle.getString("com.mrepol742.webvium.FEED.AUTH_DOMAIN"));
-           append("PROJECT_ID: " + bundle.getString("com.mrepol742.webvium.FEED.PROJECT_ID"));
-           append("STORAGE_BUCKET: " + bundle.getString("com.mrepol742.webvium.FEED.STORAGE_BUCKET"));
-           append("MESSAGING_SENDER_ID: " + bundle.getString("com.mrepol742.webvium.FEED.MESSAGING_SENDER_ID"));
-           append("APP_ID: " + bundle.getString("com.mrepol742.webvium.FEED.APP_ID"));
-           append("MEASUREMENT_ID: " + bundle.getString("com.mrepol742.webvium.FEED.MEASUREMENT_ID"));
-           // rules
-//?a=AIzaSyAmuYgXpDNti7SXnq_T3yNqJvVP1dJDo_8&b=mrepol-e2ed6.firebaseapp.com&c=mrepol-e2ed6&d=&d=mrepol-e2ed6.appspot.com&e=541029821490&f=1:541029821490:web:3713defdb0f0d8a939e02b&g=G-YYV1BV578J&h=Test%20Mj&i=SubjectMj
-
-       } catch (Exception en) {
-           append(Log.getStackTraceString(en));
-       }
-
        if (Build.VERSION.SDK_INT >= 29 ) {
             write();
         }
@@ -126,9 +91,8 @@ public class EXPI extends BaseActivity {
            try {
                String name = Thread.currentThread().getName();
                runOnUiThread(()-> append("CurrentThreadName:" + name));
-               SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
                int b = Integer.parseInt(Package.e(this).replaceAll("\\.", ""));
-               int newUpdate = Stream.i(Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "")) + "?raw=true");
+               int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/update_version>1.2.txt?raw=true");
                if (newUpdate > b) {
                    runOnUiThread(()-> append("UpdateService: Pass"));
                }
@@ -137,8 +101,7 @@ public class EXPI extends BaseActivity {
                runOnUiThread(()-> append(Log.getStackTraceString(w)));
            }
            try {
-               SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-                   String neTf = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) + "?raw=true", getString(R.string.c33));
+                   String neTf = Stream.f("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/notification_data.txt?raw=true", getString(R.string.c33));
                    String[] sp = neTf.split(";");
                    SharedPreferences j988 = getSharedPreferences("wv,", 0);
                    if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {
@@ -161,19 +124,7 @@ public class EXPI extends BaseActivity {
            }
        };
        new Thread(runnable1).start();
-       try {
-            SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-            append("SharedPreference: \nUpdate URL: " + sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "") +
-                    "\nDecoded Update URL: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "")) +
-                    "\n\nNotification Data: " + sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "") +
-                    "\nDecoded Notification Data: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) +
-                    "\n\nUpdate Version: " + sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "") +
-                    "\nDecoded Update Version: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "")) +
-                    "\n\nWebvium Search: " + sharedPreferences.getString(WELC.TEMP_SEARCH, "") +
-                    "\nDecoded Webvium Search: " + Base64.decode(sharedPreferences.getString(WELC.TEMP_SEARCH, "")));
-        } catch (Exception en) {
-            append(Log.getStackTraceString(en));
-        }
+
 
         Runnable runnable2 = () -> {
             String name = Thread.currentThread().getName();

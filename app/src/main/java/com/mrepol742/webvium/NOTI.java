@@ -52,11 +52,25 @@ public class NOTI extends MainService {
 
     @Override
     public int onStartCommand(Intent a, int c, int d) {
-        if (Connectivity.isThereAnyInternetConnection(this)) {
-            if (a.getStringExtra("sta") == null || a.getStringExtra("sta").isEmpty())
-                s1();
+        if (!Connectivity.isThereAnyInternetConnection(this)) {
+            Runnable runnable = () -> {
+                try {
+                    String neTf = Stream.f("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/notification_data.txt?raw=true", getString(R.string.c33));
+                    String[] sp = neTf.split(";");
+                    SharedPreferences j988 = getSharedPreferences("wv,", 0);
+                    if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {
+                        f(sp[0], sp[1], sp[2]);
+                        SharedPreferences.Editor gujh = j988.edit();
+                        gujh.putString("notif1", sp[0]);
+                        gujh.putString("notif2", sp[1]);
+                        gujh.apply();
+                    }
+                } catch (Exception en) {
+                    Log.a(en);
+                }
+            };
+            new Thread(runnable).start();
         }
-        g();
         s1();
         return super.onStartCommand(a, c, d);
     }
@@ -119,27 +133,6 @@ public class NOTI extends MainService {
         m.addAction(new android.app.Notification.Action(R.drawable.q, String.format(getString(R.string.g28), Objects.requireNonNull(Uri.parse(url).getHost())), pi235));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nmc.notify(Notifications.a, m.build());
-    }
-
-    public void g() {
-        Runnable runnable = () -> {
-            try {
-                SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-                    String neTf = Stream.f(Base64.decode(sharedPreferences.getString(WELC.TEMP_NOTIFICATION_DATA, "")) + "?raw=true", getString(R.string.c33));
-                    String[] sp = neTf.split(";");
-                    SharedPreferences j988 = getSharedPreferences("wv,", 0);
-                    if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {
-                        f(sp[0], sp[1], sp[2]);
-                        SharedPreferences.Editor gujh = j988.edit();
-                        gujh.putString("notif1", sp[0]);
-                        gujh.putString("notif2", sp[1]);
-                        gujh.apply();
-                    }
-            } catch (Exception en) {
-                Log.a(en);
-            }
-        };
-        new Thread(runnable).start();
     }
 
 }

@@ -21,8 +21,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.mrepol742.webvium.util.Log;
-
 public class MainReceiver extends BroadcastReceiver {
 
     @Override

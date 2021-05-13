@@ -26,7 +26,6 @@ import android.webkit.WebViewClient;
 
 import com.mrepol742.webvium.annotation.Default;
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.util.Log;
 
 public class MainWebView extends WebView {
 

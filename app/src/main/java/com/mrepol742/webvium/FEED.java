@@ -19,12 +19,14 @@ package com.mrepol742.webvium;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.ConsoleMessage;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -42,27 +44,23 @@ import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
+import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
-import com.mrepol742.webvium.util.Base64;
+import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 // @Class Feedback
 public class FEED extends BaseActivity {
-    private static final String[] config = {
-            "PCFET0NUWVBFIGh0bWw+PGh0bWw+PGhlYWQ+PHNjcmlwdCBzc mM9IiVhIj48L3NjcmlwdD48c2NyaXB0PiViPC9zY3JpcHQ+PC9oZWFkPjxib2R5PjwvYm9keT48L 2h0bWw",
-            "aH R0cHM6Ly9zbX RwanMu Y29tL3YzL3NtdHAuanM",
-            "RW1haWwuc2V  uZCh7SG9zdDogIiVhICIsIFVzZXJuYW1lIDogIiViIiwgUGFzc3dvcmQgOiAiJWMiLCBUbyA6ICclZCcsIEZyb20gOiAiJWIiLCBTdWJqZWN0IDogIiVmIiwgQm9keSA6ICIlZyJ9KS50aGVuKGZ1bmN0aW9uKG1lc3NhZ2Upe2FsZXJ0KCIlMjAiKTt9KTs",
-            "c210c C5nbWFpb C5jb20",
-            "ZH JvaWRtai5zc HBydEBnbW FpbC5jb20",
-            "T2  5lJTIwYWNjb 3VudCUyMSUyMEFsbCUyMG9mJT IwR29vZ2xlJTIwd29ya2luZyUyMGZvciUyMHlv dSUyM  Q",
-            " bXJlcG 9sNzQyQGdtYWlsLmNvbQ"
-    };
     private LinearLayout rl;
     private MainWebView b;
     private ImageView iv;
     private AutoCompleteTextView act;
     private EditText et;
+
 
     @Override
     protected void onCreate(Bundle a) {
@@ -210,11 +208,22 @@ public class FEED extends BaseActivity {
 
                 @Override
                 public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                    if (message.contains("%20")) {
+                    if (message.contains("ara")) {
                         Toast.b(FEED.this, getString(R.string.g27));
-                        finishAndRemoveTask();
+                    } else {
+                        Toast.b(FEED.this, getString(R.string.y68));
                     }
                     result.confirm();
+                    return true;
+                }
+
+                @Override
+                public boolean onConsoleMessage(ConsoleMessage cm) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(FEED.this);
+                    bld.setTitle(getString(R.string.y65));
+                    bld.setMessage(Html.b(String.format(getString(R.string.v18), cm.message(), cm.lineNumber(), cm.sourceId())));
+                    bld.setPositiveButton(getString(R.string.i6), (dialog, which) -> dialog.dismiss());
+                    bld.create().show();
                     return true;
                 }
             });
@@ -228,16 +237,20 @@ public class FEED extends BaseActivity {
                 }
             });
         }
-        String sg = Base64.decode(config[2] + "=");
-        String sg0 = sg.replace("%a ", Base64.decode(config[3] + "="));
-        String sg1 = sg0.replaceAll("%b", Base64.decode(config[4] + "="));
-        String sg2 = sg1.replace("%c", Base64.decode(config[5] + "==").replaceAll("%20", " ").replaceAll("%21", "."));
-        String sg3 = sg2.replace("%d", Base64.decode(config[6] + "==")).replace("%f", url).replace("%g", a);
-
-        String sg11 = Base64.decode(config[0] + "+").replace("%b", sg3).replace("%a", Base64.decode(config[1] + "="));
-        b.loadDataWithBaseURL("null", sg11, "text/html", "UTF-8", "null");
-        /*
-        Runnable p15 = () -> Stream.e(Base64.a(W5.a2()) + a);
-        new Thread(p15).start();*/
+        try {
+            b.loadUrl("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/Feed.html" +
+                    "?a=" + getString(R.string.firebase_apiKey) +
+                    "&b=" + getString(R.string.firebase_authDomain) +
+                    "&c=" + getString(R.string.firebase_projectId) +
+                    "&d=" + getString(R.string.firebase_storageBucket) +
+                    "&e=" + getString(R.string.firebase_messagingSenderId) +
+                    "&f=" + getString(R.string.firebase_appId) +
+                    "&g=" + getString(R.string.firebase_measurementId) +
+                    "&h=" + URLEncoder.encode(url, "UTF-8") +
+                    "&i=" + URLEncoder.encode(a, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            Log.a(e);
+            Toast.b(FEED.this, getString(R.string.y68));
+        }
     }
 }

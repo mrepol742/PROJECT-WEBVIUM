@@ -76,15 +76,6 @@ public class AboutFragment extends BasePreferenceFragment {
             if (Connectivity.isThereAnyInternetConnection(getActivity())) {
                 a51.setTitle(getString(R.string.z21));
                 a51.setSummary(getString(R.string.z22));
-            } else if (Connectivity.isRestrictBackground(getActivity())) {
-                a51.setTitle(getString(R.string.z21));
-                a51.setSummary(getString(R.string.z23));
-                a51.setOnPreferenceClickListener(a -> {
-                    a51.setTitle(getString(R.string.z24));
-                    a51.setSummary(getString(R.string.z25));
-                    a(a51);
-                    return true;
-                });
             } else {
                 a51.setTitle(getString(R.string.z24));
                 a51.setSummary(getString(R.string.z25));
@@ -107,19 +98,16 @@ public class AboutFragment extends BasePreferenceFragment {
     }
 
     private void a(Preference e) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("b", 0);
-        String string = sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "");
-        String string0 = sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "");
         Runnable re = () -> {
             try {
                 int b = Integer.parseInt(Package.e(getActivity()).replaceAll("\\.", ""));
-                int newUpdate = Stream.i(string + "?raw=true");
+                int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/update_version>1.2.txt?raw=true");
                 if (newUpdate > b) {
                     getActivity().runOnUiThread(() -> {
                         e.setTitle(getString(R.string.z28));
                         e.setSummary(getString(R.string.z29));
                         e.setOnPreferenceClickListener(a -> {
-                            Intents.e(getActivity(), "value", Base64.decode(string0), MAIN.class);
+                            Intents.e(getActivity(), "value", "https://mrepol742.github.io/PROJECT-WEBVIUM", MAIN.class);
                             return true;
                         });
                     });

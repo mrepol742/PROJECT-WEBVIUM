@@ -30,6 +30,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+@SuppressWarnings("ALL")
 public class Files {
 
     public static final String n = "\n";
@@ -62,9 +63,7 @@ public class Files {
 
     public static boolean createNewFolder(java.io.File a) {
         if (!a.exists()) {
-            if (a.mkdir()) {
-                return true;
-            }
+            return a.mkdir();
         }
         return false;
     }
@@ -81,9 +80,7 @@ public class Files {
 
     public static boolean delete(java.io.File fe) {
         if (fe.exists()) {
-            if (fe.delete()) {
-                return true;
-            }
+            return fe.delete();
         }
         return false;
     }

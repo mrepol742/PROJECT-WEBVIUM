@@ -88,15 +88,6 @@ public class VideoFragment extends BasePreferenceFragment {
                     Objects.requireNonNull(c5).close();
                     d5.flush();
                     d5.close();
-                    try {
-                        File fe = new File(StorageDirectory.getVideoPoster(getActivity()));
-                        fe.setReadOnly();
-                        Process p;
-                        p = Runtime.getRuntime().exec("attrib +h " + fe.getPath());
-                        p.waitFor();
-                    } catch (Exception en) {
-                        Log.a(en);
-                    }
                     BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(getActivity()));
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.h21)));
                 } catch (Exception en) {

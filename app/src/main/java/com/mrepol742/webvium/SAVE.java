@@ -50,36 +50,35 @@ public class SAVE extends MainService {
 
     @Override
     public int onStartCommand(final Intent b34, int c5, int fl) {
-        if (Connectivity.isThereAnyInternetConnection(this)) {
-            s1();
-        }
-
-        try {
-            String a = b34.getStringExtra("a");
-            String b = b34.getStringExtra("b");
-            a1(a, b);
-            URL b5 = new URL(b);
-            File a2 = new File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
-            if (!a2.exists()) {
-                boolean bn = a2.createNewFile();
-                if (bn) {
-                    BufferedReader c = new BufferedReader(new InputStreamReader(b5.openStream()));
-                    FileWriter fr = new FileWriter(a2, true);
-                    BufferedWriter br = new BufferedWriter(fr);
-                    String f;
-                    while ((f = c.readLine()) != null) {
-                        br.write(f);
+        if (!Connectivity.isThereAnyInternetConnection(this)) {
+            Runnable runnable = () -> {
+                try {
+                    String a = b34.getStringExtra("a");
+                    String b = b34.getStringExtra("b");
+                    a1(a, b);
+                    URL b5 = new URL(b);
+                    File a2 = new File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
+                    if (!a2.exists()) {
+                        boolean bn = a2.createNewFile();
+                        if (bn) {
+                            BufferedReader c = new BufferedReader(new InputStreamReader(b5.openStream()));
+                            FileWriter fr = new FileWriter(a2, true);
+                            BufferedWriter br = new BufferedWriter(fr);
+                            String f;
+                            while ((f = c.readLine()) != null) {
+                                br.write(f);
+                            }
+                            br.close();
+                            fr.close();
+                            a2(StorageDirectory.getWebviumDir() + "/Downloads/" + a, a);
+                        }
                     }
-                    br.close();
-                    fr.close();
-                    a2(StorageDirectory.getWebviumDir() + "/Downloads/" + a, a);
+                } catch (IOException mu) {
+                    Log.a(mu);
                 }
-            }
-        } catch (IOException mu) {
-            Log.a(mu);
+            };
+            new Thread(runnable).start();
         }
-
-
         s1();
         return super.onStartCommand(b34, c5, fl);
     }

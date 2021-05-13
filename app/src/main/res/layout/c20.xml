@@ -15,92 +15,15 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
-
-    a:id="@id/c3"
-    a:layout_width="match_parent"
-    a:layout_height="match_parent">
-
-    <LinearLayout
-        a:id="@id/c9"
-        a:layout_width="match_parent"
-        a:layout_height="400dp"
-        a:layout_alignParentTop="true"
-        a:gravity="center"
-        a:orientation="vertical">
-
-
-        <TextView
+<ScrollView xmlns:a="http://schemas.android.com/apk/res/android"
+        a:layout_width="match_parent"  a:id="@id/c3"
+        a:layout_height="match_parent" a:layout_marginTop="10dp">
+        <TextView  a:gravity="center"
             a:id="@id/c10"
-            a:layout_width="match_parent"
+            a:layout_width="match_parent" a:layout_marginTop="30dp"
             a:layout_height="wrap_content"
-            a:gravity="center"
-            a:textSize="25sp" />
-
-        <TextView
-            a:id="@id/c15"
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content"
-            a:gravity="center"
-            a:padding="10dp" />
-
-    </LinearLayout>
-
-    <ImageView
-        a:id="@id/c16"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content"
-        a:layout_alignParentStart="true"
-        a:layout_alignParentTop="true"
-        a:layout_marginStart="15dp"
-        a:layout_marginTop="10dp"
-        a:contentDescription="@string/u30"
-        a:padding="10dp" />
-
-    <HorizontalScrollView
-        a:layout_width="match_parent"
-        a:layout_height="wrap_content"
-        a:layout_above="@id/f13"
-        a:layout_below="@id/c9"
-        a:layout_centerHorizontal="true"
-        a:gravity="center">
-
-        <LinearLayout
-            a:layout_width="wrap_content"
-            a:layout_height="match_parent"
-            a:gravity="center"
-            a:orientation="horizontal">
-
-            <TextView
-                a:id="@id/d18"
-                a:layout_width="0dp"
-                a:layout_height="wrap_content"
-                a:layout_margin="10dp"
-                a:layout_weight="0.5"
-                a:gravity="center"
-                a:padding="20dp"
-                a:textSize="20sp" />
-
-            <TextView
-                a:id="@id/o27"
-                a:layout_width="0dp"
-                a:layout_height="wrap_content"
-                a:layout_margin="10dp"
-                a:layout_weight="0.5"
-                a:gravity="center"
-                a:padding="20dp"
-                a:textSize="20sp" />
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <TextView
-        a:id="@id/f13"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content"
-        a:layout_alignParentBottom="true"
-        a:layout_centerHorizontal="true"
-        a:gravity="center"
-        a:padding="15dp"
-        a:textSize="16sp" />
-</RelativeLayout>
+            a:layout_marginStart="15dp"
+            a:layout_marginEnd="15dp"
+            a:textIsSelectable="true"
+            a:textSize="@dimen/b" />
+    </ScrollView>

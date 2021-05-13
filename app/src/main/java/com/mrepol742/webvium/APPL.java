@@ -28,9 +28,9 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.os.StrictMode;
 import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Hardware;
+import com.mrepol742.webvium.widget.Toast;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -57,6 +57,7 @@ public class APPL extends Application {
             AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
             android.os.Process.killProcess(android.os.Process.myPid());
+            Toast.a(getApplicationContext(), "Crash happened");
             System.exit(2);
             uncaughtExceptionHandler.uncaughtException(thread, ex);
         });

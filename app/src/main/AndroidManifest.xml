@@ -100,28 +100,6 @@
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
 
-        <!-- FIREBASE CONFIGURATIONS -->
-        <meta-data a:name="com.mrepol742.webvium.FEED.API_KEY" a:value="YOUR_FIREBASE_API_KEY_HERE" />
-        <meta-data a:name="com.mrepol742.webvium.FEED.AUTH_DOMAIN" a:value="YOUR_FIREBASE_AUTH_DOMAIN_HERE" />
-        <meta-data a:name="com.mrepol742.webvium.FEED.PROJECT_ID" a:value="YOUR_FIREBASE_PROJECT_ID" />
-        <meta-data a:name="com.mrepol742.webvium.FEED.STORAGE_BUCKET" a:value="YOUR_FIREBASE_STORAGE_BUCKET_HERE" />
-        <meta-data a:name="com.mrepol742.webvium.FEED.MESSAGING_SENDER_ID" a:value="YOUR_FIREBASE_MESSAGING_SENDER_ID_HERE" />
-        <meta-data a:name="com.mrepol742.webvium.FEED.APP_ID" a:value="YOUR_FIREBASE_APP_ID_HERE" />
-        <meta-data a:name="com.mrepol742.webvium.FEED.MEASUREMENT_ID" a:value="YOUR_FIREBASE_MEASUREMENT_ID_HERE" />
-
-        <!-- GITHUB CONFIGURATIONS -->
-        <meta-data a:name="com.mrepol742.webvium.GIT.USERNAME" a:value="mrepol742" />
-        <meta-data a:name="com.mrepol742.webvium.GIT.REPOSITORY" a:value="Server" />
-        <meta-data a:name="com.mrepol742.webvium.GIT.BRANCH" a:value="master" />
-        <meta-data a:name="com.mrepol742.webvium.GIT.PATH" a:value="/" />
-
-        <!-- SERVER CONFIGURATIONS -->
-        <!-- ex: mrepol742.github.io -->
-        <meta-data a:name="com.mrepol742.webvium.SERVER.DOMAIN" a:value="YOUR_SERVER_DOMAIN_HERE" />
-        <!-- ex: phpFiles -->
-        <meta-data a:name="com.mrepol742.webvium.SERVER.PATH" a:value="THE_FILE_PATH_HERE" />
-
-
         <!-- Bug Report -->
         <activity
             a:name="com.mrepol742.webvium.FEED"
@@ -147,6 +125,12 @@
             a:name="com.mrepol742.webvium.HIST"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:exported="false"
+            a:windowSoftInputMode="adjustResize" />
+
+        <activity
+            a:name="com.mrepol742.webvium.EXCE"
+            a:configChanges="keyboardHidden|orientation|screenSize"
+           a:theme="@style/m"
             a:windowSoftInputMode="adjustResize" />
         <!-- SEARCH -->
         <activity

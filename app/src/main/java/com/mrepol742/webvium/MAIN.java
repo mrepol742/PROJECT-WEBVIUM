@@ -255,6 +255,7 @@ public class MAIN extends MainBaseActivity implements Format {
     private final IntentsFilter ift = new IntentsFilter();
     private final IntentsFilter ift1 = new IntentsFilter();
     private final IntentsFilter ift3 = new IntentsFilter();
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private final HashMap<String, String> eh = new HashMap<>(1);
     public WebViews h;
     public int it742;
@@ -564,12 +565,10 @@ public class MAIN extends MainBaseActivity implements Format {
     protected void onCreate(Bundle a) {
 
         super.onCreate(a);
-        int k5 = getSharedPreferences("ddnrr2", 0).getInt("noid", 0);
+        int k5 = getSharedPreferences(WELC.INIT, 0).getInt("noid", 0);
         if (k5 != 275) {
             Intents.a(this, WELC.class);
-            overridePendingTransition(R.anim.f, R.anim.b);
         }
-
         if (k5 == 275 && a221().getBoolean("lockWn99", false)) {
             Intent it = new Intent(this, LOCK.class);
             startActivityForResult(it, 345);
@@ -831,7 +830,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             onNewIntent(getIntent());
             WebView.setWebContentsDebuggingEnabled(a221().getBoolean("webP", false));
-            if (a221().getBoolean("blockSV", true)) {
+            if (a221().getBoolean("blocksv", false)) {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
             } else {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
@@ -2042,8 +2041,7 @@ public class MAIN extends MainBaseActivity implements Format {
             default:
             case "x57":
                 if (h.getSettings().getJavaScriptEnabled()) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-                    c3(Base64.decode(sharedPreferences.getString(WELC.TEMP_SEARCH, "")) +"?00OOOO0O0OO0=" + c46());
+                    c3("https://mrepol742.github.io/PROJECT-WEBVIUM/Search/index.html?00OOOO0O0OO0=" + c46());
                 } else {
                     c3(c48());
                 }
@@ -2342,7 +2340,6 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c67() {
-        String url = "aHR0cHM6Ly9oNm53b3hxdDdtcn ZlcWNwLjAwMHdlYmhvc3RhcHAuY29tL2RhdTc4Zm53anI4ZnNoL3ZpL21uYnZ jeC5waHA";
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.h7));
@@ -2355,7 +2352,7 @@ public class MAIN extends MainBaseActivity implements Format {
         Button bn = e.findViewById(R.id.k12);
         f5.setText(getString(R.string.o7));
         Runnable p15 = () -> {
-            final String sg = Stream.f(Base64.decode(url), getString(R.string.c33));
+            final String sg = Stream.f("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/IpAddress.html", getString(R.string.c33));
             runOnUiThread(() -> f.setText(sg));
         };
         new Thread(p15).start();
@@ -2369,7 +2366,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         bn.setOnClickListener(view -> {
             Runnable p151 = () -> {
-                final String sg = Stream.f(Base64.decode(url), getString(R.string.c33));
+                final String sg = Stream.f("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/IpAddress.html", getString(R.string.c33));
                 runOnUiThread(() -> f.setText(sg));
             };
             new Thread(p151).start();

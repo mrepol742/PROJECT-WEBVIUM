@@ -26,9 +26,7 @@ import android.content.Intent.ShortcutIconResource;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -45,7 +43,6 @@ import android.widget.TextView;
 
 import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
@@ -55,10 +52,8 @@ import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Base64;
-import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.util.cache.FontCache;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -72,21 +67,11 @@ public class WELC extends BaseActivity {
     public TextView tv;
     public FrameLayout fl;
     private A17a timer;
-    private boolean bn = false;
     private Animation d;
-    public static final String TEMP_UPDATE_URL = "a";
-    public static final String TEMP_UPDATE_VERSION = "b";
-    public static final String TEMP_NOTIFICATION_DATA = "c";
-    public static final String TEMP_HEADERS = "d";
-    public static final String TEMP_HEADERS_1 = "e";
-    public static final String TEMP_IP_ADDRESS = "f";
-    public static final String TEMP_LINKS = "g";
-    public static final String TEMP_META_TAGS = "h";
-    public static final String TEMP_USER_AGENT = "i";
-    public static final String TEMP_SEARCH = "j";
-    public static boolean bn1 = false;
+
+
+    public static final String INIT = "init_8";
     private RelativeLayout ll;
-    private TextView cop;
 
     @Override
     protected void onCreate(Bundle be) {
@@ -97,20 +82,16 @@ public class WELC extends BaseActivity {
         iv = findViewById(R.id.b20);
         tv = findViewById(R.id.c6);
         fl = findViewById(R.id.h10);
-        cop = findViewById(R.id.o29);
         tv.setText(getString(R.string.y63));
         rl.setBackgroundResource(R.drawable.a11);
         rl.setElevation(5);
         iv.setImageResource(R.drawable.b14);
         tv.setTypeface(type(Typeface.BOLD));
-        cop.setTypeface(type(Typeface.NORMAL));
         ll = findViewById(R.id.h11);
         if (!a221().getBoolean("autoUpdate", false)) {
             fl.setBackgroundColor(Resources.getColor(this, R.color.b));
-            cop.setTextColor(Resources.getColor(this, R.color.c));
         } else {
             fl.setBackgroundColor(Resources.getColor(this, R.color.n));
-            cop.setTextColor(Resources.getColor(this, R.color.b));
         }
         tv.setTextColor(Resources.getColor(this, R.color.b));
         d = AnimationUtils.loadAnimation(this, R.anim.h);
@@ -129,8 +110,6 @@ public class WELC extends BaseActivity {
                 d.flush();
                 d.close();
                 fos.close();
-                File fea = new File(StorageDirectory.getClasses(this));
-                fea.setReadOnly();
             } catch (Exception en) {
                 Log.a(en);
             }
@@ -142,34 +121,19 @@ public class WELC extends BaseActivity {
             if (!a221().getBoolean("autoUpdate", false)) {
                 if (!a221().getBoolean("webviumB", false)) {
                     getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    getWindow().setStatusBarColor(Resources.getColor(this, R.color.b));
                 }
             }
         }
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        try {
-            bn1 = intent.getBooleanExtra("welc", false);
-            intent.replaceExtras(new Bundle());
-            intent.setAction("");
-            intent.setData(null);
-            intent.setFlags(0);
-        } catch (Exception en) {
-            Log.a(en);
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
-        if (timer == null && !bn) {
+        if (timer == null) {
             timer = new A17a(3000, 3000);
             timer.start();
             iv.startAnimation(d);
         }
-        onNewIntent(getIntent());
     }
 
     @Override
@@ -180,36 +144,6 @@ public class WELC extends BaseActivity {
             timer = null;
             d.cancel();
         }
-    }
-
-    @Test
-    private void a() throws PackageManager.NameNotFoundException {
-        SharedPreferences sp3 = getSharedPreferences("b", 0);
-        SharedPreferences.Editor editor = sp3.edit();
-        ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
-        Bundle bundle = ai.metaData;
-        String gitUsername = bundle.getString("com.mrepol742.webvium.GIT.USERNAME");
-        String gitRepository = bundle.getString("com.mrepol742.webvium.GIT.REPOSITORY");
-        String gitBranch = bundle.getString("com.mrepol742.webvium.GIT.BRANCH");
-        String gitPath = bundle.getString("com.mrepol742.webvium.GIT.PATH");
-
-        String serverDomain = bundle.getString("com.mrepol742.webvium.SERVER.DOMAIN");
-        String serverPath = bundle.getString("com.mrepol742.webvium.SERVER.PATH");
-
-        String location = "https://github.com/" + gitUsername + "/" + gitRepository + "/blob/" + gitBranch + "/" + gitPath;
-        String location1 = "https://" + serverDomain + "/" + serverPath;
-
-        editor.putString(TEMP_UPDATE_URL, Base64.encode(location + "/update_url.txt")); // update
-        editor.putString(TEMP_UPDATE_VERSION, Base64.encode(location + "/update_version>1.2.txt")); // update version
-        editor.putString(TEMP_NOTIFICATION_DATA, Base64.encode(location + "/notification_data.txt")); // notification url
-        editor.putString(TEMP_HEADERS, Base64.encode(location1 + "/headers.php")); // Headers
-        editor.putString(TEMP_HEADERS_1, Base64.encode(location1 + "/headers1.php")); // Headers version 2
-        editor.putString(TEMP_IP_ADDRESS, Base64.encode(location1 + "/ipaddress.php")); // IP Address
-        editor.putString(TEMP_LINKS, Base64.encode(location1 + "/links.php")); //LINKS
-        editor.putString(TEMP_META_TAGS, Base64.encode(location1 + "/metatag.php")); //Meta tags
-        editor.putString(TEMP_USER_AGENT, Base64.encode(location1 + "/useragent.php")); //useragent
-        editor.putString(TEMP_SEARCH, "aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS9TZWFyY2gvaW5kZXguaHRtbA"); // search
-        editor.apply();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -236,17 +170,19 @@ public class WELC extends BaseActivity {
                 .addOnScrollChangedListener(() -> {
                     if (sv.getChildAt(0).getBottom()
                             <= (sv.getHeight() + sv.getScrollY())) {
-                         com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-                        bn.setText(getString(R.string.n25));
-                        bn.setBackgroundResource(R.drawable.c10);
-                        bn.setOnClickListener(view -> {
-                            fl.removeView(c);
-                            a3();
-                            SharedPreferences sp = getSharedPreferences("ag233", 0);
-                            SharedPreferences.Editor editor = sp.edit();
-                            editor.putLong("ag233", new Date().getTime());
-                            editor.apply();
-                        });
+                        if (!bn.getText().toString().equals(getString(R.string.n25))) {
+                            com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+                            bn.setText(getString(R.string.n25));
+                            bn.setBackgroundResource(R.drawable.c10);
+                            bn.setOnClickListener(view -> {
+                                fl.removeView(c);
+                                a3();
+                                SharedPreferences sp = getSharedPreferences("ag233", 0);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putLong("ag233", new Date().getTime());
+                                editor.apply();
+                            });
+                        }
                     }
                 });
         sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
@@ -280,20 +216,20 @@ public class WELC extends BaseActivity {
                 .addOnScrollChangedListener(() -> {
                     if (sv.getChildAt(0).getBottom()
                             <= (sv.getHeight() + sv.getScrollY())) {
-                        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-                        bn.setText(getString(R.string.n25));
-                        bn.setBackgroundResource(R.drawable.c10);
-                        bn.setOnClickListener(view -> {
-                            fl.removeView(c);
-                            l3();
-                            l6();
-                            SharedPreferences sp = getSharedPreferences("ag233", 0);
-                            SharedPreferences.Editor editor = sp.edit();
-                            editor.putLong("ag466", new Date().getTime());
-                            editor.putBoolean("aaa", true);
-                            editor.apply();
-                        });
-
+                        if (!bn.getText().toString().equals(getString(R.string.n25))) {
+                            com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
+                            bn.setText(getString(R.string.n25));
+                            bn.setBackgroundResource(R.drawable.c10);
+                            bn.setOnClickListener(view -> {
+                                fl.removeView(c);
+                                l3();
+                                l6();
+                                SharedPreferences sp = getSharedPreferences("ag233", 0);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putLong("ag466", new Date().getTime());
+                                editor.apply();
+                            });
+                        }
                     }
                 });
         sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
@@ -304,12 +240,7 @@ public class WELC extends BaseActivity {
     }
 
     private void l3() {
-        try {
-            a();
-        } catch (Exception en) {
-            throw new SecurityException();
-        }
-        SharedPreferences a5 = getSharedPreferences("ddnrr2", 0);
+        SharedPreferences a5 = getSharedPreferences(WELC.INIT, 0);
         SharedPreferences.Editor b5 = a5.edit();
         b5.putInt("noid", 275);
         b5.apply();
@@ -328,17 +259,9 @@ public class WELC extends BaseActivity {
         PendingIntent it1 = PendingIntent.getService(this, 0, new Intent(this, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it1);
         finish();
-        Intent intent = new Intent(this, UPDA.class);
-        intent.putExtra("sta", "non");
-        startService(intent);
-        Intent intent2 = new Intent(this, NOTI.class);
-        intent2.putExtra("sta", "non");
-        startService(intent2);
+        Intents.b(this, UPDA.class);
+        Intents.b(this, NOTI.class);
         overridePendingTransition(R.anim.f, R.anim.b);
-        if (bn1) {
-            Intent intent44 = new Intent(this, EXPI.class);
-            startActivity(intent44);
-        }
     }
 
     private void l6() {
@@ -379,20 +302,16 @@ public class WELC extends BaseActivity {
         public void onFinish() {
             WELC.this.rl.setVisibility(View.GONE);
             SharedPreferences sp = getSharedPreferences("ag233", 0);
-            if ( !sp.getBoolean("aaa", false)) {
-                WELC.this.a2();
-            } else {
+            if (sp.getLong("ag233", 0) != 0 && sp.getLong("ag466", 0) != 0) {
                 l3();
-                l6();
+            } else {
+                WELC.this.a2();
             }
-            WELC.this.bn = true;
             if (!a221().getBoolean("autoUpdate", false)) {
                 ll.setBackgroundColor(Resources.getColor(WELC.this, R.color.b));
             } else {
                 ll.setBackgroundColor(Resources.getColor(WELC.this, R.color.n));
             }
-            cop.setVisibility(View.GONE);
-
         }
     }
 }

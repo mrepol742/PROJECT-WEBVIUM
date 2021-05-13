@@ -20,7 +20,6 @@ package com.mrepol742.webvium.util;
 import android.net.Uri;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.os.StrictMode;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -210,6 +209,6 @@ public class Stream {
         } catch (Exception ex) {
             Log.a(ex.getClass().getName());
         }
-        return Integer.parseInt("742");
+        return Integer.parseInt("0");
     }
 }

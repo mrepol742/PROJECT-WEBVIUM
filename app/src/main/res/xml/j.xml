@@ -26,8 +26,8 @@
     </com.mrepol742.webvium.PREF0>
     <com.mrepol742.webvium.PREF0 a:title="@string/k1">
         <com.mrepol742.webvium.SWIT
-            a:defaultValue="true"
-            a:key="blockSV"
+            a:defaultValue="false"
+            a:key="blocksv"
             a:summary="@string/s27"
             a:title="@string/c20" />
         <com.mrepol742.webvium.LIST

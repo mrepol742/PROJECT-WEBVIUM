@@ -18,7 +18,6 @@
 package com.mrepol742.webvium;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -26,7 +25,7 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.util.Log;
 
 public class EXCE extends BaseActivity {
-    String[] exceptionType = {
+    final String[] exceptionType = {
             "StringIndexOutOfBoundsException",
             "IndexOutOfBoundsException",
             "ArithmeticException",
@@ -34,7 +33,7 @@ public class EXCE extends BaseActivity {
             "ActivityNotFoundException"
     };
 
-    String[] errMessage = {
+    final String[] errMessage = {
             "Invalid string operation\n",
             "Invalid list operation\n",
             "Invalid arithmetical operation\n",

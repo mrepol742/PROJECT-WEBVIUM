@@ -205,7 +205,7 @@ public class HIST extends BaseActivity {
         }
         int f = Resources.getColor(this, R.color.c);
         int g = Resources.getColor(this, R.color.b);
-        if (a221().getBoolean("blockSV", true)) {
+        if (a221().getBoolean("blocksv", false)) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);

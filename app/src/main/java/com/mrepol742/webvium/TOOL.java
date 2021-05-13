@@ -49,7 +49,6 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.os.StrictMode;
 import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;

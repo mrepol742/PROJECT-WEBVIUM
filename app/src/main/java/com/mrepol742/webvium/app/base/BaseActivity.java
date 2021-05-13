@@ -32,7 +32,6 @@ import android.view.ViewGroup;
 
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.os.StrictMode;
 import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.FontCache;
 import com.mrepol742.webvium.widget.Toast;
@@ -60,16 +59,6 @@ public class BaseActivity extends Activity {
         if (a221().getBoolean("qwe73", false)) {
             System.gc();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     public SharedPreferences a221() {

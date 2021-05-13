@@ -19,8 +19,6 @@ package com.mrepol742.webvium.content;
 
 import android.content.IntentFilter;
 
-import com.mrepol742.webvium.util.Log;
-
 public class IntentsFilter extends IntentFilter {
     public IntentsFilter() {
     }

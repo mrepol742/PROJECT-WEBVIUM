@@ -52,83 +52,71 @@ public class UPDA extends MainService {
 
     @Override
     public int onStartCommand(Intent a, int c, int d) {
-        if (Connectivity.isThereAnyInternetConnection(this)) {
-            if (a.getStringExtra("sta") == null || a.getStringExtra("sta").isEmpty())
-            s1();
+        if (!Connectivity.isThereAnyInternetConnection(this)) {
+            Runnable runnable = () -> {
+                try {
+                    int b = Integer.parseInt(Package.e(this).replaceAll("\\.", ""));
+                    int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/update_version>1.2.txt?raw=true");
+                    if (newUpdate > b) {
+                        MainNotification.b(this, "g", getString(R.string.z2));
+                        android.app.Notification.Builder m = Notifications.a(this, "g");
+                        m.setSmallIcon(R.drawable.j);
+                        android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
+                        bigText.bigText(getString(R.string.x12));
+                        bigText.setBigContentTitle(getString(R.string.x11));
+                        bigText.setSummaryText(Package.c());
+                        m.setContentTitle(getString(R.string.x11));
+                        m.setContentText(getString(R.string.x12));
+                        m.setStyle(bigText);
+                        m.setColor(Resources.getColor(this, R.color.a));
+                        m.setAutoCancel(sp.getBoolean("eac", true));
+                        m.setDefaults(android.app.Notification.DEFAULT_ALL);
+                        if (Build.VERSION.SDK_INT < 26) {
+                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("1x")) {
+                                m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
+                            }
+                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("7x")) {
+                                m.setPriority(android.app.Notification.PRIORITY_HIGH);
+                            }
+                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("30x")) {
+                                m.setPriority(android.app.Notification.PRIORITY_LOW);
+                            }
+                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("60x")) {
+                                m.setPriority(android.app.Notification.PRIORITY_MAX);
+                            }
+                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("120x")) {
+                                m.setPriority(android.app.Notification.PRIORITY_MIN);
+                            }
+                        }
+                        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("1y")) {
 
+                            m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
+                        }
+                        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("7y")) {
+                            m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+                        }
+                        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("30y")) {
+                            m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
+                        }
+                        m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.j));
+                        Intent j = new Intent(this, MAIN.class);
+                        j.putExtra("value", "https://mrepol742.github.io/PROJECT-WEBVIUM");
+                        PendingIntent k = PendingIntent.getActivity(this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
+                        m.setContentIntent(k);
+
+                        PendingIntent pi23 = PendingIntent.getActivity(this, 0, j, PendingIntent.FLAG_UPDATE_CURRENT);
+                        m.addAction(new android.app.Notification.Action(R.drawable.c2, getString(R.string.b32), pi23));
+
+                        NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        nmc.notify(Notifications.c, m.build());
+                    }
+                } catch (PackageManager.NameNotFoundException w) {
+                    Log.a(w);
+                }
+            };
+            new Thread(runnable).start();
         }
-        e();
         s1();
         return super.onStartCommand(a, c, d);
     }
-
-    private void e() {
-        try {
-            SharedPreferences sharedPreferences = getSharedPreferences("b", 0);
-            int b = Integer.parseInt(Package.e(this).replaceAll("\\.", ""));
-            int newUpdate = Stream.i(Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_VERSION, "")) + "?raw=true");
-            if (newUpdate > b) {
-                f(getString(R.string.x11), getString(R.string.x12), Base64.decode(sharedPreferences.getString(WELC.TEMP_UPDATE_URL, "")) + "?raw=true");
-            }
-        } catch (PackageManager.NameNotFoundException w) {
-            Log.a(w);
-        }
-
-    }
-
-    private void f(String title, String text, String url) {
-        MainNotification.b(this, "g", getString(R.string.z2));
-        android.app.Notification.Builder m = Notifications.a(this, "g");
-        m.setSmallIcon(R.drawable.j);
-        android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
-        bigText.bigText(text);
-        bigText.setBigContentTitle(title);
-        bigText.setSummaryText(Package.c());
-        m.setContentTitle(title);
-        m.setContentText(text);
-        m.setStyle(bigText);
-        m.setColor(Resources.getColor(this, R.color.a));
-        m.setAutoCancel(sp.getBoolean("eac", true));
-        m.setDefaults(android.app.Notification.DEFAULT_ALL);
-        if (Build.VERSION.SDK_INT < 26) {
-            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("1x")) {
-                m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
-            }
-            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("7x")) {
-                m.setPriority(android.app.Notification.PRIORITY_HIGH);
-            }
-            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("30x")) {
-                m.setPriority(android.app.Notification.PRIORITY_LOW);
-            }
-            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("60x")) {
-                m.setPriority(android.app.Notification.PRIORITY_MAX);
-            }
-            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("120x")) {
-                m.setPriority(android.app.Notification.PRIORITY_MIN);
-            }
-        }
-        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("1y")) {
-
-            m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
-        }
-        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("7y")) {
-            m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
-        }
-        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("30y")) {
-            m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
-        }
-        m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.j));
-        Intent j = new Intent(this, MAIN.class);
-        j.putExtra("value", url);
-        PendingIntent k = PendingIntent.getActivity(this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
-        m.setContentIntent(k);
-
-        PendingIntent pi23 = PendingIntent.getActivity(this, 0, j, PendingIntent.FLAG_UPDATE_CURRENT);
-        m.addAction(new android.app.Notification.Action(R.drawable.c2, getString(R.string.b32), pi23));
-
-        NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nmc.notify(Notifications.c, m.build());
-    }
-
-
 }

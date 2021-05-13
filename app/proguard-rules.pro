@@ -20,4 +20,4 @@
 -optimizationpasses 5
 -allowaccessmodification
 -overloadaggressively
--renamesourcefileattribute "Copyright-2021-Melvin-Jones-Repol"
+-renamesourcefileattribute ""

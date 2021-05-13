@@ -21,8 +21,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.mrepol742.webvium.util.Log;
-
 public class MainService extends Service {
     @Override
     public IBinder onBind(Intent intent) {

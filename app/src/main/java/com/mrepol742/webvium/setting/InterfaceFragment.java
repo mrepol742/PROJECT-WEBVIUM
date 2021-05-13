@@ -65,15 +65,6 @@ public class InterfaceFragment extends BasePreferenceFragment {
                     d.flush();
                     d.close();
                     BitmapCache.getInstance().b(StorageDirectory.getBackground(getActivity()));
-                    try {
-                        File fe = new File(StorageDirectory.getBackground(getActivity()));
-                        fe.setReadOnly();
-                        Process p;
-                        p = Runtime.getRuntime().exec("attrib +h " + fe.getPath());
-                        p.waitFor();
-                    } catch (Exception en) {
-                        Log.a(en);
-                    }
                     Intent it = new Intent(Intents.ACTION_INVALIDATE);
                     getActivity().sendBroadcast(it);
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.o29)));

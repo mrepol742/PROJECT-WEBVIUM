@@ -21,8 +21,6 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 
-import com.mrepol742.webvium.util.Log;
-
 public class MainWidgetProvider extends AppWidgetProvider {
 
     @Override

@@ -21,8 +21,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.mrepol742.webvium.util.Log;
-
 public class HistoryDatabase extends SQLiteOpenHelper {
 
     public static final String DATA_HISTORY = "qw";
