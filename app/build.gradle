@@ -32,8 +32,15 @@ android {
         versionCode Integer.parseInt(new Date().format("ddMMyyyy"))
         versionName "1.2"
         proguardFiles getDefaultProguardFile(
-                'proguard-android-optimize.txt'),
-                'proguard-rules.pro'
+                'proguard-android-optimize.txt'), 'proguard-rules.pro'
+        applicationVariants.all { variant ->
+            if (variant.getBuildType().isMinifyEnabled()) {
+                variant.assemble.doLast {
+                    variant.mappingFile.renameTo(file(
+                            "${variant.mappingFile.parent}/mapping-${variant.versionName}.txt"))
+                }
+            }
+        }
     }
 
     buildTypes {
@@ -48,6 +55,13 @@ android {
             debuggable false
             minifyEnabled true
             shrinkResources true
+            applicationVariants.all{
+                variant ->
+                    variant.outputs.each {
+                        output ->
+                            output.outputFileName = "Webvium-v" + versionName + ".apk"
+                    }
+            }
         }
     }
 
