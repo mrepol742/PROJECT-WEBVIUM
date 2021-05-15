@@ -20,6 +20,8 @@ package com.mrepol742.webvium;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +45,7 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.content.Resources;
+import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
@@ -60,6 +63,7 @@ public class FEED extends BaseActivity {
     private ImageView iv;
     private AutoCompleteTextView act;
     private EditText et;
+    private String sg;
 
 
     @Override
@@ -198,12 +202,18 @@ public class FEED extends BaseActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     public void c(final String url, final String tmp) {
-        final String a = tmp.replaceAll("\n", "<br>");
         if (b == null) {
             b = new MainWebView(this);
             rl.addView(b);
             WebSettings ws = b.getSettings();
             ws.setJavaScriptEnabled(true);
+            ws.setDomStorageEnabled(true);
+            ws.setDatabaseEnabled(true);
+            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            if (Build.VERSION.SDK_INT < 30) {
+                ws.setAppCacheEnabled(true);
+                ws.setAppCachePath(StorageDirectory.getCacheDir(this).toString());
+            }
             b.setWebChromeClient(new WebChromeClient() {
 
                 @Override
@@ -230,15 +240,26 @@ public class FEED extends BaseActivity {
             b.setWebViewClient(new MainWebViewClient() {
 
                 @Override
+                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                    Toast.a(FEED.this, "Feedback sending....");
+                }
+
+                @Override
                 public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
                     if (Connectivity.isThereAnyInternetConnection(FEED.this)) {
                         Toast.c(FEED.this, getString(R.string.x38));
                     }
                 }
+
+                @Override
+                public boolean url(WebView a, String b) {
+                    Toast.a(FEED.this, "Url was reloaded");
+                    return false;
+                }
             });
         }
         try {
-            b.loadUrl("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/Feed.html" +
+            StringBuilder sg2 = new StringBuilder("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/Feed.html" +
                     "?a=" + getString(R.string.firebase_apiKey) +
                     "&b=" + getString(R.string.firebase_authDomain) +
                     "&c=" + getString(R.string.firebase_projectId) +
@@ -247,10 +268,27 @@ public class FEED extends BaseActivity {
                     "&f=" + getString(R.string.firebase_appId) +
                     "&g=" + getString(R.string.firebase_measurementId) +
                     "&h=" + URLEncoder.encode(url, "UTF-8") +
-                    "&i=" + URLEncoder.encode(a, "UTF-8"));
+                    "&i=" + URLEncoder.encode(tmp, "UTF-8"));
+            if (sg != null) {
+                sg2.append("&j=").append(URLEncoder.encode(sg, "UTF-8"));
+            }
+            b.loadUrl(sg2.toString());
+
         } catch (UnsupportedEncodingException e) {
             Log.a(e);
             Toast.b(FEED.this, getString(R.string.y68));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent a = getIntent();
+        sg = a.getStringExtra("webvium");
+        a.removeExtra("webvium");
+        a.replaceExtras(new Bundle());
+        a.setAction("");
+        a.setData(null);
+        a.setFlags(0);
     }
 }

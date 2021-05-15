@@ -69,8 +69,11 @@ public class EXCE extends BaseActivity {
         AlertDialog.Builder bld = new AlertDialog.Builder(this);
         bld.setTitle(getString(R.string.y65));
         bld.setMessage(madeErrMsg);
+        String temp = madeErrMsg;
         bld.setPositiveButton(getString(R.string.y67), (dialog, which) -> {
-            startActivity(new Intent(this, FEED.class));
+            Intent it = new Intent(this, FEED.class);
+            it.putExtra("webvium", temp);
+            startActivity(it);
             dialog.dismiss();
         });
         bld.setNeutralButton(getString(R.string.y66), (dialog, which) -> {

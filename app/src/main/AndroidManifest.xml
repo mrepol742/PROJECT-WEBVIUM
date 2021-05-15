@@ -90,13 +90,12 @@
         a:allowBackup="false"
         a:appCategory="productivity"
         a:hasFragileUserData="true"
-        a:icon="@mipmap/c"
+        a:icon="@mipmap/c" a:theme="@style/f"
         a:label="@string/p20"
         a:largeHeap="true"
         a:manageSpaceActivity="com.mrepol742.webvium.MANG"
         a:roundIcon="@mipmap/c"
         a:supportsRtl="true"
-        a:theme="@style/f"
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
 

@@ -161,6 +161,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -2408,7 +2409,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c.flush();
             c.close();
             c8(getString(R.string.w16));
-        } catch (Exception e) {
+        } catch (IOException e) {
             Log.a(e);
             c7(getString(R.string.w14));
         }
@@ -4902,52 +4903,53 @@ public class MAIN extends MainBaseActivity implements Format {
 
     @Override
     protected void onNewIntent(Intent a) {
-        try {
             String sg = a.getStringExtra("webvium");
             String sg0 = a.getStringExtra("value");
             String sg1 = a.getAction();
             String sg12 = a.getDataString();
-            String pe;
-            try {
-                pe = URLDecoder.decode(sg12, "UTF-8");
-            } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                Log.a(unsupportedEncodingException);
-                pe = sg12;
-            }
-            File fe2 = new File(pe.replace("file://", ""));
-            if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile() ) {
-                Runnable re = () -> {
-                    try {
-                        String pe1;
+            if (sg12 != null) {
+                String pe;
+                try {
+                    pe = URLDecoder.decode(sg12, "UTF-8");
+                } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                    Log.a(unsupportedEncodingException);
+                    pe = sg12;
+                }
+                File fe2 = new File(pe.replace("file://", ""));
+                if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile()) {
+                    Runnable re = () -> {
                         try {
-                            pe1 = URLDecoder.decode(sg12, "UTF-8");
-                        } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                            Log.a(unsupportedEncodingException);
-                            pe1 = sg12;
-                        }
-                        java.io.File fe = new java.io.File(pe1.replace("file://", ""));
-                        FileReader fr = new FileReader(fe);
-                        BufferedReader br = new BufferedReader(fr);
-                        StringBuilder sb = new StringBuilder();
-                        String ln;
-                        while ((ln = br.readLine()) != null) {
-                            sb.append(ln);
-                            sb.append("<br>");
-                        }
-                        fr.close();
-                        br.close();
-                        String[] sgdd = sb.toString().split("<br>");
-                        for (String dt : sgdd) {
-                            if (dt.startsWith("URL=")) {
-                                runOnUiThread(() -> c3(dt.replace("URL=", "")));
-                                return;
+                            String pe1;
+                            try {
+                                pe1 = URLDecoder.decode(sg12, "UTF-8");
+                            } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                                Log.a(unsupportedEncodingException);
+                                pe1 = sg12;
                             }
+                            java.io.File fe = new java.io.File(pe1.replace("file://", ""));
+                            FileReader fr = new FileReader(fe);
+                            BufferedReader br = new BufferedReader(fr);
+                            StringBuilder sb = new StringBuilder();
+                            String ln;
+                            while ((ln = br.readLine()) != null) {
+                                sb.append(ln);
+                                sb.append("<br>");
+                            }
+                            fr.close();
+                            br.close();
+                            String[] sgdd = sb.toString().split("<br>");
+                            for (String dt : sgdd) {
+                                if (dt.startsWith("URL=")) {
+                                    runOnUiThread(() -> c3(dt.replace("URL=", "")));
+                                    return;
+                                }
+                            }
+                        } catch (Exception en3) {
+                            Log.a(en3);
                         }
-                    } catch (Exception en3) {
-                        Log.a(en3);
-                    }
-                };
-                new Thread(re).start();
+                    };
+                    new Thread(re).start();
+                }
             }
             String queryq = a.getStringExtra("b");
             if (queryq != null) {
@@ -5007,9 +5009,6 @@ public class MAIN extends MainBaseActivity implements Format {
             a.setAction("");
             a.setData(null);
             a.setFlags(0);
-        } catch (Exception ex) {
-            Log.a(ex);
-        }
     }
 
     protected void onNewIntent1(Intent a) {
