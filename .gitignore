@@ -37,12 +37,6 @@ captures/
 # Android Studio assets folder
 assets/
 
-# Android Studio proguard files
-app/primary-dictionary.txt
-app/secondary-dictionary.txt
-app/tertiary-dictionary.txt
-app/quaternary-dictionary.txt
-
 # Webvium
 app/src/main/c-playstore.png
 app/src/main/java/com/mrepol742/webvium/A
