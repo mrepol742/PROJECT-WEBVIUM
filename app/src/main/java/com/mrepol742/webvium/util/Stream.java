@@ -55,7 +55,7 @@ public class Stream {
                     c.isMCSiteLocal(),
                     c.isMulticastAddress());
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return problem;
     }
@@ -67,7 +67,7 @@ public class Stream {
             InetAddress ia = InetAddress.getLocalHost();
             return ia.getHostAddress();
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return problem;
     }
@@ -77,7 +77,7 @@ public class Stream {
             InetAddress c = InetAddress.getByName(Uri.parse(url).getHost());
             return c.getHostAddress();
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return problem;
     }
@@ -99,7 +99,7 @@ public class Stream {
             }
             return sb0.toString().replaceAll("\\[", "").replaceAll("]", "");
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return problem;
     }
@@ -108,7 +108,7 @@ public class Stream {
         try {
             new URL(a).openConnection();
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
     }
 
@@ -145,7 +145,7 @@ public class Stream {
                 return cd.toString();
             }
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return problem;
     }
@@ -168,10 +168,10 @@ public class Stream {
             try {
                 return Integer.parseInt(sb.toString());
             } catch (NumberFormatException nfe) {
-                Log.a(nfe);
+                nfe.printStackTrace();
             }
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return 0;
     }
@@ -181,7 +181,7 @@ public class Stream {
             InetAddress ia = InetAddress.getLocalHost();
             return ia.getHostName();
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return problem;
     }
@@ -204,10 +204,10 @@ public class Stream {
             try {
                 return Integer.parseInt(sb.toString());
             } catch (NumberFormatException nfe) {
-                Log.a(nfe);
+                nfe.printStackTrace();
             }
         } catch (Exception ex) {
-            Log.a(ex.getClass().getName());
+            ex.printStackTrace();
         }
         return Integer.parseInt("0");
     }

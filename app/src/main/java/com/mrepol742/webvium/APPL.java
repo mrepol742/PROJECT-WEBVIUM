@@ -28,9 +28,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Hardware;
-import com.mrepol742.webvium.widget.Toast;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -75,7 +73,7 @@ public class APPL extends Application {
                 }
             }
         } catch (Exception ex5) {
-            Log.a(ex5);
+            ex5.printStackTrace();
         }
     }
 

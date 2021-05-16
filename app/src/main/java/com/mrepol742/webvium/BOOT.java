@@ -29,7 +29,6 @@ import android.preference.PreferenceManager;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.util.Log;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -60,7 +59,7 @@ public class BOOT extends MainReceiver {
                     }
                     cursor.close();
                 } catch (Exception n) {
-                    Log.a(n);
+                    n.printStackTrace();
                 }
                 if (sp.getBoolean("qckS", false)) {
                     Intents.b(a, QUIC.class);
@@ -81,7 +80,7 @@ public class BOOT extends MainReceiver {
                 }
             }
         } catch (Exception en) {
-            Log.a(en);
+            en.printStackTrace();
         }
     }
 }

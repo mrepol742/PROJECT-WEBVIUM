@@ -72,7 +72,7 @@ public class SettingFragment extends BaseFragment {
             R.string.f16,
             R.string.t19
     };
-    private static int[] header1 = {
+    private static final int[] header1 = {
             R.string.a,
             R.string.o10,
             R.string.e,

@@ -41,7 +41,6 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.Vibrate;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -107,7 +106,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 try {
                     tv.setText(a(it2));
                 } catch (NoSuchObjectToReturn l1) {
-                    Log.a(l1);
+                   l1.printStackTrace();
                 }
             }
 
@@ -248,7 +247,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             try {
                 b(sb.toString());
             } catch (NoSuchObjectToReturn l2) {
-                Log.a(l2);
+                l2.printStackTrace();
             }
         } else if (id == R.id.i9) {
             String sg5 = tv1.getText().toString();
@@ -317,7 +316,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             try {
                 b(sb.toString());
             } catch (NoSuchObjectToReturn l2) {
-                Log.a(l2);
+                l2.printStackTrace();
             }
             return true;
         } else if (id == R.id.i9) {

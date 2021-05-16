@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.util.Log;
 
 public class Intents {
 
@@ -44,7 +43,7 @@ public class Intents {
             c.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(c);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -53,7 +52,7 @@ public class Intents {
             Intent c = new Intent(a, b);
             a.startService(c);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -69,7 +68,7 @@ public class Intents {
                 return true;
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
         return false;
     }
@@ -82,7 +81,7 @@ public class Intents {
             e.setResult(Activity.RESULT_OK, d);
 
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -93,7 +92,7 @@ public class Intents {
             d.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(d);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -104,7 +103,7 @@ public class Intents {
             d.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(d);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -113,7 +112,7 @@ public class Intents {
             Intent e = new Intent(b, c);
             b.startActivityForResult(e, d);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -127,7 +126,7 @@ public class Intents {
                 return true;
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
         return false;
     }
@@ -138,7 +137,7 @@ public class Intents {
             e.putExtra(h, i);
             b.startActivityForResult(e, d);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -148,7 +147,7 @@ public class Intents {
             c.setPackage(Package.b());
             a.stopService(c);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -161,7 +160,7 @@ public class Intents {
                 return true;
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
         return false;
     }
@@ -173,7 +172,7 @@ public class Intents {
             c.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(c);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -184,7 +183,7 @@ public class Intents {
             c.setData(data);
             a.startActivity(c);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

@@ -35,7 +35,6 @@ import com.mrepol742.webvium.app.NoSuchItemToGet;
 import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.util.Log;
 
 import java.util.ArrayList;
 
@@ -99,7 +98,7 @@ public class HistoryAdapter extends MainBaseAdapter {
             }
             return ssb;
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
         throw new NoSuchSpannableStringBuilderToReturn();
     }

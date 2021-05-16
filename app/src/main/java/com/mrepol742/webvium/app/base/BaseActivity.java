@@ -32,7 +32,6 @@ import android.view.ViewGroup;
 
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.FontCache;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -122,7 +121,7 @@ public class BaseActivity extends Activity {
             Toast.b(this, getString(R.string.q26));
         } catch (Exception et) {
             Toast.e(this, getString(R.string.a36), 2);
-            Log.a(et);
+            et.printStackTrace();
         }
     }
 

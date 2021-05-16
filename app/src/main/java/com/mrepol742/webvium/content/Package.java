@@ -53,7 +53,8 @@ public class Package {
         try {
             PackageInfo packageInfo = a.getPackageManager().getPackageInfo(b, it);
             return packageInfo.signatures[0].toByteArray();
-        } catch (NameNotFoundException ignored) {
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
         }
         return null;
     }

@@ -25,8 +25,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.util.Log;
-
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
@@ -71,7 +69,7 @@ public class MainNotification {
             NotificationManager nm = ctx.getSystemService(NotificationManager.class);
             nm.createNotificationChannel(nc);
         } catch (Exception ec) {
-            Log.a(ec);
+            ec.printStackTrace();
         }
     }
 
@@ -86,7 +84,7 @@ public class MainNotification {
             NotificationManager nm = c.getSystemService(NotificationManager.class);
             nm.createNotificationChannel(nc);
         } catch (Exception ec) {
-            Log.a(ec);
+            ec.printStackTrace();
         }
     }
 

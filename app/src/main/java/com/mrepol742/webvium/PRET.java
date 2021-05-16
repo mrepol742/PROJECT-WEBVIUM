@@ -36,7 +36,6 @@ import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 // @Class Pretend
@@ -93,7 +92,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             try {
                 tv4.setText(n(i));
             } catch (NoSuchObjectToReturn l1) {
-                Log.a(l1);
+                l1.printStackTrace();
             }
             if (i == R.id.n2) {
                 tv4.setBackgroundResource(R.drawable.a27);
@@ -127,7 +126,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
                 PRET.this.b(s);
                 tv.setText("s");
             } catch (NoSuchStringToReturn l2) {
-                Log.a(l2);
+               l2.printStackTrace();
             }
         });
     }

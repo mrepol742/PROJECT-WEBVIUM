@@ -58,7 +58,6 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.search.SearchAdapter;
 import com.mrepol742.webvium.search.SearchDatabase;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.cache.BitmapCache;
@@ -752,7 +751,7 @@ public class SEAR extends MainBaseActivity {
                         Toast.c(this, getString(R.string.t20));
                     }
                 } catch (Exception ex) {
-                    Log.a(ex);
+                    ex.printStackTrace();
                     Toast.c(this, getString(R.string.t20));
                 }
             }
@@ -761,7 +760,7 @@ public class SEAR extends MainBaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

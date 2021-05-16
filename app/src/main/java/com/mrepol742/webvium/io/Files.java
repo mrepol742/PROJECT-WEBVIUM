@@ -18,7 +18,6 @@
 package com.mrepol742.webvium.io;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -105,8 +104,8 @@ public class Files {
             fr.close();
             br.close();
             return sb.toString();
-        } catch (Exception ignored) {
-
+        } catch (Exception exception) {
+exception.printStackTrace();
         }
         return null;
     }
@@ -123,7 +122,7 @@ public class Files {
             }
             return true;
         } catch (Exception exception) {
-            Log.a(exception);
+            exception.printStackTrace();
         }
         return false;
     }
@@ -147,13 +146,13 @@ public class Files {
                 d.flush();
                 d.close();
                 if (readOnly) {
-                    fe2.setReadOnly();
+                    boolean bn = fe2.setReadOnly();
                 }
                 return true;
             }
             return false;
         } catch (Exception exception) {
-            Log.a(exception);
+            exception.printStackTrace();
         }
         return false;
     }

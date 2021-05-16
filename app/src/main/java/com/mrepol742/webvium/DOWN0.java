@@ -43,7 +43,6 @@ import com.mrepol742.webvium.download.DownloadServiceDataModel;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.Objects;
@@ -265,7 +264,7 @@ public class DOWN0 extends MainService {
             }
             cursor.close();
         } catch (Exception en) {
-            Log.a(en);
+            en.printStackTrace();
         }
     }
 
@@ -371,7 +370,7 @@ public class DOWN0 extends MainService {
                     Intents.a(a, DOWN.class);
                 }
             } catch (Exception ex) {
-                Log.a(ex);
+                ex.printStackTrace();
             }
         }
     }

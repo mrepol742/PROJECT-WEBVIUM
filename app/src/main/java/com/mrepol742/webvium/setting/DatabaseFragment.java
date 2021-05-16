@@ -53,7 +53,6 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Format;
 import com.mrepol742.webvium.widget.Toast;
@@ -141,7 +140,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 return true;
             });
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -401,7 +400,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                     getActivity().runOnUiThread(() -> g(getString(R.string.b25)));
                 }
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
                 getActivity().runOnUiThread(() -> d(getString(R.string.b26)));
             }
         };

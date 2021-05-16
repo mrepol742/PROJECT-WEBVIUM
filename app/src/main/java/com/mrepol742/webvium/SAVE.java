@@ -34,7 +34,6 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -59,8 +58,7 @@ public class SAVE extends MainService {
                     URL b5 = new URL(b);
                     File a2 = new File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
                     if (!a2.exists()) {
-                        boolean bn = a2.createNewFile();
-                        if (bn) {
+                        if (a2.createNewFile()) {
                             BufferedReader c = new BufferedReader(new InputStreamReader(b5.openStream()));
                             FileWriter fr = new FileWriter(a2, true);
                             BufferedWriter br = new BufferedWriter(fr);
@@ -74,7 +72,7 @@ public class SAVE extends MainService {
                         }
                     }
                 } catch (IOException mu) {
-                    Log.a(mu);
+                    mu.printStackTrace();
                 }
             };
             new Thread(runnable).start();

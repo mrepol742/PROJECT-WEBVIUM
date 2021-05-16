@@ -49,7 +49,6 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Stream;
@@ -242,9 +241,9 @@ public class TOOL extends BaseActivity {
                 }
             } catch (FileNotFoundException a) {
                 runOnUiThread(() -> Permission.check(TOOL.this, Permission.STORAGE, 1));
-                Log.a(a);
+                a.printStackTrace();
             } catch (IOException ie) {
-                Log.a(ie);
+                ie.printStackTrace();
                 runOnUiThread(() -> g(getString(R.string.b34)));
             }
         };
@@ -425,7 +424,7 @@ public class TOOL extends BaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 }

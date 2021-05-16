@@ -32,7 +32,6 @@ import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.os.CountDownTimer;
-import com.mrepol742.webvium.util.Log;
 
 @Development
 public class ExperimentalFragment extends BasePreferenceFragment {
@@ -59,7 +58,7 @@ public class ExperimentalFragment extends BasePreferenceFragment {
             });
 
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

@@ -27,7 +27,6 @@ import android.provider.Settings;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -52,7 +51,7 @@ public class DownloadFragment extends BasePreferenceFragment {
                 });
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

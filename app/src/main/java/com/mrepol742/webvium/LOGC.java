@@ -29,7 +29,6 @@ import android.widget.Toolbar;
 import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.io.BufferedReader;
@@ -89,7 +88,7 @@ public class LOGC extends BaseActivity {
             });
 
         } catch (Exception rx) {
-            Log.a(rx);
+            rx.printStackTrace();
         }
     }
 
@@ -116,7 +115,7 @@ public class LOGC extends BaseActivity {
                     sv.post(() -> sv.fullScroll(View.FOCUS_DOWN));
                 });
             } catch (IOException e1) {
-                Log.a(e1);
+               e1.printStackTrace();
             }
         };
         new Thread(e).start();

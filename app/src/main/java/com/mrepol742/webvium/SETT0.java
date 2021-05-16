@@ -38,7 +38,6 @@ import com.mrepol742.webvium.setting.AboutFragment;
 import com.mrepol742.webvium.setting.DatabaseFragment;
 import com.mrepol742.webvium.setting.FeatureFragment;
 import com.mrepol742.webvium.setting.SettingFragment;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.view.Animation;
@@ -88,7 +87,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.h3));
 
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
             Animation.animate(this, R.anim.i, tv);
             as(R.id.m10, new SettingFragment());
@@ -105,7 +104,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.y28));
 
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
             as(R.id.m10, new FeatureFragment());
             id = "a3";
@@ -121,7 +120,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.t21));
 
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
             as(R.id.m10, new DatabaseFragment());
             id = "a2";
@@ -137,7 +136,7 @@ public class SETT0 extends BaseActivity {
                 b.setText(getString(R.string.l));
 
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
             as(R.id.m10, new AboutFragment());
             id = "a1";

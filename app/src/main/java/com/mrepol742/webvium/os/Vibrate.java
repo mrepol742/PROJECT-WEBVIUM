@@ -26,7 +26,6 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.util.Log;
 
 import java.util.Objects;
 
@@ -64,7 +63,7 @@ public class Vibrate {
                 v.vibrate(b);
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

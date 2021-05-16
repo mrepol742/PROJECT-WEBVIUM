@@ -24,8 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,7 +39,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
@@ -49,9 +46,7 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.cache.FontCache;
 
 import java.io.FileOutputStream;
@@ -111,7 +106,7 @@ public class WELC extends BaseActivity {
                 d.close();
                 fos.close();
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
         };
         new Thread(re).start();
@@ -278,7 +273,7 @@ public class WELC extends BaseActivity {
             f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
             sendBroadcast(f);
         } catch (Exception et) {
-            Log.a(et);
+            et.printStackTrace();
         }
     }
 

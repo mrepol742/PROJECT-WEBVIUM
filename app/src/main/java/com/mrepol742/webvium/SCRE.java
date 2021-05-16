@@ -46,7 +46,6 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.view.Animation;
 
 // @Class Screenshot
@@ -186,7 +185,7 @@ public class SCRE extends BaseActivity {
             a.setPositiveButton("Close", (a1, intetg) -> a1.dismiss());
             a.create().show();
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -224,7 +223,7 @@ public class SCRE extends BaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 }

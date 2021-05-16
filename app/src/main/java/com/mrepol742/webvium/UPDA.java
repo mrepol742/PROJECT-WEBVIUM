@@ -33,8 +33,6 @@ import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.util.Log;
-import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 
 import java.util.Objects;
@@ -111,7 +109,7 @@ public class UPDA extends MainService {
                         nmc.notify(Notifications.c, m.build());
                     }
                 } catch (PackageManager.NameNotFoundException w) {
-                    Log.a(w);
+                    w.printStackTrace();
                 }
             };
             new Thread(runnable).start();

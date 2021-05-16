@@ -46,7 +46,6 @@ import com.mrepol742.webvium.setting.SearchFragment;
 import com.mrepol742.webvium.setting.SecurityLockFragment;
 import com.mrepol742.webvium.setting.ToolFragment;
 import com.mrepol742.webvium.setting.VideoFragment;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 
 import java.util.Objects;
@@ -208,7 +207,7 @@ public class SETT extends BaseActivity {
             a.setData(null);
             a.setFlags(0);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

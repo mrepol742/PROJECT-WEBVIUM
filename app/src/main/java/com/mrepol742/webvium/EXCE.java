@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.util.Log;
 
 public class EXCE extends BaseActivity {
     final String[] exceptionType = {
@@ -63,7 +62,7 @@ public class EXCE extends BaseActivity {
                 }
                 if(madeErrMsg.isEmpty()) madeErrMsg = errMsg;
             } catch (Exception e){
-                Log.a(e);
+                e.printStackTrace();
             }
         }
         AlertDialog.Builder bld = new AlertDialog.Builder(this);

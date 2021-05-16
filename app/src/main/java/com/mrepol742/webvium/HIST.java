@@ -48,7 +48,6 @@ import com.mrepol742.webvium.history.HistoryAdapter;
 import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Stream;
@@ -152,7 +151,7 @@ public class HIST extends BaseActivity {
                     break;
             }
         } catch (NoSuchItemToGet l4) {
-            Log.a(l4);
+            l4.printStackTrace();
         }
         return false;
     };
@@ -237,7 +236,7 @@ public class HIST extends BaseActivity {
                 try {
                     Intents.d("value", w15.c(c).ls0, HIST.this);
                 } catch (NoSuchItemToGet a34) {
-                    Log.a(a34);
+                    a34.printStackTrace();
                 }
                 finish();
             });

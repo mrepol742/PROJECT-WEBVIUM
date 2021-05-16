@@ -28,11 +28,9 @@ import com.mrepol742.webvium.VIDE;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.widget.Toast;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -65,7 +63,7 @@ public class VideoFragment extends BasePreferenceFragment {
                 return true;
             });
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -91,7 +89,7 @@ public class VideoFragment extends BasePreferenceFragment {
                     BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(getActivity()));
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.h21)));
                 } catch (Exception en) {
-                    Log.a(en);
+                    en.printStackTrace();
                     getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.p30)));
                 }
             };

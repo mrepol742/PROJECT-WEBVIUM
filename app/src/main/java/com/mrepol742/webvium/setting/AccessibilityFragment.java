@@ -33,7 +33,6 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.os.CountDownTimer;
-import com.mrepol742.webvium.util.Log;
 
 public class AccessibilityFragment extends BasePreferenceFragment {
 
@@ -55,7 +54,7 @@ public class AccessibilityFragment extends BasePreferenceFragment {
             });
 
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

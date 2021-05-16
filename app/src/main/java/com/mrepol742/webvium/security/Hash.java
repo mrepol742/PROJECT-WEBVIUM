@@ -19,7 +19,6 @@ package com.mrepol742.webvium.security;
 
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.NoSuchStringToReturn;
-import com.mrepol742.webvium.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -46,7 +45,7 @@ public class Hash {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException ne) {
-            Log.a(ne);
+            ne.printStackTrace();
         }
         throw new NoSuchStringToReturn();
     }

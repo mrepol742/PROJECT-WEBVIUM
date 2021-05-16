@@ -48,7 +48,7 @@ public class Zip {
             zos.close();
             return true;
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
         return false;
     }
@@ -82,7 +82,7 @@ public class Zip {
             zos.close();
             return true;
         } catch (IOException ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
         return false;
     }

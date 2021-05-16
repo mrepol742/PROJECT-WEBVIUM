@@ -42,7 +42,6 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.IntentsFilter;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.Objects;
@@ -161,7 +160,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
                 return true;
             });
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 

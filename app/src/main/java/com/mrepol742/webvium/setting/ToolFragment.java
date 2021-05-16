@@ -34,7 +34,6 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -58,7 +57,7 @@ public class ToolFragment extends BasePreferenceFragment {
                 return true;
             });
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -149,7 +148,7 @@ public class ToolFragment extends BasePreferenceFragment {
             try {
                 Files.deleteAll(new java.io.File(a));
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
         };
         new Thread(p15).start();

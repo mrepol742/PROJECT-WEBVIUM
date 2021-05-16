@@ -49,7 +49,6 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.Toast;
 
@@ -275,7 +274,7 @@ public class FEED extends BaseActivity {
             b.loadUrl(sg2.toString());
 
         } catch (UnsupportedEncodingException e) {
-            Log.a(e);
+           e.printStackTrace();
             Toast.b(FEED.this, getString(R.string.y68));
         }
     }

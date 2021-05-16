@@ -413,7 +413,10 @@
     <string name="v18">&lt;b>Message:&lt;/b> %1$s&lt;br>&lt;b>Line:&lt;/b> %2$d&lt;br>&lt;b>Source ID:&lt;/b> %3$s</string>
     <string name="v19">Security Certificate</string>
     <string name="v20">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d&lt;br>&lt;b>Description:&lt;/b> %3$s</string>
-    <string name="w1">It\'s time to take a break. You\'ve browsing for about %1$d minute(s).</string>
+    <plurals name="w1">
+        <item quantity="one">It\'s time to take a break. You\'ve browsing for about %1$d minute.</item>
+        <item quantity="other">It\'s time to take a break. You\'ve browsing for about %1$d minutes</item>
+    </plurals>
     <string name="w2">Reminder</string>
     <string name="w3">Print</string>
     <string name="w4">Location Permission is needed to get your precise location using the GPS and network-based</string>
@@ -672,7 +675,10 @@
     <string name="l39">Notify me</string>
     <string name="l40">Notify you that the webpage was been successfully loaded</string>
     <string name="m22">Webpage Failed Load</string>
-    <string name="m23">&lt;b>%1$s&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %2$s&lt;br/>&lt;b>Middle Name:&lt;/b> %3$s&lt;br/>&lt;b>Last Name:&lt;/b> %4$s&lt;br/>&lt;b>Birthday:&lt;/b> %5$s&lt;br/>&lt;b>Gender:&lt;/b> %6$s&lt;br/>&lt;b>Age:&lt;/b> %7$d&lt;br/>&lt;b>Relationship:&lt;/b> %8$s&lt;br/>&lt;b>Country:&lt;/b> %9$s&lt;br/>&lt;b>Eye Color:&lt;/b> %10$s&lt;br/>&lt;b>Height:&lt;/b> %11$s&lt;br/>&lt;b>Weight:&lt;/b> %12$d Pound(s)&lt;br/>&lt;b>Hobby:&lt;/b> %13$s&lt;br/>&lt;b>Interested in:&lt;/b> %14$s&lt;br/>&lt;b>Religion:&lt;/b> %15$s&lt;br/>&lt;b>Mother Name:&lt;/b> %16$s&lt;br/>&lt;b>Father Name:&lt;/b> %17$s</string>
+    <plurals name="m23">
+        <item quantity="one">&lt;b>%1$s&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %2$s&lt;br/>&lt;b>Middle Name:&lt;/b> %3$s&lt;br/>&lt;b>Last Name:&lt;/b> %4$s&lt;br/>&lt;b>Birthday:&lt;/b> %5$s&lt;br/>&lt;b>Gender:&lt;/b> %6$s&lt;br/>&lt;b>Age:&lt;/b> %7$d&lt;br/>&lt;b>Relationship:&lt;/b> %8$s&lt;br/>&lt;b>Country:&lt;/b> %9$s&lt;br/>&lt;b>Eye Color:&lt;/b> %10$s&lt;br/>&lt;b>Height:&lt;/b> %11$s&lt;br/>&lt;b>Weight:&lt;/b> %12$d Pound&lt;br/>&lt;b>Hobby:&lt;/b> %13$s&lt;br/>&lt;b>Interested in:&lt;/b> %14$s&lt;br/>&lt;b>Religion:&lt;/b> %15$s&lt;br/>&lt;b>Mother Name:&lt;/b> %16$s&lt;br/>&lt;b>Father Name:&lt;/b> %17$s</item>
+        <item quantity="one">&lt;b>%1$s&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %2$s&lt;br/>&lt;b>Middle Name:&lt;/b> %3$s&lt;br/>&lt;b>Last Name:&lt;/b> %4$s&lt;br/>&lt;b>Birthday:&lt;/b> %5$s&lt;br/>&lt;b>Gender:&lt;/b> %6$s&lt;br/>&lt;b>Age:&lt;/b> %7$d&lt;br/>&lt;b>Relationship:&lt;/b> %8$s&lt;br/>&lt;b>Country:&lt;/b> %9$s&lt;br/>&lt;b>Eye Color:&lt;/b> %10$s&lt;br/>&lt;b>Height:&lt;/b> %11$s&lt;br/>&lt;b>Weight:&lt;/b> %12$d Pounds&lt;br/>&lt;b>Hobby:&lt;/b> %13$s&lt;br/>&lt;b>Interested in:&lt;/b> %14$s&lt;br/>&lt;b>Religion:&lt;/b> %15$s&lt;br/>&lt;b>Mother Name:&lt;/b> %16$s&lt;br/>&lt;b>Father Name:&lt;/b> %17$s</item>
+    </plurals>
     <string name="m24">There\'s no Internet Connection</string>
     <string name="m25">The device is in Airplane Mode</string>
     <string name="m28">Set Vibration EffectL</string>
@@ -829,7 +835,6 @@
     <string name="y30">The developers behind this awesome project</string>
     <string name="z21">Failed! An Error Occurred</string>
     <string name="z22">No internet connection detected</string>
-    <string name="z23">Restricted background status is enabled\nClick here to force checking for updates.</string>
     <string name="z24">Checking…</string>
     <string name="z25">This may took a while to complete depends on your internet speed.</string>
     <string name="z26">Version Checked</string>
@@ -889,7 +894,7 @@
     <string name="github.branch">master</string>
     <string name="github.path">/</string>
 
-    <string name="server.domain">domain</string>
-    <string name="server.path">path</string>
+    <string name="server.domain" tools:keep="@string/server_domain">domain</string>
+    <string name="server.path" tools:keep="@string/server_path">path</string>
 
 </resources>

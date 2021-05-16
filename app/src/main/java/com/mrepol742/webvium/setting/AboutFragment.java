@@ -17,7 +17,6 @@
 
 package com.mrepol742.webvium.setting;
 
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -28,13 +27,10 @@ import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.PRIV;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.TERM;
-import com.mrepol742.webvium.WELC;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.util.Log;
-import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 
 import java.text.SimpleDateFormat;
@@ -87,13 +83,13 @@ public class AboutFragment extends BasePreferenceFragment {
                 preference.setTitle(getString(R.string.x56));
                 preference.setSummary(simpleDateFormat.format(new Date(Package.g(getActivity()))));
             } catch (Exception exception) {
-                Log.a(exception);
+                exception.printStackTrace();
                 preference.setSummary(getString(R.string.x58));
             }
 
 
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -118,7 +114,7 @@ public class AboutFragment extends BasePreferenceFragment {
                     });
                 }
             } catch (Exception w) {
-                Log.a(w);
+                w.printStackTrace();
                 getActivity().runOnUiThread(() -> {
                     e.setTitle(getString(R.string.z21));
                     e.setSummary(getString(R.string.z30));

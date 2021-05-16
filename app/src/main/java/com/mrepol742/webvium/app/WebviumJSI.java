@@ -37,7 +37,6 @@ import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.os.Vibrate;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.Objects;
@@ -216,7 +215,7 @@ bigText.bigText(a.getResources().getString(R.string.g29));
                 }
             }
         } catch (Exception c5a) {
-            Log.a(c5a);
+            c5a.printStackTrace();
         }
     }
 

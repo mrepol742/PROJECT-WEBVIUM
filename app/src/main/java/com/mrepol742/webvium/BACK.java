@@ -25,7 +25,6 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.util.Base64;
 
 import java.io.FileInputStream;
@@ -67,11 +66,11 @@ public class BACK extends MainService {
                         }
                     }
                 } catch (Exception e) {
-                    Log.a(e);
+                   e.printStackTrace();
                 }
 
             } catch (Exception e) {
-                Log.a(e);
+                e.printStackTrace();
             }
         };
         new Thread(runnable).start();
@@ -112,7 +111,7 @@ public class BACK extends MainService {
                     }
                 }
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
         };
         new Thread(runnable).start();

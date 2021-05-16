@@ -140,7 +140,6 @@ import com.mrepol742.webvium.permission.PermissionObjectDataModel;
 import com.mrepol742.webvium.search.SearchDatabase;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
@@ -161,7 +160,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -658,7 +656,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             c149();
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
         this.cm1 = CookieManager.getInstance();
         if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
@@ -839,7 +837,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c99();
             c108();
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -857,7 +855,7 @@ public class MAIN extends MainBaseActivity implements Format {
             h.pauseTimers();
             h.onPause();
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -1094,7 +1092,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         spe.apply();
                     }
                 } catch (Exception d4) {
-                    Log.a(d4);
+                   d4.printStackTrace();
                 }
                 a34.dismiss();
             });
@@ -1134,7 +1132,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
             }
         } catch (Exception haha) {
-            Log.a(haha);
+            haha.printStackTrace();
         }
     }
 
@@ -1170,7 +1168,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c7(getString(R.string.t20));
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
             c7(getString(R.string.t20));
         }
     }
@@ -1414,7 +1412,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c7(getString(R.string.t20));
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
             c7(getString(R.string.t20));
         }
     }
@@ -1433,7 +1431,7 @@ public class MAIN extends MainBaseActivity implements Format {
             Intents.h(this, SEAR.class, 911, "value", h.getUrl());
             overridePendingTransition(R.anim.a, R.anim.f);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -1486,7 +1484,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -1738,7 +1736,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             this.u.setText(ssb, TextView.BufferType.SPANNABLE);
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -1800,7 +1798,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -1834,8 +1832,9 @@ public class MAIN extends MainBaseActivity implements Format {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.w2));
-        a.setMessage(String.format(getString(R.string.w1), timeset / 60000));
-        a.setPositiveButton(getString(R.string.i6), (dialog, i) -> {
+        int i = timeset / 60000;
+        a.setMessage(String.format(getResources().getQuantityString(R.plurals.w1, i), i));
+        a.setPositiveButton(getString(R.string.i6), (dialog, i1) -> {
             c41();
             dialog.dismiss();
         });
@@ -2007,7 +2006,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     try {
                         c124(URLEncoder.encode(a, "UTF-8"));
                     } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                        Log.a(unsupportedEncodingException);
+                       unsupportedEncodingException.printStackTrace();
                         c124(a);
                     }
                 }
@@ -2018,7 +2017,7 @@ public class MAIN extends MainBaseActivity implements Format {
             try {
                 c124(URLEncoder.encode(a, "UTF-8"));
             } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                Log.a(unsupportedEncodingException);
+                unsupportedEncodingException.printStackTrace();
                 c124(a);
             }
         }
@@ -2075,7 +2074,7 @@ public class MAIN extends MainBaseActivity implements Format {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if (mi.availMem < mi.threshold) {
-                Log.a("Webvium is freeing memory now because: available ="
+                android.util.Log.d("Webvium", "MAIN is freeing memory now because: available ="
                         + (mi.availMem / 1024) + " Keep threshold ="
                         + (mi.threshold / 1024) + " Keep");
             SQLiteDatabase.releaseMemory();
@@ -2410,7 +2409,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c.close();
             c8(getString(R.string.w16));
         } catch (IOException e) {
-            Log.a(e);
+            e.printStackTrace();
             c7(getString(R.string.w14));
         }
         c69(st);
@@ -2487,7 +2486,7 @@ public class MAIN extends MainBaseActivity implements Format {
             NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             nmc.notify(Notifications.b, e.build());
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -2540,7 +2539,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -2592,7 +2591,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             ed1.setCompoundDrawablePadding(40);
         } catch (NumberFormatException nfe) {
-            Log.a(nfe);
+            nfe.printStackTrace();
         }
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(Resources.getColor(this, R.color.c));
@@ -2633,7 +2632,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 h.load((c, Base64.a(W5.a7()).replace("%a", getString(R.string.c33)).replace("%b", getString(R.string.g23)).replace("%c", getString(R.string.r21)).replace("%d", c).replace("%e", c).replace("%f", c160(b)).replace("%g", d));
             }*/
         } catch (Exception e) {
-            Log.a(e);
+           e.printStackTrace();
         }
     }
 
@@ -2662,7 +2661,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 cm0.append(sg9).append("<br><br>");
             }
         } catch (Exception e) {
-            Log.a(e);
+           e.printStackTrace();
         }
     }
 
@@ -2741,7 +2740,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c54(b);
             c52();
         } catch (Exception e) {
-            Log.a(e);
+           e.printStackTrace();
         }
     }
 
@@ -2763,7 +2762,7 @@ public class MAIN extends MainBaseActivity implements Format {
             Animation.animate(MAIN.this, R.anim.c, this.iw);
             this.cd.setBackgroundResource(R.drawable.w);
         } catch (Exception e) {
-            Log.a(e);
+           e.printStackTrace();
         }
     }
 
@@ -2794,7 +2793,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     c3(fa);
                     return true;
                 } catch (URISyntaxException use) {
-                    Log.a(use);
+                    use.printStackTrace();
                 }
             } else if (!b.startsWith("market://") && !b.startsWith("geo:") && b.contains("/store/apps/details?id=")) {
                 return c179(b);
@@ -2806,7 +2805,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception e) {
-            Log.a(e);
+           e.printStackTrace();
         }
         return false;
     }
@@ -2858,7 +2857,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -2890,7 +2889,7 @@ public class MAIN extends MainBaseActivity implements Format {
             this.cvc.onCustomViewHidden();
             this.cvc = null;
         } catch (Exception asd) {
-            Log.a(asd);
+           asd.printStackTrace();
         }
     }
 
@@ -2912,7 +2911,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ((FrameLayout) getWindow().getDecorView()).addView(this.cv, new FrameLayout.LayoutParams(-1, -1));
             getWindow().getDecorView().setSystemUiVisibility(3846);
         } catch (Exception asd) {
-            Log.a(asd);
+            asd.printStackTrace();
         }
     }
 
@@ -3150,7 +3149,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             }
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -3489,18 +3488,18 @@ public class MAIN extends MainBaseActivity implements Format {
             try {
                 java.io.File a2 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
                 if (a2.createNewFile()) {
-                    Log.a("CREATE NEW FILE = " + a);
+                    FileOutputStream a3 = new FileOutputStream(a2);
+                    OutputStreamWriter a4 = new OutputStreamWriter(a3);
+                    a4.append(Base64.decode(b.split(",")[1]));
+                    a4.close();
+                    a3.close();
+                    runOnUiThread(() -> c8(getString(R.string.f38)));
+                    return;
                 }
-                FileOutputStream a3 = new FileOutputStream(a2);
-                OutputStreamWriter a4 = new OutputStreamWriter(a3);
-                a4.append(Base64.decode(b.split(",")[1]));
-                a4.close();
-                a3.close();
-                runOnUiThread(() -> c8(getString(R.string.f38)));
             } catch (IOException e) {
-                Log.a(e);
-                runOnUiThread(() -> c7(getString(R.string.w14)));
+               e.printStackTrace();
             }
+            runOnUiThread(() -> c7(getString(R.string.w14)));
         };
         new Thread(p15).start();
     }
@@ -3563,7 +3562,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     }
 
                 } catch (NumberFormatException nfe) {
-                    Log.a(nfe);
+                    nfe.printStackTrace();
                 }
             };
             new Thread(p15).start();
@@ -3580,7 +3579,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         runOnUiThread(() -> c7("Too many inputs."));
                     }
                 } catch (NumberFormatException nfe) {
-                    Log.a(nfe);
+                    nfe.printStackTrace();
                 }
             };
             new Thread(p15).start();
@@ -3611,22 +3610,9 @@ public class MAIN extends MainBaseActivity implements Format {
 
             bn.setTextColor(f);
         }
-        Runnable p15 = () -> {
-            String sg = IdentityGenerator.a(getString(R.string.m23));
-            runOnUiThread(() -> Html.a(ti, sg));
-        };
-        new Thread(p15).start();
-
+        Html.a(ti, IdentityGenerator.a(getResources().getQuantityString(R.plurals.m23, 23)));
         bn.setText(getString(R.string.e28));
-
-        bn.setOnClickListener(view -> {
-            Runnable p151 = () -> {
-                String sg = IdentityGenerator.a(getString(R.string.m23));
-                runOnUiThread(() -> Html.a(ti, sg));
-            };
-            new Thread(p151).start();
-        });
-
+        bn.setOnClickListener(view -> Html.a(ti, IdentityGenerator.a(getResources().getQuantityString(R.plurals.m23, 23))));
         final AlertDialog g = a.create();
         Objects.requireNonNull(g.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         g.show();
@@ -3968,12 +3954,13 @@ public class MAIN extends MainBaseActivity implements Format {
                 try {
                     if (cs.getCount() == 0) {
                         java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/sh.htm");
-                        fe.createNewFile();
-                        FileWriter fw = new FileWriter(fe, false);
-                        BufferedWriter br = new BufferedWriter(fw);
-                        br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.f39) + "</b></h1></center></body></html>");
-                        br.close();
-                        fw.close();
+                        if (fe.createNewFile()) {
+                            FileWriter fw = new FileWriter(fe, false);
+                            BufferedWriter br = new BufferedWriter(fw);
+                            br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.f39) + "</b></h1></center></body></html>");
+                            br.close();
+                            fw.close();
+                        }
                     } else {
                         StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.x49) + "</th></tr>");
                         while (cs.moveToNext()) {
@@ -3981,18 +3968,18 @@ public class MAIN extends MainBaseActivity implements Format {
                         }
                         sg.append("</table></center></body></html>");
                         java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/sh.htm");
-                        fe1.createNewFile();
-                        FileWriter fw1 = new FileWriter(fe1, false);
-                        BufferedWriter br1 = new BufferedWriter(fw1);
-                        br1.write(sg.toString());
-                        br1.close();
-                        fw1.close();
-
+                        if (fe1.createNewFile()) {
+                            FileWriter fw1 = new FileWriter(fe1, false);
+                            BufferedWriter br1 = new BufferedWriter(fw1);
+                            br1.write(sg.toString());
+                            br1.close();
+                            fw1.close();
+                        }
                     }
                     runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/sh.htm"));
                     cs.close();
                 } catch (Exception en) {
-                    Log.a(en);
+                    en.printStackTrace();
                 }
             };
             new Thread(p15).start();
@@ -4352,7 +4339,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c170(String sg) {
-        h.evaluateJavascript(sg, s -> Log.a(sg));
+        h.evaluateJavascript(sg, s -> android.util.Log.d("Webvium", sg));
     }
 
     private void c171(final String sg) {
@@ -4465,7 +4452,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 Animation.animate(this, R.anim.b, tv);
             }
         } catch (Exception rx) {
-            Log.a(rx);
+            rx.printStackTrace();
         }
     }
 
@@ -4473,7 +4460,7 @@ public class MAIN extends MainBaseActivity implements Format {
         try {
             return URLDecoder.decode(sg, "UTF-8");
         } catch (UnsupportedEncodingException unsupportedEncodingException) {
-            Log.a(unsupportedEncodingException);
+            unsupportedEncodingException.printStackTrace();
         }
         return sg;
     }
@@ -4912,7 +4899,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 try {
                     pe = URLDecoder.decode(sg12, "UTF-8");
                 } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                    Log.a(unsupportedEncodingException);
+                    unsupportedEncodingException.printStackTrace();
                     pe = sg12;
                 }
                 File fe2 = new File(pe.replace("file://", ""));
@@ -4923,7 +4910,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             try {
                                 pe1 = URLDecoder.decode(sg12, "UTF-8");
                             } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                                Log.a(unsupportedEncodingException);
+                                unsupportedEncodingException.printStackTrace();
                                 pe1 = sg12;
                             }
                             java.io.File fe = new java.io.File(pe1.replace("file://", ""));
@@ -4945,7 +4932,7 @@ public class MAIN extends MainBaseActivity implements Format {
                                 }
                             }
                         } catch (Exception en3) {
-                            Log.a(en3);
+                            en3.printStackTrace();
                         }
                     };
                     new Thread(re).start();
@@ -4985,10 +4972,11 @@ public class MAIN extends MainBaseActivity implements Format {
                         Toast.c(this, getString(R.string.t20));
                     }
                 } catch (Exception ex) {
-                    Log.a(ex);
+                    ex.printStackTrace();
                     Toast.c(this, getString(R.string.t20));
                 }
             } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
+                if (sg != null)
                 c3(sg);
                 a.removeExtra("webvium");
             } else {
@@ -5009,108 +4997,6 @@ public class MAIN extends MainBaseActivity implements Format {
             a.setAction("");
             a.setData(null);
             a.setFlags(0);
-    }
-
-    protected void onNewIntent1(Intent a) {
-        try {
-            String sg = a.getStringExtra("webvium");
-            String sg0 = a.getStringExtra("value");
-            String sg1 = a.getAction();
-            try {
-                String sg12 = a.getDataString();
-                String pe = c181(sg12);
-                File fe2 = new File(pe.replace("file://", ""));
-                if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile()) {
-                    Runnable re = () -> {
-                        try {
-                            java.io.File fe = new java.io.File(pe.replace("file://", ""));
-                            FileReader fr = new FileReader(fe);
-                            BufferedReader br = new BufferedReader(fr);
-                            StringBuilder sb = new StringBuilder();
-                            String ln;
-                            while ((ln = br.readLine()) != null) {
-                                sb.append(ln);
-                                sb.append("<br>");
-                            }
-                            fr.close();
-                            br.close();
-                            String[] sgdd = sb.toString().split("<br>");
-                            for (String dt : sgdd) {
-                                if (dt.startsWith("URL=")) {
-                                    runOnUiThread(() -> c3(dt.replace("URL=", "")));
-                                    return;
-                                }
-                            }
-                        } catch (Exception en3) {
-                            Log.a(en3);
-                        }
-                    };
-                    new Thread(re).start();
-                }
-            } catch (Exception en) {
-                Log.a(en);
-            }
-            String queryq = a.getStringExtra("b");
-            if (queryq != null) {
-                c146(0);
-                a.removeExtra("b");
-            } else if (sg != null) {
-                c3(sg);
-                a.removeExtra("webvium");
-            } else if (sg0 != null) {
-                c49(sg0);
-                a.removeExtra("value");
-            } else if (nfc != null) {
-                if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(sg1)) {
-                    Parcelable[] rawMessages = a.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-                    if (rawMessages != null) {
-                        //NdefMessage[] messages = new NdefMessage[rawMessages.length];
-                        StringBuilder sb = new StringBuilder();
-                        for (Parcelable rawMessage : rawMessages) {
-                            //messages[i] = (NdefMessage) rawMessages[i];
-                            sb.append(rawMessage);
-                        }
-                        c49(sb.toString());
-                    }
-                }
-            } else if (sg1.equals(Intents.ACTION_PASTE_SEARCH)) {
-                try {
-                    String c = Clipboard.b(this);
-                    if (c != null && U3.b(c)) {
-                        SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
-                        d2.c(c);
-                        c49(c);
-                    } else {
-                        Toast.c(this, getString(R.string.t20));
-                    }
-                } catch (Exception ex) {
-                    Log.a(ex);
-                    Toast.c(this, getString(R.string.t20));
-                }
-            } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
-                c3(sg);
-                a.removeExtra("webvium");
-            } else {
-                String sg2 = a.getStringExtra(Intent.EXTRA_TEXT);
-                String sg3 = a.getDataString();
-                if (sg1.equals(Intent.ACTION_SEND) && sg2 != null) {
-                    c49(sg2);
-                } else if (sg1.equals(Intent.ACTION_VIEW) && sg3 != null) {
-                    c3(sg3);
-
-                } else if (sg1.equals(Intent.ACTION_SEARCH) || sg1.equals(Intent.ACTION_WEB_SEARCH) || sg1.equals("android.speech.action.VOICE_SPEECH_RESULTS")) {
-                    c49(SearchManager.QUERY);
-                } else if (sg1.equals(MediaStore.INTENT_ACTION_MEDIA_SEARCH)) {
-                    c49(a.getStringExtra(MediaStore.EXTRA_MEDIA_ARTIST) + " " + a.getStringExtra(MediaStore.EXTRA_MEDIA_TITLE));
-                }
-            }
-            a.replaceExtras(new Bundle());
-            a.setAction("");
-            a.setData(null);
-            a.setFlags(0);
-        } catch (Exception ex) {
-            Log.a(ex);
-        }
     }
 
     @Override
@@ -5209,7 +5095,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     }
                 }
             } catch (Exception ex) {
-                Log.a(ex);
+                ex.printStackTrace();
             }
         }
 

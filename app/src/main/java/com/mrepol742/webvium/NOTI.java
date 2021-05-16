@@ -33,8 +33,6 @@ import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.util.Log;
-import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Stream;
 
 import java.util.Objects;
@@ -66,7 +64,7 @@ public class NOTI extends MainService {
                         gujh.apply();
                     }
                 } catch (Exception en) {
-                    Log.a(en);
+                    en.printStackTrace();
                 }
             };
             new Thread(runnable).start();

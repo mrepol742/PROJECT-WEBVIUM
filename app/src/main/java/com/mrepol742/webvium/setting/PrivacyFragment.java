@@ -46,7 +46,6 @@ import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.Objects;
@@ -190,7 +189,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
                 return true;
             });
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -221,7 +220,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             try {
                 Files.deleteAll(a);
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
             }
         };
         new Thread(p15).start();
@@ -259,7 +258,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
                 w4.destroy();
                 g(getString(R.string.a38));
             } catch (Exception en) {
-                Log.a(en);
+                en.printStackTrace();
                 d(getString(R.string.a39));
             }
             a12.dismiss();

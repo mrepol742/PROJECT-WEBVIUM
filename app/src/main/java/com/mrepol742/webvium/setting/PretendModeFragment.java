@@ -44,7 +44,6 @@ import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.util.Log;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
@@ -96,7 +95,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 return true;
             });
         } catch (Exception ex) {
-            Log.a(ex);
+            ex.printStackTrace();
         }
     }
 
