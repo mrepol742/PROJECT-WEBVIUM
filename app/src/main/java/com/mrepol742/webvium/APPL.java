@@ -57,15 +57,11 @@ public class APPL extends Application {
             AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
             android.os.Process.killProcess(android.os.Process.myPid());
-            Toast.a(getApplicationContext(), "Crash happened");
             System.exit(2);
             uncaughtExceptionHandler.uncaughtException(thread, ex);
         });
         super.onCreate();
         try {
-            if (getSharedPreferences("wv,", 0).getBoolean("webDa", false) && sp.getBoolean("og67", false)) {
-                Log.getInstance(getApplicationContext());
-            }
             if (sp.getBoolean("autoUpdate55", false)) {
                 boolean bn = Hardware.isNightMode(this) == Hardware.E1.Yes;
                 if (bn) {

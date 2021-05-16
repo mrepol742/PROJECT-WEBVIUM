@@ -47,6 +47,58 @@ public class SettingFragment extends BaseFragment {
 
     private ImageView iv, iv0;
     private boolean bn;
+    private static final int[] header = {
+            R.string.a,
+            R.string.o10,
+            R.string.e,
+            R.string.f,
+            R.string.b,
+            R.string.g,
+            R.string.c,
+            R.string.i,
+            R.string.h10,
+            R.string.l14
+    };
+    private static final int[] summary = {
+            R.string.t8,
+            R.string.t9,
+            R.string.t10,
+            R.string.t11,
+            R.string.t12,
+            R.string.t13,
+            R.string.t14,
+            R.string.t15,
+            R.string.t16,
+            R.string.f16,
+            R.string.t19
+    };
+    private static int[] header1 = {
+            R.string.a,
+            R.string.o10,
+            R.string.e,
+            R.string.f,
+            R.string.b,
+            R.string.g,
+            R.string.c,
+            R.string.i,
+            R.string.h10,
+            R.string.l14,
+            R.string.y69
+    };
+    private static final int[] summary1 = {
+            R.string.t8,
+            R.string.t9,
+            R.string.t10,
+            R.string.t11,
+            R.string.t12,
+            R.string.t13,
+            R.string.t14,
+            R.string.t15,
+            R.string.t16,
+            R.string.f16,
+            R.string.t19,
+            R.string.y70
+    };
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -82,7 +134,12 @@ public class SettingFragment extends BaseFragment {
             v = inflater.inflate(R.layout.a23, container, false);
         }
         ListView a31 = v.findViewById(R.id.a3);
-        SettingAdapter aa = new SettingAdapter(getActivity());
+        SettingAdapter aa;
+        if (a224("webDa", false)) {
+            aa = new SettingAdapter(getActivity(), header, summary);
+        } else {
+            aa = new SettingAdapter(getActivity(), header1, summary1);
+        }
         a31.setAdapter(aa);
         a31.setOnItemClickListener((a1, b1, c, d) -> {
             if (bn) {
@@ -140,7 +197,7 @@ public class SettingFragment extends BaseFragment {
                 }
                 break;
             case 5:
-                Intents.e(getActivity(), "search", SETT.FRAGMENT_DOWNLOAD, SETT.class);
+                Intents.e(getActivity(), "search", SETT.FRAGMENT_ACCESSIBILITY, SETT.class);
                 break;
             case 6:
                 if (a221().getBoolean("lockWn99", false)) {

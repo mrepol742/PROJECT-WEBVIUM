@@ -873,6 +873,8 @@
     <string name="y66">End Process</string>
     <string name="y67">Send Report</string>
     <string name="y68">Failed to send Feedback.</string>
+    <string name="y69">Experimental</string>
+    <string name="y70">Unstable, underdevelopment features</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

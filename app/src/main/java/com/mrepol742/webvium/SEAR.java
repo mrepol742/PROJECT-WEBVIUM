@@ -466,6 +466,17 @@ public class SEAR extends MainBaseActivity {
     private void searchAlgorithm(String a) {
         SharedPreferences prefs4 = getSharedPreferences("wv,", 0);
         boolean d78 = prefs4.getBoolean("webDa", false);
+        if (a.equals(securedUrls[4])) {
+            SharedPreferences.Editor ed = prefs4.edit();
+            if (d78) {
+                ed.putBoolean("webDa", false);
+                Toast.a(this, "Your now beta tester");
+            } else {
+                ed.putBoolean("webDa", true);
+                Toast.a(this, "Your been removed from beta tester");
+            }
+            ed.apply();
+        }
         if (a.equals(securedUrls[5])) {
             Intents.a(this, MANG.class);
         } else if (a.equals(securedUrls[6]) && d78) {

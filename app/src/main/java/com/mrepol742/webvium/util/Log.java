@@ -38,18 +38,10 @@ import java.util.Locale;
 public class Log {
 
     private static final String st = " ~~~~~~~~~~~~~ ";
-    private static String sg;
-    private static Log a1;
+    private static final String sg = " /data/data/com.mrepol742.webvium/files/main.log";
 
     @Keep
-    private Log(Context context) {
-        sg = StorageDirectory.getFileDir(context) + "/main.log";
-    }
-
-    public static void getInstance(Context context) {
-        if (a1 == null) {
-            a1 = new Log(context);
-        }
+    private Log() {
     }
 
     public static void a(Exception a1) {
@@ -63,10 +55,6 @@ public class Log {
 
     @Development
     private static void b(String log, String category) {
-        if (a1 == null) {
-            android.util.Log.d(Package.b(), log);
-            return;
-        }
         Runnable p = () -> {
             try {
                 File logFile = new File(sg);

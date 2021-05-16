@@ -44,40 +44,17 @@ public class SettingAdapter extends MainBaseAdapter {
             R.drawable.d4,
             R.drawable.d5,
             R.drawable.e1,
-            R.drawable.e12,
-            R.drawable.d6,
             R.drawable.d20
     };
-    private static final int[] header = {
-            R.string.a,
-            R.string.o10,
-            R.string.e,
-            R.string.f,
-            R.string.b,
-            R.string.g,
-            R.string.c,
-            R.string.i,
-            R.string.h10,
-            R.string.l14
-    };
-    private static final int[] summary = {
-            R.string.t8,
-            R.string.t9,
-            R.string.t10,
-            R.string.t11,
-            R.string.t12,
-            R.string.t13,
-            R.string.t14,
-            R.string.t15,
-            R.string.t16,
-            R.string.f16,
-            R.string.t19
-    };
+    private static int[] header;
+    private static int[] summary;
     private final Context a;
 
-    public SettingAdapter(Context ct) {
+    public SettingAdapter(Context ct, int[] a1, int[] b) {
         super(ct);
         a = ct;
+        header = a1;
+        summary = b;
     }
 
     @Override
