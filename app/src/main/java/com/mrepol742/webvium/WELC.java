@@ -83,11 +83,12 @@ public class WELC extends BaseActivity {
         iv.setImageResource(R.drawable.b14);
         tv.setTypeface(type(Typeface.BOLD));
         ll = findViewById(R.id.h11);
-        if (!a221().getBoolean("autoUpdate", false)) {
-            fl.setBackgroundColor(Resources.getColor(this, R.color.b));
-        } else {
-            fl.setBackgroundColor(Resources.getColor(this, R.color.n));
-        }
+        // TODO: check
+       // if (!a221().getBoolean("autoUpdate", false)) {
+       //     fl.setBackgroundColor(Resources.getColor(this, R.color.b));
+       // } else {
+         //   fl.setBackgroundColor(Resources.getColor(this, R.color.n));
+       // }
         tv.setTextColor(Resources.getColor(this, R.color.b));
         d = AnimationUtils.loadAnimation(this, R.anim.h);
         iv.startAnimation(d);

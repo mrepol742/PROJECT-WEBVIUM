@@ -211,7 +211,7 @@ public class BaseActivity extends Activity {
             if (!a221().getBoolean("autoUpdate742", false)) {
                 setTheme(R.style.a);
             } else {
-                setTheme(R.style.b19);
+                setTheme(R.style.g);
             }
         } else if (i == T_ASSISTANT) {
             if (!a221().getBoolean("autoUpdate", false)) {

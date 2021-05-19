@@ -30,7 +30,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode Integer.parseInt(new Date().format("ddMMyyyy"))
-        versionName "1.2"
+        versionName "1.3"
         proguardFiles getDefaultProguardFile(
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
         applicationVariants.all { variant ->
@@ -45,10 +45,9 @@ android {
 
     buildTypes {
 
-        debugWithMinify {
+        debug {
             debuggable true
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
         }
 
         release {

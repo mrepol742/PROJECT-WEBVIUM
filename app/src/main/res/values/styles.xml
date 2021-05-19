@@ -25,6 +25,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 
     <!-- MENU ICON -->
@@ -53,7 +54,7 @@
 
     <!-- SPLASH SCREEN -->
     <style name="f" parent="@style/d">
-        <item name="android:windowBackground">?u</item>
+        <item name="android:windowBackground">?b</item>
         <item name="android:statusBarColor">@color/m</item>
         <item name="android:navigationBarColor">@color/m</item>
     </style>
@@ -65,6 +66,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 
     <!-- APP THEME LIGHT -->

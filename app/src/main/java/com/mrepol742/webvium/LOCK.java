@@ -118,11 +118,12 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 };
                 new Thread(p155).start();
             } else {
-                if (!a221().getBoolean("autoUpdate", false)) {
-                    ll.setBackgroundColor(Resources.getColor(this, R.color.b));
-                } else {
-                    ll.setBackgroundColor(Resources.getColor(this, R.color.n));
-                }
+                // TODO: checl
+                //if (!a221().getBoolean("autoUpdate", false)) {
+                //    ll.setBackgroundColor(Resources.getColor(this, R.color.b));
+               // } else {
+               //     ll.setBackgroundColor(Resources.getColor(this, R.color.n));
+               // }
             }
         }
     }

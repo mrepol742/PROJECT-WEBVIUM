@@ -19,7 +19,9 @@
     <!-- SYSTEM FORCE NIGHT MODE -->
     <!-- TRANSFER LIGHT TO DARK -->
     <!-- CUSTOM BACKGROUND TRANSLUCENT THEME LIGHT -->
-    <style name="a" parent="g" />
+    <style name="a" parent="g" >
+        <item name="android:windowBackground">@null</item>
+    </style>
     <!-- LIGHT THEME -->
     <style name="d" parent="e" />
     <!-- APP THEME LIGHT -->
@@ -35,7 +37,7 @@
         <item name="b">@color/n</item>
         <item name="android:statusBarColor">@color/n</item>
         <item name="android:navigationBarColor">@color/n</item>
-        <item name="android:windowBackground">?u</item>
+        <item name="android:windowBackground">?b</item>
     </style>
 
     <style name="d3" parent="d4" />
