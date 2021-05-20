@@ -37,7 +37,7 @@
         <item name="b">@color/n</item>
         <item name="android:statusBarColor">@color/n</item>
         <item name="android:navigationBarColor">@color/n</item>
-        <item name="android:windowBackground">?b</item>
+        <item name="android:windowBackground">?u</item>
     </style>
 
     <style name="d3" parent="d4" />

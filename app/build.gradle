@@ -34,10 +34,12 @@ android {
         proguardFiles getDefaultProguardFile(
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
         applicationVariants.all { variant ->
-            if (variant.getBuildType().isMinifyEnabled()) {
-                variant.assemble.doLast {
-                    variant.mappingFile.renameTo(file(
-                            "${variant.mappingFile.parent}/mapping-${variant.versionName}.txt"))
+            variant.assemble.doLast {
+                if (variant.mappingFile != null && variant.mappingFile.exists()) {
+                    def mappingFilename = "$archivesBaseName-$variant.baseName-mapping.txt"
+                    (new File(variant.mappingFile.parent, mappingFilename)).delete()
+                    variant.mappingFile.renameTo(variant.mappingFile.parent +
+                            "/" + mappingFilename)
                 }
             }
         }

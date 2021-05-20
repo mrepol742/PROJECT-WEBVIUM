@@ -33,7 +33,7 @@
 
     <!-- SPLASH SCREEN -->
     <style name="f" parent="@style/d">
-        <item name="android:windowBackground">?b</item>
+        <item name="android:windowBackground">?u</item>
         <item name="android:statusBarColor">@color/b</item>
         <item name="android:navigationBarColor">@color/m</item>
         <item name="android:windowLightStatusBar">true</item>

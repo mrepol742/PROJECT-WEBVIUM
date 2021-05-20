@@ -80,12 +80,11 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
         LinearLayout ll = findViewById(R.id.l10);
         tv.setTextColor(f);
         w4 = new MainWebView(this);
-        // TODO: checl
-      //  if (!a221().getBoolean("autoUpdate", false)) {
-      //      ll.setBackgroundColor(Resources.getColor(this, R.color.b));
-      //  } else {
-      //      ll.setBackgroundColor(Resources.getColor(this, R.color.n));
-      //  }
+       if (!a221().getBoolean("autoUpdate", false)) {
+           ll.setBackgroundColor(Resources.getColor(this, R.color.b));
+             } else {
+            ll.setBackgroundColor(Resources.getColor(this, R.color.n));
+        }
         for (int i : ids) {
             TextView tv4 = findViewById(i);
             tv4.setTextColor(g);
