@@ -39,8 +39,6 @@ assets/
 
 # Webvium
 app/src/main/c-playstore.png
-app/src/main/java/com/mrepol742/webvium/a
-app/src/main/java/com/mrepol742/webvium/b
 app/src/release/
 app/src/debug/
 

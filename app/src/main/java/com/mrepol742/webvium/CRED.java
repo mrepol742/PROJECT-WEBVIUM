@@ -17,14 +17,19 @@
 
 package com.mrepol742.webvium;
 
+import android.content.ContentResolver;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.text.Html;
 
@@ -48,7 +53,29 @@ public class CRED extends BaseActivity {
                 }
             }
         }
-        tv.setText(Html.b(getString(R.string.y64)));
+        SharedPreferences sharedPreferences = getSharedPreferences("di", 0);
+        String name = Build.MODEL;
+        try {
+            ContentResolver cr=getContentResolver();
+            Cursor cursor = cr.query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                name = cursor.getString(cursor.getColumnIndex(ContactsContract.Profile.DISPLAY_NAME));
+            }
+            cursor.close();
+        } catch (Exception en) {
+            en.printStackTrace();
+        }
+        try {
+            String sg = String.format(getString(R.string.y64),
+                    Package.e(this),
+                    sharedPreferences.getString("di", ""),
+                    sharedPreferences.getString("di1", ""),
+                    name);
+            tv.setText(Html.b(sg));
+        } catch (Exception en) {
+            en.printStackTrace();
+        }
         tv.setTypeface(type(Typeface.NORMAL));
     }
 }

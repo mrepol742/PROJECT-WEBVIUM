@@ -47,6 +47,7 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Html;
+import com.mrepol742.webvium.util.AppID;
 import com.mrepol742.webvium.util.cache.FontCache;
 
 import java.io.FileOutputStream;
@@ -65,7 +66,7 @@ public class WELC extends BaseActivity {
     private Animation d;
 
 
-    public static final String INIT = "init_8";
+    public static final String INIT = "init_9";
     private RelativeLayout ll;
 
     @Override
@@ -240,11 +241,13 @@ public class WELC extends BaseActivity {
         b5.putInt("noid", 275);
         b5.apply();
         Intents.b(this, BACK.class);
-        String sg = Hash.a("SHA-1", String.valueOf(System.currentTimeMillis()));
         SharedPreferences a52 = getSharedPreferences("di", 0);
         SharedPreferences.Editor b52 = a52.edit();
-        b52.putString("di", sg);
+        b52.putString("di", Hash.a("SHA-1", String.valueOf(System.currentTimeMillis())));
+        b52.putString("di1", AppID.getAppID(this));
         b52.apply();
+
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 6);

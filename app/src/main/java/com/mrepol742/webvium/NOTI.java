@@ -53,7 +53,7 @@ public class NOTI extends MainService {
         if (!Connectivity.isThereAnyInternetConnection(this)) {
             Runnable runnable = () -> {
                 try {
-                    String neTf = Stream.f("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/notification_data.txt?raw=true", getString(R.string.c33));
+                    String neTf = Stream.f("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/notification_data>1.3.txt?raw=true", getString(R.string.c33));
                     String[] sp = neTf.split(";");
                     SharedPreferences j988 = getSharedPreferences("wv,", 0);
                     if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {

@@ -177,6 +177,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // Welcome to Project Webvium this class serves as the Building Blocks of this Project
 // as same as in APPL (Application) class this activity must opened in fraction of seconds any kind of code
@@ -269,7 +271,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public RelativeLayout back23;
     public Handler timer;
     public int it7422;
-    public Handler cdt;
+    public Timer cdt;
     public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
     int timeset = 3600000;
     private StringBuilder cm; // console message
@@ -304,6 +306,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public static final String SE_YOUTUBE = "12b";
     public static final String SE_GITHUB = "13b";
     public static final String SE_FACEBOOK = "14b";
+
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -676,6 +679,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ift3.act(Intents.ACTION_INVALIDATE);
             registerReceiver(br4, ift3);
         }
+        cdt = new Timer();
         pm = (PowerManager) getSystemService(POWER_SERVICE);
         wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "webvium:" + this);
         tv5.setImageResource(R.drawable.a18);
@@ -683,6 +687,7 @@ public class MAIN extends MainBaseActivity implements Format {
         this.iw.setImageResource(R.drawable.a15);
         this.cd.setBackgroundResource(R.drawable.w);
         nfc = NfcAdapter.getDefaultAdapter(this);
+        c15();
         c50();
         tv3.setOnClickListener(view -> {
             if (h.getProgress() == 100) {
@@ -806,7 +811,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             h.resumeTimers();
             h.onResume();
-            c15(h, h.getSettings());
+            c15();
             bl = true;
             bl2 = true;
             registerReceiver(br, ift);
@@ -868,11 +873,6 @@ public class MAIN extends MainBaseActivity implements Format {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (cdt != null) {
-            cdt.removeCallbacks(this::c141);
-            cdt.removeCallbacksAndMessages(null);
-            cdt = null;
-        }
         if (timer != null) {
             timer.removeCallbacksAndMessages(null);
             timer = null;
@@ -1243,7 +1243,7 @@ public class MAIN extends MainBaseActivity implements Format {
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
-    private void c15(com.mrepol742.webvium.app.WebViews h, WebSettings ws) {
+    private void c15() {
         if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("1l")) {
             h.setLayerType(View.LAYER_TYPE_NONE, null);
         }
@@ -1493,6 +1493,9 @@ public class MAIN extends MainBaseActivity implements Format {
     @Development
     @Test
     private void c34() {
+        if (Build.VERSION.SDK_INT < 30) {
+            ws.setAllowFileAccess(true);
+        }
         ws.setBuiltInZoomControls(true);
         ws.setSupportMultipleWindows(false);
         ws.setJavaScriptCanOpenWindowsAutomatically(false);
@@ -1993,12 +1996,13 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a.equals("webvium://log")) {
             h.loadUrl(StorageDirectory.getFileDir(this) + "/main.log");
         } else if (a.equals("webvium://logcat")) {
-            Intents.a(this, TERM.class);
+            Intents.a(this, LOGC.class);
         } else if (IPAddress.isValidIpAddress(a)) {
             h.loadUrl(a);
         } else if (URLUtil.isValidUrl(a5)) {
             if (a5.startsWith("file://") || a5.startsWith("https://") || a5.startsWith("http://") || a5.startsWith("content://")) {
                 h.loadUrl(c138(a));
+                Toast.b(this, c138(a));
             } else {
                 if (Domain.isValidDomain(a5)) {
                     c3(c138(a));
@@ -2041,7 +2045,7 @@ public class MAIN extends MainBaseActivity implements Format {
             default:
             case "x57":
                 if (h.getSettings().getJavaScriptEnabled()) {
-                    c3("https://mrepol742.github.io/PROJECT-WEBVIUM/Search/index.html?00OOOO0O0OO0=" + c46());
+                    c3("https://mrepol742.github.io/Search/index.html?s=" + c46());
                 } else {
                     c3(c48());
                 }
@@ -2942,10 +2946,8 @@ public class MAIN extends MainBaseActivity implements Format {
             g.setVisibility(View.GONE);
             Animation.animate(this, R.anim.b, g);
             this.cm1.flush();
-            if (cdt != null) {
-                cdt.removeCallbacks(this::c141);
-                cdt.removeCallbacksAndMessages(null);
-                cdt = null;
+            cdt.cancel();
+            cdt.purge();
                 if (a224("a10", false) && bl6) {
                     // if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
                     c142(a.getTitle(), a.getUrl());
@@ -2959,10 +2961,16 @@ public class MAIN extends MainBaseActivity implements Format {
                             c143(getString(R.string.g29), getString(R.string.g30));
                         }*/
                 }
-            }
         } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
-            cdt = new Handler();
-            cdt.postDelayed(this::c141, 10000);
+            cdt.schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    c141();
+                    cdt.cancel();
+                    cdt.purge();
+                }
+            }, 10000);
         }
         if (b != 100) {
             g.setVisibility(View.VISIBLE);

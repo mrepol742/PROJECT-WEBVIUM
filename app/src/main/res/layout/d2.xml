@@ -15,74 +15,17 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="match_parent"
+    a:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     a:id="@id/o24"
-    a:layout_width="match_parent"
-    a:layout_height="match_parent"
-    a:orientation="vertical">
+    a:paddingStart="?m"
+    a:paddingEnd="?m">
 
-    <Toolbar
-        a:id="@id/i2"
-        a:layout_width="match_parent"
-        a:layout_height="wrap_content"
-        a:elevation="5dp"
-        a:minHeight="@dimen/o">
+    <include layout="@layout/a16" />
 
-        <RelativeLayout
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content">
-
-            <TextView
-                a:id="@id/i3"
-                a:layout_width="wrap_content"
-                a:layout_height="wrap_content"
-                a:layout_alignParentStart="true"
-                a:layout_marginStart="10dp"
-                a:layout_marginEnd="10dp"
-                a:layout_toStartOf="@id/k3"
-                a:ellipsize="end"
-                a:gravity="center_vertical"
-                a:maxLines="1"
-                a:textSize="@dimen/a" />
-
-            <ImageView
-                a:id="@id/k3"
-                a:layout_width="24dp"
-                a:layout_height="24dp"
-                a:layout_alignParentEnd="true"
-                a:layout_centerInParent="true"
-                a:layout_marginStart="15dp"
-                a:layout_marginEnd="15dp"
-                a:contentDescription="@string/x39" />
-        </RelativeLayout>
-    </Toolbar>
-
-
-    <TextView
-        a:id="@id/h14"
-        a:layout_width="match_parent"
-        a:layout_height="wrap_content"
-        a:layout_marginTop="10dp"
-        a:ellipsize="end"
-        a:labelFor="@id/b15"
-        a:maxLines="1"
-        a:paddingStart="?m"
-        a:paddingEnd="?m"
-        a:textSize="@dimen/c"
-        tools:ignore="LabelFor" />
-
-    <AutoCompleteTextView
-        a:id="@id/b15"
-        a:layout_width="match_parent"
-        a:layout_height="40dp"
-        a:layout_marginStart="?m"
-        a:layout_marginEnd="?m"
-        a:imeOptions="flagNoFullscreen"
-        a:inputType="text"
-        a:textSize="@dimen/c" />
-
-    <TextView
+    <TextView a:layout_below="@id/b7"
         a:id="@id/h15"
         a:layout_width="match_parent"
         a:layout_height="wrap_content"
@@ -93,17 +36,29 @@
         a:textSize="@dimen/c"
         tools:ignore="LabelFor" />
 
-    <EditText
+    <EditText a:layout_below="@id/h15"
         a:id="@id/h16"
         a:layout_width="match_parent"
         a:layout_height="wrap_content"
         a:layout_marginStart="?m"
+        a:layout_marginTop="10dp"
+        a:layout_above="@id/k3" a:gravity="top"
         a:layout_marginEnd="?m"
-        a:gravity="top"
         a:imeOptions="flagNoFullscreen"
         a:inputType="textMultiLine"
         a:textSize="@dimen/c"
         a:autofillHints="no" />
 
+    <Button
+        a:id="@id/k3"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:layout_alignParentBottom="true"
+        a:layout_centerHorizontal="true"
+        a:layout_margin="10dp" a:text="Send Feedback"
+        a:paddingLeft="25dp"
+        a:paddingTop="15dp"
+        a:paddingRight="25dp"
+        a:paddingBottom="15dp" />
 
-</LinearLayout>
+</RelativeLayout>

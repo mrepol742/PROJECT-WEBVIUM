@@ -22,9 +22,6 @@
         a:key="p20"
         a:title="@string/p20" />
     <com.mrepol742.webvium.PREF
-        a:key="ydi"
-        a:title="@string/y29" />
-    <com.mrepol742.webvium.PREF
         a:key="ins12" />
     <com.mrepol742.webvium.PREF
         a:key="g5"

@@ -49,8 +49,6 @@ public class AboutFragment extends BasePreferenceFragment {
                 Intents.a(getActivity(), CRED.class);
                 return true;
             });
-            Preference j512 = findPreference("ydi");
-            j512.setSummary(getActivity().getSharedPreferences("di", 0).getString("di", "742"));
             Preference a7 = findPreference("g5");
             a7.setOnPreferenceClickListener(a -> {
                 Intents.a(getActivity(), TERM.class);

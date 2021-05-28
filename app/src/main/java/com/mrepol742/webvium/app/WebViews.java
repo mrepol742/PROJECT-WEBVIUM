@@ -24,6 +24,7 @@ import android.view.View;
 import com.mrepol742.webvium.annotation.Development;
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.main.MainWebView;
+import com.mrepol742.webvium.content.Package;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,6 @@ public class WebViews extends MainWebView {
     }
 
     public void load(String baseUrl, String html) {
-        loadDataWithBaseURL("system checked", html, "text/html", getTextEncoding(), baseUrl);
+        loadDataWithBaseURL(Package.c(), html, "text/html", getTextEncoding(), baseUrl);
     }
 }
