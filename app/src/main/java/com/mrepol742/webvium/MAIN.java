@@ -1508,7 +1508,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 @Override
                 @Development
                 public boolean onTouch(View v, MotionEvent event) {
-                    float diff = 0;
+                    float diff;
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         lastY = event.getY();
                         ali = new ArrayList<>();
@@ -1680,7 +1680,7 @@ public class MAIN extends MainBaseActivity implements Format {
             @Override
             @Keep
             public boolean url(WebView a, String b) {
-                return c82(a, b);
+                return c82(b);
             }
 
             @Override
@@ -2771,7 +2771,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     // ShouldOverrideUrlLoading
-    public boolean c82(WebView h45, String b) {
+    public boolean c82(String b) {
         try {
             c38(b);
             if (b.startsWith("webvium://search")) {
@@ -3132,6 +3132,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     public void c99() {
         try {
             if (Objects.requireNonNull(a221().getString("hori", "30c")).equals("1c")) {
@@ -3698,6 +3699,7 @@ public class MAIN extends MainBaseActivity implements Format {
         a.create().show();
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     public void c128() {
         if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("1a1")) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -4984,7 +4986,6 @@ public class MAIN extends MainBaseActivity implements Format {
                     Toast.c(this, getString(R.string.t20));
                 }
             } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
-                if (sg != null)
                 c3(sg);
                 a.removeExtra("webvium");
             } else {
