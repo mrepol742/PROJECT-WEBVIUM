@@ -269,11 +269,10 @@ public class MAIN extends MainBaseActivity implements Format {
     public boolean bl5 = false;
     public RelativeLayout cd;
     public RelativeLayout back23;
-    public Handler timer;
+    public Timer timer;
     public int it7422;
     public Timer cdt;
     public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
-    int timeset = 3600000;
     private StringBuilder cm; // console message
     private StringBuilder cm0;// receive error
     private StringBuilder cm2;// receive ssl error
@@ -306,39 +305,6 @@ public class MAIN extends MainBaseActivity implements Format {
     public static final String SE_YOUTUBE = "12b";
     public static final String SE_GITHUB = "13b";
     public static final String SE_FACEBOOK = "14b";
-
-
-    final MenuItem.OnMenuItemClickListener mio = a1 -> {
-        switch (a1.getItemId()) {
-            case 0:
-                c13();
-                return true;
-            case 1:
-                c17();
-                return true;
-            case 2:
-                Clipboard.a(MAIN.this, h.getUrl());
-                c8(getString(R.string.k9));
-                return true;
-            case 3:
-                c16(h.getUrl(), 0);
-                return true;
-            case 4:
-                c58(h.getUrl(), h.getTitle());
-                return true;
-            case 5:
-                c14(h.getTitle(), h.getUrl());
-                return true;
-            case 6:
-                Clipboard.a(MAIN.this, h.getTitle());
-                c8(getString(R.string.k9));
-                return true;
-            case 7:
-                c16(h.getTitle(), 0);
-                return true;
-        }
-        return false;
-    };
     private WebSettings ws;
     private GeolocationDataModel w6;
     private PermissionDataModel w8;
@@ -365,26 +331,94 @@ public class MAIN extends MainBaseActivity implements Format {
     private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7;
     private TextView inf;
     private String sg;
+    public static final int POPUPMENU_TOOLBAR_PASTE_AND_SEARCH = 0;
+    public static final int POPUPMENU_TOOLBAR_PASTE = 1;
+    public static final int POPUPMENU_TOOLBAR_COPY_LINK = 2;
+    public static final int POPUPMENU_TOOLBAR_COPY_TITLE = 6;
+    public static final int POPUPMENU_TOOLBAR_SHARE_LINK = 3;
+    public static final int POPUPMENU_TOOLBAR_SHARE_TITLE = 7;
+    public static final int POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN = 4;
+    public static final int POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS = 5;
+    public static final int POPUPMENU_PHONE_SEND_SMS = 10;
+    public static final int POPUPMENU_PHONE_CALL = 11;
+    public static final int POPUPMENU_PHONE_DIAL = 5;
+    public static final int POPUPMENU_PHONE_ADD_TO_CONTACTS = 6;
+    public static final int POPUPMENU_PHONE_COPY = 4;
+    public static final int POPUPMENU_PHONE_SHARE = 14;
+    public static final int POPUPMENU_GEO_SHARE = 14;
+    public static final int POPUPMENU_MAIL_SEND_EMAIL = 9;
+    public static final int POPUPMENU_MAIL_COPY = 4;
+    public static final int POPUPMENU_MAIL_SHARE = 14;
+    public static final int POPUPMENU_IMAGE_VIEW_IMAGE = 0;
+    public static final int POPUPMENU_IMAGE_COPY = 1;
+    public static final int POPUPMENU_IMAGE_SHARE = 2;
+    public static final int POPUPMENU_IMAGE_SAVE_IMAGE = 3;
+    public static final int POPUPMENU_MAIN_COPY = 4;
+    public static final int POPUPMENU_MAIN_SHARE = 3;
+    public static final int POPUPMENU_MAIN_ADD_TO_BOOKMARKS = 6;
+    public static final int POPUPMENU_MAIN_ADD_TO_HOMESCREEN = 7;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_HEADERS = 19;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_LINKS = 15;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_META_TAGS = 20;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_ROBOTSTXT = 21;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_TRANCEROUTE = 16;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_NPING = 17;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_WHOIS = 18;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_NSLookup = 13;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_SOURCE_CODE = 5;
+    public static final int POPUPMENU_MAIN_WEB_OSINT_SAVE_LINK = 12;
+
+    final MenuItem.OnMenuItemClickListener mio = a1 -> {
+        switch (a1.getItemId()) {
+            case POPUPMENU_TOOLBAR_PASTE_AND_SEARCH:
+                c13();
+                return true;
+            case POPUPMENU_TOOLBAR_PASTE:
+                c17();
+                return true;
+            case POPUPMENU_TOOLBAR_COPY_LINK:
+                Clipboard.a(MAIN.this, h.getUrl());
+                c8(getString(R.string.k9));
+                return true;
+            case POPUPMENU_TOOLBAR_SHARE_LINK:
+                c16(h.getUrl(), 0);
+                return true;
+            case POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN:
+                c58(h.getUrl(), h.getTitle());
+                return true;
+            case POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS:
+                c14(h.getTitle(), h.getUrl());
+                return true;
+            case POPUPMENU_TOOLBAR_COPY_TITLE:
+                Clipboard.a(MAIN.this, h.getTitle());
+                c8(getString(R.string.k9));
+                return true;
+            case POPUPMENU_TOOLBAR_SHARE_TITLE:
+                c16(h.getTitle(), 0);
+                return true;
+        }
+        return false;
+    };
 
     final MenuItem.OnMenuItemClickListener e4 = a1 -> {
         switch (a1.getItemId()) {
-            case 11:
+            case POPUPMENU_PHONE_CALL:
                 c106(sg);
                 return true;
-            case 10:
+            case POPUPMENU_PHONE_SEND_SMS:
                 c105(sg);
                 return true;
-            case 14:
+            case POPUPMENU_PHONE_SHARE:
                 c16(sg, 1);
                 return true;
-            case 4:
+            case POPUPMENU_PHONE_COPY:
                 Clipboard.a(MAIN.this, sg);
                 c8(getString(R.string.k9));
                 return true;
-            case 5:
+            case POPUPMENU_PHONE_DIAL:
                 c104(sg);
                 return true;
-            case 6:
+            case POPUPMENU_PHONE_ADD_TO_CONTACTS:
                 c110(sg);
                 return true;
         }
@@ -392,7 +426,7 @@ public class MAIN extends MainBaseActivity implements Format {
     };
 
     final MenuItem.OnMenuItemClickListener e3 = a1 -> {
-        if (a1.getItemId() == 14) {
+        if (a1.getItemId() == POPUPMENU_GEO_SHARE) {
             c16(sg, 1);
             return true;
         }
@@ -401,26 +435,22 @@ public class MAIN extends MainBaseActivity implements Format {
 
     final MenuItem.OnMenuItemClickListener e2 = a1 -> {
         switch (a1.getItemId()) {
-            case 4:
+            case POPUPMENU_MAIL_COPY:
                 Clipboard.a(MAIN.this, sg);
                 c8(getString(R.string.k9));
                 return true;
-            case 9:
+            case POPUPMENU_MAIL_SEND_EMAIL:
                 c65(Objects.requireNonNull(sg));
                 return true;
-
-            case 14:
+            case POPUPMENU_MAIL_SHARE:
                 c16(sg, 1);
                 return true;
-
-
         }
         return false;
     };
 
     final MenuItem.OnMenuItemClickListener e1 = a1 -> {
         switch (a1.getItemId()) {
-
             case 3:
                 c16(sg, 0);
                 return true;
@@ -439,71 +469,53 @@ public class MAIN extends MainBaseActivity implements Format {
                 if (Permission.check(MAIN.this, Permission.STORAGE, 4)) {
                     c55(sg, null);
                 }
-
                 return true;
             case 13:
                 c43(sg);
                 return true;
-
             case 5:
                 c112(sg, 7);
                 return true;
             case 15:
-
                 c112(sg, 0);
-
                 return true;
             case 16:
-
                 c112(sg, 1);
-
                 return true;
             case 17:
-
                 c112(sg, 2);
-
                 return true;
             case 18:
-
                 c112(sg, 3);
-
                 return true;
             case 19:
-
                 c112(sg, 5);
-
                 return true;
             case 20:
-
                 c112(sg, 4);
-
                 return true;
             case 21:
-
                 c112(sg, 6);
-
                 return true;
-
         }
         return false;
     };
 
     final MenuItem.OnMenuItemClickListener e23 = a1 -> {
         switch (a1.getItemId()) {
-            case 0:
+            case POPUPMENU_IMAGE_VIEW_IMAGE:
                 c3(sg);
                 return true;
-            case 1:
+            case POPUPMENU_IMAGE_COPY:
                 Clipboard.a(MAIN.this, sg);
                 c8(getString(R.string.k9));
                 return true;
-            case 2:
+            case POPUPMENU_IMAGE_SHARE:
                 c16(sg, 0);
                 return true;
-            case 3:
+            case POPUPMENU_IMAGE_SAVE_IMAGE:
                 c74(new PendingDownloadDataModel(sg, sg, sg, 0L, sg));
                 return true;
-
         }
         return false;
     };
@@ -680,6 +692,7 @@ public class MAIN extends MainBaseActivity implements Format {
             registerReceiver(br4, ift3);
         }
         cdt = new Timer();
+        timer = new Timer();
         pm = (PowerManager) getSystemService(POWER_SERVICE);
         wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "webvium:" + this);
         tv5.setImageResource(R.drawable.a18);
@@ -873,10 +886,6 @@ public class MAIN extends MainBaseActivity implements Format {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (timer != null) {
-            timer.removeCallbacksAndMessages(null);
-            timer = null;
-        }
         if (h != null) {
             fl.removeView(h);
             h.removeAllViews();
@@ -1142,18 +1151,18 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         Menu menu = pm6.getMenu();
         if (Clipboard.c(this)) {
-            menu.add(0, 0, 0, getString(R.string.i2)).setOnMenuItemClickListener(mio);
-            menu.add(0, 1, 0, getString(R.string.i3)).setOnMenuItemClickListener(mio);
+            menu.add(0, POPUPMENU_TOOLBAR_PASTE_AND_SEARCH, 0, getString(R.string.i2)).setOnMenuItemClickListener(mio);
+            menu.add(0, POPUPMENU_TOOLBAR_PASTE, 0, getString(R.string.i3)).setOnMenuItemClickListener(mio);
         }
         SubMenu sb3 = menu.addSubMenu(getString(R.string.u));
-        sb3.add(0, 2, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
-        sb3.add(0, 6, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
+        sb3.add(0, POPUPMENU_TOOLBAR_COPY_LINK, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
+        sb3.add(0, POPUPMENU_TOOLBAR_COPY_TITLE, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
         SubMenu sb2 = menu.addSubMenu(getString(R.string.a8));
-        sb2.add(0, 3, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
-        sb2.add(0, 7, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
+        sb2.add(0, POPUPMENU_TOOLBAR_SHARE_LINK, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
+        sb2.add(0, POPUPMENU_TOOLBAR_SHARE_TITLE, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
         SubMenu sb = menu.addSubMenu(getString(R.string.h17));
-        sb.add(0, 4, 0, getString(R.string.h12)).setOnMenuItemClickListener(mio);
-        sb.add(0, 5, 0, getString(R.string.h11)).setOnMenuItemClickListener(mio);
+        sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN, 0, getString(R.string.h12)).setOnMenuItemClickListener(mio);
+        sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS, 0, getString(R.string.h11)).setOnMenuItemClickListener(mio);
         pm6.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
         pm6.show();
     }
@@ -1806,36 +1815,32 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c41() {
-        if (Objects.requireNonNull(a221().getString("remind", "")).equals("1k")) {
-            if (timer != null) {
-                timer.removeCallbacksAndMessages(null);
-                timer = null;
-            }
-        }
-        if (Objects.requireNonNull(a221().getString("remind", "")).equals("7k")) {
-            timeset = 900000;
-        }
-        if (Objects.requireNonNull(a221().getString("remind", "")).equals("30k")) {
-            timeset = 1800000;
-        }
-        if (Objects.requireNonNull(a221().getString("remind", "")).equals("60k")) {
-            timeset = 3600000;
-        }
-        if (timer != null) {
-            timer = new Handler();
-            timer.postDelayed(this::c42, timeset);
+        if (!Objects.requireNonNull(a221().getString("remind", "")).equals("1k")) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    c42();
+                    timer.cancel();
+                    timer.purge();
+                }
+            }, timeSet());
         }
     }
 
-    public void c42() {
-        if (timer != null) {
-            timer.removeCallbacksAndMessages(null);
-            timer = null;
+    private int timeSet() {
+        if (Objects.requireNonNull(a221().getString("remind", "")).equals("7k")) {
+            return 900000;
+        } else if (Objects.requireNonNull(a221().getString("remind", "")).equals("30k")) {
+            return 1800000;
         }
+        return 3600000; // for 60k
+    }
+
+    public void c42() {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.w2));
-        int i = timeset / 60000;
+        int i = timeSet() / 60000;
         a.setMessage(String.format(getResources().getQuantityString(R.plurals.w1, i), i));
         a.setPositiveButton(getString(R.string.i6), (dialog, i1) -> {
             c41();
@@ -4122,11 +4127,11 @@ public class MAIN extends MainBaseActivity implements Format {
             });
         }
         Menu m = pm1.getMenu();
-        m.add(0, 0, 0, getString(R.string.w19)).setOnMenuItemClickListener(e23);
-        m.add(0, 1, 0, getString(R.string.x3)).setOnMenuItemClickListener(e23);
-        m.add(0, 2, 0, getString(R.string.a8)).setOnMenuItemClickListener(e23);
+        m.add(0, POPUPMENU_IMAGE_VIEW_IMAGE, 0, getString(R.string.w19)).setOnMenuItemClickListener(e23);
+        m.add(0, POPUPMENU_IMAGE_COPY, 0, getString(R.string.x3)).setOnMenuItemClickListener(e23);
+        m.add(0, POPUPMENU_IMAGE_SHARE, 0, getString(R.string.a8)).setOnMenuItemClickListener(e23);
         if (i != 12) {
-            m.add(0, 3, 0, getString(R.string.w18)).setOnMenuItemClickListener(e23);
+            m.add(0, POPUPMENU_IMAGE_SAVE_IMAGE, 0, getString(R.string.w18)).setOnMenuItemClickListener(e23);
         }
         pm1.show();
     }
@@ -4169,9 +4174,9 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             });
             Menu m = pm3.getMenu();
-            m.add(0, 9, 0, getString(R.string.x2)).setOnMenuItemClickListener(e2);
-            m.add(0, 4, 0, getString(R.string.u)).setOnMenuItemClickListener(e2);
-            m.add(0, 14, 0, getString(R.string.a8)).setOnMenuItemClickListener(e2);
+            m.add(0, POPUPMENU_MAIL_SEND_EMAIL, 0, getString(R.string.x2)).setOnMenuItemClickListener(e2);
+            m.add(0, POPUPMENU_MAIL_COPY, 0, getString(R.string.u)).setOnMenuItemClickListener(e2);
+            m.add(0, POPUPMENU_MAIL_SHARE, 0, getString(R.string.a8)).setOnMenuItemClickListener(e2);
         }
         pm3.show();
     }
@@ -4185,7 +4190,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             });
             Menu m = pm4.getMenu();
-            m.add(0, 14, 0, getString(R.string.a8)).setOnMenuItemClickListener(e3);
+            m.add(0, POPUPMENU_GEO_SHARE, 0, getString(R.string.a8)).setOnMenuItemClickListener(e3);
         }
         pm4.show();
     }
@@ -4199,12 +4204,12 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             });
             Menu a1 = pm5.getMenu();
-            a1.add(0, 10, 0, getString(R.string.w20)).setOnMenuItemClickListener(e4);
-            a1.add(0, 11, 0, getString(R.string.x1)).setOnMenuItemClickListener(e4);
-            a1.add(0, 5, 0, getString(R.string.w24)).setOnMenuItemClickListener(e4);
-            a1.add(0, 6, 0, getString(R.string.w25)).setOnMenuItemClickListener(e4);
-            a1.add(0, 4, 0, getString(R.string.u)).setOnMenuItemClickListener(e4);
-            a1.add(0, 14, 0, getString(R.string.a8)).setOnMenuItemClickListener(e4);
+            a1.add(0, POPUPMENU_PHONE_SEND_SMS, 0, getString(R.string.w20)).setOnMenuItemClickListener(e4);
+            a1.add(0, POPUPMENU_PHONE_CALL, 0, getString(R.string.x1)).setOnMenuItemClickListener(e4);
+            a1.add(0, POPUPMENU_PHONE_DIAL, 0, getString(R.string.w24)).setOnMenuItemClickListener(e4);
+            a1.add(0, POPUPMENU_PHONE_ADD_TO_CONTACTS, 0, getString(R.string.w25)).setOnMenuItemClickListener(e4);
+            a1.add(0, POPUPMENU_PHONE_COPY, 0, getString(R.string.u)).setOnMenuItemClickListener(e4);
+            a1.add(0, POPUPMENU_PHONE_SHARE, 0, getString(R.string.a8)).setOnMenuItemClickListener(e4);
         }
         pm5.show();
     }

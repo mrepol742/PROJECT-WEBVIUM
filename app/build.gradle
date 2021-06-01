@@ -46,6 +46,11 @@ android {
             debuggable false
             minifyEnabled true
             shrinkResources true
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "Webvium-v${variant.versionName}.apk"
+                }
+            }
         }
     }
 

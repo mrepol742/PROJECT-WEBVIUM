@@ -41,6 +41,15 @@ assets/
 app/src/main/c-playstore.png
 app/src/release/
 app/src/debug/
+stylesheet.css
+buildJavaDoc.bat
+api21.avd.bat
+api22.avd.bat
+newNotification.bat
+newUpdate.bat
+backup.bat
+mrepol742/
+
 
 # IntelliJ
 *.iml
