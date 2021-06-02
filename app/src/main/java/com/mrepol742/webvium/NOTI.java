@@ -17,6 +17,7 @@
 
 package com.mrepol742.webvium;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -33,8 +34,10 @@ import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
+import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.util.Stream;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 // @Class NotificationService
@@ -53,15 +56,24 @@ public class NOTI extends MainService {
         if (!Connectivity.isThereAnyInternetConnection(this)) {
             Runnable runnable = () -> {
                 try {
-                    String neTf = Stream.f("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/notification_data>1.3.txt?raw=true", getString(R.string.c33));
-                    String[] sp = neTf.split(";");
-                    SharedPreferences j988 = getSharedPreferences("wv,", 0);
-                    if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(sp[0]) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(sp[1])) {
-                        f(sp[0], sp[1], sp[2]);
-                        SharedPreferences.Editor gujh = j988.edit();
-                        gujh.putString("notif1", sp[0]);
-                        gujh.putString("notif2", sp[1]);
-                        gujh.apply();
+                    String neTf = Stream.f("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/newNotification.array?raw=true", "742");
+                    if (neTf.equals("742")) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(System.currentTimeMillis());
+                        calendar.set(Calendar.HOUR_OF_DAY, 3);
+                        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                        PendingIntent it = PendingIntent.getService(this, 0, new Intent(this, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
+                    } else {
+                        String[] sp = neTf.split(";");
+                        SharedPreferences j988 = getSharedPreferences("wv,", 0);
+                        if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(Hash.a("SHA-1", sp[0])) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(Hash.a("SHA-1", sp[1]))) {
+                            f(sp[0], sp[1], sp[2]);
+                            SharedPreferences.Editor gujh = j988.edit();
+                            gujh.putString("notif1", Hash.a("SHA-1", sp[0]));
+                            gujh.putString("notif2", Hash.a("SHA-1", sp[1]));
+                            gujh.apply();
+                        }
                     }
                 } catch (Exception en) {
                     en.printStackTrace();

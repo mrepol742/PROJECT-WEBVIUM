@@ -17,6 +17,7 @@
 
 package com.mrepol742.webvium;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -138,6 +139,7 @@ public class SEAR extends MainBaseActivity {
         return false;
     };
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

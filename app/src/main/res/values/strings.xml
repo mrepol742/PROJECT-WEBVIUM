@@ -542,7 +542,7 @@
     <string name="c40">Incorrect PIN</string>
     <string name="d33">Do you really want to import History Database\nThis will override your Browsing History</string>
     <string name="d34">Do you really want to import Bookmarks Database\nThis will override your Bookmarks</string>
-
+    <string name="d35">Suasive</string>
     <string name="d38">Ongoing Download</string>
     <string name="d39">Searching for %1$s</string>
     <string name="d40">Size</string>

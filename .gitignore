@@ -49,6 +49,8 @@ newNotification.bat
 newUpdate.bat
 backup.bat
 mrepol742/
+buildRelease.bat
+buildDebug.bat
 
 
 # IntelliJ

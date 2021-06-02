@@ -202,7 +202,8 @@ public class MAIN extends MainBaseActivity implements Format {
             "https://stackoverflow.com",
             "https://youtube.com",
             "https://github.com",
-            "https://facebook.com"
+            "https://facebook.com",
+            "https://suasive.in"
     };
 
     private static final String[] ads = {
@@ -305,6 +306,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public static final String SE_YOUTUBE = "12b";
     public static final String SE_GITHUB = "13b";
     public static final String SE_FACEBOOK = "14b";
+    public static final String SE_SUASIVE = "15b";
     private WebSettings ws;
     private GeolocationDataModel w6;
     private PermissionDataModel w8;
@@ -579,6 +581,8 @@ public class MAIN extends MainBaseActivity implements Format {
     protected void onCreate(Bundle a) {
 
         super.onCreate(a);
+        cdt = new Timer();
+        timer = new Timer();
         int k5 = getSharedPreferences(WELC.INIT, 0).getInt("noid", 0);
         if (k5 != 275) {
             Intents.a(this, WELC.class);
@@ -691,8 +695,6 @@ public class MAIN extends MainBaseActivity implements Format {
             ift3.act(Intents.ACTION_INVALIDATE);
             registerReceiver(br4, ift3);
         }
-        cdt = new Timer();
-        timer = new Timer();
         pm = (PowerManager) getSystemService(POWER_SERVICE);
         wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "webvium:" + this);
         tv5.setImageResource(R.drawable.a18);
@@ -1941,6 +1943,8 @@ public class MAIN extends MainBaseActivity implements Format {
                 return searchEngine[12] + searchPath[0];
             case SE_FACEBOOK:
                 return searchEngine[13] + searchPath[8];
+            case SE_SUASIVE:
+                return searchEngine[14] + searchPath[0];
         }
     }
 
@@ -1993,6 +1997,8 @@ public class MAIN extends MainBaseActivity implements Format {
                 return searchEngine[12];
             case SE_FACEBOOK:
                 return searchEngine[13];
+            case SE_SUASIVE:
+                return searchEngine[14];
         }
     }
 

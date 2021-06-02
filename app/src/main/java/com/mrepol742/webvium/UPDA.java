@@ -17,6 +17,7 @@
 
 package com.mrepol742.webvium;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -35,6 +36,7 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.util.Stream;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 // @Class UpdateService
@@ -54,8 +56,15 @@ public class UPDA extends MainService {
             Runnable runnable = () -> {
                 try {
                     int b = Integer.parseInt(Package.e(this).replaceAll("\\.", ""));
-                    int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/update_version>1.2.txt?raw=true");
-                    if (newUpdate > b) {
+                    int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/newVersion.int?raw=true");
+                    if (newUpdate == 0) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(System.currentTimeMillis());
+                        calendar.set(Calendar.HOUR_OF_DAY, 3);
+                        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                        PendingIntent it = PendingIntent.getService(this, 0, new Intent(this, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
+                    } else if (newUpdate > b) {
                         MainNotification.b(this, "g", getString(R.string.z2));
                         android.app.Notification.Builder m = Notifications.a(this, "g");
                         m.setSmallIcon(R.drawable.j);

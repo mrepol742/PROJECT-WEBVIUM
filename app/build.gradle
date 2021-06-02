@@ -30,7 +30,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode Integer.parseInt(new Date().format("ddMMyyyy"))
-        versionName "1.3"
+        versionName "1.4"
         proguardFiles getDefaultProguardFile(
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
@@ -46,11 +46,6 @@ android {
             debuggable false
             minifyEnabled true
             shrinkResources true
-            android.applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "Webvium-v${variant.versionName}.apk"
-                }
-            }
         }
     }
 
