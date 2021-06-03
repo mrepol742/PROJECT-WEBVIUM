@@ -45,20 +45,6 @@
 
     </Toolbar>
 
-    <ScrollView
-        a:layout_width="match_parent"
-        a:layout_height="match_parent"
-        a:layout_below="@id/k"
-        a:layout_marginStart="?m"
-        a:layout_marginEnd="?m"
-        a:scrollbarStyle="outsideInset">
-
-        <TextView
-            a:id="@id/c"
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content"
-            a:textIsSelectable="true"
-            a:textSize="@dimen/b" />
-    </ScrollView>
+    <FrameLayout a:id="@id/c" a:layout_below="@id/k" a:layout_width="match_parent" a:layout_height="match_parent" />
 
 </RelativeLayout>

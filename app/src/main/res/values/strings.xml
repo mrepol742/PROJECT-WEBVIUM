@@ -861,7 +861,7 @@
     <string name="x47">To Import a Database</string>
     <string name="x48">Click here to open File Picker and navigate to default backup location %1$s then choose the backup you want to import.</string>
     <string name="x49">Queries</string>
-
+    <string name="x50">Invalid IpAddress.</string>
     <string name="x51">Log</string>
     <string name="x52">Build</string>
     <string name="x53">Mrepol742 (\"Melvin Jones Repol\", \"us\", \"we\" or \"our\") operates the Webvium</string>

@@ -45,7 +45,6 @@ import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.net.http.SslError;
 import android.net.wifi.WifiManager;
-import android.nfc.NfcAdapter;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -328,7 +327,6 @@ public class MAIN extends MainBaseActivity implements Format {
     private String cll;
     private PermissionHelper d12;
     private R7 r7;
-    private NfcAdapter nfc;
     private FrameLayout fl;
     private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7;
     private TextView inf;
@@ -369,6 +367,15 @@ public class MAIN extends MainBaseActivity implements Format {
     public static final int POPUPMENU_MAIN_WEB_OSINT_NSLookup = 13;
     public static final int POPUPMENU_MAIN_WEB_OSINT_SOURCE_CODE = 5;
     public static final int POPUPMENU_MAIN_WEB_OSINT_SAVE_LINK = 12;
+    public static int LINKS = 0;
+    public static int TRANCEROUTE = 1;
+    public static int NPING = 2;
+    public static int WHOIS = 3;
+    public static int META_TAGS = 4;
+    public static int HEADERS = 5;
+    public static int ROBOTS = 6;
+    public static int SOURCE_CODE = 7;
+    public static int IP_GEO = 8;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -701,7 +708,6 @@ public class MAIN extends MainBaseActivity implements Format {
         tv5.setBackgroundResource(R.drawable.b17);
         this.iw.setImageResource(R.drawable.a15);
         this.cd.setBackgroundResource(R.drawable.w);
-        nfc = NfcAdapter.getDefaultAdapter(this);
         c15();
         c50();
         tv3.setOnClickListener(view -> {
@@ -2004,10 +2010,13 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c49(String a) {
         String a5 = a.trim().toLowerCase();
-        if (a.equals("webvium://log")) {
-            h.loadUrl(StorageDirectory.getFileDir(this) + "/main.log");
-        } else if (a.equals("webvium://logcat")) {
-            Intents.a(this, LOGC.class);
+        if (a.startsWith("view-source:") && (a.contains("https://") || a.contains("http://") || a.contains("file://") || a.contains("content://"))) {
+            Intent it = new Intent(this, TOOL.class);
+            it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+            it.putExtra("dat", a5);
+            startActivity(it);
+        } else if (a.equals("about:blank")) {
+            h.loadUrl("about:blank");
         } else if (IPAddress.isValidIpAddress(a)) {
             h.loadUrl(a);
         } else if (URLUtil.isValidUrl(a5)) {
@@ -3345,39 +3354,29 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
-    public void c112(String url, final int type) {
+    public void c112(String url, int type) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
         a.setCancelable(true);
-        switch (type) {
-            case 0:
-                a.setTitle(getString(R.string.x9)); // LINKS
-                break;
-            case 1:
-                a.setTitle(getString(R.string.x16)); // TRANCEROUT
-                break;
-            case 2:
-                a.setTitle(getString(R.string.y11)); //NPing
-                break;
-            case 3:
-                a.setTitle(getString(R.string.z4)); //Whois
-                break;
-            case 4:
-                a.setTitle(getString(R.string.z15)); //Meta Tags
-                break;
-            case 5:
-                a.setTitle(getString(R.string.y15)); // Headers
-                break;
-            case 6:
-                a.setTitle(getString(R.string.f32)); // Robots
-                break;
-            case 7:
-                a.setTitle(getString(R.string.j)); // Source Code
-                break;
-            case 8:
-                a.setTitle(getString(R.string.z12)); // IP GeolocationDataModel
-                break;
+        if (type == LINKS) {
+            a.setTitle(getString(R.string.x9)); // LINKS
+        } else if (type == TRANCEROUTE) {
+            a.setTitle(getString(R.string.x16)); // TRANCEROUT
+        } else if (type == NPING) {
+            a.setTitle(getString(R.string.y11)); //NPing
+        } else if (type == WHOIS) {
+            a.setTitle(getString(R.string.z4)); //Whois
+        } else if (type == META_TAGS) {
+            a.setTitle(getString(R.string.z15)); //Meta Tags
+        } else if (type == HEADERS) {
+            a.setTitle(getString(R.string.y15)); // Headers
+        } else if (type == ROBOTS) {
+            a.setTitle(getString(R.string.f32)); // Robots
+        } else if (type == SOURCE_CODE) {
+            a.setTitle(getString(R.string.j)); // Source Code
+        } else if (type == IP_GEO) {
+            a.setTitle(getString(R.string.z12)); // IP GeolocationDataModel
         }
         a.setView(c);
         final EDIT ed = c.findViewById(R.id.g8);
@@ -3389,14 +3388,12 @@ public class MAIN extends MainBaseActivity implements Format {
         int f3 = Resources.getColor(this, R.color.k);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
-
             ti.setTextColor(e3);
         } else {
             ed.setTextColor(f);
             ti.setTextColor(f3);
-
         }
-        if (type == 0 || type == 4 || type == 5 || type == 7 || type == 6) {
+        if (type == 0 || (type >= 4 && type <= 7)) {
             ed.setText(url);
         } else if (type == 8) {
             ed.setText(getString(R.string.v13));
@@ -3411,90 +3408,29 @@ public class MAIN extends MainBaseActivity implements Format {
         bn.setText(getString(R.string.i6));
         ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io", "mrepol742.github.io"));
         final AlertDialog g = a.create();
-        bn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                String a = ed.getText().toString();
-                switch (type) {
-                    case 0:
-                        if (Domain.isValidDomain(a)) {
-                            b(a);
-                            // b(getString(R.string.x9) + " | " + a);
-                        }
-                        break;
-                    case 1:
-                        if (Domain.isValidDomain(a)) {
-                            b(a);
-                            //  b(getString(R.string.x16) + " | " + a);
-                        }
-                        break;
-                    case 2:
-                        if (Domain.isValidDomain(a)) {
-                            b(a);
-                            // b(getString(R.string.y11) + " | " + a);
-                        }
-                        break;
-                    case 3:
-                        if (Domain.isValidDomain(a)) {
-                            b(a);
-                            // b(getString(R.string.z4) + " | " + a);
-                        }
-                        break;
-                    case 4:
-                        if (Domain.isValidDomain(a)) {
-                            b(a);
-                            //  b(getString(R.string.z15) + " | " + a);
-                        }
-                        break;
-                    case 5:
-                        if (Domain.isValidDomain(a)) {
-                            c(a);
-                            // c(getString(R.string.y15) + " | " + a);
-                        }
-                        break;
-                    case 6:
-                        if (Domain.isValidDomain(a)) {
-                            b(a);
-                            //b(getString(R.string.f32) + " | " + a);
-                        }
-                        break;
-                    case 7:
-                        if (Domain.isValidDomain(a)) {
-                            b(a);
-                            // b(getString(R.string.j) + " | " + a);
-                        }
-                        break;
-                    case 8:
-                        b(a);
-                        //b(getString(R.string.z12) + " | " + a);
-                        break;
-                }
+        bn.setOnClickListener(view -> {
+            String a1 = ed.getText().toString();
+            Intent it = new Intent(MAIN.this, TOOL.class);
+            it.putExtra("dat", a1);
+            if (type == SOURCE_CODE) {
+                it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+            } else if (type == HEADERS) {
+                it.putExtra("id", TOOL.TOOL_HEADERS);
+            } else if (type == ROBOTS) {
+                it.putExtra("id", TOOL.TOOL_ROBOTS);
             }
-
-            public void b(String qr) {
-                g.dismiss();
-                Intent it = new Intent(MAIN.this, TOOL.class);
-                it.putExtra("value", qr);
-                startActivity(it);
-            }
-
-            public void c(String qr) {
-                g.dismiss();
-                Intent it = new Intent(MAIN.this, TOOL.class);
-                it.putExtra("value0", qr);
-                startActivity(it);
-            }
+            startActivity(it);
+            g.dismiss();
         });
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
-                if (type == 6 || type == 7) {
-                    if (!Domain.isValidDomain(url)) {
-                        ed.setError(getString(R.string.c32));
-                    }
+                if (!Domain.isValidDomain(url)) {
+                    ed.setError(getString(R.string.c32));
+                } else if (!IPAddress.isValidIpAddress(url)) {
+                    ed.setError(getString(R.string.x50));
                 }
             }
 
@@ -3573,14 +3509,8 @@ public class MAIN extends MainBaseActivity implements Format {
             Runnable p15 = () -> {
                 String str = ed.getText().toString();
                 try {
-                    int it = Integer.parseInt(str);
-                    if (it > 0 && it <= 25000) {
-                        String sg = U1.a(it);
+                        String sg = U1.a(Integer.parseInt(str));
                         runOnUiThread(() -> ti.setText(sg));
-                    } else {
-                        runOnUiThread(() -> c7("Too many inputs..."));
-                    }
-
                 } catch (NumberFormatException nfe) {
                     nfe.printStackTrace();
                 }
@@ -3591,13 +3521,8 @@ public class MAIN extends MainBaseActivity implements Format {
             Runnable p15 = () -> {
                 String str = ed.getText().toString();
                 try {
-                    int it = Integer.parseInt(str);
-                    if (it > 0 && it <= 25000) {
-                        String sg = U1.a(it);
-                        runOnUiThread(() -> ti.setText(sg));
-                    } else {
-                        runOnUiThread(() -> c7("Too many inputs."));
-                    }
+                    String sg = U1.a(Integer.parseInt(str));
+                    runOnUiThread(() -> ti.setText(sg));
                 } catch (NumberFormatException nfe) {
                     nfe.printStackTrace();
                 }
@@ -4969,19 +4894,6 @@ public class MAIN extends MainBaseActivity implements Format {
             } else if (sg0 != null) {
                 c49(sg0);
                 a.removeExtra("value");
-            } else if (nfc != null) {
-                if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(sg1)) {
-                    Parcelable[] rawMessages = a.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-                    if (rawMessages != null) {
-                        //NdefMessage[] messages = new NdefMessage[rawMessages.length];
-                        StringBuilder sb = new StringBuilder();
-                        for (Parcelable rawMessage : rawMessages) {
-                            //messages[i] = (NdefMessage) rawMessages[i];
-                            sb.append(rawMessage);
-                        }
-                        c49(sb.toString());
-                    }
-                }
             } else if (sg1.equals(Intents.ACTION_PASTE_SEARCH)) {
                 try {
                     String c = Clipboard.b(this);

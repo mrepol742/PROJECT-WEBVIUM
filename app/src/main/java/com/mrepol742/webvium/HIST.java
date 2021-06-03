@@ -48,6 +48,7 @@ import com.mrepol742.webvium.history.HistoryAdapter;
 import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
+import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Stream;
@@ -56,6 +57,7 @@ import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 // @Class History
 public class HIST extends BaseActivity {
@@ -69,6 +71,15 @@ public class HIST extends BaseActivity {
     private TextView f4;
     private PopupMenu pm;
     private int b;
+    public static int LINKS = 0;
+    public static int TRANCEROUTE = 1;
+    public static int NPING = 2;
+    public static int WHOIS = 3;
+    public static int META_TAGS = 4;
+    public static int HEADERS = 5;
+    public static int ROBOTS = 6;
+    public static int SOURCE_CODE = 7;
+    public static int IP_GEO = 8;
 
     final MenuItem.OnMenuItemClickListener d = a1 -> {
         try {
@@ -504,34 +515,24 @@ public class HIST extends BaseActivity {
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
         a.setCancelable(true);
-        switch (type) {
-            case 0:
-                a.setTitle(getString(R.string.x9)); // LINKS
-                break;
-            case 1:
-                a.setTitle(getString(R.string.x16)); // TRANCEROUT
-                break;
-            case 2:
-                a.setTitle(getString(R.string.y11)); //NPing
-                break;
-            case 3:
-                a.setTitle(getString(R.string.z4)); //Whois
-                break;
-            case 4:
-                a.setTitle(getString(R.string.z15)); //Meta Tags
-                break;
-            case 5:
-                a.setTitle(getString(R.string.y15)); // Headers
-                break;
-            case 6:
-                a.setTitle(getString(R.string.f32)); // Robots
-                break;
-            case 7:
-                a.setTitle(getString(R.string.j)); // Source Code
-                break;
-            case 8:
-                a.setTitle(getString(R.string.z12)); // IP GeolocationDataModel
-                break;
+        if (type == LINKS) {
+            a.setTitle(getString(R.string.x9)); // LINKS
+        } else if (type == TRANCEROUTE) {
+            a.setTitle(getString(R.string.x16)); // TRANCEROUT
+        } else if (type == NPING) {
+            a.setTitle(getString(R.string.y11)); //NPing
+        } else if (type == WHOIS) {
+            a.setTitle(getString(R.string.z4)); //Whois
+        } else if (type == META_TAGS) {
+            a.setTitle(getString(R.string.z15)); //Meta Tags
+        } else if (type == HEADERS) {
+            a.setTitle(getString(R.string.y15)); // Headers
+        } else if (type == ROBOTS) {
+            a.setTitle(getString(R.string.f32)); // Robots
+        } else if (type == SOURCE_CODE) {
+            a.setTitle(getString(R.string.j)); // Source Code
+        } else if (type == IP_GEO) {
+            a.setTitle(getString(R.string.z12)); // IP GeolocationDataModel
         }
         a.setView(c);
         final EDIT ed = c.findViewById(R.id.g8);
@@ -543,89 +544,39 @@ public class HIST extends BaseActivity {
         int f3 = Resources.getColor(this, R.color.k);
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
-            bn.setTextColor(e);
             ti.setTextColor(e3);
         } else {
             ed.setTextColor(f);
             ti.setTextColor(f3);
-            bn.setTextColor(f);
         }
-        if (type == 8) {
+        if (type == 0 || (type >= 4 && type <= 7)) {
+            ed.setText(url);
+        } else if (type == 8) {
+            ed.setText(getString(R.string.v13));
             Runnable p15 = () -> {
-                String sg = Stream.c(url, "");
+                final String sg = Stream.c(url, getString(R.string.c33));
                 runOnUiThread(() -> ed.setText(sg));
             };
             new Thread(p15).start();
         } else {
-            ed.setText(url);
+            ed.setText(Objects.requireNonNull(Uri.parse(url).getHost()).replace("www.", ""));
         }
         bn.setText(getString(R.string.i6));
-
         ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io", "mrepol742.github.io"));
         final AlertDialog g = a.create();
-        bn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                String a = ed.getText().toString();
-                switch (type) {
-                    case 0:
-                        if (Domain.isValidDomain(a)) {
-                            b(getString(R.string.x9) + " | " + a);
-                        }
-                        break;
-                    case 1:
-                        if (Domain.isValidDomain(a)) {
-                            b(getString(R.string.x16) + " | " + a);
-                        }
-                        break;
-                    case 2:
-                        if (Domain.isValidDomain(a)) {
-                            b(getString(R.string.y11) + " | " + a);
-                        }
-                        break;
-                    case 3:
-                        if (Domain.isValidDomain(a)) {
-                            b(getString(R.string.z4) + " | " + a);
-                        }
-                        break;
-                    case 4:
-                        if (Domain.isValidDomain(a)) {
-                            b(getString(R.string.z15) + " | " + a);
-                        }
-                        break;
-                    case 5:
-                        if (Domain.isValidDomain(a)) {
-                            c(getString(R.string.y15) + " | " + a);
-                        }
-                        break;
-                    case 6:
-                        if (Domain.isValidDomain(a)) {
-                            b(getString(R.string.f32) + " | " + a);
-                        }
-                        break;
-                    case 7:
-                        if (Domain.isValidDomain(a)) {
-                            b(getString(R.string.j) + " | " + a);
-                        }
-                        break;
-                    case 8:
-                        b(getString(R.string.z12) + " | " + a);
-                        break;
-                }
+        bn.setOnClickListener(view -> {
+            String a1 = ed.getText().toString();
+            Intent it = new Intent(HIST.this, TOOL.class);
+            it.putExtra("dat", a1);
+            if (type == SOURCE_CODE) {
+                it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+            } else if (type == HEADERS) {
+                it.putExtra("id", TOOL.TOOL_HEADERS);
+            } else if (type == ROBOTS) {
+                it.putExtra("id", TOOL.TOOL_ROBOTS);
             }
-
-            public void b(String qr) {
-                g.dismiss();
-                Intent it = new Intent(HIST.this, TOOL.class);
-                it.putExtra("value", qr);
-                HIST.this.startActivity(it);
-            }
-
-            public void c(String qr) {
-                g.dismiss();
-                Intent it = new Intent(HIST.this, TOOL.class);
-                it.putExtra("value0", qr);
-                HIST.this.startActivity(it);
-            }
+            startActivity(it);
+            g.dismiss();
         });
         ed.addTextChangedListener(new TextWatcher() {
 
@@ -634,6 +585,8 @@ public class HIST extends BaseActivity {
                 String url = ed.getText().toString().trim();
                 if (!Domain.isValidDomain(url)) {
                     ed.setError(getString(R.string.c32));
+                } else if (!IPAddress.isValidIpAddress(url)) {
+                    ed.setError(getString(R.string.x50));
                 }
             }
 

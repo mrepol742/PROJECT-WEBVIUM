@@ -57,7 +57,6 @@
     <uses-permission a:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission a:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission a:name="android.permission.WAKE_LOCK" />
-    <uses-permission a:name="android.permission.NFC" />
 
     <uses-feature
         a:name="android.hardware.camera"
@@ -79,9 +78,6 @@
         a:required="false" />
     <uses-feature
         a:name="android.hardware.wifi"
-        a:required="false" />
-    <uses-feature
-        a:name="android.hardware.nfc"
         a:required="false" />
 
     <application
@@ -381,20 +377,6 @@
                     tools:ignore="AppLinkUrlError" />
                 <data a:scheme="http" />
                 <data a:scheme="https" />
-            </intent-filter>
-            <intent-filter a:label="@string/h10">
-                <action a:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category a:name="android.intent.category.DEFAULT" />
-
-                <data a:scheme="http" />
-                <data a:scheme="https" />
-            </intent-filter>
-            <intent-filter a:label="@string/h10">
-                <action a:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category a:name="android.intent.category.DEFAULT" />
-                <data a:mimeType="text/plain" />
             </intent-filter>
             <intent-filter a:label="@string/h10">
                 <action a:name="android.intent.action.VIEW" />
@@ -709,20 +691,6 @@
                     tools:ignore="AppLinkUrlError" />
                 <data a:scheme="http" />
                 <data a:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action a:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category a:name="android.intent.category.DEFAULT" />
-
-                <data a:scheme="http" />
-                <data a:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action a:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category a:name="android.intent.category.DEFAULT" />
-                <data a:mimeType="text/plain" />
             </intent-filter>
             <intent-filter a:label="@string/x15">
                 <action a:name="android.intent.action.SEND" />

@@ -73,25 +73,15 @@ import java.util.Objects;
 
 // @Class SearchHistory
 public class SEAR extends MainBaseActivity {
-    private static final String[] securedUrls = {
-            "webvium://robots.txt",
-            "about:blank",
-            "webvium://blank",
-            "webvium://launch",
-            "webvium://beta",
-            "webvium://manage_space",
+    private final String[] webvium = {
+            "webvium://dev",
+            "webvium-source:",
             "webvium://logcat",
-            "webvium://assist",
-            "file://",
-            "http://",
-            "webvium://search_history_lite",
-            "webvium://history_lite",
-            "webvium://bookmarks_lite",
-            "webvium://log",
             "webvium://calculator",
             "webvium://credits",
-            "webvium://terms",
-            "webvium://privacy"
+            "webvium://termsandcondition",
+            "webvium://privacypolicy",
+            "webvium://blank"
     };
     private AutoCompleteTextView p;
     private ListView d;
@@ -238,7 +228,7 @@ public class SEAR extends MainBaseActivity {
             }
 
             d.setOnItemClickListener((adapterView, view, c1, l) -> {
-                searchAlgorithm(aa.getItem(c1).toString());
+                search(aa.getItem(c1).toString());
                 finish();
                 SoftKeyboard.hide(SEAR.this, b19);
             });
@@ -327,7 +317,7 @@ public class SEAR extends MainBaseActivity {
                 String query = p.getText().toString();
                 if (U3.b(query)) {
                     d2.c(query);
-                    searchAlgorithm(query);
+                    search(query);
                     finish();
                 }
                 return true;
@@ -335,6 +325,11 @@ public class SEAR extends MainBaseActivity {
             return false;
         });
         o();
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_dropdown_item_1line, webvium);
+            p.setAdapter(adapter);
+            p.setThreshold(4);
+            p.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
         if (a221().getBoolean("voice", true) && !spr()) {
             iv.setImageResource(R.drawable.c9);
             iv.setBackgroundResource(R.drawable.c6);
@@ -344,13 +339,6 @@ public class SEAR extends MainBaseActivity {
         } else {
             iv.setVisibility(View.GONE);
         }
-        if (a224("webDa", false)) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_dropdown_item_1line, securedUrls);
-            p.setAdapter(adapter);
-            p.setThreshold(4);
-            p.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
-        }
         iv1.setOnClickListener(view -> {
             if (p.getText().toString().length() == 0) {
                 finishAndRemoveTask();
@@ -358,7 +346,6 @@ public class SEAR extends MainBaseActivity {
                 p.getText().clear();
             }
         });
-
         ActionBar ab = getActionBar();
         if (ab != null) {
             // ab.setDisplayHomeAsUpEnabled(false);
@@ -464,58 +451,58 @@ public class SEAR extends MainBaseActivity {
         a.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
     }
 
-    private void searchAlgorithm(String a) {
-        SharedPreferences prefs4 = getSharedPreferences("wv,", 0);
-        boolean d78 = prefs4.getBoolean("webDa", false);
-        if (a.equals(securedUrls[4])) {
-            SharedPreferences.Editor ed = prefs4.edit();
-            if (d78) {
-                ed.putBoolean("webDa", false);
-                Toast.a(this, "Your now beta tester");
-            } else {
-                ed.putBoolean("webDa", true);
-                Toast.a(this, "Your been removed from beta tester");
-            }
-            ed.apply();
-        }
-        if (a.equals(securedUrls[5])) {
-            Intents.a(this, MANG.class);
-        } else if (a.equals(securedUrls[6]) && d78) {
-            Intents.a(this, LOGC.class);
-        } else if (a.equals(securedUrls[7])) {
-            Intents.a(this, ASSI.class);
-
-        } else if (a.equals(securedUrls[13]) && d78) {
-            if (getCallingActivity() != null) {
-                Intents.d("value", "file://" + StorageDirectory.getFileDir(this) + "/main.log", SEAR.this);
-            } else {
-                Intents.e(this, "value", "file://" + StorageDirectory.getFileDir(this) + "/main.log", MAIN.class);
-            }
-            // "webvium://search_history_lite", "webvium://history_lite", "webvium://bookmarks_lite", 10
-        } else if (a.equals("webvium://search")) {
-            if (getCallingActivity() != null) {
-                Intents.d("b", a, SEAR.this);
-            } else {
-                Intents.e(this, "b", a, MAIN.class);
-            }
-        } else if (a.equals(securedUrls[11])) {
-            //  Intents.a(this, LOT.class);
-        } else if (a.equals(securedUrls[12])) {
-            // Intents.a(this, ASY.class);
-            //     "webvium://calculator", "webvium://credits", "webvium://terms", "webvium://privacy"}; 15
-
-        } else if (a.equals(securedUrls[14])) {
-            Intents.a(this, PRET.class);
-        } else if (a.equals(securedUrls[15])) {
-            Intents.a(this, CRED.class);
-        } else if (a.equals(securedUrls[16])) {
-            v("a");
-        } else if (a.equals(securedUrls[17])) {
-            v("b");
-        } else if (getCallingActivity() != null) {
-            Intents.d("value", a, SEAR.this);
+    private void search(String a) {
+        if (a.startsWith("webvium-source:") || a.startsWith("view-source:") && (a.contains("https://") || a.contains("http://") || a.contains("file://") || a.contains("content://"))) {
+            Intent it = new Intent(this, TOOL.class);
+            it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+            it.putExtra("dat", a);
+            startActivity(it);
         } else {
-            Intents.e(this, "value", a, MAIN.class);
+            switch (a) {
+                case "webvium://dev":
+                    SharedPreferences prefs4 = getSharedPreferences("wv,", 0);
+                    boolean d78 = prefs4.getBoolean("webDa", false);
+                    SharedPreferences.Editor ed = prefs4.edit();
+                    if (d78) {
+                        ed.putBoolean("webDa", false);
+                        Toast.a(this, "Your now a developer.");
+                    } else {
+                        ed.putBoolean("webDa", true);
+                    }
+                    ed.apply();
+                    break;
+                case "webvium://logcat":
+                    Intents.a(this, LOGC.class);
+                    break;
+                case "webvium://calculator":
+                    Intents.a(this, PRET.class);
+                    break;
+                case "webvium://credits":
+                    Intents.a(this, CRED.class);
+                    break;
+                case "webvium://termsandcondition":
+                    Intents.a(this, TERM.class);
+                    break;
+                case "webvium://managespace":
+                    Intents.a(this, MANG.class);
+                    break;
+                case "webvium://privacypolicy":
+                    Intents.a(this, PRIV.class);
+                    break;
+                case "webvium://blank":
+                    send("about:blank");
+                    break;
+                default:
+                    send(a);
+            }
+        }
+    }
+
+    private void send(String sg) {
+        if (getCallingActivity() != null) {
+            Intents.d("value", sg, SEAR.this);
+        } else {
+            Intents.e(this, "value", sg, MAIN.class);
         }
     }
 
@@ -686,12 +673,6 @@ public class SEAR extends MainBaseActivity {
     private void u(String a, String b) {
         BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
         d3.c(a, b);
-    }
-
-    public void v(String b) {
-        Intent a = new Intent(this, TERM.class);
-        a.putExtra("a", b);
-        startActivity(a);
     }
 
     private void w(final String oldTitle) {
