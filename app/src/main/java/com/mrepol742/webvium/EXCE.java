@@ -19,9 +19,15 @@ package com.mrepol742.webvium;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.content.Resources;
 
 public class EXCE extends BaseActivity {
     final String[] exceptionType = {
@@ -39,16 +45,15 @@ public class EXCE extends BaseActivity {
             "Invalid toNumber block operation\n",
             "Invalid intent operation"
     };
+    private String madeErrMsg;
 
     @Override
     protected void onCreate(Bundle be) {
         theme(T_ASSISTANT);
         super.onCreate(be);
         Intent intent = getIntent();
-        String errMsg = "";
-        String madeErrMsg = "";
         if (intent != null) {
-            errMsg = intent.getStringExtra("error");
+            String errMsg = intent.getStringExtra("error");
             String[] spilt = errMsg.split("\n");
             try {
                 int le = exceptionType.length;
@@ -66,19 +71,40 @@ public class EXCE extends BaseActivity {
             }
         }
         AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        bld.setTitle(getString(R.string.y65));
-        bld.setMessage(madeErrMsg);
+        LayoutInflater d = getLayoutInflater();
+        View e = d.inflate(R.layout.a1, null);
+        bld.setView(e);
+        TextView tv = e.findViewById(R.id.o30);
+        TextView tv1 = e.findViewById(R.id.o31);
+        Button bn = e.findViewById(R.id.o33);
+        Button bn1 = e.findViewById(R.id.o32);
+        tv.setTypeface(type(Typeface.BOLD));
+        tv1.setTypeface(type(Typeface.NORMAL));
+        bn.setTypeface(type(Typeface.NORMAL));
+        bn1.setTypeface(type(Typeface.NORMAL));
+        tv.setText(getString(R.string.y65));
+        tv1.setText(madeErrMsg);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            tv.setTextColor(Resources.getColor(this, R.color.c));
+            tv1.setTextColor(Resources.getColor(this, R.color.c));
+        } else {
+            tv.setTextColor(Resources.getColor(this, R.color.b));
+            tv1.setTextColor(Resources.getColor(this, R.color.b));
+        }
+        bn.setText(getString(R.string.y67));
+        bn1.setText(getString(R.string.y66));
         String temp = madeErrMsg;
-        bld.setPositiveButton(getString(R.string.y67), (dialog, which) -> {
+        AlertDialog dd = bld.create();
+        bn.setOnClickListener((v) -> {
             Intent it = new Intent(this, FEED.class);
             it.putExtra("webvium", temp);
             startActivity(it);
-            dialog.dismiss();
+            dd.dismiss();
         });
-        bld.setNeutralButton(getString(R.string.y66), (dialog, which) -> {
+        bn1.setOnClickListener((v) -> {
             finish();
-            dialog.dismiss();
+            dd.dismiss();
         });
-        bld.create().show();
+        dd.show();
     }
 }

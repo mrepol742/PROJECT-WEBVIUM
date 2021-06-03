@@ -273,9 +273,9 @@ public class MAIN extends MainBaseActivity implements Format {
     public int it7422;
     public Timer cdt;
     public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
-    private StringBuilder cm; // console message
-    private StringBuilder cm0;// receive error
-    private StringBuilder cm2;// receive ssl error
+    private final StringBuilder cm = new StringBuilder(); // console message
+    private final StringBuilder cm0 = new StringBuilder(); // receive error
+    private final StringBuilder cm2 = new StringBuilder(); // receive ssl error
     private CookieManager cm1;
     private HistoryHelper d1;
     private SearchHelper d2;
@@ -2022,7 +2022,6 @@ public class MAIN extends MainBaseActivity implements Format {
         } else if (URLUtil.isValidUrl(a5)) {
             if (a5.startsWith("file://") || a5.startsWith("https://") || a5.startsWith("http://") || a5.startsWith("content://")) {
                 h.loadUrl(c138(a));
-                Toast.b(this, c138(a));
             } else {
                 if (Domain.isValidDomain(a5)) {
                     c3(c138(a));
@@ -2581,11 +2580,11 @@ public class MAIN extends MainBaseActivity implements Format {
                 ssl.getCName(),
                 ssl.getOName(),
                 ssl.getUName(),
-                ce.getValidNotBeforeDate().toString(),
-                ce.getValidNotAfterDate().toString(),
                 ssl0.getCName(),
                 ssl0.getOName(),
-                ssl0.getUName());
+                ssl0.getUName(),
+                ce.getValidNotBeforeDate().toString(),
+                ce.getValidNotAfterDate().toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyddMMHHmmss", Locale.US);
         String vnbd = sdf.format(ce.getValidNotAfterDate());
         String ndt = sdf.format(new Date());
@@ -2637,9 +2636,6 @@ public class MAIN extends MainBaseActivity implements Format {
             if (Build.VERSION.SDK_INT >= 23 && receivedErrorDataModel.c.startsWith("file://")) {
                 Permission.check(this, Permission.STORAGE, 2);
             }
-            if (cm0 == null) {
-                cm0 = new StringBuilder();
-            }
             String sg = String.format(getString(R.string.v20),
                     receivedErrorDataModel.c,
                     receivedErrorDataModel.b,
@@ -2678,12 +2674,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     b.isForMainFrame(),
                     b.hasGesture(),
                     c175());
-            if (cm0 ==null) {
-                cm0 = new StringBuilder(sg9);
-                cm0.append("<br><br>");
-            } else {
-                cm0.append(sg9).append("<br><br>");
-            }
+            cm0.append(sg9).append("<br><br>");
         } catch (Exception e) {
            e.printStackTrace();
         }
@@ -2693,9 +2684,6 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c79(final SslErrorHandler b, SslError c) {
         this.iw.setImageResource(R.drawable.a16);
         Animation.animate(this, R.anim.c, iw);
-        if (cm2 == null) {
-            cm2 = new StringBuilder();
-        }
         String sg = String.format(getString(R.string.g19),
                 c.getUrl(),
                 c.getPrimaryError());
@@ -2794,10 +2782,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public boolean c82(String b) {
         try {
             c38(b);
-            if (b.startsWith("webvium://search")) {
-                c146(0);
-                return true;
-            } else if (MailTo.isMailTo(b)) {
+            if (MailTo.isMailTo(b)) {
                 return c177(b);
             } else if (b.startsWith("smsto:")) {
                 return c178(b);
@@ -3107,9 +3092,6 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c95(String a, int b, String c) {
         String sg = String.format(getString(R.string.v18), a, b, c);
-        if (cm == null) {
-            cm = new StringBuilder();
-        }
         cm.append(sg).append("<br><br>");
     }
 
@@ -3673,29 +3655,6 @@ public class MAIN extends MainBaseActivity implements Format {
         res.close();
     }
 
-    public void c130() {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.y15));
-        LayoutInflater d = getLayoutInflater();
-        View e = d.inflate(R.layout.b15, null);
-        a.setView(e);
-        final TextView f = e.findViewById(R.id.k6);
-        f.setText(getString(R.string.v13));
-        Runnable p15 = () -> {
-            final String sg = Stream.f(Base64.decode("aHR0 cHM6Ly9oNm53b3hxdDdtcnZlcWNwLjAwMH dlYmhvc3RhcHAuY29tL2RhdTc4Zm53anI4ZnNoL2hzL3F3ZXJ0eS5waHA"), getString(R.string.c33));
-            runOnUiThread(() -> f.setText(sg));
-        };
-        new Thread(p15).start();
-        if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.getColor(this, R.color.c));
-        } else {
-            f.setTextColor(Resources.getColor(this, R.color.b));
-        }
-        final AlertDialog g = a.create();
-        g.show();
-    }
-
     public void c134() {
         if (h.canGoForward()) {
             tv4.setImageResource(R.drawable.b13);
@@ -4078,12 +4037,12 @@ public class MAIN extends MainBaseActivity implements Format {
             sm.add(0, 7, 0, getString(R.string.h12)).setOnMenuItemClickListener(e1);
             SubMenu sm0 = a1.addSubMenu(getString(R.string.j36));
             sm0.add(0, 19, 0, getString(R.string.y15)).setOnMenuItemClickListener(e1);
-            sm0.add(0, 15, 0, getString(R.string.x9)).setOnMenuItemClickListener(e1);
-            sm0.add(0, 20, 0, getString(R.string.z15)).setOnMenuItemClickListener(e1);
+            // sm0.add(0, 15, 0, getString(R.string.x9)).setOnMenuItemClickListener(e1);
+            // sm0.add(0, 20, 0, getString(R.string.z15)).setOnMenuItemClickListener(e1);
             sm0.add(0, 21, 0, getString(R.string.f32)).setOnMenuItemClickListener(e1);
-            sm0.add(0, 16, 0, getString(R.string.x16)).setOnMenuItemClickListener(e1);
-            sm0.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(e1);
-            sm0.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(e1);
+            // sm0.add(0, 16, 0, getString(R.string.x16)).setOnMenuItemClickListener(e1);
+           // sm0.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(e1);
+           // sm0.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(e1);
             sm0.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(e1);
             sm0.add(0, 5, 0, getString(R.string.j)).setOnMenuItemClickListener(e1);
             sm0.add(0, 12, 0, getString(R.string.i4)).setOnMenuItemClickListener(e1);
@@ -4663,14 +4622,15 @@ public class MAIN extends MainBaseActivity implements Format {
         // web osint
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
         sm.add(0, 1, 0, getString(R.string.y15));
-        sm.add(0, 2, 0, getString(R.string.x9));
-        sm.add(0, 3, 0, getString(R.string.z15));
-        sm.add(0, 4, 0, getString(R.string.x16));
-        sm.add(0, 5, 0, getString(R.string.y11));
-        sm.add(0, 6, 0, getString(R.string.z4));
+       // sm.add(0, 2, 0, getString(R.string.x9));
+       // sm.add(0, 3, 0, getString(R.string.z15));
+       // sm.add(0, 4, 0, getString(R.string.x16));
+       // sm.add(0, 5, 0, getString(R.string.y11));
+       // sm.add(0, 6, 0, getString(R.string.z4));
         sm.add(0, 7, 0, getString(R.string.h6));
         sm.add(0, 8, 0, getString(R.string.j));
-        sm.add(0, 9, 0, getString(R.string.z12));
+       // sm.add(0, 9, 0, getString(R.string.z12));
+        sm.add(0, 25, 0, getString(R.string.f32));
         // error
         SubMenu b = a.addSubMenu(getString(R.string.h30));
         b.add(0, 10, 0, getString(R.string.h36));
@@ -4683,7 +4643,6 @@ public class MAIN extends MainBaseActivity implements Format {
         a.add(0, 15, 0, getString(R.string.h7));
         a.add(0, 16, 0, getString(R.string.h35));
         a.add(0, 17, 0, getString(R.string.y14));
-        a.add(0, 18, 0, getString(R.string.y15));
         a.add(0, 19, 0, getString(R.string.z16));
         a.add(0, 20, 0, getString(R.string.z17));
         a.add(0, 21, 0, getString(R.string.i4));
@@ -4708,14 +4667,14 @@ public class MAIN extends MainBaseActivity implements Format {
                 c119();
                 return true;
             case 10:
-                if (cm0.length() >= 10 && cm0 != null) {
+                if (cm0.capacity() > 16) {
                     c164();
                 } else {
                     c7(getString(R.string.i33));
                 }
                 return true; 
             case 11:
-                if (cm2.length() >= 10 && cm2 != null) {
+                if (cm2.capacity() > 16) {
                     c165();
                 } else {
                     c7(getString(R.string.i34));
@@ -4724,9 +4683,6 @@ public class MAIN extends MainBaseActivity implements Format {
             //     case R.id.l1:
             //  c112(h.getUrl(), 6);
             //    return true;
-            case 18:
-                c130();
-                return true;
             case 12:
                 if (ws.getJavaScriptEnabled()) {
                     c127();
@@ -4739,6 +4695,9 @@ public class MAIN extends MainBaseActivity implements Format {
                 return true;
             case 3:
                 c112(h.getUrl(), 4);
+                return true;
+            case 25:
+                c112(h.getUrl(), 6);
                 return true;
             case 9:
                 c112(h.getUrl(), 8);
@@ -4770,7 +4729,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
                 return true;
             case 13:
-                if (cm.length() >= 10 && cm != null) {
+                if (cm.capacity() > 16) {
                     c47();
                 } else {
                     c7(getString(R.string.d20));

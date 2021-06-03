@@ -25,6 +25,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -35,6 +36,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.ConsoleMessage;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -42,12 +48,14 @@ import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
+import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
+import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Stream;
@@ -63,6 +71,7 @@ import java.io.OutputStreamWriter;
 public class TOOL extends BaseActivity {
 
     private TextView k;
+    private TextView tt;
     private MainWebView m;
     public static final int TOOL_SOURCE_CODE = 0;
     public static final int TOOL_HEADERS = 1;
@@ -75,6 +84,7 @@ public class TOOL extends BaseActivity {
         super.onCreate(a);
         a225(R.layout.d);
         k = findViewById(R.id.l);
+        tt = findViewById(R.id.o29);
         FrameLayout fl = findViewById(R.id.c);
         Toolbar i = findViewById(R.id.k);
         k.setTypeface(type(Typeface.BOLD));
@@ -84,11 +94,15 @@ public class TOOL extends BaseActivity {
         int p = Resources.getColor(this, R.color.b);
         if (!a221().getBoolean("autoUpdate", false)) {
             k.setTextColor(o);
+            tt.setTextColor(o);
             m.setBackgroundColor(Resources.getColor(this, R.color.p));
         } else {
             k.setTextColor(p);
+            tt.setTextColor(p);
             m.setBackgroundColor(Resources.getColor(this, R.color.m));
         }
+        k.setTypeface(type(Typeface.BOLD));
+        tt.setTypeface(type(Typeface.NORMAL));
         i.setBackgroundResource(R.drawable.p);
         setActionBar(i);
         i.setElevation(5);
@@ -100,6 +114,43 @@ public class TOOL extends BaseActivity {
         }
         i.setNavigationIcon(R.drawable.a2);
         i.setNavigationOnClickListener(view -> finish());
+        m.setWebChromeClient(new WebChromeClient() {
+
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage cm) {
+                AlertDialog.Builder bld = new AlertDialog.Builder(TOOL.this);
+                bld.setTitle(getString(R.string.y65));
+                bld.setMessage(Html.b(String.format(getString(R.string.v18), cm.message(), cm.lineNumber(), cm.sourceId())));
+                bld.setPositiveButton(getString(R.string.i6), (dialog, which) -> dialog.dismiss());
+                bld.create().show();
+                return true;
+            }
+        });
+        m.setWebViewClient(new MainWebViewClient() {
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                Toast.b(TOOL.this, getString(R.string.v13));
+            }
+
+            @Override
+            public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
+                if (Connectivity.isThereAnyInternetConnection(TOOL.this)) {
+                    Toast.c(TOOL.this, getString(R.string.x38));
+                    Toast.b(TOOL.this, getString(R.string.y72));
+                }
+                m.loadDataWithBaseURL("webvium", getString(R.string.c33), "html/text", "UTF-8", null);
+            }
+        });
+        WebSettings ws = m.getSettings();
+        if (Build.VERSION.SDK_INT >= 29) {
+            ws.setForceDark(WebSettings.FORCE_DARK_OFF);
+        }
+        ws.setSupportZoom(true);
+        if (Build.VERSION.SDK_INT < 30) {
+            ws.setAllowFileAccess(true);
+        }
+        ws.setBuiltInZoomControls(true);
     }
 
     @Override
@@ -124,24 +175,21 @@ public class TOOL extends BaseActivity {
             String data = a.getStringExtra("dat");
             switch (id) {
                 case TOOL_SOURCE_CODE:
-                    k.setText(getString(R.string.j));
-                    k.append(" | ");
+                    tt.setText(getString(R.string.j));
                     k.append(data);
                     m.loadUrl(data);
                     break;
                 case TOOL_HEADERS:
-                    k.setText(getString(R.string.y15));
-                    k.append(" | ");
+                    tt.setText(getString(R.string.y15));
                     k.append(data);
                     Runnable p15 = () -> {
                         final String temp = Stream.d(data, getString(R.string.c33));
-                        runOnUiThread(() -> m.loadUrl(temp));
+                        runOnUiThread(() -> m.loadDataWithBaseURL("webvium", temp, "html/text", "UTF-8", null));
                     };
                     new Thread(p15).start();
                     break;
                 case TOOL_ROBOTS:
-                    k.setText(getString(R.string.y15));
-                    k.append(" | ");
+                    tt.setText(getString(R.string.f32));
                     k.append(data);
                     m.loadUrl(data + "/robots.txt");
                     break;

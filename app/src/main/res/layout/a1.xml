@@ -16,26 +16,35 @@
   -->
 
 <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
-    a:layout_width="fill_parent"
-
-    a:layout_height="fill_parent"
-    a:gravity="center"
-    a:orientation="vertical"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
     a:paddingStart="?m"
     a:paddingEnd="?m">
 
     <TextView
-        a:id="@id/k13"
+        a:id="@id/o30"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
-        a:layout_gravity="center_vertical"
         a:layout_marginTop="10dp"
-        a:textIsSelectable="true" a:layout_above="@id/k14"
-        a:textSize="@dimen/c" />
+        a:textSize="@dimen/h" />
 
-    <Button a:layout_marginTop="10dp" a:layout_alignParentBottom="true"
-        a:id="@id/k14"
+    <TextView a:layout_below="@id/o30"
+        a:id="@id/o31"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
-        a:gravity="center" />
+        a:layout_marginTop="10dp"
+        a:textIsSelectable="true" a:layout_above="@id/o33"
+        a:textSize="@dimen/b" />
+
+    <Button a:layout_alignParentBottom="true" a:layout_alignParentEnd="true"
+        a:id="@id/o32"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content" />
+
+    <Button a:layout_alignParentEnd="true" a:layout_above="@id/o32"
+        a:id="@id/o33"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content" />
+
+
 </RelativeLayout>
