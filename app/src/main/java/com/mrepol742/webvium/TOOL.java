@@ -67,6 +67,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URL;
 
 // @Class Tools
 public class TOOL extends BaseActivity {
@@ -195,14 +196,19 @@ public class TOOL extends BaseActivity {
                     break;
                 case TOOL_ROBOTS:
                     Runnable runnable = () -> {
-                        boolean bn = Ping.isReachable(data + "/robots.txt");
-                        runOnUiThread(() -> {
-                            if (bn) {
-                                m.loadUrl(data + "/robots.txt");
-                            } else {
-                                m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
-                            }
-                        });
+                        try {
+                            URL url = new URL(data);
+                            boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
+                            runOnUiThread(() -> {
+                                if (bn) {
+                                    m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
+                                } else {
+                                    m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
+                                }
+                            });
+                        } catch (Exception en) {
+                            en.printStackTrace();
+                        }
                     };
                     new Thread(runnable).start();
                     tt.setText(getString(R.string.f32));
