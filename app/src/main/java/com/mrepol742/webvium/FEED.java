@@ -127,6 +127,7 @@ public class FEED extends BaseActivity {
         Animation.animate(this, R.anim.i, iv);
     }
 
+    @Override
     public boolean onKeyDown(int a5, KeyEvent b) {
         if (b.getAction() == KeyEvent.ACTION_DOWN && a5 == KeyEvent.KEYCODE_BACK) {
             finishAndRemoveTask();
@@ -135,6 +136,7 @@ public class FEED extends BaseActivity {
         return false;
     }
 
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (b != null) {

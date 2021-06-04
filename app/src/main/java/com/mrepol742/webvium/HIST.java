@@ -30,6 +30,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -49,6 +50,7 @@ import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.net.IPAddress;
+import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Stream;
@@ -511,6 +513,13 @@ public class HIST extends BaseActivity {
     }
 
     public void l(String url, final int type) {
+        if (!URLUtil.isValidUrl(url)) {
+            Toast.c(this, getString(R.string.c32));
+            return;
+        } else if (!Domain.isValidDomain(url)) {
+            Toast.c(this, getString(R.string.c32));
+            return;
+        }
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -566,16 +575,19 @@ public class HIST extends BaseActivity {
         final AlertDialog g = a.create();
         bn.setOnClickListener(view -> {
             String a1 = ed.getText().toString();
-            Intent it = new Intent(HIST.this, TOOL.class);
-            it.putExtra("dat", a1);
             if (type == SOURCE_CODE) {
+                Intent it = new Intent(HIST.this, TOOL.class);
+                it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+                startActivity(it);
             } else if (type == HEADERS) {
-                it.putExtra("id", TOOL.TOOL_HEADERS);
+                c126(a1);
             } else if (type == ROBOTS) {
+                Intent it = new Intent(HIST.this, TOOL.class);
+                it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_ROBOTS);
+                startActivity(it);
             }
-            startActivity(it);
             g.dismiss();
         });
         ed.addTextChangedListener(new TextWatcher() {
@@ -585,13 +597,68 @@ public class HIST extends BaseActivity {
                 String url = ed.getText().toString().trim();
                 if (!Domain.isValidDomain(url)) {
                     ed.setError(getString(R.string.c32));
-                } else if (!IPAddress.isValidIpAddress(url)) {
-                    ed.setError(getString(R.string.x50));
                 }
             }
 
 
         });
+        g.show();
+    }
+
+    public void c126(String url) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.b8, null);
+        a.setCancelable(true);
+        a.setTitle(getString(R.string.y15));
+        a.setView(c);
+        final EDIT ed = c.findViewById(R.id.g8);
+        final TextView ti = c.findViewById(R.id.e2);
+        final Button bn = c.findViewById(R.id.k20);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(e);
+            ti.setTextColor(e);
+        } else {
+            ed.setTextColor(f);
+            ti.setTextColor(f);
+        }
+        ti.setText(getString(R.string.v13));
+        ed.setText(Uri.parse(url).getHost());
+        if (URLUtil.isValidUrl(url)) {
+            Runnable p15 = () -> {
+                final String sg = Stream.d(url, getString(R.string.c33));
+                runOnUiThread(() -> ti.setText(Html.b(sg)));
+            };
+            new Thread(p15).start();
+        } else if (Domain.isValidDomain(url)) {
+            Runnable p15 = () -> {
+                final String sg = Stream.d("http://"+url, getString(R.string.c33));
+                runOnUiThread(() -> ti.setText(Html.b(sg)));
+            };
+            new Thread(p15).start();
+        }
+        bn.setText(getString(R.string.i6));
+
+        bn.setOnClickListener(view -> {
+            String ab = ed.getText().toString();
+            ti.setText(getString(R.string.v13));
+            if (URLUtil.isValidUrl(ab)) {
+                Runnable p15 = () -> {
+                    final String sg = Stream.d(ab, getString(R.string.c33));
+                    runOnUiThread(() -> ti.setText(Html.b(sg)));
+                };
+                new Thread(p15).start();
+            } else if (Domain.isValidDomain(ab)) {
+                Runnable p15 = () -> {
+                    final String sg = Stream.d("http://"+ab, getString(R.string.c33));
+                    runOnUiThread(() -> ti.setText(Html.b(sg)));
+                };
+                new Thread(p15).start();
+            }
+        });
+        final AlertDialog g = a.create();
         g.show();
     }
 
@@ -613,15 +680,15 @@ public class HIST extends BaseActivity {
             a.add(0, 24, 0, getString(R.string.u23)).setOnMenuItemClickListener(d);
             SubMenu sb1 = a.addSubMenu(getString(R.string.j36));
             sb1.add(0, 19, 0, getString(R.string.y15)).setOnMenuItemClickListener(d);
-            sb1.add(0, 15, 0, getString(R.string.x9)).setOnMenuItemClickListener(d);
-            sb1.add(0, 20, 0, getString(R.string.z15)).setOnMenuItemClickListener(d);
+            //sb1.add(0, 15, 0, getString(R.string.x9)).setOnMenuItemClickListener(d);
+            //sb1.add(0, 20, 0, getString(R.string.z15)).setOnMenuItemClickListener(d);
             sb1.add(0, 21, 0, getString(R.string.f32)).setOnMenuItemClickListener(d);
-            sb1.add(0, 16, 0, getString(R.string.x16)).setOnMenuItemClickListener(d);
-            sb1.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(d);
-            sb1.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(d);
+            //sb1.add(0, 16, 0, getString(R.string.x16)).setOnMenuItemClickListener(d);
+            //sb1.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(d);
+            //sb1.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(d);
             sb1.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(d);
             sb1.add(0, 5, 0, getString(R.string.j)).setOnMenuItemClickListener(d);
-            sb1.add(0, 22, 0, getString(R.string.z12)).setOnMenuItemClickListener(d);
+            //sb1.add(0, 22, 0, getString(R.string.z12)).setOnMenuItemClickListener(d);
             sb1.add(0, 12, 0, getString(R.string.i4)).setOnMenuItemClickListener(d);
         }
         pm.show();

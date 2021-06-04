@@ -56,6 +56,7 @@ import android.print.PrintManager;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.format.Formatter;
@@ -376,6 +377,8 @@ public class MAIN extends MainBaseActivity implements Format {
     public static int ROBOTS = 6;
     public static int SOURCE_CODE = 7;
     public static int IP_GEO = 8;
+    public static int BASE64_ENCODE = 1;
+    public static int URL_ENCODE = 2;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -3392,16 +3395,19 @@ public class MAIN extends MainBaseActivity implements Format {
         final AlertDialog g = a.create();
         bn.setOnClickListener(view -> {
             String a1 = ed.getText().toString();
-            Intent it = new Intent(MAIN.this, TOOL.class);
-            it.putExtra("dat", a1);
             if (type == SOURCE_CODE) {
+                Intent it = new Intent(MAIN.this, TOOL.class);
+                it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+                startActivity(it);
             } else if (type == HEADERS) {
-                it.putExtra("id", TOOL.TOOL_HEADERS);
+                c126(a1);
             } else if (type == ROBOTS) {
+                Intent it = new Intent(MAIN.this, TOOL.class);
+                it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_ROBOTS);
+                startActivity(it);
             }
-            startActivity(it);
             g.dismiss();
         });
         ed.addTextChangedListener(new TextWatcher() {
@@ -3409,10 +3415,8 @@ public class MAIN extends MainBaseActivity implements Format {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
-                if (!Domain.isValidDomain(url)) {
+                if ((!url.startsWith("http://") || !url.startsWith("https://") || !url.startsWith("file://") || !url.startsWith("content://")) && !Domain.isValidDomain(url)) {
                     ed.setError(getString(R.string.c32));
-                } else if (!IPAddress.isValidIpAddress(url)) {
-                    ed.setError(getString(R.string.x50));
                 }
             }
 
@@ -3585,6 +3589,63 @@ public class MAIN extends MainBaseActivity implements Format {
         Animation.animate(this, R.anim.a, c2);
     }
 
+    public void c126(String url) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.b8, null);
+        a.setCancelable(true);
+        a.setTitle(getString(R.string.y15));
+        a.setView(c);
+        final EDIT ed = c.findViewById(R.id.g8);
+        final TextView ti = c.findViewById(R.id.e2);
+        final Button bn = c.findViewById(R.id.k20);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(e);
+            ti.setTextColor(e);
+        } else {
+            ed.setTextColor(f);
+            ti.setTextColor(f);
+        }
+        ti.setText(getString(R.string.v13));
+        ed.setText(Uri.parse(url).getHost());
+        if (URLUtil.isValidUrl(url)) {
+            Runnable p15 = () -> {
+                final String sg = Stream.d(url, getString(R.string.c33));
+                runOnUiThread(() -> ti.setText(Html.b(sg)));
+            };
+            new Thread(p15).start();
+        } else if (Domain.isValidDomain(url)) {
+            Runnable p15 = () -> {
+                final String sg = Stream.d("http://"+url, getString(R.string.c33));
+                runOnUiThread(() -> ti.setText(Html.b(sg)));
+            };
+            new Thread(p15).start();
+        }
+        bn.setText(getString(R.string.i6));
+
+        bn.setOnClickListener(view -> {
+            String ab = ed.getText().toString();
+            ti.setText(getString(R.string.v13));
+            if (URLUtil.isValidUrl(ab)) {
+                Runnable p15 = () -> {
+                    final String sg = Stream.d(ab, getString(R.string.c33));
+                    runOnUiThread(() -> ti.setText(Html.b(sg)));
+                };
+                new Thread(p15).start();
+            } else if (Domain.isValidDomain(ab)) {
+                Runnable p15 = () -> {
+                    final String sg = Stream.d("http://"+ab, getString(R.string.c33));
+                    runOnUiThread(() -> ti.setText(Html.b(sg)));
+                };
+                new Thread(p15).start();
+            }
+        });
+        final AlertDialog g = a.create();
+        g.show();
+    }
+
     public void c127() {
         String[] suggestion = {"document.getElementById()", "document.getElementByTagName()", "document.getElementByClassName()", "document.getElementByName()", "document.body.style.backgroundColor", "document.body.style.color", "document.body.style.margin", "document.body.style.marginLeft", "document.body.style.marginBottom", "document.body.style.marginRight", "document.body.style.marginTop", "document.body.style.padding", "document.body.style.paddingTop", "document.body.style.paddingBottom", "document.body.style.paddingLeft", "document.body.style.paddingRight", "document.body.style.backgroundImage", "document.body.style.backgroundRepeat", "document.body.style.backgroundClip", "document.body.style.backgroundPosition", "document.body.style.backgroundSize", "document.body.style.background", "document.body.style.cursor", "document.body.style.outline", "document.body.style.fontFamily", "document.body.style.fontSize", "document.body.style.fontWeight", "document.body.style.fontStyle", "Webvium.showToast(var text)", "Webvium.showToastError(var text)", "Webvium.vibrate(var text)", "Webvium.showToastSuccess(var text)", "Webvium.showNotification(var title, var contentText, var validUrl)", "document.getAttribute()", "document.getAttributeNode()", "document.getBoundingClientRect()", "document.getClientRects()", "document.setAttribute()", "document.setAttributeNode()", "document.addEventListener", "Webvium.exit()", "Webvium.copyToClipboard(var)", "Webvium.enableWifi(var boolean)", "Webvium.enableFlashlight(var boolean)"};
         AlertDialog.Builder a = new AlertDialog.Builder(this);
@@ -3654,6 +3715,79 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         res.close();
     }
+
+    public void c130(int type) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.a5, null);
+        a.setCancelable(true);
+        if (type == BASE64_ENCODE) {
+            a.setTitle(getString(R.string.y73));
+        } else if (type == URL_ENCODE){
+            a.setTitle(getString(R.string.y74));
+        }
+        a.setView(c);
+        final EDIT ed = c.findViewById(R.id.o34);
+        final EDIT ed1 = c.findViewById(R.id.o35);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(e);
+            ed1.setTextColor(e);
+        } else {
+            ed.setTextColor(f);
+            ed1.setTextColor(f);
+        }
+       ed.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (ed.hasFocus()) {
+                    try {
+                        if (type == BASE64_ENCODE) {
+                            ed1.setText(Base64.encode(ed.getText().toString()));
+                        } else if (type == URL_ENCODE) {
+                            ed1.setText(URLEncoder.encode(ed.getText().toString(), "UTF-8"));
+                        }
+                    } catch (Exception en) {
+                       
+                        en.printStackTrace();
+                        ed.setError(getString(R.string.y75));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (ed1.hasFocus()) {
+                    try {
+                        if (type == BASE64_ENCODE) {
+                            ed.setText(Base64.decode(ed1.getText().toString()));
+                        } else if (type == URL_ENCODE) {
+                            ed.setText(URLDecoder.decode(ed1.getText().toString(), "UTF-8"));
+                        }
+                    } catch (Exception en) {
+
+                        en.printStackTrace();
+                        ed1.setError(getString(R.string.y75));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        final AlertDialog g = a.create();
+        g.show();
+    }
+
 
     public void c134() {
         if (h.canGoForward()) {
@@ -4639,6 +4773,8 @@ public class MAIN extends MainBaseActivity implements Format {
         SubMenu c = a.addSubMenu(getString(R.string.c8));
         c.add(0, 12, 0, getString(R.string.f23));
         c.add(0, 13, 0, getString(R.string.h4));
+        a.add(0, 26, 0, getString(R.string.y73));
+        a.add(0, 27, 0, getString(R.string.y74));
         a.add(0, 14, 0, getString(R.string.k1));
         a.add(0, 15, 0, getString(R.string.h7));
         a.add(0, 16, 0, getString(R.string.h35));
@@ -4663,6 +4799,12 @@ public class MAIN extends MainBaseActivity implements Format {
     public boolean onOptionsItemSelected(MenuItem a) {
 
         switch (a.getItemId()) {
+            case 26:
+                c130(BASE64_ENCODE);
+                return true;
+            case 27:
+                c130(URL_ENCODE);
+                return true;
             case 17:
                 c119();
                 return true;

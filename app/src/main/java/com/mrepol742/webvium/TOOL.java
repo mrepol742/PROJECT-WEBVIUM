@@ -56,6 +56,7 @@ import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.net.Connectivity;
+import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Stream;
@@ -74,9 +75,8 @@ public class TOOL extends BaseActivity {
     private TextView tt;
     private MainWebView m;
     public static final int TOOL_SOURCE_CODE = 0;
-    public static final int TOOL_HEADERS = 1;
     public static final int TOOL_ROBOTS = 2;
-
+    FrameLayout fl;
 
     @Override
     protected void onCreate(Bundle a) {
@@ -85,7 +85,7 @@ public class TOOL extends BaseActivity {
         a225(R.layout.d);
         k = findViewById(R.id.l);
         tt = findViewById(R.id.o29);
-        FrameLayout fl = findViewById(R.id.c);
+        fl = findViewById(R.id.c);
         Toolbar i = findViewById(R.id.k);
         k.setTypeface(type(Typeface.BOLD));
         m = new MainWebView(this);
@@ -169,6 +169,16 @@ public class TOOL extends BaseActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (m != null) {
+            fl.removeView(m);
+            m.removeAllViews();
+            m.destroy();
+        }
+    }
+
+    @Override
     protected void onNewIntent(Intent a) {
         try {
             int id = a.getIntExtra("id", 0);
@@ -177,21 +187,26 @@ public class TOOL extends BaseActivity {
                 case TOOL_SOURCE_CODE:
                     tt.setText(getString(R.string.j));
                     k.append(data);
-                    m.loadUrl(data);
-                    break;
-                case TOOL_HEADERS:
-                    tt.setText(getString(R.string.y15));
-                    k.append(data);
-                    Runnable p15 = () -> {
-                        final String temp = Stream.d(data, getString(R.string.c33));
-                        runOnUiThread(() -> m.loadDataWithBaseURL("webvium", temp, "html/text", "UTF-8", null));
-                    };
-                    new Thread(p15).start();
+                    if (data.startsWith("view-source:")) {
+                        m.loadUrl(data);
+                    } else {
+                        m.loadUrl("view-source:"+data);
+                    }
                     break;
                 case TOOL_ROBOTS:
+                    Runnable runnable = () -> {
+                        boolean bn = Ping.isReachable(data + "/robots.txt");
+                        runOnUiThread(() -> {
+                            if (bn) {
+                                m.loadUrl(data + "/robots.txt");
+                            } else {
+                                m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
+                            }
+                        });
+                    };
+                    new Thread(runnable).start();
                     tt.setText(getString(R.string.f32));
                     k.append(data);
-                    m.loadUrl(data + "/robots.txt");
                     break;
                 default:
                     // popup list

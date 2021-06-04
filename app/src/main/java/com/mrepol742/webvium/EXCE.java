@@ -45,13 +45,13 @@ public class EXCE extends BaseActivity {
             "Invalid toNumber block operation\n",
             "Invalid intent operation"
     };
-    private String madeErrMsg;
 
     @Override
     protected void onCreate(Bundle be) {
         theme(T_ASSISTANT);
         super.onCreate(be);
         Intent intent = getIntent();
+        String madeErrMsg = "";
         if (intent != null) {
             String errMsg = intent.getStringExtra("error");
             String[] spilt = errMsg.split("\n");
@@ -69,7 +69,14 @@ public class EXCE extends BaseActivity {
             } catch (Exception e){
                 e.printStackTrace();
             }
+            a(madeErrMsg);
+        } else {
+            finish();
         }
+
+    }
+
+    private void a(String madeErrMsg) {
         AlertDialog.Builder bld = new AlertDialog.Builder(this);
         LayoutInflater d = getLayoutInflater();
         View e = d.inflate(R.layout.a1, null);
@@ -84,22 +91,21 @@ public class EXCE extends BaseActivity {
         bn1.setTypeface(type(Typeface.NORMAL));
         tv.setText(getString(R.string.y65));
         tv1.setText(madeErrMsg);
+        tv.setTextColor(Resources.getColor(this, R.color.e));
         if (!a221().getBoolean("autoUpdate", false)) {
-            tv.setTextColor(Resources.getColor(this, R.color.c));
             tv1.setTextColor(Resources.getColor(this, R.color.c));
         } else {
-            tv.setTextColor(Resources.getColor(this, R.color.b));
             tv1.setTextColor(Resources.getColor(this, R.color.b));
         }
         bn.setText(getString(R.string.y67));
         bn1.setText(getString(R.string.y66));
-        String temp = madeErrMsg;
         AlertDialog dd = bld.create();
         bn.setOnClickListener((v) -> {
             Intent it = new Intent(this, FEED.class);
-            it.putExtra("webvium", temp);
+            it.putExtra("webvium", madeErrMsg);
             startActivity(it);
             dd.dismiss();
+            finish();
         });
         bn1.setOnClickListener((v) -> {
             finish();

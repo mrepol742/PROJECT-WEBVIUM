@@ -883,6 +883,9 @@
     <string name="y71">Sending feedback…</string>
     <string name="y72">Please try again later</string>
 
+    <string name="y73">Base64 Encoder</string>
+    <string name="y74">URL Encoder</string>
+    <string name="y75">Error!</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>
