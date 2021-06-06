@@ -109,6 +109,7 @@ import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.annotation.Unused;
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.GeolocationDataModel;
+import com.mrepol742.webvium.app.SearchJSI;
 import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
@@ -376,6 +377,8 @@ public class MAIN extends MainBaseActivity implements Format {
     public static int URL_ENCODE = 2;
     public static int ASSETLINKS = 9;
     public static int SITEMAPS = 10;
+    public static final String WEBVIUM_HOME = "https://mrepol742.github.io/Search/index.html?s=";
+    private SearchJSI searchJSI;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -633,6 +636,7 @@ public class MAIN extends MainBaseActivity implements Format {
         this.S = new ForegroundColorSpan(Resources.getColor(this, R.color.s));
         this.I = new ForegroundColorSpan(Resources.getColor(this, R.color.i));
         this.B = new ForegroundColorSpan(Resources.getColor(this, R.color.b));
+        this.searchJSI = new SearchJSI(this);
         this.cd = findViewById(R.id.v);
         HorizontalScrollView hsv = findViewById(R.id.c13);
         this.iw = findViewById(R.id.d20);
@@ -1792,6 +1796,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c38(String a) {
         try {
+            c139(a);
             if (Objects.requireNonNull(a221().getString("cookies", "")).equals("120")) {
                 if (a.startsWith("https://")) {
                     cm1.setAcceptCookie(true);
@@ -2193,7 +2198,7 @@ public class MAIN extends MainBaseActivity implements Format {
             default:
             case "x57":
                 if (h.getSettings().getJavaScriptEnabled()) {
-                    c3("https://mrepol742.github.io/Search/index.html?s=" + c46());
+                    c3(WEBVIUM_HOME + c46());
                 } else {
                     c3(c48());
                 }
@@ -3968,6 +3973,14 @@ public class MAIN extends MainBaseActivity implements Format {
             return sg.replace("http://", "https://");
         }
         return sg;
+    }
+
+    private void c139(String sg) {
+       // if (Hash.a("SHA-1", WEBVIUM_HOME).equals(Hash.a("SHA-1", sg))) {
+            h.addJavascriptInterface(this.searchJSI, "Search");
+        //} else {
+        //    h.removeJavascriptInterface("Search");
+        //}
     }
 
     private void c140() {

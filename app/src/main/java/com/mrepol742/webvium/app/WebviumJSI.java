@@ -29,6 +29,7 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.webkit.JavascriptInterface;
 
 import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.R;
@@ -55,59 +56,58 @@ public class WebviumJSI {
     private WebviumJSI() {
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void showToast(String c) {
         mainShowToast(a, c, 0, 0);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void showToastError(String c) {
         mainShowToast(a, c, 1, 0);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void showToastSuccess(String c) {
         mainShowToast(a, c, 2, 0);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void showToast(String c, int b) {
         mainShowToast(a, c, 0, b);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void showToastError(String c, int b) {
         mainShowToast(a, c, 1, b);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void showToastSuccess(String c, int b) {
         mainShowToast(a, c, 2, b);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void copyToClipboard(String c) {
         Clipboard.a(a, c);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void vibrate(int c) {
         Vibrate.a(a, c);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void enableWifi(boolean c) {
         WifiManager wifiManager = (WifiManager) a.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(c);
     }
 
-
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void exit() {
         System.exit(0);
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void showNotification(String b, String c, String d) {
         MainNotification.b(a, Uri.parse(d).getHost(), a.getResources().getString(R.string.y20));
         android.app.Notification.Builder m =
@@ -192,7 +192,7 @@ bigText.bigText(a.getResources().getString(R.string.g29));
         nmc.notify(Notifications.getRandomizeNotificationId(Notifications.DEFAULT), m.build());
     }
 
-    @android.webkit.JavascriptInterface
+    @JavascriptInterface
     public void enableFlashlight(boolean c) {
         try {
             if (Build.VERSION.SDK_INT > 23) {

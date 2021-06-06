@@ -26,12 +26,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.WebviumDatabase;
+import com.mrepol742.webvium.util.Inapproriate;
 
 public class SearchHelper implements WebviumDatabase {
 
     private static SearchHelper d2;
     private final SharedPreferences sp;
     private final SQLiteDatabase sld;
+    private static String temp;
 
     public SearchHelper(Context ct) {
         SearchDatabase d7 = new SearchDatabase(ct);
@@ -74,9 +76,10 @@ public class SearchHelper implements WebviumDatabase {
     }
 
     public void c(final String a) {
-        if (!sp.getBoolean("pSearch", false)) {
+        if (!sp.getBoolean("pSearch", false) && !temp.equals(a)) {
             if (sld != null && sld.isOpen()) {
-                if (com.mrepol742.webvium.util.Inapproriate.isInapproriate(a.toLowerCase())) {
+                if (Inapproriate.isInapproriate(a.toLowerCase())) {
+                    temp = a;
                     ContentValues values = new ContentValues();
                     values.put(SearchDatabase.COL1_SEARCH, a);
                     sld.insert(SearchDatabase.TABLE_SEARCH, null, values);
