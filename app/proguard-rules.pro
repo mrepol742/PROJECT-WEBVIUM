@@ -14,9 +14,9 @@
 
 -keepattributes *Annotation*
 -repackageclasses 'com.mrepol742.webvium'
--obfuscationdictionary secondary-dictionary.txt
--packageobfuscationdictionary secondary-dictionary.txt
--classobfuscationdictionary primary-dictionary.txt
+-obfuscationdictionary obfuscation-dictionary.txt
+-packageobfuscationdictionary obfuscation-dictionary.txt
+-classobfuscationdictionary obfuscation-dictionary.txt
 -optimizationpasses 5
 -allowaccessmodification
 -overloadaggressively

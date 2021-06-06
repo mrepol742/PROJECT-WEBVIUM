@@ -132,6 +132,7 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.IPAddress;
+import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionDataModel;
 import com.mrepol742.webvium.permission.PermissionDatabase;
@@ -179,12 +180,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
-
-// Welcome to Project Webvium this class serves as the Building Blocks of this Project
-// as same as in APPL (Application) class this activity must opened in fraction of seconds any kind of code
-// that makes this Activity runs slower well be considered as a @Bug
-// This project is created carefully started from scratch i dont recommend using any 3rd party library
-// Please be warned a single mistake is a lot of error here
 
 // @Class MainActivity
 public class MAIN extends MainBaseActivity implements Format {
@@ -274,9 +269,9 @@ public class MAIN extends MainBaseActivity implements Format {
     public int it7422;
     public Timer cdt;
     public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
-    private final StringBuilder cm = new StringBuilder(); // console message
-    private final StringBuilder cm0 = new StringBuilder(); // receive error
-    private final StringBuilder cm2 = new StringBuilder(); // receive ssl error
+    private final StringBuilder cm = new StringBuilder();
+    private final StringBuilder cm0 = new StringBuilder();
+    private final StringBuilder cm2 = new StringBuilder();
     private CookieManager cm1;
     private HistoryHelper d1;
     private SearchHelper d2;
@@ -300,7 +295,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public static final String SE_AOL = "240b";
     public static final String SE_BAIDU = "480b";
     public static final String SE_WOLFRAMALPHA = "860b";
-    public static final String SE_DISCOVERAPP = "1720b"; // updated from freebasics
+    public static final String SE_DISCOVERAPP = "1720b";
     public static final String SE_ECOSIA = "3440b";
     public static final String SE_STACKOVERFLOW = "6880b";
     public static final String SE_YOUTUBE = "12b";
@@ -379,6 +374,8 @@ public class MAIN extends MainBaseActivity implements Format {
     public static int IP_GEO = 8;
     public static int BASE64_ENCODE = 1;
     public static int URL_ENCODE = 2;
+    public static int ASSETLINKS = 9;
+    public static int SITEMAPS = 10;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -508,6 +505,12 @@ public class MAIN extends MainBaseActivity implements Format {
                 return true;
             case 21:
                 c112(sg, 6);
+                return true;
+            case 25:
+                c112(sg, ASSETLINKS);
+                return true;
+            case 26:
+                c112(sg, SITEMAPS);
                 return true;
         }
         return false;
@@ -1884,38 +1887,161 @@ public class MAIN extends MainBaseActivity implements Format {
             ti.setTextColor(f);
         }
         ti.setText(getString(R.string.v13));
-        ed.setText(Uri.parse(url).getHost());
-        if (URLUtil.isValidUrl(url)) {
-            Runnable p15 = () -> {
-                final String sg = Stream.a(url, getString(R.string.c33), getString(R.string.g25));
-                runOnUiThread(() -> ti.setText(Html.b(sg)));
-            };
-            new Thread(p15).start();
-        } else if (Domain.isValidDomain(url)) {
-            Runnable p15 = () -> {
-                final String sg = Stream.a("http://" + url, getString(R.string.c33), getString(R.string.g25));
-                runOnUiThread(() -> ti.setText(Html.b(sg)));
-            };
-            new Thread(p15).start();
-        }
+        ed.setText(url);
+        Runnable p15 = () -> {
+            final String sg = Stream.a(url, getString(R.string.c33), getString(R.string.g25));
+            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        };
+        new Thread(p15).start();
         bn.setText(getString(R.string.i6));
-
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+            bn.setBackgroundResource(R.drawable.c10);
+        } else {
+            bn.setBackgroundResource(R.drawable.c11);
+        }
         bn.setOnClickListener(view -> {
             String ab = ed.getText().toString();
             ti.setText(getString(R.string.v13));
-            if (URLUtil.isValidUrl(ab)) {
-                Runnable p15 = () -> {
+
+            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+                Runnable p151 = () -> {
                     final String sg = Stream.a(ab, getString(R.string.c33), getString(R.string.g25));
                     runOnUiThread(() -> ti.setText(Html.b(sg)));
                 };
-                new Thread(p15).start();
-            } else if (Domain.isValidDomain(ab)) {
-                Runnable p15 = () -> {
-                    final String sg = Stream.a("http://" + ab, getString(R.string.c33), getString(R.string.g25));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p15).start();
+                new Thread(p151).start();
             }
+        });
+        ed.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String url = ed.getText().toString().trim();
+                if (url.startsWith("https://") || url.startsWith("http://")) {
+                    if (!Domain.isValidDomain(url)){
+                        ed.setError(getString(R.string.y84));
+                        bn.setBackgroundResource(R.drawable.c11);
+                    } else {
+                        bn.setBackgroundResource(R.drawable.c10);
+                    }
+                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                    ed.setError(getString(R.string.y83));
+                    bn.setBackgroundResource(R.drawable.c11);
+                } else {
+                    ed.setError(getString(R.string.y82));
+                    bn.setBackgroundResource(R.drawable.c11);
+                }
+            }
+
+
+        });
+        final AlertDialog g = a.create();
+        g.show();
+    }
+
+    public void c44(String url) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.b8, null);
+        a.setCancelable(true);
+        a.setTitle(getString(R.string.y78));
+        a.setView(c);
+        final EDIT ed = c.findViewById(R.id.g8);
+        final TextView ti = c.findViewById(R.id.e2);
+        final Button bn = c.findViewById(R.id.k20);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(e);
+            ti.setTextColor(e);
+        } else {
+            ed.setTextColor(f);
+            ti.setTextColor(f);
+        }
+        ti.setText(getString(R.string.v13));
+        String sg = Uri.parse(url).getHost();
+         Runnable re = () -> {
+                try {
+                    boolean st = Ping.isHostReachable(sg, 2500);
+                    boolean nd = Ping.isHostReachable(sg, 5000);
+                    boolean rd = Ping.isHostReachable(sg, 10000);
+                        Timer timer = new Timer();
+                        timer.schedule(new TimerTask() {
+
+                            @Override
+                            public void run() {
+                                runOnUiThread(() -> {
+                                    ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                });
+                            }
+                        }, 1000);
+                        timer.schedule(new TimerTask() {
+
+                            @Override
+                            public void run() {
+                                runOnUiThread(() -> {
+                                ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                });
+                            }
+                        }, 2000);
+                        timer.schedule(new TimerTask() {
+
+                            @Override
+                            public void run() {
+                                runOnUiThread(() -> {
+                                ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                });
+                                }
+                        }, 3000);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            };
+            new Thread(re).start();
+        ed.setText(sg);
+        bn.setText(getString(R.string.i6));
+
+        bn.setOnClickListener(view -> {
+            String ab = Uri.parse(ed.getText().toString()).getHost();
+            ti.setText(getString(R.string.v13));
+            Runnable re2 = () -> {
+                try {
+                    boolean st = Ping.isHostReachable(sg, 2500);
+                    boolean nd = Ping.isHostReachable(sg, 5000);
+                    boolean rd = Ping.isHostReachable(sg, 10000);
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            runOnUiThread(() -> {
+                                ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                            });
+                        }
+                    }, 1000);
+                    timer.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            runOnUiThread(() -> {
+                                ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                            });
+                        }
+                    }, 2000);
+                    timer.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            runOnUiThread(() -> {
+                                ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                            });
+                        }
+                    }, 3000);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            };
+            new Thread(re2).start();
+
         });
         final AlertDialog g = a.create();
         g.show();
@@ -3362,6 +3488,10 @@ public class MAIN extends MainBaseActivity implements Format {
             a.setTitle(getString(R.string.j)); // Source Code
         } else if (type == IP_GEO) {
             a.setTitle(getString(R.string.z12)); // IP GeolocationDataModel
+        } else if (type == ASSETLINKS) {
+            a.setTitle(getString(R.string.y76)); // assetslinks
+        } else if (type == SITEMAPS) {
+            a.setTitle(getString(R.string.y77)); // sitemap
         }
         a.setView(c);
         final EDIT ed = c.findViewById(R.id.g8);
@@ -3378,20 +3508,14 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(f);
             ti.setTextColor(f3);
         }
-        if (type == 0 || (type >= 4 && type <= 7)) {
-            ed.setText(url);
-        } else if (type == 8) {
-            ed.setText(getString(R.string.v13));
-            Runnable p15 = () -> {
-                final String sg = Stream.c(url, getString(R.string.c33));
-                runOnUiThread(() -> ed.setText(sg));
-            };
-            new Thread(p15).start();
+        ed.setText(url);
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+            bn.setBackgroundResource(R.drawable.c10);
         } else {
-            ed.setText(Objects.requireNonNull(Uri.parse(url).getHost()).replace("www.", ""));
+            bn.setBackgroundResource(R.drawable.c11);
         }
         bn.setText(getString(R.string.i6));
-        ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io", "mrepol742.github.io"));
+        ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io"));
         final AlertDialog g = a.create();
         bn.setOnClickListener(view -> {
             String a1 = ed.getText().toString();
@@ -3407,6 +3531,16 @@ public class MAIN extends MainBaseActivity implements Format {
                 it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_ROBOTS);
                 startActivity(it);
+            } else if (type == ASSETLINKS) {
+                Intent it = new Intent(MAIN.this, TOOL.class);
+                it.putExtra("dat", a1);
+                it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
+                startActivity(it);
+            } else if (type == SITEMAPS) {
+                Intent it = new Intent(MAIN.this, TOOL.class);
+                it.putExtra("dat", a1);
+                it.putExtra("id", TOOL.TOOL_SITEMAPS);
+                startActivity(it);
             }
             g.dismiss();
         });
@@ -3415,12 +3549,21 @@ public class MAIN extends MainBaseActivity implements Format {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
-                if ((!url.startsWith("http://") || !url.startsWith("https://") || !url.startsWith("file://") || !url.startsWith("content://")) && !Domain.isValidDomain(url)) {
-                    ed.setError(getString(R.string.c32));
+                if (url.startsWith("https://") || url.startsWith("http://")) {
+                    if (!Domain.isValidDomain(url)){
+                        ed.setError(getString(R.string.y84));
+                        bn.setBackgroundResource(R.drawable.c11);
+                    } else {
+                        bn.setBackgroundResource(R.drawable.c10);
+                    }
+                }  else if (type != SOURCE_CODE && (url.startsWith("file://") || url.startsWith("content://"))){
+                    ed.setError(getString(R.string.y83));
+                    bn.setBackgroundResource(R.drawable.c11);
+                } else {
+                    ed.setError(getString(R.string.y82));
+                    bn.setBackgroundResource(R.drawable.c11);
                 }
             }
-
-
         });
         g.show();
     }
@@ -3609,38 +3752,51 @@ public class MAIN extends MainBaseActivity implements Format {
             ti.setTextColor(f);
         }
         ti.setText(getString(R.string.v13));
-        ed.setText(Uri.parse(url).getHost());
-        if (URLUtil.isValidUrl(url)) {
-            Runnable p15 = () -> {
-                final String sg = Stream.d(url, getString(R.string.c33));
-                runOnUiThread(() -> ti.setText(Html.b(sg)));
-            };
-            new Thread(p15).start();
-        } else if (Domain.isValidDomain(url)) {
-            Runnable p15 = () -> {
-                final String sg = Stream.d("http://"+url, getString(R.string.c33));
-                runOnUiThread(() -> ti.setText(Html.b(sg)));
-            };
-            new Thread(p15).start();
+        ed.setText(url);
+        Runnable p15 = () -> {
+            final String sg = Stream.d(url, getString(R.string.c33));
+            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        };
+        new Thread(p15).start();
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+            bn.setBackgroundResource(R.drawable.c10);
+        } else {
+            bn.setBackgroundResource(R.drawable.c11);
         }
         bn.setText(getString(R.string.i6));
-
         bn.setOnClickListener(view -> {
             String ab = ed.getText().toString();
             ti.setText(getString(R.string.v13));
-            if (URLUtil.isValidUrl(ab)) {
-                Runnable p15 = () -> {
+            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+                Runnable p151 = () -> {
                     final String sg = Stream.d(ab, getString(R.string.c33));
                     runOnUiThread(() -> ti.setText(Html.b(sg)));
                 };
-                new Thread(p15).start();
-            } else if (Domain.isValidDomain(ab)) {
-                Runnable p15 = () -> {
-                    final String sg = Stream.d("http://"+ab, getString(R.string.c33));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p15).start();
+                new Thread(p151).start();
             }
+        });
+        ed.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String url = ed.getText().toString().trim();
+                if (url.startsWith("https://") || url.startsWith("http://")) {
+                    if (!Domain.isValidDomain(url)){
+                        ed.setError(getString(R.string.y84));
+                        bn.setBackgroundResource(R.drawable.c11);
+                    } else {
+                        bn.setBackgroundResource(R.drawable.c10);
+                    }
+                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                    ed.setError(getString(R.string.y83));
+                    bn.setBackgroundResource(R.drawable.c11);
+                } else {
+                    ed.setError(getString(R.string.y82));
+                    bn.setBackgroundResource(R.drawable.c11);
+                }
+            }
+
+
         });
         final AlertDialog g = a.create();
         g.show();
@@ -4179,6 +4335,8 @@ public class MAIN extends MainBaseActivity implements Format {
            // sm0.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(e1);
             sm0.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(e1);
             sm0.add(0, 5, 0, getString(R.string.j)).setOnMenuItemClickListener(e1);
+            sm0.add(0, 25, 0, getString(R.string.y76)).setOnMenuItemClickListener(e1);
+            sm0.add(0, 26, 0, getString(R.string.y77)).setOnMenuItemClickListener(e1);
             sm0.add(0, 12, 0, getString(R.string.i4)).setOnMenuItemClickListener(e1);
             pm2.setOnDismissListener(popupMenu -> {
                 if (this.sg != null) {
@@ -4765,6 +4923,9 @@ public class MAIN extends MainBaseActivity implements Format {
         sm.add(0, 8, 0, getString(R.string.j));
        // sm.add(0, 9, 0, getString(R.string.z12));
         sm.add(0, 25, 0, getString(R.string.f32));
+        sm.add(0, 28, 0, getString(R.string.y76));
+        sm.add(0, 29, 0, getString(R.string.y77));
+        sm.add(0, 30, 0, getString(R.string.y78));
         // error
         SubMenu b = a.addSubMenu(getString(R.string.h30));
         b.add(0, 10, 0, getString(R.string.h36));
@@ -4804,6 +4965,15 @@ public class MAIN extends MainBaseActivity implements Format {
                 return true;
             case 27:
                 c130(URL_ENCODE);
+                return true;
+            case 28:
+                c112(h.getUrl(), ASSETLINKS);
+                return true;
+            case 29:
+                c112(h.getUrl(), SITEMAPS);
+                return true;
+            case 30:
+                c44(h.getUrl());
                 return true;
             case 17:
                 c119();

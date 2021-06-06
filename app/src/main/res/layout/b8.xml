@@ -18,25 +18,28 @@
 <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     a:layout_width="fill_parent"
-
-    a:layout_height="fill_parent"
-    a:gravity="center"
-    a:orientation="vertical"
+    a:layout_height="wrap_content"
     a:paddingStart="?m"
     a:paddingEnd="?m">
 
-    <TextView
-        a:id="@id/e2"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content"
-        a:layout_gravity="center_vertical"
-        a:layout_marginTop="10dp"
-        a:labelFor="@id/g8"
-        a:textSize="@dimen/x"
-        tools:ignore="LabelFor" />
+    <ScrollView a:layout_alignParentTop="true" a:layout_above="@id/g8"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content">
+
+        <TextView
+            a:id="@id/e2"
+            a:layout_width="match_parent"
+            a:layout_height="wrap_content"
+            a:layout_gravity="top"
+            a:layout_marginTop="10dp" a:textIsSelectable="true"
+            a:layout_marginBottom="2dp"
+            a:labelFor="@id/g8"
+            a:textSize="@dimen/x"
+            tools:ignore="LabelFor" />
+    </ScrollView>
 
     <com.mrepol742.webvium.EDIT
-        a:id="@id/g8" a:layout_below="@id/e2"
+        a:id="@id/g8" a:layout_above="@id/k20"
         a:layout_width="fill_parent"
         a:layout_height="wrap_content"
         a:layout_gravity="center_vertical"
@@ -45,9 +48,10 @@
         a:selectAllOnFocus="true"
         a:textSize="@dimen/b" />
 
-    <Button a:layout_below="@id/g8" a:layout_alignParentEnd="true"
-        a:id="@id/k20" a:layout_marginTop="10dp"
+    <Button a:layout_alignParentBottom="true"
+        a:id="@id/k20" a:layout_centerHorizontal="true"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content" />
+
 </RelativeLayout>
 

@@ -564,7 +564,7 @@
     <string name="f28">Primary Font</string>
     <string name="f29">Secondary Font</string>
     <string name="f30">Logcat</string>
-    <string name="f31">Examples: \n%1$s \n%2$s \n%3$s</string>
+    <string name="f31">Examples: \n%1$s \n%2$s</string>
     <string name="f32">Robots.txt</string>
     <string name="f33">Webvium - Lightweight, Fast, Material and Full-Featured Android Web Browser.\n\nWebvium is a weightless android app that size about 600KB. It\'s Fast, Material Design and Full-Featured Web Browser for Android. Download the latest version here: \n%1$s</string>
     <string name="f34">There\'s no email app that can handle this action.</string>
@@ -873,7 +873,7 @@
     <string name="y61">Thanks for keeping me up to date. ❤❤</string>
     <string name="y62">Scroll Down to Continue</string>
     <string name="y63">Hello World</string>
-    <string name="y64">&lt;br>&lt;br>&lt;br>&lt;br>---------------&lt;br>&lt;br>&lt;b>PROJECT-WEBVIUM&lt;/b>&lt;br>version %1$s&lt;br>&lt;br>---------------&lt;br>&lt;br>&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%3$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>%4$s&lt;/b>&lt;br>APP OWNER&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>ASSISTANT&lt;br>&lt;br>&lt;b>Amos Frosh&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;b>Java&lt;br>XML&lt;br>HTML&lt;br>CSS&lt;br>JavaScript&lt;br>PHP&lt;br>SQLite&lt;/b>&lt;br>LANGUAGES&lt;br>&lt;br>&lt;b>Github&lt;br>Firebase&lt;/b>&lt;br>SERVERS&lt;br>&lt;br>&lt;b>github.com/mrepol742/PROJECT-WEBVIUM&lt;br>github.com/mrepol742/mrepol742.github.io&lt;br>github.com/mrepol742/Server&lt;br>github.com/mrepol742/Search&lt;br>github.com/mrepol742/wiki&lt;/b>&lt;br>LINKS&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>
+    <string name="y64">&lt;br>&lt;br>&lt;br>&lt;br>------------------&lt;br>&lt;br>&lt;b>PROJECT-WEBVIUM&lt;/b>&lt;br>version %1$s&lt;br>&lt;br>------------------&lt;br>&lt;br>&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%3$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>%4$s&lt;/b>&lt;br>APP OWNER&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>ASSISTANT&lt;br>&lt;br>&lt;b>Amos Ayomide&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;b>Java&lt;br>XML&lt;br>HTML&lt;br>CSS&lt;br>JavaScript&lt;br>PHP&lt;br>SQLite&lt;/b>&lt;br>LANGUAGES&lt;br>&lt;br>&lt;b>Github&lt;br>Firebase&lt;/b>&lt;br>SERVERS&lt;br>&lt;br>&lt;b>github.com/mrepol742/PROJECT-WEBVIUM&lt;br>github.com/mrepol742/mrepol742.github.io&lt;br>github.com/mrepol742/Server&lt;br>github.com/mrepol742/Search&lt;br>github.com/mrepol742/wiki&lt;/b>&lt;br>LINKS&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>
     <string name="y65">Ooops!</string>
     <string name="y66">End Process</string>
     <string name="y67">Send Report</string>
@@ -886,6 +886,18 @@
     <string name="y73">Base64 Encoder</string>
     <string name="y74">URL Encoder</string>
     <string name="y75">Error!</string>
+    <string name="y76">AssetLinks.json</string>
+    <string name="y77">Sitemap.xml</string>
+    <string name="y78">Ping</string>
+
+    <string name="y80">Reachable by us</string>
+    <string name="y81">Unable to reach</string>
+    <string name="y82">Missing Protocol.</string>
+    <string name="y83">Invalid Protocol.</string>
+    <string name="y84">Invalid Domain.</string>
+    <string name="y85">%1$s &lt;br> 2500ms == %2$b</string>
+    <string name="y86">&lt;br>5000ms == %1$b</string>
+    <string name="y87">&lt;br>1000ms == %1$b</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

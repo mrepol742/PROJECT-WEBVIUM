@@ -96,6 +96,9 @@ public class AboutFragment extends BasePreferenceFragment {
             try {
                 int b = Integer.parseInt(Package.e(getActivity()).replaceAll("\\.", ""));
                 int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/newVersion.int?raw=true");
+                if (getActivity() == null) {
+                    return;
+                }
                 if (newUpdate > b) {
                     getActivity().runOnUiThread(() -> {
                         e.setTitle(getString(R.string.z28));

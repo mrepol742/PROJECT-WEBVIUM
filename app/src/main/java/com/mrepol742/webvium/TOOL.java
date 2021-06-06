@@ -77,6 +77,8 @@ public class TOOL extends BaseActivity {
     private MainWebView m;
     public static final int TOOL_SOURCE_CODE = 0;
     public static final int TOOL_ROBOTS = 2;
+    public static final int TOOL_SITEMAPS = 1;
+    public static final int TOOL_ASSET_LINKS = 3;
     FrameLayout fl;
 
     @Override
@@ -93,17 +95,16 @@ public class TOOL extends BaseActivity {
         fl.addView(m);
         int o = Resources.getColor(this, R.color.c);
         int p = Resources.getColor(this, R.color.b);
+        m.setBackgroundColor(Resources.getColor(this, R.color.p));
         if (!a221().getBoolean("autoUpdate", false)) {
             k.setTextColor(o);
             tt.setTextColor(o);
-            m.setBackgroundColor(Resources.getColor(this, R.color.p));
         } else {
             k.setTextColor(p);
             tt.setTextColor(p);
-            m.setBackgroundColor(Resources.getColor(this, R.color.m));
         }
-        k.setTypeface(type(Typeface.BOLD));
-        tt.setTypeface(type(Typeface.NORMAL));
+        k.setTypeface(type(Typeface.NORMAL));
+        tt.setTypeface(type(Typeface.BOLD));
         i.setBackgroundResource(R.drawable.p);
         setActionBar(i);
         i.setElevation(5);
@@ -151,6 +152,7 @@ public class TOOL extends BaseActivity {
         if (Build.VERSION.SDK_INT < 30) {
             ws.setAllowFileAccess(true);
         }
+        ws.setDisplayZoomControls(true);
         ws.setBuiltInZoomControls(true);
     }
 
@@ -212,6 +214,47 @@ public class TOOL extends BaseActivity {
                     };
                     new Thread(runnable).start();
                     tt.setText(getString(R.string.f32));
+                    k.append(data);
+                    break;
+                case TOOL_ASSET_LINKS:
+                    Runnable runnable1 = () -> {
+                        try {
+                            URL url = new URL(data);
+                            boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
+                            runOnUiThread(() -> {
+                                if (bn) {
+                                    m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
+                                } else {
+                                    m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
+                                }
+
+                            });
+                        } catch (Exception en) {
+                            en.printStackTrace();
+                        }
+                    };
+                    new Thread(runnable1).start();
+                    tt.setText(getString(R.string.y76));
+                    k.append(data);
+                    break;
+                case TOOL_SITEMAPS:
+                    Runnable runnable2 = () -> {
+                        try {
+                            URL url = new URL(data);
+                            boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
+                            runOnUiThread(() -> {
+                                if (bn) {
+                                    m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
+                                } else {
+                                    m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
+                                }
+                            });
+                        } catch (Exception en) {
+                            en.printStackTrace();
+                        }
+                    };
+                    new Thread(runnable2).start();
+                    tt.setText(getString(R.string.y77));
                     k.append(data);
                     break;
                 default:

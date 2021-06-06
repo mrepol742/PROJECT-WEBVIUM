@@ -17,7 +17,7 @@
 
 <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
     a:layout_width="match_parent"
-    a:layout_height="match_parent"
+    a:layout_height="wrap_content" a:gravity="center"
     a:paddingStart="?m"
     a:paddingEnd="?m">
 
@@ -28,14 +28,17 @@
         a:layout_marginTop="10dp"
         a:textSize="@dimen/h" />
 
-    <TextView a:layout_below="@id/o30"
+    <ScrollView a:layout_marginBottom="10dp" a:layout_above="@id/o33" a:layout_below="@id/o30" a:layout_height="wrap_content" a:layout_width="match_parent">
+
+    <TextView a:layout_gravity="top"
         a:id="@id/o31"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
         a:layout_marginTop="10dp"
-        a:textIsSelectable="true" a:layout_above="@id/o33"
+        a:textIsSelectable="true"
         a:textSize="@dimen/b" />
 
+    </ScrollView>
     <Button a:layout_alignParentBottom="true" a:layout_alignParentEnd="true"
         a:id="@id/o32"
         a:layout_width="wrap_content"

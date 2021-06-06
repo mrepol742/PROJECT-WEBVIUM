@@ -447,7 +447,6 @@ public class Domain {
             ".fidelity",
             ".fido",
             ".film",
-            ".",
             ".finance",
             ".financial",
             ".fire",

@@ -82,6 +82,8 @@ public class HIST extends BaseActivity {
     public static int ROBOTS = 6;
     public static int SOURCE_CODE = 7;
     public static int IP_GEO = 8;
+    public static int ASSETLINKS = 9;
+    public static int SITEMAPS = 10;
 
     final MenuItem.OnMenuItemClickListener d = a1 -> {
         try {
@@ -114,6 +116,9 @@ public class HIST extends BaseActivity {
 
                 case 5:
                     l(a2, 7);
+                    return true;
+                case 13:
+                    c43(a2);
                     return true;
                 case 15:
 
@@ -162,6 +167,12 @@ public class HIST extends BaseActivity {
                 case 24:
                     o(a5, a2, a4);
                     break;
+                case 25:
+                    l(a2, ASSETLINKS);
+                    return true;
+                case 26:
+                    l(a2, SITEMAPS);
+                    return true;
             }
         } catch (NoSuchItemToGet l4) {
             l4.printStackTrace();
@@ -542,6 +553,10 @@ public class HIST extends BaseActivity {
             a.setTitle(getString(R.string.j)); // Source Code
         } else if (type == IP_GEO) {
             a.setTitle(getString(R.string.z12)); // IP GeolocationDataModel
+        } else if (type == ASSETLINKS) {
+            a.setTitle(getString(R.string.y76)); // assetslinks
+        } else if (type == SITEMAPS) {
+            a.setTitle(getString(R.string.y77)); // sitemap
         }
         a.setView(c);
         final EDIT ed = c.findViewById(R.id.g8);
@@ -558,20 +573,14 @@ public class HIST extends BaseActivity {
             ed.setTextColor(f);
             ti.setTextColor(f3);
         }
-        if (type == 0 || (type >= 4 && type <= 7)) {
-            ed.setText(url);
-        } else if (type == 8) {
-            ed.setText(getString(R.string.v13));
-            Runnable p15 = () -> {
-                final String sg = Stream.c(url, getString(R.string.c33));
-                runOnUiThread(() -> ed.setText(sg));
-            };
-            new Thread(p15).start();
+        ed.setText(url);
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+            bn.setBackgroundResource(R.drawable.c10);
         } else {
-            ed.setText(Objects.requireNonNull(Uri.parse(url).getHost()).replace("www.", ""));
+            bn.setBackgroundResource(R.drawable.c11);
         }
         bn.setText(getString(R.string.i6));
-        ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io", "mrepol742.github.io"));
+        ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io"));
         final AlertDialog g = a.create();
         bn.setOnClickListener(view -> {
             String a1 = ed.getText().toString();
@@ -587,6 +596,16 @@ public class HIST extends BaseActivity {
                 it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_ROBOTS);
                 startActivity(it);
+            } else if (type == ASSETLINKS) {
+                Intent it = new Intent(HIST.this, TOOL.class);
+                it.putExtra("dat", a1);
+                it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
+                startActivity(it);
+            } else if (type == SITEMAPS) {
+                Intent it = new Intent(HIST.this, TOOL.class);
+                it.putExtra("dat", a1);
+                it.putExtra("id", TOOL.TOOL_SITEMAPS);
+                startActivity(it);
             }
             g.dismiss();
         });
@@ -595,12 +614,21 @@ public class HIST extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
-                if (!Domain.isValidDomain(url)) {
-                    ed.setError(getString(R.string.c32));
+                if (url.startsWith("https://") || url.startsWith("http://")) {
+                    if (!Domain.isValidDomain(url)){
+                        ed.setError(getString(R.string.y84));
+                        bn.setBackgroundResource(R.drawable.c11);
+                    } else {
+                        bn.setBackgroundResource(R.drawable.c10);
+                    }
+                }  else if (type != SOURCE_CODE && (url.startsWith("file://") || url.startsWith("content://"))){
+                    ed.setError(getString(R.string.y83));
+                    bn.setBackgroundResource(R.drawable.c11);
+                } else {
+                    ed.setError(getString(R.string.y82));
+                    bn.setBackgroundResource(R.drawable.c11);
                 }
             }
-
-
         });
         g.show();
     }
@@ -625,38 +653,51 @@ public class HIST extends BaseActivity {
             ti.setTextColor(f);
         }
         ti.setText(getString(R.string.v13));
-        ed.setText(Uri.parse(url).getHost());
-        if (URLUtil.isValidUrl(url)) {
-            Runnable p15 = () -> {
-                final String sg = Stream.d(url, getString(R.string.c33));
-                runOnUiThread(() -> ti.setText(Html.b(sg)));
-            };
-            new Thread(p15).start();
-        } else if (Domain.isValidDomain(url)) {
-            Runnable p15 = () -> {
-                final String sg = Stream.d("http://"+url, getString(R.string.c33));
-                runOnUiThread(() -> ti.setText(Html.b(sg)));
-            };
-            new Thread(p15).start();
+        ed.setText(url);
+        Runnable p15 = () -> {
+            final String sg = Stream.d(url, getString(R.string.c33));
+            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        };
+        new Thread(p15).start();
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+            bn.setBackgroundResource(R.drawable.c10);
+        } else {
+            bn.setBackgroundResource(R.drawable.c11);
         }
         bn.setText(getString(R.string.i6));
-
         bn.setOnClickListener(view -> {
             String ab = ed.getText().toString();
             ti.setText(getString(R.string.v13));
-            if (URLUtil.isValidUrl(ab)) {
-                Runnable p15 = () -> {
+            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+                Runnable p151 = () -> {
                     final String sg = Stream.d(ab, getString(R.string.c33));
                     runOnUiThread(() -> ti.setText(Html.b(sg)));
                 };
-                new Thread(p15).start();
-            } else if (Domain.isValidDomain(ab)) {
-                Runnable p15 = () -> {
-                    final String sg = Stream.d("http://"+ab, getString(R.string.c33));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p15).start();
+                new Thread(p151).start();
             }
+        });
+        ed.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String url = ed.getText().toString().trim();
+                if (url.startsWith("https://") || url.startsWith("http://")) {
+                    if (!Domain.isValidDomain(url)){
+                        ed.setError(getString(R.string.y84));
+                        bn.setBackgroundResource(R.drawable.c11);
+                    } else {
+                        bn.setBackgroundResource(R.drawable.c10);
+                    }
+                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                    ed.setError(getString(R.string.y83));
+                    bn.setBackgroundResource(R.drawable.c11);
+                } else {
+                    ed.setError(getString(R.string.y82));
+                    bn.setBackgroundResource(R.drawable.c11);
+                }
+            }
+
+
         });
         final AlertDialog g = a.create();
         g.show();
@@ -688,8 +729,10 @@ public class HIST extends BaseActivity {
             //sb1.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(d);
             sb1.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(d);
             sb1.add(0, 5, 0, getString(R.string.j)).setOnMenuItemClickListener(d);
+            sb1.add(0, 25, 0, getString(R.string.y76)).setOnMenuItemClickListener(d);
+            sb1.add(0, 26, 0, getString(R.string.y77)).setOnMenuItemClickListener(d);
             //sb1.add(0, 22, 0, getString(R.string.z12)).setOnMenuItemClickListener(d);
-            sb1.add(0, 12, 0, getString(R.string.i4)).setOnMenuItemClickListener(d);
+            a.add(0, 12, 0, getString(R.string.i4)).setOnMenuItemClickListener(d);
         }
         pm.show();
     }
@@ -762,5 +805,76 @@ public class HIST extends BaseActivity {
         });
 
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+    }
+
+    public void c43(String url) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.b8, null);
+        a.setCancelable(true);
+        a.setTitle(getString(R.string.h6));
+        a.setView(c);
+        final EDIT ed = c.findViewById(R.id.g8);
+        final TextView ti = c.findViewById(R.id.e2);
+        final Button bn = c.findViewById(R.id.k20);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(e);
+            ti.setTextColor(e);
+        } else {
+            ed.setTextColor(f);
+            ti.setTextColor(f);
+        }
+        ti.setText(getString(R.string.v13));
+        ed.setText(url);
+        Runnable p15 = () -> {
+            final String sg = Stream.a(url, getString(R.string.c33), getString(R.string.g25));
+            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        };
+        new Thread(p15).start();
+        bn.setText(getString(R.string.i6));
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+            bn.setBackgroundResource(R.drawable.c10);
+        } else {
+            bn.setBackgroundResource(R.drawable.c11);
+        }
+        bn.setOnClickListener(view -> {
+            String ab = ed.getText().toString();
+            ti.setText(getString(R.string.v13));
+
+            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+                Runnable p151 = () -> {
+                    final String sg = Stream.a(ab, getString(R.string.c33), getString(R.string.g25));
+                    runOnUiThread(() -> ti.setText(Html.b(sg)));
+                };
+                new Thread(p151).start();
+            }
+        });
+        ed.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String url = ed.getText().toString().trim();
+                if (url.startsWith("https://") || url.startsWith("http://")) {
+                    if (!Domain.isValidDomain(url)){
+                        ed.setError(getString(R.string.y84));
+                        bn.setBackgroundResource(R.drawable.c11);
+                    } else {
+                        bn.setBackgroundResource(R.drawable.c10);
+                    }
+                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                    ed.setError(getString(R.string.y83));
+                    bn.setBackgroundResource(R.drawable.c11);
+                } else {
+                    ed.setError(getString(R.string.y82));
+                    bn.setBackgroundResource(R.drawable.c11);
+                }
+            }
+
+
+        });
+        final AlertDialog g = a.create();
+        g.show();
     }
 }

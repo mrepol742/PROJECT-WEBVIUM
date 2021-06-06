@@ -55,8 +55,8 @@ public class Ping {
         return false;
     }
 
-    public static boolean isHostReachable(String url) throws IOException {
+    public static boolean isHostReachable(String url, int time) throws IOException {
         InetAddress inetAddress = InetAddress.getByName(url);
-        return inetAddress.isReachable(5000);
+        return inetAddress.isReachable(time);
     }
 }
