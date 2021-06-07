@@ -33,7 +33,7 @@ public class SearchHelper implements WebviumDatabase {
     private static SearchHelper d2;
     private final SharedPreferences sp;
     private final SQLiteDatabase sld;
-    private static String temp;
+    private static String temp = "";
 
     public SearchHelper(Context ct) {
         SearchDatabase d7 = new SearchDatabase(ct);

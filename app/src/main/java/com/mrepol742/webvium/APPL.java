@@ -16,7 +16,6 @@
  */
 
 package com.mrepol742.webvium;
-// WEBVIEW
 
 import android.app.AlarmManager;
 import android.app.Application;
@@ -26,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.util.Hardware;
@@ -35,17 +35,23 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 // @class Application
-// NOTE: This class must be instantiated in fraction of a second so this won't cause any slow loading of
-// activities, broadcast receivers, and services
-
 public class APPL extends Application {
-    private SharedPreferences sp;
     private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
-
 
     @Override
     public void onCreate() {
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build());
+        }
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
             Intent intent = new Intent(getApplicationContext(), EXCE.class);
@@ -62,25 +68,15 @@ public class APPL extends Application {
         try {
             if (sp.getBoolean("autoUpdate55", false)) {
                 boolean bn = Hardware.isNightMode(this) == Hardware.E1.Yes;
-                if (bn) {
-                    if (!sp.getBoolean("autoUpdate", false)) {
-                        g(true);
-                    }
-                } else {
-                    if (!sp.getBoolean("autoUpdate", false)) {
-                        g(false);
-                    }
+                if (!sp.getBoolean("autoUpdate", false) && bn) {
+                    SharedPreferences.Editor se = sp.edit();
+                    se.putBoolean("autoUpdate", true);
+                    se.apply();
                 }
             }
         } catch (Exception ex5) {
             ex5.printStackTrace();
         }
-    }
-
-    private void g(boolean bn) {
-        SharedPreferences.Editor se = sp.edit();
-        se.putBoolean("autoUpdate", bn);
-        se.apply();
     }
 
     @Override
@@ -92,20 +88,16 @@ public class APPL extends Application {
         super.onTrimMemory(i);
     }
 
-
     private String getStackTrace(Throwable th){
         final Writer result = new StringWriter();
-
         final PrintWriter printWriter = new PrintWriter(result);
         Throwable cause = th;
-
-        while(cause != null){
+        while (cause != null){
             cause.printStackTrace(printWriter);
             cause = cause.getCause();
         }
         final String stacktraceAsString = result.toString();
         printWriter.close();
-
         return stacktraceAsString;
     }
 }

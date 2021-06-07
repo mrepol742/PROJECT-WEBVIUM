@@ -44,6 +44,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.app.FeedJSI;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
@@ -206,24 +207,14 @@ public class FEED extends BaseActivity {
                     }
                 }
             });
+            b.addJavascriptInterface(new FeedJSI(this), "Feedback");
         }
         try {
-            StringBuilder sg2 = new StringBuilder("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/Feed.html" +
-                    "?a=" + getString(R.string.firebase_apiKey) +
-                    "&b=" + getString(R.string.firebase_authDomain) +
-                    "&c=" + getString(R.string.firebase_projectId) +
-                    "&d=" + getString(R.string.firebase_storageBucket) +
-                    "&e=" + getString(R.string.firebase_messagingSenderId) +
-                    "&f=" + getString(R.string.firebase_appId) +
-                    "&g=" + getString(R.string.firebase_measurementId) +
-                    "&h=" + URLEncoder.encode(Package.c() + " | v-" + Package.e(this) + " | c-" + Long.toString(Package.f(this)), "UTF-8") +
-                    "&i=" + URLEncoder.encode(tmp, "UTF-8"));
-            if (sg != null) {
-                sg2.append("&j=").append(URLEncoder.encode(sg, "UTF-8"));
-            }
-            b.loadUrl(sg2.toString());
+            String sg2 = "https://mrepol742.github.io/PROJECT-WEBVIUM/Server/Feed.html" +
+                    "?message=" + URLEncoder.encode(tmp, "UTF-8");
+            b.loadUrl(sg2);
 
-        } catch (UnsupportedEncodingException | PackageManager.NameNotFoundException e) {
+        } catch (UnsupportedEncodingException e) {
            e.printStackTrace();
            Toast.b(FEED.this, getString(R.string.y68));
         }
