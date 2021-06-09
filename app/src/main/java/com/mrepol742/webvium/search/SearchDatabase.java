@@ -28,7 +28,7 @@ public class SearchDatabase extends SQLiteOpenHelper {
     public static final String TABLE_SEARCH = "A";
     public static final String COL1_SEARCH = "B";
     
-    public SearchDatabase(Context context) {
+    protected SearchDatabase(Context context) {
         super(context, DATA_SEARCH, null, VERSION_SEARCH);
     }
 

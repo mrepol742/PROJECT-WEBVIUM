@@ -44,15 +44,8 @@ public class CRED extends BaseActivity {
         TextView tv = findViewById(R.id.c10);
         ScrollView rl = findViewById(R.id.c3);
         tv.setTextColor(Resources.getColor(this, R.color.c));
-        rl.setBackgroundResource(R.drawable.f10);
+        rl.setBackground(Resources.getDrawable(this, R.drawable.f11));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (!a221().getBoolean("autoUpdate", false)) {
-                if (!a221().getBoolean("webviumB", false)) {
-                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-            }
-        }
         SharedPreferences sharedPreferences = getSharedPreferences("di", 0);
         String name = Build.MODEL;
         try {

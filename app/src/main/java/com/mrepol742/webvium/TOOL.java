@@ -17,31 +17,19 @@
 
 package com.mrepol742.webvium;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.webkit.ConsoleMessage;
-import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -49,24 +37,18 @@ import android.widget.Toolbar;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
-import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.Ping;
+import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Stream;
-import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.net.URL;
 
 // @Class Tools
@@ -79,7 +61,8 @@ public class TOOL extends BaseActivity {
     public static final int TOOL_ROBOTS = 2;
     public static final int TOOL_SITEMAPS = 1;
     public static final int TOOL_ASSET_LINKS = 3;
-    FrameLayout fl;
+    public static final int TOOL_HEADERS = 4;
+    private FrameLayout fl;
 
     @Override
     protected void onCreate(Bundle a) {
@@ -189,7 +172,7 @@ public class TOOL extends BaseActivity {
             switch (id) {
                 case TOOL_SOURCE_CODE:
                     tt.setText(getString(R.string.j));
-                    k.append(data);
+                    k.setText(data);
                     if (data.startsWith("view-source:")) {
                         m.loadUrl(data);
                     } else {
@@ -214,7 +197,7 @@ public class TOOL extends BaseActivity {
                     };
                     new Thread(runnable).start();
                     tt.setText(getString(R.string.f32));
-                    k.append(data);
+                    k.setText(Uri.parse(data).getHost());
                     break;
                 case TOOL_ASSET_LINKS:
                     Runnable runnable1 = () -> {
@@ -235,7 +218,7 @@ public class TOOL extends BaseActivity {
                     };
                     new Thread(runnable1).start();
                     tt.setText(getString(R.string.y76));
-                    k.append(data);
+                    k.setText(Uri.parse(data).getHost());
                     break;
                 case TOOL_SITEMAPS:
                     Runnable runnable2 = () -> {
@@ -255,7 +238,32 @@ public class TOOL extends BaseActivity {
                     };
                     new Thread(runnable2).start();
                     tt.setText(getString(R.string.y77));
-                    k.append(data);
+                    k.setText(Uri.parse(data).getHost());
+                    break;
+                case TOOL_HEADERS:
+                    Runnable runnable3 = () -> {
+                        try {
+                            StringBuilder stringBuilder = new StringBuilder("<!DOCTYPE html><html><head></head><body>");
+                            stringBuilder.append(Stream.d(data, getString(R.string.c33)));
+                            stringBuilder.append("\n</body></html");
+                            File fe = new File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Headers.html") + ".html");
+                            if (fe.createNewFile()) {
+                                FileWriter fw = new FileWriter(fe, false);
+                                BufferedWriter br = new BufferedWriter(fw);
+                                br.write(stringBuilder.toString());
+                                br.close();
+                                fw.close();
+                                runOnUiThread(() -> m.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Headers.html") + ".html"));
+                            } else {
+                                m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
+                            }
+                        } catch (Exception en) {
+                            en.printStackTrace();
+                        }
+                    };
+                    new Thread(runnable3).start();
+                    tt.setText(getString(R.string.y15));
+                    k.setText(Uri.parse(data).getHost());
                     break;
                 default:
                     // popup list

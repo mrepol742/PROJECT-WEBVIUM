@@ -120,7 +120,6 @@ public class BaseActivity extends Activity {
             sendBroadcast(f);
             Toast.b(this, getString(R.string.q26));
         } catch (Exception et) {
-            Toast.e(this, getString(R.string.a36), 2);
             et.printStackTrace();
         }
     }

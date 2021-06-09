@@ -32,7 +32,7 @@ public class DownloadDatabase extends SQLiteOpenHelper {
     public static final String COL4_DOWNLOAD = "E";
     public static final String COL5_DOWNLOAD = "F";
 
-    public DownloadDatabase(Context context) {
+    protected DownloadDatabase(Context context) {
         super(context, DATA_DOWNLOAD, null, VERSION_DOWNLOAD);
     }
 

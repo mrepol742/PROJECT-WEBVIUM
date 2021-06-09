@@ -48,7 +48,6 @@ public class APPL extends Application {
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
-                    .penaltyDeath()
                     .build());
         }
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -100,5 +99,7 @@ public class APPL extends Application {
         printWriter.close();
         return stacktraceAsString;
     }
+
+
 }
 

@@ -89,7 +89,7 @@ public class EXCE extends BaseActivity {
         tv1.setTypeface(type(Typeface.NORMAL));
         bn.setTypeface(type(Typeface.NORMAL));
         bn1.setTypeface(type(Typeface.NORMAL));
-        tv.setText(getString(R.string.y65));
+        tv.setText(getString(R.string.y79));
         tv1.setText(madeErrMsg);
         tv.setTextColor(Resources.getColor(this, R.color.e));
         if (!a221().getBoolean("autoUpdate", false)) {
@@ -99,6 +99,8 @@ public class EXCE extends BaseActivity {
         }
         bn.setText(getString(R.string.y67));
         bn1.setText(getString(R.string.y66));
+        bn1.setBackgroundResource(R.drawable.g4);
+        bn.setBackgroundResource(R.drawable.c10);
         AlertDialog dd = bld.create();
         bn.setOnClickListener((v) -> {
             Intent it = new Intent(this, FEED.class);

@@ -48,9 +48,7 @@ import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.os.PowerManager;
 import android.print.PrintManager;
 import android.provider.ContactsContract;
@@ -109,16 +107,15 @@ import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.annotation.Unused;
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.GeolocationDataModel;
-import com.mrepol742.webvium.app.SearchJSI;
-import com.mrepol742.webvium.app.WebviumJSI;
-import com.mrepol742.webvium.app.UpdateJSI;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
+import com.mrepol742.webvium.app.SearchJSI;
 import com.mrepol742.webvium.app.WebViews;
+import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainNotification;
+import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.bookmark.BookmarkDatabase;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
@@ -379,8 +376,9 @@ public class MAIN extends MainBaseActivity implements Format {
     public static int ASSETLINKS = 9;
     public static int SITEMAPS = 10;
     public static final String WEBVIUM_HOME = "https://mrepol742.github.io/Search/index.html";
-    private SearchJSI searchJSI;
-    private UpdateJSI updateJSI;
+    int WEBVIUM_SEARCH = 0;
+    int WEBVIUM_HISTORY = 2;
+    int WEBVIUM_BOOKMARKS = 4;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -638,8 +636,6 @@ public class MAIN extends MainBaseActivity implements Format {
         this.S = new ForegroundColorSpan(Resources.getColor(this, R.color.s));
         this.I = new ForegroundColorSpan(Resources.getColor(this, R.color.i));
         this.B = new ForegroundColorSpan(Resources.getColor(this, R.color.b));
-        this.searchJSI = new SearchJSI(this);
-        this.updateJSI = new UpdateJSI(this);
         this.cd = findViewById(R.id.v);
         HorizontalScrollView hsv = findViewById(R.id.c13);
         this.iw = findViewById(R.id.d20);
@@ -960,6 +956,22 @@ public class MAIN extends MainBaseActivity implements Format {
         Animation.animate(MAIN.this, R.anim.c, tv5);
     }
 
+    private String c6(ConsoleMessage.MessageLevel lev) {
+        if (lev == ConsoleMessage.MessageLevel.TIP) {
+            return "#ff34a853";
+        } else if (lev == ConsoleMessage.MessageLevel.ERROR) {
+            return "#ffea4335";
+        } else if (lev == ConsoleMessage.MessageLevel.WARNING) {
+            return "#fffbbc05";
+        } else {
+            if (!a221().getBoolean("autoUpdate", false)) {
+                return "#ff484848";
+            } else {
+                return "#ffffffff";
+            }
+        }
+    }
+
     public void c7(String a) {
         Toast.c(this, a);
     }
@@ -1105,6 +1117,8 @@ public class MAIN extends MainBaseActivity implements Format {
                     if (a221().getBoolean("launch", false)) {
                         Intents.a(MAIN.this, DOWN.class);
                     }
+                    // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
+                    // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
                     SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv,", 0);
                     Intent it = new Intent(MAIN.this, DOWN0.class);
                     it.putExtra("a", c1);
@@ -1615,43 +1629,242 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
-                return c89(b, fileChooserParams);
+                MAIN.this.b = b;
+                Intent d = fileChooserParams.createIntent();
+                d.setAction(Intent.ACTION_GET_CONTENT);
+                d.addCategory(Intent.CATEGORY_OPENABLE);
+                String[] sg = fileChooserParams.getAcceptTypes();
+                if (sg.length != 0) {
+                    d.setType(sg[1]);
+                } else {
+                    d.setType("*/*");
+                }
+                if (d.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
+                    return true;
+                }
+                return false;
             }
 
             @Override
             public void onProgressChanged(WebView a, int b) {
-                c90(a, b);
+                g.setProgress(b);
+                if (b == 100) {
+                    tv3.setImageResource(R.drawable.b11);
+                    Animation.animate(MAIN.this, R.anim.c, tv3);
+                    g.setVisibility(View.GONE);
+                    Animation.animate(MAIN.this, R.anim.b, g);
+                    MAIN.this.cm1.flush();
+                    cdt.cancel();
+                    cdt.purge();
+                    if (a224("a10", false) && bl6) {
+                        // if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
+                        c142(a.getTitle(), a.getUrl());
+                       /* } else {
+                            c142(getString(R.string.g29), getString(R.string.g30));
+                        }*/
+                    } else if (a224("a10", false) && !bl6) {
+                        //if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
+                        c143(a.getTitle(), a.getUrl());
+                      /*  } else {
+                            c143(getString(R.string.g29), getString(R.string.g30));
+                        }*/
+                    }
+                } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
+                    cdt.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            c141();
+                            cdt.cancel();
+                            cdt.purge();
+                        }
+                    }, 10000);
+                }
+                if (b != 100) {
+                    g.setVisibility(View.VISIBLE);
+                    Animation.animate(MAIN.this, R.anim.c, g);
+                    tv3.setImageResource(R.drawable.a14);
+                    Animation.animate(MAIN.this, R.anim.c, tv3);
+                }
+                tv3.setBackgroundResource(R.drawable.b17);
             }
 
             @Override
             public boolean onJsAlert(WebView a, String b, String c, JsResult d) {
-                return c91(a, c, d);
+                if (a221().getBoolean("Java10", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(true);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        d.confirm();
+                        a13.dismiss();
+                    });
+                    bld.setOnCancelListener(a1 -> {
+                        d.cancel();
+                        a1.dismiss();
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
             }
 
             @Override
             public boolean onJsPrompt(WebView a, String b, String c, String d, JsPromptResult e) {
-                return c92(a, c, e);
+                if (a221().getBoolean("Java9", true)) {
+                    AlertDialog.Builder a89 = new AlertDialog.Builder(MAIN.this);
+                    LayoutInflater b54 = getLayoutInflater();
+                    View c34 = b54.inflate(R.layout.x, null);
+                    a89.setCancelable(true);
+                    a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    a89.setView(c34);
+                    TextView sjs1 = c34.findViewById(R.id.e1);
+                    final EDIT sjs = c34.findViewById(R.id.e3);
+                    int e78 = Resources.getColor(MAIN.this, R.color.c);
+                    int f = Resources.getColor(MAIN.this, R.color.b);
+                    int f1 = Resources.getColor(MAIN.this, R.color.j);
+                    int g1 = Resources.getColor(MAIN.this, R.color.k);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        sjs1.setTextColor(e78);
+                        sjs.setTextColor(e78);
+                        sjs.setHintTextColor(f1);
+                    } else {
+                        sjs1.setTextColor(f);
+                        sjs.setTextColor(f);
+                        sjs.setHintTextColor(g1);
+                    }
+                    sjs1.setText(c);
+                    a89.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        String uwe = sjs.getText().toString();
+                        e.confirm(uwe);
+                    });
+                    a89.setNegativeButton(getString(R.string.i7), (a12, intetg) -> e.cancel()).setOnCancelListener(a1 -> {
+                        e.cancel();
+                        a1.dismiss();
+                    });
+                    final AlertDialog g = a89.create();
+                    g.show();
+                    final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
+                    sjs.addTextChangedListener(new TextWatcher() {
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            okButton.setEnabled(sjs.getText().toString().length() != 0);
+                        }
+                    });
+                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    return true;
+                }
+                return false;
             }
 
             @Override
             public boolean onJsConfirm(WebView a, String b, String c, JsResult e) {
-                return c93(a, c, e);
+                if (a221().getBoolean("Java11", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(true);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        e.confirm();
+                        a13.dismiss();
+                    });
+                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
+                        e.cancel();
+                        a12.dismiss();
+                    });
+                    bld.setOnCancelListener(a1 -> {
+                        e.cancel();
+                        a1.dismiss();
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
             }
 
             @Override
             public boolean onJsBeforeUnload(WebView a, String b, String c, JsResult e) {
-                return c94(a, c, e);
+                if (a221().getBoolean("Java12", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(false);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        e.confirm();
+                        a13.dismiss();
+                    });
+                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
+                        e.cancel();
+                        a12.dismiss();
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
             }
 
             @Override
-            public boolean onConsoleMessage(ConsoleMessage cm) {
-                c95(cm.message(), cm.lineNumber(), cm.sourceId());
+            public boolean onConsoleMessage(ConsoleMessage cm1) {
+                cm.append(String.format(getString(R.string.v188), cm1.messageLevel().toString(), c6(cm1.messageLevel()), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
+                        .append("\n\n");
                 return true;
             }
 
             @Override
             public void onGeolocationPermissionsShowPrompt(String a, GeolocationPermissions.Callback b) {
-                c96(a, b);
+                final boolean c = false;
+                AlertDialog.Builder d = new AlertDialog.Builder(MAIN.this);
+                d.setMessage(String.format(getString(R.string.v14), a));
+                d.setCancelable(false);
+                d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
+                    if (Permission.check(MAIN.this, Permission.LOCATION, 5)) {
+                        b.invoke(a, true, c);
+                        c8(String.format(getString(R.string.v15), a));
+                    } else {
+                        w6 = new GeolocationDataModel(a, b);
+                    }
+                    a1.dismiss();
+                });
+                d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
+                    b.invoke(a, false, c);
+                    c7(String.format(getString(R.string.v16), a));
+                    a1.dismiss();
+                });
+                AlertDialog e = d.create();
+                e.show();
             }
 
             @Override
@@ -1734,6 +1947,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         });
         h.addJavascriptInterface(new WebviumJSI(this), Package.c());
+        h.addJavascriptInterface(new SearchJSI(this), "Search");
         if (Build.VERSION.SDK_INT >= 29) {
             h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
 
@@ -1799,7 +2013,6 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c38(String a) {
         try {
-            c139(a);
             if (Objects.requireNonNull(a221().getString("cookies", "")).equals("120")) {
                 if (a.startsWith("https://")) {
                     cm1.setAcceptCookie(true);
@@ -1977,27 +2190,21 @@ public class MAIN extends MainBaseActivity implements Format {
 
                             @Override
                             public void run() {
-                                runOnUiThread(() -> {
-                                    ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                });
+                                runOnUiThread(() -> ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
                             }
                         }, 1000);
                         timer.schedule(new TimerTask() {
 
                             @Override
                             public void run() {
-                                runOnUiThread(() -> {
-                                ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                });
+                                runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
                             }
                         }, 2000);
                         timer.schedule(new TimerTask() {
 
                             @Override
                             public void run() {
-                                runOnUiThread(() -> {
-                                ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                });
+                                runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
                                 }
                         }, 3000);
                 } catch (IOException ioException) {
@@ -2013,35 +2220,29 @@ public class MAIN extends MainBaseActivity implements Format {
             ti.setText(getString(R.string.v13));
             Runnable re2 = () -> {
                 try {
-                    boolean st = Ping.isHostReachable(sg, 2500);
-                    boolean nd = Ping.isHostReachable(sg, 5000);
-                    boolean rd = Ping.isHostReachable(sg, 10000);
+                    boolean st = Ping.isHostReachable(ab, 2500);
+                    boolean nd = Ping.isHostReachable(ab, 5000);
+                    boolean rd = Ping.isHostReachable(ab, 10000);
                     Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
 
                         @Override
                         public void run() {
-                            runOnUiThread(() -> {
-                                ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                            });
+                            runOnUiThread(() -> ti.setText(Html.b(String.format(getString(R.string.y85), ab, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
                         }
                     }, 1000);
                     timer.schedule(new TimerTask() {
 
                         @Override
                         public void run() {
-                            runOnUiThread(() -> {
-                                ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                            });
+                            runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
                         }
                     }, 2000);
                     timer.schedule(new TimerTask() {
 
                         @Override
                         public void run() {
-                            runOnUiThread(() -> {
-                                ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                            });
+                            runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
                         }
                     }, 3000);
                 } catch (IOException ioException) {
@@ -2104,7 +2305,8 @@ public class MAIN extends MainBaseActivity implements Format {
         } else {
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
-        ed.setText(Html.b(cm.toString()));
+        ed.setText(cm.toString());
+        a.setPositiveButton(getString(R.string.y89), (a2, i) -> a2.dismiss());
         final AlertDialog g = a.create();
         g.show();
     }
@@ -2147,7 +2349,13 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c49(String a) {
         String a5 = a.trim().toLowerCase();
-        if (a.startsWith("view-source:") && (a.contains("https://") || a.contains("http://") || a.contains("file://") || a.contains("content://"))) {
+        if (a5.equals("webvium://history")) {
+            c146(WEBVIUM_HISTORY);
+        } else if (a5.equals("webvium://search")) {
+            c146(WEBVIUM_SEARCH);
+        } else if (a5.equals("webvium://bookmarks")) {
+            c146(WEBVIUM_BOOKMARKS);
+        } else if (a.startsWith("view-source:") && (a.contains("https://") || a.contains("http://") || a.contains("file://") || a.contains("content://"))) {
             Intent it = new Intent(this, TOOL.class);
             it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
             it.putExtra("dat", a5);
@@ -2919,7 +3127,19 @@ public class MAIN extends MainBaseActivity implements Format {
     public boolean c82(String b) {
         try {
             c38(b);
-            if (MailTo.isMailTo(b)) {
+            if (b.equals("webvium://history")) {
+                c146(WEBVIUM_HISTORY);
+                return true;
+            } else if (b.equals("webvium://search")) {
+                c146(WEBVIUM_SEARCH);
+                return true;
+            } else if (b.equals("webvium://bookmarks")) {
+                c146(WEBVIUM_BOOKMARKS);
+                return true;
+            } else if (b.equals("webvium://launch?search")) {
+                Intents.a(this, SEAR.class);
+                return true;
+            } else if (MailTo.isMailTo(b)) {
                 return c177(b);
             } else if (b.startsWith("smsto:")) {
                 return c178(b);
@@ -3059,204 +3279,6 @@ public class MAIN extends MainBaseActivity implements Format {
         } catch (Exception asd) {
             asd.printStackTrace();
         }
-    }
-
-    // on show file chooser
-    public boolean c89(ValueCallback<Uri[]> b2, WebChromeClient.FileChooserParams fileChooserParams) {
-        b = b2;
-        Intent d = fileChooserParams.createIntent();
-        d.setAction(Intent.ACTION_GET_CONTENT);
-        d.addCategory(Intent.CATEGORY_OPENABLE);
-        String[] sg = fileChooserParams.getAcceptTypes();
-        if (sg.length != 0) {
-            d.setType(sg[1]);
-        } else {
-            d.setType("*/*");
-        }
-        if (d.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
-            return true;
-        }
-        return false;
-    }
-
-    public void c90(final WebView a, final int b) {
-        g.setProgress(b);
-        if (b == 100) {
-            tv3.setImageResource(R.drawable.b11);
-            Animation.animate(this, R.anim.c, tv3);
-            g.setVisibility(View.GONE);
-            Animation.animate(this, R.anim.b, g);
-            this.cm1.flush();
-            cdt.cancel();
-            cdt.purge();
-                if (a224("a10", false) && bl6) {
-                    // if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
-                    c142(a.getTitle(), a.getUrl());
-                       /* } else {
-                            c142(getString(R.string.g29), getString(R.string.g30));
-                        }*/
-                } else if (a224("a10", false) && !bl6) {
-                    //if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
-                    c143(a.getTitle(), a.getUrl());
-                      /*  } else {
-                            c143(getString(R.string.g29), getString(R.string.g30));
-                        }*/
-                }
-        } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
-            cdt.schedule(new TimerTask() {
-
-                @Override
-                public void run() {
-                    c141();
-                    cdt.cancel();
-                    cdt.purge();
-                }
-            }, 10000);
-        }
-        if (b != 100) {
-            g.setVisibility(View.VISIBLE);
-            Animation.animate(this, R.anim.c, g);
-            tv3.setImageResource(R.drawable.a14);
-            Animation.animate(this, R.anim.c, tv3);
-        }
-        tv3.setBackgroundResource(R.drawable.b17);
-    }
-
-    public boolean c91(WebView a, String c, final JsResult d) {
-
-        if (a221().getBoolean("Java10", true)) {
-            new AlertDialog.Builder(this)
-                    .setCancelable(true)
-                    .setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())))
-                    .setMessage(c).setPositiveButton(getString(R.string.i6), (a12, intetg) -> d.confirm())
-                    .setOnCancelListener(a1 -> {
-                        d.confirm();
-                        a1.dismiss();
-            }).create().show();
-            return true;
-        }
-        return false;
-    }
-
-    public boolean c92(WebView a, String c, final JsPromptResult e) {
-        if (a221().getBoolean("Java9", true)) {
-            AlertDialog.Builder a89 = new AlertDialog.Builder(this);
-            LayoutInflater b54 = getLayoutInflater();
-            View c34 = b54.inflate(R.layout.x, null);
-            a89.setCancelable(true);
-            a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-            a89.setView(c34);
-            TextView sjs1 = c34.findViewById(R.id.e1);
-            final EDIT sjs = c34.findViewById(R.id.e3);
-            int e78 = Resources.getColor(this, R.color.c);
-            int f = Resources.getColor(this, R.color.b);
-            int f1 = Resources.getColor(this, R.color.j);
-            int g1 = Resources.getColor(this, R.color.k);
-            if (!a221().getBoolean("autoUpdate", false)) {
-                sjs1.setTextColor(e78);
-                sjs.setTextColor(e78);
-                sjs.setHintTextColor(f1);
-            } else {
-                sjs1.setTextColor(f);
-                sjs.setTextColor(f);
-                sjs.setHintTextColor(g1);
-            }
-            sjs1.setText(c);
-            a89.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                String uwe = sjs.getText().toString();
-                e.confirm(uwe);
-            });
-            a89.setNegativeButton(getString(R.string.i7), (a12, intetg) -> e.cancel()).setOnCancelListener(a1 -> {
-                e.cancel();
-                a1.dismiss();
-            });
-            final AlertDialog g = a89.create();
-            g.show();
-            final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-            sjs.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    okButton.setEnabled(sjs.getText().toString().length() != 0);
-                }
-            });
-            g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean c93(WebView a, String c, final JsResult e) {
-
-        if (a221().getBoolean("Java11", true)) {
-            new AlertDialog.Builder(this)
-                    .setCancelable(true)
-                    .setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())))
-                    .setMessage(c)
-                    .setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        e.confirm();
-                        a13.dismiss();
-                    }).setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
-                        e.cancel();
-                        a12.dismiss();
-                    }).setOnCancelListener(a1 -> {
-                        e.cancel();
-                        a1.dismiss();
-                    }).create().show();
-            return true;
-        }
-        return false;
-    }
-
-    public boolean c94(WebView a, String c, final JsResult e) {
-
-        if (a221().getBoolean("Java12", true)) {
-            new AlertDialog.Builder(this)
-                    .setCancelable(false)
-                    .setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())))
-                    .setMessage(c).setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-                        e.confirm();
-                        a12.dismiss();
-                    }).setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-                        e.cancel();
-                        a1.dismiss();
-                    }).create().show();
-            return true;
-        }
-        return false;
-    }
-
-    public void c95(String a, int b, String c) {
-        String sg = String.format(getString(R.string.v18), a, b, c);
-        cm.append(sg).append("<br><br>");
-    }
-
-    public void c96(final String a, final GeolocationPermissions.Callback b) {
-        final boolean c = false;
-        AlertDialog.Builder d = new AlertDialog.Builder(this);
-        d.setMessage(String.format(getString(R.string.v14), a));
-        d.setCancelable(false);
-        d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
-            if (Permission.check(this, Permission.LOCATION, 5)) {
-                b.invoke(a, true, c);
-                c8(String.format(getString(R.string.v15), a));
-            } else {
-                w6 = new GeolocationDataModel(a, b);
-            }
-            a1.dismiss();
-        });
-        d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
-            b.invoke(a, false, c);
-            c7(String.format(getString(R.string.v16), a));
-            a1.dismiss();
-        });
-        AlertDialog e = d.create();
-        e.show();
-    }
-
-    private void c97() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     private void c98() {
@@ -3978,20 +4000,6 @@ public class MAIN extends MainBaseActivity implements Format {
         return sg;
     }
 
-    private void c139(String sg) {
-        if (WEBVIUM_HOME.equals(sg)) {
-            h.addJavascriptInterface(this.searchJSI, "Search");
-            if (sg.contains("?open=true")) {
-                Intents.a(this, SEAR.class);
-            }
-        } else {
-            h.removeJavascriptInterface("Search");
-        }
-       
-        h.addJavascriptInterface(this.updateJSI, "Update");
-      
-    }
-
     private void c140() {
         AlertDialog.Builder c = new AlertDialog.Builder(this);
         c.setTitle(getString(R.string.l35));
@@ -4161,7 +4169,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c146(int data) {
-        if (data == 0) {
+        if (data == WEBVIUM_SEARCH) {
             Runnable p15 = () -> {
                 Cursor cs = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
                         SearchDatabase.TABLE_SEARCH +
@@ -4170,7 +4178,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         " DESC", null);
                 try {
                     if (cs.getCount() == 0) {
-                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/sh.htm");
+                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm");
                         if (fe.createNewFile()) {
                             FileWriter fw = new FileWriter(fe, false);
                             BufferedWriter br = new BufferedWriter(fw);
@@ -4181,10 +4189,12 @@ public class MAIN extends MainBaseActivity implements Format {
                     } else {
                         StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.x49) + "</th></tr>");
                         while (cs.moveToNext()) {
-                            sg.append("<tr><td>").append(cs.getString(1)).append("</td></tr>");
+                            sg.append("<tr><td>")
+                                    .append(cs.getString(1))
+                                    .append("</td></tr>");
                         }
                         sg.append("</table></center></body></html>");
-                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/sh.htm");
+                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm");
                         if (fe1.createNewFile()) {
                             FileWriter fw1 = new FileWriter(fe1, false);
                             BufferedWriter br1 = new BufferedWriter(fw1);
@@ -4193,51 +4203,99 @@ public class MAIN extends MainBaseActivity implements Format {
                             fw1.close();
                         }
                     }
-                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/sh.htm"));
+                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm"));
                     cs.close();
                 } catch (Exception en) {
                     en.printStackTrace();
                 }
             };
             new Thread(p15).start();
-        } else if (data == 1) {
+        } else if (data == WEBVIUM_HISTORY) {
             Runnable p15 = () -> {
                 Cursor cs5 = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
                         HistoryDatabase.TABLE_HISTORY +
                         " ORDER BY " +
                         "_id" +
                         " DESC", null);
-                if (cs5.getCount() == 0) {
-                    c169("https://webvium:/history_lite", "<b>" + getString(R.string.i15));
-                } else {
-                    StringBuilder sg5 = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i16) + "</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0, user-scalable=no\"></head><body>");
-                    while (cs5.moveToNext()) {
-                        sg5.append("<b>").append(getString(R.string.i10)).append("</b> ").append(cs5.getString(1)).append("<br><b>").append(getString(R.string.f40)).append("</b> <a href=\"").append(cs5.getString(2)).append("\">").append(cs5.getString(2)).append("</a>").append("<br><br>");
+                try {
+                    if (cs5.getCount() == 0) {
+                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm");
+                        if (fe.createNewFile()) {
+                            FileWriter fw = new FileWriter(fe, false);
+                            BufferedWriter br = new BufferedWriter(fw);
+                            br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.i15) + "</b></h1></center></body></html>");
+                            br.close();
+                            fw.close();
+                        }
+                    } else {
+                        StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.q17) + "</th></tr>");
+                        while (cs5.moveToNext()) {
+                            sg.append("<tr><td>")
+                                    .append(cs5.getString(1))
+                                    .append(" - ")
+                                    .append(cs5.getString(2))
+                                    .append(" - ")
+                                    .append(cs5.getString(3))
+                                    .append("</td></tr>");
+                        }
+                        sg.append("</table></center></body></html>");
+                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm");
+                        if (fe1.createNewFile()) {
+                            FileWriter fw1 = new FileWriter(fe1, false);
+                            BufferedWriter br1 = new BufferedWriter(fw1);
+                            br1.write(sg.toString());
+                            br1.close();
+                            fw1.close();
+                        }
                     }
-                    sg5.append("</body></html>");
-                    c169("https://webvium:/history_lite", sg5.toString());
+                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm"));
+                    cs5.close();
+                } catch (Exception en) {
+                    en.printStackTrace();
                 }
-                cs5.close();
             };
             new Thread(p15).start();
-        } else if (data == 2) {
+        } else if (data == WEBVIUM_BOOKMARKS) {
             Runnable p15 = () -> {
                 Cursor cs6 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
                         BookmarkDatabase.TABLE_BOOKMARK +
                         " ORDER BY " +
                         "_id" +
                         " DESC", null);
-                if (cs6.getCount() == 0) {
-                    c169("https://webvium/bookmarks_lite", "<b>" + getString(R.string.g21));
-                } else {
-                    StringBuilder sg5 = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.h11) + "</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0, user-scalable=no\"></head><body>");
-                    while (cs6.moveToNext()) {
-                        sg5.append("<b>").append(getString(R.string.i10)).append("</b> ").append(cs6.getString(1)).append("<br><b>").append(getString(R.string.f30)).append("</b> <a href=\"").append(cs6.getString(2)).append("\">").append(cs6.getString(2)).append("</a>").append("<br><br>");
+                try {
+                    if (cs6.getCount() == 0) {
+                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
+                        if (fe.createNewFile()) {
+                            FileWriter fw = new FileWriter(fe, false);
+                            BufferedWriter br = new BufferedWriter(fw);
+                            br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.g21) + "</b></h1></center></body></html>");
+                            br.close();
+                            fw.close();
+                        }
+                    } else {
+                        StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.y88) + "</th></tr>");
+                        while (cs6.moveToNext()) {
+                            sg.append("<tr><td>")
+                                    .append(cs6.getString(1))
+                                    .append(" - ")
+                                    .append(cs6.getString(2))
+                                    .append("</td></tr>");
+                        }
+                        sg.append("</table></center></body></html>");
+                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
+                        if (fe1.createNewFile()) {
+                            FileWriter fw1 = new FileWriter(fe1, false);
+                            BufferedWriter br1 = new BufferedWriter(fw1);
+                            br1.write(sg.toString());
+                            br1.close();
+                            fw1.close();
+                        }
                     }
-                    sg5.append("</body></html>");
-                    c169("https://webvium/bookmarks_lite", sg5.toString());
+                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm"));
+                    cs6.close();
+                } catch (Exception en) {
+                    en.printStackTrace();
                 }
-                cs6.close();
             };
             new Thread(p15).start();
         }
@@ -4513,6 +4571,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm0.toString()));
+        a.setPositiveButton(getString(R.string.y89), (a2, i) -> a2.dismiss());
         final AlertDialog g = a.create();
         g.show();
     }
@@ -4531,7 +4590,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm2.toString()));
-
+        a.setPositiveButton(getString(R.string.y89), (a2, i) -> a2.dismiss());
         final AlertDialog g = a.create();
         g.show();
     }
@@ -4673,15 +4732,6 @@ public class MAIN extends MainBaseActivity implements Format {
         } catch (Exception rx) {
             rx.printStackTrace();
         }
-    }
-
-    private String c181(String sg) {
-        try {
-            return URLDecoder.decode(sg, "UTF-8");
-        } catch (UnsupportedEncodingException unsupportedEncodingException) {
-            unsupportedEncodingException.printStackTrace();
-        }
-        return sg;
     }
 
     @Override
@@ -5232,7 +5282,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         if (Objects.requireNonNull(a221().getString("hide", "")).equals("30d")) {
             if (a) {
-                c97();
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
             } else {
                 c98();
             }

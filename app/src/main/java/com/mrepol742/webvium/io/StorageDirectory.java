@@ -22,6 +22,7 @@ import android.os.Environment;
 
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.UnsupportedActions;
+import com.mrepol742.webvium.security.Hash;
 
 import java.io.File;
 
@@ -53,7 +54,7 @@ public class StorageDirectory {
     }
 
     public static String getClasses(Context context) {
-        return getFileDir(context) + "/b";
+        return getFileDir(context) + "/" + Hash.a("SHA-1", "Maven-Pro.ttf") + ".ttf";
     }
 
     public static String getVideoPoster(Context context) {

@@ -16,38 +16,57 @@
   -->
 
 <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     a:layout_width="match_parent"
     a:layout_height="wrap_content" a:gravity="center"
     a:paddingStart="?m"
     a:paddingEnd="?m">
 
     <TextView
+        a:layout_centerHorizontal="true"
         a:id="@id/o30"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
         a:layout_marginTop="10dp"
         a:textSize="@dimen/h" />
 
-    <ScrollView a:layout_marginBottom="10dp" a:layout_above="@id/o33" a:layout_below="@id/o30" a:layout_height="wrap_content" a:layout_width="match_parent">
-
-    <TextView a:layout_gravity="top"
-        a:id="@id/o31"
-        a:layout_width="wrap_content"
+    <ScrollView
+        a:layout_width="match_parent"
         a:layout_height="wrap_content"
-        a:layout_marginTop="10dp"
-        a:textIsSelectable="true"
-        a:textSize="@dimen/b" />
+        a:layout_above="@id/o36"
+        a:layout_below="@id/o30"
+        a:layout_marginBottom="10dp">
+
+        <TextView
+            a:layout_gravity="top"
+            a:id="@id/o31"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:layout_marginTop="10dp"
+            a:textIsSelectable="true"
+            a:textSize="@dimen/b" />
 
     </ScrollView>
-    <Button a:layout_alignParentBottom="true" a:layout_alignParentEnd="true"
-        a:id="@id/o32"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content" />
 
-    <Button a:layout_alignParentEnd="true" a:layout_above="@id/o32"
-        a:id="@id/o33"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content" />
+    <LinearLayout
+        a:id="@id/o36"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:layout_alignParentBottom="true">
 
+        <Button
+            a:id="@id/o32"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.1"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            a:id="@id/o33"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.1"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
 
 </RelativeLayout>

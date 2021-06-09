@@ -49,6 +49,7 @@ import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.AppID;
 import com.mrepol742.webvium.util.cache.FontCache;
+import com.mrepol742.webvium.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -64,14 +65,12 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
-
-
-    public static final String INIT = "init_9";
+    public static final String INIT = "init_12";
     private RelativeLayout ll;
 
     @Override
     protected void onCreate(Bundle be) {
-        setTheme(T_WELCOME_SCREEN);
+        theme(T_WELCOME_SCREEN);
         super.onCreate(be);
         a225(R.layout.p);
         rl = findViewById(R.id.h9);
@@ -84,11 +83,6 @@ public class WELC extends BaseActivity {
         iv.setImageResource(R.drawable.b14);
         tv.setTypeface(type(Typeface.BOLD));
         ll = findViewById(R.id.h11);
-       if (!a221().getBoolean("autoUpdate", false)) {
-            fl.setBackgroundColor(Resources.getColor(this, R.color.b));
-       } else {
-           fl.setBackgroundColor(Resources.getColor(this, R.color.n));
-        }
         tv.setTextColor(Resources.getColor(this, R.color.b));
         d = AnimationUtils.loadAnimation(this, R.anim.h);
         iv.startAnimation(d);
@@ -111,15 +105,13 @@ public class WELC extends BaseActivity {
             }
         };
         new Thread(re).start();
-        ll.setBackgroundResource(R.drawable.f10);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (!a221().getBoolean("autoUpdate", false)) {
-                if (!a221().getBoolean("webviumB", false)) {
-                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-            }
+        try {
+            ll.setBackgroundResource(R.drawable.f11);
+        } catch (Exception en) {
+            Toast.a(this, en.getMessage());
+            en.printStackTrace();
         }
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
 
     @Override
@@ -144,6 +136,13 @@ public class WELC extends BaseActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     public void a2() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!a221().getBoolean("autoUpdate", false)) {
+                if (!a221().getBoolean("webviumB", false)) {
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            }
+        }
         View c = View.inflate(this, R.layout.a3, null);
         TextView ed = c.findViewById(R.id.n23);
         final Button bn = c.findViewById(R.id.n24);
@@ -155,9 +154,11 @@ public class WELC extends BaseActivity {
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(Resources.getColor(this, R.color.c));
             ed1.setTextColor(Resources.getColor(this, R.color.c));
+            fl.setBackgroundColor(Resources.getColor(this, R.color.b));
         } else {
             ed.setTextColor(Resources.getColor(this, R.color.b));
             ed1.setTextColor(Resources.getColor(this, R.color.b));
+            fl.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
         ScrollView sv = c.findViewById(R.id.j);
         bn.setTypeface(type(Typeface.BOLD));

@@ -30,7 +30,7 @@ public class HistoryDatabase extends SQLiteOpenHelper {
     public static final String COL2_HISTORY = "C";
     public static final String COL3_HISTORY = "D";
 
-    public HistoryDatabase(Context context) {
+    protected HistoryDatabase(Context context) {
         super(context, DATA_HISTORY, null, VERSION_HISTORY);
     }
 

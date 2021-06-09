@@ -33,6 +33,11 @@ android {
         versionName "1.4"
         proguardFiles getDefaultProguardFile(
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName = "webvium-${variant.name}.apk"
+            }
+        }
     }
 
     buildTypes {

@@ -21,25 +21,19 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
-import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -48,7 +42,6 @@ import com.mrepol742.webvium.app.FeedJSI;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
@@ -126,6 +119,7 @@ public class FEED extends BaseActivity {
             }
         });
         Animation.animate(this, R.anim.i, iv);
+
     }
 
     @Override

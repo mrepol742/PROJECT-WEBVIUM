@@ -22,6 +22,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraManager;
@@ -36,6 +37,7 @@ import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.release.Keep;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Clipboard;
+import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.os.Vibrate;
 import com.mrepol742.webvium.widget.Toast;
@@ -103,8 +105,13 @@ public class WebviumJSI {
     }
 
     @JavascriptInterface
-    public void exit() {
-        System.exit(0);
+    public int currentVersion() throws PackageManager.NameNotFoundException {
+        return Integer.parseInt(Package.e(a).replaceAll("\\.", ""));
+    }
+
+    @JavascriptInterface
+    public void print() {
+
     }
 
     @JavascriptInterface

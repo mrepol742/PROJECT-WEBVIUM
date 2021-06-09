@@ -198,7 +198,7 @@
     <string name="i12">Clear All Bookmarks</string>
     <string name="i13">Clear Bookmarks</string>
     <string name="i14">Continue</string>
-    <string name="i15">NO BROWSING HISTORY TO SHOW</string>
+    <string name="i15">Your browsing history appear here</string>
     <string name="i16">Browsing History</string>
     <string name="i18">Enabled</string>
     <string name="i19">Disabled</string>
@@ -411,6 +411,7 @@
     <string name="v16">%1$s request location permission denied.</string>
     <string name="v17">Allow</string>
     <string name="v18">&lt;b>Message:&lt;/b> %1$s&lt;br>&lt;b>Line:&lt;/b> %2$d&lt;br>&lt;b>Source ID:&lt;/b> %3$s</string>
+    <string name="v188"><font color="%2$s">%1$s</font>\n\n<font color="%2$s">Message:</font> %3$s\n<font color="%2$s">Line:</font> %4$d\n<font color="%2$s">Source ID:</font> %5$s</string>
     <string name="v19">Security Certificate</string>
     <string name="v20">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d&lt;br>&lt;b>Description:&lt;/b> %3$s</string>
     <plurals name="w1">
@@ -889,7 +890,7 @@
     <string name="y76">AssetLinks.json</string>
     <string name="y77">Sitemap.xml</string>
     <string name="y78">Ping</string>
-
+    <string name="y79">----- OOOPS -----</string>
     <string name="y80">Reachable by us</string>
     <string name="y81">Unable to reach</string>
     <string name="y82">Missing Protocol.</string>
@@ -898,6 +899,8 @@
     <string name="y85">%1$s &lt;br> 2500ms == %2$b</string>
     <string name="y86">&lt;br>5000ms == %1$b</string>
     <string name="y87">&lt;br>1000ms == %1$b</string>
+    <string name="y88">Your Bookmarks</string>
+    <string name="y89">Close</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>
