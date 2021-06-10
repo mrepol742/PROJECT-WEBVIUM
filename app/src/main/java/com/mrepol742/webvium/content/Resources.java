@@ -20,6 +20,7 @@ package com.mrepol742.webvium.content;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -72,6 +73,11 @@ public class Resources {
         shape.setCornerRadii(fl);
         shape.setColor(j);
         return shape;
+    }
+
+    public static boolean isColorDark(int color){
+        double darkness = 1-(0.299* Color.red(color) + 0.587*Color.green(color) + 0.114*Color.blue(color))/255;
+        return !(darkness < 0.5);
     }
 
 }

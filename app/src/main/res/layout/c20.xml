@@ -17,13 +17,24 @@
 
 <ScrollView xmlns:a="http://schemas.android.com/apk/res/android"
         a:layout_width="match_parent"  a:id="@id/c3"
-        a:layout_height="match_parent" a:layout_marginTop="10dp">
+        a:layout_height="match_parent" >
+<LinearLayout a:layout_height="wrap_content" a:layout_width="match_parent" a:orientation="vertical">
+<ImageView a:id="@id/o39" a:layout_marginTop="50dp" a:layout_gravity="center" a:layout_height="wrap_content" a:layout_width="wrap_content" a:contentDescription="@string/p20"/>
+
+    <TextView  a:gravity="center"
+        a:id="@id/o40" a:layout_marginTop="20dp"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:layout_marginStart="15dp"
+        a:layout_marginEnd="15dp"
+        a:textSize="@dimen/h" />
+
         <TextView  a:gravity="center"
-            a:id="@id/c10"
+            a:id="@id/c10" a:layout_marginTop="20dp"
             a:layout_width="match_parent"
             a:layout_height="wrap_content"
             a:layout_marginStart="15dp"
             a:layout_marginEnd="15dp"
-            a:textIsSelectable="true"
             a:textSize="@dimen/b" />
+</LinearLayout>
     </ScrollView>

@@ -65,7 +65,7 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
-    public static final String INIT = "init_12";
+    public static final String INIT = "init_13";
     private RelativeLayout ll;
 
     @Override
@@ -154,11 +154,9 @@ public class WELC extends BaseActivity {
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(Resources.getColor(this, R.color.c));
             ed1.setTextColor(Resources.getColor(this, R.color.c));
-            fl.setBackgroundColor(Resources.getColor(this, R.color.b));
         } else {
             ed.setTextColor(Resources.getColor(this, R.color.b));
             ed1.setTextColor(Resources.getColor(this, R.color.b));
-            fl.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
         ScrollView sv = c.findViewById(R.id.j);
         bn.setTypeface(type(Typeface.BOLD));
@@ -187,6 +185,7 @@ public class WELC extends BaseActivity {
         ed1.setTypeface(type(Typeface.BOLD));
         Html.a(ed, getString(R.string.n23));
         fl.addView(c);
+        fl.setFitsSystemWindows(true);
     }
 
     @SuppressLint("ClickableViewAccessibility")

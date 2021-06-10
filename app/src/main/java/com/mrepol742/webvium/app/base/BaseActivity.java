@@ -99,7 +99,7 @@ public class BaseActivity extends Activity {
 
     public void a225(int i) {
         setContentView(i);
-        if (Build.VERSION.SDK_INT == 21 || Build.VERSION.SDK_INT == 22 || a221().getBoolean("webviumB", false)) {
+        if ((Build.VERSION.SDK_INT == 21 || Build.VERSION.SDK_INT == 22) || a221().getBoolean("webviumB", false)) {
             ViewGroup vg = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
             vg.setFitsSystemWindows(true);
         }

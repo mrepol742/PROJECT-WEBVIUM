@@ -874,7 +874,7 @@
     <string name="y61">Thanks for keeping me up to date. ❤❤</string>
     <string name="y62">Scroll Down to Continue</string>
     <string name="y63">Hello World</string>
-    <string name="y64">&lt;br>&lt;br>&lt;br>&lt;br>------------------&lt;br>&lt;br>&lt;b>PROJECT-WEBVIUM&lt;/b>&lt;br>version %1$s&lt;br>&lt;br>------------------&lt;br>&lt;br>&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%3$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>%4$s&lt;/b>&lt;br>APP OWNER&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>ASSISTANT&lt;br>&lt;br>&lt;b>Amos Ayomide&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;b>Java&lt;br>XML&lt;br>HTML&lt;br>CSS&lt;br>JavaScript&lt;br>PHP&lt;br>SQLite&lt;/b>&lt;br>LANGUAGES&lt;br>&lt;br>&lt;b>Github&lt;br>Firebase&lt;/b>&lt;br>SERVERS&lt;br>&lt;br>&lt;b>github.com/mrepol742/PROJECT-WEBVIUM&lt;br>github.com/mrepol742/mrepol742.github.io&lt;br>github.com/mrepol742/Server&lt;br>github.com/mrepol742/Search&lt;br>github.com/mrepol742/wiki&lt;/b>&lt;br>LINKS&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>
+    <string name="y64">&lt;br>&lt;b>%1$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>%3$s&lt;/b>&lt;br>APP OWNER&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>ASSISTANT&lt;br>&lt;br>&lt;b>Amos Ayomide&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;b>Java&lt;br>XML&lt;br>HTML&lt;br>CSS&lt;br>JavaScript&lt;br>PHP&lt;br>SQLite&lt;/b>&lt;br>LANGUAGES&lt;br>&lt;br>&lt;b>Github&lt;br>Firebase&lt;/b>&lt;br>SERVERS&lt;br>&lt;br>&lt;b>github.com/mrepol742/PROJECT-WEBVIUM&lt;br>github.com/mrepol742/mrepol742.github.io&lt;br>github.com/mrepol742/Server&lt;br>github.com/mrepol742/Search&lt;br>github.com/mrepol742/wiki&lt;/b>&lt;br>LINKS&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>
     <string name="y65">Ooops!</string>
     <string name="y66">End Process</string>
     <string name="y67">Send Report</string>
@@ -901,6 +901,7 @@
     <string name="y87">&lt;br>1000ms == %1$b</string>
     <string name="y88">Your Bookmarks</string>
     <string name="y89">Close</string>
+    <string name="y90">&lt;br>------------------&lt;br>&lt;br>&lt;b>PROJECT-WEBVIUM&lt;/b>&lt;br>version %1$s&lt;br>&lt;br>------------------&lt;br></string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

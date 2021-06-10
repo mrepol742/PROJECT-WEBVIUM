@@ -37,8 +37,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
 import android.net.MailTo;
 import android.net.Uri;
@@ -66,11 +68,13 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.CookieManager;
 import android.webkit.GeolocationPermissions;
 import android.webkit.HttpAuthHandler;
+import android.webkit.JavascriptInterface;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.PermissionRequest;
@@ -934,7 +938,7 @@ public class MAIN extends MainBaseActivity implements Format {
         c33(a, "");
         h.loadUrl(a);
     }
-    
+
     public void c4(Message b, Message c) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
@@ -1136,7 +1140,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         spe.apply();
                     }
                 } catch (Exception d4) {
-                   d4.printStackTrace();
+                    d4.printStackTrace();
                 }
                 a34.dismiss();
             });
@@ -1521,11 +1525,7 @@ public class MAIN extends MainBaseActivity implements Format {
             if (!a221().getBoolean("showW", false)) {
                 c35(new SpannableString(url), url, 0);
             } else {
-                if (b.equals(getSharedPreferences("di", 0).getString("di", "742"))) {
-                    c35(new SpannableString(getString(R.string.c33) + " | " + url), url, b.length() + 3);
-                } else {
-                    c35(new SpannableString(b + " | " + url), url, b.length() + 3);
-                }
+                c35(new SpannableString(b + " | " + url), url, b.length() + 3);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1947,7 +1947,21 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         });
         h.addJavascriptInterface(new WebviumJSI(this), Package.c());
-        h.addJavascriptInterface(new SearchJSI(this), "Search");
+        h.addJavascriptInterface(new SearchJSI(this), Package.c()+"SearchHelper");
+        h.addJavascriptInterface(new Object() {
+
+            @JavascriptInterface
+            public void print() {
+                c100(h);
+            }
+        }, Package.c()+"PrintHelper");
+        h.addJavascriptInterface(new Object() {
+
+            @JavascriptInterface
+            public void setTheme(String a) {
+                c36(a);
+            }
+        }, Package.c()+"ThemeHelper");
         if (Build.VERSION.SDK_INT >= 29) {
             h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
 
@@ -1985,6 +1999,35 @@ public class MAIN extends MainBaseActivity implements Format {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void c36(String sg) {
+            if (!sg.isEmpty()) {
+                Runnable re = () -> {
+                    java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
+                    if (!a221().getBoolean("webviumB", false) && !fe.exists()) {
+                        runOnUiThread(() -> {
+                            int co = Color.parseColor(sg);
+                            this.o.setBackground(Resources.toDrawable(GradientDrawable.RECTANGLE, new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co));
+                            this.llt.setBackground(Resources.toDrawable(GradientDrawable.RECTANGLE, new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co));
+                            Window win = getWindow();
+                            if (Build.VERSION.SDK_INT >= 23) {
+                                win.setStatusBarColor(co);
+                                win.setNavigationBarColor(co);
+                            }
+                            if (!Resources.isColorDark(co)) {
+                                if (Build.VERSION.SDK_INT >= 23) {
+                                    win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                }
+                                if (Build.VERSION.SDK_INT >= 26) {
+                                    win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                                }
+                            }
+                        });
+                    }
+                };
+                new Thread(re).start();
+            }
     }
 
     public void c37(String a, String c) {
@@ -2180,38 +2223,38 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         ti.setText(getString(R.string.v13));
         String sg = Uri.parse(url).getHost();
-         Runnable re = () -> {
-                try {
-                    boolean st = Ping.isHostReachable(sg, 2500);
-                    boolean nd = Ping.isHostReachable(sg, 5000);
-                    boolean rd = Ping.isHostReachable(sg, 10000);
-                        Timer timer = new Timer();
-                        timer.schedule(new TimerTask() {
+        Runnable re = () -> {
+            try {
+                boolean st = Ping.isHostReachable(sg, 2500);
+                boolean nd = Ping.isHostReachable(sg, 5000);
+                boolean rd = Ping.isHostReachable(sg, 10000);
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
 
-                            @Override
-                            public void run() {
-                                runOnUiThread(() -> ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                            }
-                        }, 1000);
-                        timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(() -> ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
+                    }
+                }, 1000);
+                timer.schedule(new TimerTask() {
 
-                            @Override
-                            public void run() {
-                                runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                            }
-                        }, 2000);
-                        timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
+                    }
+                }, 2000);
+                timer.schedule(new TimerTask() {
 
-                            @Override
-                            public void run() {
-                                runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                                }
-                        }, 3000);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            };
-            new Thread(re).start();
+                    @Override
+                    public void run() {
+                        runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
+                    }
+                }, 3000);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        };
+        new Thread(re).start();
         ed.setText(sg);
         bn.setText(getString(R.string.i6));
 
@@ -2374,7 +2417,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     try {
                         c124(URLEncoder.encode(a, "UTF-8"));
                     } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                       unsupportedEncodingException.printStackTrace();
+                        unsupportedEncodingException.printStackTrace();
                         c124(a);
                     }
                 }
@@ -2442,9 +2485,9 @@ public class MAIN extends MainBaseActivity implements Format {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if (mi.availMem < mi.threshold) {
-                android.util.Log.d("Webvium", "MAIN is freeing memory now because: available ="
-                        + (mi.availMem / 1024) + " Keep threshold ="
-                        + (mi.threshold / 1024) + " Keep");
+            android.util.Log.d("Webvium", "MAIN is freeing memory now because: available ="
+                    + (mi.availMem / 1024) + " Keep threshold ="
+                    + (mi.threshold / 1024) + " Keep");
             SQLiteDatabase.releaseMemory();
             System.gc();
             h.clearCache(false);
@@ -2759,13 +2802,13 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private int c69() {
         if (Objects.requireNonNull(a221().getString("shotQq", "1w")).equals("7w")) {
-        return 95;
-    }
+            return 95;
+        }
         if (Objects.requireNonNull(a221().getString("shotQq", "1w")).equals("30w"))
 
-    {
-        return 80;
-    }
+        {
+            return 80;
+        }
         return 100;
     }
 
@@ -2997,7 +3040,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 h.load((c, Base64.a(W5.a7()).replace("%a", getString(R.string.c33)).replace("%b", getString(R.string.g23)).replace("%c", getString(R.string.r21)).replace("%d", c).replace("%e", c).replace("%f", c160(b)).replace("%g", d));
             }*/
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -3021,7 +3064,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     c175());
             cm0.append(sg9).append("<br><br>");
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -3083,6 +3126,7 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page finished
     public void c80(WebView a, String b) {
         try {
+            a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
             if (a224("webDa", false) && a221().getBoolean("tow2", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(false);
@@ -3097,7 +3141,7 @@ public class MAIN extends MainBaseActivity implements Format {
             c54(b);
             c52();
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -3119,7 +3163,7 @@ public class MAIN extends MainBaseActivity implements Format {
             Animation.animate(MAIN.this, R.anim.c, this.iw);
             this.cd.setBackgroundResource(R.drawable.w);
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -3171,7 +3215,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return false;
     }
@@ -3255,7 +3299,7 @@ public class MAIN extends MainBaseActivity implements Format {
             this.cvc.onCustomViewHidden();
             this.cvc = null;
         } catch (Exception asd) {
-           asd.printStackTrace();
+            asd.printStackTrace();
         }
     }
 
@@ -3612,7 +3656,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     return;
                 }
             } catch (IOException e) {
-               e.printStackTrace();
+                e.printStackTrace();
             }
             runOnUiThread(() -> c7(getString(R.string.w14)));
         };
@@ -3668,8 +3712,8 @@ public class MAIN extends MainBaseActivity implements Format {
             Runnable p15 = () -> {
                 String str = ed.getText().toString();
                 try {
-                        String sg = U1.a(Integer.parseInt(str));
-                        runOnUiThread(() -> ti.setText(sg));
+                    String sg = U1.a(Integer.parseInt(str));
+                    runOnUiThread(() -> ti.setText(sg));
                 } catch (NumberFormatException nfe) {
                     nfe.printStackTrace();
                 }
@@ -3924,7 +3968,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(f);
             ed1.setTextColor(f);
         }
-       ed.addTextChangedListener(new TextWatcher() {
+        ed.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -3936,7 +3980,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             ed1.setText(URLEncoder.encode(ed.getText().toString(), "UTF-8"));
                         }
                     } catch (Exception en) {
-                       
+
                         en.printStackTrace();
                         ed.setError(getString(R.string.y75));
                     }
@@ -4302,7 +4346,6 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c149() {
-        java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
         cd.setBackgroundResource(R.drawable.w);
         tv.setBackgroundResource(R.drawable.f2);
         if (a221().getBoolean("webviumB", false)) {
@@ -4314,16 +4357,19 @@ public class MAIN extends MainBaseActivity implements Format {
                 h.setBackgroundColor(Resources.getColor(this, R.color.m));
             }
         }
-        if (a221().getBoolean("webviumB", false) && fe.exists()) {
-            this.o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-            Runnable p15 = () -> {
+        Runnable re = () -> {
+            java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
+            if (a221().getBoolean("webviumB", false) && fe.exists()) {
                 Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(MAIN.this));
-                runOnUiThread(() -> MAIN.this.back23.setBackground(new BitmapDrawable(MAIN.this.getResources(), bp)));
-            };
-            new Thread(p15).start();
-        } else {
-            this.o.setBackgroundResource(R.drawable.p);
-        }
+                runOnUiThread(() -> {
+                    this.o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
+                    MAIN.this.back23.setBackground(new BitmapDrawable(MAIN.this.getResources(), bp));
+                });
+            } else {
+                runOnUiThread(() -> this.o.setBackgroundResource(R.drawable.p));
+            }
+        };
+        new Thread(re).start();
     }
 
     public void c150() {
@@ -4411,8 +4457,8 @@ public class MAIN extends MainBaseActivity implements Format {
             // sm0.add(0, 20, 0, getString(R.string.z15)).setOnMenuItemClickListener(e1);
             sm0.add(0, 21, 0, getString(R.string.f32)).setOnMenuItemClickListener(e1);
             // sm0.add(0, 16, 0, getString(R.string.x16)).setOnMenuItemClickListener(e1);
-           // sm0.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(e1);
-           // sm0.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(e1);
+            // sm0.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(e1);
+            // sm0.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(e1);
             sm0.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(e1);
             sm0.add(0, 5, 0, getString(R.string.j)).setOnMenuItemClickListener(e1);
             sm0.add(0, 25, 0, getString(R.string.y76)).setOnMenuItemClickListener(e1);
@@ -4986,14 +5032,14 @@ public class MAIN extends MainBaseActivity implements Format {
         // web osint
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
         sm.add(0, 1, 0, getString(R.string.y15));
-       // sm.add(0, 2, 0, getString(R.string.x9));
-       // sm.add(0, 3, 0, getString(R.string.z15));
-       // sm.add(0, 4, 0, getString(R.string.x16));
-       // sm.add(0, 5, 0, getString(R.string.y11));
-       // sm.add(0, 6, 0, getString(R.string.z4));
+        // sm.add(0, 2, 0, getString(R.string.x9));
+        // sm.add(0, 3, 0, getString(R.string.z15));
+        // sm.add(0, 4, 0, getString(R.string.x16));
+        // sm.add(0, 5, 0, getString(R.string.y11));
+        // sm.add(0, 6, 0, getString(R.string.z4));
         sm.add(0, 7, 0, getString(R.string.h6));
         sm.add(0, 8, 0, getString(R.string.j));
-       // sm.add(0, 9, 0, getString(R.string.z12));
+        // sm.add(0, 9, 0, getString(R.string.z12));
         sm.add(0, 25, 0, getString(R.string.f32));
         sm.add(0, 28, 0, getString(R.string.y76));
         sm.add(0, 29, 0, getString(R.string.y77));
@@ -5056,7 +5102,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 } else {
                     c7(getString(R.string.i33));
                 }
-                return true; 
+                return true;
             case 11:
                 if (cm2.capacity() > 16) {
                     c165();
@@ -5179,99 +5225,99 @@ public class MAIN extends MainBaseActivity implements Format {
 
     @Override
     protected void onNewIntent(Intent a) {
-            String sg = a.getStringExtra("webvium");
-            String sg0 = a.getStringExtra("value");
-            String sg1 = a.getAction();
-            String sg12 = a.getDataString();
-            if (sg12 != null) {
-                String pe;
-                try {
-                    pe = URLDecoder.decode(sg12, "UTF-8");
-                } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                    unsupportedEncodingException.printStackTrace();
-                    pe = sg12;
-                }
-                File fe2 = new File(pe.replace("file://", ""));
-                if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile()) {
-                    Runnable re = () -> {
-                        try {
-                            String pe1;
-                            try {
-                                pe1 = URLDecoder.decode(sg12, "UTF-8");
-                            } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                                unsupportedEncodingException.printStackTrace();
-                                pe1 = sg12;
-                            }
-                            java.io.File fe = new java.io.File(pe1.replace("file://", ""));
-                            FileReader fr = new FileReader(fe);
-                            BufferedReader br = new BufferedReader(fr);
-                            StringBuilder sb = new StringBuilder();
-                            String ln;
-                            while ((ln = br.readLine()) != null) {
-                                sb.append(ln);
-                                sb.append("<br>");
-                            }
-                            fr.close();
-                            br.close();
-                            String[] sgdd = sb.toString().split("<br>");
-                            for (String dt : sgdd) {
-                                if (dt.startsWith("URL=")) {
-                                    runOnUiThread(() -> c3(dt.replace("URL=", "")));
-                                    return;
-                                }
-                            }
-                        } catch (Exception en3) {
-                            en3.printStackTrace();
-                        }
-                    };
-                    new Thread(re).start();
-                }
+        String sg = a.getStringExtra("webvium");
+        String sg0 = a.getStringExtra("value");
+        String sg1 = a.getAction();
+        String sg12 = a.getDataString();
+        if (sg12 != null) {
+            String pe;
+            try {
+                pe = URLDecoder.decode(sg12, "UTF-8");
+            } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                unsupportedEncodingException.printStackTrace();
+                pe = sg12;
             }
-            String queryq = a.getStringExtra("b");
-            if (queryq != null) {
-                c146(0);
-                a.removeExtra("b");
-            } else if (sg != null) {
-                c3(sg);
-                a.removeExtra("webvium");
-            } else if (sg0 != null) {
-                c49(sg0);
-                a.removeExtra("value");
-            } else if (sg1.equals(Intents.ACTION_PASTE_SEARCH)) {
-                try {
-                    String c = Clipboard.b(this);
-                    if (c != null && U3.b(c)) {
-                        SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
-                        d2.c(c);
-                        c49(c);
-                    } else {
-                        Toast.c(this, getString(R.string.t20));
+            File fe2 = new File(pe.replace("file://", ""));
+            if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile()) {
+                Runnable re = () -> {
+                    try {
+                        String pe1;
+                        try {
+                            pe1 = URLDecoder.decode(sg12, "UTF-8");
+                        } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                            unsupportedEncodingException.printStackTrace();
+                            pe1 = sg12;
+                        }
+                        java.io.File fe = new java.io.File(pe1.replace("file://", ""));
+                        FileReader fr = new FileReader(fe);
+                        BufferedReader br = new BufferedReader(fr);
+                        StringBuilder sb = new StringBuilder();
+                        String ln;
+                        while ((ln = br.readLine()) != null) {
+                            sb.append(ln);
+                            sb.append("<br>");
+                        }
+                        fr.close();
+                        br.close();
+                        String[] sgdd = sb.toString().split("<br>");
+                        for (String dt : sgdd) {
+                            if (dt.startsWith("URL=")) {
+                                runOnUiThread(() -> c3(dt.replace("URL=", "")));
+                                return;
+                            }
+                        }
+                    } catch (Exception en3) {
+                        en3.printStackTrace();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                };
+                new Thread(re).start();
+            }
+        }
+        String queryq = a.getStringExtra("b");
+        if (queryq != null) {
+            c146(0);
+            a.removeExtra("b");
+        } else if (sg != null) {
+            c3(sg);
+            a.removeExtra("webvium");
+        } else if (sg0 != null) {
+            c49(sg0);
+            a.removeExtra("value");
+        } else if (sg1.equals(Intents.ACTION_PASTE_SEARCH)) {
+            try {
+                String c = Clipboard.b(this);
+                if (c != null && U3.b(c)) {
+                    SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
+                    d2.c(c);
+                    c49(c);
+                } else {
                     Toast.c(this, getString(R.string.t20));
                 }
-            } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
-                c3(sg);
-                a.removeExtra("webvium");
-            } else {
-                String sg2 = a.getStringExtra(Intent.EXTRA_TEXT);
-                String sg3 = a.getDataString();
-                if (sg1.equals(Intent.ACTION_SEND) && sg2 != null) {
-                    c49(sg2);
-                } else if (sg1.equals(Intent.ACTION_VIEW) && sg3 != null) {
-                    c3(sg3);
-
-                } else if (sg1.equals(Intent.ACTION_SEARCH) || sg1.equals(Intent.ACTION_WEB_SEARCH) || sg1.equals("android.speech.action.VOICE_SPEECH_RESULTS")) {
-                    c49(SearchManager.QUERY);
-                } else if (sg1.equals(MediaStore.INTENT_ACTION_MEDIA_SEARCH)) {
-                    c49(a.getStringExtra(MediaStore.EXTRA_MEDIA_ARTIST) + " " + a.getStringExtra(MediaStore.EXTRA_MEDIA_TITLE));
-                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Toast.c(this, getString(R.string.t20));
             }
-            a.replaceExtras(new Bundle());
-            a.setAction("");
-            a.setData(null);
-            a.setFlags(0);
+        } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
+            c3(sg);
+            a.removeExtra("webvium");
+        } else {
+            String sg2 = a.getStringExtra(Intent.EXTRA_TEXT);
+            String sg3 = a.getDataString();
+            if (sg1.equals(Intent.ACTION_SEND) && sg2 != null) {
+                c49(sg2);
+            } else if (sg1.equals(Intent.ACTION_VIEW) && sg3 != null) {
+                c3(sg3);
+
+            } else if (sg1.equals(Intent.ACTION_SEARCH) || sg1.equals(Intent.ACTION_WEB_SEARCH) || sg1.equals("android.speech.action.VOICE_SPEECH_RESULTS")) {
+                c49(SearchManager.QUERY);
+            } else if (sg1.equals(MediaStore.INTENT_ACTION_MEDIA_SEARCH)) {
+                c49(a.getStringExtra(MediaStore.EXTRA_MEDIA_ARTIST) + " " + a.getStringExtra(MediaStore.EXTRA_MEDIA_TITLE));
+            }
+        }
+        a.replaceExtras(new Bundle());
+        a.setAction("");
+        a.setData(null);
+        a.setFlags(0);
     }
 
     @Override

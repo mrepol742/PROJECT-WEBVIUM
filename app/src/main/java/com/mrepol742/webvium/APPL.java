@@ -20,6 +20,7 @@ package com.mrepol742.webvium;
 import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
+import android.app.UiModeManager;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.Intent;
