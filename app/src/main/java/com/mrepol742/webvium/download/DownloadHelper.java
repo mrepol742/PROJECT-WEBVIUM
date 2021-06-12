@@ -27,7 +27,7 @@ import android.webkit.URLUtil;
 
 import com.mrepol742.webvium.DDMS;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.annotation.ObjectSerializability;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
 
 import java.text.SimpleDateFormat;
@@ -66,22 +66,22 @@ public class DownloadHelper implements WebviumDatabase {
     @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
-            sld.delete(DownloadDatabase.TABLE_DOWNLOAD, null, null);
+            sld.delete(Sqlite.TABLE_DOWNLOAD, null, null);
         }
     }
 
     public void b(DownloadDataModel w2) {
         if (sld != null && sld.isOpen()) {
-            sld.delete(DownloadDatabase.TABLE_DOWNLOAD,
-                    DownloadDatabase.COL1_DOWNLOAD +
+            sld.delete(Sqlite.TABLE_DOWNLOAD,
+                    Sqlite.COL1_DOWNLOAD +
                             " =? AND " +
-                            DownloadDatabase.COL2_DOWNLOAD +
+                            Sqlite.COL2_DOWNLOAD +
                             " =? AND " +
-                            DownloadDatabase.COL3_DOWNLOAD +
+                            Sqlite.COL3_DOWNLOAD +
                             " =? AND " +
-                            DownloadDatabase.COL4_DOWNLOAD +
+                            Sqlite.COL4_DOWNLOAD +
                             " =? AND " +
-                            DownloadDatabase.COL5_DOWNLOAD +
+                            Sqlite.COL5_DOWNLOAD +
                             " =? ", new String[]{w2.b,
                             w2.a,
                             Integer.toString(w2.c),
@@ -93,25 +93,24 @@ public class DownloadHelper implements WebviumDatabase {
     public void c(DownloadNewDataModel downloadNewDataModel) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(DownloadDatabase.COL1_DOWNLOAD, h(downloadNewDataModel.a));
-            values.put(DownloadDatabase.COL2_DOWNLOAD, downloadNewDataModel.b);
-            values.put(DownloadDatabase.COL3_DOWNLOAD, downloadNewDataModel.s);
-            values.put(DownloadDatabase.COL4_DOWNLOAD, f(downloadNewDataModel.d));
-            values.put(DownloadDatabase.COL5_DOWNLOAD, g());
-            sld.insert(DownloadDatabase.TABLE_DOWNLOAD, null, values);
+            values.put(Sqlite.COL1_DOWNLOAD, h(downloadNewDataModel.a));
+            values.put(Sqlite.COL2_DOWNLOAD, downloadNewDataModel.b);
+            values.put(Sqlite.COL3_DOWNLOAD, downloadNewDataModel.s);
+            values.put(Sqlite.COL4_DOWNLOAD, f(downloadNewDataModel.d));
+            values.put(Sqlite.COL5_DOWNLOAD, g());
+            sld.insert(Sqlite.TABLE_DOWNLOAD, null, values);
         }
     }
 
-    @ObjectSerializability
     public void d(DDMS w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(DownloadDatabase.COL1_DOWNLOAD, w7.b);
-            values.put(DownloadDatabase.COL2_DOWNLOAD, w7.d);
-            values.put(DownloadDatabase.COL3_DOWNLOAD, w7.f);
-            values.put(DownloadDatabase.COL4_DOWNLOAD, w7.g);
-            values.put(DownloadDatabase.COL5_DOWNLOAD, w7.e4);
-            sld.insert(DownloadDatabase.TABLE_DOWNLOAD, null, values);
+            values.put(Sqlite.COL1_DOWNLOAD, w7.b);
+            values.put(Sqlite.COL2_DOWNLOAD, w7.d);
+            values.put(Sqlite.COL3_DOWNLOAD, w7.f);
+            values.put(Sqlite.COL4_DOWNLOAD, w7.g);
+            values.put(Sqlite.COL5_DOWNLOAD, w7.e4);
+            sld.insert(Sqlite.TABLE_DOWNLOAD, null, values);
         }
     }
 
@@ -147,21 +146,21 @@ public class DownloadHelper implements WebviumDatabase {
     public void i(DownloadOldDataModel downloadOldDataModel, DownloadNewDataModel downloadNewDataModel) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(DownloadDatabase.COL1_DOWNLOAD, h(downloadNewDataModel.a));
-            values.put(DownloadDatabase.COL2_DOWNLOAD, downloadNewDataModel.b);
-            values.put(DownloadDatabase.COL3_DOWNLOAD, downloadNewDataModel.s);
-            values.put(DownloadDatabase.COL4_DOWNLOAD, f(downloadNewDataModel.d));
-            values.put(DownloadDatabase.COL5_DOWNLOAD, downloadOldDataModel.oldTime);
-            sld.update(DownloadDatabase.TABLE_DOWNLOAD, values,
-                    DownloadDatabase.COL1_DOWNLOAD +
+            values.put(Sqlite.COL1_DOWNLOAD, h(downloadNewDataModel.a));
+            values.put(Sqlite.COL2_DOWNLOAD, downloadNewDataModel.b);
+            values.put(Sqlite.COL3_DOWNLOAD, downloadNewDataModel.s);
+            values.put(Sqlite.COL4_DOWNLOAD, f(downloadNewDataModel.d));
+            values.put(Sqlite.COL5_DOWNLOAD, downloadOldDataModel.oldTime);
+            sld.update(Sqlite.TABLE_DOWNLOAD, values,
+                    Sqlite.COL1_DOWNLOAD +
                             " LIKE ? AND " +
-                            DownloadDatabase.COL2_DOWNLOAD +
+                            Sqlite.COL2_DOWNLOAD +
                             " LIKE ? AND " +
-                            DownloadDatabase.COL3_DOWNLOAD +
+                            Sqlite.COL3_DOWNLOAD +
                             " LIKE ? AND " +
-                            DownloadDatabase.COL4_DOWNLOAD +
+                            Sqlite.COL4_DOWNLOAD +
                             " LIKE ? AND " +
-                            DownloadDatabase.COL5_DOWNLOAD +
+                            Sqlite.COL5_DOWNLOAD +
                             " LIKE ? ", new String[]{downloadOldDataModel.oldTitle, downloadOldDataModel.oldUrl, String.valueOf(downloadOldDataModel.oldDrawable), downloadOldDataModel.oldTime, downloadOldDataModel.oldSize});
         }
 

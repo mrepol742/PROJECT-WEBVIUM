@@ -23,7 +23,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 @SuppressWarnings("ALL")
 public class Package {

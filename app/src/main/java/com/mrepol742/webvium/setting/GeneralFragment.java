@@ -69,7 +69,7 @@ public class GeneralFragment extends BasePreferenceFragment {
 
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-            SharedPreferences a19 = getActivity().getSharedPreferences("wv,", 0);
+            SharedPreferences a19 = getActivity().getSharedPreferences("wv", 0);
             final String a20 = a19.getString("MyURL", c48());
 
             if (Objects.equals(sp.getString("general", ""), "1o")) {

@@ -30,11 +30,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadAdapter;
 import com.mrepol742.webvium.download.DownloadArrayDataModel;
-import com.mrepol742.webvium.download.DownloadDatabase;
 import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.Toast;
@@ -94,7 +94,7 @@ public class DOWN extends BaseActivity {
         a1.setNavigationOnClickListener(view -> finish());
         a3 = findViewById(R.id.a3);
         Cursor res = d10.getReadableDatabase().rawQuery("SELECT * FROM " +
-                DownloadDatabase.TABLE_DOWNLOAD +
+                Sqlite.TABLE_DOWNLOAD +
                 " ORDER BY " +
                 "_id" +
                 " DESC", null);

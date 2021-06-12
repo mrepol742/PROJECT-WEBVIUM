@@ -22,7 +22,7 @@ import android.os.Build;
 import android.preference.PreferenceCategory;
 import android.util.AttributeSet;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 // @Class PrefCategory
 public class PREF0 extends PreferenceCategory {

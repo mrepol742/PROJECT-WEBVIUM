@@ -47,17 +47,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
-import com.mrepol742.webvium.bookmark.BookmarkDatabase;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.search.SearchAdapter;
-import com.mrepol742.webvium.search.SearchDatabase;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
@@ -81,7 +79,10 @@ public class SEAR extends MainBaseActivity {
             "webvium://credits",
             "webvium://termsandcondition",
             "webvium://privacypolicy",
-            "webvium://blank"
+            "webvium://blank",
+            "webvium://search",
+            "webvium://history",
+            "webvium://bookmarks"
     };
     private AutoCompleteTextView p;
     private ListView d;
@@ -157,7 +158,7 @@ public class SEAR extends MainBaseActivity {
         iv1.setBackgroundResource(R.drawable.b17);
         d2 = SearchHelper.getInstance(getApplicationContext());
         Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                SearchDatabase.TABLE_SEARCH +
+                Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
                 " DESC ", null);
@@ -175,7 +176,7 @@ public class SEAR extends MainBaseActivity {
         if (a221().getBoolean("showHTT", false)) {
             HistoryHelper d1 = HistoryHelper.getInstance(getApplicationContext());
             Cursor rest = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    HistoryDatabase.TABLE_HISTORY +
+                    Sqlite.TABLE_HISTORY +
                     " ORDER BY " +
                     "_id" +
                     " DESC ", null);
@@ -195,7 +196,7 @@ public class SEAR extends MainBaseActivity {
             if (a221().getBoolean("showBKM", false)) {
                 BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
                 Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        BookmarkDatabase.TABLE_BOOKMARK +
+                        Sqlite.TABLE_BOOKMARK +
                         " ORDER BY " +
                         "_id" +
                         " DESC ", null);
@@ -417,7 +418,7 @@ public class SEAR extends MainBaseActivity {
         Runnable p15 = () -> {
             ArrayList<String> itemIdsh = new ArrayList<>();
             Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    SearchDatabase.TABLE_SEARCH +
+                    Sqlite.TABLE_SEARCH +
                     " ORDER BY " +
                     "_id" +
                     " DESC ", null);
@@ -460,7 +461,7 @@ public class SEAR extends MainBaseActivity {
         } else {
             switch (a) {
                 case "webvium://dev":
-                    SharedPreferences prefs4 = getSharedPreferences("wv,", 0);
+                    SharedPreferences prefs4 = getSharedPreferences("wv", 0);
                     boolean d78 = prefs4.getBoolean("webDa", false);
                     SharedPreferences.Editor ed = prefs4.edit();
                     if (d78) {

@@ -26,7 +26,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.annotation.Test;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.widget.Toast;
@@ -37,7 +36,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 // @Class Logcat
-@Test
 public class LOGC extends BaseActivity {
     private TextView tv;
     private ScrollView sv;

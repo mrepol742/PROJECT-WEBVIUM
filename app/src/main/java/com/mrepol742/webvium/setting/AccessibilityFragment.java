@@ -79,7 +79,7 @@ public class AccessibilityFragment extends BasePreferenceFragment {
 
     private void a() {
         getActivity().finish();
-        SharedPreferences c56 = getActivity().getSharedPreferences("wv,", 0);
+        SharedPreferences c56 = getActivity().getSharedPreferences("wv", 0);
         Intent it = new Intent(getActivity(), MAIN.class);
         it.putExtra("value", c56.getString("MyURL", ""));
         it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -21,7 +21,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 public class Animation {
     @Keep

@@ -30,7 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.NoSuchItemToGet;
 import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;

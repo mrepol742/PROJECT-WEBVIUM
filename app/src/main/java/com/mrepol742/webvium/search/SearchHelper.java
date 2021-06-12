@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
 import com.mrepol742.webvium.util.Inapproriate;
 
@@ -63,14 +64,14 @@ public class SearchHelper implements WebviumDatabase {
     @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
-            sld.delete(SearchDatabase.TABLE_SEARCH, null, null);
+            sld.delete(Sqlite.TABLE_SEARCH, null, null);
         }
     }
 
     public void b(final String a) {
         if (sld != null && sld.isOpen()) {
-            sld.delete(SearchDatabase.TABLE_SEARCH,
-                    SearchDatabase.COL1_SEARCH +
+            sld.delete(Sqlite.TABLE_SEARCH,
+                    Sqlite.COL1_SEARCH +
                             " =? ", new String[]{a});
         }
     }
@@ -81,8 +82,8 @@ public class SearchHelper implements WebviumDatabase {
                 if (Inapproriate.isInapproriate(a.toLowerCase())) {
                     temp = a;
                     ContentValues values = new ContentValues();
-                    values.put(SearchDatabase.COL1_SEARCH, a);
-                    sld.insert(SearchDatabase.TABLE_SEARCH, null, values);
+                    values.put(Sqlite.COL1_SEARCH, a);
+                    sld.insert(Sqlite.TABLE_SEARCH, null, values);
                 }
             }
         }
@@ -91,9 +92,9 @@ public class SearchHelper implements WebviumDatabase {
     public void f(final String oldData, final String newData) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(SearchDatabase.COL1_SEARCH, newData);
-            sld.update(SearchDatabase.TABLE_SEARCH, values,
-                    SearchDatabase.COL1_SEARCH +
+            values.put(Sqlite.COL1_SEARCH, newData);
+            sld.update(Sqlite.TABLE_SEARCH, values,
+                    Sqlite.COL1_SEARCH +
                             " LIKE ? ", new String[]{oldData});
         }
     }

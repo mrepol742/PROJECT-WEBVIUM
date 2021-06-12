@@ -24,12 +24,9 @@ import android.preference.PreferenceManager;
 import android.webkit.JavascriptInterface;
 
 import com.mrepol742.webvium.MAIN;
-import com.mrepol742.webvium.annotation.release.Keep;
-import com.mrepol742.webvium.bookmark.BookmarkDatabase;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
-import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.search.SearchDatabase;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Domain;
@@ -89,7 +86,7 @@ public class SearchJSI {
     public String query() {
         ArrayList<String> ls = new ArrayList<>();
         Cursor res = searchHelper.getReadableDatabase().rawQuery("SELECT * FROM " +
-                SearchDatabase.TABLE_SEARCH +
+                Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
                 " DESC ", null);
@@ -102,7 +99,7 @@ public class SearchJSI {
         if (sharedPreferences.getBoolean("showHTT", false)) {
             HistoryHelper d1 = HistoryHelper.getInstance(context.getApplicationContext());
             Cursor rest = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    HistoryDatabase.TABLE_HISTORY +
+                    Sqlite.TABLE_HISTORY +
                     " ORDER BY " +
                     "_id" +
                     " DESC ", null);
@@ -120,7 +117,7 @@ public class SearchJSI {
         if (sharedPreferences.getBoolean("showBKM", false)) {
             BookmarkHelper d3 = BookmarkHelper.getInstance(context.getApplicationContext());
             Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    BookmarkDatabase.TABLE_BOOKMARK +
+                    Sqlite.TABLE_BOOKMARK +
                     " ORDER BY " +
                     "_id" +
                     " DESC ", null);

@@ -18,7 +18,7 @@
 package com.mrepol742.webvium.util;
 
 import com.mrepol742.webvium.EDIT;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 public class U3 {
     @Keep

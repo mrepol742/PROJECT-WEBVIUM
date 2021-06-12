@@ -17,11 +17,8 @@
 
 package com.mrepol742.webvium;
 
-import com.mrepol742.webvium.annotation.ObjectSerializability;
-
 import java.io.Serializable;
 
-@ObjectSerializability
 public class DDMS implements Serializable {
     public final String b;
     public final String d;

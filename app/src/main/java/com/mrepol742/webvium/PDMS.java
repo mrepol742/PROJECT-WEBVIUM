@@ -17,11 +17,8 @@
 
 package com.mrepol742.webvium;
 
-import com.mrepol742.webvium.annotation.ObjectSerializability;
-
 import java.io.Serializable;
 
-@ObjectSerializability
 public class PDMS implements Serializable {
     public final String nm;
     public final String pm;

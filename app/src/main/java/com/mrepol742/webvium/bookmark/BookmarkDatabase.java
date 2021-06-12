@@ -21,35 +21,31 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.mrepol742.webvium.app.Sqlite;
+
 public class BookmarkDatabase extends SQLiteOpenHelper {
 
-    public static final String DATA_BOOKMARK = "zx";
-    public static final int VERSION_BOOKMARK = 1;
-    public static final String TABLE_BOOKMARK = "A";
-    public static final String COL1_BOOKMARK = "B";
-    public static final String COL2_BOOKMARK = "C";
-
     public BookmarkDatabase(Context context) {
-        super(context, DATA_BOOKMARK, null, VERSION_BOOKMARK);
+        super(context, Sqlite.DATA_BOOKMARK, null, Sqlite.VERSION_BOOKMARK);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +
-                TABLE_BOOKMARK +
+                Sqlite.TABLE_BOOKMARK +
                 " ( " +
                 "_id" +
                 " INTEGER PRIMARY KEY, " +
-                COL1_BOOKMARK +
+                Sqlite.COL1_BOOKMARK +
                 " TEXT, " +
-                COL2_BOOKMARK +
+                Sqlite.COL2_BOOKMARK +
                 " TEXT ) ");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +
-                TABLE_BOOKMARK);
+                Sqlite.TABLE_BOOKMARK);
         onCreate(db);
     }
 

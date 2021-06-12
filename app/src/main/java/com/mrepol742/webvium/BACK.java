@@ -37,6 +37,7 @@ public class BACK extends MainService {
 
     @Override
     public int onStartCommand(Intent a, int flag, int c) {
+        s1();
         Runnable runnable = () -> {
             try {
                 String sg1 = dt();

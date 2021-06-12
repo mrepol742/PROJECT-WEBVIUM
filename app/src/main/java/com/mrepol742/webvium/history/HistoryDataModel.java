@@ -17,7 +17,7 @@
 
 package com.mrepol742.webvium.history;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 public class HistoryDataModel {
     public String ls;

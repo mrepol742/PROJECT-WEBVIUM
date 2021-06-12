@@ -24,7 +24,7 @@ import android.app.Service;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 public class Permission {
     public static final String LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;

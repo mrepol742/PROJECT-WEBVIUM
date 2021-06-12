@@ -24,7 +24,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.mrepol742.webvium.BDMS;
-import com.mrepol742.webvium.annotation.ObjectSerializability;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
 
 public class BookmarkHelper implements WebviumDatabase {
@@ -46,10 +46,10 @@ public class BookmarkHelper implements WebviumDatabase {
 
     public void b(final String a, final String b) {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BookmarkDatabase.TABLE_BOOKMARK,
-                    BookmarkDatabase.COL1_BOOKMARK +
+            sld.delete(Sqlite.TABLE_BOOKMARK,
+                    Sqlite.COL1_BOOKMARK +
                             "=? AND " +
-                            BookmarkDatabase.COL2_BOOKMARK +
+                            Sqlite.COL2_BOOKMARK +
                             "=? ", new String[]{b, a});
         }
     }
@@ -69,38 +69,37 @@ public class BookmarkHelper implements WebviumDatabase {
     @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
-            sld.delete(BookmarkDatabase.TABLE_BOOKMARK, null, null);
+            sld.delete(Sqlite.TABLE_BOOKMARK, null, null);
         }
     }
 
     public void c(final String a, final String b) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BookmarkDatabase.COL1_BOOKMARK, a);
-            values.put(BookmarkDatabase.COL2_BOOKMARK, b);
-            sld.insert(BookmarkDatabase.TABLE_BOOKMARK, null, values);
+            values.put(Sqlite.COL1_BOOKMARK, a);
+            values.put(Sqlite.COL2_BOOKMARK, b);
+            sld.insert(Sqlite.TABLE_BOOKMARK, null, values);
         }
     }
 
-    @ObjectSerializability
     public void d(BDMS a) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BookmarkDatabase.COL1_BOOKMARK, a.sg);
-            values.put(BookmarkDatabase.COL2_BOOKMARK, a.sg0);
-            sld.insert(BookmarkDatabase.TABLE_BOOKMARK, null, values);
+            values.put(Sqlite.COL1_BOOKMARK, a.sg);
+            values.put(Sqlite.COL2_BOOKMARK, a.sg0);
+            sld.insert(Sqlite.TABLE_BOOKMARK, null, values);
         }
     }
 
     public void f(final String oldTitle, final String oldURl, final String newTitle, final String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(BookmarkDatabase.COL1_BOOKMARK, newTitle);
-            values.put(BookmarkDatabase.COL2_BOOKMARK, newUrl);
-            sld.update(BookmarkDatabase.TABLE_BOOKMARK, values,
-                    BookmarkDatabase.COL1_BOOKMARK +
+            values.put(Sqlite.COL1_BOOKMARK, newTitle);
+            values.put(Sqlite.COL2_BOOKMARK, newUrl);
+            sld.update(Sqlite.TABLE_BOOKMARK, values,
+                    Sqlite.COL1_BOOKMARK +
                             " LIKE ? AND " +
-                            BookmarkDatabase.COL2_BOOKMARK +
+                            Sqlite.COL2_BOOKMARK +
                             " LIKE ?", new String[]{oldTitle, oldURl});
         }
     }

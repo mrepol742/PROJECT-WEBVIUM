@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 public class Hardware {
     @Keep

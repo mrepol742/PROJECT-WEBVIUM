@@ -40,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.NoSuchItemToGet;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
@@ -47,9 +48,7 @@ import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.history.HistoryAdapter;
 import com.mrepol742.webvium.history.HistoryDataModel;
-import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
@@ -59,7 +58,6 @@ import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 // @Class History
 public class HIST extends BaseActivity {
@@ -197,7 +195,7 @@ public class HIST extends BaseActivity {
         d1 = HistoryHelper.getInstance(getApplicationContext());
         a1.setElevation(5);
         Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                HistoryDatabase.TABLE_HISTORY +
+                Sqlite.TABLE_HISTORY +
                 " ORDER BY " +
                 "_id" +
                 " DESC", null);
@@ -485,7 +483,7 @@ public class HIST extends BaseActivity {
         Runnable p15 = () -> {
             ArrayList<HistoryDataModel> al = new ArrayList<>();
             Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    HistoryDatabase.TABLE_HISTORY +
+                    Sqlite.TABLE_HISTORY +
                     " ORDER BY " +
                     "_id" +
                     " DESC", null);

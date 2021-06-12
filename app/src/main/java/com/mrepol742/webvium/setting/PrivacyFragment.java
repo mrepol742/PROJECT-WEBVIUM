@@ -29,13 +29,13 @@ import android.webkit.WebViewDatabase;
 
 import com.mrepol742.webvium.CLIP;
 import com.mrepol742.webvium.EDIT0;
+import com.mrepol742.webvium.LIST;
 import com.mrepol742.webvium.LOCK;
 import com.mrepol742.webvium.MAIN;
-import com.mrepol742.webvium.LIST;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.SWIT;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
+import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
@@ -207,7 +207,8 @@ public class PrivacyFragment extends BasePreferenceFragment {
         a.setTitle(getString(R.string.b));
         a.setMessage(getString(R.string.u5));
         a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            h(StorageDirectory.getCacheDir(getActivity()));
+            Runnable p15 = () -> h(StorageDirectory.getCacheDir(getActivity()));
+            new Thread(p15).start();
             g(getString(R.string.a27));
             a12.dismiss();
         });
@@ -215,15 +216,12 @@ public class PrivacyFragment extends BasePreferenceFragment {
         a.create().show();
     }
 
-    private void h(final java.io.File a) {
-        Runnable p15 = () -> {
-            try {
-                Files.deleteAll(a);
-            } catch (Exception en) {
-                en.printStackTrace();
-            }
-        };
-        new Thread(p15).start();
+    private void h(java.io.File a) {
+        try {
+            Files.deleteAll(a);
+        } catch (Exception en) {
+            en.printStackTrace();
+        }
     }
 
     private void g(String a) {

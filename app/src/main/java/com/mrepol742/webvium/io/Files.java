@@ -17,7 +17,7 @@
 
 package com.mrepol742.webvium.io;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

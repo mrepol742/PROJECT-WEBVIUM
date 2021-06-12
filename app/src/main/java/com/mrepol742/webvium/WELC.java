@@ -51,6 +51,7 @@ import com.mrepol742.webvium.util.AppID;
 import com.mrepol742.webvium.util.cache.FontCache;
 import com.mrepol742.webvium.widget.Toast;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -65,7 +66,7 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
-    public static final String INIT = "init_13";
+    public static final String INIT = "init_14";
     private RelativeLayout ll;
 
     @Override
@@ -90,16 +91,19 @@ public class WELC extends BaseActivity {
         timer.start();
         Runnable re = () -> {
             try {
-                InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
-                OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
-                byte[] e = new byte[1024];
-                int f;
-                while ((f = fos.read(e)) != -1) {
-                    d.write(e, 0, f);
+                File fe = new File(StorageDirectory.getClasses(this));
+                if (!fe.exists()) {
+                    InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
+                    OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
+                    byte[] e = new byte[1024];
+                    int f;
+                    while ((f = fos.read(e)) != -1) {
+                        d.write(e, 0, f);
+                    }
+                    d.flush();
+                    d.close();
+                    fos.close();
                 }
-                d.flush();
-                d.close();
-                fos.close();
             } catch (Exception en) {
                 en.printStackTrace();
             }

@@ -69,28 +69,28 @@ public class BaseActivity extends Activity {
 
     public String a222(String sg) {
         if (exclusive == null) {
-            exclusive = getSharedPreferences("wv,", 0);
+            exclusive = getSharedPreferences("wv", 0);
         }
         return exclusive.getString(sg, "");
     }
 
     public int a223(String sg) {
         if (exclusive == null) {
-            exclusive = getSharedPreferences("wv,", 0);
+            exclusive = getSharedPreferences("wv", 0);
         }
         return exclusive.getInt(sg, 0);
     }
 
     public boolean a224(String sg, boolean def) {
         if (exclusive == null) {
-            exclusive = getSharedPreferences("wv,", 0);
+            exclusive = getSharedPreferences("wv", 0);
         }
         return exclusive.getBoolean(sg, def);
     }
 
     public void a225(String sg, boolean def) {
         if (exclusive == null) {
-            exclusive = getSharedPreferences("wv,", 0);
+            exclusive = getSharedPreferences("wv", 0);
         }
         SharedPreferences.Editor e = exclusive.edit();
         e.putBoolean(sg, def);

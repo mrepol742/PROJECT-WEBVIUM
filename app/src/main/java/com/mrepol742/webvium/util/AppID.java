@@ -23,7 +23,7 @@ import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.security.Hash;
 
 import java.util.UUID;

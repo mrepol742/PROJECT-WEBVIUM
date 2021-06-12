@@ -18,7 +18,6 @@
 package com.mrepol742.webvium;
 
 import android.app.ActionBar;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -85,9 +84,7 @@ public class VIDE extends BaseActivity {
         h17.setNavigationIcon(R.drawable.a2);
         h17.setNavigationOnClickListener(view -> finish());
 
-        SharedPreferences prefs = getSharedPreferences("Webvium", 0);
-        boolean d78 = prefs.getBoolean("webDa", false);
-        if (d78) {
+        if (a224("weDa", false)) {
             k8.setVisibility(View.VISIBLE);
         } else {
             k8.setVisibility(View.GONE);

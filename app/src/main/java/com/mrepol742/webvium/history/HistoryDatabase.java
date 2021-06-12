@@ -21,38 +21,33 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.mrepol742.webvium.app.Sqlite;
+
 public class HistoryDatabase extends SQLiteOpenHelper {
 
-    public static final String DATA_HISTORY = "qw";
-    public static final int VERSION_HISTORY = 1;
-    public static final String TABLE_HISTORY = "A";
-    public static final String COL1_HISTORY = "B";
-    public static final String COL2_HISTORY = "C";
-    public static final String COL3_HISTORY = "D";
-
     protected HistoryDatabase(Context context) {
-        super(context, DATA_HISTORY, null, VERSION_HISTORY);
+        super(context, Sqlite.DATA_HISTORY, null, Sqlite.VERSION_HISTORY);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +
-                TABLE_HISTORY +
+                Sqlite.TABLE_HISTORY +
                 " ( " +
                 "_id" +
                 " INTEGER PRIMARY KEY, " +
-                COL1_HISTORY +
+                Sqlite.COL1_HISTORY +
                 " TEXT, " +
-                COL2_HISTORY +
+                Sqlite.COL2_HISTORY +
                 " TEXT, " +
-                COL3_HISTORY +
+                Sqlite.COL3_HISTORY +
                 " TEXT )");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +
-                TABLE_HISTORY);
+                Sqlite.TABLE_HISTORY);
         onCreate(db);
     }
 

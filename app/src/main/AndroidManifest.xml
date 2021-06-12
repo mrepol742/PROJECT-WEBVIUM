@@ -18,7 +18,7 @@
 <manifest xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mrepol742.webvium"
-    a:installLocation="internalOnly">
+    a:installLocation="auto">
 
     <queries />
     <supports-screens

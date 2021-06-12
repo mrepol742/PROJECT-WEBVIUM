@@ -34,7 +34,7 @@ import android.webkit.JavascriptInterface;
 
 import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Package;

@@ -17,12 +17,10 @@
 
 package com.mrepol742.webvium;
 
-import com.mrepol742.webvium.annotation.ObjectSerializability;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 import java.io.Serializable;
 
-@ObjectSerializability
 public class HDMS implements Serializable {
     public String ls;
     public String ls0;

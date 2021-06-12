@@ -21,41 +21,35 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.mrepol742.webvium.app.Sqlite;
+
 public class PermissionDatabase extends SQLiteOpenHelper {
 
-    public static final String DATA_PERMISSION = "po";
-    public static final int VERSION_PERMISSION = 1;
-    public static final String TABLE_PERMISSION = "A";
-    public static final String COL1_PERMISSION = "B";
-    public static final String COL2_PERMISSION = "C";
-    public static final String COL3_PERMISSION = "D";
-    public static final String COL4_PERMISSION = "E";
-
     public PermissionDatabase(Context context) {
-        super(context, DATA_PERMISSION, null, VERSION_PERMISSION);
+        super(context, Sqlite.DATA_PERMISSION, null, Sqlite.VERSION_PERMISSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +
-                TABLE_PERMISSION +
+                Sqlite.TABLE_PERMISSION +
                 " ( " +
                 "_id" +
                 " INTEGER PRIMARY KEY, " +
-                COL1_PERMISSION +
+                Sqlite.COL1_PERMISSION +
                 " TEXT, " +
-                COL2_PERMISSION +
+                Sqlite.COL2_PERMISSION +
                 " TEXT, " +
-                COL3_PERMISSION +
+                Sqlite.COL3_PERMISSION +
                 " TEXT, " +
-                COL4_PERMISSION +
+                Sqlite.COL4_PERMISSION +
                 " TEXT )");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +
-                TABLE_PERMISSION);
+                Sqlite.TABLE_PERMISSION);
         onCreate(db);
     }
 

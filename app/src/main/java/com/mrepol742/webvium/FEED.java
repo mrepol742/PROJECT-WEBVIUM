@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -28,7 +29,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
-import android.webkit.JsResult;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -38,10 +39,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.FeedJSI;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
+import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
@@ -49,9 +50,6 @@ import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.Toast;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 // @Class Feedback
 public class FEED extends BaseActivity {
@@ -161,20 +159,13 @@ public class FEED extends BaseActivity {
             ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             if (Build.VERSION.SDK_INT < 30) {
                 ws.setAppCacheEnabled(true);
-                ws.setAppCachePath(StorageDirectory.getCacheDir(this).toString());
+                Runnable re = () -> {
+                    String sg = StorageDirectory.getCacheDir(this).toString();
+                    runOnUiThread(() -> ws.setAppCachePath(sg));
+                };
+                new Thread(re).start();
             }
             b.setWebChromeClient(new WebChromeClient() {
-
-                @Override
-                public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                    if (message.contains("ara")) {
-                        Toast.b(FEED.this, getString(R.string.g27));
-                    } else {
-                        Toast.b(FEED.this, getString(R.string.y68));
-                    }
-                    result.confirm();
-                    return true;
-                }
 
                 @Override
                 public boolean onConsoleMessage(ConsoleMessage cm) {
@@ -201,17 +192,65 @@ public class FEED extends BaseActivity {
                     }
                 }
             });
-            b.addJavascriptInterface(new FeedJSI(this), "Feedback");
-        }
-        try {
-            String sg2 = "https://mrepol742.github.io/PROJECT-WEBVIUM/Server/Feed.html" +
-                    "?message=" + URLEncoder.encode(tmp, "UTF-8");
-            b.loadUrl(sg2);
+            b.addJavascriptInterface(new Object() {
 
-        } catch (UnsupportedEncodingException e) {
-           e.printStackTrace();
-           Toast.b(FEED.this, getString(R.string.y68));
+                @JavascriptInterface
+                public String appKey() {
+                    return getString(R.string.firebase_apiKey);
+                }
+
+                @JavascriptInterface
+                public String authDomain() {
+                    return getString(R.string.firebase_authDomain);
+                }
+
+                @JavascriptInterface
+                public String projectId() {
+                    return getString(R.string.firebase_projectId);
+                }
+
+                @JavascriptInterface
+                public String storageBucket() {
+                    return getString(R.string.firebase_storageBucket);
+                }
+
+                @JavascriptInterface
+                public String messagingSenderId() {
+                    return getString(R.string.firebase_messagingSenderId);
+                }
+
+                @JavascriptInterface
+                public String appId() {
+                    return getString(R.string.firebase_appId);
+                }
+
+                @JavascriptInterface
+                public String measurementId() {
+                    return getString(R.string.firebase_measurementId);
+                }
+
+                @JavascriptInterface
+                public String getWebviumVersion() throws PackageManager.NameNotFoundException {
+                    return Package.c() + " v-" + Package.e(FEED.this) + " c-" + Long.toString(Package.f(FEED.this));
+                }
+
+                @JavascriptInterface
+                public String getMessage() {
+                    return tmp;
+                }
+
+                @JavascriptInterface
+                public String getLog() {
+                    return sg;
+                }
+
+                @JavascriptInterface
+                public void succeed() {
+                    Toast.b(FEED.this, getString(R.string.g27));
+                }
+            }, Package.c() + "FeedbackHelper");
         }
+        b.loadUrl("https://mrepol742.github.io/PROJECT-WEBVIUM/services/Feedback.html");
     }
 
     @Override

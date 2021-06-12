@@ -25,9 +25,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
 
-import com.mrepol742.webvium.annotation.Development;
-import com.mrepol742.webvium.annotation.Unused;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 public class Connectivity {
     @Keep
@@ -55,40 +53,6 @@ public class Connectivity {
         return Settings.Global.getInt(a.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
     }
 
-    @SuppressWarnings("EmptyMethod")
-    @Development
-    public static void c() {
-      /*   ConnectivityManager cm = (ConnectivityManager) a.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-         NetworkCapabilities nc = cm.getNetworkCapabilities(cm.getActiveNetwork());
-         String[] bn = new String[]{};
-         if (nc != null) {
-               bn[0] = nc.hasTransport(NetworkCapabilities.TRANSPORT_VPN);
-               bn[1] = nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
-               bn[2] = nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
-               bn[3] = nc.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
-               bn[4] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
-               bn[5] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_CBS);
-               bn[6] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_DUN);
-               bn[7] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_EIMS);
-               bn[8] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_FOREGROUND);
-               bn[9] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_FOTA);
-               bn[10] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_IA);
-               bn[11] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_IMS);
-               bn[12] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_INTERNET);
-               bn[13] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_MCX);
-               bn[14] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_MMS);
-               bn[15] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_NOT_CONGESTED);
-               bn[16] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
-               bn[17] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_NOT_RESTRICTED);
-               bn[18] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_NOT_ROAMING);
-               bn[19] = nc.hasTransport(NetworkCapabilities.NET_CAPABILITY_NOT_SUSPENDED);
-          
-
-
-        }
-        return bn;*/
-    }
-
     private static boolean d(NetworkCapabilities nc) {
         if (nc != null) {
             return nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) || nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
@@ -102,24 +66,5 @@ public class Connectivity {
             return nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) || nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE);
         }
         return false;
-    }
-
-    public static boolean isRestrictBackground(Context aq) {
-        ConnectivityManager cm = (ConnectivityManager) aq.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (Build.VERSION.SDK_INT >= 24) {
-            int a = cm.getRestrictBackgroundStatus();
-            if (a == ConnectivityManager.RESTRICT_BACKGROUND_STATUS_DISABLED || a == ConnectivityManager.RESTRICT_BACKGROUND_STATUS_WHITELISTED) {
-                return false;
-            } else if (a == ConnectivityManager.RESTRICT_BACKGROUND_STATUS_ENABLED) {
-                return true;
-            }
-        }
-        return true;
-    }
-
-    @Unused
-    public static boolean isMetered(Context aq) {
-        ConnectivityManager cm = (ConnectivityManager) aq.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.isActiveNetworkMetered();
     }
 }

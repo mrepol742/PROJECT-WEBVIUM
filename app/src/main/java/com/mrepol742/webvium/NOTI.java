@@ -66,7 +66,7 @@ public class NOTI extends MainService {
                         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
                     } else {
                         String[] sp = neTf.split(";");
-                        SharedPreferences j988 = getSharedPreferences("wv,", 0);
+                        SharedPreferences j988 = getSharedPreferences("wv", 0);
                         if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(Hash.a("SHA-1", sp[0])) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(Hash.a("SHA-1", sp[1]))) {
                             f(sp[0], sp[1], sp[2]);
                             SharedPreferences.Editor gujh = j988.edit();

@@ -40,14 +40,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkAdapter;
-import com.mrepol742.webvium.bookmark.BookmarkDatabase;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
@@ -58,7 +57,6 @@ import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 // @Class Bookmarks
 public class BOOK extends BaseActivity {
@@ -218,7 +216,7 @@ public class BOOK extends BaseActivity {
         c.setNavigationOnClickListener(view -> finish());
         d3 = BookmarkHelper.getInstance(getApplicationContext());
         Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                BookmarkDatabase.TABLE_BOOKMARK +
+                Sqlite.TABLE_BOOKMARK +
                 " ORDER BY " +
                 "_id" +
                 " DESC", null);
@@ -466,7 +464,7 @@ public class BOOK extends BaseActivity {
         Runnable p15 = () -> {
             ArrayList<String> itemIdsh = new ArrayList<>();
             Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    BookmarkDatabase.TABLE_BOOKMARK +
+                    Sqlite.TABLE_BOOKMARK +
                     " ORDER BY " +
                     "_id" +
                     " DESC", null);

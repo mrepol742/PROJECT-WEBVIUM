@@ -19,7 +19,7 @@ package com.mrepol742.webvium.util;
 
 import android.net.Uri;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

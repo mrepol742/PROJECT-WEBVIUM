@@ -24,8 +24,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.mrepol742.webvium.annotation.Default;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 public class MainWebView extends WebView {
 
@@ -76,22 +75,18 @@ public class MainWebView extends WebView {
         return this.webChromeClient;
     }
 
-    @Default
     public int getFontSize() {
         return fontSize;
     }
 
-    @Default
     public String getUserAgent() {
         return userAgent;
     }
 
-    @Default
     public int getTextZoom() {
         return textZoom;
     }
 
-    @Default
     public String getTextEncoding() {
         return textEncoding;
     }

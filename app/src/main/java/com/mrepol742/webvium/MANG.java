@@ -42,8 +42,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.Intents;
@@ -376,7 +376,8 @@ public class MANG extends BaseActivity {
         a.setTitle(a1);
         a.setMessage(b1);
         a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            l(StorageDirectory.getCacheDir(this));
+            Runnable run = () -> l(StorageDirectory.getCacheDir(this));
+            new Thread(run).start();
             a22.dismiss();
             a1();
         });
@@ -599,7 +600,7 @@ public class MANG extends BaseActivity {
             C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
             getSharedPreferences("a", 0).edit().clear().apply();
             a221().edit().clear().apply();
-            getSharedPreferences("wv,", 0).edit().clear().apply();
+            getSharedPreferences("wv", 0).edit().clear().apply();
             a22.dismiss();
             System.exit(0);
 
@@ -618,9 +619,9 @@ public class MANG extends BaseActivity {
         a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
             C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
             C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-            getSharedPreferences("a", 0).edit().clear().apply();
+            getSharedPreferences("wv", 0).edit().clear().apply();
             a221().edit().clear().apply();
-            getSharedPreferences("wv,", 0).edit().clear().apply();
+            getSharedPreferences("a", 0).edit().clear().apply();
             HistoryHelper d1 = HistoryHelper.getInstance(getApplicationContext());
             d1.delete();
             SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
@@ -923,7 +924,7 @@ public class MANG extends BaseActivity {
 
     private void a55() {
         finish();
-        SharedPreferences c56 = getSharedPreferences("wv,", 0);
+        SharedPreferences c56 = getSharedPreferences("wv", 0);
         Intent it = new Intent(this, MAIN.class);
         it.putExtra("value", c56.getString("MyURL", ""));
         it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

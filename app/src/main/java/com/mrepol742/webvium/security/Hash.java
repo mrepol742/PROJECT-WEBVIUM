@@ -17,7 +17,7 @@
 
 package com.mrepol742.webvium.security;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.NoSuchStringToReturn;
 
 import java.security.MessageDigest;

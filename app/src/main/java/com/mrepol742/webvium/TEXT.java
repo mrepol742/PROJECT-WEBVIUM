@@ -130,7 +130,7 @@ public class TEXT extends BaseActivity {
             ws.setDefaultFontSize(a223("dr55"));
             a1.setProgress(a223("dr55"));
         }
-        SharedPreferences a35 = getSharedPreferences("wv,", 0);
+        SharedPreferences a35 = getSharedPreferences("wv", 0);
 
         a10a.setOnSeekBarChangeListener(new W11() {
 

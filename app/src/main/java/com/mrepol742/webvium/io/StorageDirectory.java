@@ -20,9 +20,8 @@ package com.mrepol742.webvium.io;
 import android.content.Context;
 import android.os.Environment;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.UnsupportedActions;
-import com.mrepol742.webvium.security.Hash;
 
 import java.io.File;
 
@@ -54,15 +53,15 @@ public class StorageDirectory {
     }
 
     public static String getClasses(Context context) {
-        return getFileDir(context) + "/" + Hash.a("SHA-1", "Maven-Pro.ttf") + ".ttf";
+        return getFileDir(context) + "/a";
     }
 
     public static String getVideoPoster(Context context) {
-        return getFileDir(context) + "/e";
+        return getFileDir(context) + "/b";
     }
 
     public static String getBackground(Context context) {
-        return getFileDir(context) + "/a";
+        return getFileDir(context) + "/c";
     }
 
     public static File getCacheDir(Context context) {

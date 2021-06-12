@@ -22,7 +22,7 @@ import android.os.Build;
 import android.preference.EditTextPreference;
 import android.util.AttributeSet;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 // @Class EditPref
 public class EDIT0 extends EditTextPreference {

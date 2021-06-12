@@ -371,7 +371,7 @@ public class BACK0 extends BaseActivity {
             a5.dismiss();
             a5 = null;
             finishAndRemoveTask();
-            SharedPreferences c56 = getSharedPreferences("wv,", 0);
+            SharedPreferences c56 = getSharedPreferences("wv", 0);
             Intent it = new Intent(BACK0.this, MAIN.class);
             it.putExtra("value", c56.getString("MyURL", ""));
             it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

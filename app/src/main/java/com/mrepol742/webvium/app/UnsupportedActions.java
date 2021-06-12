@@ -17,7 +17,7 @@
 
 package com.mrepol742.webvium.app;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 @Keep
 public class UnsupportedActions extends RuntimeException {

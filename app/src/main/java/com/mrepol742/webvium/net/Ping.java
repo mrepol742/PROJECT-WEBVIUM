@@ -17,13 +17,12 @@
 
 package com.mrepol742.webvium.net;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 
 import javax.net.ssl.HttpsURLConnection;
 

@@ -3,7 +3,7 @@
 }
 
 -keepclassmembers class * {
-    @com.mrepol742.webvium.annotation.release.Keep <methods>;
+    @com.mrepol742.webvium.annotation.Keep <methods>;
 }
 
 -keep class com.mrepol742.webvium.BDMS

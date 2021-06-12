@@ -105,30 +105,25 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.annotation.Beta;
-import com.mrepol742.webvium.annotation.Development;
-import com.mrepol742.webvium.annotation.Test;
-import com.mrepol742.webvium.annotation.Unused;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.GeolocationDataModel;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
 import com.mrepol742.webvium.app.SearchJSI;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
-import com.mrepol742.webvium.bookmark.BookmarkDatabase;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.history.HistoryDatabase;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
@@ -138,10 +133,8 @@ import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionDataModel;
-import com.mrepol742.webvium.permission.PermissionDatabase;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.permission.PermissionObjectDataModel;
-import com.mrepol742.webvium.search.SearchDatabase;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Html;
@@ -379,7 +372,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public static int URL_ENCODE = 2;
     public static int ASSETLINKS = 9;
     public static int SITEMAPS = 10;
-    public static final String WEBVIUM_HOME = "https://mrepol742.github.io/Search/index.html";
+    public static final String WEBVIUM_HOME = "https://mrepol742.github.io/Search";
     int WEBVIUM_SEARCH = 0;
     int WEBVIUM_HISTORY = 2;
     int WEBVIUM_BOOKMARKS = 4;
@@ -597,9 +590,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     @Override
-    @Development
     protected void onCreate(Bundle a) {
-
         super.onCreate(a);
         cdt = new Timer();
         timer = new Timer();
@@ -1123,7 +1114,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     }
                     // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
                     // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
-                    SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv,", 0);
+                    SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
                     Intent it = new Intent(MAIN.this, DOWN0.class);
                     it.putExtra("a", c1);
                     it.putExtra("b", w18.a1);
@@ -1422,7 +1413,11 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         if (Build.VERSION.SDK_INT < 30) {
             ws.setAppCacheEnabled(a221().getBoolean("open4", true));
-            ws.setAppCachePath(StorageDirectory.getCacheDir(this).toString());
+            Runnable re = () -> {
+                String sg = StorageDirectory.getCacheDir(this).toString();
+                runOnUiThread(() -> ws.setAppCachePath(sg));
+            };
+            new Thread(re).start();
         }
         if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("1m")) {
             ws.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -1533,9 +1528,6 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    @Beta
-    @Development
-    @Test
     private void c34() {
         if (Build.VERSION.SDK_INT < 30) {
             ws.setAllowFileAccess(true);
@@ -1550,7 +1542,6 @@ public class MAIN extends MainBaseActivity implements Format {
                 ArrayList<Integer> ali;
 
                 @Override
-                @Development
                 public boolean onTouch(View v, MotionEvent event) {
                     float diff;
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -2003,6 +1994,12 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c36(String sg) {
             if (!sg.isEmpty()) {
+                if (BuildConfig.DEBUG) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("th", 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("a", sg);
+                    editor.apply();
+                }
                 Runnable re = () -> {
                     java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
                     if (!a221().getBoolean("webviumB", false) && !fe.exists()) {
@@ -3877,7 +3874,50 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c127() {
-        String[] suggestion = {"document.getElementById()", "document.getElementByTagName()", "document.getElementByClassName()", "document.getElementByName()", "document.body.style.backgroundColor", "document.body.style.color", "document.body.style.margin", "document.body.style.marginLeft", "document.body.style.marginBottom", "document.body.style.marginRight", "document.body.style.marginTop", "document.body.style.padding", "document.body.style.paddingTop", "document.body.style.paddingBottom", "document.body.style.paddingLeft", "document.body.style.paddingRight", "document.body.style.backgroundImage", "document.body.style.backgroundRepeat", "document.body.style.backgroundClip", "document.body.style.backgroundPosition", "document.body.style.backgroundSize", "document.body.style.background", "document.body.style.cursor", "document.body.style.outline", "document.body.style.fontFamily", "document.body.style.fontSize", "document.body.style.fontWeight", "document.body.style.fontStyle", "Webvium.showToast(var text)", "Webvium.showToastError(var text)", "Webvium.vibrate(var text)", "Webvium.showToastSuccess(var text)", "Webvium.showNotification(var title, var contentText, var validUrl)", "document.getAttribute()", "document.getAttributeNode()", "document.getBoundingClientRect()", "document.getClientRects()", "document.setAttribute()", "document.setAttributeNode()", "document.addEventListener", "Webvium.exit()", "Webvium.copyToClipboard(var)", "Webvium.enableWifi(var boolean)", "Webvium.enableFlashlight(var boolean)"};
+        String[] suggestion = {"document.getElementById()",
+                "document.getElementByTagName()",
+                "document.getElementByClassName()",
+                "document.getElementByName()",
+                "document.body.style.backgroundColor",
+                "document.body.style.color",
+                "document.body.style.margin",
+                "document.body.style.marginLeft",
+                "document.body.style.marginBottom",
+                "document.body.style.marginRight",
+                "document.body.style.marginTop",
+                "document.body.style.padding",
+                "document.body.style.paddingTop",
+                "document.body.style.paddingBottom",
+                "document.body.style.paddingLeft",
+                "document.body.style.paddingRight",
+                "document.body.style.backgroundImage",
+                "document.body.style.backgroundRepeat",
+                "document.body.style.backgroundClip",
+                "document.body.style.backgroundPosition",
+                "document.body.style.backgroundSize",
+                "document.body.style.background",
+                "document.body.style.cursor",
+                "document.body.style.outline",
+                "document.body.style.fontFamily",
+                "document.body.style.fontSize",
+                "document.body.style.fontWeight",
+                "document.body.style.fontStyle",
+                Package.c() + ".showToast(string)",
+                Package.c() + ".showToastError(string)",
+                Package.c() + ".vibrate(integer)",
+                Package.c() + ".showToastSuccess(string)",
+                Package.c() + ".showNotification(string_title, string_content, string_url)",
+                "document.getAttribute()",
+                "document.getAttributeNode()",
+                "document.getBoundingClientRect()",
+                "document.getClientRects()",
+                "document.setAttribute()",
+                "document.setAttributeNode()",
+                "document.addEventListener",
+                Package.c() + ".copyToClipboard(string)",
+                Package.c() + ".enableWifi(boolean)",
+                Package.c() + "PrintHelper.print()",
+                Package.c() + ".enableFlashlight(boolean)"};
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b5, null);
@@ -3926,7 +3966,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c129(final PermissionRequest pr) {
         Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
-                PermissionDatabase.TABLE_PERMISSION +
+                Sqlite.TABLE_PERMISSION +
                 " ORDER BY " +
                 "_id" +
                 " DESC", null);
@@ -4067,7 +4107,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c142(String sg, String sg1) {
-        SharedPreferences sp = getSharedPreferences("wv,", 0);
+        SharedPreferences sp = getSharedPreferences("wv", 0);
         SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean("a10", false);
         spe.apply();
@@ -4120,7 +4160,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c143(String sg, String sg1) {
-        SharedPreferences sp = getSharedPreferences("wv,", 0);
+        SharedPreferences sp = getSharedPreferences("wv", 0);
         SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean("a10", false);
         spe.apply();
@@ -4216,7 +4256,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (data == WEBVIUM_SEARCH) {
             Runnable p15 = () -> {
                 Cursor cs = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        SearchDatabase.TABLE_SEARCH +
+                        Sqlite.TABLE_SEARCH +
                         " ORDER BY " +
                         "_id" +
                         " DESC", null);
@@ -4257,7 +4297,7 @@ public class MAIN extends MainBaseActivity implements Format {
         } else if (data == WEBVIUM_HISTORY) {
             Runnable p15 = () -> {
                 Cursor cs5 = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        HistoryDatabase.TABLE_HISTORY +
+                        Sqlite.TABLE_HISTORY +
                         " ORDER BY " +
                         "_id" +
                         " DESC", null);
@@ -4302,7 +4342,7 @@ public class MAIN extends MainBaseActivity implements Format {
         } else if (data == WEBVIUM_BOOKMARKS) {
             Runnable p15 = () -> {
                 Cursor cs6 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        BookmarkDatabase.TABLE_BOOKMARK +
+                        Sqlite.TABLE_BOOKMARK +
                         " ORDER BY " +
                         "_id" +
                         " DESC", null);
@@ -4373,7 +4413,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c150() {
-        SharedPreferences sp = getSharedPreferences("wv,", 0);
+        SharedPreferences sp = getSharedPreferences("wv", 0);
         SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean("a10", true);
         spe.apply();
@@ -4382,7 +4422,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c151(WebView a, String b, Boolean c) {
         if (!c) {
             d1.c(a.getTitle(), b);
-            SharedPreferences c56 = getSharedPreferences("wv,", 0);
+            SharedPreferences c56 = getSharedPreferences("wv", 0);
             SharedPreferences.Editor d56 = c56.edit();
             d56.putString("MyURL", b);
             d56.apply();
@@ -4563,46 +4603,6 @@ public class MAIN extends MainBaseActivity implements Format {
         dd.show();
     }
 
-    @Unused
-    public String c160(int i) {
-        switch (i) {
-            case WebViewClient.ERROR_AUTHENTICATION:
-                return getString(R.string.o31);
-            case WebViewClient.ERROR_BAD_URL:
-                return getString(R.string.o32);
-            case WebViewClient.ERROR_CONNECT:
-                return getString(R.string.o33);
-            case WebViewClient.ERROR_FAILED_SSL_HANDSHAKE:
-                return getString(R.string.o34);
-            case WebViewClient.ERROR_FILE:
-                return getString(R.string.o35);
-            case WebViewClient.ERROR_FILE_NOT_FOUND:
-                return getString(R.string.o36);
-            case WebViewClient.ERROR_HOST_LOOKUP:
-                return getString(R.string.o37);
-            case WebViewClient.ERROR_IO:
-                return getString(R.string.o38);
-            case WebViewClient.ERROR_PROXY_AUTHENTICATION:
-                return getString(R.string.o39);
-            case WebViewClient.ERROR_REDIRECT_LOOP:
-                return getString(R.string.o40);
-            case WebViewClient.ERROR_TIMEOUT:
-                return getString(R.string.p21);
-            case WebViewClient.ERROR_TOO_MANY_REQUESTS:
-                return getString(R.string.p22);
-            case WebViewClient.ERROR_UNKNOWN:
-                return getString(R.string.p23);
-            case WebViewClient.ERROR_UNSAFE_RESOURCE:
-                return getString(R.string.p24);
-            case WebViewClient.ERROR_UNSUPPORTED_AUTH_SCHEME:
-                return getString(R.string.p25);
-            case WebViewClient.ERROR_UNSUPPORTED_SCHEME:
-                return getString(R.string.p26);
-            default:
-                return "";
-        }
-    }
-
     public void c164() {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
@@ -4656,10 +4656,6 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         }
         return null;
-    }
-
-    private void c169(String s, String g) {
-        runOnUiThread(() -> h.load(s, g));
     }
 
     private void c170(String sg) {
@@ -5391,7 +5387,7 @@ public class MAIN extends MainBaseActivity implements Format {
             String sg = b.getAction();
             if (sg.equals("android.net.conn.CONNECTIVITY_CHANGE") || sg.equals("android.net.wifi.WIFI_STATE_CHANGED") || sg.equals("android.intent.action.AIRPLANE_MODE")) {
                 c180();
-                if (Objects.equals(h.getTitle(), getSharedPreferences("di", 0).getString("di", "742"))) {
+                if (Objects.equals(h.getTitle(), getSharedPreferences("wv", 0).getString("di", "742"))) {
                     h.reload();
                 }
             }

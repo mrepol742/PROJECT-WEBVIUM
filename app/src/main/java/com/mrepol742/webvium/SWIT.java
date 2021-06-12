@@ -22,7 +22,7 @@ import android.os.Build;
 import android.preference.SwitchPreference;
 import android.util.AttributeSet;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 // @Class SwitchPref
 public class SWIT extends SwitchPreference {

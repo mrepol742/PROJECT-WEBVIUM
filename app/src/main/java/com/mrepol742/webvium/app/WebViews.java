@@ -21,15 +21,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.mrepol742.webvium.annotation.Development;
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.content.Package;
 
 import java.util.ArrayList;
 
 public class WebViews extends MainWebView {
-    @Development
     public final ArrayList<ForwardBackwardHistoryDataModel> w4 = new ArrayList<>();
 
     @Keep
@@ -53,14 +51,12 @@ public class WebViews extends MainWebView {
     }
 
     @Override
-    @Development
     public void goBack() {
         w4.add(new ForwardBackwardHistoryDataModel("", getUrl()));
         super.goBack();
     }
 
     @Override
-    @Development
     public void goForward() {
         w4.add(new ForwardBackwardHistoryDataModel(getUrl(), ""));
         super.goForward();

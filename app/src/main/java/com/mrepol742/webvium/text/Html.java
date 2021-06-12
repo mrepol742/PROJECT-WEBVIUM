@@ -21,7 +21,7 @@ import android.os.Build;
 import android.text.Spanned;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.annotation.release.Keep;
+import com.mrepol742.webvium.annotation.Keep;
 
 @SuppressWarnings("deprecation")
 public class Html {
