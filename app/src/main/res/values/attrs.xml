@@ -45,5 +45,5 @@
     <attr name="a1" format="reference" />
     <attr name="a2" format="reference" />
     <attr name="a3" format="reference" />
-
+    <attr name="a4" format="color" />
 </resources>

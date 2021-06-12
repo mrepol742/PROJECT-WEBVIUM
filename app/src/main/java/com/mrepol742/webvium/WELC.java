@@ -144,6 +144,8 @@ public class WELC extends BaseActivity {
             if (!a221().getBoolean("autoUpdate", false)) {
                 if (!a221().getBoolean("webviumB", false)) {
                     getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    getWindow().setStatusBarColor(Resources.getColor(this, R.color.b));
+                    getWindow().setNavigationBarColor(Resources.getColor(this, R.color.m));
                 }
             }
         }

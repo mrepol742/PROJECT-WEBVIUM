@@ -90,6 +90,7 @@
         <item name="q">@drawable/f24</item>
         <item name="r">@color/q</item>
         <item name="s">@color/d</item>
+        <item name="a4">@color/o</item>
         <item name="android:textColorPrimary">?a</item>
         <item name="android:textColorSecondary">@color/a6</item>
         <item name="android:textColorPrimaryInverse">?b</item>
@@ -146,6 +147,7 @@
         <item name="q">@drawable/f24</item>
         <item name="r">@color/d</item>
         <item name="s">@color/q</item>
+        <item name="a4">@color/w</item>
         <item name="android:textColorPrimary">?a</item>
         <item name="android:textColorSecondary">@color/a7</item>
         <item name="android:textColorPrimaryInverse">?b</item>

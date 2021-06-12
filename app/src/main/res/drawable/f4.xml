@@ -20,7 +20,7 @@
     <item>
         <shape a:shape="rectangle">
             <corners a:radius="50dp" />
-            <solid a:color="@android:color/transparent" />
+            <solid a:color="@color/l" />
             <stroke
                 a:width="2dp"
                 a:color="@color/e" />

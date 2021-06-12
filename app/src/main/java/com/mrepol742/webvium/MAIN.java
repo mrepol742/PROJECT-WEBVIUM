@@ -41,6 +41,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.InsetDrawable;
 import android.media.AudioManager;
 import android.net.MailTo;
 import android.net.Uri;
@@ -2005,8 +2006,12 @@ public class MAIN extends MainBaseActivity implements Format {
                     if (!a221().getBoolean("webviumB", false) && !fe.exists()) {
                         runOnUiThread(() -> {
                             int co = Color.parseColor(sg);
-                            this.o.setBackground(Resources.toDrawable(GradientDrawable.RECTANGLE, new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co));
-                            this.llt.setBackground(Resources.toDrawable(GradientDrawable.RECTANGLE, new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co));
+                            InsetDrawable inset = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
+                                    new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 0, 0, 10, 10);
+                            this.o.setBackground(inset);
+                            InsetDrawable inset1 = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
+                                    new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co), 10, 10, 10, 0);
+                            this.llt.setBackground(inset1);
                             Window win = getWindow();
                             if (Build.VERSION.SDK_INT >= 23) {
                                 win.setStatusBarColor(co);
@@ -2019,6 +2024,28 @@ public class MAIN extends MainBaseActivity implements Format {
                                 if (Build.VERSION.SDK_INT >= 26) {
                                     win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
                                 }
+                            }
+                        });
+                    }
+                };
+                new Thread(re).start();
+            } else {
+                Runnable re = () -> {
+                    java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
+                    if (!a221().getBoolean("webviumB", false) && !fe.exists()) {
+                        runOnUiThread(() -> {
+                            this.llt.setBackgroundResource(R.drawable.f1);
+                            this.o.setBackgroundResource(R.drawable.p);
+                            Window win = getWindow();
+                            if (!a221().getBoolean("autoUpdate", false)) {
+                                   if (Build.VERSION.SDK_INT >= 23) {
+                                    win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                }
+                                    win.setStatusBarColor(Resources.getColor(this, R.color.b));
+                                    win.setNavigationBarColor(Resources.getColor(this, R.color.m));
+                            } else {
+                                win.setStatusBarColor(Resources.getColor(this, R.color.n));
+                               win.setNavigationBarColor(Resources.getColor(this, R.color.n));
                             }
                         });
                     }
