@@ -51,8 +51,6 @@
     <string name="a8">Share</string>
     <string name="a9">Show Webpage Title</string>
     <string name="a10">Always show webpage title in toolbar</string>
-    <string name="a11">Save</string>
-    <string name="a12">Edit</string>
     <string name="a13">Delete</string>
     <string name="a14">Details</string>
     <string name="a15">Clears any saved data for web forms</string>
@@ -193,7 +191,6 @@
     <string name="i6">OK</string>
     <string name="i7">Cancel</string>
     <string name="i9">Search History</string>
-    <string name="i10">Name:</string>
     <string name="i11">Clear All History</string>
     <string name="i12">Clear All Bookmarks</string>
     <string name="i13">Clear Bookmarks</string>
@@ -238,7 +235,6 @@
     <string name="l8">Share %1$s with:</string>
     <string name="l10">Security Lock Settings</string>
     <string name="l11">Confirm to delete %1$s?</string>
-    <string name="l13">| BETA</string>
     <string name="l14">Manage Space</string>
     <string name="l15">Dismiss</string>
     <string name="l16">Screenshot cleared.</string>
@@ -518,7 +514,6 @@
     <string name="b28">Failed to Import.</string>
     <string name="b32">Download</string>
     <string name="b33">Click Assist App &lt;b>>>&lt;/b> Webvium &lt;b>>>&lt;/b> DONE.</string>
-    <string name="b34">Failed to save the source code.</string>
     <string name="b36">Do you really want to clear Clipboard?</string>
     <string name="b37">Clipboard Cleared.</string>
     <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
@@ -528,9 +523,6 @@
     <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
     <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="c26">about:blank</string>
-    <string name="c27">Source Code Copied.</string>
-    <string name="c28">File Saved | %1$s</string>
-    <string name="c29">Save File</string>
     <string name="c30">Name</string>
     <string name="c31">Saved Path</string>
     <string name="c32">Invalid Link.</string>
@@ -572,7 +564,6 @@
     <string name="f37">Font Size</string>
     <string name="f38">Image Saved.</string>
     <string name="f39">Your search history appear here</string>
-    <string name="f40">Link:</string>
     <string name="g21">Your bookmarks appear here</string>
     <string name="g24">Pretend Mode Settings</string>
     <string name="g25">&lt;b>Host Name:&lt;/b> %1$s&lt;br>&lt;b>IP Address:&lt;/b> %2$s&lt;br>&lt;b>Hash Code:&lt;/b> %3$d&lt;br>&lt;b>Canonical Hostname:&lt;/b> %4$s&lt;br>&lt;b>Wildcard Address:&lt;/b> %5$b&lt;br>&lt;b>Local Address:&lt;/b> %6$b&lt;br>&lt;b>Loopback Address:&lt;/b> %7$b&lt;br>&lt;b>Global Scope:&lt;/b> %8$b&lt;br>&lt;b>Link Scope:&lt;/b> %9$b&lt;br>&lt;b>Node Scope:&lt;/b> %10$b&lt;br>&lt;b>Organization Scope:&lt;/b> %11$b&lt;br>&lt;b>Site Scope:&lt;/b> %12$b&lt;br>&lt;b>IP Multicast Address:&lt;/b> %13$b</string>
@@ -706,22 +697,6 @@
     <string name="n39">Touch to open search</string>
     <string name="n40">Touch to open Webvium</string>
     <string name="o29">Custom Background Image was been loaded.</string>
-    <string name="o31">User authentication failed on server</string>
-    <string name="o32">Malformed URL</string>
-    <string name="o33">Failed to connect to the server</string>
-    <string name="o34">Failed to perform SSL handshake</string>
-    <string name="o35">Generic file error</string>
-    <string name="o36">File not found</string>
-    <string name="o37">Server or proxy hostname lookup failed</string>
-    <string name="o38">Failed to read or write to the server</string>
-    <string name="o39">User authentication failed on proxy</string>
-    <string name="o40">Too many redirects</string>
-    <string name="p21">Connection timed out</string>
-    <string name="p22">Too many requests during this load</string>
-    <string name="p23">Generic error</string>
-    <string name="p24">Resource load was canceled by Safe Browsing</string>
-    <string name="p25">Unsupported authentication scheme (not basic or digest)</string>
-    <string name="p26">Unsupported URI scheme</string>
     <string name="p29">Request Headers</string>
     <string name="p30">Failed to change poster image.</string>
     <string name="p33">Failed to change background image.</string>
@@ -821,18 +796,9 @@
     <string name="x37">Gesture up/down to hide/show navbar</string>
     <string name="x38">Failed! No Internet Connection</string>
     <string name="x39">Send Feedback</string>
-    <string name="x40">Subject</string>
 
-    <string name="y21">Tell me, What feature you\'d like to see on next update.</string>
-    <string name="y22">Briefly explain how can i reproduce the problem.</string>
-
-    <string name="y23">Feature Request</string>
-    <string name="y24">Send a Feedback</string>
-    <string name="y25">Report an issue</string>
-    <string name="y26">Message</string>
     <string name="y27">I\'d like to hear your feedback about Webvium.</string>
     <string name="y28">Features</string>
-    <string name="y29">Your ID</string>
     <string name="y30">The developers behind this awesome project</string>
     <string name="z21">Failed! An Error Occurred</string>
     <string name="z22">No internet connection detected</string>
@@ -862,9 +828,6 @@
     <string name="x47">To Import a Database</string>
     <string name="x48">Click here to open File Picker and navigate to default backup location %1$s then choose the backup you want to import.</string>
     <string name="x49">Queries</string>
-    <string name="x50">Invalid IpAddress.</string>
-    <string name="x51">Log</string>
-    <string name="x52">Build</string>
     <string name="x53">Mrepol742 (\"Melvin Jones Repol\", \"us\", \"we\" or \"our\") operates the Webvium</string>
     <string name="x54">Webvium Logcat</string>
     <string name="x56">Last Installed on:</string>
@@ -878,7 +841,6 @@
     <string name="y65">Ooops!</string>
     <string name="y66">End Process</string>
     <string name="y67">Send Report</string>
-    <string name="y68">Failed to send Feedback.</string>
     <string name="y69">Experimental</string>
     <string name="y70">Unstable, underdevelopment features</string>
     <string name="y71">Sending feedback…</string>

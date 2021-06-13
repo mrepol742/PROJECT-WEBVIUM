@@ -55,7 +55,7 @@
         a:layout_height="wrap_content"
         a:layout_alignParentBottom="true"
         a:layout_centerHorizontal="true"
-        a:layout_margin="10dp" a:text="Send Feedback"
+        a:layout_margin="10dp"
         a:paddingLeft="25dp"
         a:paddingTop="15dp"
         a:paddingRight="25dp"

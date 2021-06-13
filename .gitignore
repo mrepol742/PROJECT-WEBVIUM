@@ -48,9 +48,11 @@ api22.avd.bat
 newNotification.bat
 newUpdate.bat
 backup.bat
-mrepol742/
+util/
 buildRelease.bat
 buildDebug.bat
+/app/primaryDictionary.txt
+/app/secondaryDictionary.txt
 
 
 # IntelliJ

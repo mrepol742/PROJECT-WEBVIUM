@@ -71,17 +71,17 @@ public class HIST extends BaseActivity {
     private TextView f4;
     private PopupMenu pm;
     private int b;
-    public static int LINKS = 0;
-    public static int TRANCEROUTE = 1;
-    public static int NPING = 2;
-    public static int WHOIS = 3;
-    public static int META_TAGS = 4;
-    public static int HEADERS = 5;
-    public static int ROBOTS = 6;
-    public static int SOURCE_CODE = 7;
-    public static int IP_GEO = 8;
-    public static int ASSETLINKS = 9;
-    public static int SITEMAPS = 10;
+    public static final int LINKS = 0;
+    public static final int TRANCEROUTE = 1;
+    public static final int NPING = 2;
+    public static final int WHOIS = 3;
+    public static final int META_TAGS = 4;
+    public static final int HEADERS = 5;
+    public static final int ROBOTS = 6;
+    public static final int SOURCE_CODE = 7;
+    public static final int IP_GEO = 8;
+    public static final int ASSETLINKS = 9;
+    public static final int SITEMAPS = 10;
 
     final MenuItem.OnMenuItemClickListener d = a1 -> {
         try {

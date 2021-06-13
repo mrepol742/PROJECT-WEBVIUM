@@ -13,3 +13,11 @@
 -keep class com.mrepol742.webvium.HDMS
 
 -keepattributes *Annotation*
+-repackageclasses 'com.mrepol742.webvium'
+-obfuscationdictionary obfuscation-dictionary.txt
+-packageobfuscationdictionary obfuscation-dictionary.txt
+-classobfuscationdictionary obfuscation-dictionary.txt
+-optimizationpasses 5
+-allowaccessmodification
+-overloadaggressively
+-renamesourcefileattribute ""

@@ -53,7 +53,6 @@
     <item name="a12" type="id" />
     <item name="a13" type="id" />
     <item name="b1" type="id" />
-    <item name="b3" type="id" />
     <item name="b6" type="id" />
     <item name="b7" type="id" />
     <item name="b8" type="id" />
@@ -63,7 +62,6 @@
     <item name="b12" type="id" />
     <item name="b13" type="id" />
     <item name="b14" type="id" />
-    <item name="b15" type="id" />
     <item name="b16" type="id" />
     <item name="b17" type="id" />
     <item name="b18" type="id" />
@@ -71,8 +69,6 @@
     <item name="b20" type="id" />
     <item name="c1" type="id" />
     <item name="c3" type="id" />
-    <item name="c4" type="id" />
-    <item name="c5" type="id" />
     <item name="c6" type="id" />
     <item name="c8" type="id" />
     <item name="c10" type="id" />
@@ -119,10 +115,6 @@
     <item name="f10" type="id" />
     <item name="f11" type="id" />
     <item name="f12" type="id" />
-    <item name="f14" type="id" />
-    <item name="f15" type="id" />
-    <item name="f16" type="id" />
-    <item name="f17" type="id" />
 
     <item name="g1" type="id" />
     <item name="g4" type="id" />
@@ -132,7 +124,6 @@
     <item name="h9" type="id" />
     <item name="h10" type="id" />
     <item name="h11" type="id" />
-    <item name="h14" type="id" />
     <item name="h15" type="id" />
     <item name="h16" type="id" />
     <item name="h17" type="id" />
@@ -140,8 +131,6 @@
     <item name="h19" type="id" />
     <item name="h20" type="id" />
     <item name="i1" type="id" />
-    <item name="i2" type="id" />
-    <item name="i3" type="id" />
 
 
     <item name="i6" type="id" />

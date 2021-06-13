@@ -53,12 +53,10 @@ public class SETT0 extends BaseActivity {
         theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.a);
-        Toolbar tl = findViewById(R.id.c3);
-        TextView b = findViewById(R.id.c4);
+        Toolbar tl = findViewById(R.id.b7);
+        TextView b = findViewById(R.id.b8);
         setActionBar(tl);
-        TextView c1 = findViewById(R.id.c5);
         b.setTypeface(type(Typeface.BOLD));
-        c1.setTypeface(type(Typeface.BOLD));
         int k = Resources.getColor(this, R.color.c);
         int l = Resources.getColor(this, R.color.b);
         ActionBar ab = getActionBar();
@@ -69,13 +67,6 @@ public class SETT0 extends BaseActivity {
         tl.setNavigationIcon(R.drawable.a2);
         tl.setNavigationOnClickListener(view -> finishAndRemoveTask());
         b.setText(getString(R.string.h3));
-        c1.setText(getString(R.string.l13));
-        boolean d78 = a224("webDa", false);
-        if (d78) {
-            c1.setVisibility(View.VISIBLE);
-        } else {
-            c1.setVisibility(View.GONE);
-        }
         as(R.id.m10, new SettingFragment());
         TextView tv = findViewById(R.id.m17);
         tv.setText(getString(R.string.h3));
@@ -85,7 +76,6 @@ public class SETT0 extends BaseActivity {
             try {
                 Animation.animate(this, R.anim.c, b);
                 b.setText(getString(R.string.h3));
-
             } catch (Exception en) {
                 en.printStackTrace();
             }
@@ -102,7 +92,6 @@ public class SETT0 extends BaseActivity {
                 Animation.animate(this, R.anim.i, tv0);
                 Animation.animate(this, R.anim.c, b);
                 b.setText(getString(R.string.y28));
-
             } catch (Exception en) {
                 en.printStackTrace();
             }
@@ -145,15 +134,12 @@ public class SETT0 extends BaseActivity {
         });
         if (!a221().getBoolean("autoUpdate", false)) {
             b.setTextColor(k);
-            c1.setTextColor(k);
-
             tv.setTextColor(k);
             tv0.setTextColor(k);
             tv1.setTextColor(k);
             tv2.setTextColor(k);
         } else {
             b.setTextColor(l);
-            c1.setTextColor(l);
             tv.setTextColor(l);
             tv0.setTextColor(l);
             tv1.setTextColor(l);
@@ -187,7 +173,6 @@ public class SETT0 extends BaseActivity {
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);
         b24(true);
-
     }
 
     @Override

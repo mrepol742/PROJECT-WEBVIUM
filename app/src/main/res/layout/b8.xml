@@ -55,7 +55,6 @@
             a:layout_height="match_parent"
             a:layout_margin="5dp"
             a:layout_weight="0.4"
-            a:text="https://mrepol742.github.io"
             a:inputType="textAutoCorrect"
             a:selectAllOnFocus="true"
             a:textSize="@dimen/b" />
@@ -64,7 +63,6 @@
             a:id="@id/k20"
             a:layout_width="0dp"
             a:layout_weight="0.1"
-            a:text="OK"
             a:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

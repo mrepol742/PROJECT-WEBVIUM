@@ -20,7 +20,7 @@
 
     a:layout_height="match_parent">
 
-    <include layout="@layout/a20" />
+    <include layout="@layout/a16" />
 
     <FrameLayout
         a:id="@id/i6"

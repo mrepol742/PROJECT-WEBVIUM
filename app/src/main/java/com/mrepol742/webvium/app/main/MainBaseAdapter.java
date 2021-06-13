@@ -86,15 +86,9 @@ public class MainBaseAdapter extends BaseAdapter implements View.OnTouchListener
     public boolean onDrag(View view, DragEvent de) {
         switch (de.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-
-                return true;
-            case DragEvent.ACTION_DRAG_ENTERED:
-                return true;
             case DragEvent.ACTION_DRAG_EXITED:
-                return true;
+            case DragEvent.ACTION_DRAG_ENTERED:
             case DragEvent.ACTION_DROP:
-
-                return true;
             case DragEvent.ACTION_DRAG_ENDED:
                 return true;
             default:

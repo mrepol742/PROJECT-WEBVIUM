@@ -28,6 +28,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -120,6 +121,7 @@ import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
+import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.IntentsFilter;
@@ -360,23 +362,24 @@ public class MAIN extends MainBaseActivity implements Format {
     public static final int POPUPMENU_MAIN_WEB_OSINT_NSLookup = 13;
     public static final int POPUPMENU_MAIN_WEB_OSINT_SOURCE_CODE = 5;
     public static final int POPUPMENU_MAIN_WEB_OSINT_SAVE_LINK = 12;
-    public static int LINKS = 0;
-    public static int TRANCEROUTE = 1;
-    public static int NPING = 2;
-    public static int WHOIS = 3;
-    public static int META_TAGS = 4;
-    public static int HEADERS = 5;
-    public static int ROBOTS = 6;
-    public static int SOURCE_CODE = 7;
-    public static int IP_GEO = 8;
-    public static int BASE64_ENCODE = 1;
-    public static int URL_ENCODE = 2;
-    public static int ASSETLINKS = 9;
-    public static int SITEMAPS = 10;
+    public static final int LINKS = 0;
+    public static final int TRANCEROUTE = 1;
+    public static final int NPING = 2;
+    public static final int WHOIS = 3;
+    public static final int META_TAGS = 4;
+    public static final int HEADERS = 5;
+    public static final int ROBOTS = 6;
+    public static final int SOURCE_CODE = 7;
+    public static final int IP_GEO = 8;
+    public static final int BASE64_ENCODE = 1;
+    public static final int URL_ENCODE = 2;
+    public static final int ASSETLINKS = 9;
+    public static final int SITEMAPS = 10;
     public static final String WEBVIUM_HOME = "https://mrepol742.github.io/Search";
-    int WEBVIUM_SEARCH = 0;
-    int WEBVIUM_HISTORY = 2;
-    int WEBVIUM_BOOKMARKS = 4;
+    final int WEBVIUM_SEARCH = 0;
+    final int WEBVIUM_HISTORY = 2;
+    final int WEBVIUM_BOOKMARKS = 4;
+    private MainReceiver ipH;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -1536,7 +1539,7 @@ public class MAIN extends MainBaseActivity implements Format {
         ws.setBuiltInZoomControls(true);
         ws.setSupportMultipleWindows(false);
         ws.setJavaScriptCanOpenWindowsAutomatically(false);
-        if (a224("webDa", false) && (a221().getBoolean("hst", false) || a221().getBoolean("hste", false))) {
+        if (a221().getBoolean("hst", false) || a221().getBoolean("hste", false)) {
             h.setOnTouchListener(new View.OnTouchListener() {
                 final int sel = 5;
                 float lastY;
@@ -1954,6 +1957,15 @@ public class MAIN extends MainBaseActivity implements Format {
                 c36(a);
             }
         }, Package.c()+"ThemeHelper");
+        h.addJavascriptInterface(new Object() {
+
+            @JavascriptInterface
+            public void ip(String sg) {
+                Intent it = new Intent("com.mrepol742.webvium.WebviumIpHelper");
+                it.putExtra("ip", sg);
+                sendBroadcast(it);
+            }
+        }, Package.c() + "IpHelper");
         if (Build.VERSION.SDK_INT >= 29) {
             h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
 
@@ -2775,6 +2787,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c67() {
+        h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org/?format=json');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}");
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.h7));
@@ -2786,11 +2799,17 @@ public class MAIN extends MainBaseActivity implements Format {
         TextView f5 = e.findViewById(R.id.c20);
         Button bn = e.findViewById(R.id.k12);
         f5.setText(getString(R.string.o7));
-        Runnable p15 = () -> {
-            final String sg = Stream.f("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/IpAddress.html", getString(R.string.c33));
-            runOnUiThread(() -> f.setText(sg));
+        this.ipH = new MainReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                super.onReceive(context, intent);
+                f.setText(intent.getStringExtra("ip"));
+            }
         };
-        new Thread(p15).start();
+        IntentsFilter af = new IntentsFilter();
+        af.act("com.mrepol742.webvium.WebviumIpHelper");
+        registerReceiver(this.ipH, af);
         bn.setText(getString(R.string.h14));
         if (!a221().getBoolean("autoUpdate", false)) {
             f.setTextColor(Resources.getColor(this, R.color.c));
@@ -2799,12 +2818,10 @@ public class MAIN extends MainBaseActivity implements Format {
             f.setTextColor(Resources.getColor(this, R.color.b));
             f5.setTextColor(Resources.getColor(this, R.color.b));
         }
-        bn.setOnClickListener(view -> {
-            Runnable p151 = () -> {
-                final String sg = Stream.f("https://mrepol742.github.io/PROJECT-WEBVIUM/Server/IpAddress.html", getString(R.string.c33));
-                runOnUiThread(() -> f.setText(sg));
-            };
-            new Thread(p151).start();
+        bn.setOnClickListener(view -> h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org/?format=json');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}"));
+        a.setOnCancelListener(dialog -> {
+            unregisterReceiver(this.ipH);
+            dialog.dismiss();
         });
         AlertDialog dd = a.create();
         Objects.requireNonNull(dd.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
@@ -3151,7 +3168,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c80(WebView a, String b) {
         try {
             a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
-            if (a224("webDa", false) && a221().getBoolean("tow2", false)) {
+            if (a221().getBoolean("tow2", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(false);
             }
@@ -3172,7 +3189,7 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page started
     public void c81(String b) {
         try {
-            if (a224("webDa", false) && a221().getBoolean("tow", false)) {
+            if (a221().getBoolean("tow", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(true);
             }

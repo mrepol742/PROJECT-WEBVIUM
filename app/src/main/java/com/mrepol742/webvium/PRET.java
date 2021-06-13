@@ -66,7 +66,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
     private MainWebView w4;
 
     @Override
-    @SuppressLint({"SetJavaScriptEnabled", "ClickableViewAccessibility"})
+    @SuppressLint({"SetJavaScriptEnabled", "ClickableViewAccessibility", "SourceLockedOrientationActivity"})
     protected void onCreate(Bundle be) {
         super.onCreate(be);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {

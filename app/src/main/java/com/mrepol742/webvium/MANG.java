@@ -77,7 +77,6 @@ public class MANG extends BaseActivity {
             R.drawable.d17,
             R.drawable.d18,
             R.drawable.d19,
-            R.drawable.e13,
             R.drawable.e14,
             R.drawable.e15
     };
@@ -87,7 +86,6 @@ public class MANG extends BaseActivity {
             R.string.d12,
             R.string.d14,
             R.string.c35,
-            R.string.p11,
             R.string.p12,
             R.string.c36
     };
@@ -294,19 +292,6 @@ public class MANG extends BaseActivity {
         } else if (a == 4) {
             x(getString(R.string.l14), getString(R.string.u7));
         } else if (a == 5) {
-            if (Permission.check(this, Permission.STORAGE, 2)) {
-                java.io.File fe = new java.io.File(StorageDirectory.getWebviumDir() + "/Source Code");
-                int i = 0;
-                if (fe.exists() && fe.isDirectory()) {
-                    i = Objects.requireNonNull(fe.list()).length;
-                }
-                if (i > 0) {
-                    t(getString(R.string.l14), getString(R.string.u8));
-                } else {
-                    r(getString(R.string.v29));
-                }
-            }
-        } else if (a == 6) {
             if (Permission.check(this, Permission.STORAGE, 3)) {
                 java.io.File fe = new java.io.File(StorageDirectory.getWebviumDir() + "/Screenshot");
                 int i = 0;
@@ -319,7 +304,7 @@ public class MANG extends BaseActivity {
                     r(getString(R.string.v29));
                 }
             }
-        } else if (a == 7) {
+        } else if (a == 6) {
             if (Permission.check(this, Permission.STORAGE, 4)) {
                 java.io.File fe = new java.io.File(StorageDirectory.getDownloadDir());
                 int i = 0;
@@ -342,8 +327,6 @@ public class MANG extends BaseActivity {
 
     private void k(String a1, String b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
@@ -387,8 +370,6 @@ public class MANG extends BaseActivity {
 
     private void n(String a1, String b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
@@ -407,8 +388,6 @@ public class MANG extends BaseActivity {
 
     private void o(String a1, String b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
@@ -424,15 +403,11 @@ public class MANG extends BaseActivity {
 
     private void q(String jk) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(getString(R.string.l14));
         a.setMessage(Html.b(jk));
         a.setPositiveButton(getString(R.string.u14), (a12, intetg) -> {
-
             Intents.l(this, Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
-
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
@@ -460,27 +435,6 @@ public class MANG extends BaseActivity {
                         r(getString(R.string.u17));
                     } else {
                         q(getString(R.string.u18));
-                    }
-                }
-                break;
-            case 2:
-                if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
-                    a1();
-                    java.io.File fe = new java.io.File(StorageDirectory.getWebviumDir() + "/Source Code");
-                    int i = 0;
-                    if (fe.exists() && fe.isDirectory()) {
-                        i = Objects.requireNonNull(fe.list()).length;
-                    }
-                    if (i > 0) {
-                        t(getString(R.string.l14), getString(R.string.u8));
-                    } else {
-                        r(getString(R.string.v29));
-                    }
-                } else {
-                    if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        r(getString(R.string.u15));
-                    } else {
-                        q(getString(R.string.u16));
                     }
                 }
                 break;
@@ -541,26 +495,8 @@ public class MANG extends BaseActivity {
         }
     }
 
-    private void t(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
-        a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            l(StorageDirectory.getWebviumDir() + "/Source Code/");
-            a22.dismiss();
-            a1();
-        });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
-        a.create().show();
-    }
-
     private void u(String a1, String b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
@@ -575,8 +511,6 @@ public class MANG extends BaseActivity {
 
     private void v(String a1, String b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
@@ -595,7 +529,6 @@ public class MANG extends BaseActivity {
         a.setTitle(a1);
         a.setMessage(b1);
         a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-
             C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
             C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
             getSharedPreferences("a", 0).edit().clear().apply();
@@ -611,8 +544,6 @@ public class MANG extends BaseActivity {
 
     private void y(String a1, String b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
@@ -706,21 +637,6 @@ public class MANG extends BaseActivity {
             res.close();
             rest.close();
             boolean bn = Permission.checkOnly(this, Permission.STORAGE);
-            if (bn) {
-                long lg = a7(Package.c() + "/Source Code/");
-                if (lg == 0) {
-                    b.add(getString(R.string.v29));
-                    d.add("");
-                } else if (lg == 1) {
-                    b.add(getString(R.string.v28) + a7(Package.c() + "/Source Code/"));
-                    d.add("Size: " + c(b(StorageDirectory.a() + Package.c() + "/Source Code/")));
-                } else {
-                    b.add(getString(R.string.c39) + a7(Package.c() + "/Source Code/"));
-                    d.add("Size: " + c(b(StorageDirectory.getWebviumDir() + "/Source Code/")));
-                }
-            } else {
-                b.add("Storage permission is required");
-            }
             if (bn) {
                 long lg = a7(Package.c() + "/Screenshot/");
                 if (lg == 0) {
@@ -816,21 +732,6 @@ public class MANG extends BaseActivity {
             res.close();
             rest.close();
             boolean bn = Permission.checkOnly(this, Permission.STORAGE);
-            if (bn) {
-                long lg = a7(Package.c() + "/Source Code/");
-                if (lg == 0) {
-                    b.add(getString(R.string.v29));
-                    d.add("");
-                } else if (lg == 1) {
-                    b.add(getString(R.string.v28) + a7(Package.c() + "/Source Code/"));
-                    d.add("Size: " + c(b(StorageDirectory.getWebviumDir() + "/Source Code/")));
-                } else {
-                    b.add(getString(R.string.c39) + a7(Package.c() + "/Source Code/"));
-                    d.add("Size: " + c(b(StorageDirectory.getWebviumDir() + "/Source Code/")));
-                }
-            } else {
-                b.add("Storage permission is required");
-            }
             if (bn) {
                 long lg = a7(Package.c() + "/Screenshot/");
                 if (lg == 0) {

@@ -50,9 +50,8 @@ public class TEXT extends BaseActivity {
         } else {
             a225(R.layout.l);
         }
-        Toolbar h17 = findViewById(R.id.c3);
-        TextView h18 = findViewById(R.id.c4);
-        TextView k8 = findViewById(R.id.c5);
+        Toolbar h17 = findViewById(R.id.b7);
+        TextView h18 = findViewById(R.id.b8);
         TextView a11 = findViewById(R.id.b16);
         SeekBar a1 = findViewById(R.id.a1);
         TextView a9 = findViewById(R.id.b17);
@@ -65,18 +64,13 @@ public class TEXT extends BaseActivity {
         a1.setMax(75);
         a10a.setMax(200);
         h18.setTypeface(type(Typeface.BOLD));
-        k8.setTypeface(type(Typeface.BOLD));
         a11.setTypeface(type(Typeface.BOLD));
         a9.setTypeface(type(Typeface.BOLD));
         setActionBar(h17);
         h17.setElevation(5);
         h18.setText(getString(R.string.g14));
-        k8.setText(getString(R.string.l13));
-
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(true);
-            // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
         w4.setWebViewClient(new MainWebViewClient() {
@@ -90,28 +84,18 @@ public class TEXT extends BaseActivity {
             h18.setTextColor(Resources.getColor(this, R.color.c));
             a11.setTextColor(Resources.getColor(this, R.color.c));
             a9.setTextColor(Resources.getColor(this, R.color.c));
-            k8.setTextColor(Resources.getColor(this, R.color.c));
             w4.setBackgroundColor(Resources.getColor(this, R.color.p));
             w4.loadDataWithBaseURL(null, "<!DOCTYPE html><html><style name=\"text/css\">@font-face { font-family: classes; src: url(\"file:///android_asset/classes\"); } * { color: #212121; font-family: classes;} ::selection { background-color: #4285f4; color: #ffffff}  </style></html><body><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><p>Paragraph</p></body></html>", "text/html", w4.getTextEncoding(), null);
-
         } else {
             h18.setTextColor(Resources.getColor(this, R.color.b));
-            k8.setTextColor(Resources.getColor(this, R.color.b));
             a11.setTextColor(Resources.getColor(this, R.color.b));
             a9.setTextColor(Resources.getColor(this, R.color.b));
             w4.setBackgroundColor(Resources.getColor(this, R.color.m));
             w4.loadDataWithBaseURL(null, "<!DOCTYPE html><html><style name=\"text/css\">@font-face { font-family: classes; src: url(\"file:///android_asset/classes\"); } * { color: #ffffff; font-family: classes;} ::selection { background-color: #4285f4; color: #ffffff} </style></html><body><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><p>Paragraph</p></body></html>", "text/html", w4.getTextEncoding(), null);
-
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
         h17.setNavigationOnClickListener(view -> finish());
-        if (a224("webDa", false)) {
-            k8.setVisibility(View.VISIBLE);
-        } else {
-            k8.setVisibility(View.GONE);
-        }
-
         a11.setText(getString(R.string.o8));
         a9.setText(getString(R.string.f37));
         WebSettings ws = w4.getSettings();
@@ -122,7 +106,6 @@ public class TEXT extends BaseActivity {
             ws.setTextZoom(a223("dr"));
             a10a.setProgress(a223("dr"));
         }
-
         if (a223("dr55") == 0) {
             ws.setDefaultFontSize(as);
             a1.setProgress(as);
@@ -131,7 +114,6 @@ public class TEXT extends BaseActivity {
             a1.setProgress(a223("dr55"));
         }
         SharedPreferences a35 = getSharedPreferences("wv", 0);
-
         a10a.setOnSeekBarChangeListener(new W11() {
 
             @Override
@@ -155,8 +137,6 @@ public class TEXT extends BaseActivity {
             }
 
         });
-
-
     }
 
     @Override
@@ -167,7 +147,6 @@ public class TEXT extends BaseActivity {
             w4.destroy();
         }
         super.onDestroy();
-
     }
 
 }

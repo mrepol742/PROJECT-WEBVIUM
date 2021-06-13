@@ -74,39 +74,24 @@ public class SETT extends BaseActivity {
     protected void onCreate(Bundle a) {
         theme(T_DEFAULT);
         super.onCreate(a);
-
         a225(R.layout.a9);
-        Toolbar h17 = findViewById(R.id.c3);
-        h18 = findViewById(R.id.c4);
-        TextView k8 = findViewById(R.id.c5);
+        Toolbar h17 = findViewById(R.id.b7);
+        h18 = findViewById(R.id.b8);
         h18.setTypeface(type(Typeface.BOLD));
-        k8.setTypeface(type(Typeface.BOLD));
         setActionBar(h17);
         h17.setElevation(5);
-        k8.setText(getString(R.string.l13));
-
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(true);
-            // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
-
         if (!a221().getBoolean("autoUpdate", false)) {
             h18.setTextColor(Resources.getColor(this, R.color.c));
-            k8.setTextColor(Resources.getColor(this, R.color.c));
         } else {
             h18.setTextColor(Resources.getColor(this, R.color.b));
-            k8.setTextColor(Resources.getColor(this, R.color.b));
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
         h17.setNavigationOnClickListener(view -> finish());
-        if (a224("webDa", false)) {
-            k8.setVisibility(View.VISIBLE);
-        } else {
-            k8.setVisibility(View.GONE);
-        }
         onNewIntent(getIntent());
     }
 
