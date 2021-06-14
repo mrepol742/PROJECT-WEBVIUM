@@ -2006,6 +2006,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c36(String sg) {
+        if (a221().getBoolean("wthj", false)) {
             if (!sg.isEmpty()) {
                 if (BuildConfig.DEBUG) {
                     SharedPreferences sharedPreferences = getSharedPreferences("th", 0);
@@ -2019,51 +2020,54 @@ public class MAIN extends MainBaseActivity implements Format {
                         runOnUiThread(() -> {
                             int co = Color.parseColor(sg);
                             InsetDrawable inset = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
-                                    new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 0, 0, 10, 10);
+                                    new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 10, 0, 10, 0);
                             this.o.setBackground(inset);
                             InsetDrawable inset1 = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
-                                    new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co), 10, 10, 10, 0);
+                                    new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co), 10, 0, 10, 0);
                             this.llt.setBackground(inset1);
-                            Window win = getWindow();
                             if (Build.VERSION.SDK_INT >= 23) {
-                                win.setStatusBarColor(co);
-                                win.setNavigationBarColor(co);
-                            }
-                            if (!Resources.isColorDark(co)) {
-                                if (Build.VERSION.SDK_INT >= 23) {
-                                    win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                if (!Resources.isColorDark(co)) {
+                                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                    if (Build.VERSION.SDK_INT >= 26) {
+                                        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                                    }
                                 }
-                                if (Build.VERSION.SDK_INT >= 26) {
-                                    win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-                                }
+                                getWindow().setStatusBarColor(co);
+                                getWindow().setNavigationBarColor(co);
                             }
+                            this.cd.setBackgroundResource(R.drawable.a10);
                         });
                     }
                 };
                 new Thread(re).start();
             } else {
-                Runnable re = () -> {
+                Runnable re1 = () -> {
                     java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
                     if (!a221().getBoolean("webviumB", false) && !fe.exists()) {
                         runOnUiThread(() -> {
                             this.llt.setBackgroundResource(R.drawable.f1);
                             this.o.setBackgroundResource(R.drawable.p);
-                            Window win = getWindow();
                             if (!a221().getBoolean("autoUpdate", false)) {
-                                   if (Build.VERSION.SDK_INT >= 23) {
-                                    win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                if (Build.VERSION.SDK_INT >= 23) {
+                                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                                 }
-                                    win.setStatusBarColor(Resources.getColor(this, R.color.b));
-                                    win.setNavigationBarColor(Resources.getColor(this, R.color.m));
+                                getWindow().setStatusBarColor(Resources.getColor(this, R.color.b));
+                                getWindow().setNavigationBarColor(Resources.getColor(this, R.color.m));
                             } else {
-                                win.setStatusBarColor(Resources.getColor(this, R.color.n));
-                               win.setNavigationBarColor(Resources.getColor(this, R.color.n));
+                                getWindow().setStatusBarColor(Resources.getColor(this, R.color.n));
+                                getWindow().setNavigationBarColor(Resources.getColor(this, R.color.n));
+                            }
+                            if (h.getUrl().startsWith("http://")) {
+                                this.cd.setBackgroundResource(R.drawable.f4);
+                            } else {
+                                this.cd.setBackgroundResource(R.drawable.w);
                             }
                         });
                     }
                 };
-                new Thread(re).start();
+                new Thread(re1).start();
             }
+        }
     }
 
     public void c37(String a, String c) {
@@ -2787,7 +2791,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c67() {
-        h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org/?format=json');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}");
+        h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}");
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.h7));
@@ -2818,7 +2822,7 @@ public class MAIN extends MainBaseActivity implements Format {
             f.setTextColor(Resources.getColor(this, R.color.b));
             f5.setTextColor(Resources.getColor(this, R.color.b));
         }
-        bn.setOnClickListener(view -> h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org/?format=json');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}"));
+        bn.setOnClickListener(view -> h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}"));
         a.setOnCancelListener(dialog -> {
             unregisterReceiver(this.ipH);
             dialog.dismiss();
@@ -3167,7 +3171,12 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page finished
     public void c80(WebView a, String b) {
         try {
-            a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
+            if (a.getSettings().getJavaScriptEnabled()) {
+                if (a221().getBoolean("wthj", false)) {
+                    a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
+                }
+                a.loadUrl("javascript:window." + Package.c() + "Webvium.description( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'description') { return metas[i].getAttribute('content'); } } return '';  } )() );");
+            }
             if (a221().getBoolean("tow2", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(false);
@@ -3313,8 +3322,10 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public Bitmap c84() {
-        if (new java.io.File(StorageDirectory.getVideoPoster(this)).exists()) {
-            return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(this));
+        if (a221().getBoolean("webviumP", false)) {
+            if (new java.io.File(StorageDirectory.getVideoPoster(this)).exists()) {
+                return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(this));
+            }
         }
         return BitmapFactory.decodeResource(getResources(), R.drawable.e3);
     }
@@ -3367,7 +3378,11 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c98() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        if (Build.VERSION.SDK_INT >= 30) {
+            getWindow().setDecorFitsSystemWindows(true);
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        }
         if (Build.VERSION.SDK_INT >= 23) {
             if (!a221().getBoolean("autoUpdate", false)) {
                 if (!a221().getBoolean("webviumB", false)) {
@@ -4286,7 +4301,9 @@ public class MAIN extends MainBaseActivity implements Format {
                 return false;
             };
             Menu me = pm7.getMenu();
-            me.add(0, 0, 0, getString(R.string.h16)).setOnMenuItemClickListener(e);
+            if (BuildConfig.DEBUG) {
+                me.add(0, 0, 0, getString(R.string.h16)).setOnMenuItemClickListener(e);
+            }
             me.add(0, 1, 0, getString(R.string.s14)).setOnMenuItemClickListener(e);
             me.add(0, 2, 0, getString(R.string.s16)).setOnMenuItemClickListener(e);
             me.add(0, 3, 0, getString(R.string.h3)).setOnMenuItemClickListener(e);
@@ -5368,7 +5385,16 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         if (Objects.requireNonNull(a221().getString("hide", "")).equals("30d")) {
             if (a) {
-                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
+                if (Build.VERSION.SDK_INT >= 30) {
+                    getWindow().setDecorFitsSystemWindows(false);
+                } else {
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                            View.SYSTEM_UI_FLAG_FULLSCREEN);
+                }
             } else {
                 c98();
             }

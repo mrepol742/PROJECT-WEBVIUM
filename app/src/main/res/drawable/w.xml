@@ -20,7 +20,6 @@
     <item>
         <shape a:shape="rectangle">
             <corners a:radius="50dp" />
-            <solid a:color="?a4" />
             <stroke
                 a:width="2dp"
                 a:color="?f" />

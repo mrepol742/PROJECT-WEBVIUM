@@ -15,18 +15,11 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
-    a:layout_width="match_parent"
+<!--suppress ALL -->
 
-    a:layout_height="match_parent">
+<PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
+    <com.mrepol742.webvium.PREF0 a:title="@string/y94">
 
-    <include layout="@layout/a16" />
+    </com.mrepol742.webvium.PREF0>
 
-    <FrameLayout
-        a:id="@id/i6"
-        a:layout_width="match_parent"
-        a:layout_height="match_parent"
-        a:layout_below="@id/b7" />
-
-
-</RelativeLayout>
+</PreferenceScreen>

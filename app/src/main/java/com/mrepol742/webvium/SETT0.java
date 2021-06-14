@@ -86,20 +86,24 @@ public class SETT0 extends BaseActivity {
             invalidateOptionsMenu();
         });
         TextView tv0 = findViewById(R.id.m18);
-        tv0.setText(getString(R.string.y28));
-        tv0.setOnClickListener(view -> {
-            try {
-                Animation.animate(this, R.anim.i, tv0);
-                Animation.animate(this, R.anim.c, b);
-                b.setText(getString(R.string.y28));
-            } catch (Exception en) {
-                en.printStackTrace();
-            }
-            as(R.id.m10, new FeatureFragment());
-            id = "a3";
-            b24(true);
-            invalidateOptionsMenu();
-        });
+        if (BuildConfig.DEBUG) {
+            tv0.setText(getString(R.string.y28));
+            tv0.setOnClickListener(view -> {
+                try {
+                    Animation.animate(this, R.anim.i, tv0);
+                    Animation.animate(this, R.anim.c, b);
+                    b.setText(getString(R.string.y28));
+                } catch (Exception en) {
+                    en.printStackTrace();
+                }
+                as(R.id.m10, new FeatureFragment());
+                id = "a3";
+                b24(true);
+                invalidateOptionsMenu();
+            });
+        } else {
+            tv0.setVisibility(View.GONE);
+        }
         TextView tv1 = findViewById(R.id.m20);
         tv1.setText(getString(R.string.t21));
         tv1.setOnClickListener(view -> {

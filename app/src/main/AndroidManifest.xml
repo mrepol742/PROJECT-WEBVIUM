@@ -437,7 +437,14 @@
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
             a:exported="false"
             a:launchMode="singleTask"
-            a:windowSoftInputMode="stateHidden" /> <!-- MANAGE SPACE -->
+            a:windowSoftInputMode="stateHidden" />
+        <!-- WELCOME SCREEN -->
+        <activity
+            a:name="com.mrepol742.webvium.WELC0"
+            a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
+            a:exported="false"
+            a:launchMode="singleTask"
+            a:windowSoftInputMode="stateHidden" /><!-- MANAGE SPACE -->
         <activity
             a:name="com.mrepol742.webvium.MANG"
             a:configChanges="keyboardHidden|orientation|screenSize"

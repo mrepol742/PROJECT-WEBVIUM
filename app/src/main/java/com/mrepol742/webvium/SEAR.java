@@ -72,7 +72,6 @@ import java.util.Objects;
 // @Class SearchHistory
 public class SEAR extends MainBaseActivity {
     private final String[] webvium = {
-            "webvium://dev",
             "webvium-source:",
             "webvium://logcat",
             "webvium://calculator",
@@ -460,18 +459,6 @@ public class SEAR extends MainBaseActivity {
             startActivity(it);
         } else {
             switch (a) {
-                case "webvium://dev":
-                    SharedPreferences prefs4 = getSharedPreferences("wv", 0);
-                    boolean d78 = prefs4.getBoolean("webDa", false);
-                    SharedPreferences.Editor ed = prefs4.edit();
-                    if (d78) {
-                        ed.putBoolean("webDa", false);
-                        Toast.a(this, "Your now a developer.");
-                    } else {
-                        ed.putBoolean("webDa", true);
-                    }
-                    ed.apply();
-                    break;
                 case "webvium://logcat":
                     Intents.a(this, LOGC.class);
                     break;

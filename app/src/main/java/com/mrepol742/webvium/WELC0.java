@@ -60,83 +60,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 // @Class WelcomeScreen
-public class WELC extends BaseActivity {
-    public RelativeLayout rl;
-    public ImageView iv;
-    public TextView tv;
-    public FrameLayout fl;
-    private A17a timer;
-    private Animation d;
-    public static final String INIT = "init_15";
-    private RelativeLayout ll;
+public class WELC0 extends BaseActivity {
+    private FrameLayout fl;
 
     @Override
     protected void onCreate(Bundle be) {
-        theme(T_WELCOME_SCREEN);
+      theme(T_DEFAULT);
         super.onCreate(be);
-        a225(R.layout.p);
-        rl = findViewById(R.id.h9);
-        iv = findViewById(R.id.b20);
-        tv = findViewById(R.id.c6);
-        fl = findViewById(R.id.h10);
-        tv.setText(getString(R.string.y63));
-        rl.setBackgroundResource(R.drawable.a11);
-        rl.setElevation(5);
-        iv.setImageResource(R.drawable.b14);
-        tv.setTypeface(type(Typeface.BOLD));
-        ll = findViewById(R.id.h11);
-        tv.setTextColor(Resources.getColor(this, R.color.b));
-        d = AnimationUtils.loadAnimation(this, R.anim.h);
-        iv.startAnimation(d);
-        timer = new A17a(5000, 5000);
-        timer.start();
-        Runnable re = () -> {
-            try {
-                File fe = new File(StorageDirectory.getClasses(this));
-                if (!fe.exists()) {
-                    InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
-                    OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
-                    byte[] e = new byte[1024];
-                    int f;
-                    while ((f = fos.read(e)) != -1) {
-                        d.write(e, 0, f);
-                    }
-                    d.flush();
-                    d.close();
-                    fos.close();
-                }
-            } catch (Exception en) {
-                en.printStackTrace();
-            }
-        };
-        new Thread(re).start();
-        try {
-            ll.setBackgroundResource(R.drawable.f11);
-        } catch (Exception en) {
-            Toast.a(this, en.getMessage());
-            en.printStackTrace();
-        }
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (timer == null) {
-            timer = new A17a(3000, 3000);
-            timer.start();
-            iv.startAnimation(d);
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-            d.cancel();
-        }
+        a225(R.layout.a10);
+        fl = findViewById(R.id.o41);
+a2();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -286,29 +219,4 @@ public class WELC extends BaseActivity {
         return false;
     }
 
-    class A17a extends CountDownTimer {
-
-        public A17a(long a, long b) {
-            super(a, b);
-
-        }
-
-        @Override
-        public void onFinish() {
-            WELC.this.rl.setVisibility(View.GONE);
-            SharedPreferences sp = getSharedPreferences("ag233", 0);
-            if (sp.getLong("ag233", 0) != 0 && sp.getLong("ag466", 0) != 0) {
-                l3();
-            } else {
-                //WELC.this.a2();
-                Intents.a(WELC.this, WELC0.class);
-                finish();
-            }
-            if (!a221().getBoolean("autoUpdate", false)) {
-                ll.setBackgroundColor(Resources.getColor(WELC.this, R.color.b));
-            } else {
-                ll.setBackgroundColor(Resources.getColor(WELC.this, R.color.n));
-            }
-        }
-    }
 }

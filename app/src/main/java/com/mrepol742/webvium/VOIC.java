@@ -50,7 +50,7 @@ import java.util.Objects;
 
 // @Class Voice
 public class VOIC extends BaseActivity {
-    public static SpeechRecognizer sr;
+    public SpeechRecognizer sr;
     public TextView tv;
     private ScrollView sv;
 

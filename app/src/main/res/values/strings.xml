@@ -864,6 +864,10 @@
     <string name="y88">Your Bookmarks</string>
     <string name="y89">Close</string>
     <string name="y90">&lt;br>------------------&lt;br>&lt;br>&lt;b>PROJECT-WEBVIUM&lt;/b>&lt;br>version %1$s&lt;br>&lt;br>------------------&lt;br></string>
+    <string name="y91">Theme Color Adaptation</string>
+    <string name="y92">Adapt website theme to Webvium Main UI</string>
+    <string name="y93">Enabled Experimental Features</string>
+    <string name="y94">Coming Soon…</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

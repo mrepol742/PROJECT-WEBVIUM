@@ -34,6 +34,7 @@
         a:title="@string/s" />
     <com.mrepol742.webvium.PREF0 a:title="@string/g37">
         <com.mrepol742.webvium.SWIT
+            a:defaultValue="false"
             a:key="webviumP"
             a:title="@string/g38" />
         <com.mrepol742.webvium.PREF

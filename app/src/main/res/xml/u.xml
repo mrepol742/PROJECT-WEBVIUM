@@ -17,21 +17,36 @@
 
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
+    <com.mrepol742.webvium.SWIT
+        a:defaultValue="false"
+        a:key="maUU"
+        a:title="@string/u" />
 
+    <com.mrepol742.webvium.PREF0 a:title="@string/o10">
+        <com.mrepol742.webvium.SWIT
+            a:defaultValue="false"
+            a:dependency="maUU"
+            a:key="wthj"
+            a:summary="@string/y92"
+            a:title="@string/y91" />
+    </com.mrepol742.webvium.PREF0>
     <com.mrepol742.webvium.PREF0 a:title="@string/q5">
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="hst"
+            a:dependency="maUU"
             a:summary="@string/q8"
             a:title="@string/q9" />
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="hste"
+            a:dependency="maUU"
             a:summary="@string/q6"
             a:title="@string/q13" />
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="hste0"
+            a:dependency="maUU"
             a:summary="@string/x37"
             a:title="@string/x36" />
 
@@ -41,11 +56,13 @@
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="tow"
+            a:dependency="maUU"
             a:summary="@string/q11"
             a:title="@string/q12" />
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="tow2"
+            a:dependency="maUU"
             a:summary="@string/q4"
             a:title="@string/q10" />
     </com.mrepol742.webvium.PREF0>
@@ -53,6 +70,7 @@
     <com.mrepol742.webvium.PREF0 a:title="@string/y">
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
+            a:dependency="maUU"
             a:key="qwe73"
             a:summary="@string/z8"
             a:title="@string/z7" />
@@ -60,6 +78,7 @@
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:key="asd71"
+            a:dependency="maUU"
             a:title="@string/x14" />
     </com.mrepol742.webvium.PREF0>
 

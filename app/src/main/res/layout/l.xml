@@ -29,7 +29,7 @@
         a:layout_width="match_parent"
         a:layout_height="match_parent"
         a:layout_above="@id/a2"
-        a:layout_below="@id/c3" />
+        a:layout_below="@id/b7" />
 
     <RelativeLayout
         a:id="@id/a2"

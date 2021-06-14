@@ -26,7 +26,7 @@
         a:layout_width="match_parent"
         a:layout_height="match_parent"
         a:layout_above="@id/m16"
-        a:layout_below="@id/c3" />
+        a:layout_below="@id/b7" />
 
     <ImageView
         a:id="@id/o25"
