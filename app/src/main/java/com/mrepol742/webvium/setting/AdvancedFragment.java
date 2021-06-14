@@ -134,6 +134,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             final SWIT java10 = (SWIT) findPreference("Java10");
             final SWIT java11 = (SWIT) findPreference("Java11");
             final SWIT java12 = (SWIT) findPreference("Java12");
+            final SWIT javaweb = (SWIT) findPreference("Javaweb");
             LIST java = (LIST) findPreference("java");
             java.setOnPreferenceChangeListener((preference, newValue) -> {
                 if (newValue.toString().equals("7f")) {
@@ -141,11 +142,13 @@ public class AdvancedFragment extends BasePreferenceFragment {
                     java10.setEnabled(false);
                     java11.setEnabled(false);
                     java12.setEnabled(false);
+                    javaweb.setEnabled(false);
                 } else {
                     java9.setEnabled(true);
                     java10.setEnabled(true);
                     java11.setEnabled(true);
                     java12.setEnabled(true);
+                    javaweb.setEnabled(true);
                 }
                 return true;
             });

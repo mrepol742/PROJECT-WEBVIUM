@@ -20,7 +20,7 @@
     <com.mrepol742.webvium.SWIT
         a:defaultValue="false"
         a:key="maUU"
-        a:title="@string/u" />
+        a:title="@string/y93" />
 
     <com.mrepol742.webvium.PREF0 a:title="@string/o10">
         <com.mrepol742.webvium.SWIT

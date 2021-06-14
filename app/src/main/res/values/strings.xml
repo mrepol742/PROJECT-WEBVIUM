@@ -868,6 +868,7 @@
     <string name="y92">Adapt website theme to Webvium Main UI</string>
     <string name="y93">Enabled Experimental Features</string>
     <string name="y94">Coming Soon…</string>
+    <string name="y95">Webvium Javascript Interface</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

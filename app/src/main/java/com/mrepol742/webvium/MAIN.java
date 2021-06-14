@@ -109,6 +109,7 @@ import android.widget.Toolbar;
 
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.GeolocationDataModel;
+import com.mrepol742.webvium.app.HashJSI;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
@@ -116,6 +117,7 @@ import com.mrepol742.webvium.app.SearchJSI;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.WebviumJSI;
+import com.mrepol742.webvium.app.XORJSI;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainReceiver;
@@ -1287,6 +1289,23 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c15() {
+        if (a221().getBoolean("Javaweb", true)) {
+            h.addJavascriptInterface(new WebviumJSI(this), Package.c());
+            h.addJavascriptInterface(new Object() {
+
+                @JavascriptInterface
+                public void print() {
+                    c100(h);
+                }
+            }, Package.c()+"PrintHelper");
+            h.addJavascriptInterface(new HashJSI(), Package.c()+"HashHelper");
+            h.addJavascriptInterface(new XORJSI(), Package.c()+"XORHelper");
+        } else {
+            h.removeJavascriptInterface(Package.c());
+            h.removeJavascriptInterface(Package.c()+"PrintHelper");
+            h.removeJavascriptInterface(Package.c()+"HashHelper");
+            h.removeJavascriptInterface(Package.c()+"XORHelper");
+        }
         if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("1l")) {
             h.setLayerType(View.LAYER_TYPE_NONE, null);
         }
@@ -1941,15 +1960,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 return c168(wr);
             }
         });
-        h.addJavascriptInterface(new WebviumJSI(this), Package.c());
         h.addJavascriptInterface(new SearchJSI(this), Package.c()+"SearchHelper");
-        h.addJavascriptInterface(new Object() {
-
-            @JavascriptInterface
-            public void print() {
-                c100(h);
-            }
-        }, Package.c()+"PrintHelper");
         h.addJavascriptInterface(new Object() {
 
             @JavascriptInterface

@@ -58,6 +58,10 @@
             a:title="@string/c9" />
         <com.mrepol742.webvium.SWIT
             a:defaultValue="true"
+            a:key="Javaweb"
+            a:title="@string/y95" />
+        <com.mrepol742.webvium.SWIT
+            a:defaultValue="true"
             a:key="Java9"
             a:summary="@string/c12"
             a:title="@string/c11" />

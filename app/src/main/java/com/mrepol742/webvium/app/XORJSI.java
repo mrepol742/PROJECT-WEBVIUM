@@ -15,21 +15,25 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.security;
+package com.mrepol742.webvium.app;
 
-public class HashDataModel {
+import android.webkit.JavascriptInterface;
 
-    public final String sg;
-    public final String sg1;
-    public final boolean bn;
-    public final int i;
-    public final byte[] e = {7, 4, 2};
+import com.mrepol742.webvium.annotation.Keep;
+import com.mrepol742.webvium.security.XOREncryption;
 
-    public HashDataModel(String sg, String sg1, boolean bn, int i) {
-        this.sg = sg;
-        this.sg1 = sg1;
-        this.bn = bn;
-        this.i = i;
+public class XORJSI {
+
+    @Keep
+    public XORJSI() {
+
     }
 
+    @JavascriptInterface
+    public String encoDe(String sg, String key) {
+        if (!sg.isEmpty() && !key.isEmpty()) {
+            return XOREncryption.encryptDecrypt(sg, key.charAt(0));
+        }
+        return "";
+    }
 }

@@ -17,28 +17,47 @@
 
 package com.mrepol742.webvium.security;
 
+import android.os.Build;
+
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.NoSuchStringToReturn;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 import static java.security.MessageDigest.getInstance;
 
 public class Hash {
+    private static byte[] bytes;
+
     @Keep
     private Hash() {
     }
 
     public static String a(String a, String b) {
-        return a(new HashDataModel(a, b));
+        return a(new HashDataModel(a, b, false, 0));
+    }
+
+    public static String a(String a, String b, boolean c) {
+        return a(new HashDataModel(a, b, c, 1));
     }
 
     public static String a(HashDataModel w1) {
         try {
             MessageDigest md = getInstance(w1.sg);
             md.update(w1.e);
-            byte[] bytes = md.digest(w1.sg1.getBytes());
+            if (w1.bn) {
+                byte[] bytes = new byte[20];
+                if (Build.VERSION.SDK_INT >= 26) {
+                    SecureRandom.getInstanceStrong().nextBytes(bytes);
+                } else {
+                    SecureRandom random = new SecureRandom();
+                    random.nextBytes(bytes);
+                }
+            } else if (w1.i == 0){
+                bytes = md.digest(w1.sg1.getBytes());
+            }
             StringBuilder sb = new StringBuilder();
             for (byte be2 : bytes) {
                 sb.append(Integer.toString((be2 & 0xff) + 0x100, 16).substring(1));
@@ -49,5 +68,4 @@ public class Hash {
         }
         throw new NoSuchStringToReturn();
     }
-
 }
