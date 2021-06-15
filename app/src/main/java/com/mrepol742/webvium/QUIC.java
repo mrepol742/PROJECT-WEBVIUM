@@ -34,8 +34,8 @@ public class QUIC extends MainService {
 
     @Override
     public int onStartCommand(Intent a1, int c555, int c) {
-        MainNotification.b(this, "c", getString(R.string.y18));
-        android.app.Notification.Builder m = Notifications.a(this, "c");
+        MainNotification.b(this, getString(R.string.l33), getString(R.string.y18));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.l33));
         m.setSmallIcon(R.drawable.a18);
         m.setContentTitle(getString(R.string.l33));
         m.setContentText(getString(R.string.n39));

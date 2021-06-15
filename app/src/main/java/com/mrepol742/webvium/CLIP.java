@@ -93,22 +93,18 @@ public class CLIP extends MainService {
     }
 
     private void a(String jk) {
-        MainNotification.b(this, "f", getString(R.string.z1));
-        android.app.Notification.Builder m = Notifications.a(this, "f");
+        MainNotification.b(this, getString(R.string.x8), getString(R.string.z1));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.x8));
         m.setSmallIcon(R.drawable.b16);
         m.setContentTitle(getResources().getString(R.string.x7));
         m.setContentText(jk);
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
         bigText.bigText(jk);
         bigText.setBigContentTitle(getResources().getString(R.string.x7));
-        bigText.setSummaryText(Package.c());
-
-
+        bigText.setSummaryText(getString(R.string.x8));
         m.setStyle(bigText);
-
         m.setColor(Resources.getColor(this, R.color.a));
         SharedPreferences sq = PreferenceManager.getDefaultSharedPreferences(this);
-
         m.setAutoCancel(sq.getBoolean("eac", true));
         m.setDefaults(android.app.Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT <= 26) {

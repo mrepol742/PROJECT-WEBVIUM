@@ -1971,18 +1971,18 @@ public class MAIN extends MainBaseActivity implements Format {
         h.addJavascriptInterface(new Object() {
 
             @JavascriptInterface
-            public void ip(String sg) {
-                Intent it = new Intent("com.mrepol742.webvium.WebviumIpHelper");
-                it.putExtra("ip", sg);
-                sendBroadcast(it);
+            public void launch() {
+                Intents.a(MAIN.this, VOIC.class);
             }
-        }, Package.c() + "IpHelper");
+        }, Package.c() + "VoiceHelper");
         if (Build.VERSION.SDK_INT >= 29) {
             h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
 
                 @Override
                 public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-
+                    if (a221().getBoolean("wthj56", false)) {
+                        webViewRenderProcess.terminate();
+                    }
                 }
 
                 @Override
@@ -2802,6 +2802,15 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c67() {
+        h.addJavascriptInterface(new Object() {
+
+            @JavascriptInterface
+            public void ip(String sg) {
+                Intent it = new Intent("com.mrepol742.webvium.WebviumIpHelper");
+                it.putExtra("ip", sg);
+                sendBroadcast(it);
+            }
+        }, Package.c() + "IpHelper");
         h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}");
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
@@ -2836,6 +2845,7 @@ public class MAIN extends MainBaseActivity implements Format {
         bn.setOnClickListener(view -> h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}"));
         a.setOnCancelListener(dialog -> {
             unregisterReceiver(this.ipH);
+            h.removeJavascriptInterface(Package.c() + "IpHelper");
             dialog.dismiss();
         });
         AlertDialog dd = a.create();
@@ -2902,8 +2912,8 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c70(String a) {
         try {
             Bitmap bit = BitmapFactory.decodeFile(a);
-            MainNotification.b(this, "b", getString(R.string.y17));
-            android.app.Notification.Builder e = Notifications.a(this, "b");
+            MainNotification.b(this, getString(R.string.k1), getString(R.string.y17));
+            android.app.Notification.Builder e = Notifications.a(this, getString(R.string.k1));
             e.setColor(Resources.getColor(this, R.color.a));
             e.setSmallIcon(R.drawable.a13);
             e.setLargeIcon(bit);
@@ -4181,8 +4191,8 @@ public class MAIN extends MainBaseActivity implements Format {
         SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean("a10", false);
         spe.apply();
-        MainNotification.b(this, "k", getString(R.string.l40));
-        android.app.Notification.Builder m = Notifications.a(this, "k");
+        MainNotification.b(this, getString(R.string.l38), getString(R.string.l40));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.l38));
         m.setSmallIcon(R.drawable.f8);
         m.setContentTitle(getString(R.string.l38));
         m.setContentText(sg1);
@@ -4234,8 +4244,8 @@ public class MAIN extends MainBaseActivity implements Format {
         SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean("a10", false);
         spe.apply();
-        MainNotification.b(this, "l", getString(R.string.m1));
-        android.app.Notification.Builder m = Notifications.a(this, "l");
+        MainNotification.b(this, getString(R.string.h1), getString(R.string.m1));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.h1));
         m.setSmallIcon(R.drawable.r);
         m.setContentTitle(getString(R.string.m22));
         m.setContentText(sg1);

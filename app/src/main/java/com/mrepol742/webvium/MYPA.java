@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.main.MainReceiver;
@@ -33,7 +34,7 @@ public class MYPA extends MainReceiver {
     @Override
     public void onReceive(Context a, Intent b) {
         if (Objects.requireNonNull(b.getAction()).equals("android.intent.action.MY_PACKAGE_REPLACED")) {
-            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("bcP", true)) {
+            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("bcP", true) && Build.VERSION.SDK_INT < 29) {
                 Intents.b(a, BACK.class);
             }
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {

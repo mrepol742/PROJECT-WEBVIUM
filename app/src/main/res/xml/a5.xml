@@ -50,10 +50,5 @@
             a:key="shotQq"
             a:summary="%1$s"
             a:title="@string/p13" />
-
-
-        <com.mrepol742.webvium.PREF
-            a:key="clearScreen"
-            a:title="@string/p12" />
     </com.mrepol742.webvium.PREF0>
 </PreferenceScreen>

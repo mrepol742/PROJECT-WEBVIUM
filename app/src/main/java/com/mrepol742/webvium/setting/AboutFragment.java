@@ -84,8 +84,6 @@ public class AboutFragment extends BasePreferenceFragment {
                 exception.printStackTrace();
                 preference.setSummary(getString(R.string.x58));
             }
-
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -471,7 +471,7 @@
     <string name="y20">Notify you about certain actions from Webpages.</string>
     <string name="z1">Notify you to directly open any valid link you copied.</string>
     <string name="z2">Notify you that there is new update in Webvium.</string>
-    <string name="z3">Notification from Melvin Jones Repol.</string>
+    <string name="z3">Notifications from Mrepol742 about changes, updates and related info\'s about Webvium.</string>
     <string name="z4">Whois</string>
     <string name="z5">Collapse Search View</string>
     <string name="z6">Clear Session Cookies</string>
@@ -762,8 +762,21 @@
     <string name="v22">NO DOWNLOADS</string>
     <string name="v23">Download History Cleared.</string>
     <string name="v24">Do you really want to clear All Downloads History?</string>
-    <string name="v25">Item: </string>
-    <string name="v26">Items: </string>
+    <plurals name="v25">
+        <item quantity="one">Item: %1$d</item>
+        <item quantity="other">Items: %1$d</item>
+        <item quantity="zero">No item\'s to be cleared</item>
+    </plurals>
+    <plurals name="v27">
+        <item quantity="one">File: %1$d</item>
+        <item quantity="other">Files: %1$d</item>
+        <item quantity="zero">No item\'s to be cleared</item>
+    </plurals>
+    <plurals name="v28">
+        <item quantity="one">Size: %1$d</item>
+        <item quantity="zero"> </item>
+    </plurals>
+
     <string name="v27">No item\'s to be cleared</string>
     <string name="v28">File: </string>
     <string name="v29">No file\'s to be cleared</string>
@@ -832,7 +845,7 @@
     <string name="x54">Webvium Logcat</string>
     <string name="x56">Last Installed on:</string>
     <string name="x57">Webvium</string>
-    <string name="x58">An error was happened while getting the last install time</string>
+    <string name="x58">May 6, 2020 | 12:00:00</string>
     <string name="x60">Webvium Experiments</string>
     <string name="y61">Thanks for keeping me up to date. ❤❤</string>
     <string name="y62">Scroll Down to Continue</string>
@@ -869,6 +882,9 @@
     <string name="y93">Enabled Experimental Features</string>
     <string name="y94">Coming Soon…</string>
     <string name="y95">Webvium Javascript Interface</string>
+    <string name="y96">RenderProcess Unresponsive</string>
+    <string name="y97">Terminate if render become unresponsive</string>
+
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

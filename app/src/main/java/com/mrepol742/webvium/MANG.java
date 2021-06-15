@@ -89,6 +89,20 @@ public class MANG extends BaseActivity {
             R.string.p12,
             R.string.c36
     };
+    private static final int[] drawables1 = {
+            R.drawable.d15,
+            R.drawable.d16,
+            R.drawable.d17,
+            R.drawable.d18,
+            R.drawable.d19
+    };
+    private static final int[] strings1 = {
+            R.string.i13,
+            R.string.e10,
+            R.string.d12,
+            R.string.d14,
+            R.string.c35
+    };
     private final ArrayList<String> a = new ArrayList<>();
     private final ArrayList<String> b = new ArrayList<>();
     private final ArrayList<Integer> c = new ArrayList<>();
@@ -186,8 +200,8 @@ public class MANG extends BaseActivity {
         return Formatter.formatFileSize(this, a);
     }
 
-    private long d(String as) {
-        long f = 0;
+    private int d(String as) {
+        int f = 0;
         java.io.File a = new java.io.File(as);
         if (a.exists()) {
             String[] b = a.list();
@@ -563,7 +577,9 @@ public class MANG extends BaseActivity {
             d9.delete();
             PermissionHelper d91 = PermissionHelper.getInstance(getApplicationContext());
             d91.delete();
-            l(StorageDirectory.getWebviumDir());
+            if (Build.VERSION.SDK_INT < 29) {
+                l(StorageDirectory.getWebviumDir());
+            }
             if (MAIN.bl2) {
                 MAIN.c63();
             }
@@ -582,10 +598,10 @@ public class MANG extends BaseActivity {
             final ArrayList<Integer> c = new ArrayList<>();
 
             final ArrayList<String> d = new ArrayList<>();
-            for (int i : strings) {
+            for (int i : getStrings()) {
                 a.add(getString(i));
             }
-            for (int i5 : drawables) {
+            for (int i5 : getDrawables()) {
                 c.add(i5);
             }
             for (int i5 = 0; i5 < 5; i5++) {
@@ -607,65 +623,34 @@ public class MANG extends BaseActivity {
                     " DESC";
             Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
             int cont = rest1.getCount();
-            if (cont == 0) {
-                b.add(getString(R.string.v27)); // bookmarks db
-            } else if (cont == 1) {
-                b.add(getString(R.string.v25) + cont); // bookmarks db
-            } else {
-                b.add(getString(R.string.v26) + cont); // bookmarks db
-            }
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
             b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
             int cont1 = rest.getCount();
-            if (cont1 == 0) {
-                b.add(getString(R.string.v27));// browsing history db
-            } else if (cont1 == 1) {
-                b.add(getString(R.string.v25) + cont1); // browsing history db
-            } else {
-                b.add(getString(R.string.v26) + cont1); // browsing history db
-            }
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
             int cont11 = res.getCount();
-            if (cont11 == 0) {
-                b.add(getString(R.string.v27));// search history db
-            } else if (cont11 == 1) {
-                b.add(getString(R.string.v25) + cont11);// search history db
-            } else {
-                b.add(getString(R.string.v26) + cont11); // search history db
-            }
-
-            b.add(getString(R.string.c38) + c(b(Base64.decode("Ly9kYXRhL 2RhdGEvY29tLmRyb2 lkbWoud2Vidml 1bS9zaGFyZWRfcHJlZnMv"))));
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+            b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
             rest1.close();
             res.close();
             rest.close();
-            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
-            if (bn) {
-                long lg = a7(Package.c() + "/Screenshot/");
-                if (lg == 0) {
-                    b.add(getString(R.string.v29));
-                    d.add("");
-                } else if (lg == 1) {
-                    b.add(getString(R.string.v28) + a7(Package.c() + "/Screenshot/"));
-                    d.add("Size: " + c(b(StorageDirectory.getWebviumDir() + "/Screenshot/")));
+            if (Build.VERSION.SDK_INT < 29) {
+                boolean bn = Permission.checkOnly(this, Permission.STORAGE);
+                if (bn) {
+                    int lg = a7(Package.c() + "/Screenshot/");
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
                 } else {
-                    b.add(getString(R.string.c39) + a7(Package.c() + "/Screenshot/"));
-                    d.add("Size: " + c(b(StorageDirectory.getWebviumDir() + "/Screenshot/")));
+                    b.add("Storage permission is required");
                 }
-            } else {
-                b.add("Storage permission is required");
-            }
-            if (bn) {
-                long lg = a7(Package.c() + "/Downloads/");
-                if (lg == 0) {
-                    b.add(getString(R.string.v29));
-                    d.add("");
-                } else if (lg == 1) {
-                    b.add(getString(R.string.v28) + a7(Package.c() + "/Downloads/"));
-                    d.add("Size: " + c(b(StorageDirectory.getDownloadDir())));
+                if (bn) {
+                    int lg = a7(Package.c() + "/Downloads/");
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                            c(b(StorageDirectory.getDownloadDir()))));
                 } else {
-                    b.add(getString(R.string.c39) + a7(Package.c() + "/Downloads/"));
-                    d.add("Size: " + c(b(StorageDirectory.getDownloadDir())));
+                    b.add("Storage permission is required");
                 }
-            } else {
-                b.add("Storage permission is required");
             }
             runOnUiThread(() -> {
                 w19.a(new ManageSpaceDataModel(a, b, c, d));
@@ -677,13 +662,13 @@ public class MANG extends BaseActivity {
 
     private void a2() {
         Runnable re = () -> {
-            for (int i5 : drawables) {
+            for (int i5 : getDrawables()) {
                 c.add(i5);
             }
             for (int i5 = 0; i5 < 5; i5++) {
                 d.add("");
             }
-            for (int i : strings) {
+            for (int i : getStrings()) {
                 a.add(getString(i));
             }
             String sb5 = "SELECT * FROM " + "A" +
@@ -702,67 +687,35 @@ public class MANG extends BaseActivity {
                     " DESC";
             Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
             int cont = rest1.getCount();
-            if (cont == 0) {
-                b.add(getString(R.string.v27)); // bookmarks db
-            } else if (cont == 1) {
-                b.add(getString(R.string.v25) + cont); // bookmarks db
-            } else {
-                b.add(getString(R.string.v26) + cont); // bookmarks db
-            }
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
             b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
             int cont1 = rest.getCount();
-            if (cont1 == 0) {
-                b.add(getString(R.string.v27));// browsing history db
-            } else if (cont1 == 1) {
-                b.add(getString(R.string.v25) + cont1); // browsing history db
-            } else {
-                b.add(getString(R.string.v26) + cont1); // browsing history db
-            }
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
             int cont11 = res.getCount();
-            if (cont11 == 0) {
-                b.add(getString(R.string.v27));// search history db
-            } else if (cont11 == 1) {
-                b.add(getString(R.string.v25) + cont11);// search history db
-            } else {
-                b.add(getString(R.string.v26) + cont11); // search history db
-            }
-
-            b.add(getString(R.string.c38) + c(b(Base64.decode("Ly9kYX RhL2RhdGEvY29 tLmRyb2lkbWoud2Vidml1bS 9zaGFyZWRfcHJlZnMv"))));
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+            b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
             rest1.close();
             res.close();
             rest.close();
-            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
-            if (bn) {
-                long lg = a7(Package.c() + "/Screenshot/");
-                if (lg == 0) {
-                    b.add(getString(R.string.v29));
-                    d.add("");
-                } else if (lg == 1) {
-                    b.add(getString(R.string.v28) + a7(Package.c() + "/Screenshot/"));
-                    d.add("Size: " + c(b(StorageDirectory.getWebviumDir() + "/Screenshot/")));
+            if (Build.VERSION.SDK_INT < 29) {
+                boolean bn = Permission.checkOnly(this, Permission.STORAGE);
+                if (bn) {
+                    int lg = a7(Package.c() + "/Screenshot/");
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
                 } else {
-                    b.add(getString(R.string.c39) + a7(Package.c() + "/Screenshot/"));
-                    d.add("Size: " + c(b(StorageDirectory.getWebviumDir() + "/Screenshot/")));
+                    b.add("Storage permission is required");
                 }
-            } else {
-                b.add("Storage permission is required");
-            }
-            if (bn) {
-                long lg = a7(Package.c() + "/Downloads/");
-                if (lg == 0) {
-                    b.add(getString(R.string.v29));
-                    d.add("");
-                } else if (lg == 1) {
-                    b.add(getString(R.string.v28) + a7(Package.c() + "/Downloads/"));
-                    d.add("Size: " + c(b(StorageDirectory.getDownloadDir())));
+                if (bn) {
+                    int lg = a7(Package.c() + "/Downloads/");
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                            c(b(StorageDirectory.getDownloadDir()))));
                 } else {
-                    b.add(getString(R.string.c39) + a7(Package.c() + "/Downloads/"));
-                    d.add("Size: " + c(b(StorageDirectory.getDownloadDir())));
+                    b.add("Storage permission is required");
                 }
-            } else {
-                b.add("Storage permission is required");
             }
-
 
         };
         new Thread(re).start();
@@ -832,8 +785,22 @@ public class MANG extends BaseActivity {
         startActivity(it);
     }
 
-    private long a7(String sg) {
+    private int a7(String sg) {
         return d(StorageDirectory.a() + "/" + sg);
+    }
+
+    private int[] getDrawables() {
+        if (Build.VERSION.SDK_INT < 29) {
+            return drawables;
+        }
+        return drawables1;
+    }
+
+    private int[] getStrings() {
+        if (Build.VERSION.SDK_INT < 29) {
+            return strings;
+        }
+        return strings1;
     }
 
     private class R7 extends MainReceiver {

@@ -51,8 +51,8 @@ public class FLOA extends MainService {
         });
         wm.addView(vw, wl);
 */
-        MainNotification.c(this, "j", getString(R.string.l34));
-        android.app.Notification.Builder m = Notifications.a(this, "j");
+        MainNotification.c(this, getString(R.string.l32), getString(R.string.l34));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.l32));
         m.setSmallIcon(R.drawable.a18);
         m.setContentTitle(getString(R.string.l32));
         m.setContentText(getString(R.string.n40));

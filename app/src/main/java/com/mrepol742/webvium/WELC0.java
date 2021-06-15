@@ -170,14 +170,14 @@ a2();
         SharedPreferences.Editor b5 = a5.edit();
         b5.putInt("noid", 275);
         b5.apply();
-        Intents.b(this, BACK.class);
+        if (Build.VERSION.SDK_INT < 29) {
+            Intents.b(this, BACK.class);
+        }
         SharedPreferences a52 = getSharedPreferences("di", 0);
         SharedPreferences.Editor b52 = a52.edit();
         b52.putString("di", Hash.a("SHA-1", String.valueOf(System.currentTimeMillis())));
         b52.putString("di1", AppID.getAppID(this));
         b52.apply();
-
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 6);

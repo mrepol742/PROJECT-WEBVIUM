@@ -20,6 +20,7 @@ package com.mrepol742.webvium.setting;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,11 @@ public class ExperimentalFragment extends BasePreferenceFragment {
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
-            a5(R.xml.u);
+            if (Build.VERSION.SDK_INT >= 29) {
+                a5(R.xml.a7);
+            } else {
+                a5(R.xml.u);
+            }
             PREF a7 = (PREF) findPreference("cFNT");
             a7.setOnPreferenceClickListener(a -> {
                 t();

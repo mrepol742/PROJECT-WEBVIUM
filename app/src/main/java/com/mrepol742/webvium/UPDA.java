@@ -65,13 +65,13 @@ public class UPDA extends MainService {
                         PendingIntent it = PendingIntent.getService(this, 0, new Intent(this, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
                         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
                     } else if (newUpdate > b) {
-                        MainNotification.b(this, "g", getString(R.string.z2));
-                        android.app.Notification.Builder m = Notifications.a(this, "g");
+                        MainNotification.b(this, getString(R.string.x11), getString(R.string.z2));
+                        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.x11));
                         m.setSmallIcon(R.drawable.j);
                         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
                         bigText.bigText(getString(R.string.x12));
                         bigText.setBigContentTitle(getString(R.string.x11));
-                        bigText.setSummaryText(Package.c());
+                        bigText.setSummaryText(getString(R.string.n21));
                         m.setContentTitle(getString(R.string.x11));
                         m.setContentText(getString(R.string.x12));
                         m.setStyle(bigText);

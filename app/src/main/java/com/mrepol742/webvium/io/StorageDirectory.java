@@ -64,6 +64,14 @@ public class StorageDirectory {
         return getFileDir(context) + "/c";
     }
 
+    public static String getSharedPref(Context context) {
+        return "//data/data/" + context.getPackageName() + "/shared_prefs/";
+    }
+
+    public static String getBaseApk() {
+        return "/data/app/%1$s/base.apk";
+    }
+
     public static File getCacheDir(Context context) {
         File fe = context.getCacheDir();
         if (fe.getAbsolutePath().contains("com.mrepol742.webvium")) {

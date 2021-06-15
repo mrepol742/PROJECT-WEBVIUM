@@ -116,7 +116,7 @@ public class WELC extends BaseActivity {
             Toast.a(this, en.getMessage());
             en.printStackTrace();
         }
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
 
     @Override
@@ -139,105 +139,14 @@ public class WELC extends BaseActivity {
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    public void a2() {
-        View c = View.inflate(this, R.layout.a3, null);
-        TextView ed = c.findViewById(R.id.n23);
-        final Button bn = c.findViewById(R.id.n24);
-        TextView ed1 = c.findViewById(R.id.o28);
-        ed1.setText(getString(R.string.f12).toUpperCase());
-        bn.setBackgroundResource(R.drawable.c11);
-        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-        bn.setText(getString(R.string.y62));
-        if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.getColor(this, R.color.c));
-            ed1.setTextColor(Resources.getColor(this, R.color.c));
-        } else {
-            ed.setTextColor(Resources.getColor(this, R.color.b));
-            ed1.setTextColor(Resources.getColor(this, R.color.b));
-        }
-        ScrollView sv = c.findViewById(R.id.j);
-        bn.setTypeface(type(Typeface.BOLD));
-        bn.setAllCaps(true);
-        sv.getViewTreeObserver()
-                .addOnScrollChangedListener(() -> {
-                    if (sv.getChildAt(0).getBottom()
-                            <= (sv.getHeight() + sv.getScrollY())) {
-                        if (!bn.getText().toString().equals(getString(R.string.n25))) {
-                            com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-                            bn.setText(getString(R.string.n25));
-                            bn.setBackgroundResource(R.drawable.c10);
-                            bn.setOnClickListener(view -> {
-                                fl.removeView(c);
-                                a3();
-                                SharedPreferences sp = getSharedPreferences("ag233", 0);
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putLong("ag233", new Date().getTime());
-                                editor.apply();
-                            });
-                        }
-                    }
-                });
-        sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        ed.setTypeface(type(Typeface.NORMAL));
-        ed1.setTypeface(type(Typeface.BOLD));
-        Html.a(ed, getString(R.string.n23));
-        fl.addView(c);
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    public void a3() {
-        View c = View.inflate(this, R.layout.a3, null);
-        TextView ed = c.findViewById(R.id.n23);
-        final Button bn = c.findViewById(R.id.n24);
-        TextView ed1 = c.findViewById(R.id.o28);
-        ed1.setText(getString(R.string.x44).toUpperCase());
-        bn.setBackgroundResource(R.drawable.c11);
-        com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-        bn.setText(getString(R.string.y62));
-        if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(Resources.getColor(this, R.color.c));
-            ed1.setTextColor(Resources.getColor(this, R.color.c));
-        } else {
-            ed.setTextColor(Resources.getColor(this, R.color.b));
-            ed1.setTextColor(Resources.getColor(this, R.color.b));
-        }
-        ScrollView sv = c.findViewById(R.id.j);
-        bn.setTypeface(type(Typeface.BOLD));
-        bn.setAllCaps(true);
-        sv.getViewTreeObserver()
-                .addOnScrollChangedListener(() -> {
-                    if (sv.getChildAt(0).getBottom()
-                            <= (sv.getHeight() + sv.getScrollY())) {
-                        if (!bn.getText().toString().equals(getString(R.string.n25))) {
-                            com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-                            bn.setText(getString(R.string.n25));
-                            bn.setBackgroundResource(R.drawable.c10);
-                            bn.setOnClickListener(view -> {
-                                fl.removeView(c);
-                                l3();
-                                l6();
-                                SharedPreferences sp = getSharedPreferences("ag233", 0);
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putLong("ag466", new Date().getTime());
-                                editor.apply();
-                            });
-                        }
-                    }
-                });
-        sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        ed.setTypeface(type(Typeface.NORMAL));
-        ed1.setTypeface(type(Typeface.BOLD));
-        Html.a(ed, getString(R.string.n24));
-        fl.addView(c);
-    }
-
     private void l3() {
         SharedPreferences a5 = getSharedPreferences(WELC.INIT, 0);
         SharedPreferences.Editor b5 = a5.edit();
         b5.putInt("noid", 275);
         b5.apply();
-        Intents.b(this, BACK.class);
+        if (Build.VERSION.SDK_INT < 29) {
+            Intents.b(this, BACK.class);
+        }
         SharedPreferences a52 = getSharedPreferences("di", 0);
         SharedPreferences.Editor b52 = a52.edit();
         b52.putString("di", Hash.a("SHA-1", String.valueOf(System.currentTimeMillis())));
@@ -257,24 +166,6 @@ public class WELC extends BaseActivity {
         Intents.b(this, UPDA.class);
         Intents.b(this, NOTI.class);
         overridePendingTransition(R.anim.f, R.anim.b);
-    }
-
-    private void l6() {
-        try {
-            Intent e = new Intent(Intents.ACTION_LAUNCH);
-            e.addCategory(Intents.CATEGORY_GENIUS);
-            e.setPackage(Package.b());
-            e.putExtra("duplicate", false);
-            Intent f = new Intent();
-            f.putExtra("android.intent.extra.shortcut.INTENT", e);
-            f.putExtra("android.intent.extra.shortcut.NAME", Package.c());
-            f.putExtra("android.intent.extra.shortcut.ICON_RESOURCE", ShortcutIconResource.fromContext(this, R.mipmap.c));
-            f.putExtra("duplicate", false);
-            f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-            sendBroadcast(f);
-        } catch (Exception et) {
-            et.printStackTrace();
-        }
     }
 
     @Override
@@ -300,7 +191,6 @@ public class WELC extends BaseActivity {
             if (sp.getLong("ag233", 0) != 0 && sp.getLong("ag466", 0) != 0) {
                 l3();
             } else {
-                //WELC.this.a2();
                 Intents.a(WELC.this, WELC0.class);
                 finish();
             }

@@ -56,10 +56,10 @@ public class DOWN0 extends MainService {
     private DownloadManager dm;
 
     private void a() {
-        MainNotification.c(this, "d", getString(R.string.y19));
-        android.app.Notification.Builder m = Notifications.a(this, "d");
+        MainNotification.c(this, getString(R.string.d38), getString(R.string.y19));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.d38));
         m.setSmallIcon(R.drawable.c2);
-        m.setContentTitle(getResources().getString(R.string.d38));
+        m.setContentTitle(getString(R.string.d38));
         m.setOngoing(true);
         m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(false);
@@ -75,7 +75,7 @@ public class DOWN0 extends MainService {
         android.app.Notification.Builder m = Notifications.a(this, "c");
         m.setSmallIcon(R.drawable.c2);
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
-        bigText.setSummaryText(Package.c());
+        bigText.setSummaryText(getString(R.string.n15));
         bigText.setBigContentTitle(ghg);
         String text = String.format(getString(R.string.u22), name, url, jk);
         bigText.bigText(text);
@@ -272,7 +272,7 @@ public class DOWN0 extends MainService {
         android.app.Notification.Builder m = Notifications.a(this, "c");
         m.setSmallIcon(R.drawable.c2);
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
-        bigText.setSummaryText(Package.c());
+        bigText.setSummaryText(getString(R.string.n15));
         //if (HDMS.b(jk)) {
         bigText.setBigContentTitle(getString(R.string.u20));
         m.setContentTitle(getString(R.string.u20));

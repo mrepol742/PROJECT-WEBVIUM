@@ -86,13 +86,13 @@ public class NOTI extends MainService {
     }
 
     private void f(String title, String text, String url) {
-        MainNotification.b(this, "h", getString(R.string.z3));
-        android.app.Notification.Builder m = Notifications.a(this, "h");
+        MainNotification.b(this, getString(R.string.n13), getString(R.string.z3));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.n13));
         m.setSmallIcon(R.drawable.c);
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
         bigText.bigText(text);
         bigText.setBigContentTitle(title);
-        bigText.setSummaryText(Package.c());
+        bigText.setSummaryText(getString(R.string.m6));
         m.setContentTitle(title);
         m.setContentText(text);
         m.setStyle(bigText);

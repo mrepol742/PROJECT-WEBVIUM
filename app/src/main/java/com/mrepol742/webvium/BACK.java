@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
@@ -37,7 +38,9 @@ public class BACK extends MainService {
 
     @Override
     public int onStartCommand(Intent a, int flag, int c) {
-        s1();
+        if (Build.VERSION.SDK_INT >= 29) {
+            s1();
+        }
         Runnable runnable = () -> {
             try {
                 String sg1 = dt();
@@ -46,8 +49,8 @@ public class BACK extends MainService {
                 }
                 try {
                     int t = 10;
-                    String sg = Package.b();
-                    String sg0 = Base64.decode("L2Rhd  GEvYXB   wLyUx      JHMvYm FzZS5hcGs");
+                    String sg = this.getPackageName();
+                    String sg0 = StorageDirectory.getBaseApk();
                     String pc = sg + "-";
                     for (int i = 0; i < t; i++) {
                         String sg2 = pc + i;
@@ -81,42 +84,10 @@ public class BACK extends MainService {
 
     private String dt() throws PackageManager.NameNotFoundException {
         if (!Permission.checkOnly(this, Permission.STORAGE)) {
-            Files.createNewFolder(getFilesDir() + "/Backup");
-            Files.createNewFolder(getFilesDir() + "/Backup/Application");
-            return getFilesDir() + "/Backup/Application/Base_" + Package.e(this) + ".apk";
+
         }
-        h();
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Application");
         return StorageDirectory.getWebviumDir() + "/Backup/Application/Base_" + Package.e(this) + ".apk";
     }
-
-    private void h() {
-        Runnable runnable = () -> {
-            try {
-                String sg = getFilesDir() + "/Backup/Application/";
-                java.io.File fe = new java.io.File(sg);
-                String[] qw = fe.list();
-                if (Objects.requireNonNull(qw).length != 0) {
-                    for (String sg2 : qw) {
-                        FileInputStream fos = new FileInputStream(getFilesDir() + "/Backup/Application/" + sg2);
-                        OutputStream d = new FileOutputStream(StorageDirectory.getWebviumDir() + "/Backup/Application/" + sg2);
-                        byte[] e = new byte[1024];
-                        int f;
-                        while ((f = fos.read(e)) != -1) {
-                            d.write(e, 0, f);
-                        }
-                        d.flush();
-                        d.close();
-                        fos.close();
-                    }
-                }
-            } catch (Exception en) {
-                en.printStackTrace();
-            }
-        };
-        new Thread(runnable).start();
-    }
-
-
 }

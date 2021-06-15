@@ -25,10 +25,13 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+import com.mrepol742.webvium.R;
+
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
 public class MainNotification {
+
     public static void a(Context ctx, int notifyId) {
         NotificationManager nMgr = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         nMgr.cancel(notifyId);

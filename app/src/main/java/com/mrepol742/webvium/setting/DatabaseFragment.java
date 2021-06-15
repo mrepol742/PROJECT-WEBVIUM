@@ -85,7 +85,11 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 r7 = new R7();
                 getActivity().registerReceiver(r7, is);
             }
-            a5(R.xml.x);
+            if (Build.VERSION.SDK_INT < 29) {
+                a5(R.xml.x);
+            } else {
+                a5(R.xml.a6);
+            }
 
             Preference n = findPreference("res");
             n.setOnPreferenceClickListener(a -> {
