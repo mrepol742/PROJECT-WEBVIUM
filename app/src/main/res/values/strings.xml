@@ -884,6 +884,8 @@
     <string name="y95">Webvium Javascript Interface</string>
     <string name="y96">RenderProcess Unresponsive</string>
     <string name="y97">Terminate if render become unresponsive</string>
+    <string name="y98">Notify you that Webvium was in foreground</string>
+    <string name="y99">Notify you that Webvium was saving the url.</string>
 
 
     <string name="firebase.apiKey">api_key</string>

@@ -986,27 +986,38 @@ public class MAIN extends MainBaseActivity implements Format {
         d.setMessage(String.format(getString(R.string.i38), Objects.requireNonNull(pr.getOrigin().getHost()), Arrays.toString(pr.getResources())));
         d.setCancelable(false);
         d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
-            if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
+            if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE) && Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
+                if (!Permission.check(this, Permission.CAMERA, 9) && !Permission.check(this, Permission.MICROPHONE, 10)) {
+                    w8 = new PermissionDataModel(pr);
+                } else {
+                    pr.grant(pr.getResources());
+                    d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
+                            Hash.a("SHA-1", Arrays.toString(pr.getResources())),
+                            "true",
+                            "false"));
+                    c8(String.format(getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
+                }
+            } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
                 if (!Permission.check(this, Permission.CAMERA, 6)) {
                     w8 = new PermissionDataModel(pr);
                 } else {
                     pr.grant(pr.getResources());
-                    d12.c(new PermissionObjectDataModel(pr.getOrigin().getHost(),
-                            Arrays.toString(pr.getResources()),
+                    d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
+                            Hash.a("SHA-1", Arrays.toString(pr.getResources())),
                             "true",
                             "false"));
-                    c8(String.format(getString(R.string.i40), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
+                    c8(String.format(getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
                 }
             } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
                 if (!Permission.check(this, Permission.MICROPHONE, 7)) {
                     w8 = new PermissionDataModel(pr);
                 } else {
                     pr.grant(pr.getResources());
-                    d12.c(new PermissionObjectDataModel(pr.getOrigin().getHost(),
-                            Arrays.toString(pr.getResources()),
+                    d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
+                            Hash.a("SHA-1", Arrays.toString(pr.getResources())),
                             "true",
                             "false"));
-                    c8(String.format(getString(R.string.i40), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
+                    c8(String.format(getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
                 }
             }
             a1.dismiss();
@@ -4045,25 +4056,29 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c129(final PermissionRequest pr) {
-        Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
-                Sqlite.TABLE_PERMISSION +
-                " ORDER BY " +
-                "_id" +
-                " DESC", null);
-        if (res.getCount() == 0) {
-            c9(pr);
-        } else {
-            while (res.moveToNext()) {
-                String sg1 = res.getString(1);
-                String sg = res.getString(2);
-                if (sg1.equals(pr.getOrigin().getHost()) && (Arrays.toString(pr.getResources()).contains(sg) || Arrays.toString(pr.getResources()).equals(sg))) {
-                    pr.grant(pr.getResources());
-                } else {
-                    c9(pr);
+        if (BuildConfig.DEBUG) {
+            Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
+                    Sqlite.TABLE_PERMISSION +
+                    " ORDER BY " +
+                    "_id" +
+                    " DESC", null);
+            if (res.getCount() == 0) {
+                c9(pr);
+            } else {
+                while (res.moveToNext()) {
+                    String sg1 = res.getString(1);
+                    String sg = res.getString(2);
+                    if (sg1.equals(Hash.a("SHA-1", pr.getOrigin().toString())) && Hash.a("SHA-1", Arrays.toString(pr.getResources())).equals(sg)) {
+                        pr.grant(pr.getResources());
+                    } else {
+                        c9(pr);
+                    }
                 }
             }
+            res.close();
+        } else {
+            c9(pr);
         }
-        res.close();
     }
 
     public void c130(int type) {

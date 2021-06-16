@@ -110,7 +110,7 @@ public class SAVE extends MainService {
     }
 
     private void a2(String str, String jk) {
-
+        MainNotification.b(this, getString(R.string.y19), getString(R.string.y99));
         android.app.Notification.Builder m = Notifications.a(this, getString(R.string.y19));
         m.setSmallIcon(R.drawable.c2);
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();

@@ -42,9 +42,9 @@ public class MainNotification {
         nMgr.cancelAll();
     }
 
-    @TargetApi(Build.VERSION_CODES.O)
+    @TargetApi(26)
     public static void b(Context ctx, String a, String b) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT < 26) {
             return;
         }
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -76,9 +76,9 @@ public class MainNotification {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.O)
+    @TargetApi(26)
     public static void c(Context c, String a, String b) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT < 26) {
             return;
         }
         try {

@@ -26,6 +26,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.mrepol742.webvium.PDMS;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
+import com.mrepol742.webvium.security.Hash;
 
 public class PermissionHelper implements WebviumDatabase {
 
@@ -73,15 +74,15 @@ public class PermissionHelper implements WebviumDatabase {
                             Sqlite.COL3_PERMISSION +
                             " =? AND " +
                             Sqlite.COL4_PERMISSION +
-                            " =? ", new String[]{w2.nm, w2.pm, w2.gt, w2.dnt});
+                            " =? ", new String[]{Hash.a("SHA-1", w2.nm), Hash.a("SHA-1", w2.pm), w2.gt, w2.dnt});
         }
     }
 
     public void c(PermissionObjectDataModel w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_PERMISSION, w7.nm);
-            values.put(Sqlite.COL2_PERMISSION, w7.pm);
+            values.put(Sqlite.COL1_PERMISSION, Hash.a("SHA-1", w7.nm));
+            values.put(Sqlite.COL2_PERMISSION, Hash.a("SHA-1", w7.pm));
             values.put(Sqlite.COL3_PERMISSION, w7.gt);
             values.put(Sqlite.COL4_PERMISSION, w7.dnt);
             sld.insert(Sqlite.TABLE_PERMISSION, null, values);
@@ -102,8 +103,8 @@ public class PermissionHelper implements WebviumDatabase {
     public void i(PermissionObjectDataModel old, PermissionObjectDataModel w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_PERMISSION, w7.nm);
-            values.put(Sqlite.COL2_PERMISSION, w7.pm);
+            values.put(Sqlite.COL1_PERMISSION, Hash.a("SHA-1", w7.nm));
+            values.put(Sqlite.COL2_PERMISSION, Hash.a("SHA-1", w7.pm));
             values.put(Sqlite.COL3_PERMISSION, w7.gt);
             values.put(Sqlite.COL4_PERMISSION, w7.dnt);
             sld.update(Sqlite.TABLE_PERMISSION, values,
@@ -114,7 +115,7 @@ public class PermissionHelper implements WebviumDatabase {
                             Sqlite.COL3_PERMISSION +
                             " LIKE ? AND " +
                             Sqlite.COL4_PERMISSION +
-                            " LIKE ? ", new String[]{old.nm, old.pm, old.gt, old.dnt});
+                            " LIKE ? ", new String[]{Hash.a("SHA-1", old.nm), Hash.a("SHA-1", old.pm), old.gt, old.dnt});
         }
     }
 }

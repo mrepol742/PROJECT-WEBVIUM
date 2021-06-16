@@ -72,7 +72,8 @@ public class DOWN0 extends MainService {
     }
 
     private void b(String jk, String ghg, String name, String url) {
-        android.app.Notification.Builder m = Notifications.a(this, "c");
+        MainNotification.b(this, getString(R.string.n15), getString(R.string.y98));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.n15));
         m.setSmallIcon(R.drawable.c2);
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
         bigText.setSummaryText(getString(R.string.n15));
@@ -206,15 +207,15 @@ public class DOWN0 extends MainService {
     }
 
     private void e(Intent a) {
-        Files.createNewFolder(StorageDirectory.getDownloadDir());
-        String sg = a.getStringExtra("a"); // title
-        String sg0 = a.getStringExtra("b"); // link
-        boolean sg1 = a.getBooleanExtra("c", false); // visible
-        boolean sg2 = a.getBooleanExtra("d", false); //notif
-        String sg3 = a.getStringExtra("e"); // mimetyoe
-        String sg4 = a.getStringExtra("f"); // cookie
-        String sg5 = a.getStringExtra("g"); //us
         try {
+            Files.createNewFolder(StorageDirectory.getDownloadDir());
+            String sg = a.getStringExtra("a"); // title
+            String sg0 = a.getStringExtra("b"); // link
+            boolean sg1 = a.getBooleanExtra("c", false); // visible
+            boolean sg2 = a.getBooleanExtra("d", false); //notif
+            String sg3 = a.getStringExtra("e"); // mimetyoe
+            String sg4 = a.getStringExtra("f"); // cookie
+            String sg5 = a.getStringExtra("g"); //us
             DownloadManager.Request f = new DownloadManager.Request(Uri.parse(sg0));
             //if (HDMS.b(sg)) {
             f.setTitle(sg);
@@ -269,7 +270,8 @@ public class DOWN0 extends MainService {
     }
 
     private void f(String jk) {
-        android.app.Notification.Builder m = Notifications.a(this, "c");
+        MainNotification.b(this, getString(R.string.n15), getString(R.string.y98));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.n15));
         m.setSmallIcon(R.drawable.c2);
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
         bigText.setSummaryText(getString(R.string.n15));

@@ -18,10 +18,10 @@
 package com.mrepol742.webvium.permission;
 
 public class PermissionObjectDataModel {
-    public final String nm;
-    public final String pm;
-    public final String gt;
-    public final String dnt;
+    public final String nm; // host name
+    public final String pm; // permission asked
+    public final String gt; // granted ??
+    public final String dnt; //denied ?
 
     public PermissionObjectDataModel(String nm, String pm, String gt, String dnt) {
         this.nm = nm;
