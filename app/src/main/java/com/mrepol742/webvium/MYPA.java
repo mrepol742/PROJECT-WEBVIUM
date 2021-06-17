@@ -37,7 +37,7 @@ public class MYPA extends MainReceiver {
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("bcP", true) && Build.VERSION.SDK_INT < 29) {
                 Intents.b(a, BACK.class);
             }
-            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
+            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("maUU", false) && PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
                 Intents.a(a, MAIN.class);
             }
             Toast.f(a, a.getString(R.string.y61), 2);

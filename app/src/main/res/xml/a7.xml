@@ -35,9 +35,17 @@
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
             a:dependency="maUU"
+            a:key="wthj123"
+            a:summary="@string/z41"
+            a:title="@string/y100" />
+
+        <com.mrepol742.webvium.SWIT
+            a:defaultValue="false"
+            a:dependency="maUU"
             a:key="wthj56"
             a:summary="@string/y97"
             a:title="@string/y96" />
+
     </com.mrepol742.webvium.PREF0>
 
     <com.mrepol742.webvium.PREF0 a:title="@string/q5">

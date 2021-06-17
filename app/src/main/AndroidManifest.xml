@@ -167,6 +167,7 @@
             a:exported="false"
             a:windowSoftInputMode="stateHidden" />
         <!-- backup auto immport -->
+
         <activity
             a:name="com.mrepol742.webvium.BACK0"
             a:configChanges="keyboardHidden|orientation|screenSize"
@@ -201,6 +202,13 @@
                 <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.bac" />
             </intent-filter>
         </activity>
+        <activity
+            a:name="com.mrepol742.webvium.BACK1"
+            a:configChanges="keyboardHidden|orientation|screenSize"
+            a:excludeFromRecents="true"
+            a:launchMode="singleTask"
+            a:theme="@style/m"
+            a:windowSoftInputMode="stateHidden"/>
         <!-- DATABASE ERROR -->
         <!-- ASSISTANT -->
         <activity

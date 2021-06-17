@@ -55,7 +55,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (a221().getBoolean("qwe73", false)) {
+        if (a221().getBoolean("maUU", false) && a221().getBoolean("qwe73", false)) {
             System.gc();
         }
     }

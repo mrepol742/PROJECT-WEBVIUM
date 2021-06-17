@@ -17,12 +17,22 @@
 
 package com.mrepol742.webvium;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
+import com.mrepol742.webvium.app.Notifications;
+import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
+import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
@@ -84,10 +94,65 @@ public class BACK extends MainService {
 
     private String dt() throws PackageManager.NameNotFoundException {
         if (!Permission.checkOnly(this, Permission.STORAGE)) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            MainNotification.b(this, getString(R.string.n22), getString(R.string.z42));
+            android.app.Notification.Builder m = Notifications.a(this, getString(R.string.n22));
+            m.setSmallIcon(R.drawable.c);
+            android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
+            bigText.bigText(getString(R.string.z44));
+            bigText.setBigContentTitle(getString(R.string.z43));
+            bigText.setSummaryText(getString(R.string.n22));
+            m.setContentTitle(getString(R.string.z43));
+            m.setContentText(getString(R.string.z44));
+            m.setStyle(bigText);
+            m.setColor(Resources.getColor(this, R.color.a));
+            m.setAutoCancel(sp.getBoolean("eac", true));
+            m.setDefaults(android.app.Notification.DEFAULT_ALL);
+            if (Build.VERSION.SDK_INT < 26) {
+                if (sp.getString("py", "") == null) {
+                    m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
+                }
+                if (Objects.requireNonNull(sp.getString("py", "")).equals("1x")) {
+                    m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
+                }
+                if (Objects.requireNonNull(sp.getString("py", "")).equals("7x")) {
+                    m.setPriority(android.app.Notification.PRIORITY_HIGH);
+                }
+                if (Objects.requireNonNull(sp.getString("py", "")).equals("30x")) {
+                    m.setPriority(android.app.Notification.PRIORITY_LOW);
+                }
+                if (Objects.requireNonNull(sp.getString("py", "")).equals("60x")) {
+                    m.setPriority(android.app.Notification.PRIORITY_MAX);
+                }
+                if (Objects.requireNonNull(sp.getString("py", "")).equals("120x")) {
+                    m.setPriority(android.app.Notification.PRIORITY_MIN);
+                }
+            }
+            if (sp.getString("vy", "") == null) {
+                m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+            }
+            if (Objects.requireNonNull(sp.getString("vy", "")).equals("1y")) {
 
+                m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
+            }
+            if (Objects.requireNonNull(sp.getString("vy", "")).equals("7y")) {
+                m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+            }
+            if (Objects.requireNonNull(sp.getString("vy", "")).equals("30y")) {
+                m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
+            }
+            m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.c));
+            Intent j = new Intent(this, BACK1.class);
+            PendingIntent k = PendingIntent.getActivity(this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
+            m.setContentIntent(k);
+            Intent j55 = new Intent(this, BACK1.class);
+            PendingIntent pi235 = PendingIntent.getActivity(this, 2, j55, PendingIntent.FLAG_UPDATE_CURRENT);
+            m.addAction(new android.app.Notification.Action(R.drawable.a20, getString(R.string.z45), pi235));
+            NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            nmc.notify(Notifications.a, m.build());
         }
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Application");
-        return StorageDirectory.getWebviumDir() + "/Backup/Application/Base_" + Package.e(this) + ".apk";
+        return StorageDirectory.getWebviumDir() + "/Backup/Application/"+Package.c()+"_" + Package.e(this) + ".apk";
     }
 }

@@ -1569,7 +1569,7 @@ public class MAIN extends MainBaseActivity implements Format {
         ws.setBuiltInZoomControls(true);
         ws.setSupportMultipleWindows(false);
         ws.setJavaScriptCanOpenWindowsAutomatically(false);
-        if (a221().getBoolean("hst", false) || a221().getBoolean("hste", false)) {
+        if (a221().getBoolean("maUU", false) && (a221().getBoolean("hst", false) || a221().getBoolean("hste", false))) {
             h.setOnTouchListener(new View.OnTouchListener() {
                 final int sel = 5;
                 float lastY;
@@ -1596,30 +1596,30 @@ public class MAIN extends MainBaseActivity implements Format {
                             res += ali.get(i);
                         }
                         if (res > 0) {
-                            if (a221().getBoolean("hst", false)) {
+                            if (a221().getBoolean("maUU", false) && a221().getBoolean("hst", false)) {
                                 if (findViewById(R.id.m4).getVisibility() != View.VISIBLE) {
                                     ab.show();
                                     Animation.animate(MAIN.this, R.anim.d, o);
                                 }
                             }
-                            if (a221().getBoolean("hste", false)) {
+                            if (a221().getBoolean("maUU", false) && a221().getBoolean("hste", false)) {
                                 o.setElevation(5);
                             }
-                            if (a221().getBoolean("hste0", false)) {
+                            if (a221().getBoolean("maUU", false) && a221().getBoolean("hste0", false)) {
                                 findViewById(R.id.m4).setVisibility(View.VISIBLE);
                                 Animation.animate(MAIN.this, R.anim.a, findViewById(R.id.m4));
                             }
                         } else {
-                            if (a221().getBoolean("hst", false)) {
+                            if (a221().getBoolean("maUU", false) && a221().getBoolean("hst", false)) {
                                 if (findViewById(R.id.m4).getVisibility() != View.GONE) {
                                     ab.hide();
                                     Animation.animate(MAIN.this, R.anim.a, o);
                                 }
                             }
-                            if (a221().getBoolean("hste", false)) {
+                            if (a221().getBoolean("maUU", false) && a221().getBoolean("hste", false)) {
                                 o.setElevation(0);
                             }
-                            if (a221().getBoolean("hste0", false)) {
+                            if (a221().getBoolean("maUU", false) && a221().getBoolean("hste0", false)) {
                                 findViewById(R.id.m4).setVisibility(View.GONE);
                                 Animation.animate(MAIN.this, R.anim.d, findViewById(R.id.m4));
                             }
@@ -1991,7 +1991,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
                 @Override
                 public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-                    if (a221().getBoolean("wthj56", false)) {
+                    if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj56", false)) {
                         webViewRenderProcess.terminate();
                     }
                 }
@@ -2028,7 +2028,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c36(String sg) {
-        if (a221().getBoolean("wthj", false)) {
+        if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj", false)) {
             if (!sg.isEmpty()) {
                 if (BuildConfig.DEBUG) {
                     SharedPreferences sharedPreferences = getSharedPreferences("th", 0);
@@ -3204,12 +3204,12 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c80(WebView a, String b) {
         try {
             if (a.getSettings().getJavaScriptEnabled()) {
-                if (a221().getBoolean("wthj", false)) {
+                if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj", false)) {
                     a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
                 }
                 a.loadUrl("javascript:window." + Package.c() + "Webvium.description( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'description') { return metas[i].getAttribute('content'); } } return '';  } )() );");
             }
-            if (a221().getBoolean("tow2", false)) {
+            if (a221().getBoolean("maUU", false) && a221().getBoolean("tow2", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(false);
             }
@@ -3230,7 +3230,7 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page started
     public void c81(String b) {
         try {
-            if (a221().getBoolean("tow", false)) {
+            if (a221().getBoolean("maUU", false) && a221().getBoolean("tow", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(true);
             }
@@ -4744,19 +4744,22 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public WebResourceResponse c168(WebResourceRequest wr) {
-        String url = wr.getUrl().toString();
-        for (String sg : ads) {
-            if (url.contains(sg)) {
-                return new WebResourceResponse("text/plain",
-                        "UTF-8",
-                        new ByteArrayInputStream(String.format(getString(R.string.g20), url).getBytes()));
+        if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj123", false)) {
+            String url = Uri.parse(wr.getUrl().toString()).getHost();
+            for (String sg : ads) {
+                if (url.contains(sg)) {
+                    return new WebResourceResponse("text/plain",
+                            "UTF-8",
+                            new ByteArrayInputStream(String.format(getString(R.string.g20), url).getBytes()));
+                }
             }
+            return null;
         }
         return null;
     }
 
     private void c170(String sg) {
-        h.evaluateJavascript(sg, s -> android.util.Log.d("Webvium", sg));
+        h.evaluateJavascript(sg, s -> android.util.Log.d(Package.c(), sg));
     }
 
     private void c171(final String sg) {

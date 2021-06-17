@@ -886,7 +886,12 @@
     <string name="y97">Terminate if render become unresponsive</string>
     <string name="y98">Notify you that Webvium was in foreground</string>
     <string name="y99">Notify you that Webvium was saving the url.</string>
-
+    <string name="y100">Adblocker</string>
+    <string name="z41">Block ads and make the page load faster.</string>
+    <string name="z42">Notify you that Backup Service failed to backup Webvium APK.</string>
+    <string name="z43">Failed to Backup Webvium</string>
+    <string name="z44">Storage Permission is needed to write to the SD card.</string>
+    <string name="z45">Allow</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

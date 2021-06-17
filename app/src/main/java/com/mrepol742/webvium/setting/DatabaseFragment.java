@@ -17,16 +17,22 @@
 
 package com.mrepol742.webvium.setting;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -59,6 +65,7 @@ import com.mrepol742.webvium.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -393,22 +400,35 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
     }
 
     private void write(String sg, Object al) {
-        Runnable re = () -> {
-            try {
-                if (Build.VERSION.SDK_INT <= 29) {
-                    FileOutputStream fos = new FileOutputStream(sg);
-                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                    oos.writeObject(al);
-                    oos.close();
-                    fos.close();
-                    getActivity().runOnUiThread(() -> g(getString(R.string.b25)));
+        if (Build.VERSION.SDK_INT < 29) {
+            Runnable re = () -> {
+                try {
+                        FileOutputStream fos = new FileOutputStream(sg);
+                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                        oos.writeObject(al);
+                        oos.close();
+                        fos.close();
+                        getActivity().runOnUiThread(() -> g(getString(R.string.b25)));
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    getActivity().runOnUiThread(() -> d(getString(R.string.b26)));
                 }
-            } catch (Exception en) {
-                en.printStackTrace();
-                getActivity().runOnUiThread(() -> d(getString(R.string.b26)));
-            }
-        };
-        new Thread(re).start();
+            };
+            new Thread(re).start();
+        } else {
+                try {
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.MediaColumns.DISPLAY_NAME, "webvium_test.txt");
+                    values.put(MediaStore.MediaColumns.MIME_TYPE, "text/plain");
+                    values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Webvium");
+                    Uri uri = getActivity().getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
+                    ObjectOutputStream outputStream = (ObjectOutputStream) getActivity().getContentResolver().openOutputStream(uri);
+                    outputStream.writeObject(al);
+                    outputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
     }
 
     private class R7 extends MainReceiver {

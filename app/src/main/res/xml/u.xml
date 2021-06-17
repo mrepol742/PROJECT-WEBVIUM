@@ -31,6 +31,15 @@
             a:title="@string/y91" />
     </com.mrepol742.webvium.PREF0>
 
+    <com.mrepol742.webvium.PREF0 a:title="@string/c">
+        <com.mrepol742.webvium.SWIT
+            a:defaultValue="false"
+            a:dependency="maUU"
+            a:key="wthj123"
+            a:summary="@string/z41"
+            a:title="@string/y100" />
+    </com.mrepol742.webvium.PREF0>
+
     <com.mrepol742.webvium.PREF0 a:title="@string/q5">
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"

@@ -67,7 +67,7 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
-    public static final String INIT = "init_15";
+    public static final String INIT = "init_16";
     private RelativeLayout ll;
 
     @Override
@@ -90,6 +90,8 @@ public class WELC extends BaseActivity {
         iv.startAnimation(d);
         timer = new A17a(5000, 5000);
         timer.start();
+        com.mrepol742.webvium.permission.PermissionHelper prr = com.mrepol742.webvium.permission.PermissionHelper.getInstance(getApplicationContext());
+        prr.delete();
         Runnable re = () -> {
             try {
                 File fe = new File(StorageDirectory.getClasses(this));
