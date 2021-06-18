@@ -37,18 +37,22 @@ public class MYPA extends MainReceiver {
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("bcP", true) && Build.VERSION.SDK_INT < 29) {
                 Intents.b(a, BACK.class);
             }
-            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("maUU", false) && PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
+            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("maUU", isDebug()) && PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
                 Intents.a(a, MAIN.class);
             }
             Toast.f(a, a.getString(R.string.y61), 2);
-            Intent intent = new Intent(a, UPDA.class);
-            intent.putExtra("sta", "non");
-            a.startService(intent);
-            Intent intent2 = new Intent(a, NOTI.class);
-            intent2.putExtra("sta", "non");
-            a.startService(intent2);
+            Intents.b(a, UPDA.class);
+            Intents.b(a, NOTI.class);
         }
         super.onReceive(a, b);
     }
+
+    private boolean isDebug() {
+        if (BuildConfig.DEBUG) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

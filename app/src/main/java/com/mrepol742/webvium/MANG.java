@@ -591,12 +591,9 @@ public class MANG extends BaseActivity {
     }
 
     private void a1() {
-        Runnable re = () -> {
             final ArrayList<String> a = new ArrayList<>();
-
             final ArrayList<String> b = new ArrayList<>();
             final ArrayList<Integer> c = new ArrayList<>();
-
             final ArrayList<String> d = new ArrayList<>();
             for (int i : getStrings()) {
                 a.add(getString(i));
@@ -623,12 +620,24 @@ public class MANG extends BaseActivity {
                     " DESC";
             Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
             int cont = rest1.getCount();
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
+            if (cont == 0) {
+                b.add(getString(R.string.v27));
+            } else {
+                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
+            }
             b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
             int cont1 = rest.getCount();
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
+            if (cont1 == 0) {
+                b.add(getString(R.string.v27));
+            } else {
+                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
+            }
             int cont11 = res.getCount();
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+            if (cont11 == 0) {
+                b.add(getString(R.string.v27));
+            } else {
+                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+            }
             b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
             rest1.close();
             res.close();
@@ -637,31 +646,31 @@ public class MANG extends BaseActivity {
                 boolean bn = Permission.checkOnly(this, Permission.STORAGE);
                 if (bn) {
                     int lg = a7(Package.c() + "/Screenshot/");
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
-                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
+                    int lg1 = a7(Package.c() + "/Downloads/");
+                    if (lg == 0) {
+                        b.add(getString(R.string.v29));
+                    } else{
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                                c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
+                    }
+                    if (lg1 == 0) {
+                        b.add(getString(R.string.v29));
+                    } else {
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
+                                c(b(StorageDirectory.getDownloadDir()))));
+                    }
                 } else {
                     b.add("Storage permission is required");
-                }
-                if (bn) {
-                    int lg = a7(Package.c() + "/Downloads/");
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
-                            c(b(StorageDirectory.getDownloadDir()))));
-                } else {
                     b.add("Storage permission is required");
                 }
             }
-            runOnUiThread(() -> {
                 w19.a(new ManageSpaceDataModel(a, b, c, d));
                 w19.notifyDataSetChanged();
-            });
-        };
-        new Thread(re).start();
     }
 
     private void a2() {
-        Runnable re = () -> {
             for (int i5 : getDrawables()) {
                 c.add(i5);
             }
@@ -687,38 +696,52 @@ public class MANG extends BaseActivity {
                     " DESC";
             Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
             int cont = rest1.getCount();
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
+            if (cont == 0) {
+                b.add(getString(R.string.v27));
+            } else {
+                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
+            }
             b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
             int cont1 = rest.getCount();
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
+            if (cont1 == 0) {
+                b.add(getString(R.string.v27));
+            } else {
+                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
+            }
             int cont11 = res.getCount();
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+            if (cont11 == 0) {
+                b.add(getString(R.string.v27));
+            } else {
+                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+            }
             b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
             rest1.close();
             res.close();
             rest.close();
-            if (Build.VERSION.SDK_INT < 29) {
+             if (Build.VERSION.SDK_INT < 29) {
                 boolean bn = Permission.checkOnly(this, Permission.STORAGE);
                 if (bn) {
                     int lg = a7(Package.c() + "/Screenshot/");
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
-                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
+                    int lg1 = a7(Package.c() + "/Downloads/");
+                    if (lg == 0) {
+                        b.add(getString(R.string.v29));
+                    } else{
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                                c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
+                    }
+                    if (lg1 == 0) {
+                        b.add(getString(R.string.v29));
+                    } else {
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
+                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
+                                c(b(StorageDirectory.getDownloadDir()))));
+                    }
                 } else {
                     b.add("Storage permission is required");
-                }
-                if (bn) {
-                    int lg = a7(Package.c() + "/Downloads/");
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
-                            c(b(StorageDirectory.getDownloadDir()))));
-                } else {
                     b.add("Storage permission is required");
                 }
             }
-
-        };
-        new Thread(re).start();
     }
 
     @Override

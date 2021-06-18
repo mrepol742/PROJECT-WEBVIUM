@@ -763,17 +763,15 @@
     <string name="v23">Download History Cleared.</string>
     <string name="v24">Do you really want to clear All Downloads History?</string>
     <plurals name="v25">
-        <item quantity="one">Item: %1$d</item>
-        <item quantity="other">Items: %1$d</item>
-        <item quantity="zero">No item\'s to be cleared</item>
+        <item quantity="one">Item: %1$s</item>
+        <item quantity="other">Items: %1$s</item>
     </plurals>
     <plurals name="v27">
-        <item quantity="one">File: %1$d</item>
-        <item quantity="other">Files: %1$d</item>
-        <item quantity="zero">No item\'s to be cleared</item>
+        <item quantity="one">File: %1$s</item>
+        <item quantity="other">Files: %1$s</item>
     </plurals>
     <plurals name="v28">
-        <item quantity="one">Size: %1$d</item>
+        <item quantity="one">Size: %1$s</item>
         <item quantity="zero"> </item>
     </plurals>
 
@@ -892,6 +890,15 @@
     <string name="z43">Failed to Backup Webvium</string>
     <string name="z44">Storage Permission is needed to write to the SD card.</string>
     <string name="z45">Allow</string>
+    <string name="z46">Strict Mode</string>
+    <string name="z47">Thread Policy</string>
+    <string name="z48">VM Policy</string>
+    <string name="z49">Detect everything that\'s potentially suspect. Required Webvium to restart to take effect.</string>
+    <string name="z50">Crash Handler</string>
+    <string name="z51">Handle unhandled crash and show an error dialog instead of App has Stop Alert Dialog.</string>
+    <string name="z52">Trim Memory</string>
+    <string name="z53">Release SQLite Database memory and call garbage collector if memory running critical, moderate or low.</string>
+
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

@@ -38,32 +38,37 @@ import java.io.Writer;
 // @class Application
 public class APPL extends Application {
     private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+    private  SharedPreferences sp;
 
     @Override
     public void onCreate() {
-        if (BuildConfig.DEBUG) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean("maUU", isDebug()) && sp.getBoolean("stcMM", isDebug())) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
                     .build());
+        }
+        if (sp.getBoolean("maUU", isDebug()) && sp.getBoolean("stcMM6", isDebug())) {
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
                     .build());
         }
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-        Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
-            Intent intent = new Intent(getApplicationContext(), EXCE.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("error", getStackTrace(ex));
-            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT);
-            AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(2);
-            uncaughtExceptionHandler.uncaughtException(thread, ex);
-        });
+        if (sp.getBoolean("thred", true)) {
+            this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+            Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
+                Intent intent = new Intent(getApplicationContext(), EXCE.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("error", getStackTrace(ex));
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT);
+                AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(2);
+                uncaughtExceptionHandler.uncaughtException(thread, ex);
+            });
+        }
         super.onCreate();
         try {
             if (sp.getBoolean("autoUpdate55", false)) {
@@ -81,7 +86,7 @@ public class APPL extends Application {
 
     @Override
     public void onTrimMemory(int i) {
-        if (i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
+        if (sp.getBoolean("triMM", true) && (i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW)) {
             SQLiteDatabase.releaseMemory();
             System.gc();
         }
@@ -99,6 +104,13 @@ public class APPL extends Application {
         final String stacktraceAsString = result.toString();
         printWriter.close();
         return stacktraceAsString;
+    }
+
+    private boolean isDebug() {
+        if (BuildConfig.DEBUG) {
+            return true;
+        }
+        return false;
     }
 
 

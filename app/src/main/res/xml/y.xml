@@ -28,6 +28,11 @@
         a:key="dont"
         a:summary="@string/c3"
         a:title="@string/c2" />
+    <com.mrepol742.webvium.SWIT
+        a:defaultValue="true"
+        a:key="thred"
+        a:summary="@string/z51"
+        a:title="@string/z50" />
 
     <com.mrepol742.webvium.PREF0 a:title="@string/a22">
         <com.mrepol742.webvium.PREF
@@ -168,6 +173,11 @@
             a:key="renderP"
             a:summary="%1$s"
             a:title="@string/p4" />
+        <com.mrepol742.webvium.SWIT
+            a:defaultValue="true"
+            a:key="triMM"
+            a:summary="@string/z53"
+            a:title="@string/z52" />
     </com.mrepol742.webvium.PREF0>
 
 

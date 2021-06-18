@@ -30,6 +30,7 @@ import android.preference.PreferenceManager;
 import android.speech.SpeechRecognizer;
 import android.view.ViewGroup;
 
+import com.mrepol742.webvium.BuildConfig;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.util.cache.FontCache;
@@ -55,9 +56,16 @@ public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (a221().getBoolean("maUU", false) && a221().getBoolean("qwe73", false)) {
+        if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("qwe73", false)) {
             System.gc();
         }
+    }
+
+    public boolean isDebug() {
+        if (BuildConfig.DEBUG) {
+            return true;
+        }
+        return false;
     }
 
     public SharedPreferences a221() {
