@@ -103,5 +103,17 @@ public class StorageDirectory {
         }
     }
 
+    public static class Fonts {
+
+        public static String getPrimaryFont(Context co) {
+            return getFileDir(co) + "/d";
+        }
+
+        public static String getSecondaryFont(Context co) {
+            return getFileDir(co) + "/e";
+        }
+    }
+
+
 
 }

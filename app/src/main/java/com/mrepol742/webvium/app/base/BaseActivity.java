@@ -28,17 +28,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.speech.SpeechRecognizer;
+import android.util.LruCache;
 import android.view.ViewGroup;
 
 import com.mrepol742.webvium.BuildConfig;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.util.cache.FontCache;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.io.StorageDirectory;
+import com.mrepol742.webvium.widget.AwesomeToast;
+
+import java.io.File;
 
 public class BaseActivity extends Activity {
 
-    public FontCache U7;
+    public LruCache<Integer, Typeface> cac;
+    private Typeface main;
+    public static final String MAVEN_PRO = "classes";
     private SharedPreferences sharedPreferences;
     private SharedPreferences exclusive;
     public static final int T_MAIN = 0;
@@ -46,26 +51,22 @@ public class BaseActivity extends Activity {
     public static final int T_DEFAULT = 2;
     public static final int T_WELCOME_SCREEN = 3;
     public static final int T_ASSISTANT = 4;
+    private static final int PRIMARY_CACHE = 99;
+    private static final int SECONDARY_CACHE = 100;
 
     @Override
     protected void onCreate(Bundle be) {
         super.onCreate(be);
-        U7 = FontCache.getInstance(getApplicationContext());
+        cac = new LruCache<>(32);
+        main = Typeface.createFromAsset(getAssets(), MAVEN_PRO);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("qwe73", false)) {
+        if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("qwe73", false)) {
             System.gc();
         }
-    }
-
-    public boolean isDebug() {
-        if (BuildConfig.DEBUG) {
-            return true;
-        }
-        return false;
     }
 
     public SharedPreferences a221() {
@@ -126,7 +127,7 @@ public class BaseActivity extends Activity {
             f.putExtra("android.intent.extra.shortcut.ICON_RESOURCE", Intent.ShortcutIconResource.fromContext(this, icon));
             f.putExtra("duplicate", false);
             sendBroadcast(f);
-            Toast.b(this, getString(R.string.q26));
+            AwesomeToast.b(this, getString(R.string.q26));
         } catch (Exception et) {
             et.printStackTrace();
         }
@@ -229,8 +230,33 @@ public class BaseActivity extends Activity {
         }
     }
 
-    public Typeface type(int i) {
-        return U7.a(i);
+    public Typeface type(int sg) {
+        if (a221().getBoolean("cFNT", false)) {
+            File fe = new File(StorageDirectory.Fonts.getPrimaryFont(this));
+            File fe1 = new File(StorageDirectory.Fonts.getSecondaryFont(this));
+            if (fe.exists()) {
+                Typeface bp0 = cac.get(PRIMARY_CACHE);
+                if (bp0 == null) {
+                    bp0 = Typeface.createFromFile(fe);
+                    cac.put(PRIMARY_CACHE, bp0);
+                }
+                return bp0;
+            }
+            if (fe1.exists()) {
+                Typeface bp0 = cac.get(SECONDARY_CACHE);
+                if (bp0 == null) {
+                    bp0 = Typeface.createFromFile(fe);
+                    cac.put(SECONDARY_CACHE, bp0);
+                }
+                return bp0;
+            }
+        }
+        Typeface bp = cac.get(sg);
+        if (bp == null) {
+            bp = Typeface.create(main, sg);
+            cac.put(sg, bp);
+        }
+        return bp;
     }
 
     public boolean spr() {

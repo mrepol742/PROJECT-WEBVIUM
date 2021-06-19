@@ -28,7 +28,7 @@ import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class DownloadFragment extends BasePreferenceFragment {
 
@@ -63,7 +63,7 @@ public class DownloadFragment extends BasePreferenceFragment {
         a.setMessage(Html.b(getString(R.string.u12)));
         a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
             Intents.k(getActivity(), Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-            Toast.d(getActivity(), Html.b(getString(R.string.a25)).toString());
+            AwesomeToast.d(getActivity(), Html.b(getString(R.string.a25)).toString());
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
         a.create().show();

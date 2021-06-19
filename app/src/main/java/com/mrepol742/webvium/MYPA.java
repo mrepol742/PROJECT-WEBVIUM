@@ -24,7 +24,7 @@ import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -40,7 +40,7 @@ public class MYPA extends MainReceiver {
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("maUU", isDebug()) && PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
                 Intents.a(a, MAIN.class);
             }
-            Toast.f(a, a.getString(R.string.y61), 2);
+            AwesomeToast.f(a, a.getString(R.string.y61), 2);
             Intents.b(a, UPDA.class);
             Intents.b(a, NOTI.class);
         }

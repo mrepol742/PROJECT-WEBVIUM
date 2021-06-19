@@ -30,7 +30,7 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class SearchFragment extends BasePreferenceFragment {
 
@@ -71,7 +71,7 @@ public class SearchFragment extends BasePreferenceFragment {
         a.setMessage(getString(R.string.a21));
         a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
             Intents.k(getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
-            Toast.d(getActivity(), Html.b(getString(R.string.b33)).toString());
+            AwesomeToast.d(getActivity(), Html.b(getString(R.string.b33)).toString());
             a12.dismiss();
         });
         a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());

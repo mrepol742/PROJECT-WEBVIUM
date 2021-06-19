@@ -40,7 +40,7 @@ import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.os.Vibrate;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -230,13 +230,13 @@ bigText.bigText(a.getResources().getString(R.string.g29));
         switch (c) {
             default:
             case 0:
-                Toast.a(a, b, d);
+                AwesomeToast.a(a, b, d);
             break;
             case 1:
-                Toast.c(a, b);
+                AwesomeToast.c(a, b);
             break;
             case 2:
-                Toast.b(a, b);
+                AwesomeToast.b(a, b);
             break;
         }
     }

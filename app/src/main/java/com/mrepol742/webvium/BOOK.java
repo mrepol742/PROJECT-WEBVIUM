@@ -54,7 +54,7 @@ import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.util.Stream;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.view.Animation;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.ArrayList;
 
@@ -457,7 +457,7 @@ public class BOOK extends BaseActivity {
     }
 
     private void k5(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
     }
 
     private void k() {
@@ -502,10 +502,10 @@ public class BOOK extends BaseActivity {
 
     public void l(String url, final int type) {
         if (!URLUtil.isValidUrl(url)) {
-            Toast.c(this, getString(R.string.c32));
+            AwesomeToast.c(this, getString(R.string.c32));
             return;
         } else if (!Domain.isValidDomain(url)) {
-            Toast.c(this, getString(R.string.c32));
+            AwesomeToast.c(this, getString(R.string.c32));
             return;
         }
         AlertDialog.Builder a = new AlertDialog.Builder(this);

@@ -42,14 +42,14 @@ public class APPL extends Application {
 
     @Override
     public void onCreate() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean("maUU", isDebug()) && sp.getBoolean("stcMM", isDebug())) {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean("maUU", BuildConfig.DEBUG) && sp.getBoolean("stcMM", BuildConfig.DEBUG)) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
                     .build());
         }
-        if (sp.getBoolean("maUU", isDebug()) && sp.getBoolean("stcMM6", isDebug())) {
+        if (sp.getBoolean("maUU", BuildConfig.DEBUG) && sp.getBoolean("stcMM6", BuildConfig.DEBUG)) {
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
@@ -88,7 +88,6 @@ public class APPL extends Application {
     public void onTrimMemory(int i) {
         if (sp.getBoolean("triMM", true) && (i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE || i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW)) {
             SQLiteDatabase.releaseMemory();
-            System.gc();
         }
         super.onTrimMemory(i);
     }
@@ -105,14 +104,5 @@ public class APPL extends Application {
         printWriter.close();
         return stacktraceAsString;
     }
-
-    private boolean isDebug() {
-        if (BuildConfig.DEBUG) {
-            return true;
-        }
-        return false;
-    }
-
-
 }
 

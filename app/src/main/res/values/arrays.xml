@@ -58,7 +58,7 @@
         <item name="12b">@string/x41</item>
         <item name="13b">@string/x42</item>
         <item name="14b">@string/x43</item>
-        <item name="15b">@string/d35</item>
+
     </string-array>
     <string-array name="f">
         <item name="1b">1b</item>
@@ -75,7 +75,7 @@
         <item name="12b">12b</item>
         <item name="13b">13b</item>
         <item name="14b">14b</item>
-        <item name="15b">15b</item>
+
     </string-array>
 
 

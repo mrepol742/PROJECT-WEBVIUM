@@ -37,7 +37,7 @@ import com.mrepol742.webvium.download.DownloadAdapter;
 import com.mrepol742.webvium.download.DownloadArrayDataModel;
 import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.view.Animation;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.ArrayList;
 
@@ -153,7 +153,7 @@ public class DOWN extends BaseActivity {
     }
 
     private void f(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
 
     }
 

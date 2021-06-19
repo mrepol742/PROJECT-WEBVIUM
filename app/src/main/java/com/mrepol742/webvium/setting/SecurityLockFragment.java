@@ -46,7 +46,7 @@ import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -150,7 +150,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
             } catch (NoSuchStringToReturn l2) {
                 l2.printStackTrace();
             }
-            Toast.a(getActivity(), getActivity().getResources().getString(R.string.l3), 0);
+            AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l3), 0);
             spe.setChecked(true);
             a.dismiss();
         });
@@ -350,7 +350,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             } else {
                 spe.setChecked(false);
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
             }
 
         }
@@ -366,7 +366,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             } else {
                 spe.setChecked(true);
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
             }
 
         }
@@ -498,9 +498,9 @@ public class SecurityLockFragment extends BasePreferenceFragment {
                 SharedPreferences.Editor b5 = a.edit();
                 b5.putString("ajGjbduTwibdi", Hash.a("SHA-512", a2));
                 b5.apply();
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.k22), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k22), 0);
             } else {
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
             }
         }
     }
@@ -576,11 +576,11 @@ public class SecurityLockFragment extends BasePreferenceFragment {
                 SharedPreferences.Editor b5 = a.edit();
                 b5.clear();
                 b5.apply();
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.k24), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k24), 0);
                 spe.setChecked(false);
             } else {
 
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
             }
 
         }

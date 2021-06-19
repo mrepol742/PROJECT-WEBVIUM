@@ -36,7 +36,7 @@ import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -56,7 +56,7 @@ public class BACK0 extends BaseActivity {
             try {
                 a(getContentResolver().openInputStream(data.getData()));
             } catch (Exception en) {
-                Toast.c(BACK0.this, getString(R.string.z21));
+                AwesomeToast.c(BACK0.this, getString(R.string.z21));
                 en.printStackTrace();
                 finishAndRemoveTask();
             }
@@ -91,18 +91,18 @@ public class BACK0 extends BaseActivity {
                 } else if (ot1 instanceof SDMS) {
                     e(ot);
                 } else {
-                    Toast.c(BACK0.this, getString(R.string.z21));
+                    AwesomeToast.c(BACK0.this, getString(R.string.z21));
                     finishAndRemoveTask();
                 }
 
             } else if (ot instanceof Map) {
                 c(ot);
             } else {
-                Toast.c(BACK0.this, getString(R.string.z21));
+                AwesomeToast.c(BACK0.this, getString(R.string.z21));
                 finishAndRemoveTask();
             }
         } catch (Exception en) {
-            Toast.c(BACK0.this, getString(R.string.z21));
+            AwesomeToast.c(BACK0.this, getString(R.string.z21));
            en.printStackTrace();
             finishAndRemoveTask();
         }
@@ -156,7 +156,7 @@ public class BACK0 extends BaseActivity {
     }
 
     private void d(String a) {
-        Toast.c(this, a);
+        AwesomeToast.c(this, a);
     }
 
     private void e(Object mp) {
@@ -218,7 +218,7 @@ public class BACK0 extends BaseActivity {
     }
 
     private void g(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
     }
 
     private void h(Object mp) {
@@ -343,7 +343,7 @@ public class BACK0 extends BaseActivity {
                 try {
                     a(new FileInputStream(URLDecoder.decode(data.replace("file://", ""), "UTF-8")));
                 } catch (Exception en) {
-                    Toast.c(BACK0.this, getString(R.string.z21));
+                    AwesomeToast.c(BACK0.this, getString(R.string.z21));
                     en.printStackTrace();
                     finishAndRemoveTask();
                 }

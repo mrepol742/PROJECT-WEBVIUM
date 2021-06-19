@@ -63,7 +63,7 @@ import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.view.Animation;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -429,11 +429,11 @@ public class MANG extends BaseActivity {
     }
 
     public void r(String a) {
-        Toast.c(this, a);
+        AwesomeToast.c(this, a);
     }
 
     public void s(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
     }
 
     @Override

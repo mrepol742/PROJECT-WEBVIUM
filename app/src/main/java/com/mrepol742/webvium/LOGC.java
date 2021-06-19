@@ -28,17 +28,20 @@ import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // @Class Logcat
 public class LOGC extends BaseActivity {
     private TextView tv;
     private ScrollView sv;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle a) {
@@ -46,6 +49,7 @@ public class LOGC extends BaseActivity {
         super.onCreate(a);
         try {
             a225(R.layout.n);
+            timer = new Timer();
             Toolbar a1 = findViewById(R.id.b7);
             TextView a2 = findViewById(R.id.b8);
             tv = findViewById(R.id.a);
@@ -82,8 +86,9 @@ public class LOGC extends BaseActivity {
             a5();
             iv.setOnClickListener(view -> {
                 a5();
-                Toast.b(LOGC.this, getString(R.string.t23));
+                AwesomeToast.b(LOGC.this, getString(R.string.t23));
             });
+            tv.setText(getString(R.string.t22));
 
         } catch (Exception rx) {
             rx.printStackTrace();
@@ -101,16 +106,25 @@ public class LOGC extends BaseActivity {
                 StringBuilder sb = new StringBuilder();
                 while (br.readLine() != null) {
                     sb.append(br.readLine());
-                    sb.append("\n\n");
+                    sb.append("\n");
                 }
                 pr.destroy();
+                br.close();
+                isr.close();
+                is.close();
                 runOnUiThread(() -> {
                     if (sb.length() != 0) {
-                        tv.setText(sb.toString());
-                    } else {
-                        tv.setText(LOGC.this.getString(R.string.t22));
+                        tv.append(sb.toString());
                     }
-                    sv.post(() -> sv.fullScroll(View.FOCUS_DOWN));
+                    timer.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            runOnUiThread(() -> sv.post(() -> sv.fullScroll(View.FOCUS_DOWN)));
+                            timer.cancel();
+                            timer.purge();
+                        }
+                    }, 1000);
                 });
             } catch (IOException e1) {
                e1.printStackTrace();
@@ -123,6 +137,7 @@ public class LOGC extends BaseActivity {
     protected void onResume() {
         super.onResume();
         a5();
+        AwesomeToast.b(LOGC.this, getString(R.string.t23));
     }
 
 

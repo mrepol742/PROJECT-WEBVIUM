@@ -42,7 +42,7 @@ import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -76,7 +76,7 @@ public class VOIC extends BaseActivity {
             sv.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
         if (spr()) {
-            Toast.c(this, getString(R.string.n36));
+            AwesomeToast.c(this, getString(R.string.n36));
             finish();
         } else {
             sr = SpeechRecognizer.createSpeechRecognizer(this);

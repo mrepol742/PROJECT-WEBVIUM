@@ -49,7 +49,7 @@ import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.view.Animation;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 // @Class Feedback
 public class FEED extends BaseActivity {
@@ -181,14 +181,14 @@ public class FEED extends BaseActivity {
 
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                    Toast.b(FEED.this, getString(R.string.y71));
+                    AwesomeToast.b(FEED.this, getString(R.string.y71));
                 }
 
                 @Override
                 public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
                     if (Connectivity.isThereAnyInternetConnection(FEED.this)) {
-                        Toast.c(FEED.this, getString(R.string.x38));
-                        Toast.b(FEED.this, getString(R.string.y72));
+                        AwesomeToast.c(FEED.this, getString(R.string.x38));
+                        AwesomeToast.b(FEED.this, getString(R.string.y72));
                     }
                 }
             });
@@ -246,7 +246,7 @@ public class FEED extends BaseActivity {
 
                 @JavascriptInterface
                 public void succeed() {
-                    Toast.b(FEED.this, getString(R.string.g27));
+                    AwesomeToast.b(FEED.this, getString(R.string.g27));
                 }
             }, Package.c() + "FeedbackHelper");
         }

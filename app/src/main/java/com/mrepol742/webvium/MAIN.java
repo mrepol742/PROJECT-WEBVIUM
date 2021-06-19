@@ -28,7 +28,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -70,7 +69,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.CookieManager;
@@ -123,7 +121,6 @@ import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
-import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.IntentsFilter;
@@ -155,7 +152,7 @@ import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.view.SoftKeyboard;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 import com.mrepol742.webvium.widget.W11;
 
 import java.io.BufferedReader;
@@ -199,7 +196,6 @@ public class MAIN extends MainBaseActivity implements Format {
             "https://youtube.com",
             "https://github.com",
             "https://facebook.com",
-            "https://suasive.in"
     };
 
     private static final String[] ads = {
@@ -302,7 +298,6 @@ public class MAIN extends MainBaseActivity implements Format {
     public static final String SE_YOUTUBE = "12b";
     public static final String SE_GITHUB = "13b";
     public static final String SE_FACEBOOK = "14b";
-    public static final String SE_SUASIVE = "15b";
     private WebSettings ws;
     private GeolocationDataModel w6;
     private PermissionDataModel w8;
@@ -790,11 +785,11 @@ public class MAIN extends MainBaseActivity implements Format {
             if (Connectivity.isAirplaneMode(this)) {
                 tv.setVisibility(View.GONE);
                 Animation.animate(this, R.anim.b, tv);
-                Toast.a(this, getString(R.string.m24));
+                AwesomeToast.a(this, getString(R.string.m24));
             } else {
                 tv.setVisibility(View.GONE);
                 Animation.animate(this, R.anim.b, tv);
-                Toast.a(this, getString(R.string.m25));
+                AwesomeToast.a(this, getString(R.string.m25));
             }
             return true;
         });
@@ -978,11 +973,11 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c7(String a) {
-        Toast.c(this, a);
+        AwesomeToast.c(this, a);
     }
 
     public void c8(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
     }
 
     public void c9(PermissionRequest pr) {
@@ -1393,6 +1388,11 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Objects.requireNonNull(a221().getString("java", "1f")).equals("7f")) {
             ws.setJavaScriptEnabled(false);
         }
+        if (!ws.getJavaScriptEnabled()) {
+            if (Uri.parse(h.getUrl()).getHost().equals("mrepol742.github.io") && h.getUrl().contains("/Search")) {
+
+            }
+        }
         if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("1r")) {
             ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
@@ -1574,7 +1574,7 @@ public class MAIN extends MainBaseActivity implements Format {
         ws.setBuiltInZoomControls(true);
         ws.setSupportMultipleWindows(false);
         ws.setJavaScriptCanOpenWindowsAutomatically(false);
-        if (a221().getBoolean("maUU", isDebug()) && (a221().getBoolean("hst", false) || a221().getBoolean("hste", false))) {
+        if (a221().getBoolean("maUU", BuildConfig.DEBUG) && (a221().getBoolean("hst", false) || a221().getBoolean("hste", false))) {
             h.setOnTouchListener(new View.OnTouchListener() {
                 final int sel = 5;
                 float lastY;
@@ -1601,30 +1601,30 @@ public class MAIN extends MainBaseActivity implements Format {
                             res += ali.get(i);
                         }
                         if (res > 0) {
-                            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("hst", false)) {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hst", false)) {
                                 if (findViewById(R.id.m4).getVisibility() != View.VISIBLE) {
                                     ab.show();
                                     Animation.animate(MAIN.this, R.anim.d, o);
                                 }
                             }
-                            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("hste", false)) {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste", false)) {
                                 o.setElevation(5);
                             }
-                            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("hste0", false)) {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste0", false)) {
                                 findViewById(R.id.m4).setVisibility(View.VISIBLE);
                                 Animation.animate(MAIN.this, R.anim.a, findViewById(R.id.m4));
                             }
                         } else {
-                            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("hst", false)) {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hst", false)) {
                                 if (findViewById(R.id.m4).getVisibility() != View.GONE) {
                                     ab.hide();
                                     Animation.animate(MAIN.this, R.anim.a, o);
                                 }
                             }
-                            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("hste", false)) {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste", false)) {
                                 o.setElevation(0);
                             }
-                            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("hste0", false)) {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste0", false)) {
                                 findViewById(R.id.m4).setVisibility(View.GONE);
                                 Animation.animate(MAIN.this, R.anim.d, findViewById(R.id.m4));
                             }
@@ -1996,7 +1996,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
                 @Override
                 public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-                    if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("wthj56", false)) {
+                    if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj56", false)) {
                         webViewRenderProcess.terminate();
                     }
                 }
@@ -2033,7 +2033,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c36(String sg) {
-        if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("wthj", false)) {
+        if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj", false)) {
             if (!sg.isEmpty()) {
                 if (BuildConfig.DEBUG) {
                     SharedPreferences sharedPreferences = getSharedPreferences("th", 0);
@@ -2115,9 +2115,9 @@ public class MAIN extends MainBaseActivity implements Format {
             f.putExtra("duplicate", false);
             f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
             sendBroadcast(f);
-            Toast.b(this, getString(R.string.q26));
+            AwesomeToast.b(this, getString(R.string.q26));
         } catch (Exception et) {
-            Toast.e(this, getString(R.string.a36), 2);
+            AwesomeToast.e(this, getString(R.string.a36), 2);
         }
     }
 
@@ -2397,8 +2397,6 @@ public class MAIN extends MainBaseActivity implements Format {
                 return searchEngine[12] + searchPath[0];
             case SE_FACEBOOK:
                 return searchEngine[13] + searchPath[8];
-            case SE_SUASIVE:
-                return searchEngine[14] + searchPath[0];
         }
     }
 
@@ -2452,8 +2450,6 @@ public class MAIN extends MainBaseActivity implements Format {
                 return searchEngine[12];
             case SE_FACEBOOK:
                 return searchEngine[13];
-            case SE_SUASIVE:
-                return searchEngine[14];
         }
     }
 
@@ -2557,7 +2553,6 @@ public class MAIN extends MainBaseActivity implements Format {
                         + (mi.availMem / 1024) + " Keep threshold ="
                         + (mi.threshold / 1024) + " Keep");
                 SQLiteDatabase.releaseMemory();
-                System.gc();
                 h.clearCache(false);
             }
         }
@@ -2815,7 +2810,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (a.resolveActivity(getPackageManager()) != null) {
             startActivity(Intent.createChooser(a, getString(R.string.a26)));
         } else {
-            Toast.c(this, getString(R.string.f34));
+            AwesomeToast.c(this, getString(R.string.f34));
         }
     }
 
@@ -3211,12 +3206,12 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c80(WebView a, String b) {
         try {
             if (a.getSettings().getJavaScriptEnabled()) {
-                if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("wthj", false)) {
+                if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj", false)) {
                     a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
                 }
                 a.loadUrl("javascript:window." + Package.c() + "Webvium.description( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'description') { return metas[i].getAttribute('content'); } } return '';  } )() );");
             }
-            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("tow2", false)) {
+            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("tow2", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(false);
             }
@@ -3237,7 +3232,7 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page started
     public void c81(String b) {
         try {
-            if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("tow", false)) {
+            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("tow", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(true);
             }
@@ -4767,7 +4762,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public WebResourceResponse c168(WebResourceRequest wr) {
-        if (a221().getBoolean("maUU", isDebug()) && a221().getBoolean("wthj123", false)) {
+        if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj123", false)) {
             String url = Uri.parse(wr.getUrl().toString()).getHost();
             for (String sg : ads) {
                 if (url.contains(sg)) {
@@ -5410,11 +5405,11 @@ public class MAIN extends MainBaseActivity implements Format {
                     d2.c(c);
                     c49(c);
                 } else {
-                    Toast.c(this, getString(R.string.t20));
+                    AwesomeToast.c(this, getString(R.string.t20));
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Toast.c(this, getString(R.string.t20));
+                AwesomeToast.c(this, getString(R.string.t20));
             }
         } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
             c3(sg);

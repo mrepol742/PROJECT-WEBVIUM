@@ -21,7 +21,6 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -62,7 +61,7 @@ import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.view.SoftKeyboard;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -410,7 +409,7 @@ public class SEAR extends MainBaseActivity {
     }
 
     private void f6(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
     }
 
     private void k() {
@@ -654,7 +653,7 @@ public class SEAR extends MainBaseActivity {
     }
 
     private void t(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
 
     }
 
@@ -719,11 +718,11 @@ public class SEAR extends MainBaseActivity {
                     if (U3.b(Objects.requireNonNull(c))) {
                         p.setText(c);
                     } else {
-                        Toast.c(this, getString(R.string.t20));
+                        AwesomeToast.c(this, getString(R.string.t20));
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Toast.c(this, getString(R.string.t20));
+                    AwesomeToast.c(this, getString(R.string.t20));
                 }
             }
             a.replaceExtras(new Bundle());

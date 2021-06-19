@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.MAIN;
+import com.mrepol742.webvium.PREF;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
@@ -35,7 +36,7 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.util.cache.BitmapCache;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -43,6 +44,8 @@ import java.io.OutputStream;
 import java.util.Objects;
 
 public class InterfaceFragment extends BasePreferenceFragment {
+    private static final int PRIMARY_FONT = 1234;
+    private static final int SECONDARY_FONT = 1235;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -65,10 +68,35 @@ public class InterfaceFragment extends BasePreferenceFragment {
                     BitmapCache.getInstance().b(StorageDirectory.getBackground(getActivity()));
                     Intent it = new Intent(Intents.ACTION_INVALIDATE);
                     getActivity().sendBroadcast(it);
-                    getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.o29)));
+                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.o29)));
                 } catch (Exception en) {
                     en.printStackTrace();
-                    getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.p33)));
+                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.p33)));
+                }
+            };
+            new Thread(p15).start();
+        } else if ((requestCode == PRIMARY_FONT || requestCode == SECONDARY_FONT)&& data != null) {
+            Runnable p15 = () -> {
+                try {
+                    InputStream c = getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
+                    OutputStream d = new FileOutputStream(b20(requestCode));
+                    byte[] e = new byte[1024];
+                    int f;
+                    if (c != null) {
+                        while ((f = c.read(e)) != -1) {
+                            d.write(e, 0, f);
+                        }
+                    }
+                    Objects.requireNonNull(c).close();
+                    d.flush();
+                    d.close();
+                    getActivity().runOnUiThread(() -> {
+AwesomeToast.b(getActivity(), getString(R.string.z55));
+t();
+                    });
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.z54)));
                 }
             };
             new Thread(p15).start();
@@ -105,10 +133,53 @@ public class InterfaceFragment extends BasePreferenceFragment {
                 t(0);
                 return true;
             });
+            Preference a455 = findPreference("cfnt5");
+            a455.setOnPreferenceClickListener(a -> {
+                b19(PRIMARY_FONT);
+                return true;
+            });
+            Preference a433 = findPreference("cfnt2");
+            a433.setOnPreferenceClickListener(a -> {
+                b19(SECONDARY_FONT);
+                return true;
+            });
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private String b20(int cn) {
+        if (cn == PRIMARY_FONT) {
+            return StorageDirectory.Fonts.getPrimaryFont(getActivity());
+        }
+        return StorageDirectory.Fonts.getSecondaryFont(getActivity());
+    }
+
+    private void b19(int id) {
+        Intent d = new Intent(Intent.ACTION_GET_CONTENT);
+        d.setType("*/*");
+        d.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), id);
+    }
+
+    private void t() {
+        AlertDialog.Builder c = new AlertDialog.Builder(getActivity());
+        LayoutInflater d = LayoutInflater.from(getActivity());
+        View e = d.inflate(R.layout.a12, null);
+        c.setCancelable(false);
+        c.setView(e);
+        TextView f = e.findViewById(R.id.g1);
+        f.setText(getString(R.string.o1));
+        if (!a221().getBoolean("autoUpdate", false)) {
+            f.setTextColor(Resources.getColor(getActivity(), R.color.c));
+        } else {
+            f.setTextColor(Resources.getColor(getActivity(), R.color.b));
+        }
+        AlertDialog j5 = c.create();
+        O5 timer = new O5(2000, 2000, j5);
+        timer.start();
+        j5.show();
     }
 
     private void t(int vr) {

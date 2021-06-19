@@ -47,7 +47,7 @@ import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -153,7 +153,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
             }
             C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
             C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 2);
-            Toast.a(getActivity(), getActivity().getResources().getString(R.string.j31), 0);
+            AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j31), 0);
             spe.setChecked(true);
             a.dismiss();
         });
@@ -357,7 +357,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
             } else {
                 spe.setChecked(false);
 
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
             }
 
         }
@@ -375,7 +375,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
             } else {
 
                 spe.setChecked(true);
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
             }
 
         }
@@ -507,9 +507,9 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 SharedPreferences.Editor b5 = a.edit();
                 b5.putString("gsJsGsKSIgPes", Hash.a("SHA-512", a2));
                 b5.apply();
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.k31), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k31), 0);
             } else {
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
             }
         }
     }
@@ -584,13 +584,13 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 SharedPreferences.Editor b5 = a.edit();
                 b5.clear();
                 b5.apply();
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.k33), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k33), 0);
                 spe.setChecked(false);
                 C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 2);
                 C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 1);
             } else {
 
-                Toast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
+                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
             }
 
         }

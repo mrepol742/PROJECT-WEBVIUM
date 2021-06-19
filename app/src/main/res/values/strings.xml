@@ -535,7 +535,7 @@
     <string name="c40">Incorrect PIN</string>
     <string name="d33">Do you really want to import History Database\nThis will override your Browsing History</string>
     <string name="d34">Do you really want to import Bookmarks Database\nThis will override your Bookmarks</string>
-    <string name="d35">Suasive</string>
+
     <string name="d38">Ongoing Download</string>
     <string name="d39">Searching for %1$s</string>
     <string name="d40">Size</string>
@@ -553,9 +553,9 @@
     <string name="f24">Execute</string>
     <string name="f25">Says: %1$s</string>
     <string name="f26">Font</string>
-    <string name="f27">Custom Font File</string>
-    <string name="f28">Primary Font</string>
-    <string name="f29">Secondary Font</string>
+    <string name="f27">Enable Custom Font</string>
+    <string name="f28">Custom Primary Font</string>
+    <string name="f29">Custom Secondary Font</string>
     <string name="f30">Logcat</string>
     <string name="f31">Examples: \n%1$s \n%2$s</string>
     <string name="f32">Robots.txt</string>
@@ -898,7 +898,8 @@
     <string name="z51">Handle unhandled crash and show an error dialog instead of App has Stop Alert Dialog.</string>
     <string name="z52">Trim Memory</string>
     <string name="z53">Release SQLite Database memory and call garbage collector if memory running critical, moderate or low.</string>
-
+    <string name="z54">Failed to set custom font.</string>
+    <string name="z55">Custom Font was been loaded.</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

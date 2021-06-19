@@ -29,7 +29,7 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.util.cache.BitmapCache;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -87,15 +87,15 @@ public class VideoFragment extends BasePreferenceFragment {
                     d5.flush();
                     d5.close();
                     BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(getActivity()));
-                    getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.h21)));
+                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.h21)));
                 } catch (Exception en) {
                     en.printStackTrace();
-                    getActivity().runOnUiThread(() -> Toast.b(getActivity(), getString(R.string.p30)));
+                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.p30)));
                 }
             };
             new Thread(p15).start();
         } else {
-            Toast.b(getActivity(), getString(R.string.p30));
+            AwesomeToast.b(getActivity(), getString(R.string.p30));
         }
     }
 

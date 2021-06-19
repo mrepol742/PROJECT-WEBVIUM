@@ -43,7 +43,7 @@ import com.mrepol742.webvium.download.DownloadServiceDataModel;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -199,7 +199,7 @@ public class DOWN0 extends MainService {
                         sendBroadcast(mediaScanIntent);
                     }
                 }
-                Toast.a(this, getString(R.string.x34));
+                AwesomeToast.a(this, getString(R.string.x34));
                 s2();
                 break;
 
@@ -328,12 +328,12 @@ public class DOWN0 extends MainService {
     }
 
     private void g() {
-        Toast.a(this, getString(R.string.u21));
+        AwesomeToast.a(this, getString(R.string.u21));
         s1();
     }
 
     private void h() {
-        Toast.a(this, getString(R.string.x35));
+        AwesomeToast.a(this, getString(R.string.x35));
     }
 
     @Override

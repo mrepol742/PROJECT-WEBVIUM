@@ -42,7 +42,7 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.IntentsFilter;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -198,7 +198,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
     }
 
     private void g(String a) {
-        Toast.b(getActivity(), a);
+        AwesomeToast.b(getActivity(), a);
     }
 
     private class R7 extends MainReceiver {

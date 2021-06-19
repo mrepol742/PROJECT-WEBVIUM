@@ -44,7 +44,7 @@ import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Stream;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -115,14 +115,14 @@ public class TOOL extends BaseActivity {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                Toast.b(TOOL.this, getString(R.string.v13));
+                AwesomeToast.b(TOOL.this, getString(R.string.v13));
             }
 
             @Override
             public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
                 if (Connectivity.isThereAnyInternetConnection(TOOL.this)) {
-                    Toast.c(TOOL.this, getString(R.string.x38));
-                    Toast.b(TOOL.this, getString(R.string.y72));
+                    AwesomeToast.c(TOOL.this, getString(R.string.x38));
+                    AwesomeToast.b(TOOL.this, getString(R.string.y72));
                 }
                 m.loadDataWithBaseURL("webvium", getString(R.string.c33), "html/text", "UTF-8", null);
             }

@@ -50,7 +50,6 @@ public class SearchJSI {
             "https://youtube.com",
             "https://github.com",
             "https://facebook.com",
-            "https://suasive.in"
     };
     private static final String[] searchPath = {
             "/search?q=",
@@ -174,8 +173,6 @@ public class SearchJSI {
                 return searchEngine[12] + searchPath[0];
             case MAIN.SE_FACEBOOK:
                 return searchEngine[13] + searchPath[8];
-            case MAIN.SE_SUASIVE:
-                return searchEngine[14] + searchPath[0];
         }
     }
 }

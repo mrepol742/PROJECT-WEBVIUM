@@ -55,7 +55,7 @@ import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Stream;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.view.Animation;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.ArrayList;
 
@@ -379,7 +379,7 @@ public class HIST extends BaseActivity {
     }
 
     private void f(String a) {
-        Toast.b(this, a);
+        AwesomeToast.b(this, a);
 
     }
 
@@ -523,10 +523,10 @@ public class HIST extends BaseActivity {
 
     public void l(String url, final int type) {
         if (!URLUtil.isValidUrl(url)) {
-            Toast.c(this, getString(R.string.c32));
+            AwesomeToast.c(this, getString(R.string.c32));
             return;
         } else if (!Domain.isValidDomain(url)) {
-            Toast.c(this, getString(R.string.c32));
+            AwesomeToast.c(this, getString(R.string.c32));
             return;
         }
         AlertDialog.Builder a = new AlertDialog.Builder(this);

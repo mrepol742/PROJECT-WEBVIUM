@@ -42,7 +42,7 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.Vibrate;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.util.cache.BitmapCache;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.File;
 import java.util.Objects;
@@ -165,7 +165,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             overridePendingTransition(R.anim.f, R.anim.b);
             Vibrate.a(this, 100);
         } else {
-            Toast.c(this, getString(R.string.c40));
+            AwesomeToast.c(this, getString(R.string.c40));
             Animation am76 = AnimationUtils.loadAnimation(this, R.anim.a);
             ll.startAnimation(am76);
             tv1.setText("");

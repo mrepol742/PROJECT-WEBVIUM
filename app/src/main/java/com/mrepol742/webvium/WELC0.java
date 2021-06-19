@@ -30,13 +30,8 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -44,18 +39,10 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.AppID;
-import com.mrepol742.webvium.util.cache.FontCache;
-import com.mrepol742.webvium.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Date;
 

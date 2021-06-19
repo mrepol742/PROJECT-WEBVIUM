@@ -36,7 +36,7 @@ import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 // @Class Pretend
 public class PRET extends MainBaseActivity implements View.OnClickListener, View.OnLongClickListener {
@@ -119,7 +119,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
     }
 
     private void a(String sg) {
-        Toast.a(this, sg);
+        AwesomeToast.a(this, sg);
 
         w4.evaluateJavascript("(function() { return eval(" + sg + "); })();", s -> {
             try {

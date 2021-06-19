@@ -35,7 +35,7 @@ import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class ToolFragment extends BasePreferenceFragment {
 
@@ -89,7 +89,7 @@ if (Build.VERSION.SDK_INT >= 29) {
     }
 
     private void d(String a) {
-        Toast.c(getActivity(), a);
+        AwesomeToast.c(getActivity(), a);
     }
 
     private void j() {
@@ -99,7 +99,7 @@ if (Build.VERSION.SDK_INT >= 29) {
     }
 
     private void g(String a) {
-        Toast.b(getActivity(), a);
+        AwesomeToast.b(getActivity(), a);
     }
 
     private void h(final String a) {

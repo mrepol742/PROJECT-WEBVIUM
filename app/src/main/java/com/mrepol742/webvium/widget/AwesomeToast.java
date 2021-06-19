@@ -18,19 +18,31 @@
 package com.mrepol742.webvium.widget;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
+import android.util.LruCache;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mrepol742.webvium.PRIV;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
+import com.mrepol742.webvium.app.SharedPref;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.util.cache.FontCache;
+import com.mrepol742.webvium.io.StorageDirectory;
 
-public class Toast {
+import java.io.File;
+
+public class AwesomeToast {
+    private static final String MAVEN_PRO = "classes";
+    private static Typeface type;
+    private static LruCache<Integer, Typeface> cac;
+    private static final int PRIMARY_CACHE = 99;
+
     @Keep
-    private Toast() {
+    private AwesomeToast() {
     }
 
     public static void a(Context a, String b55, int c5) {
@@ -39,8 +51,7 @@ public class Toast {
         tv.setTextColor(Resources.getColor(a, R.color.c));
         tv.setMaxLines(2);
         tv.setBackgroundResource(R.drawable.e11);
-        FontCache u7 = FontCache.getInstance(a.getApplicationContext());
-        tv.setTypeface(u7.a(Typeface.NORMAL));
+        tv.setTypeface(type(a.getApplicationContext()));
         tv.setText(b55);
         android.widget.Toast d = new android.widget.Toast(a);
         d.setDuration(c5);
@@ -58,8 +69,7 @@ public class Toast {
         TextView tv = b.findViewById(R.id.b14);
         tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.o);
-        FontCache u7 = FontCache.getInstance(a.getApplicationContext());
-        tv.setTypeface(u7.a(Typeface.NORMAL));
+        tv.setTypeface(type(a.getApplicationContext()));
         tv.setText(b55);
         tv.setMaxLines(2);
         android.widget.Toast d = new android.widget.Toast(a);
@@ -74,8 +84,7 @@ public class Toast {
         TextView tv = b.findViewById(R.id.b14);
         tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.n);
-        FontCache u7 = FontCache.getInstance(a.getApplicationContext());
-        tv.setTypeface(u7.a(Typeface.NORMAL));
+        tv.setTypeface(type(a.getApplicationContext()));
         tv.setText(bgg);
         tv.setMaxLines(2);
         android.widget.Toast d = new android.widget.Toast(a);
@@ -89,8 +98,7 @@ public class Toast {
         TextView tv = b.findViewById(R.id.b14);
         tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.o);
-        FontCache u7 = FontCache.getInstance(a.getApplicationContext());
-        tv.setTypeface(u7.a(Typeface.NORMAL));
+        tv.setTypeface(type(a.getApplicationContext()));
         tv.setText(b55);
         android.widget.Toast d = new android.widget.Toast(a);
         d.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
@@ -105,8 +113,7 @@ public class Toast {
         TextView tv = b.findViewById(R.id.b14);
         tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.n);
-        FontCache u7 = FontCache.getInstance(a.getApplicationContext());
-        tv.setTypeface(u7.a(Typeface.NORMAL));
+        tv.setTypeface(type(a.getApplicationContext()));
         tv.setText(bgg);
         tv.setMaxLines(2);
         android.widget.Toast d = new android.widget.Toast(a);
@@ -122,14 +129,40 @@ public class Toast {
         TextView tv = b.findViewById(R.id.b14);
         tv.setTextColor(Resources.getColor(a, R.color.b));
         tv.setBackgroundResource(R.drawable.o);
-        FontCache u7 = FontCache.getInstance(a.getApplicationContext());
-        tv.setTypeface(u7.a(Typeface.NORMAL));
+        tv.setTypeface(type(a.getApplicationContext()));
         tv.setText(b55);
         tv.setMaxLines(2);
         android.widget.Toast d = new android.widget.Toast(a);
         d.setDuration(i);
         d.setView(b);
         d.show();
+    }
+
+    private static Typeface type(Context ct) {
+        if (type == null) {
+            type = Typeface.createFromAsset(ct.getAssets(), MAVEN_PRO);
+        }
+        if (cac == null) {
+            cac = new LruCache<>(32);
+        }
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ct);
+        if (sp.getBoolean("cFNT", false)) {
+            File fe = new File(StorageDirectory.Fonts.getPrimaryFont(ct));
+            if (fe.exists()) {
+                Typeface bp0 = cac.get(PRIMARY_CACHE);
+                if (bp0 == null) {
+                    bp0 = Typeface.createFromFile(fe);
+                    cac.put(PRIMARY_CACHE, bp0);
+                }
+                return bp0;
+            }
+        }
+        Typeface bp = cac.get(Typeface.NORMAL);
+        if (bp == null) {
+            bp = Typeface.create(type, Typeface.NORMAL);
+            cac.put(Typeface.NORMAL, bp);
+        }
+        return bp;
     }
 
 

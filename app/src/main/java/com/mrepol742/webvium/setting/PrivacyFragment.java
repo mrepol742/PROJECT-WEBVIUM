@@ -46,7 +46,7 @@ import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -225,7 +225,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
     }
 
     private void g(String a) {
-        Toast.b(getActivity(), a);
+        AwesomeToast.b(getActivity(), a);
     }
 
     private void a1() {
@@ -297,7 +297,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
     }
 
     private void d(String a) {
-        Toast.c(getActivity(), a);
+        AwesomeToast.c(getActivity(), a);
     }
 
     private void v() {

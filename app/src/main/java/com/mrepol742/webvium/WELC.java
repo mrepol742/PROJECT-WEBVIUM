@@ -17,50 +17,41 @@
 
 package com.mrepol742.webvium;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.AppID;
-import com.mrepol742.webvium.util.cache.FontCache;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
-import java.util.Date;
 
 // @Class WelcomeScreen
 public class WELC extends BaseActivity {
+    private static final String MAVEN_PRO = "classes";
     public RelativeLayout rl;
     public ImageView iv;
     public TextView tv;
@@ -90,13 +81,11 @@ public class WELC extends BaseActivity {
         iv.startAnimation(d);
         timer = new A17a(5000, 5000);
         timer.start();
-        com.mrepol742.webvium.permission.PermissionHelper prr = com.mrepol742.webvium.permission.PermissionHelper.getInstance(getApplicationContext());
-        prr.delete();
         Runnable re = () -> {
             try {
                 File fe = new File(StorageDirectory.getClasses(this));
                 if (!fe.exists()) {
-                    InputStream fos = getAssets().open(FontCache.MAVEN_PRO);
+                    InputStream fos = getAssets().open(MAVEN_PRO);
                     OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
                     byte[] e = new byte[1024];
                     int f;
@@ -115,7 +104,7 @@ public class WELC extends BaseActivity {
         try {
             ll.setBackgroundResource(R.drawable.f11);
         } catch (Exception en) {
-            Toast.a(this, en.getMessage());
+            AwesomeToast.a(this, en.getMessage());
             en.printStackTrace();
         }
         //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);

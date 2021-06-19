@@ -30,7 +30,7 @@ import com.mrepol742.webvium.UPDA;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.util.U3;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
@@ -133,7 +133,7 @@ public class GeneralFragment extends BasePreferenceFragment {
             PREF a1 = (PREF) findPreference("cfu");
             a1.setOnPreferenceClickListener(a -> {
                 Intents.b(getActivity(), UPDA.class);
-                Toast.b(getActivity(), getString(R.string.m30));
+                AwesomeToast.b(getActivity(), getString(R.string.m30));
 
                 return true;
             });

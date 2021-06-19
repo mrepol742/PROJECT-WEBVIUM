@@ -17,7 +17,6 @@
 
 package com.mrepol742.webvium.setting;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -32,7 +31,6 @@ import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -61,11 +59,10 @@ import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.util.Format;
-import com.mrepol742.webvium.widget.Toast;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -386,11 +383,11 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
     }
 
     private void d(String a) {
-        Toast.c(getActivity(), a);
+        AwesomeToast.c(getActivity(), a);
     }
 
     private void g(String a) {
-        Toast.b(getActivity(), a);
+        AwesomeToast.b(getActivity(), a);
     }
 
     @Override
