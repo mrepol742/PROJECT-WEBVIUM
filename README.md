@@ -23,8 +23,9 @@
   <img src="https://img.shields.io/badge/APK-blue.svg" />
   <img src="https://img.shields.io/badge/576.2KB-gray.svg" />
  </p>
+ 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_welc.webp" width="190">  <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_light_main.webp" width="190"> <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_dark_main.webp" width="190"> <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_manage_space.webp" width="190"> <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_settings.webp" width="190"> <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_about.webp" width="190"> 
+ <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_dark_main.webp" width="190"> <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_settings.webp" width="190"> <img src="https://raw.githubusercontent.com/mrepol742/mrepol742.github.io/main/images/webvium_about.webp" width="190"> 
 </p>
 
   <p>Webvium is a weightless android app that has a size of 576.2KB. It's Fast, Material Design and Full-Featured Web Browser for Android. And its absolutely free to download and without any ads.</p>
