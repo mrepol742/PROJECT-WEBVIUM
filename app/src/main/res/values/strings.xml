@@ -900,6 +900,8 @@
     <string name="z53">Release SQLite Database memory and call garbage collector if memory running critical, moderate or low.</string>
     <string name="z54">Failed to set custom font.</string>
     <string name="z55">Custom Font was been loaded.</string>
+    <string name="z56">Notify you that Backup Service successfully backup Webvium APK.</string>
+    <string name="z57">Successfully Backup Webvium</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

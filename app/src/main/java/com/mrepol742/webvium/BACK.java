@@ -76,6 +76,7 @@ public class BACK extends MainService {
                             d.flush();
                             d.close();
                             fos.close();
+                            d1(sg1);
                             break;
                         }
                     }
@@ -92,12 +93,42 @@ public class BACK extends MainService {
         return super.onStartCommand(a, flag, c);
     }
 
+    private void d1(String loc) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        MainNotification.b(this, getString(R.string.n22), getString(R.string.z56));
+        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.n22));
+        m.setSmallIcon(R.drawable.a20);
+        m.setContentTitle(getString(R.string.z57));
+        m.setContentText(loc);
+        m.setColor(Resources.getColor(this, R.color.a));
+        m.setAutoCancel(sp.getBoolean("eac", true));
+        m.setDefaults(android.app.Notification.DEFAULT_ALL);
+        if (Build.VERSION.SDK_INT < 26) {
+            m.setPriority(android.app.Notification.PRIORITY_HIGH);
+        }
+        if (sp.getString("vy", "") == null) {
+            m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+        }
+        if (Objects.requireNonNull(sp.getString("vy", "")).equals("1y")) {
+            m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
+        }
+        if (Objects.requireNonNull(sp.getString("vy", "")).equals("7y")) {
+            m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+        }
+        if (Objects.requireNonNull(sp.getString("vy", "")).equals("30y")) {
+            m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
+        }
+        m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.a20));
+        NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nmc.notify(Notifications.a, m.build());
+    }
+
     private String dt() throws PackageManager.NameNotFoundException {
         if (!Permission.checkOnly(this, Permission.STORAGE)) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             MainNotification.b(this, getString(R.string.n22), getString(R.string.z42));
             android.app.Notification.Builder m = Notifications.a(this, getString(R.string.n22));
-            m.setSmallIcon(R.drawable.c);
+            m.setSmallIcon(R.drawable.r);
             android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
             bigText.bigText(getString(R.string.z44));
             bigText.setBigContentTitle(getString(R.string.z43));
@@ -105,34 +136,16 @@ public class BACK extends MainService {
             m.setContentTitle(getString(R.string.z43));
             m.setContentText(getString(R.string.z44));
             m.setStyle(bigText);
-            m.setColor(Resources.getColor(this, R.color.a));
+            m.setColor(Resources.getColor(this, R.color.e));
             m.setAutoCancel(sp.getBoolean("eac", true));
             m.setDefaults(android.app.Notification.DEFAULT_ALL);
             if (Build.VERSION.SDK_INT < 26) {
-                if (sp.getString("py", "") == null) {
-                    m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
-                }
-                if (Objects.requireNonNull(sp.getString("py", "")).equals("1x")) {
-                    m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
-                }
-                if (Objects.requireNonNull(sp.getString("py", "")).equals("7x")) {
-                    m.setPriority(android.app.Notification.PRIORITY_HIGH);
-                }
-                if (Objects.requireNonNull(sp.getString("py", "")).equals("30x")) {
-                    m.setPriority(android.app.Notification.PRIORITY_LOW);
-                }
-                if (Objects.requireNonNull(sp.getString("py", "")).equals("60x")) {
-                    m.setPriority(android.app.Notification.PRIORITY_MAX);
-                }
-                if (Objects.requireNonNull(sp.getString("py", "")).equals("120x")) {
-                    m.setPriority(android.app.Notification.PRIORITY_MIN);
-                }
+                m.setPriority(android.app.Notification.PRIORITY_HIGH);
             }
             if (sp.getString("vy", "") == null) {
                 m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
             }
             if (Objects.requireNonNull(sp.getString("vy", "")).equals("1y")) {
-
                 m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
             }
             if (Objects.requireNonNull(sp.getString("vy", "")).equals("7y")) {
@@ -141,7 +154,7 @@ public class BACK extends MainService {
             if (Objects.requireNonNull(sp.getString("vy", "")).equals("30y")) {
                 m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
             }
-            m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.c));
+            m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.r));
             Intent j = new Intent(this, BACK1.class);
             PendingIntent k = PendingIntent.getActivity(this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
             m.setContentIntent(k);
@@ -153,6 +166,6 @@ public class BACK extends MainService {
         }
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Application");
-        return StorageDirectory.getWebviumDir() + "/Backup/Application/"+Package.c()+"_" + Package.e(this) + ".apk";
+        return StorageDirectory.getWebviumDir() + "/Backup/Application/"+Package.c()+" v" + Package.e(this) + ".apk";
     }
 }

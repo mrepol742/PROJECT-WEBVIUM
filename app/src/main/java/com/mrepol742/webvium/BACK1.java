@@ -17,15 +17,71 @@
 
 package com.mrepol742.webvium;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.content.Intents;
+import com.mrepol742.webvium.content.Package;
+import com.mrepol742.webvium.manifest.Permission;
+import com.mrepol742.webvium.text.Html;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class BACK1  extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle be) {
         super.onCreate(be);
+        if (Permission.check(this, Permission.STORAGE, 1)) {
+            Intents.b(this, BACK.class);
+            finish();
+        }
+    }
 
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    public void onRequestPermissionsResult(int a, String[] b, int[] c) {
+        super.onRequestPermissionsResult(a, b, c);
+        if (a == 1) {
+            if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
+                Intents.b(this, BACK.class);
+                finish();
+            } else {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    AwesomeToast.c(this, getString(R.string.u15));
+                    finish();
+                } else {
+                    c53(getString(R.string.u16));
+                }
+            }
+        }
+    }
+
+    private void c53(String jk) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        a.setCancelable(false);
+        a.setTitle(getString(R.string.s26));
+        a.setMessage(Html.b(jk));
+        a.setPositiveButton(getString(R.string.u14), (a12, intetg) -> {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", Package.b(), null);
+            intent.setData(uri);
+            startActivity(intent);
+            a12.dismiss();
+            finish();
+        });
+        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
+            a1.dismiss();
+            finish();
+        });
+        a.create().show();
     }
 }

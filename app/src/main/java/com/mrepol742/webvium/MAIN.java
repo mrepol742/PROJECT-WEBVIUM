@@ -5168,7 +5168,9 @@ public class MAIN extends MainBaseActivity implements Format {
         c.add(0, 13, 0, getString(R.string.h4));
         a.add(0, 26, 0, getString(R.string.y73));
         a.add(0, 27, 0, getString(R.string.y74));
-        a.add(0, 14, 0, getString(R.string.k1));
+        if (Build.VERSION.SDK_INT < 29) {
+            a.add(0, 14, 0, getString(R.string.k1));
+        }
         a.add(0, 15, 0, getString(R.string.h7));
         a.add(0, 16, 0, getString(R.string.h35));
         a.add(0, 17, 0, getString(R.string.y14));

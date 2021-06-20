@@ -20,6 +20,7 @@ package com.mrepol742.webvium;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -105,21 +106,25 @@ public class SETT0 extends BaseActivity {
             tv0.setVisibility(View.GONE);
         }
         TextView tv1 = findViewById(R.id.m20);
-        tv1.setText(getString(R.string.t21));
-        tv1.setOnClickListener(view -> {
-            try {
-                Animation.animate(this, R.anim.i, tv1);
-                Animation.animate(this, R.anim.c, b);
-                b.setText(getString(R.string.t21));
+        if (Build.VERSION.SDK_INT < 29) {
+            tv1.setText(getString(R.string.t21));
+            tv1.setOnClickListener(view -> {
+                try {
+                    Animation.animate(this, R.anim.i, tv1);
+                    Animation.animate(this, R.anim.c, b);
+                    b.setText(getString(R.string.t21));
 
-            } catch (Exception en) {
-                en.printStackTrace();
-            }
-            as(R.id.m10, new DatabaseFragment());
-            id = "a2";
-            b24(false);
-            invalidateOptionsMenu();
-        });
+                } catch (Exception en) {
+                    en.printStackTrace();
+                }
+                as(R.id.m10, new DatabaseFragment());
+                id = "a2";
+                b24(false);
+                invalidateOptionsMenu();
+            });
+        } else {
+            tv1.setVisibility(View.GONE);
+        }
         TextView tv2 = findViewById(R.id.m1);
         tv2.setText(getString(R.string.l));
         tv2.setOnClickListener(view -> {
