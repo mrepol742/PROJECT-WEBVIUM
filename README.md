@@ -21,13 +21,13 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Android%205-Newer-orange.svg" />
   <img src="https://img.shields.io/badge/APK-blue.svg" />
-  <img src="https://img.shields.io/badge/576.2KB-gray.svg" />
+  <img src="https://img.shields.io/badge/584.7KB-gray.svg" />
  </p>
 <p align="center">
 <img src="https://github.com/mrepol742/PROJECT-WEBVIUM/blob/master/preview.gif?raw=true" width="900px">
 </p>
 
-  <p>Webvium is a weightless android app that has a size of 576.2KB. It's Fast, Material Design and Full-Featured Web Browser for Android. And its absolutely free to download and without any ads.</p>
+  <p>Webvium is a weightless android app that has a size of 584.7KB. It's Fast, Material Design and Full-Featured Web Browser for Android. And its absolutely free to download and without any ads.</p>
         <div><h3>CUSTOMIZATION</h3><p>Use the Interface settings, to change the app theme to dark or light. Add a little curved on edge of screen or make your favorite photo or wallpaper as app main background. Redefined your browsing experience.</p></div>
         <div><h3>LIGHTWEIGHT AND FASTER</h3>Webvium is programmed and developed to be the most lightweight app possible. Lightweight means faster installation time. Faster download time. And better browsing experience. Share this app to your friends within fraction of a seconds.</div>
         <div><h3>MATERIAL DESIGN</h3>Immerse yourself in one of the most awesome browser fully material based designed. The colors and icons are carefully picked. And it uses one of the coolest fonts ever The Maven Pro.</div>
