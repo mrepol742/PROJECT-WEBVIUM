@@ -113,6 +113,7 @@ import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
 import com.mrepol742.webvium.app.SearchJSI;
 import com.mrepol742.webvium.app.Sqlite;
+import com.mrepol742.webvium.app.WebViewTab;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.XORJSI;
@@ -180,7 +181,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 // @Class MainActivity
-public class MAIN extends MainBaseActivity implements Format {
+public class MainBeta extends MainBaseActivity implements Format {
     private static final String[] searchEngine = {
             "https://google.com",
             "https://duckduckgo.com",
@@ -321,7 +322,7 @@ public class MAIN extends MainBaseActivity implements Format {
     private PermissionHelper d12;
     private R7 r7;
     private FrameLayout fl;
-    private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7;
+    private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7, pm8;
     private TextView inf;
     private String sg;
     public static final int POPUPMENU_TOOLBAR_PASTE_AND_SEARCH = 0;
@@ -378,6 +379,8 @@ public class MAIN extends MainBaseActivity implements Format {
     final int WEBVIUM_HISTORY = 2;
     final int WEBVIUM_BOOKMARKS = 4;
     private MainReceiver ipH;
+    private ArrayList<WebViewTab> tabs = new ArrayList<>();
+    private int ct;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -388,7 +391,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c17();
                 return true;
             case POPUPMENU_TOOLBAR_COPY_LINK:
-                Clipboard.a(MAIN.this, h.getUrl());
+                Clipboard.a(MainBeta.this, h.getUrl());
                 c8(getString(R.string.k9));
                 return true;
             case POPUPMENU_TOOLBAR_SHARE_LINK:
@@ -401,7 +404,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c14(h.getTitle(), h.getUrl());
                 return true;
             case POPUPMENU_TOOLBAR_COPY_TITLE:
-                Clipboard.a(MAIN.this, h.getTitle());
+                Clipboard.a(MainBeta.this, h.getTitle());
                 c8(getString(R.string.k9));
                 return true;
             case POPUPMENU_TOOLBAR_SHARE_TITLE:
@@ -423,7 +426,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c16(sg, 1);
                 return true;
             case POPUPMENU_PHONE_COPY:
-                Clipboard.a(MAIN.this, sg);
+                Clipboard.a(MainBeta.this, sg);
                 c8(getString(R.string.k9));
                 return true;
             case POPUPMENU_PHONE_DIAL:
@@ -447,7 +450,7 @@ public class MAIN extends MainBaseActivity implements Format {
     final MenuItem.OnMenuItemClickListener e2 = a1 -> {
         switch (a1.getItemId()) {
             case POPUPMENU_MAIL_COPY:
-                Clipboard.a(MAIN.this, sg);
+                Clipboard.a(MainBeta.this, sg);
                 c8(getString(R.string.k9));
                 return true;
             case POPUPMENU_MAIL_SEND_EMAIL:
@@ -466,7 +469,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c16(sg, 0);
                 return true;
             case 4:
-                Clipboard.a(MAIN.this, sg);
+                Clipboard.a(MainBeta.this, sg);
                 c8(getString(R.string.k9));
                 return true;
 
@@ -477,7 +480,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c58(sg, null);
                 return true;
             case 12:
-                if (Permission.check(MAIN.this, Permission.STORAGE, 4)) {
+                if (Permission.check(MainBeta.this, Permission.STORAGE, 4)) {
                     c55(sg, null);
                 }
                 return true;
@@ -524,7 +527,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 c3(sg);
                 return true;
             case POPUPMENU_IMAGE_COPY:
-                Clipboard.a(MAIN.this, sg);
+                Clipboard.a(MainBeta.this, sg);
                 c8(getString(R.string.k9));
                 return true;
             case POPUPMENU_IMAGE_SHARE:
@@ -607,7 +610,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         c41();
 
-        a225(R.layout.c);
+        a225(R.layout.cbeta);
 
 
         this.o = findViewById(R.id.f);
@@ -617,6 +620,8 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         this.h = new com.mrepol742.webvium.app.WebViews(this);
         fl = findViewById(R.id.i);
+        tabs.add(new WebViewTab(h, "New Tab", "Default Homepage setup"));
+        ct = 0;
         fl.addView(h);
         tv = findViewById(R.id.d19);
         tv1 = findViewById(R.id.b1);
@@ -667,9 +672,9 @@ public class MAIN extends MainBaseActivity implements Format {
         tv7.setImageResource(R.drawable.d7);
         tv7.setOnClickListener(view -> c144());
         tv7.setBackgroundResource(R.drawable.b17);
-        tv8.setImageResource(R.drawable.d8);
+        tv8.setImageResource(R.drawable.new_tab);
         tv8.setBackgroundResource(R.drawable.b17);
-        tv8.setOnClickListener(view -> Intents.f(this, HIST.class, 211));
+        tv8.setOnClickListener(view -> c10());
         tv9.setImageResource(R.drawable.d9);
         tv9.setBackgroundResource(R.drawable.b17);
         tv9.setOnClickListener(view -> Intents.f(this, BOOK.class, 2115));
@@ -693,7 +698,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
             this.br2 = new R36();
         }
-        c34();
+        c34(this.h);
         eh.put("DNT", "1");
         this.ift.act("android.net.conn.CONNECTIVITY_CHANGE");
         this.ift.act("android.net.wifi.WIFI_STATE_CHANGED");
@@ -713,7 +718,7 @@ public class MAIN extends MainBaseActivity implements Format {
         tv5.setBackgroundResource(R.drawable.b17);
         this.iw.setImageResource(R.drawable.a15);
         this.cd.setBackgroundResource(R.drawable.w);
-        c15();
+        c15(this.h);
         c50();
         tv3.setOnClickListener(view -> {
             if (h.getProgress() == 100) {
@@ -747,7 +752,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 return false;
             }
             if (pm0 == null) {
-                pm0 = new PopupMenu(MAIN.this, view);
+                pm0 = new PopupMenu(MainBeta.this, view);
                 pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
             }
             Menu me = pm0.getMenu();
@@ -769,7 +774,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 return false;
             }
             if (pm0 == null) {
-                pm0 = new PopupMenu(MAIN.this, view);
+                pm0 = new PopupMenu(MainBeta.this, view);
                 pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
             }
             Menu me = pm0.getMenu();
@@ -837,7 +842,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             h.resumeTimers();
             h.onResume();
-            c15();
+            c15(this.h);
             bl = true;
             bl2 = true;
             registerReceiver(br, ift);
@@ -932,7 +937,8 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c3(String a) {
         c33(a, "");
-        h.loadUrl(a);
+        WebViews as = tabs.get(ct).web;
+        as.loadUrl(a);
     }
 
     public void c4(Message b, Message c) {
@@ -953,7 +959,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c5(Bitmap b) {
         tv5.setImageBitmap(b);
-        Animation.animate(MAIN.this, R.anim.c, tv5);
+        Animation.animate(MainBeta.this, R.anim.c, tv5);
     }
 
     private String c6(ConsoleMessage.MessageLevel lev) {
@@ -1030,6 +1036,484 @@ public class MAIN extends MainBaseActivity implements Format {
         e.show();
     }
 
+    private void c10() {
+        if (pm8 == null) {
+            pm8 = new PopupMenu(this, tv8);
+            pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
+        }
+        MenuItem.OnMenuItemClickListener e = a1 -> {
+                ct = tabs.size();
+            if (a1.getItemId() != 742) {
+                fl.removeAllViews();
+                WebViewTab webb = tabs.get(a1.getItemId());
+                fl.addView(webb.web);
+            } else {
+                WebViews web = new WebViews(this);
+                tabs.add(new WebViewTab(web, "New Tab ", "about:blank"));
+//c50();
+web.loadUrl("https://google.com");
+                c34(web);
+                c15(web);
+                fl.removeAllViews();
+                fl.addView(web);
+            }
+            return true;
+        };
+        Menu me = pm8.getMenu();
+        int len = tabs.size();
+        for (int i = 0; i < len; i++) {
+            me.add(0, i, 0, "Tab " + i).setOnMenuItemClickListener(e);
+        }
+        me.add(0, 742, 0, "New Tab").setOnMenuItemClickListener(e);
+        pm8.show();
+    }
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void c34(WebViews h) {
+        WebSettings ws = h.getSettings();
+        if (Build.VERSION.SDK_INT < 30) {
+            ws.setAllowFileAccess(true);
+        }
+        ws.setBuiltInZoomControls(true);
+        ws.setSupportMultipleWindows(false);
+        ws.setJavaScriptCanOpenWindowsAutomatically(false);
+        if (a221().getBoolean("maUU", BuildConfig.DEBUG) && (a221().getBoolean("hst", false) || a221().getBoolean("hste", false))) {
+            h.setOnTouchListener(new View.OnTouchListener() {
+                final int sel = 5;
+                float lastY;
+                ArrayList<Integer> ali;
+
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    float diff;
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        lastY = event.getY();
+                        ali = new ArrayList<>();
+                    } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                        diff = event.getY() - lastY;
+                        lastY = event.getY();
+                        if (diff > 0)
+                            ali.add(1);
+                        else
+                            ali.add(-1);
+                        if (ali.size() == sel + 1)
+                            ali.remove(0);
+                        int res = 0;
+                        int size = ali.size();
+                        for (int i = 0; i < size; i++) {
+                            res += ali.get(i);
+                        }
+                        if (res > 0) {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hst", false)) {
+                                if (findViewById(R.id.m4).getVisibility() != View.VISIBLE) {
+                                    ab.show();
+                                    Animation.animate(MainBeta.this, R.anim.d, o);
+                                }
+                            }
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste", false)) {
+                                o.setElevation(5);
+                            }
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste0", false)) {
+                                findViewById(R.id.m4).setVisibility(View.VISIBLE);
+                                Animation.animate(MainBeta.this, R.anim.a, findViewById(R.id.m4));
+                            }
+                        } else {
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hst", false)) {
+                                if (findViewById(R.id.m4).getVisibility() != View.GONE) {
+                                    ab.hide();
+                                    Animation.animate(MainBeta.this, R.anim.a, o);
+                                }
+                            }
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste", false)) {
+                                o.setElevation(0);
+                            }
+                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste0", false)) {
+                                findViewById(R.id.m4).setVisibility(View.GONE);
+                                Animation.animate(MainBeta.this, R.anim.d, findViewById(R.id.m4));
+                            }
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+        h.setDownloadListener((str, str2, str3, str4, j) -> c83(new PendingDownloadDataModel(str, str3, str4, j, str2)));
+        h.setWebChromeClient(new WebChromeClient() {
+
+            @Override
+            public Bitmap getDefaultVideoPoster() {
+                return c84();
+            }
+
+            @Override
+            public void onReceivedTitle(WebView a, String b) {
+                c86(a, b);
+            }
+
+            @Override
+            public void onHideCustomView() {
+                c87();
+            }
+
+            @Override
+            public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
+                c88(a, b);
+            }
+
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
+                MainBeta.this.b = b;
+                Intent d = fileChooserParams.createIntent();
+                d.setAction(Intent.ACTION_GET_CONTENT);
+                d.addCategory(Intent.CATEGORY_OPENABLE);
+                String[] sg = fileChooserParams.getAcceptTypes();
+                if (sg.length != 0) {
+                    d.setType(sg[1]);
+                } else {
+                    d.setType("*/*");
+                }
+                if (d.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onProgressChanged(WebView a, int b) {
+                g.setProgress(b);
+                if (b == 100) {
+                    tv3.setImageResource(R.drawable.b11);
+                    Animation.animate(MainBeta.this, R.anim.c, tv3);
+                    g.setVisibility(View.GONE);
+                    Animation.animate(MainBeta.this, R.anim.b, g);
+                    MainBeta.this.cm1.flush();
+                    cdt.cancel();
+                    cdt.purge();
+                    if (a224("a10", false) && bl6) {
+                        // if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
+                        c142(a.getTitle(), a.getUrl());
+                       /* } else {
+                            c142(getString(R.string.g29), getString(R.string.g30));
+                        }*/
+                    } else if (a224("a10", false) && !bl6) {
+                        //if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
+                        c143(a.getTitle(), a.getUrl());
+                      /*  } else {
+                            c143(getString(R.string.g29), getString(R.string.g30));
+                        }*/
+                    }
+                } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
+                    cdt.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            c141();
+                            cdt.cancel();
+                            cdt.purge();
+                        }
+                    }, 10000);
+                }
+                if (b != 100) {
+                    g.setVisibility(View.VISIBLE);
+                    Animation.animate(MainBeta.this, R.anim.c, g);
+                    tv3.setImageResource(R.drawable.a14);
+                    Animation.animate(MainBeta.this, R.anim.c, tv3);
+                }
+                tv3.setBackgroundResource(R.drawable.b17);
+            }
+
+            @Override
+            public boolean onJsAlert(WebView a, String b, String c, JsResult d) {
+                if (a221().getBoolean("Java10", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(MainBeta.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(true);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(MainBeta.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(MainBeta.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        d.confirm();
+                        a13.dismiss();
+                    });
+                    bld.setOnCancelListener(a1 -> {
+                        d.cancel();
+                        a1.dismiss();
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onJsPrompt(WebView a, String b, String c, String d, JsPromptResult e) {
+                if (a221().getBoolean("Java9", true)) {
+                    AlertDialog.Builder a89 = new AlertDialog.Builder(MainBeta.this);
+                    LayoutInflater b54 = getLayoutInflater();
+                    View c34 = b54.inflate(R.layout.x, null);
+                    a89.setCancelable(true);
+                    a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    a89.setView(c34);
+                    TextView sjs1 = c34.findViewById(R.id.e1);
+                    final EDIT sjs = c34.findViewById(R.id.e3);
+                    int e78 = Resources.getColor(MainBeta.this, R.color.c);
+                    int f = Resources.getColor(MainBeta.this, R.color.b);
+                    int f1 = Resources.getColor(MainBeta.this, R.color.j);
+                    int g1 = Resources.getColor(MainBeta.this, R.color.k);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        sjs1.setTextColor(e78);
+                        sjs.setTextColor(e78);
+                        sjs.setHintTextColor(f1);
+                    } else {
+                        sjs1.setTextColor(f);
+                        sjs.setTextColor(f);
+                        sjs.setHintTextColor(g1);
+                    }
+                    sjs1.setText(c);
+                    a89.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        String uwe = sjs.getText().toString();
+                        e.confirm(uwe);
+                    });
+                    a89.setNegativeButton(getString(R.string.i7), (a12, intetg) -> e.cancel()).setOnCancelListener(a1 -> {
+                        e.cancel();
+                        a1.dismiss();
+                    });
+                    final AlertDialog g = a89.create();
+                    g.show();
+                    final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
+                    sjs.addTextChangedListener(new TextWatcher() {
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            okButton.setEnabled(sjs.getText().toString().length() != 0);
+                        }
+                    });
+                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onJsConfirm(WebView a, String b, String c, JsResult e) {
+                if (a221().getBoolean("Java11", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(MainBeta.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(true);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(MainBeta.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(MainBeta.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        e.confirm();
+                        a13.dismiss();
+                    });
+                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
+                        e.cancel();
+                        a12.dismiss();
+                    });
+                    bld.setOnCancelListener(a1 -> {
+                        e.cancel();
+                        a1.dismiss();
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onJsBeforeUnload(WebView a, String b, String c, JsResult e) {
+                if (a221().getBoolean("Java12", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(MainBeta.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(false);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(MainBeta.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(MainBeta.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
+                        e.confirm();
+                        a13.dismiss();
+                    });
+                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
+                        e.cancel();
+                        a12.dismiss();
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage cm1) {
+                cm.append(String.format(getString(R.string.v188), cm1.messageLevel().toString(), c6(cm1.messageLevel()), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
+                        .append("\n\n");
+                return true;
+            }
+
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String a, GeolocationPermissions.Callback b) {
+                final boolean c = false;
+                AlertDialog.Builder d = new AlertDialog.Builder(MainBeta.this);
+                d.setMessage(String.format(getString(R.string.v14), a));
+                d.setCancelable(false);
+                d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
+                    if (Permission.check(MainBeta.this, Permission.LOCATION, 5)) {
+                        b.invoke(a, true, c);
+                        c8(String.format(getString(R.string.v15), a));
+                    } else {
+                        w6 = new GeolocationDataModel(a, b);
+                    }
+                    a1.dismiss();
+                });
+                d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
+                    b.invoke(a, false, c);
+                    c7(String.format(getString(R.string.v16), a));
+                    a1.dismiss();
+                });
+                AlertDialog e = d.create();
+                e.show();
+            }
+
+            @Override
+            public View getVideoLoadingProgressView() {
+                return c1();
+            }
+
+            @Override
+            public void onPermissionRequest(PermissionRequest pr) {
+                c129(pr);
+            }
+
+            @Override
+            public void onReceivedIcon(WebView a, Bitmap b) {
+                c5(b);
+            }
+        });
+        h.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
+        h.setWebViewClient(new MainWebViewClient() {
+
+            @Override
+            public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
+                c23(event);
+            }
+
+            @Override
+            public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
+                c172(handler, host, realm);
+            }
+
+            @Override
+            public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
+                c77(new ReceivedErrorDataModel(b, c, d, bn, bn1));
+            }
+
+            @Override
+            public void onReceivedHttpError(WebView a, WebResourceRequest b, WebResourceResponse c) {
+                c78(b, c);
+            }
+
+            @Override
+            public void onReceivedSslError(WebView a, SslErrorHandler b, SslError c) {
+                c79(b, c);
+            }
+
+            @Override
+            public void onPageFinished(WebView a, String b) {
+                c80(a, b);
+            }
+
+            @Override
+            public void onPageStarted(WebView a, String b, Bitmap b5) {
+                c81(b);
+            }
+
+            @Override
+            @Keep
+            public boolean url(WebView a, String b) {
+                return c82(b);
+            }
+
+            @Override
+            public void onSafeBrowsingHit(WebView view, WebResourceRequest ess, int type, SafeBrowsingResponse sbh) {
+                c60(view, type, sbh);
+            }
+
+            @Override
+            public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
+                c151(a, b, c);
+            }
+
+            @Override
+            public void onFormResubmission(WebView a, Message b, Message c) {
+                c4(b, c);
+            }
+
+            @Override
+            public WebResourceResponse r(WebResourceRequest wr) {
+                return c168(wr);
+            }
+        });
+        h.addJavascriptInterface(new SearchJSI(this), Package.c()+"SearchHelper");
+        h.addJavascriptInterface(new Object() {
+
+            @JavascriptInterface
+            public void setTheme(String a) {
+                c36(a);
+            }
+        }, Package.c()+"ThemeHelper");
+        h.addJavascriptInterface(new Object() {
+
+            @JavascriptInterface
+            public void launch() {
+                Intents.a(MainBeta.this, VOIC.class);
+            }
+        }, Package.c() + "VoiceHelper");
+        if (Build.VERSION.SDK_INT >= 29) {
+            h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
+
+                @Override
+                public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
+                    if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj56", false)) {
+                        webViewRenderProcess.terminate();
+                    }
+                }
+
+                @Override
+                public void onRenderProcessResponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
+
+                }
+            });
+        }
+    }
+
+
     private void c11(PendingDownloadDataModel w18) {
         try {
 
@@ -1061,8 +1545,8 @@ public class MAIN extends MainBaseActivity implements Format {
 
                 j4.setText(getString(R.string.e23));
                 Runnable re = () -> {
-                    String fn = Formatter.formatFileSize(MAIN.this, w18.a4);
-                    String fn1 = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace() + w18.a4);
+                    String fn = Formatter.formatFileSize(MainBeta.this, w18.a4);
+                    String fn1 = Formatter.formatFileSize(MainBeta.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace() + w18.a4);
                     runOnUiThread(() -> {
                         h.setText(fn);
                         j5.setText(fn1);
@@ -1082,8 +1566,8 @@ public class MAIN extends MainBaseActivity implements Format {
             j2.setText(getString(R.string.e22));
             j6.setText(getString(R.string.e24));
             Runnable re = () -> {
-                String j3a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace());
-                String j7a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getTotalSpace());
+                String j3a = Formatter.formatFileSize(MainBeta.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace());
+                String j7a = Formatter.formatFileSize(MainBeta.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getTotalSpace());
                 runOnUiThread(() -> {
                     j3.setText(j3a);
                     j7.setText(j7a);
@@ -1126,12 +1610,12 @@ public class MAIN extends MainBaseActivity implements Format {
                     String c1 = s.getText().toString();
                     c8(getString(R.string.e27));
                     if (a221().getBoolean("launch", false)) {
-                        Intents.a(MAIN.this, DOWN.class);
+                        Intents.a(MainBeta.this, DOWN.class);
                     }
                     // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
                     // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
-                    SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
-                    Intent it = new Intent(MAIN.this, DOWN0.class);
+                    SharedPreferences sp9 = MainBeta.this.getSharedPreferences("wv", 0);
+                    Intent it = new Intent(MainBeta.this, DOWN0.class);
                     it.putExtra("a", c1);
                     it.putExtra("b", w18.a1);
                     it.putExtra("c", true);
@@ -1139,7 +1623,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     it.putExtra("e", w18.a3);
                     it.putExtra("f", w18.a1);
                     it.putExtra("g", w18.a6);
-                    Notifications.b(MAIN.this, it);
+                    Notifications.b(MainBeta.this, it);
                     if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
                         c71();
                         SharedPreferences.Editor spe = sp9.edit();
@@ -1298,7 +1782,8 @@ public class MAIN extends MainBaseActivity implements Format {
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
-    private void c15() {
+    private void c15(WebViews h) {
+        WebSettings ws = h.getSettings();
         if (a221().getBoolean("Javaweb", true)) {
             h.addJavascriptInterface(new WebviumJSI(this), Package.c());
             h.addJavascriptInterface(new Object() {
@@ -1564,453 +2049,6 @@ public class MAIN extends MainBaseActivity implements Format {
             ex.printStackTrace();
         }
     }
-
-    
-    @SuppressLint("ClickableViewAccessibility")
-    private void c34() {
-        if (Build.VERSION.SDK_INT < 30) {
-            ws.setAllowFileAccess(true);
-        }
-        ws.setBuiltInZoomControls(true);
-        ws.setSupportMultipleWindows(false);
-        ws.setJavaScriptCanOpenWindowsAutomatically(false);
-        if (a221().getBoolean("maUU", BuildConfig.DEBUG) && (a221().getBoolean("hst", false) || a221().getBoolean("hste", false))) {
-            h.setOnTouchListener(new View.OnTouchListener() {
-                final int sel = 5;
-                float lastY;
-                ArrayList<Integer> ali;
-
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    float diff;
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        lastY = event.getY();
-                        ali = new ArrayList<>();
-                    } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                        diff = event.getY() - lastY;
-                        lastY = event.getY();
-                        if (diff > 0)
-                            ali.add(1);
-                        else
-                            ali.add(-1);
-                        if (ali.size() == sel + 1)
-                            ali.remove(0);
-                        int res = 0;
-                        int size = ali.size();
-                        for (int i = 0; i < size; i++) {
-                            res += ali.get(i);
-                        }
-                        if (res > 0) {
-                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hst", false)) {
-                                if (findViewById(R.id.m4).getVisibility() != View.VISIBLE) {
-                                    ab.show();
-                                    Animation.animate(MAIN.this, R.anim.d, o);
-                                }
-                            }
-                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste", false)) {
-                                o.setElevation(5);
-                            }
-                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste0", false)) {
-                                findViewById(R.id.m4).setVisibility(View.VISIBLE);
-                                Animation.animate(MAIN.this, R.anim.a, findViewById(R.id.m4));
-                            }
-                        } else {
-                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hst", false)) {
-                                if (findViewById(R.id.m4).getVisibility() != View.GONE) {
-                                    ab.hide();
-                                    Animation.animate(MAIN.this, R.anim.a, o);
-                                }
-                            }
-                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste", false)) {
-                                o.setElevation(0);
-                            }
-                            if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("hste0", false)) {
-                                findViewById(R.id.m4).setVisibility(View.GONE);
-                                Animation.animate(MAIN.this, R.anim.d, findViewById(R.id.m4));
-                            }
-                        }
-                    }
-                    return false;
-                }
-            });
-        }
-        h.setDownloadListener((str, str2, str3, str4, j) -> c83(new PendingDownloadDataModel(str, str3, str4, j, str2)));
-        h.setWebChromeClient(new WebChromeClient() {
-
-            @Override
-            public Bitmap getDefaultVideoPoster() {
-                return c84();
-            }
-
-            @Override
-            public void onReceivedTitle(WebView a, String b) {
-                c86(a, b);
-            }
-
-            @Override
-            public void onHideCustomView() {
-                c87();
-            }
-
-            @Override
-            public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
-                c88(a, b);
-            }
-
-            @Override
-            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
-                MAIN.this.b = b;
-                Intent d = fileChooserParams.createIntent();
-                d.setAction(Intent.ACTION_GET_CONTENT);
-                d.addCategory(Intent.CATEGORY_OPENABLE);
-                String[] sg = fileChooserParams.getAcceptTypes();
-                if (sg.length != 0) {
-                    d.setType(sg[1]);
-                } else {
-                    d.setType("*/*");
-                }
-                if (d.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public void onProgressChanged(WebView a, int b) {
-                g.setProgress(b);
-                if (b == 100) {
-                    tv3.setImageResource(R.drawable.b11);
-                    Animation.animate(MAIN.this, R.anim.c, tv3);
-                    g.setVisibility(View.GONE);
-                    Animation.animate(MAIN.this, R.anim.b, g);
-                    MAIN.this.cm1.flush();
-                    cdt.cancel();
-                    cdt.purge();
-                    if (a224("a10", false) && bl6) {
-                        // if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
-                        c142(a.getTitle(), a.getUrl());
-                       /* } else {
-                            c142(getString(R.string.g29), getString(R.string.g30));
-                        }*/
-                    } else if (a224("a10", false) && !bl6) {
-                        //if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
-                        c143(a.getTitle(), a.getUrl());
-                      /*  } else {
-                            c143(getString(R.string.g29), getString(R.string.g30));
-                        }*/
-                    }
-                } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
-                    cdt.schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            c141();
-                            cdt.cancel();
-                            cdt.purge();
-                        }
-                    }, 10000);
-                }
-                if (b != 100) {
-                    g.setVisibility(View.VISIBLE);
-                    Animation.animate(MAIN.this, R.anim.c, g);
-                    tv3.setImageResource(R.drawable.a14);
-                    Animation.animate(MAIN.this, R.anim.c, tv3);
-                }
-                tv3.setBackgroundResource(R.drawable.b17);
-            }
-
-            @Override
-            public boolean onJsAlert(WebView a, String b, String c, JsResult d) {
-                if (a221().getBoolean("Java10", true)) {
-                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater d1 = getLayoutInflater();
-                    View e5 = d1.inflate(R.layout.a13, null);
-                    bld.setView(e5);
-                    bld.setCancelable(true);
-                    TextView tv = e5.findViewById(R.id.o37);
-                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    tv.setText(c);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
-                    } else {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
-                    }
-                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        d.confirm();
-                        a13.dismiss();
-                    });
-                    bld.setOnCancelListener(a1 -> {
-                        d.cancel();
-                        a1.dismiss();
-                    });
-                    AlertDialog dd = bld.create();
-                    dd.show();
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onJsPrompt(WebView a, String b, String c, String d, JsPromptResult e) {
-                if (a221().getBoolean("Java9", true)) {
-                    AlertDialog.Builder a89 = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater b54 = getLayoutInflater();
-                    View c34 = b54.inflate(R.layout.x, null);
-                    a89.setCancelable(true);
-                    a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    a89.setView(c34);
-                    TextView sjs1 = c34.findViewById(R.id.e1);
-                    final EDIT sjs = c34.findViewById(R.id.e3);
-                    int e78 = Resources.getColor(MAIN.this, R.color.c);
-                    int f = Resources.getColor(MAIN.this, R.color.b);
-                    int f1 = Resources.getColor(MAIN.this, R.color.j);
-                    int g1 = Resources.getColor(MAIN.this, R.color.k);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        sjs1.setTextColor(e78);
-                        sjs.setTextColor(e78);
-                        sjs.setHintTextColor(f1);
-                    } else {
-                        sjs1.setTextColor(f);
-                        sjs.setTextColor(f);
-                        sjs.setHintTextColor(g1);
-                    }
-                    sjs1.setText(c);
-                    a89.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        String uwe = sjs.getText().toString();
-                        e.confirm(uwe);
-                    });
-                    a89.setNegativeButton(getString(R.string.i7), (a12, intetg) -> e.cancel()).setOnCancelListener(a1 -> {
-                        e.cancel();
-                        a1.dismiss();
-                    });
-                    final AlertDialog g = a89.create();
-                    g.show();
-                    final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-                    sjs.addTextChangedListener(new TextWatcher() {
-
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                            okButton.setEnabled(sjs.getText().toString().length() != 0);
-                        }
-                    });
-                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onJsConfirm(WebView a, String b, String c, JsResult e) {
-                if (a221().getBoolean("Java11", true)) {
-                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater d1 = getLayoutInflater();
-                    View e5 = d1.inflate(R.layout.a13, null);
-                    bld.setView(e5);
-                    bld.setCancelable(true);
-                    TextView tv = e5.findViewById(R.id.o37);
-                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    tv.setText(c);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
-                    } else {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
-                    }
-                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        e.confirm();
-                        a13.dismiss();
-                    });
-                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
-                        e.cancel();
-                        a12.dismiss();
-                    });
-                    bld.setOnCancelListener(a1 -> {
-                        e.cancel();
-                        a1.dismiss();
-                    });
-                    AlertDialog dd = bld.create();
-                    dd.show();
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onJsBeforeUnload(WebView a, String b, String c, JsResult e) {
-                if (a221().getBoolean("Java12", true)) {
-                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater d1 = getLayoutInflater();
-                    View e5 = d1.inflate(R.layout.a13, null);
-                    bld.setView(e5);
-                    bld.setCancelable(false);
-                    TextView tv = e5.findViewById(R.id.o37);
-                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    tv.setText(c);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
-                    } else {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
-                    }
-                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        e.confirm();
-                        a13.dismiss();
-                    });
-                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
-                        e.cancel();
-                        a12.dismiss();
-                    });
-                    AlertDialog dd = bld.create();
-                    dd.show();
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onConsoleMessage(ConsoleMessage cm1) {
-                cm.append(String.format(getString(R.string.v188), cm1.messageLevel().toString(), c6(cm1.messageLevel()), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
-                        .append("\n\n");
-                return true;
-            }
-
-            @Override
-            public void onGeolocationPermissionsShowPrompt(String a, GeolocationPermissions.Callback b) {
-                final boolean c = false;
-                AlertDialog.Builder d = new AlertDialog.Builder(MAIN.this);
-                d.setMessage(String.format(getString(R.string.v14), a));
-                d.setCancelable(false);
-                d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
-                    if (Permission.check(MAIN.this, Permission.LOCATION, 5)) {
-                        b.invoke(a, true, c);
-                        c8(String.format(getString(R.string.v15), a));
-                    } else {
-                        w6 = new GeolocationDataModel(a, b);
-                    }
-                    a1.dismiss();
-                });
-                d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
-                    b.invoke(a, false, c);
-                    c7(String.format(getString(R.string.v16), a));
-                    a1.dismiss();
-                });
-                AlertDialog e = d.create();
-                e.show();
-            }
-
-            @Override
-            public View getVideoLoadingProgressView() {
-                return c1();
-            }
-
-            @Override
-            public void onPermissionRequest(PermissionRequest pr) {
-                c129(pr);
-            }
-
-            @Override
-            public void onReceivedIcon(WebView a, Bitmap b) {
-                c5(b);
-            }
-        });
-        h.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        h.setWebViewClient(new MainWebViewClient() {
-
-            @Override
-            public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
-                c23(event);
-            }
-
-            @Override
-            public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-                c172(handler, host, realm);
-            }
-
-            @Override
-            public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
-                c77(new ReceivedErrorDataModel(b, c, d, bn, bn1));
-            }
-
-            @Override
-            public void onReceivedHttpError(WebView a, WebResourceRequest b, WebResourceResponse c) {
-                c78(b, c);
-            }
-
-            @Override
-            public void onReceivedSslError(WebView a, SslErrorHandler b, SslError c) {
-                c79(b, c);
-            }
-
-            @Override
-            public void onPageFinished(WebView a, String b) {
-                c80(a, b);
-            }
-
-            @Override
-            public void onPageStarted(WebView a, String b, Bitmap b5) {
-                c81(b);
-            }
-
-            @Override
-            @Keep
-            public boolean url(WebView a, String b) {
-                return c82(b);
-            }
-
-            @Override
-            public void onSafeBrowsingHit(WebView view, WebResourceRequest ess, int type, SafeBrowsingResponse sbh) {
-                c60(view, type, sbh);
-            }
-
-            @Override
-            public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
-                c151(a, b, c);
-            }
-
-            @Override
-            public void onFormResubmission(WebView a, Message b, Message c) {
-                c4(b, c);
-            }
-
-            @Override
-            public WebResourceResponse r(WebResourceRequest wr) {
-                return c168(wr);
-            }
-        });
-        h.addJavascriptInterface(new SearchJSI(this), Package.c()+"SearchHelper");
-        h.addJavascriptInterface(new Object() {
-
-            @JavascriptInterface
-            public void setTheme(String a) {
-                c36(a);
-            }
-        }, Package.c()+"ThemeHelper");
-        h.addJavascriptInterface(new Object() {
-
-            @JavascriptInterface
-            public void launch() {
-                Intents.a(MAIN.this, VOIC.class);
-            }
-        }, Package.c() + "VoiceHelper");
-        if (Build.VERSION.SDK_INT >= 29) {
-            h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
-
-                @Override
-                public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-                    if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj56", false)) {
-                        webViewRenderProcess.terminate();
-                    }
-                }
-
-                @Override
-                public void onRenderProcessResponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
-
-                }
-            });
-        }
-    }
-
-
-
 
     private void c35(SpannableString ssb, String url, int it) {
         try {
@@ -2457,6 +2495,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c49(String a) {
+        WebViews as = tabs.get(ct).web;
         String a5 = a.trim().toLowerCase();
         if (a5.equals("webvium://history")) {
             c146(WEBVIUM_HISTORY);
@@ -2470,12 +2509,12 @@ public class MAIN extends MainBaseActivity implements Format {
             it.putExtra("dat", a5);
             startActivity(it);
         } else if (a.equals("about:blank")) {
-            h.loadUrl("about:blank");
+            as.loadUrl("about:blank");
         } else if (IPAddress.isValidIpAddress(a)) {
-            h.loadUrl(a);
+            as.loadUrl(a);
         } else if (URLUtil.isValidUrl(a5)) {
             if (a5.startsWith("file://") || a5.startsWith("https://") || a5.startsWith("http://") || a5.startsWith("content://")) {
-                h.loadUrl(c138(a));
+                as.loadUrl(c138(a));
             } else {
                 if (Domain.isValidDomain(a5)) {
                     c3(c138(a));
@@ -2596,7 +2635,7 @@ public class MAIN extends MainBaseActivity implements Format {
             this.iw.setVisibility(View.GONE);
             this.tv10.setVisibility(View.GONE);
         }
-        Animation.animate(MAIN.this, R.anim.c, this.iw);
+        Animation.animate(MainBeta.this, R.anim.c, this.iw);
         this.iw.setBackgroundResource(R.drawable.b17);
         this.tv10.setText("|");
     }
@@ -2638,7 +2677,7 @@ public class MAIN extends MainBaseActivity implements Format {
             Intent it = new Intent(this, Hash.class);
             it.putExtra("a", ed.getText().toString());
             it.putExtra("b", ed1.getText().toString());
-            Notifications.b(MAIN.this, it);
+            Notifications.b(MainBeta.this, it);
             a2.dismiss();
 
         });
@@ -3241,13 +3280,13 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             tv5.setImageResource(R.drawable.a18);
             tv5.setBackgroundResource(R.drawable.b17);
-            Animation.animate(MAIN.this, R.anim.c, tv5);
+            Animation.animate(MainBeta.this, R.anim.c, tv5);
             bl5 = false;
             c134();
             c38(b);
             c33(b, getString(R.string.v13));
             this.iw.setImageResource(R.drawable.a15);
-            Animation.animate(MAIN.this, R.anim.c, this.iw);
+            Animation.animate(MainBeta.this, R.anim.c, this.iw);
             this.cd.setBackgroundResource(R.drawable.w);
         } catch (Exception e) {
             e.printStackTrace();
@@ -3687,24 +3726,24 @@ public class MAIN extends MainBaseActivity implements Format {
         bn.setOnClickListener(view -> {
             String a1 = ed.getText().toString();
             if (type == SOURCE_CODE) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
+                Intent it = new Intent(MainBeta.this, TOOL.class);
                 it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
                 startActivity(it);
             } else if (type == HEADERS) {
                 c126(a1);
             } else if (type == ROBOTS) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
+                Intent it = new Intent(MainBeta.this, TOOL.class);
                 it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_ROBOTS);
                 startActivity(it);
             } else if (type == ASSETLINKS) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
+                Intent it = new Intent(MainBeta.this, TOOL.class);
                 it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
                 startActivity(it);
             } else if (type == SITEMAPS) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
+                Intent it = new Intent(MainBeta.this, TOOL.class);
                 it.putExtra("dat", a1);
                 it.putExtra("id", TOOL.TOOL_SITEMAPS);
                 startActivity(it);
@@ -3878,7 +3917,7 @@ public class MAIN extends MainBaseActivity implements Format {
             mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) - 1, AudioManager.FLAG_PLAY_SOUND);
         }
         Runnable p15 = () -> {
-            final Bitmap pp = Resources.getBitmapFromResource(MAIN.this, R.drawable.a6);
+            final Bitmap pp = Resources.getBitmapFromResource(MainBeta.this, R.drawable.a6);
             runOnUiThread(() -> c2.setThumb(new BitmapDrawable(getResources(), pp)));
         };
         new Thread(p15).start();
@@ -3892,7 +3931,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         });
         ll.setOnClickListener(view -> {
-            Animation.animate(MAIN.this, R.anim.d, c2);
+            Animation.animate(MainBeta.this, R.anim.d, c2);
             k.removeView(c);
         });
         k.addView(c);
@@ -4173,8 +4212,8 @@ public class MAIN extends MainBaseActivity implements Format {
             tv6.setImageResource(R.drawable.c14);
         }
 
-        Animation.animate(MAIN.this, R.anim.c, tv6);
-        Animation.animate(MAIN.this, R.anim.c, tv4);
+        Animation.animate(MainBeta.this, R.anim.c, tv6);
+        Animation.animate(MainBeta.this, R.anim.c, tv4);
     }
 
     public String c138(String sg) {
@@ -4251,7 +4290,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Objects.requireNonNull(a221().getString("vy", "7y")).equals("30y")) {
             m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
         }
-        Intent j11 = new Intent(this, MAIN.class);
+        Intent j11 = new Intent(this, MainBeta.class);
         PendingIntent k567 = PendingIntent.getActivity(this, 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
         m.setContentIntent(k567);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.f8));
@@ -4303,7 +4342,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Objects.requireNonNull(a221().getString("vy", "7y")).equals("30y")) {
             m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
         }
-        Intent j11 = new Intent(this, MAIN.class);
+        Intent j11 = new Intent(this, MainBeta.class);
         PendingIntent k567 = PendingIntent.getActivity(this, 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
         m.setContentIntent(k567);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.r));
@@ -4326,10 +4365,10 @@ public class MAIN extends MainBaseActivity implements Format {
                         return true;
 
                     case 0:
-                        Intents.a(MAIN.this, DOWN.class);
+                        Intents.a(MainBeta.this, DOWN.class);
                         return true;
                     case 3:
-                        Intents.a(MAIN.this, SETT0.class);
+                        Intents.a(MainBeta.this, SETT0.class);
                         return true;
                     case 1:
                         h.pageUp(true);
@@ -4337,6 +4376,9 @@ public class MAIN extends MainBaseActivity implements Format {
                     case 2:
                         h.pageDown(true);
                         return true;
+                    case 6:
+                        Intents.f(this, HIST.class, 211);
+                        break;
 
                 }
                 return false;
@@ -4350,6 +4392,7 @@ public class MAIN extends MainBaseActivity implements Format {
             me.add(0, 3, 0, getString(R.string.h3)).setOnMenuItemClickListener(e);
             me.add(0, 4, 0, getString(R.string.h2)).setOnMenuItemClickListener(e);
             me.add(0, 5, 0, getString(R.string.e10)).setOnMenuItemClickListener(e);
+            me.add(0, 6, 0, getString(R.string.h18)).setOnMenuItemClickListener(e);
         }
         pm7.show();
     }
@@ -4494,22 +4537,22 @@ public class MAIN extends MainBaseActivity implements Format {
             Runnable re = () -> {
                 java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
                 if (fe.exists()) {
-                    Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(MAIN.this));
+                    Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(MainBeta.this));
                     runOnUiThread(() -> {
                         this.set = true;
                         this.h.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
                         this.o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-                        MAIN.this.back23.setBackground(new BitmapDrawable(MAIN.this.getResources(), bp));
+                        MainBeta.this.back23.setBackground(new BitmapDrawable(MainBeta.this.getResources(), bp));
                         this.llt.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
                     });
                 } else {
                     runOnUiThread(() -> {
                         if (!a221().getBoolean("autoUpdate", false)) {
                             h.setBackgroundColor(Resources.getColor(this, R.color.p));
-                            MAIN.this.back23.setBackgroundColor(Resources.getColor(this, R.color.p));
+                            MainBeta.this.back23.setBackgroundColor(Resources.getColor(this, R.color.p));
                         } else {
                             h.setBackgroundColor(Resources.getColor(this, R.color.m));
-                            MAIN.this.back23.setBackgroundColor(Resources.getColor(this, R.color.m));
+                            MainBeta.this.back23.setBackgroundColor(Resources.getColor(this, R.color.m));
                         }
                         this.o.setBackgroundResource(R.drawable.p);
                         this.llt.setBackgroundResource(R.drawable.f1);
@@ -4522,10 +4565,10 @@ public class MAIN extends MainBaseActivity implements Format {
             this.llt.setBackgroundResource(R.drawable.f1);
             if (!a221().getBoolean("autoUpdate", false)) {
                 h.setBackgroundColor(Resources.getColor(this, R.color.p));
-                MAIN.this.back23.setBackgroundColor(Resources.getColor(this, R.color.p));
+                MainBeta.this.back23.setBackgroundColor(Resources.getColor(this, R.color.p));
             } else {
                 h.setBackgroundColor(Resources.getColor(this, R.color.m));
-                MAIN.this.back23.setBackgroundColor(Resources.getColor(this, R.color.m));
+                MainBeta.this.back23.setBackgroundColor(Resources.getColor(this, R.color.m));
             }
         }
     }

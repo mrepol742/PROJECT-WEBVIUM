@@ -902,6 +902,7 @@
     <string name="z55">Custom Font was been loaded.</string>
     <string name="z56">Notify you that Backup Service successfully backup Webvium APK.</string>
     <string name="z57">Successfully Backup Webvium</string>
+    <string name="z58">New Tab</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

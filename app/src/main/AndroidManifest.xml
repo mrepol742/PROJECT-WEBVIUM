@@ -479,6 +479,316 @@
         </activity>
         <!-- MAIN ACTIVITY -->
         <activity
+            a:name="com.mrepol742.webvium.MainBeta"
+            a:alwaysRetainTaskState="true"
+            a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
+            a:launchMode="singleTask" a:label="Webvium Beta"
+            a:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.BROWSABLE" />
+                <category a:name="android.intent.category.DEFAULT" />
+
+                <data a:scheme="file" />
+                <data a:scheme="content" />
+                <data a:mimeType="*/*" />
+                <data a:host="*" />
+                <data a:pathPattern=".*.html" />
+                <data a:pathPattern=".*..*.html" />
+                <data a:pathPattern=".*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.html" />
+                <data a:pathPattern=".*.htm" />
+                <data a:pathPattern=".*..*.htm" />
+                <data a:pathPattern=".*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.htm" />
+                <data a:pathPattern=".*.xhtml" />
+                <data a:pathPattern=".*..*.xhtml" />
+                <data a:pathPattern=".*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.xhtml" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.xhtml" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.BROWSABLE" />
+                <category a:name="android.intent.category.DEFAULT" />
+
+                <data a:scheme="file" />
+                <data a:scheme="content" />
+                <data a:mimeType="*/*" />
+                <data a:host="*" />
+                <data a:pathPattern=".*.url" />
+                <data a:pathPattern=".*..*.url" />
+                <data a:pathPattern=".*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.url" />
+                <data a:pathPattern=".*.desktop" />
+                <data a:pathPattern=".*..*.desktop" />
+                <data a:pathPattern=".*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.BROWSABLE" />
+                <category a:name="android.intent.category.DEFAULT" />
+
+                <data a:scheme="file" />
+                <data a:scheme="content" />
+                <data a:mimeType="*/*" />
+                <data a:host="*" />
+                <data a:pathPattern=".*.HTML" />
+                <data a:pathPattern=".*..*.HTML" />
+                <data a:pathPattern=".*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.HTML" />
+                <data a:pathPattern=".*.HTM" />
+                <data a:pathPattern=".*..*.HTM" />
+                <data a:pathPattern=".*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.HTM" />
+                <data a:pathPattern=".*.XHTML" />
+                <data a:pathPattern=".*..*.XHTML" />
+                <data a:pathPattern=".*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.XHTML" />
+                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.XHTML" />
+            </intent-filter>
+            <intent-filter>
+                <category a:name="android.intent.category.LAUNCHER" />
+                <category a:name="android.intent.category.BROWSABLE" />
+                <category a:name="android.intent.category.APP_BROWSER" />
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.BROWSABLE" />
+                <category a:name="android.intent.category.DEFAULT" />
+
+                <data a:scheme="http" />
+                <data a:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data a:scheme="http" />
+                <data a:scheme="https" />
+                <data a:scheme="about" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="com.mrepol742.webvium.intent.action.LAUNCH" />
+
+                <category a:name="com.mrepol742.webvium.intent.category.LEGENDS" />
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.BROWSABLE" />
+                <category a:name="android.intent.category.DEFAULT" />
+
+                <data a:scheme="http" />
+                <data a:scheme="https" />
+                <data a:mimeType="text/html" />
+                <data a:mimeType="text/plain" />
+                <data a:mimeType="application/xhtml+xml" />
+                <data a:mimeType="application/vnd.wap.xhtml+xml" />
+            </intent-filter>
+            <intent-filter a:label="@string/x15">
+                <action a:name="android.intent.action.MEDIA_SEARCH" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter a:label="@string/x15">
+                <action a:name="android.intent.action.SEARCH" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter a:label="@string/x15">
+                <action a:name="android.speech.action.VOICE_SPEECH_RESULTS" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter a:label="@string/x15">
+                <action a:name="android.intent.action.WEB_SEARCH" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme=""
+                    tools:ignore="AppLinkUrlError" />
+                <data a:scheme="http" />
+                <data a:scheme="https" />
+            </intent-filter>
+            <intent-filter a:label="@string/x15">
+                <action a:name="android.intent.action.SEND" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+
+                <data a:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="com.mrepol742.webvium.intent.action.PASTE_SEARCH" />
+
+                <category a:name="com.mrepol742.webvium.intent.category.LEGENDS" />
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="http"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/webvium" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="http"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/PROJECT-WEBVIUM" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="https"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/webvium" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="https"
+                    a:host="mrepol742.github.io"
+                    a:pathPattern="/PROJECT-WEBVIUM" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="http"
+                    a:host="*" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW" />
+
+                <category a:name="android.intent.category.DEFAULT" />
+                <category a:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    a:scheme="https"
+                    a:host="*" />
+            </intent-filter>
+        </activity>
+
+
+<activity
             a:name="com.mrepol742.webvium.MAIN"
             a:alwaysRetainTaskState="true"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
@@ -838,6 +1148,22 @@
                 a:name="android.app.shortcuts"
                 a:resource="@xml/s" />
         </activity-alias>
+
+  <activity-alias
+            a:name="com.mrepol742.webvium.activity.alias.MAYBETA"
+            a:enabled="true" a:label="Webvium Beta"
+            a:exported="true"
+            a:targetActivity="com.mrepol742.webvium.MainBeta">
+            <intent-filter>
+                <action a:name="android.intent.action.MAIN" />
+
+                <category a:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                a:name="android.app.shortcuts"
+                a:resource="@xml/s" />
+        </activity-alias>
+
 
         <activity-alias
             a:name="com.mrepol742.webvium.activity.alias.PRE"
