@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.speech.SpeechRecognizer;
 import android.util.LruCache;
+import android.view.KeyEvent;
 import android.view.ViewGroup;
 
 import com.mrepol742.webvium.BuildConfig;
@@ -262,5 +263,4 @@ public class BaseActivity extends Activity {
     public boolean spr() {
         return !SpeechRecognizer.isRecognitionAvailable(this);
     }
-
 }

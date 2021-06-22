@@ -28,6 +28,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -743,6 +744,4 @@ public class SEAR extends MainBaseActivity {
             }
         }
     }
-
-
 }

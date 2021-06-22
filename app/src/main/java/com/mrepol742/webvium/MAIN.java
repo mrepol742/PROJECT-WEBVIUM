@@ -113,6 +113,7 @@ import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
 import com.mrepol742.webvium.app.SearchJSI;
 import com.mrepol742.webvium.app.Sqlite;
+import com.mrepol742.webvium.app.WebViewTab;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.XORJSI;
@@ -265,7 +266,8 @@ public class MAIN extends MainBaseActivity implements Format {
     public Timer timer;
     public int it7422;
     public Timer cdt;
-    public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
+    public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv9;
+    private TextView tv8;
     private final StringBuilder cm = new StringBuilder();
     private final StringBuilder cm0 = new StringBuilder();
     private final StringBuilder cm2 = new StringBuilder();
@@ -321,7 +323,7 @@ public class MAIN extends MainBaseActivity implements Format {
     private PermissionHelper d12;
     private R7 r7;
     private FrameLayout fl;
-    private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7;
+    private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7, pm8;
     private TextView inf;
     private String sg;
     public static final int POPUPMENU_TOOLBAR_PASTE_AND_SEARCH = 0;
@@ -378,6 +380,8 @@ public class MAIN extends MainBaseActivity implements Format {
     final int WEBVIUM_HISTORY = 2;
     final int WEBVIUM_BOOKMARKS = 4;
     private MainReceiver ipH;
+    private final ArrayList<WebViewTab> tabs = new ArrayList<>();
+    private int ct;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -607,7 +611,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         c41();
 
-        a225(R.layout.c);
+        a225(R.layout.cbeta);
 
 
         this.o = findViewById(R.id.f);
@@ -617,6 +621,8 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         this.h = new com.mrepol742.webvium.app.WebViews(this);
         fl = findViewById(R.id.i);
+        tabs.add(new WebViewTab(h, "New Tab", "Default Homepage setup"));
+        ct = 0;
         fl.addView(h);
         tv = findViewById(R.id.d19);
         tv1 = findViewById(R.id.b1);
@@ -663,13 +669,13 @@ public class MAIN extends MainBaseActivity implements Format {
         this.u.setOnClickListener(view -> c22());
         hsv.setOnClickListener(view -> c22());
         this.u.setTypeface(type(Typeface.NORMAL));
+        this.tv8.setTypeface(type(Typeface.NORMAL));
         this.g.setMax(100);
         tv7.setImageResource(R.drawable.d7);
         tv7.setOnClickListener(view -> c144());
         tv7.setBackgroundResource(R.drawable.b17);
-        tv8.setImageResource(R.drawable.d8);
-        tv8.setBackgroundResource(R.drawable.b17);
-        tv8.setOnClickListener(view -> Intents.f(this, HIST.class, 211));
+        tv8.setBackgroundResource(R.drawable.b29);
+        tv8.setOnClickListener(view -> c10());
         tv9.setImageResource(R.drawable.d9);
         tv9.setBackgroundResource(R.drawable.b17);
         tv9.setOnClickListener(view -> Intents.f(this, BOOK.class, 2115));
@@ -682,8 +688,10 @@ public class MAIN extends MainBaseActivity implements Format {
             c134();
             if (!a221().getBoolean("autoUpdate", false)) {
                 this.u.setTextColor(this.a7);
+                this.tv8.setTextColor(this.a7);
             } else {
                 this.u.setTextColor(this.a8);
+                this.tv8.setTextColor(this.a8);
             }
             c149();
         } catch (Exception ex) {
@@ -693,7 +701,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
             this.br2 = new R36();
         }
-        c34();
+        c34(this.h);
         eh.put("DNT", "1");
         this.ift.act("android.net.conn.CONNECTIVITY_CHANGE");
         this.ift.act("android.net.wifi.WIFI_STATE_CHANGED");
@@ -713,7 +721,7 @@ public class MAIN extends MainBaseActivity implements Format {
         tv5.setBackgroundResource(R.drawable.b17);
         this.iw.setImageResource(R.drawable.a15);
         this.cd.setBackgroundResource(R.drawable.w);
-        c15();
+        c15(this.h);
         c50();
         tv3.setOnClickListener(view -> {
             if (h.getProgress() == 100) {
@@ -837,7 +845,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             h.resumeTimers();
             h.onResume();
-            c15();
+            c15(this.h);
             bl = true;
             bl2 = true;
             registerReceiver(br, ift);
@@ -845,21 +853,17 @@ public class MAIN extends MainBaseActivity implements Format {
                 registerReceiver(br2, ift1);
             }
             if (a221().getBoolean("home", true)) {
-                if (tv1.getVisibility() == View.VISIBLE) {
-                    tv1.setVisibility(View.VISIBLE);
-                    tv1.setImageResource(R.drawable.a12);
-                    tv1.setBackgroundResource(R.drawable.b17);
-                }
-            } else if (tv1.getVisibility() == View.GONE) {
+                tv1.setImageResource(R.drawable.a12);
+                tv1.setBackgroundResource(R.drawable.b17);
+                tv1.setVisibility(View.VISIBLE);
+            } else {
                 tv1.setVisibility(View.GONE);
             }
             if (a221().getBoolean("voice", true) && !spr()) {
-                if (tv1.getVisibility() == View.VISIBLE) {
-                    tv2.setVisibility(View.VISIBLE);
-                    tv2.setBackgroundResource(R.drawable.b17);
-                    tv2.setImageResource(R.drawable.f);
-                }
-            } else if (tv1.getVisibility() == View.GONE) {
+                tv2.setVisibility(View.VISIBLE);
+                tv2.setBackgroundResource(R.drawable.b17);
+                tv2.setImageResource(R.drawable.f);
+            } else {
                 tv2.setVisibility(View.GONE);
             }
             onNewIntent(getIntent());
@@ -871,6 +875,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             c99();
             c108();
+            tv8.setText(Integer.toString(tabs.size()));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -932,7 +937,8 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c3(String a) {
         c33(a, "");
-        h.loadUrl(a);
+        WebViews as = tabs.get(ct).web;
+        as.loadUrl(a);
     }
 
     public void c4(Message b, Message c) {
@@ -1030,544 +1036,44 @@ public class MAIN extends MainBaseActivity implements Format {
         e.show();
     }
 
-    private void c11(PendingDownloadDataModel w18) {
-        try {
-
-            String b = URLUtil.guessFileName(w18.a1, w18.a2, w18.a3);
-            AlertDialog.Builder c = new AlertDialog.Builder(this);
-            LayoutInflater d = getLayoutInflater();
-            View e = d.inflate(R.layout.j, null);
-            c.setCancelable(true);
-            c.setTitle(getString(R.string.l5));
-            c.setView(e);
-            TextView f = e.findViewById(R.id.a5);
-            final EDIT s = e.findViewById(R.id.d1);
-            TextView h = e.findViewById(R.id.d2);
-            TextView i = e.findViewById(R.id.d3);
-            final TextView j = e.findViewById(R.id.d4);
-            TextView k = e.findViewById(R.id.b9);
-            TextView l = e.findViewById(R.id.c11);
-            TextView m = e.findViewById(R.id.c12);
-            TextView j2 = e.findViewById(R.id.e8);
-            TextView j3 = e.findViewById(R.id.e9);
-            TextView j4 = e.findViewById(R.id.e10);
-            TextView j5 = e.findViewById(R.id.e11);
-            TextView j6 = e.findViewById(R.id.e12);
-            TextView j7 = e.findViewById(R.id.e13);
-            f.setText(getString(R.string.c30));
-            s.setText(b);
-            k.setText(getString(R.string.d40));
-            if (w18.a4 != 0) {
-
-                j4.setText(getString(R.string.e23));
-                Runnable re = () -> {
-                    String fn = Formatter.formatFileSize(MAIN.this, w18.a4);
-                    String fn1 = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace() + w18.a4);
-                    runOnUiThread(() -> {
-                        h.setText(fn);
-                        j5.setText(fn1);
-                    });
-                };
-                new Thread(re).start();
+    private void c10() {
+        if (pm8 == null) {
+            pm8 = new PopupMenu(this, tv8);
+            pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
+        }
+        MenuItem.OnMenuItemClickListener e = a1 -> {
+            if (a1.getItemId() != 742) {
+                fl.removeAllViews();
+                WebViewTab webb = tabs.get(a1.getItemId());
+                fl.addView(webb.web);
+                ct = a1.getItemId();
             } else {
-                h.setText(getString(R.string.w22));
-                j4.setVisibility(View.GONE);
-                j5.setVisibility(View.GONE);
+                WebViews web = new WebViews(this);
+                tabs.add(new WebViewTab(web, "New Tab ", "about:blank"));
+//c50();
+                web.loadUrl("https://google.com");
+                c34(web);
+                c15(web);
+                fl.removeAllViews();
+                fl.addView(web);
+                ct = tabs.size()-1;
             }
-            l.setText(getString(R.string.e21));
-            i.setText(w18.a1);
-            m.setText(getString(R.string.c31));
-            String sg7 = StorageDirectory.getWebviumDir() + "/Downloads/" + b;
-            j.setText(sg7);
-            j2.setText(getString(R.string.e22));
-            j6.setText(getString(R.string.e24));
-            Runnable re = () -> {
-                String j3a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace());
-                String j7a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getTotalSpace());
-                runOnUiThread(() -> {
-                    j3.setText(j3a);
-                    j7.setText(j7a);
-                });
-            };
-            new Thread(re).start();
-            if (!a221().getBoolean("autoUpdate", false)) {
-                f.setTextColor(this.a7);
-                k.setTextColor(this.a7);
-                l.setTextColor(this.a7);
-                m.setTextColor(this.a7);
-                s.setTextColor(this.a7);
-                h.setTextColor(this.a7);
-                i.setTextColor(this.a7);
-                j.setTextColor(this.a7);
-                j2.setTextColor(this.a7);
-                j3.setTextColor(this.a7);
-                j4.setTextColor(this.a7);
-                j5.setTextColor(this.a7);
-                j6.setTextColor(this.a7);
-                j7.setTextColor(this.a7);
-            } else {
-                f.setTextColor(this.a8);
-                k.setTextColor(this.a8);
-                l.setTextColor(this.a8);
-                m.setTextColor(this.a8);
-                s.setTextColor(this.a8);
-                h.setTextColor(this.a8);
-                i.setTextColor(this.a8);
-                j.setTextColor(this.a8);
-                j2.setTextColor(this.a8);
-                j3.setTextColor(this.a8);
-                j4.setTextColor(this.a8);
-                j5.setTextColor(this.a8);
-                j6.setTextColor(this.a8);
-                j7.setTextColor(this.a8);
-            }
-            c.setPositiveButton(getString(R.string.e25), (a34, m1) -> {
-                try {
-                    String c1 = s.getText().toString();
-                    c8(getString(R.string.e27));
-                    if (a221().getBoolean("launch", false)) {
-                        Intents.a(MAIN.this, DOWN.class);
-                    }
-                    // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
-                    // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
-                    SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
-                    Intent it = new Intent(MAIN.this, DOWN0.class);
-                    it.putExtra("a", c1);
-                    it.putExtra("b", w18.a1);
-                    it.putExtra("c", true);
-                    it.putExtra("d", true);
-                    it.putExtra("e", w18.a3);
-                    it.putExtra("f", w18.a1);
-                    it.putExtra("g", w18.a6);
-                    Notifications.b(MAIN.this, it);
-                    if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
-                        c71();
-                        SharedPreferences.Editor spe = sp9.edit();
-                        spe.putString("downAlert", "a");
-                        spe.apply();
-                    }
-                } catch (Exception d4) {
-                    d4.printStackTrace();
-                }
-                a34.dismiss();
-            });
-            c.setNegativeButton(getString(R.string.i7), (a, intetg) -> a.dismiss());
-            final AlertDialog g = c.create();
-            g.show();
-            final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-            s.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    String jhh56 = s.getText().toString();
-                    String sg78 = StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56;
-                    j.setText(sg78);
-                    if (U3.b(jhh56)) {
-                        java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56 + "." + Package.c().toLowerCase());
-                        if (a90.exists()) {
-                            s.setError(getString(R.string.u19));
-                            okButton.setEnabled(false);
-                        } else {
-                            okButton.setEnabled(true);
-                        }
-                    } else {
-                        okButton.setEnabled(false);
-                    }
-                }
-
-
-            });
-
-            String jhh56 = s.getText().toString();
-            java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56 + "." + Package.c().toLowerCase());
-            if (a90.exists()) {
-                s.setError(getString(R.string.u19));
-                g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-            } else {
-                g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-            }
-        } catch (Exception haha) {
-            haha.printStackTrace();
+            tv8.setText(Integer.toString(tabs.size()));
+            return true;
+        };
+        Menu me = pm8.getMenu();
+        int len = tabs.size();
+        for (int i = 0; i < len; i++) {
+            me.add(0, i, 0, "Tab " + i).setOnMenuItemClickListener(e);
         }
+        me.add(0, 742, 0, "New Tab").setOnMenuItemClickListener(e);
+        pm8.show();
     }
 
-    private void c12() {
-        if (pm6 == null) {
-            pm6 = new PopupMenu(this, this.iw);
-        }
-        Menu menu = pm6.getMenu();
-        if (Clipboard.c(this)) {
-            menu.add(0, POPUPMENU_TOOLBAR_PASTE_AND_SEARCH, 0, getString(R.string.i2)).setOnMenuItemClickListener(mio);
-            menu.add(0, POPUPMENU_TOOLBAR_PASTE, 0, getString(R.string.i3)).setOnMenuItemClickListener(mio);
-        }
-        SubMenu sb3 = menu.addSubMenu(getString(R.string.u));
-        sb3.add(0, POPUPMENU_TOOLBAR_COPY_LINK, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
-        sb3.add(0, POPUPMENU_TOOLBAR_COPY_TITLE, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
-        SubMenu sb2 = menu.addSubMenu(getString(R.string.a8));
-        sb2.add(0, POPUPMENU_TOOLBAR_SHARE_LINK, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
-        sb2.add(0, POPUPMENU_TOOLBAR_SHARE_TITLE, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
-        SubMenu sb = menu.addSubMenu(getString(R.string.h17));
-        sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN, 0, getString(R.string.h12)).setOnMenuItemClickListener(mio);
-        sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS, 0, getString(R.string.h11)).setOnMenuItemClickListener(mio);
-        pm6.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
-        pm6.show();
-    }
 
-    public void c13() {
-        try {
-            String c = Clipboard.b(this);
-            if (c != null) {
-                c49(c);
-                d2.c(c);
-            } else {
-                c7(getString(R.string.t20));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            c7(getString(R.string.t20));
-        }
-    }
-
-    public void c14(String a23, String asd) {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        LayoutInflater b = getLayoutInflater();
-        View c = b.inflate(R.layout.z, null);
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.h11));
-        a.setView(c);
-        final TextView ti = c.findViewById(R.id.f9);
-        final EDIT ed = c.findViewById(R.id.f10);
-        final TextView ti1 = c.findViewById(R.id.f11);
-        final EDIT ed1 = c.findViewById(R.id.f12);
-        int e = Resources.getColor(this, R.color.c);
-        int f = Resources.getColor(this, R.color.b);
-        if (!a221().getBoolean("autoUpdate", false)) {
-            ed.setTextColor(e);
-            ed1.setTextColor(e);
-            ti.setTextColor(e);
-            ti1.setTextColor(e);
-        } else {
-            ed.setTextColor(f);
-            ed1.setTextColor(f);
-            ti.setTextColor(f);
-            ti1.setTextColor(f);
-        }
-        ti.setText(getString(R.string.t3));
-        ti1.setText(getString(R.string.t4));
-        if (a23 != null) {
-            ed.setText(a23);
-        } else {
-            Uri hl = Uri.parse(asd);
-            ed.setText(hl.getHost());
-        }
-        ed1.setText(asd);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            d3.c(ed.getText().toString(), ed1.getText().toString());
-            c8(getString(R.string.t2));
-        });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
-        final AlertDialog g = a.create();
-        g.show();
-        final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
-            }
-
-
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
-            }
-
-
-        });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
-    }
-
-    private void c15() {
-        if (a221().getBoolean("Javaweb", true)) {
-            h.addJavascriptInterface(new WebviumJSI(this), Package.c());
-            h.addJavascriptInterface(new Object() {
-
-                @JavascriptInterface
-                public void print() {
-                    c100(h);
-                }
-            }, Package.c()+"PrintHelper");
-            h.addJavascriptInterface(new HashJSI(), Package.c()+"HashHelper");
-            h.addJavascriptInterface(new XORJSI(), Package.c()+"XORHelper");
-        } else {
-            h.removeJavascriptInterface(Package.c());
-            h.removeJavascriptInterface(Package.c()+"PrintHelper");
-            h.removeJavascriptInterface(Package.c()+"HashHelper");
-            h.removeJavascriptInterface(Package.c()+"XORHelper");
-        }
-        if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("1l")) {
-            h.setLayerType(View.LAYER_TYPE_NONE, null);
-        }
-        if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("7l")) {
-            h.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        }
-        if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("30l")) {
-            h.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
-        if (Build.VERSION.SDK_INT >= 26) {
-            if (Objects.requireNonNull(a221().getString("renderP", "1s")).equals("1s")) {
-                h.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_BOUND, true);
-            }
-            if (Objects.requireNonNull(a221().getString("renderP", "1s")).equals("7s")) {
-                h.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_IMPORTANT, true);
-            }
-            if (Objects.requireNonNull(a221().getString("renderP", "1s")).equals("30s")) {
-                h.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_WAIVED, true);
-            }
-        }
-        if (a223("dr") == 0) {
-            ws.setTextZoom(h.getTextZoom());
-        } else {
-            ws.setTextZoom(a223("dr"));
-        }
-        if (a223("dr55") == 0) {
-            ws.setDefaultFontSize(h.getFontSize());
-        } else {
-            ws.setDefaultFontSize(a223("dr55"));
-        }
-        ws.setLoadWithOverviewMode(a221().getBoolean("open", false));
-        ws.setUseWideViewPort(a221().getBoolean("open1", false));
-        ws.setDomStorageEnabled(a221().getBoolean("open2", true));
-        ws.setDatabaseEnabled(a221().getBoolean("open3", true));
-        if (Build.VERSION.SDK_INT >= 29) {
-            if (a221().getBoolean("wfdM01", true)) {
-                ws.setForceDark(WebSettings.FORCE_DARK_ON);
-            } else {
-                ws.setForceDark(WebSettings.FORCE_DARK_OFF);
-            }
-        }
-        if (Build.VERSION.SDK_INT >= 26) {
-            ws.setSafeBrowsingEnabled(a221().getBoolean("save", true));
-        }
-        ws.setBlockNetworkImage(a221().getBoolean("block", false));
-        ws.setDisplayZoomControls(a221().getBoolean("zoom", false));
-        ws.setMediaPlaybackRequiresUserGesture(a221().getBoolean("auto", false));
-        ws.setSupportZoom(a221().getBoolean("enableZ", true));
-        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("1")) {
-            cm1.setAcceptCookie(true);
-            cm1.setAcceptThirdPartyCookies(h, false);
-
-        }
-        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("7")) {
-            cm1.setAcceptThirdPartyCookies(h, true);
-            cm1.setAcceptCookie(true);
-        }
-        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("30")) {
-            cm1.setAcceptCookie(false);
-            cm1.setAcceptThirdPartyCookies(h, false);
-        }
-        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("60")) {
-            cm1.setAcceptCookie(true);
-            cm1.setAcceptThirdPartyCookies(h, true);
-            CookieManager.allowFileSchemeCookies();
-        }
-        if (Objects.requireNonNull(a221().getString("java", "1f")).equals("1f")) {
-            c166();
-        }
-        if (Objects.requireNonNull(a221().getString("java", "1f")).equals("7f")) {
-            ws.setJavaScriptEnabled(false);
-        }
-        if (!ws.getJavaScriptEnabled()) {
-            if (Uri.parse(h.getUrl()).getHost().equals("mrepol742.github.io") && h.getUrl().contains("/Search")) {
-                c50();
-            }
-        }
-        if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("1r")) {
-            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-        if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("7r")) {
-            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
-        }
-        if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("30r")) {
-            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("1a")) {
-            ws.setDefaultTextEncodingName(h.getTextEncoding());
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("7a")) {
-            ws.setDefaultTextEncodingName(code[0]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("30a")) {
-            ws.setDefaultTextEncodingName(code[1]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("60a")) {
-            ws.setDefaultTextEncodingName(code[2]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("120a")) {
-            ws.setDefaultTextEncodingName(code[3]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("240a")) {
-            ws.setDefaultTextEncodingName(code[4]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("480a")) {
-            ws.setDefaultTextEncodingName(code[5]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("960a")) {
-            ws.setDefaultTextEncodingName(code[6]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("1920a")) {
-            ws.setDefaultTextEncodingName(code[7]);
-        }
-        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("3840a")) {
-            ws.setDefaultTextEncodingName(a221().getString("CtextE", ""));
-        }
-        if (Build.VERSION.SDK_INT < 26) {
-            if (Objects.requireNonNull(a221().getString("form", "1g")).equals("1g")) {
-                ws.setSaveFormData(true);
-            }
-            if (Objects.requireNonNull(a221().getString("form", "1g")).equals("30g")) {
-                ws.setSaveFormData(false);
-            }
-        }
-        if (Objects.requireNonNull(a221().getString("location", "1h")).equals("1h")) {
-            ws.setGeolocationEnabled(true);
-            if (Build.VERSION.SDK_INT < 24) {
-                ws.setGeolocationDatabasePath(getFilesDir().toString());
-            }
-        }
-        if (Objects.requireNonNull(a221().getString("location", "1h")).equals("30h")) {
-            ws.setGeolocationEnabled(false);
-        }
-        if (Build.VERSION.SDK_INT < 30) {
-            ws.setAppCacheEnabled(a221().getBoolean("open4", true));
-            Runnable re = () -> {
-                String sg = StorageDirectory.getCacheDir(this).toString();
-                runOnUiThread(() -> ws.setAppCachePath(sg));
-            };
-            new Thread(re).start();
-        }
-        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("1m")) {
-            ws.setCacheMode(WebSettings.LOAD_DEFAULT);
-        }
-        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("7m")) {
-            ws.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-        }
-        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("30m")) {
-            ws.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        }
-        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("60m")) {
-            ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        }
-    }
-
-    public void c16(String a, int c11) {
-        Intent b = new Intent("android.intent.action.SEND");
-        b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", a);
-        String c = getString(R.string.l8);
-        String c45 = String.format(c, "\"" + a + "\"");
-        if (c11 == 0) {
-            c45 = String.format(c, "\"" + h.getTitle() + "\"");
-        }
-        startActivity(Intent.createChooser(b, c45));
-    }
-
-    public void c17() {
-        try {
-            String c = Clipboard.b(this);
-            if (c != null) {
-                Intents.h(this, SEAR.class, 911, "value", c);
-                overridePendingTransition(R.anim.a, R.anim.f);
-            } else {
-                c7(getString(R.string.t20));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            c7(getString(R.string.t20));
-        }
-    }
-
-    public void c20(boolean a) {
-        if (a) {
-            ws.setUserAgentString(ws.getUserAgentString().replace("Mobile", "eliboM").replace("Android", "diordnA"));
-        } else {
-            ws.setUserAgentString(ws.getUserAgentString().replace("eliboM", "Mobile").replace("diordnA", "Android"));
-        }
-        h.reload();
-    }
-
-    public void c22() {
-        try {
-            Intents.h(this, SEAR.class, 911, "value", h.getUrl());
-            overridePendingTransition(R.anim.a, R.anim.f);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private void c23(KeyEvent event) {
-        if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            onKeyDown(event.getKeyCode(), event);
-        } else {
-            onKeyUp(event.getKeyCode(), event);
-        }
-    }
-
-    public void c25() {
-        if (a221().getBoolean("clearP", false)) {
-            h.clearCache(false);
-        }
-        if (a221().getBoolean("clearH", false)) {
-            c63();
-            d1.delete();
-        }
-        if (a221().getBoolean("clearC", false)) {
-            Clipboard.a(this, " ");
-        }
-        if (a221().getBoolean("clearPr", false)) {
-            c31();
-            if (wd == null) {
-                wd = WebViewDatabase.getInstance(this);
-            }
-            if (wd.hasHttpAuthUsernamePassword()) {
-                wd.clearHttpAuthUsernamePassword();
-            }
-            if (Build.VERSION.SDK_INT <= 26 && wd.hasFormData()) {
-                wd.clearFormData();
-            }
-        }
-    }
-
-    public void c31() {
-        h.clearSslPreferences();
-    }
-
-    private void c33(String url, String b) {
-        try {
-            if (!a221().getBoolean("showW", false)) {
-                c35(new SpannableString(url), url, 0);
-            } else {
-                c35(new SpannableString(b + " | " + url), url, b.length() + 3);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    
     @SuppressLint("ClickableViewAccessibility")
-    private void c34() {
+    private void c34(WebViews h) {
+        WebSettings ws = h.getSettings();
         if (Build.VERSION.SDK_INT < 30) {
             ws.setAllowFileAccess(true);
         }
@@ -2010,7 +1516,541 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
 
+    private void c11(PendingDownloadDataModel w18) {
+        try {
 
+            String b = URLUtil.guessFileName(w18.a1, w18.a2, w18.a3);
+            AlertDialog.Builder c = new AlertDialog.Builder(this);
+            LayoutInflater d = getLayoutInflater();
+            View e = d.inflate(R.layout.j, null);
+            c.setCancelable(true);
+            c.setTitle(getString(R.string.l5));
+            c.setView(e);
+            TextView f = e.findViewById(R.id.a5);
+            final EDIT s = e.findViewById(R.id.d1);
+            TextView h = e.findViewById(R.id.d2);
+            TextView i = e.findViewById(R.id.d3);
+            final TextView j = e.findViewById(R.id.d4);
+            TextView k = e.findViewById(R.id.b9);
+            TextView l = e.findViewById(R.id.c11);
+            TextView m = e.findViewById(R.id.c12);
+            TextView j2 = e.findViewById(R.id.e8);
+            TextView j3 = e.findViewById(R.id.e9);
+            TextView j4 = e.findViewById(R.id.e10);
+            TextView j5 = e.findViewById(R.id.e11);
+            TextView j6 = e.findViewById(R.id.e12);
+            TextView j7 = e.findViewById(R.id.e13);
+            f.setText(getString(R.string.c30));
+            s.setText(b);
+            k.setText(getString(R.string.d40));
+            if (w18.a4 != 0) {
+
+                j4.setText(getString(R.string.e23));
+                Runnable re = () -> {
+                    String fn = Formatter.formatFileSize(MAIN.this, w18.a4);
+                    String fn1 = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace() + w18.a4);
+                    runOnUiThread(() -> {
+                        h.setText(fn);
+                        j5.setText(fn1);
+                    });
+                };
+                new Thread(re).start();
+            } else {
+                h.setText(getString(R.string.w22));
+                j4.setVisibility(View.GONE);
+                j5.setVisibility(View.GONE);
+            }
+            l.setText(getString(R.string.e21));
+            i.setText(w18.a1);
+            m.setText(getString(R.string.c31));
+            String sg7 = StorageDirectory.getWebviumDir() + "/Downloads/" + b;
+            j.setText(sg7);
+            j2.setText(getString(R.string.e22));
+            j6.setText(getString(R.string.e24));
+            Runnable re = () -> {
+                String j3a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace());
+                String j7a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getTotalSpace());
+                runOnUiThread(() -> {
+                    j3.setText(j3a);
+                    j7.setText(j7a);
+                });
+            };
+            new Thread(re).start();
+            if (!a221().getBoolean("autoUpdate", false)) {
+                f.setTextColor(this.a7);
+                k.setTextColor(this.a7);
+                l.setTextColor(this.a7);
+                m.setTextColor(this.a7);
+                s.setTextColor(this.a7);
+                h.setTextColor(this.a7);
+                i.setTextColor(this.a7);
+                j.setTextColor(this.a7);
+                j2.setTextColor(this.a7);
+                j3.setTextColor(this.a7);
+                j4.setTextColor(this.a7);
+                j5.setTextColor(this.a7);
+                j6.setTextColor(this.a7);
+                j7.setTextColor(this.a7);
+            } else {
+                f.setTextColor(this.a8);
+                k.setTextColor(this.a8);
+                l.setTextColor(this.a8);
+                m.setTextColor(this.a8);
+                s.setTextColor(this.a8);
+                h.setTextColor(this.a8);
+                i.setTextColor(this.a8);
+                j.setTextColor(this.a8);
+                j2.setTextColor(this.a8);
+                j3.setTextColor(this.a8);
+                j4.setTextColor(this.a8);
+                j5.setTextColor(this.a8);
+                j6.setTextColor(this.a8);
+                j7.setTextColor(this.a8);
+            }
+            c.setPositiveButton(getString(R.string.e25), (a34, m1) -> {
+                try {
+                    String c1 = s.getText().toString();
+                    c8(getString(R.string.e27));
+                    if (a221().getBoolean("launch", false)) {
+                        Intents.a(MAIN.this, DOWN.class);
+                    }
+                    // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
+                    // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
+                    SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
+                    Intent it = new Intent(MAIN.this, DOWN0.class);
+                    it.putExtra("a", c1);
+                    it.putExtra("b", w18.a1);
+                    it.putExtra("c", true);
+                    it.putExtra("d", true);
+                    it.putExtra("e", w18.a3);
+                    it.putExtra("f", w18.a1);
+                    it.putExtra("g", w18.a6);
+                    Notifications.b(MAIN.this, it);
+                    if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
+                        c71();
+                        SharedPreferences.Editor spe = sp9.edit();
+                        spe.putString("downAlert", "a");
+                        spe.apply();
+                    }
+                } catch (Exception d4) {
+                    d4.printStackTrace();
+                }
+                a34.dismiss();
+            });
+            c.setNegativeButton(getString(R.string.i7), (a, intetg) -> a.dismiss());
+            final AlertDialog g = c.create();
+            g.show();
+            final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
+            s.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    String jhh56 = s.getText().toString();
+                    String sg78 = StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56;
+                    j.setText(sg78);
+                    if (U3.b(jhh56)) {
+                        java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56 + "." + Package.c().toLowerCase());
+                        if (a90.exists()) {
+                            s.setError(getString(R.string.u19));
+                            okButton.setEnabled(false);
+                        } else {
+                            okButton.setEnabled(true);
+                        }
+                    } else {
+                        okButton.setEnabled(false);
+                    }
+                }
+
+
+            });
+
+            String jhh56 = s.getText().toString();
+            java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56 + "." + Package.c().toLowerCase());
+            if (a90.exists()) {
+                s.setError(getString(R.string.u19));
+                g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            } else {
+                g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+            }
+        } catch (Exception haha) {
+            haha.printStackTrace();
+        }
+    }
+
+    private void c12() {
+        if (pm6 == null) {
+            pm6 = new PopupMenu(this, this.iw);
+        }
+        Menu menu = pm6.getMenu();
+        if (Clipboard.c(this)) {
+            menu.add(0, POPUPMENU_TOOLBAR_PASTE_AND_SEARCH, 0, getString(R.string.i2)).setOnMenuItemClickListener(mio);
+            menu.add(0, POPUPMENU_TOOLBAR_PASTE, 0, getString(R.string.i3)).setOnMenuItemClickListener(mio);
+        }
+        SubMenu sb3 = menu.addSubMenu(getString(R.string.u));
+        sb3.add(0, POPUPMENU_TOOLBAR_COPY_LINK, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
+        sb3.add(0, POPUPMENU_TOOLBAR_COPY_TITLE, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
+        SubMenu sb2 = menu.addSubMenu(getString(R.string.a8));
+        sb2.add(0, POPUPMENU_TOOLBAR_SHARE_LINK, 0, getString(R.string.t4)).setOnMenuItemClickListener(mio);
+        sb2.add(0, POPUPMENU_TOOLBAR_SHARE_TITLE, 0, getString(R.string.s23)).setOnMenuItemClickListener(mio);
+        SubMenu sb = menu.addSubMenu(getString(R.string.h17));
+        sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN, 0, getString(R.string.h12)).setOnMenuItemClickListener(mio);
+        sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS, 0, getString(R.string.h11)).setOnMenuItemClickListener(mio);
+        pm6.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
+        pm6.show();
+    }
+
+    public void c13() {
+        try {
+            String c = Clipboard.b(this);
+            if (c != null) {
+                c49(c);
+                d2.c(c);
+            } else {
+                c7(getString(R.string.t20));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            c7(getString(R.string.t20));
+        }
+    }
+
+    public void c14(String a23, String asd) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.z, null);
+        a.setCancelable(true);
+        a.setTitle(getString(R.string.h11));
+        a.setView(c);
+        final TextView ti = c.findViewById(R.id.f9);
+        final EDIT ed = c.findViewById(R.id.f10);
+        final TextView ti1 = c.findViewById(R.id.f11);
+        final EDIT ed1 = c.findViewById(R.id.f12);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(e);
+            ed1.setTextColor(e);
+            ti.setTextColor(e);
+            ti1.setTextColor(e);
+        } else {
+            ed.setTextColor(f);
+            ed1.setTextColor(f);
+            ti.setTextColor(f);
+            ti1.setTextColor(f);
+        }
+        ti.setText(getString(R.string.t3));
+        ti1.setText(getString(R.string.t4));
+        if (a23 != null) {
+            ed.setText(a23);
+        } else {
+            Uri hl = Uri.parse(asd);
+            ed.setText(hl.getHost());
+        }
+        ed1.setText(asd);
+        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
+            d3.c(ed.getText().toString(), ed1.getText().toString());
+            c8(getString(R.string.t2));
+        });
+        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        final AlertDialog g = a.create();
+        g.show();
+        final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
+        ed.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+
+        });
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+    }
+
+    private void c15(WebViews h) {
+        WebSettings ws = h.getSettings();
+        if (a221().getBoolean("Javaweb", true)) {
+            h.addJavascriptInterface(new WebviumJSI(this), Package.c());
+            h.addJavascriptInterface(new Object() {
+
+                @JavascriptInterface
+                public void print() {
+                    c100(h);
+                }
+            }, Package.c()+"PrintHelper");
+            h.addJavascriptInterface(new HashJSI(), Package.c()+"HashHelper");
+            h.addJavascriptInterface(new XORJSI(), Package.c()+"XORHelper");
+        } else {
+            h.removeJavascriptInterface(Package.c());
+            h.removeJavascriptInterface(Package.c()+"PrintHelper");
+            h.removeJavascriptInterface(Package.c()+"HashHelper");
+            h.removeJavascriptInterface(Package.c()+"XORHelper");
+        }
+        if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("1l")) {
+            h.setLayerType(View.LAYER_TYPE_NONE, null);
+        }
+        if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("7l")) {
+            h.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        if (Objects.requireNonNull(a221().getString("setLT", "7l")).equals("30l")) {
+            h.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+        if (Build.VERSION.SDK_INT >= 26) {
+            if (Objects.requireNonNull(a221().getString("renderP", "1s")).equals("1s")) {
+                h.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_BOUND, true);
+            }
+            if (Objects.requireNonNull(a221().getString("renderP", "1s")).equals("7s")) {
+                h.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_IMPORTANT, true);
+            }
+            if (Objects.requireNonNull(a221().getString("renderP", "1s")).equals("30s")) {
+                h.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_WAIVED, true);
+            }
+        }
+        if (a223("dr") == 0) {
+            ws.setTextZoom(h.getTextZoom());
+        } else {
+            ws.setTextZoom(a223("dr"));
+        }
+        if (a223("dr55") == 0) {
+            ws.setDefaultFontSize(h.getFontSize());
+        } else {
+            ws.setDefaultFontSize(a223("dr55"));
+        }
+        ws.setLoadWithOverviewMode(a221().getBoolean("open", false));
+        ws.setUseWideViewPort(a221().getBoolean("open1", false));
+        ws.setDomStorageEnabled(a221().getBoolean("open2", true));
+        ws.setDatabaseEnabled(a221().getBoolean("open3", true));
+        if (Build.VERSION.SDK_INT >= 29) {
+            if (a221().getBoolean("wfdM01", true)) {
+                ws.setForceDark(WebSettings.FORCE_DARK_ON);
+            } else {
+                ws.setForceDark(WebSettings.FORCE_DARK_OFF);
+            }
+        }
+        if (Build.VERSION.SDK_INT >= 26) {
+            ws.setSafeBrowsingEnabled(a221().getBoolean("save", true));
+        }
+        ws.setBlockNetworkImage(a221().getBoolean("block", false));
+        ws.setDisplayZoomControls(a221().getBoolean("zoom", false));
+        ws.setMediaPlaybackRequiresUserGesture(a221().getBoolean("auto", false));
+        ws.setSupportZoom(a221().getBoolean("enableZ", true));
+        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("1")) {
+            cm1.setAcceptCookie(true);
+            cm1.setAcceptThirdPartyCookies(h, false);
+
+        }
+        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("7")) {
+            cm1.setAcceptThirdPartyCookies(h, true);
+            cm1.setAcceptCookie(true);
+        }
+        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("30")) {
+            cm1.setAcceptCookie(false);
+            cm1.setAcceptThirdPartyCookies(h, false);
+        }
+        if (Objects.requireNonNull(a221().getString("cookies", "7")).equals("60")) {
+            cm1.setAcceptCookie(true);
+            cm1.setAcceptThirdPartyCookies(h, true);
+            CookieManager.allowFileSchemeCookies();
+        }
+        if (Objects.requireNonNull(a221().getString("java", "1f")).equals("1f")) {
+            c166();
+        }
+        if (Objects.requireNonNull(a221().getString("java", "1f")).equals("7f")) {
+            ws.setJavaScriptEnabled(false);
+        }
+        if (!ws.getJavaScriptEnabled()) {
+            if (Uri.parse(h.getUrl()).getHost().equals("mrepol742.github.io") && h.getUrl().contains("/Search")) {
+                c50();
+            }
+        }
+        if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("1r")) {
+            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("7r")) {
+            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+        }
+        if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("30r")) {
+            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("1a")) {
+            ws.setDefaultTextEncodingName(h.getTextEncoding());
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("7a")) {
+            ws.setDefaultTextEncodingName(code[0]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("30a")) {
+            ws.setDefaultTextEncodingName(code[1]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("60a")) {
+            ws.setDefaultTextEncodingName(code[2]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("120a")) {
+            ws.setDefaultTextEncodingName(code[3]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("240a")) {
+            ws.setDefaultTextEncodingName(code[4]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("480a")) {
+            ws.setDefaultTextEncodingName(code[5]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("960a")) {
+            ws.setDefaultTextEncodingName(code[6]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("1920a")) {
+            ws.setDefaultTextEncodingName(code[7]);
+        }
+        if (Objects.requireNonNull(a221().getString("textE", "1a")).equals("3840a")) {
+            ws.setDefaultTextEncodingName(a221().getString("CtextE", ""));
+        }
+        if (Build.VERSION.SDK_INT < 26) {
+            if (Objects.requireNonNull(a221().getString("form", "1g")).equals("1g")) {
+                ws.setSaveFormData(true);
+            }
+            if (Objects.requireNonNull(a221().getString("form", "1g")).equals("30g")) {
+                ws.setSaveFormData(false);
+            }
+        }
+        if (Objects.requireNonNull(a221().getString("location", "1h")).equals("1h")) {
+            ws.setGeolocationEnabled(true);
+            if (Build.VERSION.SDK_INT < 24) {
+                ws.setGeolocationDatabasePath(getFilesDir().toString());
+            }
+        }
+        if (Objects.requireNonNull(a221().getString("location", "1h")).equals("30h")) {
+            ws.setGeolocationEnabled(false);
+        }
+        if (Build.VERSION.SDK_INT < 30) {
+            ws.setAppCacheEnabled(a221().getBoolean("open4", true));
+            Runnable re = () -> {
+                String sg = StorageDirectory.getCacheDir(this).toString();
+                runOnUiThread(() -> ws.setAppCachePath(sg));
+            };
+            new Thread(re).start();
+        }
+        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("1m")) {
+            ws.setCacheMode(WebSettings.LOAD_DEFAULT);
+        }
+        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("7m")) {
+            ws.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        }
+        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("30m")) {
+            ws.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        }
+        if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("60m")) {
+            ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        }
+    }
+
+    public void c16(String a, int c11) {
+        Intent b = new Intent("android.intent.action.SEND");
+        b.setType("text/plain");
+        b.putExtra("android.intent.extra.TEXT", a);
+        String c = getString(R.string.l8);
+        String c45 = String.format(c, "\"" + a + "\"");
+        if (c11 == 0) {
+            c45 = String.format(c, "\"" + h.getTitle() + "\"");
+        }
+        startActivity(Intent.createChooser(b, c45));
+    }
+
+    public void c17() {
+        try {
+            String c = Clipboard.b(this);
+            if (c != null) {
+                Intents.h(this, SEAR.class, 911, "value", c);
+                overridePendingTransition(R.anim.a, R.anim.f);
+            } else {
+                c7(getString(R.string.t20));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            c7(getString(R.string.t20));
+        }
+    }
+
+    public void c20(boolean a) {
+        if (a) {
+            ws.setUserAgentString(ws.getUserAgentString().replace("Mobile", "eliboM").replace("Android", "diordnA"));
+        } else {
+            ws.setUserAgentString(ws.getUserAgentString().replace("eliboM", "Mobile").replace("diordnA", "Android"));
+        }
+        h.reload();
+    }
+
+    public void c22() {
+        try {
+            Intents.h(this, SEAR.class, 911, "value", h.getUrl());
+            overridePendingTransition(R.anim.a, R.anim.f);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void c23(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            onKeyDown(event.getKeyCode(), event);
+        } else {
+            onKeyUp(event.getKeyCode(), event);
+        }
+    }
+
+    public void c25() {
+        if (a221().getBoolean("clearP", false)) {
+            h.clearCache(false);
+        }
+        if (a221().getBoolean("clearH", false)) {
+            c63();
+            d1.delete();
+        }
+        if (a221().getBoolean("clearC", false)) {
+            Clipboard.a(this, " ");
+        }
+        if (a221().getBoolean("clearPr", false)) {
+            c31();
+            if (wd == null) {
+                wd = WebViewDatabase.getInstance(this);
+            }
+            if (wd.hasHttpAuthUsernamePassword()) {
+                wd.clearHttpAuthUsernamePassword();
+            }
+            if (Build.VERSION.SDK_INT <= 26 && wd.hasFormData()) {
+                wd.clearFormData();
+            }
+        }
+    }
+
+    public void c31() {
+        h.clearSslPreferences();
+    }
+
+    private void c33(String url, String b) {
+        try {
+            if (!a221().getBoolean("showW", false)) {
+                c35(new SpannableString(url), url, 0);
+            } else {
+                c35(new SpannableString(b + " | " + url), url, b.length() + 3);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     private void c35(SpannableString ssb, String url, int it) {
         try {
@@ -2457,6 +2497,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c49(String a) {
+        WebViews as = tabs.get(ct).web;
         String a5 = a.trim().toLowerCase();
         if (a5.equals("webvium://history")) {
             c146(WEBVIUM_HISTORY);
@@ -2470,12 +2511,12 @@ public class MAIN extends MainBaseActivity implements Format {
             it.putExtra("dat", a5);
             startActivity(it);
         } else if (a.equals("about:blank")) {
-            h.loadUrl("about:blank");
+            as.loadUrl("about:blank");
         } else if (IPAddress.isValidIpAddress(a)) {
-            h.loadUrl(a);
+            as.loadUrl(a);
         } else if (URLUtil.isValidUrl(a5)) {
             if (a5.startsWith("file://") || a5.startsWith("https://") || a5.startsWith("http://") || a5.startsWith("content://")) {
-                h.loadUrl(c138(a));
+                as.loadUrl(c138(a));
             } else {
                 if (Domain.isValidDomain(a5)) {
                     c3(c138(a));
@@ -4337,6 +4378,9 @@ public class MAIN extends MainBaseActivity implements Format {
                     case 2:
                         h.pageDown(true);
                         return true;
+                    case 6:
+                        Intents.f(this, HIST.class, 211);
+                        break;
 
                 }
                 return false;
@@ -4345,6 +4389,7 @@ public class MAIN extends MainBaseActivity implements Format {
             if (BuildConfig.DEBUG) {
                 me.add(0, 0, 0, getString(R.string.h16)).setOnMenuItemClickListener(e);
             }
+            me.add(0, 6, 0, getString(R.string.h18)).setOnMenuItemClickListener(e);
             me.add(0, 1, 0, getString(R.string.s14)).setOnMenuItemClickListener(e);
             me.add(0, 2, 0, getString(R.string.s16)).setOnMenuItemClickListener(e);
             me.add(0, 3, 0, getString(R.string.h3)).setOnMenuItemClickListener(e);
