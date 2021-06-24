@@ -41,6 +41,7 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.util.AppID;
+import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.File;
@@ -58,7 +59,7 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
-    public static final String INIT = "init_16";
+    public static final String INIT = "init_17";
     private RelativeLayout ll;
 
     @Override
@@ -107,7 +108,6 @@ public class WELC extends BaseActivity {
             AwesomeToast.a(this, en.getMessage());
             en.printStackTrace();
         }
-        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
 
     @Override

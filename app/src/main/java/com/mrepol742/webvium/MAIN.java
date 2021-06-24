@@ -392,24 +392,24 @@ public class MAIN extends MainBaseActivity implements Format {
                 c17();
                 return true;
             case POPUPMENU_TOOLBAR_COPY_LINK:
-                Clipboard.a(MAIN.this, h.getUrl());
+                Clipboard.a(MAIN.this, currentTab().getUrl());
                 c8(getString(R.string.k9));
                 return true;
             case POPUPMENU_TOOLBAR_SHARE_LINK:
-                c16(h.getUrl(), 0);
+                c16(currentTab().getUrl(), 0);
                 return true;
             case POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN:
-                c58(h.getUrl(), h.getTitle());
+                c58(currentTab().getUrl(), currentTab().getTitle());
                 return true;
             case POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS:
-                c14(h.getTitle(), h.getUrl());
+                c14(currentTab().getTitle(), currentTab().getUrl());
                 return true;
             case POPUPMENU_TOOLBAR_COPY_TITLE:
-                Clipboard.a(MAIN.this, h.getTitle());
+                Clipboard.a(MAIN.this, currentTab().getTitle());
                 c8(getString(R.string.k9));
                 return true;
             case POPUPMENU_TOOLBAR_SHARE_TITLE:
-                c16(h.getTitle(), 0);
+                c16(currentTab().getTitle(), 0);
                 return true;
         }
         return false;
@@ -701,7 +701,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
             this.br2 = new R36();
         }
-        c34(this.h);
+        c34(currentTab());
         eh.put("DNT", "1");
         this.ift.act("android.net.conn.CONNECTIVITY_CHANGE");
         this.ift.act("android.net.wifi.WIFI_STATE_CHANGED");
@@ -721,14 +721,14 @@ public class MAIN extends MainBaseActivity implements Format {
         tv5.setBackgroundResource(R.drawable.b17);
         this.iw.setImageResource(R.drawable.a15);
         this.cd.setBackgroundResource(R.drawable.w);
-        c15(this.h);
+        c15(currentTab());
         c50();
         tv3.setOnClickListener(view -> {
-            if (h.getProgress() == 100) {
-                h.reload();
+            if (currentTab().getProgress() == 100) {
+                currentTab().reload();
             } else {
-                h.stopLoading();
-                h.getFirstClient().onPageFinished(h, h.getUrl());
+                currentTab().stopLoading();
+                currentTab().getFirstClient().onPageFinished(currentTab(), currentTab().getUrl());
             }
         });
         if (a221().getBoolean("home", true)) {
@@ -742,8 +742,8 @@ public class MAIN extends MainBaseActivity implements Format {
         }
 
         tv4.setOnClickListener(view -> {
-            if (h.canGoForward()) {
-                h.goForward();
+            if (currentTab().canGoForward()) {
+                currentTab().goForward();
             }
         });
         MenuItem.OnMenuItemClickListener e = a1 -> {
@@ -751,7 +751,7 @@ public class MAIN extends MainBaseActivity implements Format {
             return true;
         };
         tv4.setOnLongClickListener(view -> {
-            if (h.w4.size() == 0) {
+            if (currentTab().w4.size() == 0) {
                 return false;
             }
             if (pm0 == null) {
@@ -759,21 +759,21 @@ public class MAIN extends MainBaseActivity implements Format {
                 pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
             }
             Menu me = pm0.getMenu();
-            int size = h.w4.size();
+            int size = currentTab().w4.size();
             for (int i = 0; i < size; i++) {
-                if (U3.b(h.w4.get(i).sg))
-                    me.add(0, i, 0, h.w4.get(i).sg).setOnMenuItemClickListener(e);
+                if (U3.b(currentTab().w4.get(i).sg))
+                    me.add(0, i, 0, currentTab().w4.get(i).sg).setOnMenuItemClickListener(e);
             }
             pm0.show();
             return true;
         });
         tv6.setOnClickListener(view -> {
-            if (h.canGoBack()) {
-                h.goBack();
+            if (currentTab().canGoBack()) {
+                currentTab().goBack();
             }
         });
         tv6.setOnLongClickListener(view -> {
-            if (h.w4.size() == 0) {
+            if (currentTab().w4.size() == 0) {
                 return false;
             }
             if (pm0 == null) {
@@ -781,10 +781,10 @@ public class MAIN extends MainBaseActivity implements Format {
                 pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
             }
             Menu me = pm0.getMenu();
-            int size = h.w4.size();
+            int size = currentTab().w4.size();
             for (int i = 0; i < size; i++) {
-                if (U3.b(h.w4.get(i).sg0))
-                    me.add(0, i, 0, h.w4.get(i).sg0).setOnMenuItemClickListener(e);
+                if (U3.b(currentTab().w4.get(i).sg0))
+                    me.add(0, i, 0, currentTab().w4.get(i).sg0).setOnMenuItemClickListener(e);
             }
             pm0.show();
             return true;
@@ -801,7 +801,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             return true;
         });
-        h.setOnLongClickListener(view -> c152());
+        currentTab().setOnLongClickListener(view -> c152());
         tv.setVisibility(View.GONE);
     }
 
@@ -834,8 +834,8 @@ public class MAIN extends MainBaseActivity implements Format {
             } else if (Build.VERSION.SDK_INT >= 23 && pm.isIgnoringBatteryOptimizations(Package.b())) {
                 wl.acquire(10 * 60 * 1000L /*10 minutes*/);
             }
-            if (Objects.equals(h.getTitle(), getSharedPreferences("di", 0).getString("di", "742"))) {
-                h.reload();
+            if (Objects.equals(currentTab().getTitle(), getSharedPreferences("di", 0).getString("di", "742"))) {
+                currentTab().reload();
             }
             if (Build.VERSION.SDK_INT >= 24) {
                 boolean bn1 = isInMultiWindowMode() || isInPictureInPictureMode();
@@ -843,9 +843,9 @@ public class MAIN extends MainBaseActivity implements Format {
                     c176(true);
                 }
             }
-            h.resumeTimers();
-            h.onResume();
-            c15(this.h);
+            currentTab().resumeTimers();
+            currentTab().onResume();
+            c15(currentTab());
             bl = true;
             bl2 = true;
             registerReceiver(br, ift);
@@ -892,8 +892,8 @@ public class MAIN extends MainBaseActivity implements Format {
             if (wl.isHeld()) {
                 wl.release();
             }
-            h.pauseTimers();
-            h.onPause();
+            currentTab().pauseTimers();
+            currentTab().onPause();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -908,10 +908,14 @@ public class MAIN extends MainBaseActivity implements Format {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (h != null) {
-            fl.removeView(h);
-            h.removeAllViews();
-            h.destroy();
+        try {
+            for (WebViewTab web : tabs) {
+                web.web.removeAllViews();
+                web.web.destroy();
+                fl.removeAllViews();
+            }
+        } catch (Exception en) {
+            en.printStackTrace();
         }
         bl2 = false;
         if (r7 != null) {
@@ -930,14 +934,14 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c2() {
-        if (h.canGoForward()) {
-            h.goForward();
+        if (currentTab().canGoForward()) {
+            currentTab().goForward();
         }
     }
 
     private void c3(String a) {
         c33(a, "");
-        WebViews as = tabs.get(ct).web;
+        WebViews as = currentTab();
         as.loadUrl(a);
     }
 
@@ -1876,7 +1880,7 @@ public class MAIN extends MainBaseActivity implements Format {
             ws.setJavaScriptEnabled(false);
         }
         if (!ws.getJavaScriptEnabled()) {
-            if (Uri.parse(h.getUrl()).getHost().equals("mrepol742.github.io") && h.getUrl().contains("/Search")) {
+            if (Uri.parse(currentTab().getUrl()).getHost().equals("mrepol742.github.io") && currentTab().getUrl().contains("/Search")) {
                 c50();
             }
         }
@@ -1965,7 +1969,7 @@ public class MAIN extends MainBaseActivity implements Format {
         String c = getString(R.string.l8);
         String c45 = String.format(c, "\"" + a + "\"");
         if (c11 == 0) {
-            c45 = String.format(c, "\"" + h.getTitle() + "\"");
+            c45 = String.format(c, "\"" + currentTab().getTitle() + "\"");
         }
         startActivity(Intent.createChooser(b, c45));
     }
@@ -1991,12 +1995,12 @@ public class MAIN extends MainBaseActivity implements Format {
         } else {
             ws.setUserAgentString(ws.getUserAgentString().replace("eliboM", "Mobile").replace("diordnA", "Android"));
         }
-        h.reload();
+        currentTab().reload();
     }
 
     public void c22() {
         try {
-            Intents.h(this, SEAR.class, 911, "value", h.getUrl());
+            Intents.h(this, SEAR.class, 911, "value", currentTab().getUrl());
             overridePendingTransition(R.anim.a, R.anim.f);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -2013,7 +2017,9 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c25() {
         if (a221().getBoolean("clearP", false)) {
-            h.clearCache(false);
+            for (WebViewTab web: tabs) {
+                web.web.clearCache(false);
+            }
         }
         if (a221().getBoolean("clearH", false)) {
             c63();
@@ -2037,7 +2043,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c31() {
-        h.clearSslPreferences();
+        currentTab().clearSslPreferences();
     }
 
     private void c33(String url, String b) {
@@ -2127,7 +2133,7 @@ public class MAIN extends MainBaseActivity implements Format {
                                 getWindow().setStatusBarColor(Resources.getColor(this, R.color.n));
                                 getWindow().setNavigationBarColor(Resources.getColor(this, R.color.n));
                             }
-                            if (h.getUrl().startsWith("http://")) {
+                            if (currentTab().getUrl().startsWith("http://")) {
                                 this.cd.setBackgroundResource(R.drawable.f4);
                             } else {
                                 this.cd.setBackgroundResource(R.drawable.w);
@@ -2149,8 +2155,8 @@ public class MAIN extends MainBaseActivity implements Format {
             Intent f = new Intent();
             f.putExtra("android.intent.extra.shortcut.INTENT", e);
             f.putExtra("android.intent.extra.shortcut.NAME", a);
-            if (h.getFavicon() != null) {
-                f.putExtra("android.intent.extra.shortcut.ICON", h.getFavicon());
+            if (currentTab().getFavicon() != null) {
+                f.putExtra("android.intent.extra.shortcut.ICON", currentTab().getFavicon());
             } else {
                 f.putExtra("android.intent.extra.shortcut.ICON_RESOURCE",
                         Intent.ShortcutIconResource.fromContext(this, R.mipmap.c));
@@ -2169,10 +2175,14 @@ public class MAIN extends MainBaseActivity implements Format {
             if (Objects.requireNonNull(a221().getString("cookies", "")).equals("120")) {
                 if (a.startsWith("https://")) {
                     cm1.setAcceptCookie(true);
-                    cm1.setAcceptThirdPartyCookies(h, true);
+                    for (WebViewTab web: tabs) {
+                        cm1.setAcceptThirdPartyCookies(web.web, true);
+                    }
                 } else {
                     cm1.setAcceptCookie(false);
-                    cm1.setAcceptThirdPartyCookies(h, false);
+                    for (WebViewTab web: tabs) {
+                        cm1.setAcceptThirdPartyCookies(web.web, false);
+                    }
                 }
             }
             if (Objects.requireNonNull(a221().getString("java", "")).equals("30f")) {
@@ -2213,6 +2223,10 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }, timeSet());
         }
+    }
+    
+    private WebViews currentTab() {
+        return tabs.get(ct).web;
     }
 
     private int timeSet() {
@@ -2497,7 +2511,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c49(String a) {
-        WebViews as = tabs.get(ct).web;
+        WebViews as = currentTab();
         String a5 = a.trim().toLowerCase();
         if (a5.equals("webvium://history")) {
             c146(WEBVIUM_HISTORY);
@@ -2558,7 +2572,7 @@ public class MAIN extends MainBaseActivity implements Format {
         switch (Objects.requireNonNull(a221().getString("general", "x57"))) {
             default:
             case "x57":
-                if (h.getSettings().getJavaScriptEnabled()) {
+                if (currentTab().getSettings().getJavaScriptEnabled()) {
                     c3(WEBVIUM_HOME);
                 } else {
                     c3(c48());
@@ -2597,7 +2611,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         + (mi.availMem / 1024) + " Keep threshold ="
                         + (mi.threshold / 1024) + " Keep");
                 SQLiteDatabase.releaseMemory();
-                h.clearCache(false);
+                currentTab().clearCache(false);
             }
         }
     }
@@ -2859,7 +2873,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c67() {
-        h.addJavascriptInterface(new Object() {
+        currentTab().addJavascriptInterface(new Object() {
 
             @JavascriptInterface
             public void ip(String sg) {
@@ -2868,7 +2882,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 sendBroadcast(it);
             }
         }, Package.c() + "IpHelper");
-        h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}");
+        currentTab().loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}");
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.h7));
@@ -2899,10 +2913,10 @@ public class MAIN extends MainBaseActivity implements Format {
             f.setTextColor(Resources.getColor(this, R.color.b));
             f5.setTextColor(Resources.getColor(this, R.color.b));
         }
-        bn.setOnClickListener(view -> h.loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}"));
+        bn.setOnClickListener(view -> currentTab().loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}"));
         a.setOnCancelListener(dialog -> {
             unregisterReceiver(this.ipH);
-            h.removeJavascriptInterface(Package.c() + "IpHelper");
+            currentTab().removeJavascriptInterface(Package.c() + "IpHelper");
             dialog.dismiss();
         });
         AlertDialog dd = a.create();
@@ -3078,15 +3092,15 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c75() {
-        String url = h.getUrl();
-        if (h.getCertificate() == null) {
+        String url = currentTab().getUrl();
+        if (currentTab().getCertificate() == null) {
             return;
         }
-        SslCertificate ce = h.getCertificate();
+        SslCertificate ce = currentTab().getCertificate();
         SslCertificate.DName ssl = ce.getIssuedTo();
         SslCertificate.DName ssl0 = ce.getIssuedBy();
         String ag9 = String.format(getString(R.string.b7),
-                Objects.requireNonNull(h.getTitle()),
+                Objects.requireNonNull(currentTab().getTitle()),
                 Objects.requireNonNull(url),
                 ssl.getCName(),
                 ssl.getOName(),
@@ -3417,7 +3431,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c87() {
         try {
             ab.show();
-            h.invalidate();
+            currentTab().invalidate();
             bl3 = false;
             c98();
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -3438,7 +3452,7 @@ public class MAIN extends MainBaseActivity implements Format {
         try {
             ab.hide();
             bl3 = true;
-            h.invalidate();
+            currentTab().invalidate();
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             c128();
@@ -3549,7 +3563,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             Package.e(this)));
                     break;
                 case UA_ANDROID_STOCK:
-                    ws.setUserAgentString(this.h.getUserAgent());
+                    ws.setUserAgentString(this.currentTab().getUserAgent());
                     break;
                 case UA_INTERNET_EXPLORER:
                     ws.setUserAgentString(userAgents[1]);
@@ -3627,7 +3641,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         ti.setText(getString(R.string.c30));
         ti2.setText(getString(R.string.c31));
-        String sg11 = Uri.parse(h.getUrl()).getHost() + ".png";
+        String sg11 = Uri.parse(currentTab().getUrl()).getHost() + ".png";
         String sg = StorageDirectory.getDownloadDir() + "/" + sg11;
         ti3.setText(sg);
         ed.setText(sg11);
@@ -4201,13 +4215,13 @@ public class MAIN extends MainBaseActivity implements Format {
 
 
     public void c134() {
-        if (h.canGoForward()) {
+        if (currentTab().canGoForward()) {
             tv4.setImageResource(R.drawable.b13);
             tv4.setBackgroundResource(R.drawable.b17);
         } else {
             tv4.setImageResource(R.drawable.b30);
         }
-        if (h.canGoBack()) {
+        if (currentTab().canGoBack()) {
             tv6.setImageResource(R.drawable.c13);
             tv4.setBackgroundResource(R.drawable.b17);
         } else {
@@ -4362,7 +4376,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         finishAndRemoveTask();
                         return true;
                     case 5:
-                        h.clearCache(false);
+                        currentTab().clearCache(false);
                         c8(getString(R.string.a27));
                         return true;
 
@@ -4373,10 +4387,10 @@ public class MAIN extends MainBaseActivity implements Format {
                         Intents.a(MAIN.this, SETT0.class);
                         return true;
                     case 1:
-                        h.pageUp(true);
+                        currentTab().pageUp(true);
                         return true;
                     case 2:
-                        h.pageDown(true);
+                        currentTab().pageDown(true);
                         return true;
                     case 6:
                         Intents.f(this, HIST.class, 211);
@@ -4434,7 +4448,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             fw1.close();
                         }
                     }
-                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm"));
+                    runOnUiThread(() -> currentTab().loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm"));
                     cs.close();
                 } catch (Exception en) {
                     en.printStackTrace();
@@ -4479,7 +4493,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             fw1.close();
                         }
                     }
-                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm"));
+                    runOnUiThread(() -> currentTab().loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm"));
                     cs5.close();
                 } catch (Exception en) {
                     en.printStackTrace();
@@ -4522,7 +4536,7 @@ public class MAIN extends MainBaseActivity implements Format {
                             fw1.close();
                         }
                     }
-                    runOnUiThread(() -> h.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm"));
+                    runOnUiThread(() -> currentTab().loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm"));
                     cs6.close();
                 } catch (Exception en) {
                     en.printStackTrace();
@@ -4593,7 +4607,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private boolean c152() {
-        WebView.HitTestResult d = h.getHitTestResult();
+        WebView.HitTestResult d = currentTab().getHitTestResult();
         int te = d.getType();
         sg = d.getExtra();
         switch (te) {
@@ -4806,7 +4820,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     @SuppressLint("SetJavaScriptEnabled")
     public void c166() {
-        ws.setJavaScriptEnabled(true);
+        currentTab().getSettings().setJavaScriptEnabled(true);
     }
 
     public WebResourceResponse c168(WebResourceRequest wr) {
@@ -4825,7 +4839,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c170(String sg) {
-        h.evaluateJavascript(sg, s -> android.util.Log.d(Package.c(), sg));
+        currentTab().evaluateJavascript(sg, s -> android.util.Log.d(Package.c(), sg));
     }
 
     private void c171(final String sg) {
@@ -4850,7 +4864,7 @@ public class MAIN extends MainBaseActivity implements Format {
         String b = null;
         boolean c = handler.useHttpAuthUsernamePassword();
         if (c) {
-            String[] cre = h.getHttpAuthUsernamePassword(host, realm);
+            String[] cre = currentTab().getHttpAuthUsernamePassword(host, realm);
             if (cre != null && cre.length == 2) {
                 a = cre[0];
                 b = cre[1];
@@ -4930,11 +4944,15 @@ public class MAIN extends MainBaseActivity implements Format {
                     tv.setImageResource(R.drawable.a4);
                 }
                 tv.setVisibility(View.VISIBLE);
-                h.setNetworkAvailable(false);
+                for (WebViewTab web: tabs) {
+                    web.web.setNetworkAvailable(false);
+                }
                 Animation.animate(this, R.anim.i, tv);
             } else {
                 tv.setVisibility(View.GONE);
-                h.setNetworkAvailable(true);
+                for (WebViewTab web: tabs) {
+                    web.web.setNetworkAvailable(true);
+                }
                 Animation.animate(this, R.anim.b, tv);
             }
         } catch (Exception rx) {
@@ -4953,7 +4971,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         c11(pend);
                         pend = null;
                     } else {
-                        h.reload();
+                        currentTab().reload();
                     }
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -4966,9 +4984,9 @@ public class MAIN extends MainBaseActivity implements Format {
                 break;
             case 2:
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
-                    h.reload();
+                    currentTab().reload();
                 } else {
-                    if (Objects.requireNonNull(h.getUrl()).startsWith("file://")) {
+                    if (Objects.requireNonNull(currentTab().getUrl()).startsWith("file://")) {
                         if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
                             c7(getString(R.string.u17));
@@ -4984,7 +5002,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     if (Objects.requireNonNull(a221().getString("SVCTb", "1a2")).equals("1a2")) {
                         c68(back23);
                     } else {
-                        c68(h);
+                        c68(currentTab());
                     }
                     SoftKeyboard.hide(this, back23);
                 } else {
@@ -4998,7 +5016,7 @@ public class MAIN extends MainBaseActivity implements Format {
             case 4:
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    c55(h.getUrl(), h.getTitle());
+                    c55(currentTab().getUrl(), currentTab().getTitle());
 
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -5016,7 +5034,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         c8(String.format(getString(R.string.v15),w6.a));
                         w6 = null;
                     } else {
-                        h.reload();
+                        currentTab().reload();
                     }
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -5038,7 +5056,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         c8(String.format(getString(R.string.i40), Objects.requireNonNull(w8.pr.getOrigin().getHost()), Arrays.toString(w8.pr.getResources())));
                         w8 = null;
                     } else {
-                        h.reload();
+                        currentTab().reload();
                     }
                 } else {
 
@@ -5060,7 +5078,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         c8(String.format(getString(R.string.i40), Objects.requireNonNull(w8.pr.getOrigin().getHost()), Arrays.toString(w8.pr.getResources())));
                         w8 = null;
                     } else {
-                        h.reload();
+                        currentTab().reload();
                     }
                 } else {
 
@@ -5098,16 +5116,16 @@ public class MAIN extends MainBaseActivity implements Format {
                 c125(1);
                 return true;
             } else if (Objects.equals(a221().getString("VU", ""), "7u")) {
-                h.pageUp(true);
+                currentTab().pageUp(true);
                 return true;
             } else if (Objects.equals(a221().getString("VU", ""), "30u")) {
-                h.zoomIn();
+                currentTab().zoomIn();
                 return true;
-            } else if (Objects.equals(a221().getString("VU", ""), "60u") && h.canGoBack()) {
-                h.goBack();
+            } else if (Objects.equals(a221().getString("VU", ""), "60u") && currentTab().canGoBack()) {
+                currentTab().goBack();
                 return true;
             } else if (Objects.equals(a221().getString("VU", ""), "120u")) {
-                h.reload();
+                currentTab().reload();
                 return true;
             } else if (Objects.equals(a221().getString("VU", ""), "140u")) {
                 Intents.f(this, BOOK.class, 2115);
@@ -5122,17 +5140,17 @@ public class MAIN extends MainBaseActivity implements Format {
                 c125(0);
                 return true;
             } else if (Objects.equals(a221().getString("VD", ""), "7v")) {
-                h.pageDown(true);
+                currentTab().pageDown(true);
                 return true;
             } else if (Objects.equals(a221().getString("VD", ""), "30v")) {
-                h.zoomOut();
+                currentTab().zoomOut();
                 return true;
-            } else if (Objects.equals(a221().getString("VD", ""), "60v") && h.canGoForward()) {
-                h.goForward();
+            } else if (Objects.equals(a221().getString("VD", ""), "60v") && currentTab().canGoForward()) {
+                currentTab().goForward();
                 return true;
             } else if (Objects.equals(a221().getString("VD", ""), "120v")) {
-                h.stopLoading();
-                h.getFirstClient().onPageFinished(h, h.getUrl());
+                currentTab().stopLoading();
+                currentTab().getFirstClient().onPageFinished(currentTab(), currentTab().getUrl());
                 return true;
             } else if (Objects.equals(a221().getString("VD", ""), "140v")) {
                 Intents.f(this, HIST.class, 211);
@@ -5146,11 +5164,11 @@ public class MAIN extends MainBaseActivity implements Format {
     @Override
     public boolean onKeyUp(int a, KeyEvent b) {
         if (a == 4 && b.isTracking() && !b.isCanceled()) {
-            if (!h.canGoBack()) {
+            if (!currentTab().canGoBack()) {
                 c25();
                 moveTaskToBack(true);
             } else {
-                h.goBack();
+                currentTab().goBack();
             }
             return true;
         }
@@ -5172,14 +5190,14 @@ public class MAIN extends MainBaseActivity implements Format {
                 c3(c48());
                 return true;
             } else if (Objects.equals(a221().getString("longP", ""), "30p")) {
-                h.reload();
+                currentTab().reload();
                 return true;
             } else if (Objects.equals(a221().getString("longP", ""), "60p")) {
-                if (!h.canGoBack()) {
+                if (!currentTab().canGoBack()) {
                     c25();
                     moveTaskToBack(true);
                 } else {
-                    h.goBack();
+                    currentTab().goBack();
                 }
                 return true;
             }
@@ -5249,13 +5267,13 @@ public class MAIN extends MainBaseActivity implements Format {
                 c130(URL_ENCODE);
                 return true;
             case 28:
-                c112(h.getUrl(), ASSETLINKS);
+                c112(currentTab().getUrl(), ASSETLINKS);
                 return true;
             case 29:
-                c112(h.getUrl(), SITEMAPS);
+                c112(currentTab().getUrl(), SITEMAPS);
                 return true;
             case 30:
-                c44(h.getUrl());
+                c44(currentTab().getUrl());
                 return true;
             case 17:
                 c119();
@@ -5275,7 +5293,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
                 return true;
             //     case R.id.l1:
-            //  c112(h.getUrl(), 6);
+            //  c112(currentTab().getUrl(), 6);
             //    return true;
             case 12:
                 if (ws.getJavaScriptEnabled()) {
@@ -5285,16 +5303,16 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
                 return true;
             case 1:
-                c112(h.getUrl(), 5);
+                c112(currentTab().getUrl(), 5);
                 return true;
             case 3:
-                c112(h.getUrl(), 4);
+                c112(currentTab().getUrl(), 4);
                 return true;
             case 25:
-                c112(h.getUrl(), 6);
+                c112(currentTab().getUrl(), 6);
                 return true;
             case 9:
-                c112(h.getUrl(), 8);
+                c112(currentTab().getUrl(), 8);
                 return true;
             case 19:
                 c122();
@@ -5306,10 +5324,10 @@ public class MAIN extends MainBaseActivity implements Format {
                 c123();
                 return true;
             case 22:
-                c100(h);
+                c100(currentTab());
                 return true;
             case 8:
-                c112(h.getUrl(), 7);
+                c112(currentTab().getUrl(), 7);
                 return true;
             case 24:
                 if (a.isChecked()) {
@@ -5331,14 +5349,14 @@ public class MAIN extends MainBaseActivity implements Format {
                 return true;
             case 21:
                 if (Permission.check(this, Permission.STORAGE, 4)) {
-                    c55(h.getUrl(), h.getTitle());
+                    c55(currentTab().getUrl(), currentTab().getTitle());
                 }
                 return true;
             case 15:
                 c67();
                 return true;
             case 7:
-                c43(h.getUrl());
+                c43(currentTab().getUrl());
                 return true;
             case 23:
                 Intent d = new Intent(Intent.ACTION_GET_CONTENT);
@@ -5354,23 +5372,23 @@ public class MAIN extends MainBaseActivity implements Format {
                     if (Objects.requireNonNull(a221().getString("SVCTb", "1a2")).equals("1a2")) {
                         c68(back23);
                     } else {
-                        c68(h);
+                        c68(currentTab());
                     }
                 }
                 return true;
             //     case R.id.f5:
-            //        c58(h.getUrl(), h.getTitle());
+            //        c58(currentTab().getUrl(), currentTab().getTitle());
             //     return true;
             case 2:
                 return true;
             case 4:
-                c112(h.getUrl(), 1);
+                c112(currentTab().getUrl(), 1);
                 return true;
             case 5:
-                c112(h.getUrl(), 2);
+                c112(currentTab().getUrl(), 2);
                 return true;
             case 6:
-                c112(h.getUrl(), 3);
+                c112(currentTab().getUrl(), 3);
                 return true;
 
         }
@@ -5564,8 +5582,8 @@ public class MAIN extends MainBaseActivity implements Format {
             String sg = b.getAction();
             if (sg.equals("android.net.conn.CONNECTIVITY_CHANGE") || sg.equals("android.net.wifi.WIFI_STATE_CHANGED") || sg.equals("android.intent.action.AIRPLANE_MODE")) {
                 c180();
-                if (Objects.equals(h.getTitle(), getSharedPreferences("wv", 0).getString("di", "742"))) {
-                    h.reload();
+                if (Objects.equals(currentTab().getTitle(), getSharedPreferences("wv", 0).getString("di", "742"))) {
+                    currentTab().reload();
                 }
             }
         }

@@ -14,8 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<shape xmlns:a="http://schemas.android.com/apk/res/android" a:shape="rectangle">
+<inset xmlns:a="http://schemas.android.com/apk/res/android" a:insetLeft="10dp" a:insetRight="10dp" a:insetTop="0dp" a:insetBottom="0dp">
+<shape a:shape="rectangle">
         <corners a:radius="50dp" />
         <stroke a:width="2dp" a:color="?a" />
 </shape>
+</inset>
