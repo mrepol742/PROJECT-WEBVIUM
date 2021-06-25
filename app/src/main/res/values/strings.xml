@@ -609,7 +609,7 @@
     <string name="i34">There\'s no received SSL error\'s to show</string>
     <string name="i36">Vibrate</string>
     <string name="i37">Vibration Effect</string>
-    <string name="i38">Allow %1$s to access your device %2$s</string>
+    <string name="i38">Allow &lt;b>%1$s&lt;/b> to access your device &lt;b>%2$s&lt;/b></string>
     <string name="i39">Deny</string>
     <string name="i40">%1$s can now access your device %2$s</string>
     <string name="j21">%1$s request %2$s permission denied</string>
@@ -903,6 +903,11 @@
     <string name="z56">Notify you that Backup Service successfully backup Webvium APK.</string>
     <string name="z57">Successfully Backup Webvium</string>
     <string name="z58">New Tab</string>
+    <string name="z59">Camera and Microphone</string>
+    <string name="z60">Camera</string>
+    <string name="z61">Microphone</string>
+    <string name="z62">Media Identifier</string>
+    <string name="z63">MIDI Devices</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>
