@@ -58,6 +58,7 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.search.SearchAdapter;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.text.TextWatcher;
+import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.view.Animation;
@@ -81,7 +82,8 @@ public class SEAR extends MainBaseActivity {
             "webvium://blank",
             "webvium://search",
             "webvium://history",
-            "webvium://bookmarks"
+            "webvium://bookmarks",
+            "webvium://rickroll"
     };
     private AutoCompleteTextView p;
     private ListView d;
@@ -479,6 +481,9 @@ public class SEAR extends MainBaseActivity {
                     break;
                 case "webvium://blank":
                     send("about:blank");
+                    break;
+                case "webvium://rickroll":
+                    send(Base64.decode("aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ"));
                     break;
                 default:
                     send(a);

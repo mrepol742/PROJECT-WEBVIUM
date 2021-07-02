@@ -13,6 +13,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * At the time i wrote this only me and god knows,
+ * now only God knows.
  */
 
 package com.mrepol742.webvium;
@@ -610,7 +613,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         c41();
 
-        a225(R.layout.cbeta);
+        a225(R.layout.c);
 
 
         this.o = findViewById(R.id.f);
@@ -691,7 +694,6 @@ public class MAIN extends MainBaseActivity implements Format {
                 this.u.setTextColor(this.a8);
                 this.tv8.setTextColor(this.a8);
             }
-            c149(h);
             cd.setBackgroundResource(R.drawable.w);
             tv.setBackgroundResource(R.drawable.f2);
         } catch (Exception ex) {
@@ -721,8 +723,8 @@ public class MAIN extends MainBaseActivity implements Format {
         tv5.setBackgroundResource(R.drawable.b17);
         this.iw.setImageResource(R.drawable.a15);
         this.cd.setBackgroundResource(R.drawable.w);
-        c15(currentTab());
-        c50();
+        c15(h);
+        c50(h);
         tv3.setOnClickListener(view -> {
             if (currentTab().getProgress() == 100) {
                 currentTab().reload();
@@ -732,7 +734,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         });
         if (a221().getBoolean("home", true)) {
-            tv1.setOnClickListener(view -> c51());
+            tv1.setOnClickListener(view -> c51(currentTab()));
         }
         if (a221().getBoolean("voice", true) && !spr()) {
             tv2.setOnClickListener(view -> {
@@ -803,6 +805,7 @@ public class MAIN extends MainBaseActivity implements Format {
         });
         currentTab().setOnLongClickListener(view -> c152());
         tv.setVisibility(View.GONE);
+        c149(h);
     }
 
     @Override
@@ -945,6 +948,11 @@ public class MAIN extends MainBaseActivity implements Format {
         as.loadUrl(a);
     }
 
+    private void c3(WebViews web, String a) {
+        c33(a, "");
+        web.loadUrl(a);
+    }
+
     public void c4(Message b, Message c) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
@@ -1062,8 +1070,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 fl.removeAllViews();
                 WebViews web = new WebViews(this);
                 tabs.add(new WebViewTab(web, "New Tab ", "about:blank"));
-//c50();
-                web.loadUrl("https://google.com");
+                c50(web);
                 c34(web);
                 c15(web);
                 c149(web);
@@ -1082,7 +1089,7 @@ public class MAIN extends MainBaseActivity implements Format {
         Menu me = pm8.getMenu();
         int len = tabs.size();
         for (int i = 0; i < len; i++) {
-            me.add(0, i, 0, "Tab " + String.valueOf(i + 1)).setOnMenuItemClickListener(e);
+            me.add(0, i, 0, "Tab " + (i + 1)).setOnMenuItemClickListener(e);
         }
         me.add(0, 742, 0, "New Tab").setOnMenuItemClickListener(e);
         pm8.show();
@@ -1826,6 +1833,7 @@ public class MAIN extends MainBaseActivity implements Format {
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void c15(WebViews h) {
         WebSettings ws = h.getSettings();
         if (a221().getBoolean("Javaweb", true)) {
@@ -1912,14 +1920,14 @@ public class MAIN extends MainBaseActivity implements Format {
             CookieManager.allowFileSchemeCookies();
         }
         if (Objects.requireNonNull(a221().getString("java", "1f")).equals("1f")) {
-            c166();
+            ws.setJavaScriptEnabled(true);
         }
         if (Objects.requireNonNull(a221().getString("java", "1f")).equals("7f")) {
             ws.setJavaScriptEnabled(false);
         }
         if (!ws.getJavaScriptEnabled()) {
             if (Uri.parse(currentUrl()).getHost().equals("mrepol742.github.io") && currentUrl().contains("/Search")) {
-                c50();
+                c50(currentTab());
             }
         }
         if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("1r")) {
@@ -2222,7 +2230,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
                 if (Objects.requireNonNull(a221().getString("java", "")).equals("30f")) {
                     if (a.startsWith("https://")) {
-                        c166();
+                        currentSettings(web).setJavaScriptEnabled(true);
                     } else {
                             currentSettings(web).setJavaScriptEnabled(false);
                     }
@@ -2567,9 +2575,14 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c49(String a) {
-        WebViews as = currentTab();
+       c49(currentTab(), a);
+    }
+
+    public void c49(WebViews as, String a) {
         String a5 = a.trim().toLowerCase();
-        if (a5.equals("webvium://history")) {
+        if (a5.equals("webvium://rickroll")) {
+            as.loadUrl(Base64.decode("aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ"));
+        } else if (a5.equals("webvium://history")) {
             c146(WEBVIUM_HISTORY);
         } else if (a5.equals("webvium://search")) {
             c146(WEBVIUM_SEARCH);
@@ -2611,48 +2624,48 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
-    private void c50() {
+    private void c50(WebViews web) {
         if (a221().getBoolean("tab", false)) {
             String sg0 = a222("MyURL");
             if (sg0 != null) {
-                c3(sg0);
+                c3(web, sg0);
             } else {
-                c51();
+                c51(web);
             }
         } else {
-            c51();
+            c51(web);
         }
     }
 
-    private void c51() {
+    private void c51(WebViews web) {
         switch (Objects.requireNonNull(a221().getString("general", "x57"))) {
             default:
             case "x57":
                 if (currentSettings().getJavaScriptEnabled()) {
-                    c3(WEBVIUM_HOME);
+                    c3(web, WEBVIUM_HOME);
                 } else {
-                    c3(c48());
+                    c3(web, c48());
                 }
                 break;
             case "1o":
-                c3(c48());
+                c3(web, c48());
                 break;
             case "7o":
                 String sg0 = a222("MyURL");
                 if (sg0 == null) {
                     sg0 = c48();
                 }
-                c3(sg0);
+                c3(web, sg0);
                 break;
             case "30o":
-                c3("about:blank");
+                c3(web, "about:blank");
                 break;
             case "60o":
                 String sg1 = a221().getString("cGeneral", "");
                 if (sg1 != null && U3.b(sg1)) {
-                    c49(sg1);
+                    c49(web, sg1);
                 } else {
-                    c3(c48());
+                    c3(web, c48());
                 }
                 break;
         }
@@ -3319,6 +3332,7 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page finished
     public void c80(WebView a, String b) {
         try {
+            c134();
             if (a.getSettings().getJavaScriptEnabled()) {
                 if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj", false)) {
                     a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
@@ -3354,7 +3368,6 @@ public class MAIN extends MainBaseActivity implements Format {
             tv5.setBackgroundResource(R.drawable.b17);
             Animation.animate(MAIN.this, R.anim.c, tv5);
             bl5 = false;
-            c134();
             c38(b);
             c33(b, getString(R.string.v13));
             this.iw.setImageResource(R.drawable.a15);
@@ -4271,23 +4284,21 @@ public class MAIN extends MainBaseActivity implements Format {
         g.show();
     }
 
-
     public void c134() {
         if (currentTab().canGoForward()) {
             tv4.setImageResource(R.drawable.b13);
             tv4.setBackgroundResource(R.drawable.b17);
+            Animation.animate(MAIN.this, R.anim.c, tv4);
         } else {
             tv4.setImageResource(R.drawable.b30);
         }
         if (currentTab().canGoBack()) {
             tv6.setImageResource(R.drawable.c13);
-            tv4.setBackgroundResource(R.drawable.b17);
+            tv6.setBackgroundResource(R.drawable.b17);
+            Animation.animate(MAIN.this, R.anim.c, tv6);
         } else {
             tv6.setImageResource(R.drawable.c14);
         }
-
-        Animation.animate(MAIN.this, R.anim.c, tv6);
-        Animation.animate(MAIN.this, R.anim.c, tv4);
     }
 
     public String c138(String sg) {
@@ -4872,11 +4883,6 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setPositiveButton(getString(R.string.y89), (a2, i) -> a2.dismiss());
         final AlertDialog g = a.create();
         g.show();
-    }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    public void c166() {
-        currentSettings().setJavaScriptEnabled(true);
     }
 
     public WebResourceResponse c168(WebResourceRequest wr) {

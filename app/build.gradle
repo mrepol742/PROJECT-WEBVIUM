@@ -29,8 +29,10 @@ android {
         applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode Integer.parseInt(new Date().format("ddMMyyyy"))
+        versionCode Integer.parseInt(new Date().format("yyMMdd"))
         versionName "1.6"
+        // < 1.0 The version i know what i am doing,
+        // > 1.5 Now only god knows.
         proguardFiles getDefaultProguardFile(
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
         android.applicationVariants.all { variant ->

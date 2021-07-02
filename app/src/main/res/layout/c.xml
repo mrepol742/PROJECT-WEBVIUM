@@ -178,8 +178,8 @@
         <TextView
             a:id="@id/m7" a:gravity="center"
             a:layout_width="0dp"
-            a:layout_height="wrap_content"
-            a:layout_weight="0.5" />
+            a:layout_height="wrap_content" a:padding="3dp"
+            a:layout_weight="0.23" />
 
         <ImageView
             a:id="@id/m8"
