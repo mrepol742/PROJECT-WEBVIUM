@@ -384,6 +384,7 @@ public class MAIN extends MainBaseActivity implements Format {
     private MainReceiver ipH;
     private final ArrayList<WebViewTab> tabs = new ArrayList<>();
     private int ct;
+    private boolean isSh = false;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -1472,11 +1473,6 @@ public class MAIN extends MainBaseActivity implements Format {
         h.setWebViewClient(new MainWebViewClient() {
 
             @Override
-            public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
-                c23(event);
-            }
-
-            @Override
             public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
                 c172(handler, host, realm);
             }
@@ -2053,14 +2049,6 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
-    private void c23(KeyEvent event) {
-        if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            onKeyDown(event.getKeyCode(), event);
-        } else {
-            onKeyUp(event.getKeyCode(), event);
-        }
-    }
-
     public void c25() {
         if (a221().getBoolean("clearP", false)) {
             for (WebViewTab web: tabs) {
@@ -2089,7 +2077,9 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c31() {
-        currentTab().clearSslPreferences();
+        for (WebViewTab web: tabs) {
+            web.web.clearSslPreferences();
+        }
     }
 
     private void c33(String url, String b) {
@@ -3990,19 +3980,20 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private void c125(int type) {
-        final FrameLayout k = findViewById(R.id.i);
-        View c = View.inflate(this, R.layout.c6, null);
-        LinearLayout ll = c.findViewById(R.id.b6);
-        final SeekBar c2 = c.findViewById(R.id.c18);
-        final AudioManager mAudio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        c2.setElevation(5);
-        c2.setBackgroundResource(R.drawable.a19);
-        c2.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
+       final AudioManager mAudio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (type == 1) {
             mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) + 1, AudioManager.FLAG_PLAY_SOUND);
         } else if (type == 0) {
             mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) - 1, AudioManager.FLAG_PLAY_SOUND);
         }
+        if (!isSh) {
+        final FrameLayout k = findViewById(R.id.i);
+        View c = View.inflate(this, R.layout.c6, null);
+        LinearLayout ll = c.findViewById(R.id.b6);
+        final SeekBar c2 = c.findViewById(R.id.c18);
+        c2.setElevation(5);
+        c2.setBackgroundResource(R.drawable.a19);
+        c2.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
         Runnable p15 = () -> {
             final Bitmap pp = Resources.getBitmapFromResource(MAIN.this, R.drawable.a6);
             runOnUiThread(() -> c2.setThumb(new BitmapDrawable(getResources(), pp)));
@@ -4020,9 +4011,16 @@ public class MAIN extends MainBaseActivity implements Format {
         ll.setOnClickListener(view -> {
             Animation.animate(MAIN.this, R.anim.d, c2);
             k.removeView(c);
+            isSh = false;
         });
         k.addView(c);
         Animation.animate(this, R.anim.a, c2);
+        isSh = true;
+        } else {
+          final FrameLayout k123 = findViewById(R.id.i);
+          final SeekBar c55 = k123.findViewById(R.id.c18);
+          c55.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
+        }
     }
 
     public void c126(String url) {
@@ -5174,7 +5172,7 @@ public class MAIN extends MainBaseActivity implements Format {
     @Override
     public boolean onKeyDown(int a, KeyEvent b) {
         if (a == KeyEvent.KEYCODE_VOLUME_UP) {
-            if (a221().getString("VU", "") == null) {
+            if (Objects.equals(a221().getString("VU", "1u"), "1u")) {
                 c125(1);
                 return true;
             } else if (Objects.equals(a221().getString("VU", ""), "7u")) {
@@ -5195,10 +5193,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             return true;
         } else if (a == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            if (a221().getString("VD", "") == null) {
-                c125(0);
-                return true;
-            } else if (Objects.equals(a221().getString("VD", ""), "1v")) {
+            if (Objects.equals(a221().getString("VD", "1v"), "1v")) {
                 c125(0);
                 return true;
             } else if (Objects.equals(a221().getString("VD", ""), "7v")) {

@@ -59,7 +59,7 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
-    public static final String INIT = "init_18";
+    public static final String INIT = "init_17";
     private RelativeLayout ll;
 
     @Override

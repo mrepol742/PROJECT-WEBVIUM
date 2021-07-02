@@ -29,7 +29,7 @@ android {
         applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode Integer.parseInt(new Date().format("yyMMdd"))
+        versionCode Integer.parseInt(new Date().format("yyyyMMdd"))
         versionName "1.6"
         // < 1.0 The version i know what i am doing,
         // > 1.5 Now only god knows.
