@@ -180,6 +180,7 @@ public class HistoryAdapter extends MainBaseAdapter {
         TextView b;
         ImageView c;
         TextView d;
+
         @Keep
         private AN() {
         }

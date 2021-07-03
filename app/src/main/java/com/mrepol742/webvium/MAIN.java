@@ -43,6 +43,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.media.AudioManager;
@@ -101,6 +102,7 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -182,6 +184,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.lang.reflect.*;
 
 // @Class MainActivity
 public class MAIN extends MainBaseActivity implements Format {
@@ -385,6 +388,7 @@ public class MAIN extends MainBaseActivity implements Format {
     private final ArrayList<WebViewTab> tabs = new ArrayList<>();
     private int ct;
     private boolean isSh = false;
+    private AN an;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -1049,6 +1053,23 @@ public class MAIN extends MainBaseActivity implements Format {
         e.show();
     }
 
+    /* private void c10() {
+        FrameLayout fl = findViewById(R.id.o45);
+        if (an == null) {
+            an = new AN();
+            LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = li.inflate(R.layout.a14, null);
+            ImageView iv = v.findViewById(R.id.o42);
+            TextView tv = v.findViewById(R.id.o43);
+            ImageView iv2 = v.findViewById(R.id.o44);
+
+            fl.setTag(an);
+        } else {
+            an = (AN) fl.getTag();
+
+        }
+    } */
+
     private void c10() {
         if (pm8 == null) {
             pm8 = new PopupMenu(this, tv8);
@@ -1065,6 +1086,20 @@ public class MAIN extends MainBaseActivity implements Format {
                 c149(webb.web);
                 fl.addView(webb.web);
                 ct = a1.getItemId();
+            } else if (a1.getItemId() == 743) {
+                fl.removeAllViews();
+                for (WebViewTab web: tabs) {
+                    web.web.destroy();
+                }
+                tabs.clear();
+                WebViews web = new WebViews(this);
+                tabs.add(new WebViewTab(web, "New Tab ", "about:blank"));
+                c50(web);
+                c34(web);
+                c15(web);
+                c149(web);
+                fl.addView(web);
+                ct = tabs.size();
             } else {
                 currentTab().pauseTimers();
                 currentTab().onPause();
@@ -1090,10 +1125,47 @@ public class MAIN extends MainBaseActivity implements Format {
         Menu me = pm8.getMenu();
         int len = tabs.size();
         for (int i = 0; i < len; i++) {
-            me.add(0, i, 0, "Tab " + (i + 1)).setOnMenuItemClickListener(e);
+            me.add(0, i, 0, getTitleNonNull(i)).setOnMenuItemClickListener(e).setIcon(getFaviconNonNull(i));
+
         }
-        me.add(0, 742, 0, "New Tab").setOnMenuItemClickListener(e);
+        me.add(0, 742, 0, "New Tab").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a22));
+        me.add(0, 743, 0, "Close All").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a25));
+        setForceShowIcon(pm8);
         pm8.show();
+    }
+
+public static void setForceShowIcon(PopupMenu popupMenu) {
+    try {
+        Field[] fields = popupMenu.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            if ("mPopup".equals(field.getName())) {
+                field.setAccessible(true);
+                Object menuPopupHelper = field.get(popupMenu);
+                Class<?> classPopupHelper = Class.forName(menuPopupHelper
+                        .getClass().getName());
+                Method setForceIcons = classPopupHelper.getMethod(
+                        "setForceShowIcon", boolean.class);
+                setForceIcons.invoke(menuPopupHelper, true);
+                break;
+            }
+        }
+    } catch (Throwable e) {
+        e.printStackTrace();
+    }
+}
+
+    private String getTitleNonNull(int loc) {
+        if (tabs.get(loc).web.getTitle() != null) {
+            return tabs.get(loc).web.getTitle();
+        }
+        return "Tab " + (loc + 1);
+    }
+
+    private Drawable getFaviconNonNull(int loc) {
+        if (tabs.get(loc).web.getFavicon() != null) {
+            return new BitmapDrawable(getResources(), tabs.get(loc).web.getFavicon());
+        }
+        return Resources.getDrawable(this, R.mipmap.c);
     }
 
     private String c11(String sg) {
@@ -5671,6 +5743,21 @@ public class MAIN extends MainBaseActivity implements Format {
                 cd.setBackgroundResource(R.drawable.w);
                 tv.setBackgroundResource(R.drawable.f2);
             }
+        }
+    }
+
+    /*
+    * There was no Hentai here. Sorry 😂😂..
+    * come back to line 6, 765 next week!
+    */
+
+    private static class AN {
+        ImageView a;
+        TextView b;
+        ImageView c;
+
+        @Keep
+        private AN() {
         }
     }
 }
