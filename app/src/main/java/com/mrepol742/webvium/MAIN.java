@@ -1076,7 +1076,7 @@ public class MAIN extends MainBaseActivity implements Format {
             pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
         }
         MenuItem.OnMenuItemClickListener e = a1 -> {
-            if (a1.getItemId() != 742) {
+            if (a1.getItemId() != 742 && a1.getItemId() != 743) {
                 currentTab().pauseTimers();
                 currentTab().onPause();
                 fl.removeAllViews();
@@ -1087,19 +1087,20 @@ public class MAIN extends MainBaseActivity implements Format {
                 fl.addView(webb.web);
                 ct = a1.getItemId();
             } else if (a1.getItemId() == 743) {
-                fl.removeAllViews();
-                for (WebViewTab web: tabs) {
-                    web.web.destroy();
+                for (WebViewTab tab: tabs) {
+                    tab.web.destroy();
                 }
                 tabs.clear();
                 WebViews web = new WebViews(this);
                 tabs.add(new WebViewTab(web, "New Tab ", "about:blank"));
+                fl.removeAllViews();
                 c50(web);
                 c34(web);
                 c15(web);
                 c149(web);
                 fl.addView(web);
-                ct = tabs.size();
+                ct = 0;
+                c8("Tabs Cleared.");
             } else {
                 currentTab().pauseTimers();
                 currentTab().onPause();
@@ -1116,7 +1117,7 @@ public class MAIN extends MainBaseActivity implements Format {
             tv8.setText(String.valueOf(tabs.size()));
             if (currentUrl() != null && currentTitle() != null) {
                 c33(currentUrl(), currentTitle());
-        }
+            }
             if (currentFavicon() != null) {
                 c5(currentFavicon());
             }
@@ -1130,29 +1131,29 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         me.add(0, 742, 0, "New Tab").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a22));
         me.add(0, 743, 0, "Close All").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a25));
-        setForceShowIcon(pm8);
+        forceShowIcon(pm8);
         pm8.show();
     }
 
-public static void setForceShowIcon(PopupMenu popupMenu) {
-    try {
-        Field[] fields = popupMenu.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if ("mPopup".equals(field.getName())) {
-                field.setAccessible(true);
-                Object menuPopupHelper = field.get(popupMenu);
-                Class<?> classPopupHelper = Class.forName(menuPopupHelper
-                        .getClass().getName());
-                Method setForceIcons = classPopupHelper.getMethod(
-                        "setForceShowIcon", boolean.class);
-                setForceIcons.invoke(menuPopupHelper, true);
-                break;
+    public static void forceShowIcon(PopupMenu popupMenu) {
+        try {
+            Field[] fields = popupMenu.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if ("mPopup".equals(field.getName())) {
+                    field.setAccessible(true);
+                    Object menuPopupHelper = field.get(popupMenu);
+                    Class<?> classPopupHelper = Class.forName(menuPopupHelper
+                            .getClass().getName());
+                    Method setForceIcons = classPopupHelper.getMethod(
+                            "setForceShowIcon", boolean.class);
+                    setForceIcons.invoke(menuPopupHelper, true);
+                    break;
+                }
             }
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
-    } catch (Throwable e) {
-        e.printStackTrace();
     }
-}
 
     private String getTitleNonNull(int loc) {
         if (tabs.get(loc).web.getTitle() != null) {
@@ -1165,7 +1166,7 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
         if (tabs.get(loc).web.getFavicon() != null) {
             return new BitmapDrawable(getResources(), tabs.get(loc).web.getFavicon());
         }
-        return Resources.getDrawable(this, R.mipmap.c);
+        return Resources.getDrawable(this, R.drawable.a18);
     }
 
     private String c11(String sg) {
@@ -1178,10 +1179,10 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
         } else if (sg.contains(PermissionRequest.RESOURCE_PROTECTED_MEDIA_ID)) {
             return getString(R.string.z62);
         }
-         else if (sg.contains(PermissionRequest.RESOURCE_MIDI_SYSEX)) {
+        else if (sg.contains(PermissionRequest.RESOURCE_MIDI_SYSEX)) {
             return getString(R.string.z63);
         }
-         return null;
+        return null;
     }
 
     private String c12(Uri sg) {
@@ -2284,33 +2285,33 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
                 if (Objects.requireNonNull(a221().getString("cookies", "")).equals("120")) {
                     if (a.startsWith("https://")) {
                         cm1.setAcceptCookie(true);
-                            cm1.setAcceptThirdPartyCookies(web.web, true);
+                        cm1.setAcceptThirdPartyCookies(web.web, true);
                     } else {
                         cm1.setAcceptCookie(false);
-                            cm1.setAcceptThirdPartyCookies(web.web, false);
+                        cm1.setAcceptThirdPartyCookies(web.web, false);
                     }
                 }
                 if (Objects.requireNonNull(a221().getString("java", "")).equals("30f")) {
                     if (a.startsWith("https://")) {
                         currentSettings(web).setJavaScriptEnabled(true);
                     } else {
-                            currentSettings(web).setJavaScriptEnabled(false);
+                        currentSettings(web).setJavaScriptEnabled(false);
                     }
                 }
                 if (Build.VERSION.SDK_INT < 26) {
                     if (Objects.requireNonNull(a221().getString("form", "")).equals("7g")) {
-                            currentSettings(web).setSaveFormData(a.startsWith("https://"));
+                        currentSettings(web).setSaveFormData(a.startsWith("https://"));
                     }
                 }
                 if (Objects.requireNonNull(a221().getString("location", "")).equals("7h")) {
-                        if (a.startsWith("https://")) {
-                            currentSettings(web).setGeolocationEnabled(true);
-                            if (Build.VERSION.SDK_INT <= 24) {
-                                currentSettings(web).setGeolocationDatabasePath(getFilesDir().toString());
-                            }
-                        } else {
-                            currentSettings(web).setGeolocationEnabled(false);
+                    if (a.startsWith("https://")) {
+                        currentSettings(web).setGeolocationEnabled(true);
+                        if (Build.VERSION.SDK_INT <= 24) {
+                            currentSettings(web).setGeolocationDatabasePath(getFilesDir().toString());
                         }
+                    } else {
+                        currentSettings(web).setGeolocationEnabled(false);
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -2330,7 +2331,7 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
             }, timeSet());
         }
     }
-    
+
     private WebViews currentTab() {
         return tabs.get(ct).web;
     }
@@ -2338,15 +2339,15 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
     private WebSettings currentSettings(WebViewTab ws) {
         return ws.web.getSettings();
     }
-    
+
     private WebSettings currentSettings() {
         return currentTab().getSettings();
     }
-    
+
     private String currentTitle() {
         return currentTab().getTitle();
     }
-    
+
     private String currentUrl() {
         return currentTab().getUrl();
     }
@@ -2637,7 +2638,7 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
     }
 
     public void c49(String a) {
-       c49(currentTab(), a);
+        c49(currentTab(), a);
     }
 
     public void c49(WebViews as, String a) {
@@ -3685,8 +3686,8 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
     }
 
     private void c108() throws PackageManager.NameNotFoundException {
-            if (!ua) {
-                for (WebViewTab web: tabs) {
+        if (!ua) {
+            for (WebViewTab web: tabs) {
                 switch (Objects.requireNonNull(a221().getString("userA", ""))) {
                     default:
                     case UA_DEFAULT:
@@ -4052,46 +4053,46 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
     }
 
     private void c125(int type) {
-       final AudioManager mAudio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        final AudioManager mAudio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (type == 1) {
             mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) + 1, AudioManager.FLAG_PLAY_SOUND);
         } else if (type == 0) {
             mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) - 1, AudioManager.FLAG_PLAY_SOUND);
         }
         if (!isSh) {
-        final FrameLayout k = findViewById(R.id.i);
-        View c = View.inflate(this, R.layout.c6, null);
-        LinearLayout ll = c.findViewById(R.id.b6);
-        final SeekBar c2 = c.findViewById(R.id.c18);
-        c2.setElevation(5);
-        c2.setBackgroundResource(R.drawable.a19);
-        c2.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
-        Runnable p15 = () -> {
-            final Bitmap pp = Resources.getBitmapFromResource(MAIN.this, R.drawable.a6);
-            runOnUiThread(() -> c2.setThumb(new BitmapDrawable(getResources(), pp)));
-        };
-        new Thread(p15).start();
-        c2.setMax(mAudio.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        c2.setOnSeekBarChangeListener(new W11() {
+            final FrameLayout k = findViewById(R.id.i);
+            View c = View.inflate(this, R.layout.c6, null);
+            LinearLayout ll = c.findViewById(R.id.b6);
+            final SeekBar c2 = c.findViewById(R.id.c18);
+            c2.setElevation(5);
+            c2.setBackgroundResource(R.drawable.a19);
+            c2.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
+            Runnable p15 = () -> {
+                final Bitmap pp = Resources.getBitmapFromResource(MAIN.this, R.drawable.a6);
+                runOnUiThread(() -> c2.setThumb(new BitmapDrawable(getResources(), pp)));
+            };
+            new Thread(p15).start();
+            c2.setMax(mAudio.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+            c2.setOnSeekBarChangeListener(new W11() {
 
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, i, AudioManager.FLAG_PLAY_SOUND);
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, i, AudioManager.FLAG_PLAY_SOUND);
 
-            }
-        });
-        ll.setOnClickListener(view -> {
-            Animation.animate(MAIN.this, R.anim.d, c2);
-            k.removeView(c);
-            isSh = false;
-        });
-        k.addView(c);
-        Animation.animate(this, R.anim.a, c2);
-        isSh = true;
+                }
+            });
+            ll.setOnClickListener(view -> {
+                Animation.animate(MAIN.this, R.anim.d, c2);
+                k.removeView(c);
+                isSh = false;
+            });
+            k.addView(c);
+            Animation.animate(this, R.anim.a, c2);
+            isSh = true;
         } else {
-          final FrameLayout k123 = findViewById(R.id.i);
-          final SeekBar c55 = k123.findViewById(R.id.c18);
-          c55.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
+            final FrameLayout k123 = findViewById(R.id.i);
+            final SeekBar c55 = k123.findViewById(R.id.c18);
+            c55.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
         }
     }
 
@@ -5747,9 +5748,9 @@ public static void setForceShowIcon(PopupMenu popupMenu) {
     }
 
     /*
-    * There was no Hentai here. Sorry 😂😂..
-    * come back to line 6, 765 next week!
-    */
+     * There was no Hentai here. Sorry 😂😂..
+     * come back to line 6, 765 next week!
+     */
 
     private static class AN {
         ImageView a;
