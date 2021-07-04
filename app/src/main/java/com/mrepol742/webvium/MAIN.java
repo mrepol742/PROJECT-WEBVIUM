@@ -118,7 +118,6 @@ import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
 import com.mrepol742.webvium.app.SearchJSI;
 import com.mrepol742.webvium.app.Sqlite;
-import com.mrepol742.webvium.app.WebViewTab;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.XORJSI;
@@ -145,6 +144,7 @@ import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.permission.PermissionObjectDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Hash;
+import com.mrepol742.webvium.tab.NewTabAdapter;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
@@ -385,10 +385,9 @@ public class MAIN extends MainBaseActivity implements Format {
     final int WEBVIUM_HISTORY = 2;
     final int WEBVIUM_BOOKMARKS = 4;
     private MainReceiver ipH;
-    private final ArrayList<WebViewTab> tabs = new ArrayList<>();
+    private final ArrayList<WebViews> tabs = new ArrayList<>();
     private int ct;
     private boolean isSh = false;
-    private AN an;
 
     final MenuItem.OnMenuItemClickListener mio = a1 -> {
         switch (a1.getItemId()) {
@@ -628,7 +627,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         this.h = new com.mrepol742.webvium.app.WebViews(this);
         fl = findViewById(R.id.i);
-        tabs.add(new WebViewTab(h, "New Tab", "Default Homepage setup"));
+        tabs.add(h);
         ct = 0;
         fl.addView(h);
         tv = findViewById(R.id.d19);
@@ -917,9 +916,9 @@ public class MAIN extends MainBaseActivity implements Format {
     protected void onDestroy() {
         super.onDestroy();
         try {
-            for (WebViewTab web : tabs) {
-                web.web.removeAllViews();
-                web.web.destroy();
+            for (WebViews web : tabs) {
+                web.removeAllViews();
+                web.destroy();
                 fl.removeAllViews();
             }
         } catch (Exception en) {
@@ -1053,24 +1052,15 @@ public class MAIN extends MainBaseActivity implements Format {
         e.show();
     }
 
-    /* private void c10() {
+     private void c10() {
         FrameLayout fl = findViewById(R.id.o45);
-        if (an == null) {
-            an = new AN();
-            LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = li.inflate(R.layout.a14, null);
-            ImageView iv = v.findViewById(R.id.o42);
-            TextView tv = v.findViewById(R.id.o43);
-            ImageView iv2 = v.findViewById(R.id.o44);
+        ListView lv = new ListView(this);
+        NewTabAdapter nta = new NewTabAdapter(this, tabs);
+        lv.setAdapter(nta);
+        fl.addView(lv);
+    }
 
-            fl.setTag(an);
-        } else {
-            an = (AN) fl.getTag();
-
-        }
-    } */
-
-    private void c10() {
+    /* private void c10() {
         if (pm8 == null) {
             pm8 = new PopupMenu(this, tv8);
             pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
@@ -1080,19 +1070,19 @@ public class MAIN extends MainBaseActivity implements Format {
                 currentTab().pauseTimers();
                 currentTab().onPause();
                 fl.removeAllViews();
-                WebViewTab webb = tabs.get(a1.getItemId());
-                webb.web.resumeTimers();
-                webb.web.onResume();
-                c149(webb.web);
-                fl.addView(webb.web);
+                WebViews webb = tabs.get(a1.getItemId());
+                webb.resumeTimers();
+                webb.onResume();
+                c149(webb);
+                fl.addView(webb);
                 ct = a1.getItemId();
             } else if (a1.getItemId() == 743) {
-                for (WebViewTab tab: tabs) {
-                    tab.web.destroy();
+                for (WebViews tab: tabs) {
+                    tab.destroy();
                 }
                 tabs.clear();
                 WebViews web = new WebViews(this);
-                tabs.add(new WebViewTab(web, "New Tab ", "about:blank"));
+                tabs.add(web);
                 fl.removeAllViews();
                 c50(web);
                 c34(web);
@@ -1106,7 +1096,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 currentTab().onPause();
                 fl.removeAllViews();
                 WebViews web = new WebViews(this);
-                tabs.add(new WebViewTab(web, "New Tab ", "about:blank"));
+                tabs.add(web);
                 c50(web);
                 c34(web);
                 c15(web);
@@ -1133,7 +1123,7 @@ public class MAIN extends MainBaseActivity implements Format {
         me.add(0, 743, 0, "Close All").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a25));
         forceShowIcon(pm8);
         pm8.show();
-    }
+    } */
 
     public static void forceShowIcon(PopupMenu popupMenu) {
         try {
@@ -1156,15 +1146,15 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private String getTitleNonNull(int loc) {
-        if (tabs.get(loc).web.getTitle() != null) {
-            return tabs.get(loc).web.getTitle();
+        if (tabs.get(loc).getTitle() != null) {
+            return tabs.get(loc).getTitle();
         }
         return "Tab " + (loc + 1);
     }
 
     private Drawable getFaviconNonNull(int loc) {
-        if (tabs.get(loc).web.getFavicon() != null) {
-            return new BitmapDrawable(getResources(), tabs.get(loc).web.getFavicon());
+        if (tabs.get(loc).getFavicon() != null) {
+            return new BitmapDrawable(getResources(), tabs.get(loc).getFavicon());
         }
         return Resources.getDrawable(this, R.drawable.a18);
     }
@@ -2124,8 +2114,8 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c25() {
         if (a221().getBoolean("clearP", false)) {
-            for (WebViewTab web: tabs) {
-                web.web.clearCache(false);
+            for (WebViews web: tabs) {
+                web.clearCache(false);
             }
         }
         if (a221().getBoolean("clearH", false)) {
@@ -2150,8 +2140,8 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c31() {
-        for (WebViewTab web: tabs) {
-            web.web.clearSslPreferences();
+        for (WebViews web: tabs) {
+            web.clearSslPreferences();
         }
     }
 
@@ -2281,14 +2271,14 @@ public class MAIN extends MainBaseActivity implements Format {
 
     public void c38(String a) {
         try {
-            for (WebViewTab web: tabs) {
+            for (WebViews web: tabs) {
                 if (Objects.requireNonNull(a221().getString("cookies", "")).equals("120")) {
                     if (a.startsWith("https://")) {
                         cm1.setAcceptCookie(true);
-                        cm1.setAcceptThirdPartyCookies(web.web, true);
+                        cm1.setAcceptThirdPartyCookies(web, true);
                     } else {
                         cm1.setAcceptCookie(false);
-                        cm1.setAcceptThirdPartyCookies(web.web, false);
+                        cm1.setAcceptThirdPartyCookies(web, false);
                     }
                 }
                 if (Objects.requireNonNull(a221().getString("java", "")).equals("30f")) {
@@ -2333,11 +2323,11 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private WebViews currentTab() {
-        return tabs.get(ct).web;
+        return tabs.get(ct);
     }
 
-    private WebSettings currentSettings(WebViewTab ws) {
-        return ws.web.getSettings();
+    private WebSettings currentSettings(WebViews ws) {
+        return ws.getSettings();
     }
 
     private WebSettings currentSettings() {
@@ -3687,7 +3677,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c108() throws PackageManager.NameNotFoundException {
         if (!ua) {
-            for (WebViewTab web: tabs) {
+            for (WebViews web: tabs) {
                 switch (Objects.requireNonNull(a221().getString("userA", ""))) {
                     default:
                     case UA_DEFAULT:
@@ -5077,14 +5067,14 @@ public class MAIN extends MainBaseActivity implements Format {
                     tv.setImageResource(R.drawable.a4);
                 }
                 tv.setVisibility(View.VISIBLE);
-                for (WebViewTab web: tabs) {
-                    web.web.setNetworkAvailable(false);
+                for (WebViews web: tabs) {
+                    web.setNetworkAvailable(false);
                 }
                 Animation.animate(this, R.anim.i, tv);
             } else {
                 tv.setVisibility(View.GONE);
-                for (WebViewTab web: tabs) {
-                    web.web.setNetworkAvailable(true);
+                for (WebViews web: tabs) {
+                    web.setNetworkAvailable(true);
                 }
                 Animation.animate(this, R.anim.b, tv);
             }
@@ -5751,14 +5741,4 @@ public class MAIN extends MainBaseActivity implements Format {
      * There was no Hentai here. Sorry 😂😂..
      * come back to line 6, 765 next week!
      */
-
-    private static class AN {
-        ImageView a;
-        TextView b;
-        ImageView c;
-
-        @Keep
-        private AN() {
-        }
-    }
 }

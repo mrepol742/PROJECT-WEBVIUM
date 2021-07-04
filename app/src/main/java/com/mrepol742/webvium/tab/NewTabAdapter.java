@@ -1,0 +1,125 @@
+/*
+ *
+ * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
+ *
+ * License under the GNU General Public License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Unless required by the applicable law or agreed in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.mrepol742.webvium.tab;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.mrepol742.webvium.R;
+import com.mrepol742.webvium.annotation.Keep;
+import com.mrepol742.webvium.app.NoSuchItemToGet;
+import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
+import com.mrepol742.webvium.app.WebViews;
+import com.mrepol742.webvium.app.main.MainBaseAdapter;
+import com.mrepol742.webvium.content.Resources;
+
+import java.util.ArrayList;
+
+public class NewTabAdapter extends MainBaseAdapter {
+    private final Context a;
+    private final ArrayList<WebViews> ws;
+    private final SharedPreferences sp;
+
+    public NewTabAdapter(Context ct, ArrayList<WebViews> ws) {
+        super(ct);
+        this.a = ct;
+        this.ws = ws;
+        this.sp = PreferenceManager.getDefaultSharedPreferences(ct);
+    }
+
+    private Drawable getFaviconNonNull(int loc) {
+        if (ws.get(loc).getFavicon() != null) {
+            return new BitmapDrawable(a.getResources(), ws.get(loc).getFavicon());
+        }
+        return Resources.getDrawable(a, R.drawable.a18);
+    }
+
+    private String getTitleNonNull(int loc) {
+        if (ws.get(loc).getTitle() != null) {
+            return ws.get(loc).getTitle();
+        }
+        return "Tab " + (loc + 1);
+    }
+
+    @Override
+    public int getCount() {
+        synchronized (this.ws) {
+            return this.ws.size();
+        }
+    }
+
+    @Override
+    public Object getItem(int it) {
+        synchronized (this.ws) {
+            return this.ws.get(it);
+        }
+    }
+
+    @Override
+    public long getItemId(int it) {
+        return it;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup vg) {
+        try {
+            AN w17;
+            if (view == null) {
+                LayoutInflater li = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = li.inflate(R.layout.a14, vg, false);
+                w17 = new AN();
+                w17.a = view.findViewById(R.id.o42);
+                w17.b = view.findViewById(R.id.o43);
+                w17.c = view.findViewById(R.id.o44);
+                if (!this.sp.getBoolean("autoUpdate", false)) {
+                    w17.b.setTextColor(Resources.getColor(a, R.color.c));
+                } else {
+                    w17.b.setTextColor(Resources.getColor(a, R.color.b));
+                }
+                w17.b.setTypeface(type(Typeface.NORMAL));
+                view.setTag(w17);
+            } else {
+                w17 = (AN) view.getTag();
+            }
+            w17.a.setImageDrawable(getFaviconNonNull(i));
+            w17.b.setText(getTitleNonNull(i));
+        } catch (IndexOutOfBoundsException | NoSuchSpannableStringBuilderToReturn | NoSuchItemToGet ignored) {
+
+        }
+        return view;
+    }
+
+    private static class AN {
+        ImageView a;
+        TextView b;
+        ImageView c;
+
+        @Keep
+        private AN() {
+        }
+    }
+}

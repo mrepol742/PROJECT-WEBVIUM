@@ -67,6 +67,8 @@ public class HistoryAdapter extends MainBaseAdapter {
             return R.drawable.a16;
         } else if (b.startsWith("file://") || b.startsWith("content://")) {
             return R.drawable.a17;
+        } else if (b.startsWith("webvium://")) {
+            return R.mipmap.d;
         }
         return R.drawable.a8;
     }
@@ -87,7 +89,7 @@ public class HistoryAdapter extends MainBaseAdapter {
                 ssb.setSpan(this.E, 0, 7, 0);
             } else if (url.startsWith("file://")) {
                 ssb.setSpan(this.S, 0, 7, 0);
-            } else if (url.startsWith("content://")) {
+            } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
                 ssb.setSpan(this.S, 0, 10, 0);
             } else {
                 if (!this.sp.getBoolean("autoUpdate", false)) {
