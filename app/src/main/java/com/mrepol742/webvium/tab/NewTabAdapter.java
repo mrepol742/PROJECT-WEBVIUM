@@ -19,6 +19,7 @@ package com.mrepol742.webvium.tab;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -41,28 +42,14 @@ import java.util.ArrayList;
 
 public class NewTabAdapter extends MainBaseAdapter {
     private final Context a;
-    private final ArrayList<WebViews> ws;
+    private final ArrayList<NewTabDataModel> ws;
     private final SharedPreferences sp;
 
-    public NewTabAdapter(Context ct, ArrayList<WebViews> ws) {
+    public NewTabAdapter(Context ct, ArrayList<NewTabDataModel> ws) {
         super(ct);
         this.a = ct;
         this.ws = ws;
         this.sp = PreferenceManager.getDefaultSharedPreferences(ct);
-    }
-
-    private Drawable getFaviconNonNull(int loc) {
-        if (ws.get(loc).getFavicon() != null) {
-            return new BitmapDrawable(a.getResources(), ws.get(loc).getFavicon());
-        }
-        return Resources.getDrawable(a, R.drawable.a18);
-    }
-
-    private String getTitleNonNull(int loc) {
-        if (ws.get(loc).getTitle() != null) {
-            return ws.get(loc).getTitle();
-        }
-        return "Tab " + (loc + 1);
     }
 
     @Override
@@ -97,17 +84,32 @@ public class NewTabAdapter extends MainBaseAdapter {
                 w17.c = view.findViewById(R.id.o44);
                 if (!this.sp.getBoolean("autoUpdate", false)) {
                     w17.b.setTextColor(Resources.getColor(a, R.color.c));
+                    w17.c.setTextColor(Resources.getColor(a, R.color.c));
                 } else {
                     w17.b.setTextColor(Resources.getColor(a, R.color.b));
+                    w17.c.setTextColor(Resources.getColor(a, R.color.b));
                 }
                 w17.b.setTypeface(type(Typeface.NORMAL));
+                w17.c.setTypeface(type(Typeface.NORMAL));
                 view.setTag(w17);
             } else {
                 w17 = (AN) view.getTag();
             }
-            w17.a.setImageDrawable(getFaviconNonNull(i));
-            w17.b.setText(getTitleNonNull(i));
-        } catch (IndexOutOfBoundsException | NoSuchSpannableStringBuilderToReturn | NoSuchItemToGet ignored) {
+            String title = ws.get(i).title;
+            Bitmap bit = ws.get(i).favicon;
+            if (title.equals("webvium://newtab")) {
+                w17.a.setImageResource(R.drawable.a22);
+                w17.c.setText(a.getString(R.string.z58));
+            } else if (title.equals("webvium://closealltab")) {
+                w17.a.setImageResource(R.drawable.a25);
+                w17.c.setText(a.getString(R.string.z64));
+            } else {
+                w17.c.setText(title);
+            }
+            if (bit != null) {
+                w17.a.setImageBitmap(bit);
+            }
+        } catch (IndexOutOfBoundsException ignored) {
 
         }
         return view;
@@ -116,7 +118,7 @@ public class NewTabAdapter extends MainBaseAdapter {
     private static class AN {
         ImageView a;
         TextView b;
-        ImageView c;
+        TextView c;
 
         @Keep
         private AN() {

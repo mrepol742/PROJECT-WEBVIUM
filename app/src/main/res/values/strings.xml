@@ -908,7 +908,7 @@
     <string name="z61">Microphone</string>
     <string name="z62">Media Identifier</string>
     <string name="z63">MIDI Devices</string>
-    <string name="z64">Close current tab</string>
+    <string name="z64">Close All</string>
 
     <string name="firebase.apiKey">api_key</string>
     <string name="firebase.authDomain">auth_domain</string>

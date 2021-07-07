@@ -113,6 +113,7 @@ import android.widget.Toolbar;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.GeolocationDataModel;
 import com.mrepol742.webvium.app.HashJSI;
+import com.mrepol742.webvium.app.NoSuchItemToGet;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
@@ -145,6 +146,7 @@ import com.mrepol742.webvium.permission.PermissionObjectDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.tab.NewTabAdapter;
+import com.mrepol742.webvium.tab.NewTabDataModel;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
@@ -1053,14 +1055,73 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
      private void c10() {
-        FrameLayout fl = findViewById(R.id.o45);
+        // FrameLayout fl = findViewById(R.id.o45);
         ListView lv = new ListView(this);
-        NewTabAdapter nta = new NewTabAdapter(this, tabs);
+        ArrayList<NewTabDataModel> ws = new ArrayList<>();
+        int size = tabs.size();
+        for (int i = 0; i < size; i++) {
+            ws.add(new NewTabDataModel(getFavicon(i), getTitle(i), getUrl(i)));
+        }
+        lv.setPadding(10, 10, 10, 10);
+        ws.add(new NewTabDataModel(null, "webvium://newtab", null));
+        ws.add(new NewTabDataModel(null, "webvium://closealltab", null));
+        NewTabAdapter nta = new NewTabAdapter(this, ws);
         lv.setAdapter(nta);
-        fl.addView(lv);
+        // fl.addView(lv);
+
+         AlertDialog.Builder bld = new AlertDialog.Builder(this);
+         bld.setView(lv);
+         bld.setCancelable(true);
+         AlertDialog dd = bld.create();
+         dd.show();
+         lv.setOnItemClickListener((a4, b, c, d) -> {
+             if (a4.getCount() == c) {
+                 for (WebViews tab: tabs) {
+                     tab.destroy();
+                 }
+                 tabs.clear();
+                 WebViews web = new WebViews(this);
+                 tabs.add(web);
+                 fl.removeAllViews();
+                 c50(web);
+                 c34(web);
+                 c15(web);
+                 c149(web);
+                 fl.addView(web);
+                 ct = 0;
+                 c8("Tabs Cleared.");
+                 dd.dismiss();
+             } else if (a4.getCount() - 1 == c) {
+                 currentTab().pauseTimers();
+                 currentTab().onPause();
+                 fl.removeAllViews();
+                 WebViews webb = tabs.get(c);
+                 webb.resumeTimers();
+                 webb.onResume();
+                 c149(webb);
+                 fl.addView(webb);
+                 ct = c;
+                 dd.dismiss();
+             } else {
+                 currentTab().pauseTimers();
+                 currentTab().onPause();
+                 fl.removeAllViews();
+                 WebViews web = new WebViews(this);
+                 tabs.add(web);
+                 c50(web);
+                 c34(web);
+                 c15(web);
+                 c149(web);
+                 fl.addView(web);
+                 ct = tabs.size() - 1;
+                 c7("Size was: " + ws.size());
+                 dd.dismiss();
+             }
+         });
     }
 
-    /* private void c10() {
+
+    private void c10as() {
         if (pm8 == null) {
             pm8 = new PopupMenu(this, tv8);
             pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
@@ -1123,7 +1184,7 @@ public class MAIN extends MainBaseActivity implements Format {
         me.add(0, 743, 0, "Close All").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a25));
         forceShowIcon(pm8);
         pm8.show();
-    } */
+    } 
 
     public static void forceShowIcon(PopupMenu popupMenu) {
         try {
@@ -1157,6 +1218,24 @@ public class MAIN extends MainBaseActivity implements Format {
             return new BitmapDrawable(getResources(), tabs.get(loc).getFavicon());
         }
         return Resources.getDrawable(this, R.drawable.a18);
+    }
+
+    private Bitmap getFavicon(int loc) {
+        if (tabs.get(loc).getFavicon() != null) {
+            return tabs.get(loc).getFavicon();
+        }
+        return BitmapFactory.decodeResource(getResources(), R.drawable.a18);
+    }
+
+    private String getTitle(int loc) {
+        if (tabs.get(loc).getTitle() != null) {
+            return tabs.get(loc).getTitle();
+        }
+        return "Tab " + (loc + 1);
+    }
+
+    private String getUrl(int loc) {
+        return tabs.get(loc).getUrl();
     }
 
     private String c11(String sg) {
