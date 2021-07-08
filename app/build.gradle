@@ -30,7 +30,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode Integer.parseInt(new Date().format("yyyyMMdd"))
-        versionName "1.6"
+        versionName "1.7"
         // < 1.0 The version i know what i am doing,
         // > 1.5 Now only god knows.
         proguardFiles getDefaultProguardFile(

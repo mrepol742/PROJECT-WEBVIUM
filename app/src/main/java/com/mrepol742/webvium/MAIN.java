@@ -1054,7 +1054,7 @@ public class MAIN extends MainBaseActivity implements Format {
         e.show();
     }
 
-     private void c10() {
+     private void c10qwe() {
         // FrameLayout fl = findViewById(R.id.o45);
         ListView lv = new ListView(this);
         ArrayList<NewTabDataModel> ws = new ArrayList<>();
@@ -1092,8 +1092,8 @@ public class MAIN extends MainBaseActivity implements Format {
                  c8("Tabs Cleared.");
                  dd.dismiss();
              } else if (a4.getItemAtPosition(c).toString().equals("webvium://newtab")) {
-                 //currentTab().pauseTimers();
-                 //currentTab().onPause();
+                 currentTab().pauseTimers();
+                 currentTab().onPause();
                  fl.removeAllViews();
                  WebViews web = new WebViews(this);
                  tabs.add(web);
@@ -1113,14 +1113,14 @@ public class MAIN extends MainBaseActivity implements Format {
                  webb.onResume();
                  c149(webb);
                  fl.addView(webb);
-                 ct = c;
+                 ct = c - 2;
                  dd.dismiss();
              }
          });
     }
 
 
-    private void c10as() {
+    private void c10() {
         if (pm8 == null) {
             pm8 = new PopupMenu(this, tv8);
             pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
