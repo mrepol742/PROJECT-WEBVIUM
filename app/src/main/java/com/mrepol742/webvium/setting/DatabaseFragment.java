@@ -257,7 +257,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 getActivity().runOnUiThread(() -> g(getString(R.string.z31)));
             } else {
                 while (res.moveToNext()) {
-                    al.add(new HDMS(res.getString(1), res.getString(2), res.getString(3)));
+                    al.add(new HDMS(res.getString(1), res.getString(2), res.getLong(3)));
                 }
                 write(file, al);
             }

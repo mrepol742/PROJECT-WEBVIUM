@@ -1075,7 +1075,7 @@ public class MAIN extends MainBaseActivity implements Format {
          AlertDialog dd = bld.create();
          dd.show();
          lv.setOnItemClickListener((a4, b, c, d) -> {
-             if (a4.getCount() == c) {
+             if (a4.getItemAtPosition(c).toString().equals("webvium://closealltab")) {
                  for (WebViews tab: tabs) {
                      tab.destroy();
                  }
@@ -1091,20 +1091,9 @@ public class MAIN extends MainBaseActivity implements Format {
                  ct = 0;
                  c8("Tabs Cleared.");
                  dd.dismiss();
-             } else if (a4.getCount() - 1 == c) {
-                 currentTab().pauseTimers();
-                 currentTab().onPause();
-                 fl.removeAllViews();
-                 WebViews webb = tabs.get(c);
-                 webb.resumeTimers();
-                 webb.onResume();
-                 c149(webb);
-                 fl.addView(webb);
-                 ct = c;
-                 dd.dismiss();
-             } else {
-                 currentTab().pauseTimers();
-                 currentTab().onPause();
+             } else if (a4.getItemAtPosition(c).toString().equals("webvium://newtab")) {
+                 //currentTab().pauseTimers();
+                 //currentTab().onPause();
                  fl.removeAllViews();
                  WebViews web = new WebViews(this);
                  tabs.add(web);
@@ -1114,7 +1103,17 @@ public class MAIN extends MainBaseActivity implements Format {
                  c149(web);
                  fl.addView(web);
                  ct = tabs.size() - 1;
-                 c7("Size was: " + ws.size());
+                 dd.dismiss();
+             } else {
+                 currentTab().pauseTimers();
+                 currentTab().onPause();
+                 fl.removeAllViews();
+                 WebViews webb = tabs.get(c);
+                 webb.resumeTimers();
+                 webb.onResume();
+                 c149(webb);
+                 fl.addView(webb);
+                 ct = c;
                  dd.dismiss();
              }
          });

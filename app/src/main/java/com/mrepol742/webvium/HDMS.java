@@ -24,9 +24,9 @@ import java.io.Serializable;
 public class HDMS implements Serializable {
     public String ls;
     public String ls0;
-    public String ls2;
+    public long ls2;
 
-    public HDMS(String ls, String ls0, String ls2) {
+    public HDMS(String ls, String ls0, long ls2) {
         this.ls = ls;
         this.ls0 = ls0;
         this.ls2 = ls2;

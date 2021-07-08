@@ -87,7 +87,7 @@ public class HIST extends BaseActivity {
         try {
             String a5 = w15.c(b).ls;
             String a2 = w15.c(b).ls0;
-            String a4 = w15.c(b).ls2;
+            long a4 = w15.c(b).ls2;
             switch (a1.getItemId()) {
                 case 1:
                     b(a2);
@@ -210,7 +210,7 @@ public class HIST extends BaseActivity {
             while (res.moveToNext()) {
                 al.add(new HistoryDataModel(res.getString(1),
                         res.getString(2),
-                        res.getString(3)));
+                        res.getLong(3)));
             }
             runOnUiThread(() -> {
                 f4.setVisibility(View.GONE);
@@ -363,7 +363,7 @@ public class HIST extends BaseActivity {
         startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + a + "\"")));
     }
 
-    private void c(final String b, final String kl, final String b1) {
+    private void c(String b, String kl, long b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.h18));
@@ -498,7 +498,7 @@ public class HIST extends BaseActivity {
                 while (res.moveToNext()) {
                     al.add(new HistoryDataModel(res.getString(1),
                             res.getString(2),
-                            res.getString(3)));
+                            res.getLong(3)));
                 }
                 if (al.size() == 0) {
                     runOnUiThread(() -> {
@@ -735,7 +735,7 @@ public class HIST extends BaseActivity {
         pm.show();
     }
 
-    private void o(final String oldTitle, final String oldURl, final String oldTIme) {
+    private void o(String oldTitle, String oldURl, long oldTIme) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.z, null);

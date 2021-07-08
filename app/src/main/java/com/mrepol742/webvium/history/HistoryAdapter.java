@@ -35,8 +35,12 @@ import com.mrepol742.webvium.app.NoSuchItemToGet;
 import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.content.Resources;
+import com.mrepol742.webvium.util.DateUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class HistoryAdapter extends MainBaseAdapter {
     private final Context a;
@@ -47,12 +51,19 @@ public class HistoryAdapter extends MainBaseAdapter {
     private final ForegroundColorSpan S;
     private final ForegroundColorSpan I;
     private final ForegroundColorSpan B;
+    private final SimpleDateFormat day;
+    private final SimpleDateFormat month;
+    private final SimpleDateFormat year;
+
 
     public HistoryAdapter(Context ct, ArrayList<HistoryDataModel> w3) {
         super(ct);
         this.a = ct;
         this.w3 = w3;
         this.sp = PreferenceManager.getDefaultSharedPreferences(ct);
+        this.day = new SimpleDateFormat("dd", Locale.US);
+        this.month = new SimpleDateFormat("MM", Locale.US);
+        this.year = new SimpleDateFormat("yyyy", Locale.US);
         this.A = new ForegroundColorSpan(Resources.getColor(ct, R.color.a));
         this.E = new ForegroundColorSpan(Resources.getColor(ct, R.color.e));
         this.S = new ForegroundColorSpan(Resources.getColor(ct, R.color.s));
@@ -170,7 +181,9 @@ public class HistoryAdapter extends MainBaseAdapter {
             w17.a.setText(c(it).ls);
             w17.c.setImageResource(d(c(it).ls0));
             w17.b.setText(b(c(it).ls0), TextView.BufferType.SPANNABLE);
-            w17.d.setText(c(it).ls2);
+            Date date = new Date(c(it).ls2);
+            String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) +  " " + year.format(date);
+            w17.d.setText(fiDate);
         } catch (IndexOutOfBoundsException | NoSuchSpannableStringBuilderToReturn | NoSuchItemToGet ignored) {
 
         }

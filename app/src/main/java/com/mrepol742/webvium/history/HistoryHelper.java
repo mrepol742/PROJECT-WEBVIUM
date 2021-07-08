@@ -73,7 +73,7 @@ public class HistoryHelper implements WebviumDatabase {
         }
     }
 
-    public void b(final String a, final String b, final String s) {
+    public void b(final String a, final String b, final long s) {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_HISTORY,
                     Sqlite.COL1_HISTORY +
@@ -81,7 +81,7 @@ public class HistoryHelper implements WebviumDatabase {
                             Sqlite.COL2_HISTORY +
                             " =? AND " +
                             Sqlite.COL3_HISTORY +
-                            " =? ", new String[]{b, a, s});
+                            " =? ", new String[]{b, a, Long.toString(s)});
         }
     }
 
@@ -93,7 +93,7 @@ public class HistoryHelper implements WebviumDatabase {
                 ContentValues values = new ContentValues();
                 values.put(Sqlite.COL1_HISTORY, h(a));
                 values.put(Sqlite.COL2_HISTORY, b);
-                values.put(Sqlite.COL3_HISTORY, g());
+                values.put(Sqlite.COL3_HISTORY, System.currentTimeMillis());
                 sld.insert(Sqlite.TABLE_HISTORY, null, values);
             }
 
@@ -115,11 +115,6 @@ public class HistoryHelper implements WebviumDatabase {
         }
     }
 
-    private String g() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMddyy | HHmm", Locale.US);
-        return sdf.format(new Date());
-    }
-
     private String h(String sg) {
         if (URLUtil.isValidUrl(sg)) {
             try {
@@ -133,7 +128,7 @@ public class HistoryHelper implements WebviumDatabase {
         return sg;
     }
 
-    public void i(final String oldTitle, final String oldURl, final String oldTIme, final String newTitle, final String newUrl) {
+    public void i(String oldTitle, String oldURl, long oldTIme, String newTitle, String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
             values.put(Sqlite.COL1_HISTORY, h(newTitle));
@@ -145,7 +140,7 @@ public class HistoryHelper implements WebviumDatabase {
                             Sqlite.COL2_HISTORY +
                             " LIKE ? AND " +
                             Sqlite.COL3_HISTORY +
-                            " LIKE ?", new String[]{oldTitle, oldURl, oldTIme});
+                            " LIKE ?", new String[]{oldTitle, oldURl, Long.toString(oldTIme)});
         }
     }
 
