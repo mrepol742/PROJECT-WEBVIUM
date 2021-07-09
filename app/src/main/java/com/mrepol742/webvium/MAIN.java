@@ -1075,7 +1075,7 @@ public class MAIN extends MainBaseActivity implements Format {
          AlertDialog dd = bld.create();
          dd.show();
          lv.setOnItemClickListener((a4, b, c, d) -> {
-             AwesomeToast.b(this, tabs.size() + " " + c);
+             AwesomeToast.b(this, tabs.size() + " " + c + 1);
              try {
                  if (tabs.size() == c + 1) {
                      for (WebViews tab : tabs) {
