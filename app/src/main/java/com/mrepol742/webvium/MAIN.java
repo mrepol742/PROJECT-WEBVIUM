@@ -1075,46 +1075,51 @@ public class MAIN extends MainBaseActivity implements Format {
          AlertDialog dd = bld.create();
          dd.show();
          lv.setOnItemClickListener((a4, b, c, d) -> {
-             if (tabs.size() == c) {
-                 for (WebViews tab: tabs) {
-                     tab.destroy();
+             AwesomeToast.b(this, tabs.size() + " " + c);
+             try {
+                 if (tabs.size() == c + 1) {
+                     for (WebViews tab : tabs) {
+                         tab.destroy();
+                     }
+                     tabs.clear();
+                     WebViews web = new WebViews(this);
+                     tabs.add(web);
+                     fl.removeAllViews();
+                     c50(web);
+                     c34(web);
+                     c15(web);
+                     c149(web);
+                     fl.addView(web);
+                     ct = 0;
+                     c8("Tabs Cleared.");
+                     dd.dismiss();
+                 } else if (tabs.size() - 1 == c + 1) {
+                     currentTab().pauseTimers();
+                     currentTab().onPause();
+                     fl.removeAllViews();
+                     WebViews web = new WebViews(this);
+                     tabs.add(web);
+                     c50(web);
+                     c34(web);
+                     c15(web);
+                     c149(web);
+                     fl.addView(web);
+                     ct = tabs.size() - 1;
+                     dd.dismiss();
+                 } else {
+                     currentTab().pauseTimers();
+                     currentTab().onPause();
+                     fl.removeAllViews();
+                     WebViews webb = tabs.get(c);
+                     webb.resumeTimers();
+                     webb.onResume();
+                     c149(webb);
+                     fl.addView(webb);
+                     ct = c - 2;
+                     dd.dismiss();
                  }
-                 tabs.clear();
-                 WebViews web = new WebViews(this);
-                 tabs.add(web);
-                 fl.removeAllViews();
-                 c50(web);
-                 c34(web);
-                 c15(web);
-                 c149(web);
-                 fl.addView(web);
-                 ct = 0;
-                 c8("Tabs Cleared.");
-                 dd.dismiss();
-             } else if (tabs.size() - 1 == c) {
-                 currentTab().pauseTimers();
-                 currentTab().onPause();
-                 fl.removeAllViews();
-                 WebViews web = new WebViews(this);
-                 tabs.add(web);
-                 c50(web);
-                 c34(web);
-                 c15(web);
-                 c149(web);
-                 fl.addView(web);
-                 ct = tabs.size() - 1;
-                 dd.dismiss();
-             } else {
-                 currentTab().pauseTimers();
-                 currentTab().onPause();
-                 fl.removeAllViews();
-                 WebViews webb = tabs.get(c);
-                 webb.resumeTimers();
-                 webb.onResume();
-                 c149(webb);
-                 fl.addView(webb);
-                 ct = c - 2;
-                 dd.dismiss();
+             } catch (Exception en) {
+
              }
          });
     }
@@ -4734,6 +4739,9 @@ public class MAIN extends MainBaseActivity implements Format {
                                     .append(cs6.getString(2))
                                     .append("</td></tr>");
                         }
+                        // You code was crazy ass unreadabe!
+                        // You accused me of writing a unreadable code?
+                        // I refuse to comment!
                         sg.append("</table></center></body></html>");
                         java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
                         if (fe1.createNewFile()) {

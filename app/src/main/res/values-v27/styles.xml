@@ -19,9 +19,9 @@
 
     <style name="d" parent="@style/a11">
         <item name="android:statusBarColor">@color/b</item>
-        <item name="android:navigationBarColor">@color/b</item>
+        <item name="android:navigationBarColor">@color/m</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 
     <style name="e" parent="@style/a12">
