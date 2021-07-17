@@ -20,6 +20,7 @@ package com.mrepol742.webvium.setting;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.EDIT0;
@@ -67,7 +68,7 @@ public class GeneralFragment extends BasePreferenceFragment {
 
             final EDIT0 hj89 = (EDIT0) findPreference("cGeneral");
 
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
             SharedPreferences a19 = getActivity().getSharedPreferences("wv", 0);
             final String a20 = a19.getString("MyURL", c48());
@@ -95,47 +96,59 @@ public class GeneralFragment extends BasePreferenceFragment {
                 }
             }
 
-            hj89.setOnPreferenceChangeListener((preference, newValue) -> {
-                if (newValue != null && U3.b((newValue.toString()))) {
-                    hj89.setSummary(newValue.toString());
-                } else {
-                    hj89.setSummary(c48());
+            hj89.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-                }
-                return true;
-            });
-            hj9.setOnPreferenceChangeListener((preference, newValue) -> {
-                if (newValue.toString().equals("1o")) {
-                    hj9.setSummary(getActivity().getResources().getString(R.string.x17));
-                    hj89.setEnabled(false);
-                    hj89.setSummary(sp.getString("cGeneral", ""));
-                } else if (newValue.toString().equals("7o")) {
-                    hj9.setSummary(a20);
-                    hj89.setEnabled(false);
-                    hj89.setSummary(sp.getString("cGeneral", ""));
-                } else if (newValue.toString().equals("30o")) {
-                    hj9.setSummary(getActivity().getResources().getString(R.string.c26));
-                    hj89.setEnabled(false);
-                    hj89.setSummary(sp.getString("cGeneral", ""));
-                } else if (newValue.toString().equals("60o")) {
-                    hj89.setEnabled(true);
-                    hj9.setSummary(getActivity().getResources().getString(R.string.q20));
-                    String pre = sp.getString("cGeneral", "");
-                    if (pre != null && U3.b(pre)) {
-                        hj89.setSummary(pre);
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue != null && U3.b((newValue.toString()))) {
+                        hj89.setSummary(newValue.toString());
                     } else {
-                        hj89.setSummary(c48());
+                        hj89.setSummary(GeneralFragment.this.c48());
 
                     }
+                    return true;
                 }
-                return true;
+            });
+            hj9.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.toString().equals("1o")) {
+                        hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.x17));
+                        hj89.setEnabled(false);
+                        hj89.setSummary(sp.getString("cGeneral", ""));
+                    } else if (newValue.toString().equals("7o")) {
+                        hj9.setSummary(a20);
+                        hj89.setEnabled(false);
+                        hj89.setSummary(sp.getString("cGeneral", ""));
+                    } else if (newValue.toString().equals("30o")) {
+                        hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.c26));
+                        hj89.setEnabled(false);
+                        hj89.setSummary(sp.getString("cGeneral", ""));
+                    } else if (newValue.toString().equals("60o")) {
+                        hj89.setEnabled(true);
+                        hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.q20));
+                        String pre = sp.getString("cGeneral", "");
+                        if (pre != null && U3.b(pre)) {
+                            hj89.setSummary(pre);
+                        } else {
+                            hj89.setSummary(GeneralFragment.this.c48());
+
+                        }
+                    }
+                    return true;
+                }
             });
             PREF a1 = (PREF) findPreference("cfu");
-            a1.setOnPreferenceClickListener(a -> {
-                Intents.b(getActivity(), UPDA.class);
-                AwesomeToast.b(getActivity(), getString(R.string.m30));
+            a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-                return true;
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.b(GeneralFragment.this.getActivity(), UPDA.class);
+                    AwesomeToast.b(GeneralFragment.this.getActivity(), GeneralFragment.this.getString(R.string.m30));
+
+                    return true;
+                }
             });
         } catch (Exception ex) {
             ex.printStackTrace();

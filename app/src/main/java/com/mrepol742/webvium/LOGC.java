@@ -80,13 +80,23 @@ public class LOGC extends BaseActivity {
             }
             a1.setBackgroundResource(R.drawable.p);
             a1.setNavigationIcon(R.drawable.a2);
-            a1.setNavigationOnClickListener(view -> finishAndRemoveTask());
+            a1.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    LOGC.this.finishAndRemoveTask();
+                }
+            });
 
             a1.setElevation(5);
             a5();
-            iv.setOnClickListener(view -> {
-                a5();
-                AwesomeToast.b(LOGC.this, getString(R.string.t23));
+            iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    LOGC.this.a5();
+                    AwesomeToast.b(LOGC.this, LOGC.this.getString(R.string.t23));
+                }
             });
             tv.setText(getString(R.string.t22));
 
@@ -97,37 +107,57 @@ public class LOGC extends BaseActivity {
 
 
     public void a5() {
-        Runnable e = () -> {
-            try {
-                Process pr = Runtime.getRuntime().exec("logcat -d");
-                InputStream is = pr.getInputStream();
-                InputStreamReader isr = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(isr);
-                StringBuilder sb = new StringBuilder();
-                while (br.readLine() != null) {
-                    sb.append(br.readLine());
-                    sb.append("\n");
-                }
-                pr.destroy();
-                br.close();
-                isr.close();
-                is.close();
-                runOnUiThread(() -> {
-                    if (sb.length() != 0) {
-                        tv.append(sb.toString());
-                    }
-                    timer.schedule(new TimerTask() {
+        Runnable e = new Runnable() {
 
-                        @Override
+            @Override
+            public void run() {
+                try {
+                    Process pr = Runtime.getRuntime().exec("logcat -d");
+                    InputStream is = pr.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    final StringBuilder sb = new StringBuilder();
+                    while (br.readLine() != null) {
+                        sb.append(br.readLine());
+                        sb.append("\n");
+                    }
+                    pr.destroy();
+                    br.close();
+                    isr.close();
+                    is.close();
+                    LOGC.this.runOnUiThread(new Runnable() {
+
+            @Override
                         public void run() {
-                            runOnUiThread(() -> sv.post(() -> sv.fullScroll(View.FOCUS_DOWN)));
-                            timer.cancel();
-                            timer.purge();
+                            if (sb.length() != 0) {
+                                tv.append(sb.toString());
+                            }
+                            timer.schedule(new TimerTask() {
+
+            @Override
+                                public void run() {
+                                    runOnUiThread(new Runnable() {
+
+            @Override
+                                        public void run() {
+                                            sv.post(new Runnable() {
+
+            @Override
+                                                public void run() {
+                                                    sv.fullScroll(View.FOCUS_DOWN);
+                                                }
+                                            });
+                                        }
+                                    });
+                                    timer.cancel();
+                                    timer.purge();
+                                }
+                            }, 1000);
                         }
-                    }, 1000);
-                });
-            } catch (IOException e1) {
-               e1.printStackTrace();
+                    });
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         };
         new Thread(e).start();

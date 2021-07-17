@@ -18,8 +18,10 @@
 package com.mrepol742.webvium.setting;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 
 import com.mrepol742.webvium.PREF;
 import com.mrepol742.webvium.QUIC;
@@ -34,7 +36,7 @@ import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class SearchFragment extends BasePreferenceFragment {
 
-    @Override
+            @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
@@ -44,19 +46,27 @@ public class SearchFragment extends BasePreferenceFragment {
                 a5(R.xml.d);
             }
             PREF b = (PREF) findPreference("asst");
-            b.setOnPreferenceClickListener(a -> {
-                b14();
-                return true;
+            b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    SearchFragment.this.b14();
+                    return true;
+                }
             });
             SWIT cbf = (SWIT) findPreference("qckS");
-            cbf.setOnPreferenceChangeListener((preference, newValue) -> {
-                if (newValue.toString().equals("true")) {
-                    Intents.b(getActivity(), QUIC.class);
-                } else {
-                    Intents.i(getActivity(), QUIC.class);
-                    MainNotification.a(getActivity(), Notifications.d);
+            cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.toString().equals("true")) {
+                        Intents.b(SearchFragment.this.getActivity(), QUIC.class);
+                    } else {
+                        Intents.i(SearchFragment.this.getActivity(), QUIC.class);
+                        MainNotification.a(SearchFragment.this.getActivity(), Notifications.d);
+                    }
+                    return true;
                 }
-                return true;
             });
 
         } catch (Exception ex) {
@@ -69,12 +79,22 @@ public class SearchFragment extends BasePreferenceFragment {
         a.setCancelable(true);
         a.setTitle(getString(R.string.z18));
         a.setMessage(getString(R.string.a21));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            Intents.k(getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
-            AwesomeToast.d(getActivity(), Html.b(getString(R.string.b33)).toString());
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Intents.k(SearchFragment.this.getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
+                AwesomeToast.d(SearchFragment.this.getActivity(), Html.b(SearchFragment.this.getString(R.string.b33)).toString());
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 

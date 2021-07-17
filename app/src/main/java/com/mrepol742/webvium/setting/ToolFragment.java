@@ -20,6 +20,7 @@ package com.mrepol742.webvium.setting;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -39,7 +40,7 @@ import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class ToolFragment extends BasePreferenceFragment {
 
-    @Override
+            @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
@@ -48,9 +49,13 @@ if (Build.VERSION.SDK_INT >= 29) {
 } else {
     a5(R.xml.j);
     Preference u1 = findPreference("clearScreen");
-    u1.setOnPreferenceClickListener(a -> {
-        j();
-        return true;
+    u1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+        public boolean onPreferenceClick(Preference a) {
+            ToolFragment.this.j();
+            return true;
+        }
     });
 }
         } catch (Exception ex) {
@@ -80,11 +85,21 @@ if (Build.VERSION.SDK_INT >= 29) {
         a.setCancelable(true);
         a.setTitle(getString(R.string.s26));
         a.setMessage(Html.b(jk));
-        a.setPositiveButton(getString(R.string.u14), (a12, intetg) -> {
-            Intents.l(getActivity(), Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.u14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Intents.l(ToolFragment.this.getActivity(), Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -103,11 +118,15 @@ if (Build.VERSION.SDK_INT >= 29) {
     }
 
     private void h(final String a) {
-        Runnable p15 = () -> {
-            try {
-                Files.deleteAll(new java.io.File(a));
-            } catch (Exception en) {
-                en.printStackTrace();
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    Files.deleteAll(new java.io.File(a));
+                } catch (Exception en) {
+                    en.printStackTrace();
+                }
             }
         };
         new Thread(p15).start();
@@ -118,12 +137,22 @@ if (Build.VERSION.SDK_INT >= 29) {
         a.setCancelable(true);
         a.setTitle(getString(R.string.h10));
         a.setMessage(getString(R.string.u9));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            h(StorageDirectory.getWebviumDir() + "/Screenshot/");
-            g(getString(R.string.l16));
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                ToolFragment.this.h(StorageDirectory.getWebviumDir() + "/Screenshot/");
+                ToolFragment.this.g(ToolFragment.this.getString(R.string.l16));
+
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 }

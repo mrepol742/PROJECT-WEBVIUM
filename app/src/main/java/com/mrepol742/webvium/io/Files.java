@@ -67,13 +67,25 @@ public class Files {
         return false;
     }
 
-    public static void createNewFolder(String a) {
-       Runnable runnable = () -> createNewFolder(new File(a));
+    public static void createNewFolder(final String a) {
+       Runnable runnable = new Runnable() {
+
+            @Override
+           public void run() {
+               createNewFolder(new File(a));
+           }
+       };
       new Thread(runnable).start();
     }
 
-    public static void delete(String a) {
-        Runnable runnable = () -> delete(new File(a));
+    public static void delete(final String a) {
+        Runnable runnable = new Runnable() {
+
+            @Override
+            public void run() {
+                delete(new File(a));
+            }
+        };
         new Thread(runnable).start();
     }
 
@@ -127,8 +139,14 @@ exception.printStackTrace();
         return false;
     }
 
-    public static void write(String location, String data, boolean readOnly) {
-        Runnable runnable = () -> write(new File(location), data, readOnly);
+    public static void write(final String location, final String data, final boolean readOnly) {
+        Runnable runnable = new Runnable() {
+
+            @Override
+            public void run() {
+                write(new File(location), data, readOnly);
+            }
+        };
         new Thread(runnable).start();
     }
 
@@ -157,8 +175,14 @@ exception.printStackTrace();
         return false;
     }
 
-    public static void copy(String sg, String sg0, boolean readOnly) {
-        Runnable re = () -> copy(new File(sg), new File(sg0), readOnly);
+    public static void copy(final String sg, final String sg0, final boolean readOnly) {
+        Runnable re = new Runnable() {
+
+            @Override
+            public void run() {
+                copy(new File(sg), new File(sg0), readOnly);
+            }
+        };
         new Thread(re).start();
     }
 }

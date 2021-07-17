@@ -20,6 +20,7 @@ package com.mrepol742.webvium;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -36,7 +37,7 @@ import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class BACK1  extends BaseActivity {
 
-    @Override
+            @Override
     protected void onCreate(Bundle be) {
         super.onCreate(be);
         if (Permission.check(this, Permission.STORAGE, 1)) {
@@ -69,18 +70,26 @@ public class BACK1  extends BaseActivity {
         a.setCancelable(false);
         a.setTitle(getString(R.string.s26));
         a.setMessage(Html.b(jk));
-        a.setPositiveButton(getString(R.string.u14), (a12, intetg) -> {
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            Uri uri = Uri.fromParts("package", Package.b(), null);
-            intent.setData(uri);
-            startActivity(intent);
-            a12.dismiss();
-            finish();
+        a.setPositiveButton(getString(R.string.u14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", Package.b(), null);
+                intent.setData(uri);
+                BACK1.this.startActivity(intent);
+                a12.dismiss();
+                BACK1.this.finish();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            a1.dismiss();
-            finish();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+                BACK1.this.finish();
+            }
         });
         a.create().show();
     }

@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -112,11 +113,15 @@ public class SettingFragment extends BaseFragment {
         SettingAdapter aa;
         aa = new SettingAdapter(getActivity(), header1, summary1);
         a31.setAdapter(aa);
-        a31.setOnItemClickListener((a1, b1, c, d) -> {
-            if (bn) {
-                b(c);
-            } else {
-                a(c);
+        a31.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> a1, View b1, int c, long d) {
+                if (bn) {
+                    SettingFragment.this.b(c);
+                } else {
+                    SettingFragment.this.a(c);
+                }
             }
         });
         if (bn) {
@@ -126,15 +131,25 @@ public class SettingFragment extends BaseFragment {
             iv0 = v.findViewById(R.id.m3);
             iv.setBackgroundResource(R.drawable.c6);
             iv0.setBackgroundResource(R.drawable.c6);
-            iv.setOnClickListener(view -> e());
-            iv0.setOnClickListener(view -> {
-                // TODO
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_EMAIL, "Test");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-                startActivity(Intent.createChooser(intent, "Send Email"));
+            iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    SettingFragment.this.e();
+                }
+            });
+            iv0.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    // TODO
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_EMAIL, "Test");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                    intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                    SettingFragment.this.startActivity(Intent.createChooser(intent, "Send Email"));
+                }
             });
             iv.setImageResource(R.drawable.c7);
             iv0.setImageResource(R.drawable.c8);

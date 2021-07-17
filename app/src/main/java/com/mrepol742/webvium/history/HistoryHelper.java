@@ -31,10 +31,6 @@ import com.mrepol742.webvium.HDMS;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 public class HistoryHelper implements WebviumDatabase {
 
     private static HistoryHelper d1;

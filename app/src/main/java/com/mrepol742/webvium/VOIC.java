@@ -21,6 +21,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -82,7 +83,7 @@ public class VOIC extends BaseActivity {
             sr = SpeechRecognizer.createSpeechRecognizer(this);
             sr.setRecognitionListener(new RecognitionListener() {
 
-                @Override
+            @Override
                 public void onReadyForSpeech(Bundle bundle) {
                     ArrayList<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (sg == null) {
@@ -222,10 +223,14 @@ public class VOIC extends BaseActivity {
         bn5.setText(R.string.n37);
         bn5.setAllCaps(true);
         bn5.setTypeface(type(Typeface.BOLD));
-        bn5.setOnClickListener(view -> {
-            if (Permission.check(VOIC.this, Permission.MICROPHONE, 1)) {
-                if (spr()) {
-                    b();
+        bn5.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (Permission.check(VOIC.this, Permission.MICROPHONE, 1)) {
+                    if (VOIC.this.spr()) {
+                        VOIC.this.b();
+                    }
                 }
             }
         });
@@ -236,20 +241,36 @@ public class VOIC extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.s26));
         a.setMessage(Html.b(jk));
-        a.setPositiveButton(getString(R.string.u14), (a12, intetg) -> {
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            Uri uri = Uri.fromParts("package", Package.b(), null);
-            intent.setData(uri);
-            startActivity(intent);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.u14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", Package.b(), null);
+                intent.setData(uri);
+                VOIC.this.startActivity(intent);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
     private void f() {
-        sv.post(() -> sv.fullScroll(View.FOCUS_DOWN));
+        sv.post(new Runnable() {
+
+            @Override
+            public void run() {
+                sv.fullScroll(View.FOCUS_DOWN);
+            }
+        });
     }
 
     @Override

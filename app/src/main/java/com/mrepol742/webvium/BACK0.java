@@ -18,6 +18,7 @@
 package com.mrepol742.webvium;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -49,7 +50,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class BACK0 extends BaseActivity {
 
-    @Override
+            @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 742 && resultCode == RESULT_OK && data.getData() != null) {
@@ -108,49 +109,57 @@ public class BACK0 extends BaseActivity {
         }
     }
 
-    private void c(Object mp) {
+    private void c(final Object mp) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
         a.setTitle(getString(R.string.t6));
         a.setMessage(R.string.b39);
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            Map<String, ?> al;
-            try {
-                al = (Map) mp;
-                SharedPreferences.Editor spe = sp.edit();
-                spe.clear();
-                for (Map.Entry<String, ?> sg : al.entrySet()) {
-                    Object ob = sg.getValue();
-                    if (ob instanceof String) {
-                        spe.putString(sg.getKey(), (String) ob);
-                    } else if (ob instanceof Boolean) {
-                        String ky = sg.getKey();
-                        if (ky.equals("ptm") || ky.equals("lockWn99")) {
-                            spe.putBoolean(ky, false);
-                        } else {
-                            spe.putBoolean(ky, (Boolean) ob);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(BACK0.this);
+                Map<String, ?> al;
+                try {
+                    al = (Map) mp;
+                    SharedPreferences.Editor spe = sp.edit();
+                    spe.clear();
+                    for (Map.Entry<String, ?> sg : al.entrySet()) {
+                        Object ob = sg.getValue();
+                        if (ob instanceof String) {
+                            spe.putString(sg.getKey(), (String) ob);
+                        } else if (ob instanceof Boolean) {
+                            String ky = sg.getKey();
+                            if (ky.equals("ptm") || ky.equals("lockWn99")) {
+                                spe.putBoolean(ky, false);
+                            } else {
+                                spe.putBoolean(ky, (Boolean) ob);
+                            }
+                        } else if (ob instanceof Integer) {
+                            spe.putInt(sg.getKey(), (Integer) ob);
                         }
-                    } else if (ob instanceof Integer) {
-                        spe.putInt(sg.getKey(), (Integer) ob);
                     }
+                    spe.apply();
+                    C10.a(BACK0.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                    C10.a(BACK0.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+                    BACK0.this.getSharedPreferences("a", 0).edit().putString("ajGjbduTwibdi", "").putString("gsJsGsKSIgPes", "").apply();
+                    BACK0.this.g(BACK0.this.getString(R.string.b27));
+                    BACK0.this.t();
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    BACK0.this.d(BACK0.this.getString(R.string.b28));
                 }
-                spe.apply();
-                C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-                C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-                getSharedPreferences("a", 0).edit().putString("ajGjbduTwibdi", "").putString("gsJsGsKSIgPes", "").apply();
-                g(getString(R.string.b27));
-                t();
-            } catch (Exception en) {
-               en.printStackTrace();
-                d(getString(R.string.b28));
+                a12.dismiss();
+                BACK0.this.finishAndRemoveTask();
             }
-            a12.dismiss();
-            finishAndRemoveTask();
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            a1.dismiss();
-            finishAndRemoveTask();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+                BACK0.this.finishAndRemoveTask();
+            }
         });
         a.create().show();
     }
@@ -159,60 +168,76 @@ public class BACK0 extends BaseActivity {
         AwesomeToast.c(this, a);
     }
 
-    private void e(Object mp) {
+    private void e(final Object mp) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
         a.setTitle(getString(R.string.t6));
         a.setMessage(getString(R.string.c21));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            SearchHelper d1 = SearchHelper.getInstance(getApplicationContext());
-            ArrayList<SDMS> al;
-            try {
-                al = (ArrayList) mp;
-                d1.delete();
-                for (SDMS w13 : al) {
-                    d1.c(w13.sg);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                SearchHelper d1 = SearchHelper.getInstance(BACK0.this.getApplicationContext());
+                ArrayList<SDMS> al;
+                try {
+                    al = (ArrayList) mp;
+                    d1.delete();
+                    for (SDMS w13 : al) {
+                        d1.c(w13.sg);
+                    }
+                    BACK0.this.g(BACK0.this.getString(R.string.b27));
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    BACK0.this.d(BACK0.this.getString(R.string.b28));
                 }
-                g(getString(R.string.b27));
-            } catch (Exception en) {
-                en.printStackTrace();
-                d(getString(R.string.b28));
+                a12.dismiss();
+                BACK0.this.finishAndRemoveTask();
             }
-            a12.dismiss();
-            finishAndRemoveTask();
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            a1.dismiss();
-            finishAndRemoveTask();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+                BACK0.this.finishAndRemoveTask();
+            }
         });
         a.create().show();
     }
 
-    private void f(Object mp) {
+    private void f(final Object mp) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
         a.setTitle(getString(R.string.t6));
         a.setMessage(getString(R.string.z35));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            DownloadHelper d1 = DownloadHelper.getInstance(getApplicationContext());
-            ArrayList<DDMS> al;
-            try {
-                al = (ArrayList) mp;
-                d1.delete();
-                for (DDMS w13 : al) {
-                    d1.d(w13);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                DownloadHelper d1 = DownloadHelper.getInstance(BACK0.this.getApplicationContext());
+                ArrayList<DDMS> al;
+                try {
+                    al = (ArrayList) mp;
+                    d1.delete();
+                    for (DDMS w13 : al) {
+                        d1.d(w13);
+                    }
+                    BACK0.this.g(BACK0.this.getString(R.string.b27));
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    BACK0.this.d(BACK0.this.getString(R.string.b28));
                 }
-                g(getString(R.string.b27));
-            } catch (Exception en) {
-                en.printStackTrace();
-                d(getString(R.string.b28));
+                a12.dismiss();
+                BACK0.this.finishAndRemoveTask();
             }
-            a12.dismiss();
-            finishAndRemoveTask();
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            a1.dismiss();
-            finishAndRemoveTask();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+                BACK0.this.finishAndRemoveTask();
+            }
         });
         a.create().show();
     }
@@ -221,89 +246,113 @@ public class BACK0 extends BaseActivity {
         AwesomeToast.b(this, a);
     }
 
-    private void h(Object mp) {
+    private void h(final Object mp) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
         a.setTitle(getString(R.string.t6));
         a.setMessage(getString(R.string.z37));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            PermissionHelper d1 = PermissionHelper.getInstance(getApplicationContext());
-            ArrayList<PDMS> al;
-            try {
-                al = (ArrayList) mp;
-                d1.delete();
-                for (PDMS w13 : al) {
-                    d1.d(w13);
-                }
-                g(getString(R.string.b27));
-            } catch (Exception en) {
-                en.printStackTrace();
-                d(getString(R.string.b28));
-            }
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
-            a12.dismiss();
-            finishAndRemoveTask();
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                PermissionHelper d1 = PermissionHelper.getInstance(BACK0.this.getApplicationContext());
+                ArrayList<PDMS> al;
+                try {
+                    al = (ArrayList) mp;
+                    d1.delete();
+                    for (PDMS w13 : al) {
+                        d1.d(w13);
+                    }
+                    BACK0.this.g(BACK0.this.getString(R.string.b27));
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    BACK0.this.d(BACK0.this.getString(R.string.b28));
+                }
+
+                a12.dismiss();
+                BACK0.this.finishAndRemoveTask();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            a1.dismiss();
-            finishAndRemoveTask();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+                BACK0.this.finishAndRemoveTask();
+            }
         });
         a.create().show();
     }
 
-    private void i(Object mp) {
+    private void i(final Object mp) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
         a.setTitle(getString(R.string.t6));
         a.setMessage(getString(R.string.d34));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            BookmarkHelper d1 = BookmarkHelper.getInstance(getApplicationContext());
-            ArrayList<BDMS> al;
-            try {
-                al = (ArrayList) mp;
-                d1.delete();
-                for (BDMS w13 : al) {
-                    d1.d(w13);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                BookmarkHelper d1 = BookmarkHelper.getInstance(BACK0.this.getApplicationContext());
+                ArrayList<BDMS> al;
+                try {
+                    al = (ArrayList) mp;
+                    d1.delete();
+                    for (BDMS w13 : al) {
+                        d1.d(w13);
+                    }
+                    BACK0.this.g(BACK0.this.getString(R.string.b27));
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    BACK0.this.d(BACK0.this.getString(R.string.b28));
                 }
-                g(getString(R.string.b27));
-            } catch (Exception en) {
-                en.printStackTrace();
-                d(getString(R.string.b28));
+                a12.dismiss();
+                BACK0.this.finishAndRemoveTask();
             }
-            a12.dismiss();
-            finishAndRemoveTask();
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            a1.dismiss();
-            finishAndRemoveTask();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+                BACK0.this.finishAndRemoveTask();
+            }
         });
         a.create().show();
     }
 
-    private void j(Object mp) {
+    private void j(final Object mp) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
         a.setTitle(getString(R.string.t6));
         a.setMessage(getString(R.string.d33));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            HistoryHelper d1 = HistoryHelper.getInstance(getApplicationContext());
-            ArrayList<HDMS> al;
-            try {
-                al = (ArrayList) mp;
-                d1.delete();
-                for (HDMS w13 : al) {
-                    d1.d(w13);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                HistoryHelper d1 = HistoryHelper.getInstance(BACK0.this.getApplicationContext());
+                ArrayList<HDMS> al;
+                try {
+                    al = (ArrayList) mp;
+                    d1.delete();
+                    for (HDMS w13 : al) {
+                        d1.d(w13);
+                    }
+                    BACK0.this.g(BACK0.this.getString(R.string.b27));
+                } catch (Exception en) {
+                    BACK0.this.d(BACK0.this.getString(R.string.b28));
                 }
-                g(getString(R.string.b27));
-            } catch (Exception en) {
-                d(getString(R.string.b28));
+                a12.dismiss();
+                BACK0.this.finishAndRemoveTask();
             }
-            a12.dismiss();
-            finishAndRemoveTask();
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            a1.dismiss();
-            finishAndRemoveTask();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+                BACK0.this.finishAndRemoveTask();
+            }
         });
         a.create().show();
     }

@@ -21,6 +21,7 @@ import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -35,7 +36,7 @@ import java.util.Locale;
 // @Class Privacy Policy
 public class PRIV extends BaseActivity {
 
-    @Override
+            @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme(T_DEFAULT);
         super.onCreate(savedInstanceState);
@@ -69,7 +70,13 @@ public class PRIV extends BaseActivity {
             findViewById(R.id.l11).setBackgroundColor(Resources.getColor(this, R.color.m));
         }
         c.setBackgroundResource(R.drawable.p);
-        c.setNavigationOnClickListener(view -> finish());
+        c.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                PRIV.this.finish();
+            }
+        });
         d.setText(getString(R.string.x44));
         e.setText(Html.b(getString(R.string.n24)));
         SharedPreferences sp = getSharedPreferences("ag233", 0);

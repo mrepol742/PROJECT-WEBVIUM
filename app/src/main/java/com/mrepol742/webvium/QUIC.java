@@ -32,7 +32,7 @@ import com.mrepol742.webvium.content.Resources;
 // @Class QuickSearch
 public class QUIC extends MainService {
 
-    @Override
+            @Override
     public int onStartCommand(Intent a1, int c555, int c) {
         MainNotification.b(this, getString(R.string.l33), getString(R.string.y18));
         android.app.Notification.Builder m = Notifications.a(this, getString(R.string.l33));

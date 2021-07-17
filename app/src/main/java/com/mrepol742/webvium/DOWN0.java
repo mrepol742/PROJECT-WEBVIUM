@@ -364,7 +364,7 @@ public class DOWN0 extends MainService {
 
     static class R37 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             try {
@@ -379,7 +379,7 @@ public class DOWN0 extends MainService {
 
     class R7 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             if (Objects.requireNonNull(b.getAction()).equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {

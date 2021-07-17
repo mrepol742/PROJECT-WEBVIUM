@@ -24,6 +24,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
@@ -83,7 +84,13 @@ public class ASSI extends BaseActivity {
         p.setTypeface(type(Typeface.NORMAL));
         m11.setTypeface(type(Typeface.BOLD));
         gjj.setBackgroundResource(R.drawable.w);
-        gjj.setOnClickListener(view -> SoftKeyboard.hide(ASSI.this, gjj));
+        gjj.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                SoftKeyboard.hide(ASSI.this, gjj);
+            }
+        });
         p.addTextChangedListener(new TextWatcher() {
 
 
@@ -100,21 +107,25 @@ public class ASSI extends BaseActivity {
             // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
-        p.setOnEditorActionListener((v, actionId, event) -> {
-            boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                SoftKeyboard.hide(ASSI.this, gjj);
-                String query = p.getText().toString();
-                if (U3.b(query)) {
-                    Intents.e(ASSI.this, "value", query, MAIN.class);
+        p.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
-                    d2.c(query);
-                    finish();
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    SoftKeyboard.hide(ASSI.this, gjj);
+                    String query = p.getText().toString();
+                    if (U3.b(query)) {
+                        Intents.e(ASSI.this, "value", query, MAIN.class);
 
+                        d2.c(query);
+                        ASSI.this.finish();
+
+                    }
+                    handled = true;
                 }
-                handled = true;
+                return handled;
             }
-            return handled;
         });
         e();
     }
@@ -132,7 +143,13 @@ public class ASSI extends BaseActivity {
         if (a221().getBoolean("voice", true) && !spr()) {
             iv1.setImageResource(R.drawable.c9);
             iv1.setBackgroundResource(R.drawable.c6);
-            iv1.setOnClickListener(view -> b());
+            iv1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    ASSI.this.b();
+                }
+            });
             Animation.animate(this, R.anim.i, iv1);
             iv1.setVisibility(View.VISIBLE);
         } else {
@@ -158,9 +175,21 @@ public class ASSI extends BaseActivity {
         iv.setImageResource(R.drawable.a14);
         iv.setBackgroundResource(R.drawable.b17);
         if (p.getText().toString().length() == 0) {
-            iv.setOnClickListener(view -> finishAndRemoveTask());
+            iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    ASSI.this.finishAndRemoveTask();
+                }
+            });
         } else {
-            iv.setOnClickListener(view -> p.getText().clear());
+            iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    p.getText().clear();
+                }
+            });
         }
     }
 

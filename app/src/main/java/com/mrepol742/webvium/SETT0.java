@@ -32,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.setting.AboutFragment;
@@ -55,7 +54,7 @@ public class SETT0 extends BaseActivity {
         super.onCreate(a);
         a225(R.layout.a);
         Toolbar tl = findViewById(R.id.b7);
-        TextView b = findViewById(R.id.b8);
+        final TextView b = findViewById(R.id.b8);
         setActionBar(tl);
         b.setTypeface(type(Typeface.BOLD));
         int k = Resources.getColor(this, R.color.c);
@@ -66,80 +65,102 @@ public class SETT0 extends BaseActivity {
         }
         tl.setBackgroundResource(R.drawable.p);
         tl.setNavigationIcon(R.drawable.a2);
-        tl.setNavigationOnClickListener(view -> finishAndRemoveTask());
+        tl.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                SETT0.this.finishAndRemoveTask();
+            }
+        });
         b.setText(getString(R.string.h3));
         as(R.id.m10, new SettingFragment());
-        TextView tv = findViewById(R.id.m17);
+        final TextView tv = findViewById(R.id.m17);
         tv.setText(getString(R.string.h3));
         Animation.animate(this, R.anim.c, b);
         Animation.animate(this, R.anim.i, tv);
-        tv.setOnClickListener(view -> {
-            try {
-                Animation.animate(this, R.anim.c, b);
-                b.setText(getString(R.string.h3));
-            } catch (Exception en) {
-                en.printStackTrace();
-            }
-            Animation.animate(this, R.anim.i, tv);
-            as(R.id.m10, new SettingFragment());
-            id = "a";
-            b24(true);
-            invalidateOptionsMenu();
-        });
-        TextView tv0 = findViewById(R.id.m18);
-        if (BuildConfig.DEBUG) {
-            tv0.setText(getString(R.string.y28));
-            tv0.setOnClickListener(view -> {
+        tv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
                 try {
-                    Animation.animate(this, R.anim.i, tv0);
-                    Animation.animate(this, R.anim.c, b);
-                    b.setText(getString(R.string.y28));
+                    Animation.animate(SETT0.this, R.anim.c, b);
+                    b.setText(SETT0.this.getString(R.string.h3));
                 } catch (Exception en) {
                     en.printStackTrace();
                 }
-                as(R.id.m10, new FeatureFragment());
-                id = "a3";
-                b24(true);
-                invalidateOptionsMenu();
+                Animation.animate(SETT0.this, R.anim.i, tv);
+                SETT0.this.as(R.id.m10, new SettingFragment());
+                id = "a";
+                SETT0.this.b24(true);
+                SETT0.this.invalidateOptionsMenu();
+            }
+        });
+        final TextView tv0 = findViewById(R.id.m18);
+        if (BuildConfig.DEBUG) {
+            tv0.setText(getString(R.string.y28));
+            tv0.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    try {
+                        Animation.animate(SETT0.this, R.anim.i, tv0);
+                        Animation.animate(SETT0.this, R.anim.c, b);
+                        b.setText(SETT0.this.getString(R.string.y28));
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                    }
+                    SETT0.this.as(R.id.m10, new FeatureFragment());
+                    id = "a3";
+                    SETT0.this.b24(true);
+                    SETT0.this.invalidateOptionsMenu();
+                }
             });
         } else {
             tv0.setVisibility(View.GONE);
         }
-        TextView tv1 = findViewById(R.id.m20);
+        final TextView tv1 = findViewById(R.id.m20);
         if (Build.VERSION.SDK_INT < 29) {
             tv1.setText(getString(R.string.t21));
-            tv1.setOnClickListener(view -> {
-                try {
-                    Animation.animate(this, R.anim.i, tv1);
-                    Animation.animate(this, R.anim.c, b);
-                    b.setText(getString(R.string.t21));
+            tv1.setOnClickListener(new View.OnClickListener() {
 
-                } catch (Exception en) {
-                    en.printStackTrace();
+            @Override
+                public void onClick(View view) {
+                    try {
+                        Animation.animate(SETT0.this, R.anim.i, tv1);
+                        Animation.animate(SETT0.this, R.anim.c, b);
+                        b.setText(SETT0.this.getString(R.string.t21));
+
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                    }
+                    SETT0.this.as(R.id.m10, new DatabaseFragment());
+                    id = "a2";
+                    SETT0.this.b24(false);
+                    SETT0.this.invalidateOptionsMenu();
                 }
-                as(R.id.m10, new DatabaseFragment());
-                id = "a2";
-                b24(false);
-                invalidateOptionsMenu();
             });
         } else {
             tv1.setVisibility(View.GONE);
         }
-        TextView tv2 = findViewById(R.id.m1);
+        final TextView tv2 = findViewById(R.id.m1);
         tv2.setText(getString(R.string.l));
-        tv2.setOnClickListener(view -> {
-            try {
-                Animation.animate(this, R.anim.i, tv2);
-                Animation.animate(this, R.anim.c, b);
-                b.setText(getString(R.string.l));
+        tv2.setOnClickListener(new View.OnClickListener() {
 
-            } catch (Exception en) {
-                en.printStackTrace();
+            @Override
+            public void onClick(View view) {
+                try {
+                    Animation.animate(SETT0.this, R.anim.i, tv2);
+                    Animation.animate(SETT0.this, R.anim.c, b);
+                    b.setText(SETT0.this.getString(R.string.l));
+
+                } catch (Exception en) {
+                    en.printStackTrace();
+                }
+                SETT0.this.as(R.id.m10, new AboutFragment());
+                id = "a1";
+                SETT0.this.b24(true);
+                SETT0.this.invalidateOptionsMenu();
             }
-            as(R.id.m10, new AboutFragment());
-            id = "a1";
-            b24(true);
-            invalidateOptionsMenu();
         });
         if (!a221().getBoolean("autoUpdate", false)) {
             b.setTextColor(k);
@@ -177,15 +198,25 @@ public class SETT0 extends BaseActivity {
         iv0 = findViewById(R.id.o26);
         iv.setBackgroundResource(R.drawable.c6);
         iv0.setBackgroundResource(R.drawable.c6);
-        iv.setOnClickListener(view -> b23());
-        iv0.setOnClickListener(view -> {
-            // TODO
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_EMAIL, "Test");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-            intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-            startActivity(Intent.createChooser(intent, "Send Email"));
+        iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                SETT0.this.b23();
+            }
+        });
+        iv0.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // TODO
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, "Test");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                SETT0.this.startActivity(Intent.createChooser(intent, "Send Email"));
+            }
         });
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);

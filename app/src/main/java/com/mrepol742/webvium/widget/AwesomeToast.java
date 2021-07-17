@@ -26,10 +26,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.PRIV;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.app.SharedPref;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 

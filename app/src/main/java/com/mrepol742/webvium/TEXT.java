@@ -95,10 +95,16 @@ public class TEXT extends BaseActivity {
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
-        h17.setNavigationOnClickListener(view -> finish());
+        h17.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                TEXT.this.finish();
+            }
+        });
         a11.setText(getString(R.string.o8));
         a9.setText(getString(R.string.f37));
-        WebSettings ws = w4.getSettings();
+        final WebSettings ws = w4.getSettings();
         if (a223("dr") == 0) {
             ws.setTextZoom(ae);
             a10a.setProgress(ae);
@@ -113,7 +119,7 @@ public class TEXT extends BaseActivity {
             ws.setDefaultFontSize(a223("dr55"));
             a1.setProgress(a223("dr55"));
         }
-        SharedPreferences a35 = getSharedPreferences("wv", 0);
+        final SharedPreferences a35 = getSharedPreferences("wv", 0);
         a10a.setOnSeekBarChangeListener(new W11() {
 
             @Override

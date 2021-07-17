@@ -116,6 +116,7 @@ public class ManageSpaceAdapter extends MainBaseAdapter {
         TextView b;
         ImageView c;
         TextView d;
+
         @Keep
         private W19a() {
         }

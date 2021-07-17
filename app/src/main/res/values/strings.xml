@@ -283,7 +283,6 @@
     <string name="p3">Webpage favicon.</string>
     <string name="p4">Renderer Priority Policy</string>
     <string name="p5">Set Renderer Priority Policy</string>
-    <string name="p11">Clear Source Code</string>
     <string name="p12">Clear Screenshot</string>
     <string name="p13">Quality</string>
     <string name="p14">Set Quality</string>
@@ -293,7 +292,6 @@
     <string name="p18">Volume Down</string>
     <string name="p19">Set Action for Volume Up</string>
     <string name="p20">Webvium</string>
-    <string name="q1">Source code cleared.</string>
     <string name="q2">Require PIN to open Webvium</string>
     <string name="q3">Security Lock</string>
     <string name="q4">Disable WiFi after the webpage was been fully loaded</string>
@@ -377,7 +375,6 @@
     <string name="u5">Do you really want to clear Cache?</string>
     <string name="u6">Do you really want to clear Search History?</string>
     <string name="u7">Do you really want to clear Preferences?</string>
-    <string name="u8">Do you really want to clear Source Codes?</string>
     <string name="u9">Do you really want to clear Screenshots?</string>
     <string name="u10">Do you really want to clear Downloads?</string>
     <string name="u11">All of Webvium Data will be deleted permanently. This includes all files, settings, databases, backups etc.</string>
@@ -407,7 +404,7 @@
     <string name="v16">%1$s request location permission denied.</string>
     <string name="v17">Allow</string>
     <string name="v18">&lt;b>Message:&lt;/b> %1$s&lt;br>&lt;b>Line:&lt;/b> %2$d&lt;br>&lt;b>Source ID:&lt;/b> %3$s</string>
-    <string name="v188"><font color="%2$s">%1$s</font>\n\n<font color="%2$s">Message:</font> %3$s\n<font color="%2$s">Line:</font> %4$d\n<font color="%2$s">Source ID:</font> %5$s</string>
+    <string name="v188"><font color="742">%1$s</font>\n\n<font color="742">Message:</font> %2$s\n<font color="742">Line:</font> %3$d\n<font color="742">Source ID:</font> %4$s</string>
     <string name="v19">Security Certificate</string>
     <string name="v20">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d&lt;br>&lt;b>Description:&lt;/b> %3$s</string>
     <plurals name="w1">
@@ -531,7 +528,6 @@
     <string name="c36">Clear Downloads</string>
     <string name="c37">Clear All Data</string>
     <string name="c38">Size: </string>
-    <string name="c39">Files: </string>
     <string name="c40">Incorrect PIN</string>
     <string name="d33">Do you really want to import History Database\nThis will override your Browsing History</string>
     <string name="d34">Do you really want to import Bookmarks Database\nThis will override your Bookmarks</string>
@@ -567,7 +563,6 @@
     <string name="g21">Your bookmarks appear here</string>
     <string name="g24">Pretend Mode Settings</string>
     <string name="g25">&lt;b>Host Name:&lt;/b> %1$s&lt;br>&lt;b>IP Address:&lt;/b> %2$s&lt;br>&lt;b>Hash Code:&lt;/b> %3$d&lt;br>&lt;b>Canonical Hostname:&lt;/b> %4$s&lt;br>&lt;b>Wildcard Address:&lt;/b> %5$b&lt;br>&lt;b>Local Address:&lt;/b> %6$b&lt;br>&lt;b>Loopback Address:&lt;/b> %7$b&lt;br>&lt;b>Global Scope:&lt;/b> %8$b&lt;br>&lt;b>Link Scope:&lt;/b> %9$b&lt;br>&lt;b>Node Scope:&lt;/b> %10$b&lt;br>&lt;b>Organization Scope:&lt;/b> %11$b&lt;br>&lt;b>Site Scope:&lt;/b> %12$b&lt;br>&lt;b>IP Multicast Address:&lt;/b> %13$b</string>
-    <string name="g27">Feedback Send.</string>
     <string name="g28">View %1$s</string>
     <string name="g31">Webvium Webpages Notification</string>
     <string name="g34">The page you\'re trying to view contains data that has already been submitted (\"POSTDATA\"). If you resend the data, any action the form on the page carried out (such as a search or online purchase) will be repeated.</string>
@@ -776,7 +771,6 @@
     </plurals>
 
     <string name="v27">No item\'s to be cleared</string>
-    <string name="v28">File: </string>
     <string name="v29">No file\'s to be cleared</string>
     <string name="v30">Clear All Downloads</string>
     <string name="w21">Download File</string>
@@ -806,9 +800,7 @@
     <string name="x36">Hide/Show Navbar</string>
     <string name="x37">Gesture up/down to hide/show navbar</string>
     <string name="x38">Failed! No Internet Connection</string>
-    <string name="x39">Send Feedback</string>
 
-    <string name="y27">I\'d like to hear your feedback about Webvium.</string>
     <string name="y28">Features</string>
     <string name="y30">The developers behind this awesome project</string>
     <string name="z21">Failed! An Error Occurred</string>
@@ -854,7 +846,6 @@
     <string name="y67">Send Report</string>
     <string name="y69">Experimental</string>
     <string name="y70">Unstable, underdevelopment features</string>
-    <string name="y71">Sending feedback…</string>
     <string name="y72">Please try again later</string>
 
     <string name="y73">Base64 Encoder</string>
@@ -893,7 +884,6 @@
     <string name="z46">Strict Mode</string>
     <string name="z47">Thread Policy</string>
     <string name="z48">VM Policy</string>
-    <string name="z49">Detect everything that\'s potentially suspect. Required Webvium to restart to take effect.</string>
     <string name="z50">Crash Handler</string>
     <string name="z51">Handle unhandled crash and show an error dialog instead of App has Stop Alert Dialog.</string>
     <string name="z52">Trim Memory</string>

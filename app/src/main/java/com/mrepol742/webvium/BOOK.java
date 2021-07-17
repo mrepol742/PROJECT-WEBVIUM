@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -32,6 +33,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.URLUtil;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -83,89 +85,93 @@ public class BOOK extends BaseActivity {
     public static final int ASSETLINKS = 9;
     public static final int SITEMAPS = 10;
 
-    final MenuItem.OnMenuItemClickListener d = a1 -> {
-        String a5 = ls.get(it);
-        String a2 = ls0.get(it);
-        switch (a1.getItemId()) {
-            case 1:
-                b(a2);
-                return true;
-            case 2:
-                Clipboard.a(BOOK.this, a2);
-                k5(getString(R.string.k9));
-                return true;
-            case 3:
-                k2(a2, a5);
-                return true;
-            case 9:
+    final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
-                Clipboard.a(BOOK.this, a5);
-                k5(getString(R.string.k9));
-                return true;
-            case 6:
-                a(a2, a5);
-                return true;
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            String a5 = ls.get(it);
+            String a2 = ls0.get(it);
+            switch (a1.getItemId()) {
+                case 1:
+                    BOOK.this.b(a2);
+                    return true;
+                case 2:
+                    Clipboard.a(BOOK.this, a2);
+                    BOOK.this.k5(BOOK.this.getString(R.string.k9));
+                    return true;
+                case 3:
+                    BOOK.this.k2(a2, a5);
+                    return true;
+                case 9:
 
-            case 5:
-                l(a2, 7);
-                return true;
-            case 13:
-                c43(a2);
-                return true;
-            case 15:
+                    Clipboard.a(BOOK.this, a5);
+                    BOOK.this.k5(BOOK.this.getString(R.string.k9));
+                    return true;
+                case 6:
+                    BOOK.this.a(a2, a5);
+                    return true;
 
-                l(a2, 0);
+                case 5:
+                    BOOK.this.l(a2, 7);
+                    return true;
+                case 13:
+                    BOOK.this.c43(a2);
+                    return true;
+                case 15:
 
-                return true;
-            case 16:
+                    BOOK.this.l(a2, 0);
 
-                l(a2, 1);
+                    return true;
+                case 16:
 
-                return true;
-            case 17:
+                    BOOK.this.l(a2, 1);
 
-                l(a2, 2);
+                    return true;
+                case 17:
 
-                return true;
-            case 18:
+                    BOOK.this.l(a2, 2);
 
-                l(a2, 3);
+                    return true;
+                case 18:
 
-                return true;
-            case 19:
+                    BOOK.this.l(a2, 3);
 
-                l(a2, 5);
+                    return true;
+                case 19:
 
-                return true;
-            case 20:
+                    BOOK.this.l(a2, 5);
 
-                l(a2, 4);
+                    return true;
+                case 20:
 
-                return true;
-            case 21:
+                    BOOK.this.l(a2, 4);
 
-                l(a2, 6);
+                    return true;
+                case 21:
 
-                return true;
-            case 22:
+                    BOOK.this.l(a2, 6);
 
-                l(a2, 8);
+                    return true;
+                case 22:
 
-                return true;
-            case 23:
-                b(a5);
-                return true;
-            case 24:
-                o(a5, a2);
-                return true;
-            case 25:
-                l(a2, ASSETLINKS);
-                return true;
-            case 26:
-                l(a2, SITEMAPS);
-                return true;
+                    BOOK.this.l(a2, 8);
+
+                    return true;
+                case 23:
+                    BOOK.this.b(a5);
+                    return true;
+                case 24:
+                    BOOK.this.o(a5, a2);
+                    return true;
+                case 25:
+                    BOOK.this.l(a2, ASSETLINKS);
+                    return true;
+                case 26:
+                    BOOK.this.l(a2, SITEMAPS);
+                    return true;
+            }
+            return false;
         }
-        return false;
     };
 
     @Override
@@ -182,7 +188,13 @@ public class BOOK extends BaseActivity {
         iv = findViewById(R.id.j2);
         iv.setBackgroundResource(R.drawable.c6);
         iv.setImageResource(R.drawable.a23);
-        iv.setOnClickListener(view -> d());
+        iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                BOOK.this.d();
+            }
+        });
         setActionBar(c);
         ActionBar ab = getActionBar();
         if (ab != null) {
@@ -213,7 +225,13 @@ public class BOOK extends BaseActivity {
         }
         c.setBackgroundResource(R.drawable.p);
         c.setNavigationIcon(R.drawable.a2);
-        c.setNavigationOnClickListener(view -> finish());
+        c.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                BOOK.this.finish();
+            }
+        });
         d3 = BookmarkHelper.getInstance(getApplicationContext());
         Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_BOOKMARK +
@@ -239,19 +257,33 @@ public class BOOK extends BaseActivity {
         if (ls != null) {
             w15 = new BookmarkAdapter(this, ls);
             e.setAdapter(w15);
-            e.setOnItemClickListener((a1, b1, c1, d1) -> {
-                Intents.d("value", ls0.get(c1), BOOK.this);
-                finish();
+            e.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+                public void onItemClick(AdapterView<?> a1, View b1, int c1, long d1) {
+                    Intents.d("value", ls0.get(c1), BOOK.this);
+                    BOOK.this.finish();
+                }
             });
-            e.setOnItemLongClickListener((adapterView, view, i, l) -> {
-                n(view, i);
-                return true;
+            e.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    BOOK.this.n(view, i);
+                    return true;
+                }
             });
         }
         iv1 = findViewById(R.id.j3);
         iv1.setBackgroundResource(R.drawable.c6);
         iv1.setImageResource(R.drawable.c16);
-        iv1.setOnClickListener(view -> c("", ""));
+        iv1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                BOOK.this.c("", "");
+            }
+        });
         e.setNumColumns(p(getResources().getConfiguration().orientation));
     }
 
@@ -301,12 +333,22 @@ public class BOOK extends BaseActivity {
             ed.setText(hl.getHost());
         }
         ed1.setText(a23);
-        a.setPositiveButton(getString(R.string.i6), (a2, it) -> {
-            //  m(ed.getText().toString() ,ed1.getText().toString());
-            shrt(ed.getText().toString(), ed1.getText().toString(), R.mipmap.w);
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int it) {
+                //  m(ed.getText().toString() ,ed1.getText().toString());
+                BOOK.this.shrt(ed.getText().toString(), ed1.getText().toString(), R.mipmap.w);
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -382,16 +424,26 @@ public class BOOK extends BaseActivity {
             ed.setText(hl.getHost());
         }
         ed1.setText(asd);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            d3.c(ed.getText().toString(), ed1.getText().toString());
-            k5(getString(R.string.u1));
-            f6.setClickable(false);
-            this.e.setVisibility(View.VISIBLE);
-            iv.setVisibility(View.VISIBLE);
-            k();
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                d3.c(ed.getText().toString(), ed1.getText().toString());
+                BOOK.this.k5(BOOK.this.getString(R.string.u1));
+                f6.setClickable(false);
+                BOOK.this.e.setVisibility(View.VISIBLE);
+                iv.setVisibility(View.VISIBLE);
+                BOOK.this.k();
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -431,14 +483,24 @@ public class BOOK extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.h11));
         a.setMessage(getString(R.string.u4));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            d3.delete();
-            k5(getString(R.string.u3));
-            f6.setClickable(true);
-            e.setVisibility(View.GONE);
-            iv.setVisibility(View.GONE);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                d3.delete();
+                BOOK.this.k5(BOOK.this.getString(R.string.u3));
+                f6.setClickable(true);
+                e.setVisibility(View.GONE);
+                iv.setVisibility(View.GONE);
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -447,12 +509,22 @@ public class BOOK extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.h11));
         a.setMessage(String.format(getString(R.string.l7), "\"" + b + "\""));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            d3.b(b, c5);
-            k5(String.format(getString(R.string.h5), b));
-            k();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                d3.b(b, c5);
+                BOOK.this.k5(String.format(BOOK.this.getString(R.string.h5), b));
+                BOOK.this.k();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -461,41 +533,57 @@ public class BOOK extends BaseActivity {
     }
 
     private void k() {
-        Runnable p15 = () -> {
-            ArrayList<String> itemIdsh = new ArrayList<>();
-            Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    Sqlite.TABLE_BOOKMARK +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC", null);
-            if (res.getCount() == 0) {
-                runOnUiThread(() -> {
-                    f8.setVisibility(View.VISIBLE);
-                    f6.setClickable(true);
-                    e.setVisibility(View.GONE);
-                    iv.setVisibility(View.GONE);
-                });
-            } else {
-                while (res.moveToNext()) {
-                    itemIdsh.add(res.getString(1));
-                }
-                if (itemIdsh.size() == 0) {
-                    runOnUiThread(() -> {
-                        f8.setVisibility(View.VISIBLE);
-                        f6.setClickable(true);
-                        e.setVisibility(View.GONE);
-                        iv.setVisibility(View.GONE);
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final ArrayList<String> itemIdsh = new ArrayList<>();
+                Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+                        Sqlite.TABLE_BOOKMARK +
+                        " ORDER BY " +
+                        "_id" +
+                        " DESC", null);
+                if (res.getCount() == 0) {
+                    BOOK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            f8.setVisibility(View.VISIBLE);
+                            f6.setClickable(true);
+                            e.setVisibility(View.GONE);
+                            iv.setVisibility(View.GONE);
+                        }
                     });
                 } else {
-                    runOnUiThread(() -> {
-                        w15.a(itemIdsh);
-                        w15.notifyDataSetChanged();
-                        f8.setVisibility(View.GONE);
-                        e.setVisibility(View.VISIBLE);
-                    });
+                    while (res.moveToNext()) {
+                        itemIdsh.add(res.getString(1));
+                    }
+                    if (itemIdsh.size() == 0) {
+                        BOOK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                f8.setVisibility(View.VISIBLE);
+                                f6.setClickable(true);
+                                e.setVisibility(View.GONE);
+                                iv.setVisibility(View.GONE);
+                            }
+                        });
+                    } else {
+                        BOOK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                w15.a(itemIdsh);
+                                w15.notifyDataSetChanged();
+                                f8.setVisibility(View.GONE);
+                                e.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
                 }
+                res.close();
             }
-            res.close();
         };
         new Thread(p15).start();
     }
@@ -559,32 +647,36 @@ public class BOOK extends BaseActivity {
         bn.setText(getString(R.string.i6));
         ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io"));
         final AlertDialog g = a.create();
-        bn.setOnClickListener(view -> {
-            String a1 = ed.getText().toString();
-            if (type == SOURCE_CODE) {
-                Intent it = new Intent(BOOK.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
-                startActivity(it);
-            } else if (type == HEADERS) {
-                c126(a1);
-            } else if (type == ROBOTS) {
-                Intent it = new Intent(BOOK.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_ROBOTS);
-                startActivity(it);
-            } else if (type == ASSETLINKS) {
-                Intent it = new Intent(BOOK.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
-                startActivity(it);
-            } else if (type == SITEMAPS) {
-                Intent it = new Intent(BOOK.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_SITEMAPS);
-                startActivity(it);
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String a1 = ed.getText().toString();
+                if (type == SOURCE_CODE) {
+                    Intent it = new Intent(BOOK.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+                    BOOK.this.startActivity(it);
+                } else if (type == HEADERS) {
+                    BOOK.this.c126(a1);
+                } else if (type == ROBOTS) {
+                    Intent it = new Intent(BOOK.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_ROBOTS);
+                    BOOK.this.startActivity(it);
+                } else if (type == ASSETLINKS) {
+                    Intent it = new Intent(BOOK.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
+                    BOOK.this.startActivity(it);
+                } else if (type == SITEMAPS) {
+                    Intent it = new Intent(BOOK.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_SITEMAPS);
+                    BOOK.this.startActivity(it);
+                }
+                g.dismiss();
             }
-            g.dismiss();
         });
         ed.addTextChangedListener(new TextWatcher() {
 
@@ -610,7 +702,7 @@ public class BOOK extends BaseActivity {
         g.show();
     }
 
-    public void c126(String url) {
+    public void c126(final String url) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -631,9 +723,19 @@ public class BOOK extends BaseActivity {
         }
         ti.setText(getString(R.string.v13));
         ed.setText(url);
-        Runnable p15 = () -> {
-            final String sg = Stream.d(url, getString(R.string.c33));
-            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final String sg = Stream.d(url, BOOK.this.getString(R.string.c33));
+                BOOK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        ti.setText(Html.b(sg));
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
@@ -642,15 +744,29 @@ public class BOOK extends BaseActivity {
             bn.setBackgroundResource(R.drawable.c11);
         }
         bn.setText(getString(R.string.i6));
-        bn.setOnClickListener(view -> {
-            String ab = ed.getText().toString();
-            ti.setText(getString(R.string.v13));
-            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
-                Runnable p151 = () -> {
-                    final String sg = Stream.d(ab, getString(R.string.c33));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p151).start();
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final String ab = ed.getText().toString();
+                ti.setText(BOOK.this.getString(R.string.v13));
+                if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
+                    Runnable p151 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            final String sg = Stream.d(ab, BOOK.this.getString(R.string.c33));
+                            BOOK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(Html.b(sg));
+                                }
+                            });
+                        }
+                    };
+                    new Thread(p151).start();
+                }
             }
         });
         ed.addTextChangedListener(new TextWatcher() {
@@ -743,12 +859,22 @@ public class BOOK extends BaseActivity {
         ed.setText(oldTitle);
 
         ed1.setText(oldURl);
-        a.setPositiveButton(getString(R.string.i6), (a2, it) -> {
-            d3.f(oldTitle, oldURl, ed.getText().toString(), ed1.getText().toString());
-            k();
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int it) {
+                d3.f(oldTitle, oldURl, ed.getText().toString(), ed1.getText().toString());
+                BOOK.this.k();
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -792,7 +918,7 @@ public class BOOK extends BaseActivity {
         }
     }
 
-    public void c43(String url) {
+    public void c43(final String url) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -813,9 +939,19 @@ public class BOOK extends BaseActivity {
         }
         ti.setText(getString(R.string.v13));
         ed.setText(url);
-        Runnable p15 = () -> {
-            final String sg = Stream.a(url, getString(R.string.c33), getString(R.string.g25));
-            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final String sg = Stream.a(url, BOOK.this.getString(R.string.c33), BOOK.this.getString(R.string.g25));
+                BOOK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        ti.setText(Html.b(sg));
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         bn.setText(getString(R.string.i6));
@@ -824,16 +960,30 @@ public class BOOK extends BaseActivity {
         } else {
             bn.setBackgroundResource(R.drawable.c10);
         }
-        bn.setOnClickListener(view -> {
-            String ab = ed.getText().toString();
-            ti.setText(getString(R.string.v13));
+        bn.setOnClickListener(new View.OnClickListener() {
 
-            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
-                Runnable p151 = () -> {
-                    final String sg = Stream.a(ab, getString(R.string.c33), getString(R.string.g25));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p151).start();
+            @Override
+            public void onClick(View view) {
+                final String ab = ed.getText().toString();
+                ti.setText(BOOK.this.getString(R.string.v13));
+
+                if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
+                    Runnable p151 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            final String sg = Stream.a(ab, BOOK.this.getString(R.string.c33), BOOK.this.getString(R.string.g25));
+                            BOOK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(Html.b(sg));
+                                }
+                            });
+                        }
+                    };
+                    new Thread(p151).start();
+                }
             }
         });
         ed.addTextChangedListener(new TextWatcher() {

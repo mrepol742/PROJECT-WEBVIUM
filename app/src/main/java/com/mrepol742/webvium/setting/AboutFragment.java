@@ -39,32 +39,48 @@ import java.util.Locale;
 
 public class AboutFragment extends BasePreferenceFragment {
 
-    @Override
+            @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
             a5(R.xml.i);
             Preference j5 = findPreference("m7");
-            j5.setOnPreferenceClickListener(a -> {
-                Intents.a(getActivity(), CRED.class);
-                return true;
+            j5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.a(AboutFragment.this.getActivity(), CRED.class);
+                    return true;
+                }
             });
             Preference a7 = findPreference("g5");
-            a7.setOnPreferenceClickListener(a -> {
-                Intents.a(getActivity(), TERM.class);
-                return true;
+            a7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.a(AboutFragment.this.getActivity(), TERM.class);
+                    return true;
+                }
             });
             Preference a722 = findPreference("g6");
-            a722.setOnPreferenceClickListener(a -> {
-                Intents.a(getActivity(), PRIV.class);
-                return true;
+            a722.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.a(AboutFragment.this.getActivity(), PRIV.class);
+                    return true;
+                }
             });
             Preference a5 = findPreference("p20");
             a5.setSummary(Package.e(getActivity()) + " | " + Package.f(getActivity()));
-            a5.setOnPreferenceClickListener(a -> {
-                Intents.l(getActivity(), Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
+            a5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-                return true;
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.l(AboutFragment.this.getActivity(), Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
+
+                    return true;
+                }
             });
             Preference a51 = findPreference("ml1");
             if (Connectivity.isThereAnyInternetConnection(getActivity())) {
@@ -89,35 +105,55 @@ public class AboutFragment extends BasePreferenceFragment {
         }
     }
 
-    private void a(Preference e) {
-        Runnable re = () -> {
-            try {
-                int b = Integer.parseInt(Package.e(getActivity()).replaceAll("\\.", ""));
-                int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/newVersion.int?raw=true");
-                if (getActivity() == null) {
-                    return;
-                }
-                if (newUpdate > b) {
-                    getActivity().runOnUiThread(() -> {
-                        e.setTitle(getString(R.string.z28));
-                        e.setSummary(getString(R.string.z29));
-                        e.setOnPreferenceClickListener(a -> {
-                            Intents.e(getActivity(), "value", "https://mrepol742.github.io/PROJECT-WEBVIUM", MAIN.class);
-                            return true;
+    private void a(final Preference e) {
+        Runnable re = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    int b = Integer.parseInt(Package.e(AboutFragment.this.getActivity()).replaceAll("\\.", ""));
+                    int newUpdate = Stream.i("https://github.com/" + AboutFragment.this.getString(R.string.github_username) + "/" + AboutFragment.this.getString(R.string.github_repository) + "/blob/" + AboutFragment.this.getString(R.string.github_branch) + "/" + AboutFragment.this.getString(R.string.github_path) + "/newVersion.int?raw=true");
+                    if (AboutFragment.this.getActivity() == null) {
+                        return;
+                    }
+                    if (newUpdate > b) {
+                        AboutFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                e.setTitle(AboutFragment.this.getString(R.string.z28));
+                                e.setSummary(AboutFragment.this.getString(R.string.z29));
+                                e.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                                    public boolean onPreferenceClick(Preference a) {
+                                        Intents.e(AboutFragment.this.getActivity(), "value", "https://mrepol742.github.io/PROJECT-WEBVIUM", MAIN.class);
+                                        return true;
+                                    }
+                                });
+                            }
                         });
-                    });
-                } else {
-                    getActivity().runOnUiThread(() -> {
-                        e.setTitle(getString(R.string.z26));
-                        e.setSummary(getString(R.string.z27));
+                    } else {
+                        AboutFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                e.setTitle(AboutFragment.this.getString(R.string.z26));
+                                e.setSummary(AboutFragment.this.getString(R.string.z27));
+                            }
+                        });
+                    }
+                } catch (Exception w) {
+                    w.printStackTrace();
+                    AboutFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            e.setTitle(AboutFragment.this.getString(R.string.z21));
+                            e.setSummary(AboutFragment.this.getString(R.string.z30));
+                        }
                     });
                 }
-            } catch (Exception w) {
-                w.printStackTrace();
-                getActivity().runOnUiThread(() -> {
-                    e.setTitle(getString(R.string.z21));
-                    e.setSummary(getString(R.string.z30));
-                });
             }
         };
         new Thread(re).start();

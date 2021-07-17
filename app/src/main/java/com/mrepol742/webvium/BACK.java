@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -36,7 +35,6 @@ import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.util.Base64;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -46,46 +44,50 @@ import java.util.Objects;
 // @Class BackupService
 public class BACK extends MainService {
 
-    @Override
+            @Override
     public int onStartCommand(Intent a, int flag, int c) {
         if (Build.VERSION.SDK_INT >= 29) {
             s1();
         }
-        Runnable runnable = () -> {
-            try {
-                String sg1 = dt();
-                if (new java.io.File(sg1).exists()) {
-                    s1();
-                }
-                try {
-                    int t = 10;
-                    String sg = this.getPackageName();
-                    String sg0 = StorageDirectory.getBaseApk();
-                    String pc = sg + "-";
-                    for (int i = 0; i < t; i++) {
-                        String sg2 = pc + i;
-                        java.io.File fe = new java.io.File(String.format(sg0, sg2));
-                        if (fe.exists()) {
-                            FileInputStream fos = new FileInputStream(fe.toString());
-                            OutputStream d = new FileOutputStream(sg1);
-                            byte[] e = new byte[1024];
-                            int f;
-                            while ((f = fos.read(e)) != -1) {
-                                d.write(e, 0, f);
-                            }
-                            d.flush();
-                            d.close();
-                            fos.close();
-                            d1(sg1);
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                   e.printStackTrace();
-                }
+        Runnable runnable = new Runnable() {
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            @Override
+            public void run() {
+                try {
+                    String sg1 = BACK.this.dt();
+                    if (new java.io.File(sg1).exists()) {
+                        BACK.this.s1();
+                    }
+                    try {
+                        int t = 10;
+                        String sg = BACK.this.getPackageName();
+                        String sg0 = StorageDirectory.getBaseApk();
+                        String pc = sg + "-";
+                        for (int i = 0; i < t; i++) {
+                            String sg2 = pc + i;
+                            java.io.File fe = new java.io.File(String.format(sg0, sg2));
+                            if (fe.exists()) {
+                                FileInputStream fos = new FileInputStream(fe.toString());
+                                OutputStream d = new FileOutputStream(sg1);
+                                byte[] e = new byte[1024];
+                                int f;
+                                while ((f = fos.read(e)) != -1) {
+                                    d.write(e, 0, f);
+                                }
+                                d.flush();
+                                d.close();
+                                fos.close();
+                                BACK.this.d1(sg1);
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         new Thread(runnable).start();

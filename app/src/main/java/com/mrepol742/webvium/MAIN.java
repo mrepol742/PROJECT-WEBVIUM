@@ -31,6 +31,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -76,6 +77,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.CookieManager;
+import android.webkit.DownloadListener;
 import android.webkit.GeolocationPermissions;
 import android.webkit.HttpAuthHandler;
 import android.webkit.JavascriptInterface;
@@ -95,6 +97,7 @@ import android.webkit.WebViewClient;
 import android.webkit.WebViewDatabase;
 import android.webkit.WebViewRenderProcess;
 import android.webkit.WebViewRenderProcessClient;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -113,7 +116,6 @@ import android.widget.Toolbar;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.GeolocationDataModel;
 import com.mrepol742.webvium.app.HashJSI;
-import com.mrepol742.webvium.app.NoSuchItemToGet;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
@@ -394,162 +396,186 @@ public class MAIN extends MainBaseActivity implements Format {
     private int ct;
     private boolean isSh = false;
 
-    final MenuItem.OnMenuItemClickListener mio = a1 -> {
-        switch (a1.getItemId()) {
-            case POPUPMENU_TOOLBAR_PASTE_AND_SEARCH:
-                c13();
-                return true;
-            case POPUPMENU_TOOLBAR_PASTE:
-                c17();
-                return true;
-            case POPUPMENU_TOOLBAR_COPY_LINK:
-                Clipboard.a(MAIN.this, currentUrl());
-                c8(getString(R.string.k9));
-                return true;
-            case POPUPMENU_TOOLBAR_SHARE_LINK:
-                c16(currentUrl(), 0);
-                return true;
-            case POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN:
-                c58(currentUrl(), currentTitle());
-                return true;
-            case POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS:
-                c14(currentTitle(), currentUrl());
-                return true;
-            case POPUPMENU_TOOLBAR_COPY_TITLE:
-                Clipboard.a(MAIN.this, currentTitle());
-                c8(getString(R.string.k9));
-                return true;
-            case POPUPMENU_TOOLBAR_SHARE_TITLE:
-                c16(currentTitle(), 0);
-                return true;
+    final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            switch (a1.getItemId()) {
+                case POPUPMENU_TOOLBAR_PASTE_AND_SEARCH:
+                    MAIN.this.c13();
+                    return true;
+                case POPUPMENU_TOOLBAR_PASTE:
+                    MAIN.this.c17();
+                    return true;
+                case POPUPMENU_TOOLBAR_COPY_LINK:
+                    Clipboard.a(MAIN.this, MAIN.this.currentUrl());
+                    MAIN.this.c8(MAIN.this.getString(R.string.k9));
+                    return true;
+                case POPUPMENU_TOOLBAR_SHARE_LINK:
+                    MAIN.this.c16(MAIN.this.currentUrl(), 0);
+                    return true;
+                case POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN:
+                    MAIN.this.c58(MAIN.this.currentUrl(), MAIN.this.currentTitle());
+                    return true;
+                case POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS:
+                    MAIN.this.c14(MAIN.this.currentTitle(), MAIN.this.currentUrl());
+                    return true;
+                case POPUPMENU_TOOLBAR_COPY_TITLE:
+                    Clipboard.a(MAIN.this, MAIN.this.currentTitle());
+                    MAIN.this.c8(MAIN.this.getString(R.string.k9));
+                    return true;
+                case POPUPMENU_TOOLBAR_SHARE_TITLE:
+                    MAIN.this.c16(MAIN.this.currentTitle(), 0);
+                    return true;
+            }
+            return false;
         }
-        return false;
     };
 
-    final MenuItem.OnMenuItemClickListener e4 = a1 -> {
-        switch (a1.getItemId()) {
-            case POPUPMENU_PHONE_CALL:
-                c106(sg);
-                return true;
-            case POPUPMENU_PHONE_SEND_SMS:
-                c105(sg);
-                return true;
-            case POPUPMENU_PHONE_SHARE:
-                c16(sg, 1);
-                return true;
-            case POPUPMENU_PHONE_COPY:
-                Clipboard.a(MAIN.this, sg);
-                c8(getString(R.string.k9));
-                return true;
-            case POPUPMENU_PHONE_DIAL:
-                c104(sg);
-                return true;
-            case POPUPMENU_PHONE_ADD_TO_CONTACTS:
-                c110(sg);
-                return true;
+    final MenuItem.OnMenuItemClickListener e4 = new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            switch (a1.getItemId()) {
+                case POPUPMENU_PHONE_CALL:
+                    MAIN.this.c106(sg);
+                    return true;
+                case POPUPMENU_PHONE_SEND_SMS:
+                    MAIN.this.c105(sg);
+                    return true;
+                case POPUPMENU_PHONE_SHARE:
+                    MAIN.this.c16(sg, 1);
+                    return true;
+                case POPUPMENU_PHONE_COPY:
+                    Clipboard.a(MAIN.this, sg);
+                    MAIN.this.c8(MAIN.this.getString(R.string.k9));
+                    return true;
+                case POPUPMENU_PHONE_DIAL:
+                    MAIN.this.c104(sg);
+                    return true;
+                case POPUPMENU_PHONE_ADD_TO_CONTACTS:
+                    MAIN.this.c110(sg);
+                    return true;
+            }
+            return false;
         }
-        return false;
     };
 
-    final MenuItem.OnMenuItemClickListener e3 = a1 -> {
-        if (a1.getItemId() == POPUPMENU_GEO_SHARE) {
-            c16(sg, 1);
-            return true;
+    final MenuItem.OnMenuItemClickListener e3 = new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            if (a1.getItemId() == POPUPMENU_GEO_SHARE) {
+                MAIN.this.c16(sg, 1);
+                return true;
+            }
+            return false;
         }
-        return false;
     };
 
-    final MenuItem.OnMenuItemClickListener e2 = a1 -> {
-        switch (a1.getItemId()) {
-            case POPUPMENU_MAIL_COPY:
-                Clipboard.a(MAIN.this, sg);
-                c8(getString(R.string.k9));
-                return true;
-            case POPUPMENU_MAIL_SEND_EMAIL:
-                c65(Objects.requireNonNull(sg));
-                return true;
-            case POPUPMENU_MAIL_SHARE:
-                c16(sg, 1);
-                return true;
+    final MenuItem.OnMenuItemClickListener e2 = new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            switch (a1.getItemId()) {
+                case POPUPMENU_MAIL_COPY:
+                    Clipboard.a(MAIN.this, sg);
+                    MAIN.this.c8(MAIN.this.getString(R.string.k9));
+                    return true;
+                case POPUPMENU_MAIL_SEND_EMAIL:
+                    MAIN.this.c65(Objects.requireNonNull(sg));
+                    return true;
+                case POPUPMENU_MAIL_SHARE:
+                    MAIN.this.c16(sg, 1);
+                    return true;
+            }
+            return false;
         }
-        return false;
     };
 
-    final MenuItem.OnMenuItemClickListener e1 = a1 -> {
-        switch (a1.getItemId()) {
-            case 3:
-                c16(sg, 0);
-                return true;
-            case 4:
-                Clipboard.a(MAIN.this, sg);
-                c8(getString(R.string.k9));
-                return true;
+    final MenuItem.OnMenuItemClickListener e1 = new MenuItem.OnMenuItemClickListener() {
 
-            case 6:
-                c14(null, sg);
-                return true;
-            case 7:
-                c58(sg, null);
-                return true;
-            case 12:
-                if (Permission.check(MAIN.this, Permission.STORAGE, 4)) {
-                    c55(sg, null);
-                }
-                return true;
-            case 13:
-                c43(sg);
-                return true;
-            case 5:
-                c112(sg, 7);
-                return true;
-            case 15:
-                c112(sg, 0);
-                return true;
-            case 16:
-                c112(sg, 1);
-                return true;
-            case 17:
-                c112(sg, 2);
-                return true;
-            case 18:
-                c112(sg, 3);
-                return true;
-            case 19:
-                c112(sg, 5);
-                return true;
-            case 20:
-                c112(sg, 4);
-                return true;
-            case 21:
-                c112(sg, 6);
-                return true;
-            case 25:
-                c112(sg, ASSETLINKS);
-                return true;
-            case 26:
-                c112(sg, SITEMAPS);
-                return true;
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            switch (a1.getItemId()) {
+                case 3:
+                    MAIN.this.c16(sg, 0);
+                    return true;
+                case 4:
+                    Clipboard.a(MAIN.this, sg);
+                    MAIN.this.c8(MAIN.this.getString(R.string.k9));
+                    return true;
+
+                case 6:
+                    MAIN.this.c14(null, sg);
+                    return true;
+                case 7:
+                    MAIN.this.c58(sg, null);
+                    return true;
+                case 12:
+                    if (Permission.check(MAIN.this, Permission.STORAGE, 4)) {
+                        MAIN.this.c55(sg, null);
+                    }
+                    return true;
+                case 13:
+                    MAIN.this.c43(sg);
+                    return true;
+                case 5:
+                    MAIN.this.c112(sg, 7);
+                    return true;
+                case 15:
+                    MAIN.this.c112(sg, 0);
+                    return true;
+                case 16:
+                    MAIN.this.c112(sg, 1);
+                    return true;
+                case 17:
+                    MAIN.this.c112(sg, 2);
+                    return true;
+                case 18:
+                    MAIN.this.c112(sg, 3);
+                    return true;
+                case 19:
+                    MAIN.this.c112(sg, 5);
+                    return true;
+                case 20:
+                    MAIN.this.c112(sg, 4);
+                    return true;
+                case 21:
+                    MAIN.this.c112(sg, 6);
+                    return true;
+                case 25:
+                    MAIN.this.c112(sg, ASSETLINKS);
+                    return true;
+                case 26:
+                    MAIN.this.c112(sg, SITEMAPS);
+                    return true;
+            }
+            return false;
         }
-        return false;
     };
 
-    final MenuItem.OnMenuItemClickListener e23 = a1 -> {
-        switch (a1.getItemId()) {
-            case POPUPMENU_IMAGE_VIEW_IMAGE:
-                c3(sg);
-                return true;
-            case POPUPMENU_IMAGE_COPY:
-                Clipboard.a(MAIN.this, sg);
-                c8(getString(R.string.k9));
-                return true;
-            case POPUPMENU_IMAGE_SHARE:
-                c16(sg, 0);
-                return true;
-            case POPUPMENU_IMAGE_SAVE_IMAGE:
-                c74(new PendingDownloadDataModel(sg, sg, sg, 0L, sg));
-                return true;
+    final MenuItem.OnMenuItemClickListener e23 = new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            switch (a1.getItemId()) {
+                case POPUPMENU_IMAGE_VIEW_IMAGE:
+                    MAIN.this.c3(sg);
+                    return true;
+                case POPUPMENU_IMAGE_COPY:
+                    Clipboard.a(MAIN.this, sg);
+                    MAIN.this.c8(MAIN.this.getString(R.string.k9));
+                    return true;
+                case POPUPMENU_IMAGE_SHARE:
+                    MAIN.this.c16(sg, 0);
+                    return true;
+                case POPUPMENU_IMAGE_SAVE_IMAGE:
+                    MAIN.this.c74(new PendingDownloadDataModel(sg, sg, sg, 0L, sg));
+                    return true;
+            }
+            return false;
         }
-        return false;
     };
 
     public static void c63() {
@@ -664,38 +690,86 @@ public class MAIN extends MainBaseActivity implements Format {
             this.ab.setDisplayShowTitleEnabled(false);
         }
         this.o.setElevation(5);
-        this.iw.setOnClickListener(view -> c75());
-        this.iw.setOnLongClickListener(view -> {
-            c140();
-            return true;
+        this.iw.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MAIN.this.c75();
+            }
+        });
+        this.iw.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                MAIN.this.c140();
+                return true;
+            }
         });
         this.a7 = Resources.getColor(this, R.color.c);
         this.a8 = Resources.getColor(this, R.color.b);
         this.a9 = Resources.getColor(this, R.color.a);
-        this.cd.setOnClickListener(view -> c22());
-        this.cd.setOnLongClickListener(view -> {
-            c12();
-            return true;
+        this.cd.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MAIN.this.c22();
+            }
         });
-        this.u.setOnClickListener(view -> c22());
-        hsv.setOnClickListener(view -> c22());
+        this.cd.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                MAIN.this.c12();
+                return true;
+            }
+        });
+        this.u.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MAIN.this.c22();
+            }
+        });
+        hsv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MAIN.this.c22();
+            }
+        });
         this.u.setTypeface(type(Typeface.NORMAL));
         this.tv8.setTypeface(type(Typeface.NORMAL));
         this.g.setMax(100);
         tv7.setImageResource(R.drawable.d7);
-        tv7.setOnClickListener(view -> c144());
+        tv7.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MAIN.this.c144();
+            }
+        });
         tv7.setBackgroundResource(R.drawable.b17);
         tv8.setBackgroundResource(R.drawable.b29);
-        tv8.setOnClickListener(view -> {
-            if (BuildConfig.DEBUG) {
-                c10();
-            } else {
-                c18();
+        tv8.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (BuildConfig.DEBUG) {
+                    MAIN.this.c10();
+                } else {
+                    MAIN.this.c18();
+                }
             }
         });
         tv9.setImageResource(R.drawable.d9);
         tv9.setBackgroundResource(R.drawable.b17);
-        tv9.setOnClickListener(view -> Intents.f(this, BOOK.class, 2115));
+        tv9.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intents.f(MAIN.this, BOOK.class, 2115);
+            }
+        });
         try {
             this.d1 = HistoryHelper.getInstance(getApplicationContext());
             this.d2 = SearchHelper.getInstance(getApplicationContext());
@@ -740,85 +814,141 @@ public class MAIN extends MainBaseActivity implements Format {
         this.cd.setBackgroundResource(R.drawable.w);
         c15(h);
         c50(h);
-        tv3.setOnClickListener(view -> {
-            if (currentTab().getProgress() == 100) {
-                currentTab().reload();
-            } else {
-                currentTab().stopLoading();
-                currentTab().getFirstClient().onPageFinished(currentTab(), currentUrl());
+        tv3.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (MAIN.this.currentTab().getProgress() == 100) {
+                    MAIN.this.currentTab().reload();
+                } else {
+                    MAIN.this.currentTab().stopLoading();
+                    MAIN.this.currentTab().getFirstClient().onPageFinished(MAIN.this.currentTab(), MAIN.this.currentUrl());
+                }
             }
         });
         if (a221().getBoolean("home", true)) {
-            tv1.setOnClickListener(view -> c51(currentTab()));
+            tv1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    MAIN.this.c51(MAIN.this.currentTab());
+                }
+            });
         }
         if (a221().getBoolean("voice", true) && !spr()) {
-            tv2.setOnClickListener(view -> {
-                Intent a12 = new Intent(this, VOIC.class);
-                startActivityForResult(a12, 742);
+            tv2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    Intent a12 = new Intent(MAIN.this, VOIC.class);
+                    MAIN.this.startActivityForResult(a12, 742);
+                }
             });
         }
 
-        tv4.setOnClickListener(view -> {
-            if (currentTab().canGoForward()) {
-                currentTab().goForward();
+        tv4.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (MAIN.this.currentTab().canGoForward()) {
+                    MAIN.this.currentTab().goForward();
+                }
             }
         });
-        MenuItem.OnMenuItemClickListener e = a1 -> {
-            c3(a1.getTitle().toString());
-            return true;
+        final MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem a1) {
+                MAIN.this.c3(a1.getTitle().toString());
+                return true;
+            }
         };
-        tv4.setOnLongClickListener(view -> {
-            if (currentTab().w4.size() == 0) {
-                return false;
+        tv4.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                if (MAIN.this.currentTab().w4.size() == 0) {
+                    return false;
+                }
+                if (pm0 == null) {
+                    pm0 = new PopupMenu(MAIN.this, view);
+                    pm0.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                        public void onDismiss(PopupMenu popupMenu) {
+                            popupMenu.getMenu().clear();
+                        }
+                    });
+                }
+                Menu me = pm0.getMenu();
+                int size = MAIN.this.currentTab().w4.size();
+                for (int i = 0; i < size; i++) {
+                    if (U3.b(MAIN.this.currentTab().w4.get(i).sg))
+                        me.add(0, i, 0, MAIN.this.currentTab().w4.get(i).sg).setOnMenuItemClickListener(e);
+                }
+                pm0.show();
+                return true;
             }
-            if (pm0 == null) {
-                pm0 = new PopupMenu(MAIN.this, view);
-                pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
-            }
-            Menu me = pm0.getMenu();
-            int size = currentTab().w4.size();
-            for (int i = 0; i < size; i++) {
-                if (U3.b(currentTab().w4.get(i).sg))
-                    me.add(0, i, 0, currentTab().w4.get(i).sg).setOnMenuItemClickListener(e);
-            }
-            pm0.show();
-            return true;
         });
-        tv6.setOnClickListener(view -> {
-            if (currentTab().canGoBack()) {
-                currentTab().goBack();
+        tv6.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (MAIN.this.currentTab().canGoBack()) {
+                    MAIN.this.currentTab().goBack();
+                }
             }
         });
-        tv6.setOnLongClickListener(view -> {
-            if (currentTab().w4.size() == 0) {
-                return false;
+        tv6.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                if (MAIN.this.currentTab().w4.size() == 0) {
+                    return false;
+                }
+                if (pm0 == null) {
+                    pm0 = new PopupMenu(MAIN.this, view);
+                    pm0.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                        public void onDismiss(PopupMenu popupMenu) {
+                            popupMenu.getMenu().clear();
+                        }
+                    });
+                }
+                Menu me = pm0.getMenu();
+                int size = MAIN.this.currentTab().w4.size();
+                for (int i = 0; i < size; i++) {
+                    if (U3.b(MAIN.this.currentTab().w4.get(i).sg0))
+                        me.add(0, i, 0, MAIN.this.currentTab().w4.get(i).sg0).setOnMenuItemClickListener(e);
+                }
+                pm0.show();
+                return true;
             }
-            if (pm0 == null) {
-                pm0 = new PopupMenu(MAIN.this, view);
-                pm0.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
-            }
-            Menu me = pm0.getMenu();
-            int size = currentTab().w4.size();
-            for (int i = 0; i < size; i++) {
-                if (U3.b(currentTab().w4.get(i).sg0))
-                    me.add(0, i, 0, currentTab().w4.get(i).sg0).setOnMenuItemClickListener(e);
-            }
-            pm0.show();
-            return true;
         });
-        tv.setOnLongClickListener(view -> {
-            if (Connectivity.isAirplaneMode(this)) {
-                tv.setVisibility(View.GONE);
-                Animation.animate(this, R.anim.b, tv);
-                AwesomeToast.a(this, getString(R.string.m24));
-            } else {
-                tv.setVisibility(View.GONE);
-                Animation.animate(this, R.anim.b, tv);
-                AwesomeToast.a(this, getString(R.string.m25));
+        tv.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                if (Connectivity.isAirplaneMode(MAIN.this)) {
+                    tv.setVisibility(View.GONE);
+                    Animation.animate(MAIN.this, R.anim.b, tv);
+                    AwesomeToast.a(MAIN.this, MAIN.this.getString(R.string.m24));
+                } else {
+                    tv.setVisibility(View.GONE);
+                    Animation.animate(MAIN.this, R.anim.b, tv);
+                    AwesomeToast.a(MAIN.this, MAIN.this.getString(R.string.m25));
+                }
+                return true;
             }
-            return true;
         });
-        currentTab().setOnLongClickListener(view -> c152());
+        currentTab().setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                return MAIN.this.c152();
+            }
+        });
         tv.setVisibility(View.GONE);
         c149(h);
     }
@@ -968,18 +1098,26 @@ public class MAIN extends MainBaseActivity implements Format {
         web.loadUrl(a);
     }
 
-    public void c4(Message b, Message c) {
+    public void c4(final Message b, final Message c) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
         a.setTitle(getString(R.string.g36));
         a.setMessage(getString(R.string.g34));
-        a.setPositiveButton(getString(R.string.g36), (a12, intetg) -> {
-            c.sendToTarget();
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.g36), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                c.sendToTarget();
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> {
-            b.sendToTarget();
-            a1.dismiss();
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                b.sendToTarget();
+                a1.dismiss();
+            }
         });
         a.create().show();
     }
@@ -1013,51 +1151,59 @@ public class MAIN extends MainBaseActivity implements Format {
         AwesomeToast.b(this, a);
     }
 
-    public void c9(PermissionRequest pr) {
+    public void c9(final PermissionRequest pr) {
         AlertDialog.Builder d = new AlertDialog.Builder(this);
         d.setMessage(Html.b(String.format(getString(R.string.i38), c12(pr.getOrigin()), c11(Arrays.toString(pr.getResources())))));
         d.setCancelable(false);
-        d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
-            if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE) && Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
-                if (!Permission.check(this, Permission.CAMERA, 9) && !Permission.check(this, Permission.MICROPHONE, 10)) {
-                    w8 = new PermissionDataModel(pr);
-                } else {
-                    pr.grant(pr.getResources());
-                    d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
-                            Hash.a("SHA-1", Arrays.toString(pr.getResources())),
-                            "true",
-                            "false"));
-                    c8(String.format(getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
+        d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int i) {
+                if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE) && Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
+                    if (!Permission.check(MAIN.this, Permission.CAMERA, 9) && !Permission.check(MAIN.this, Permission.MICROPHONE, 10)) {
+                        w8 = new PermissionDataModel(pr);
+                    } else {
+                        pr.grant(pr.getResources());
+                        d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
+                                Hash.a("SHA-1", Arrays.toString(pr.getResources())),
+                                "true",
+                                "false"));
+                        MAIN.this.c8(String.format(MAIN.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
+                    }
+                } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
+                    if (!Permission.check(MAIN.this, Permission.CAMERA, 6)) {
+                        w8 = new PermissionDataModel(pr);
+                    } else {
+                        pr.grant(pr.getResources());
+                        d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
+                                Hash.a("SHA-1", Arrays.toString(pr.getResources())),
+                                "true",
+                                "false"));
+                        MAIN.this.c8(String.format(MAIN.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
+                    }
+                } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
+                    if (!Permission.check(MAIN.this, Permission.MICROPHONE, 7)) {
+                        w8 = new PermissionDataModel(pr);
+                    } else {
+                        pr.grant(pr.getResources());
+                        d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
+                                Hash.a("SHA-1", Arrays.toString(pr.getResources())),
+                                "true",
+                                "false"));
+                        MAIN.this.c8(String.format(MAIN.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
+                    }
                 }
-            } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
-                if (!Permission.check(this, Permission.CAMERA, 6)) {
-                    w8 = new PermissionDataModel(pr);
-                } else {
-                    pr.grant(pr.getResources());
-                    d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
-                            Hash.a("SHA-1", Arrays.toString(pr.getResources())),
-                            "true",
-                            "false"));
-                    c8(String.format(getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
-                }
-            } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
-                if (!Permission.check(this, Permission.MICROPHONE, 7)) {
-                    w8 = new PermissionDataModel(pr);
-                } else {
-                    pr.grant(pr.getResources());
-                    d12.c(new PermissionObjectDataModel(Hash.a("SHA-1", pr.getOrigin().toString()),
-                            Hash.a("SHA-1", Arrays.toString(pr.getResources())),
-                            "true",
-                            "false"));
-                    c8(String.format(getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
-                }
+                a1.dismiss();
             }
-            a1.dismiss();
         });
-        d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
-            pr.deny();
-            c7(String.format(getString(R.string.j21), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
-            a1.dismiss();
+        d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int i) {
+                pr.deny();
+                MAIN.this.c7(String.format(MAIN.this.getString(R.string.j21), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
+                a1.dismiss();
+            }
         });
         AlertDialog e = d.create();
         e.show();
@@ -1066,7 +1212,7 @@ public class MAIN extends MainBaseActivity implements Format {
      private void c10() {
         // FrameLayout fl = findViewById(R.id.o45);
         ListView lv = new ListView(this);
-        ArrayList<NewTabDataModel> ws = new ArrayList<>();
+        final ArrayList<NewTabDataModel> ws = new ArrayList<>();
         int size = tabs.size();
         for (int i = 0; i < size; i++) {
             ws.add(new NewTabDataModel(getFavicon(i), getTitle(i), getUrl(i)));
@@ -1081,54 +1227,58 @@ public class MAIN extends MainBaseActivity implements Format {
          AlertDialog.Builder bld = new AlertDialog.Builder(this);
          bld.setView(lv);
          bld.setCancelable(true);
-         AlertDialog dd = bld.create();
+         final AlertDialog dd = bld.create();
          dd.show();
-         lv.setOnItemClickListener((a4, b, c, d) -> {
-             AwesomeToast.b(this, (ws.size() - 1) + " " + c);
-             try {
-                 if (ws.size() == c) {
-                     for (WebViews tab : tabs) {
-                         tab.destroy();
-                     }
-                     tabs.clear();
-                     WebViews web = new WebViews(this);
-                     tabs.add(web);
-                     fl.removeAllViews();
-                     c50(web);
-                     c34(web);
-                     c15(web);
-                     c149(web);
-                     fl.addView(web);
-                     ct = 0;
-                     c8("Tabs Cleared.");
-                     dd.dismiss();
-                 } else if (ws.size() - 1 == c) {
-                     currentTab().pauseTimers();
-                     currentTab().onPause();
-                     fl.removeAllViews();
-                     WebViews web = new WebViews(this);
-                     tabs.add(web);
-                     c50(web);
-                     c34(web);
-                     c15(web);
-                     c149(web);
-                     fl.addView(web);
-                     ct = tabs.size() - 1;
-                     dd.dismiss();
-                 } else {
-                     currentTab().pauseTimers();
-                     currentTab().onPause();
-                     fl.removeAllViews();
-                     WebViews webb = tabs.get(c);
-                     webb.resumeTimers();
-                     webb.onResume();
-                     c149(webb);
-                     fl.addView(webb);
-                     ct = c - 2;
-                     dd.dismiss();
-                 }
-             } catch (Exception ignored) {
+         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+             public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
+                 AwesomeToast.b(MAIN.this, (ws.size() - 1) + " " + c);
+                 try {
+                     if (ws.size() == c) {
+                         for (WebViews tab : tabs) {
+                             tab.destroy();
+                         }
+                         tabs.clear();
+                         WebViews web = new WebViews(MAIN.this);
+                         tabs.add(web);
+                         fl.removeAllViews();
+                         MAIN.this.c50(web);
+                         MAIN.this.c34(web);
+                         MAIN.this.c15(web);
+                         MAIN.this.c149(web);
+                         fl.addView(web);
+                         ct = 0;
+                         MAIN.this.c8("Tabs Cleared.");
+                         dd.dismiss();
+                     } else if (ws.size() - 1 == c) {
+                         MAIN.this.currentTab().pauseTimers();
+                         MAIN.this.currentTab().onPause();
+                         fl.removeAllViews();
+                         WebViews web = new WebViews(MAIN.this);
+                         tabs.add(web);
+                         MAIN.this.c50(web);
+                         MAIN.this.c34(web);
+                         MAIN.this.c15(web);
+                         MAIN.this.c149(web);
+                         fl.addView(web);
+                         ct = tabs.size() - 1;
+                         dd.dismiss();
+                     } else {
+                         MAIN.this.currentTab().pauseTimers();
+                         MAIN.this.currentTab().onPause();
+                         fl.removeAllViews();
+                         WebViews webb = tabs.get(c);
+                         webb.resumeTimers();
+                         webb.onResume();
+                         MAIN.this.c149(webb);
+                         fl.addView(webb);
+                         ct = c - 2;
+                         dd.dismiss();
+                     }
+                 } catch (Exception ignored) {
+
+                 }
              }
          });
     }
@@ -1137,55 +1287,65 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c18() {
         if (pm8 == null) {
             pm8 = new PopupMenu(this, tv8);
-            pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
-        }
-        MenuItem.OnMenuItemClickListener e = a1 -> {
-            if (a1.getItemId() != 742 && a1.getItemId() != 743) {
-                currentTab().pauseTimers();
-                currentTab().onPause();
-                fl.removeAllViews();
-                WebViews webb = tabs.get(a1.getItemId());
-                webb.resumeTimers();
-                webb.onResume();
-                c149(webb);
-                fl.addView(webb);
-                ct = a1.getItemId();
-            } else if (a1.getItemId() == 743) {
-                for (WebViews tab: tabs) {
-                    tab.destroy();
+            pm8.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    popupMenu.getMenu().clear();
                 }
-                tabs.clear();
-                WebViews web = new WebViews(this);
-                tabs.add(web);
-                fl.removeAllViews();
-                c50(web);
-                c34(web);
-                c15(web);
-                c149(web);
-                fl.addView(web);
-                ct = 0;
-                c8("Tabs Cleared.");
-            } else {
-                currentTab().pauseTimers();
-                currentTab().onPause();
-                fl.removeAllViews();
-                WebViews web = new WebViews(this);
-                tabs.add(web);
-                c50(web);
-                c34(web);
-                c15(web);
-                c149(web);
-                fl.addView(web);
-                ct = tabs.size() - 1;
+            });
+        }
+        MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem a1) {
+                if (a1.getItemId() != 742 && a1.getItemId() != 743) {
+                    MAIN.this.currentTab().pauseTimers();
+                    MAIN.this.currentTab().onPause();
+                    fl.removeAllViews();
+                    WebViews webb = tabs.get(a1.getItemId());
+                    webb.resumeTimers();
+                    webb.onResume();
+                    MAIN.this.c149(webb);
+                    fl.addView(webb);
+                    ct = a1.getItemId();
+                } else if (a1.getItemId() == 743) {
+                    for (WebViews tab : tabs) {
+                        tab.destroy();
+                    }
+                    tabs.clear();
+                    WebViews web = new WebViews(MAIN.this);
+                    tabs.add(web);
+                    fl.removeAllViews();
+                    MAIN.this.c50(web);
+                    MAIN.this.c34(web);
+                    MAIN.this.c15(web);
+                    MAIN.this.c149(web);
+                    fl.addView(web);
+                    ct = 0;
+                    MAIN.this.c8("Tabs Cleared.");
+                } else {
+                    MAIN.this.currentTab().pauseTimers();
+                    MAIN.this.currentTab().onPause();
+                    fl.removeAllViews();
+                    WebViews web = new WebViews(MAIN.this);
+                    tabs.add(web);
+                    MAIN.this.c50(web);
+                    MAIN.this.c34(web);
+                    MAIN.this.c15(web);
+                    MAIN.this.c149(web);
+                    fl.addView(web);
+                    ct = tabs.size() - 1;
+                }
+                tv8.setText(String.valueOf(tabs.size()));
+                if (MAIN.this.currentUrl() != null && MAIN.this.currentTitle() != null) {
+                    MAIN.this.c33(MAIN.this.currentUrl(), MAIN.this.currentTitle());
+                }
+                if (MAIN.this.currentFavicon() != null) {
+                    MAIN.this.c5(MAIN.this.currentFavicon());
+                }
+                return true;
             }
-            tv8.setText(String.valueOf(tabs.size()));
-            if (currentUrl() != null && currentTitle() != null) {
-                c33(currentUrl(), currentTitle());
-            }
-            if (currentFavicon() != null) {
-                c5(currentFavicon());
-            }
-            return true;
         };
         Menu me = pm8.getMenu();
         int len = tabs.size();
@@ -1346,7 +1506,13 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             });
         }
-        h.setDownloadListener((str, str2, str3, str4, j) -> c83(new PendingDownloadDataModel(str, str3, str4, j, str2)));
+        h.setDownloadListener(new DownloadListener() {
+
+            @Override
+            public void onDownloadStart(String str, String str2, String str3, String str4, long j) {
+                MAIN.this.c83(new PendingDownloadDataModel(str, str3, str4, j, str2));
+            }
+        });
         h.setWebChromeClient(new WebChromeClient() {
 
             @Override
@@ -1415,7 +1581,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
                     cdt.schedule(new TimerTask() {
 
-                        @Override
+            @Override
                         public void run() {
                             c141();
                             cdt.cancel();
@@ -1433,7 +1599,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
 
             @Override
-            public boolean onJsAlert(WebView a, String b, String c, JsResult d) {
+            public boolean onJsAlert(WebView a, String b, String c, final JsResult d) {
                 if (a221().getBoolean("Java10", true)) {
                     AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
                     LayoutInflater d1 = getLayoutInflater();
@@ -1448,13 +1614,21 @@ public class MAIN extends MainBaseActivity implements Format {
                     } else {
                         tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
                     }
-                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        d.confirm();
-                        a13.dismiss();
+                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            d.confirm();
+                            a13.dismiss();
+                        }
                     });
-                    bld.setOnCancelListener(a1 -> {
-                        d.cancel();
-                        a1.dismiss();
+                    bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+                        public void onCancel(DialogInterface a1) {
+                            d.cancel();
+                            a1.dismiss();
+                        }
                     });
                     AlertDialog dd = bld.create();
                     dd.show();
@@ -1464,7 +1638,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
 
             @Override
-            public boolean onJsPrompt(WebView a, String b, String c, String d, JsPromptResult e) {
+            public boolean onJsPrompt(WebView a, String b, String c, String d, final JsPromptResult e) {
                 if (a221().getBoolean("Java9", true)) {
                     AlertDialog.Builder a89 = new AlertDialog.Builder(MAIN.this);
                     LayoutInflater b54 = getLayoutInflater();
@@ -1488,20 +1662,34 @@ public class MAIN extends MainBaseActivity implements Format {
                         sjs.setHintTextColor(g1);
                     }
                     sjs1.setText(c);
-                    a89.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        String uwe = sjs.getText().toString();
-                        e.confirm(uwe);
+                    a89.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            String uwe = sjs.getText().toString();
+                            e.confirm(uwe);
+                        }
                     });
-                    a89.setNegativeButton(getString(R.string.i7), (a12, intetg) -> e.cancel()).setOnCancelListener(a1 -> {
-                        e.cancel();
-                        a1.dismiss();
+                    a89.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                        }
+                    }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+                        public void onCancel(DialogInterface a1) {
+                            e.cancel();
+                            a1.dismiss();
+                        }
                     });
                     final AlertDialog g = a89.create();
                     g.show();
                     final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
                     sjs.addTextChangedListener(new TextWatcher() {
 
-                        @Override
+            @Override
                         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                             okButton.setEnabled(sjs.getText().toString().length() != 0);
                         }
@@ -1513,7 +1701,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
 
             @Override
-            public boolean onJsConfirm(WebView a, String b, String c, JsResult e) {
+            public boolean onJsConfirm(WebView a, String b, String c, final JsResult e) {
                 if (a221().getBoolean("Java11", true)) {
                     AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
                     LayoutInflater d1 = getLayoutInflater();
@@ -1528,17 +1716,29 @@ public class MAIN extends MainBaseActivity implements Format {
                     } else {
                         tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
                     }
-                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        e.confirm();
-                        a13.dismiss();
+                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            e.confirm();
+                            a13.dismiss();
+                        }
                     });
-                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
-                        e.cancel();
-                        a12.dismiss();
+                    bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                            a12.dismiss();
+                        }
                     });
-                    bld.setOnCancelListener(a1 -> {
-                        e.cancel();
-                        a1.dismiss();
+                    bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+                        public void onCancel(DialogInterface a1) {
+                            e.cancel();
+                            a1.dismiss();
+                        }
                     });
                     AlertDialog dd = bld.create();
                     dd.show();
@@ -1548,7 +1748,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
 
             @Override
-            public boolean onJsBeforeUnload(WebView a, String b, String c, JsResult e) {
+            public boolean onJsBeforeUnload(WebView a, String b, String c, final JsResult e) {
                 if (a221().getBoolean("Java12", true)) {
                     AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
                     LayoutInflater d1 = getLayoutInflater();
@@ -1563,13 +1763,21 @@ public class MAIN extends MainBaseActivity implements Format {
                     } else {
                         tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
                     }
-                    bld.setPositiveButton(getString(R.string.i6), (a13, intetg) -> {
-                        e.confirm();
-                        a13.dismiss();
+                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            e.confirm();
+                            a13.dismiss();
+                        }
                     });
-                    bld.setNegativeButton(getString(R.string.i7), (a12, intetg) -> {
-                        e.cancel();
-                        a12.dismiss();
+                    bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                            a12.dismiss();
+                        }
                     });
                     AlertDialog dd = bld.create();
                     dd.show();
@@ -1580,30 +1788,38 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm1) {
-                cm.append(String.format(getString(R.string.v188), cm1.messageLevel().toString(), c6(cm1.messageLevel()), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
+                cm.append(String.format(getString(R.string.v188).replaceAll("742", c6(cm1.messageLevel())), cm1.messageLevel().toString(), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
                         .append("\n\n");
                 return true;
             }
 
             @Override
-            public void onGeolocationPermissionsShowPrompt(String a, GeolocationPermissions.Callback b) {
+            public void onGeolocationPermissionsShowPrompt(final String a, final GeolocationPermissions.Callback b) {
                 final boolean c = false;
                 AlertDialog.Builder d = new AlertDialog.Builder(MAIN.this);
                 d.setMessage(String.format(getString(R.string.v14), a));
                 d.setCancelable(false);
-                d.setPositiveButton(getString(R.string.v17), (a1, i) -> {
-                    if (Permission.check(MAIN.this, Permission.LOCATION, 5)) {
-                        b.invoke(a, true, c);
-                        c8(String.format(getString(R.string.v15), a));
-                    } else {
-                        w6 = new GeolocationDataModel(a, b);
+                d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
+
+            @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        if (Permission.check(MAIN.this, Permission.LOCATION, 5)) {
+                            b.invoke(a, true, c);
+                            c8(String.format(getString(R.string.v15), a));
+                        } else {
+                            w6 = new GeolocationDataModel(a, b);
+                        }
+                        a1.dismiss();
                     }
-                    a1.dismiss();
                 });
-                d.setNegativeButton(getString(R.string.i39), (a1, i) -> {
-                    b.invoke(a, false, c);
-                    c7(String.format(getString(R.string.v16), a));
-                    a1.dismiss();
+                d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
+
+            @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        b.invoke(a, false, c);
+                        c7(String.format(getString(R.string.v16), a));
+                        a1.dismiss();
+                    }
                 });
                 AlertDialog e = d.create();
                 e.show();
@@ -1706,7 +1922,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Build.VERSION.SDK_INT >= 29) {
             h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
 
-                @Override
+            @Override
                 public void onRenderProcessUnresponsive(WebView webView, WebViewRenderProcess webViewRenderProcess) {
                     if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj56", false)) {
                         webViewRenderProcess.terminate();
@@ -1722,7 +1938,7 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
 
-    private void c11(PendingDownloadDataModel w18) {
+    private void c11(final PendingDownloadDataModel w18) {
         try {
             String b = URLUtil.guessFileName(w18.a1, w18.a2, w18.a3);
             AlertDialog.Builder c = new AlertDialog.Builder(this);
@@ -1733,31 +1949,39 @@ public class MAIN extends MainBaseActivity implements Format {
             c.setView(e);
             TextView f = e.findViewById(R.id.a5);
             final EDIT s = e.findViewById(R.id.d1);
-            TextView h = e.findViewById(R.id.d2);
+            final TextView h = e.findViewById(R.id.d2);
             TextView i = e.findViewById(R.id.d3);
             final TextView j = e.findViewById(R.id.d4);
             TextView k = e.findViewById(R.id.b9);
             TextView l = e.findViewById(R.id.c11);
             TextView m = e.findViewById(R.id.c12);
             TextView j2 = e.findViewById(R.id.e8);
-            TextView j3 = e.findViewById(R.id.e9);
+            final TextView j3 = e.findViewById(R.id.e9);
             TextView j4 = e.findViewById(R.id.e10);
-            TextView j5 = e.findViewById(R.id.e11);
+            final TextView j5 = e.findViewById(R.id.e11);
             TextView j6 = e.findViewById(R.id.e12);
-            TextView j7 = e.findViewById(R.id.e13);
+            final TextView j7 = e.findViewById(R.id.e13);
             f.setText(getString(R.string.c30));
             s.setText(b);
             k.setText(getString(R.string.d40));
             if (w18.a4 != 0) {
 
                 j4.setText(getString(R.string.e23));
-                Runnable re = () -> {
-                    String fn = Formatter.formatFileSize(MAIN.this, w18.a4);
-                    String fn1 = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace() + w18.a4);
-                    runOnUiThread(() -> {
-                        h.setText(fn);
-                        j5.setText(fn1);
-                    });
+                Runnable re = new Runnable() {
+
+            @Override
+                    public void run() {
+                        final String fn = Formatter.formatFileSize(MAIN.this, w18.a4);
+                        final String fn1 = Formatter.formatFileSize(MAIN.this, new File(Objects.requireNonNull(MAIN.this.getExternalFilesDir(null)).toString()).getFreeSpace() + w18.a4);
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                h.setText(fn);
+                                j5.setText(fn1);
+                            }
+                        });
+                    }
                 };
                 new Thread(re).start();
             } else {
@@ -1772,13 +1996,21 @@ public class MAIN extends MainBaseActivity implements Format {
             j.setText(sg7);
             j2.setText(getString(R.string.e22));
             j6.setText(getString(R.string.e24));
-            Runnable re = () -> {
-                String j3a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getFreeSpace());
-                String j7a = Formatter.formatFileSize(MAIN.this, new java.io.File(Objects.requireNonNull(getExternalFilesDir(null)).toString()).getTotalSpace());
-                runOnUiThread(() -> {
-                    j3.setText(j3a);
-                    j7.setText(j7a);
-                });
+            Runnable re = new Runnable() {
+
+            @Override
+                public void run() {
+                    final String j3a = Formatter.formatFileSize(MAIN.this, new File(Objects.requireNonNull(MAIN.this.getExternalFilesDir(null)).toString()).getFreeSpace());
+                    final String j7a = Formatter.formatFileSize(MAIN.this, new File(Objects.requireNonNull(MAIN.this.getExternalFilesDir(null)).toString()).getTotalSpace());
+                    MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            j3.setText(j3a);
+                            j7.setText(j7a);
+                        }
+                    });
+                }
             };
             new Thread(re).start();
             if (!a221().getBoolean("autoUpdate", false)) {
@@ -1812,43 +2044,53 @@ public class MAIN extends MainBaseActivity implements Format {
                 j6.setTextColor(this.a8);
                 j7.setTextColor(this.a8);
             }
-            c.setPositiveButton(getString(R.string.e25), (a34, m1) -> {
-                try {
-                    String c1 = s.getText().toString();
-                    c8(getString(R.string.e27));
-                    if (a221().getBoolean("launch", false)) {
-                        Intents.a(MAIN.this, DOWN.class);
+            c.setPositiveButton(getString(R.string.e25), new DialogInterface.OnClickListener() {
+
+            @Override
+                public void onClick(DialogInterface a34, int m1) {
+                    try {
+                        String c1 = s.getText().toString();
+                        MAIN.this.c8(MAIN.this.getString(R.string.e27));
+                        if (MAIN.this.a221().getBoolean("launch", false)) {
+                            Intents.a(MAIN.this, DOWN.class);
+                        }
+                        // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
+                        // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
+                        SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
+                        Intent it = new Intent(MAIN.this, DOWN0.class);
+                        it.putExtra("a", c1);
+                        it.putExtra("b", w18.a1);
+                        it.putExtra("c", true);
+                        it.putExtra("d", true);
+                        it.putExtra("e", w18.a3);
+                        it.putExtra("f", w18.a1);
+                        it.putExtra("g", w18.a6);
+                        Notifications.b(MAIN.this, it);
+                        if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
+                            MAIN.this.c71();
+                            SharedPreferences.Editor spe = sp9.edit();
+                            spe.putString("downAlert", "a");
+                            spe.apply();
+                        }
+                    } catch (Exception d4) {
+                        d4.printStackTrace();
                     }
-                    // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
-                    // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
-                    SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
-                    Intent it = new Intent(MAIN.this, DOWN0.class);
-                    it.putExtra("a", c1);
-                    it.putExtra("b", w18.a1);
-                    it.putExtra("c", true);
-                    it.putExtra("d", true);
-                    it.putExtra("e", w18.a3);
-                    it.putExtra("f", w18.a1);
-                    it.putExtra("g", w18.a6);
-                    Notifications.b(MAIN.this, it);
-                    if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
-                        c71();
-                        SharedPreferences.Editor spe = sp9.edit();
-                        spe.putString("downAlert", "a");
-                        spe.apply();
-                    }
-                } catch (Exception d4) {
-                    d4.printStackTrace();
+                    a34.dismiss();
                 }
-                a34.dismiss();
             });
-            c.setNegativeButton(getString(R.string.i7), (a, intetg) -> a.dismiss());
+            c.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+                public void onClick(DialogInterface a, int intetg) {
+                    a.dismiss();
+                }
+            });
             final AlertDialog g = c.create();
             g.show();
             final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
             s.addTextChangedListener(new TextWatcher() {
 
-                @Override
+            @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     String jhh56 = s.getText().toString();
                     String sg78 = StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56;
@@ -1900,7 +2142,13 @@ public class MAIN extends MainBaseActivity implements Format {
         SubMenu sb = menu.addSubMenu(getString(R.string.h17));
         sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_HOMESCREEN, 0, getString(R.string.h12)).setOnMenuItemClickListener(mio);
         sb.add(0, POPUPMENU_TOOLBAR_ADD_TO_BOOKMARKS, 0, getString(R.string.h11)).setOnMenuItemClickListener(mio);
-        pm6.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
+        pm6.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+            public void onDismiss(PopupMenu popupMenu) {
+                popupMenu.getMenu().clear();
+            }
+        });
         pm6.show();
     }
 
@@ -1952,11 +2200,21 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setText(hl.getHost());
         }
         ed1.setText(asd);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            d3.c(ed.getText().toString(), ed1.getText().toString());
-            c8(getString(R.string.t2));
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                d3.c(ed.getText().toString(), ed1.getText().toString());
+                MAIN.this.c8(MAIN.this.getString(R.string.t2));
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -1990,8 +2248,8 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void c15(WebViews h) {
-        WebSettings ws = h.getSettings();
+    private void c15(final WebViews h) {
+        final WebSettings ws = h.getSettings();
         if (a221().getBoolean("Javaweb", true)) {
             h.addJavascriptInterface(new WebviumJSI(this), Package.c());
             h.addJavascriptInterface(new Object() {
@@ -2144,9 +2402,19 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         if (Build.VERSION.SDK_INT < 30) {
             ws.setAppCacheEnabled(a221().getBoolean("open4", true));
-            Runnable re = () -> {
-                String sg = StorageDirectory.getCacheDir(this).toString();
-                runOnUiThread(() -> ws.setAppCachePath(sg));
+            Runnable re = new Runnable() {
+
+            @Override
+                public void run() {
+                    final String sg = StorageDirectory.getCacheDir(MAIN.this).toString();
+                    MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            ws.setAppCachePath(sg);
+                        }
+                    });
+                }
             };
             new Thread(re).start();
         }
@@ -2277,7 +2545,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
-    private void c36(String sg) {
+    private void c36(final String sg) {
         if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj", false)) {
             if (!sg.isEmpty()) {
                 if (BuildConfig.DEBUG) {
@@ -2286,55 +2554,71 @@ public class MAIN extends MainBaseActivity implements Format {
                     editor.putString("a", sg);
                     editor.apply();
                 }
-                Runnable re = () -> {
-                    java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
-                    if (!a221().getBoolean("webviumB", false) && !fe.exists()) {
-                        runOnUiThread(() -> {
-                            int co = Color.parseColor(sg);
-                            InsetDrawable inset = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
-                                    new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 10, 0, 10, 0);
-                            this.o.setBackground(inset);
-                            InsetDrawable inset1 = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
-                                    new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co), 10, 0, 10, 0);
-                            this.llt.setBackground(inset1);
-                            if (Build.VERSION.SDK_INT >= 23) {
-                                if (!Resources.isColorDark(co)) {
-                                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                                    if (Build.VERSION.SDK_INT >= 26) {
-                                        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                Runnable re = new Runnable() {
+
+            @Override
+                    public void run() {
+                        File fe = new File(StorageDirectory.getBackground(MAIN.this));
+                        if (!MAIN.this.a221().getBoolean("webviumB", false) && !fe.exists()) {
+                            MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    int co = Color.parseColor(sg);
+                                    InsetDrawable inset = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
+                                            new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 10, 0, 10, 0);
+                                    MAIN.this.o.setBackground(inset);
+                                    InsetDrawable inset1 = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
+                                            new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co), 10, 0, 10, 0);
+                                    MAIN.this.llt.setBackground(inset1);
+                                    if (Build.VERSION.SDK_INT >= 23) {
+                                        if (!Resources.isColorDark(co)) {
+                                            MAIN.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                            if (Build.VERSION.SDK_INT >= 26) {
+                                                MAIN.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                                            }
+                                        }
+                                        MAIN.this.getWindow().setStatusBarColor(co);
+                                        MAIN.this.getWindow().setNavigationBarColor(co);
                                     }
+                                    MAIN.this.cd.setBackgroundResource(R.drawable.a10);
                                 }
-                                getWindow().setStatusBarColor(co);
-                                getWindow().setNavigationBarColor(co);
-                            }
-                            this.cd.setBackgroundResource(R.drawable.a10);
-                        });
+                            });
+                        }
                     }
                 };
                 new Thread(re).start();
             } else {
-                Runnable re1 = () -> {
-                    java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
-                    if (!a221().getBoolean("webviumB", false) && !fe.exists()) {
-                        runOnUiThread(() -> {
-                            this.llt.setBackgroundResource(R.drawable.f1);
-                            this.o.setBackgroundResource(R.drawable.p);
-                            if (!a221().getBoolean("autoUpdate", false)) {
-                                if (Build.VERSION.SDK_INT >= 23) {
-                                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                Runnable re1 = new Runnable() {
+
+            @Override
+                    public void run() {
+                        File fe = new File(StorageDirectory.getBackground(MAIN.this));
+                        if (!MAIN.this.a221().getBoolean("webviumB", false) && !fe.exists()) {
+                            MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    MAIN.this.llt.setBackgroundResource(R.drawable.f1);
+                                    MAIN.this.o.setBackgroundResource(R.drawable.p);
+                                    if (!MAIN.this.a221().getBoolean("autoUpdate", false)) {
+                                        if (Build.VERSION.SDK_INT >= 23) {
+                                            MAIN.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                        }
+                                        MAIN.this.getWindow().setStatusBarColor(Resources.getColor(MAIN.this, R.color.b));
+                                        MAIN.this.getWindow().setNavigationBarColor(Resources.getColor(MAIN.this, R.color.m));
+                                    } else {
+                                        MAIN.this.getWindow().setStatusBarColor(Resources.getColor(MAIN.this, R.color.n));
+                                        MAIN.this.getWindow().setNavigationBarColor(Resources.getColor(MAIN.this, R.color.n));
+                                    }
+                                    if (MAIN.this.currentUrl().startsWith("http://")) {
+                                        MAIN.this.cd.setBackgroundResource(R.drawable.f4);
+                                    } else {
+                                        MAIN.this.cd.setBackgroundResource(R.drawable.w);
+                                    }
                                 }
-                                getWindow().setStatusBarColor(Resources.getColor(this, R.color.b));
-                                getWindow().setNavigationBarColor(Resources.getColor(this, R.color.m));
-                            } else {
-                                getWindow().setStatusBarColor(Resources.getColor(this, R.color.n));
-                                getWindow().setNavigationBarColor(Resources.getColor(this, R.color.n));
-                            }
-                            if (currentUrl().startsWith("http://")) {
-                                this.cd.setBackgroundResource(R.drawable.f4);
-                            } else {
-                                this.cd.setBackgroundResource(R.drawable.w);
-                            }
-                        });
+                            });
+                        }
                     }
                 };
                 new Thread(re1).start();
@@ -2380,11 +2664,7 @@ public class MAIN extends MainBaseActivity implements Format {
                     }
                 }
                 if (Objects.requireNonNull(a221().getString("java", "")).equals("30f")) {
-                    if (a.startsWith("https://")) {
-                        currentSettings(web).setJavaScriptEnabled(true);
-                    } else {
-                        currentSettings(web).setJavaScriptEnabled(false);
-                    }
+                    currentSettings(web).setJavaScriptEnabled(a.startsWith("https://"));
                 }
                 if (Build.VERSION.SDK_INT < 26) {
                     if (Objects.requireNonNull(a221().getString("form", "")).equals("7g")) {
@@ -2410,7 +2690,8 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c41() {
         if (!Objects.requireNonNull(a221().getString("remind", "")).equals("1k")) {
             timer.schedule(new TimerTask() {
-                @Override
+
+            @Override
                 public void run() {
                     c42();
                     timer.cancel();
@@ -2459,18 +2740,26 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setTitle(getString(R.string.w2));
         int i = timeSet() / 60000;
         a.setMessage(String.format(getResources().getQuantityString(R.plurals.w1, i), i));
-        a.setPositiveButton(getString(R.string.i6), (dialog, i1) -> {
-            c41();
-            dialog.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int i1) {
+                MAIN.this.c41();
+                dialog.dismiss();
+            }
         });
-        a.setOnCancelListener(a1 -> {
-            c41();
-            a1.dismiss();
+        a.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface a1) {
+                MAIN.this.c41();
+                a1.dismiss();
+            }
         });
         a.create().show();
     }
 
-    public void c43(String url) {
+    public void c43(final String url) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -2491,9 +2780,19 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         ti.setText(getString(R.string.v13));
         ed.setText(url);
-        Runnable p15 = () -> {
-            final String sg = Stream.a(url, getString(R.string.c33), getString(R.string.g25));
-            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final String sg = Stream.a(url, MAIN.this.getString(R.string.c33), MAIN.this.getString(R.string.g25));
+                MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        ti.setText(Html.b(sg));
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         bn.setText(getString(R.string.i6));
@@ -2502,16 +2801,30 @@ public class MAIN extends MainBaseActivity implements Format {
         } else {
             bn.setBackgroundResource(R.drawable.c11);
         }
-        bn.setOnClickListener(view -> {
-            String ab = ed.getText().toString();
-            ti.setText(getString(R.string.v13));
+        bn.setOnClickListener(new View.OnClickListener() {
 
-            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
-                Runnable p151 = () -> {
-                    final String sg = Stream.a(ab, getString(R.string.c33), getString(R.string.g25));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p151).start();
+            @Override
+            public void onClick(View view) {
+                final String ab = ed.getText().toString();
+                ti.setText(MAIN.this.getString(R.string.v13));
+
+                if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
+                    Runnable p151 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            final String sg = Stream.a(ab, MAIN.this.getString(R.string.c33), MAIN.this.getString(R.string.g25));
+                            MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(Html.b(sg));
+                                }
+                            });
+                        }
+                    };
+                    new Thread(p151).start();
+                }
             }
         });
         ed.addTextChangedListener(new TextWatcher() {
@@ -2561,78 +2874,126 @@ public class MAIN extends MainBaseActivity implements Format {
             ti.setTextColor(f);
         }
         ti.setText(getString(R.string.v13));
-        String sg = Uri.parse(url).getHost();
-        Runnable re = () -> {
-            try {
-                boolean st = Ping.isHostReachable(sg, 2500);
-                boolean nd = Ping.isHostReachable(sg, 5000);
-                boolean rd = Ping.isHostReachable(sg, 10000);
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
+        final String sg = Uri.parse(url).getHost();
+        Runnable re = new Runnable() {
 
-                    @Override
-                    public void run() {
-                        runOnUiThread(() -> ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                    }
-                }, 1000);
-                timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    final boolean st = Ping.isHostReachable(sg, 2500);
+                    final boolean nd = Ping.isHostReachable(sg, 5000);
+                    final boolean rd = Ping.isHostReachable(sg, 10000);
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
 
-                    @Override
-                    public void run() {
-                        runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                    }
-                }, 2000);
-                timer.schedule(new TimerTask() {
+            @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                    }
-                }, 3000);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+            @Override
+                                public void run() {
+                                    ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                }
+                            });
+                        }
+                    }, 1000);
+                    timer.schedule(new TimerTask() {
+
+            @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                }
+                            });
+                        }
+                    }, 2000);
+                    timer.schedule(new TimerTask() {
+
+            @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                }
+                            });
+                        }
+                    }, 3000);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         };
         new Thread(re).start();
         ed.setText(sg);
         bn.setText(getString(R.string.i6));
 
-        bn.setOnClickListener(view -> {
-            String ab = Uri.parse(ed.getText().toString()).getHost();
-            ti.setText(getString(R.string.v13));
-            Runnable re2 = () -> {
-                try {
-                    boolean st = Ping.isHostReachable(ab, 2500);
-                    boolean nd = Ping.isHostReachable(ab, 5000);
-                    boolean rd = Ping.isHostReachable(ab, 10000);
-                    Timer timer = new Timer();
-                    timer.schedule(new TimerTask() {
+        bn.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void run() {
-                            runOnUiThread(() -> ti.setText(Html.b(String.format(getString(R.string.y85), ab, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
+            @Override
+            public void onClick(View view) {
+                final String ab = Uri.parse(ed.getText().toString()).getHost();
+                ti.setText(MAIN.this.getString(R.string.v13));
+                Runnable re2 = new Runnable() {
+
+            @Override
+                    public void run() {
+                        try {
+                            final boolean st = Ping.isHostReachable(ab, 2500);
+                            final boolean nd = Ping.isHostReachable(ab, 5000);
+                            final boolean rd = Ping.isHostReachable(ab, 10000);
+                            Timer timer = new Timer();
+                            timer.schedule(new TimerTask() {
+
+            @Override
+                                public void run() {
+                                    runOnUiThread(new Runnable() {
+
+            @Override
+                                        public void run() {
+                                            ti.setText(Html.b(String.format(getString(R.string.y85), ab, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                        }
+                                    });
+                                }
+                            }, 1000);
+                            timer.schedule(new TimerTask() {
+
+            @Override
+                                public void run() {
+                                    runOnUiThread(new Runnable() {
+
+            @Override
+                                        public void run() {
+                                            ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                        }
+                                    });
+                                }
+                            }, 2000);
+                            timer.schedule(new TimerTask() {
+
+            @Override
+                                public void run() {
+                                    runOnUiThread(new Runnable() {
+
+            @Override
+                                        public void run() {
+                                            ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
+                                        }
+                                    });
+                                }
+                            }, 3000);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
                         }
-                    }, 1000);
-                    timer.schedule(new TimerTask() {
+                    }
+                };
+                new Thread(re2).start();
 
-                        @Override
-                        public void run() {
-                            runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                        }
-                    }, 2000);
-                    timer.schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            runOnUiThread(() -> ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81)))));
-                        }
-                    }, 3000);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            };
-            new Thread(re2).start();
-
+            }
         });
         final AlertDialog g = a.create();
         g.show();
@@ -2686,7 +3047,13 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(cm.toString());
-        a.setPositiveButton(getString(R.string.y89), (a2, i) -> a2.dismiss());
+        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
     }
@@ -2848,15 +3215,25 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.s26));
         a.setMessage(Html.b(jk));
-        a.setPositiveButton(getString(R.string.u14), (a12, intetg) -> {
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            Uri uri = Uri.fromParts("package", Package.b(), null);
-            intent.setData(uri);
-            startActivity(intent);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.u14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", Package.b(), null);
+                intent.setData(uri);
+                MAIN.this.startActivity(intent);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -2916,15 +3293,25 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setText(hl);
         }
         ed1.setText(a23);
-        a.setPositiveButton(getString(R.string.e25), (a2, i) -> {
-            Intent it = new Intent(this, Hash.class);
-            it.putExtra("a", ed.getText().toString());
-            it.putExtra("b", ed1.getText().toString());
-            Notifications.b(MAIN.this, it);
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.e25), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                Intent it = new Intent(MAIN.this, Hash.class);
+                it.putExtra("a", ed.getText().toString());
+                it.putExtra("b", ed1.getText().toString());
+                Notifications.b(MAIN.this, it);
+                a2.dismiss();
+
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -3006,11 +3393,21 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setText(hl.getHost());
         }
         ed1.setText(a23);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            c37(ed.getText().toString(), ed1.getText().toString());
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                MAIN.this.c37(ed.getText().toString(), ed1.getText().toString());
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -3071,13 +3468,21 @@ public class MAIN extends MainBaseActivity implements Format {
                 a.setCancelable(false);
                 a.setTitle(getString(R.string.h40));
                 a.setMessage(Html.b(String.format(getString(R.string.h39), Objects.requireNonNull(Uri.parse(view.getUrl()).getHost()), wde, type)));
-                a.setPositiveButton(getString(R.string.i21), (a2, i) -> {
-                    sbh.backToSafety(true);
-                    a2.dismiss();
+                a.setPositiveButton(getString(R.string.i21), new DialogInterface.OnClickListener() {
+
+            @Override
+                    public void onClick(DialogInterface a2, int i) {
+                        sbh.backToSafety(true);
+                        a2.dismiss();
+                    }
                 });
-                a.setNegativeButton(getString(R.string.i22), (a2, i) -> {
-                    sbh.proceed(true);
-                    a2.dismiss();
+                a.setNegativeButton(getString(R.string.i22), new DialogInterface.OnClickListener() {
+
+            @Override
+                    public void onClick(DialogInterface a2, int i) {
+                        sbh.proceed(true);
+                        a2.dismiss();
+                    }
                 });
                 a.create().show();
             } else {
@@ -3140,11 +3545,21 @@ public class MAIN extends MainBaseActivity implements Format {
             f.setTextColor(Resources.getColor(this, R.color.b));
             f5.setTextColor(Resources.getColor(this, R.color.b));
         }
-        bn.setOnClickListener(view -> currentTab().loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {"+Package.c()+"IpHelper.ip(dat);}"));
-        a.setOnCancelListener(dialog -> {
-            unregisterReceiver(this.ipH);
-            currentTab().removeJavascriptInterface(Package.c() + "IpHelper");
-            dialog.dismiss();
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MAIN.this.currentTab().loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {" + Package.c() + "IpHelper.ip(dat);}");
+            }
+        });
+        a.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                MAIN.this.unregisterReceiver(MAIN.this.ipH);
+                MAIN.this.currentTab().removeJavascriptInterface(Package.c() + "IpHelper");
+                dialog.dismiss();
+            }
         });
         AlertDialog dd = a.create();
         Objects.requireNonNull(dd.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
@@ -3176,7 +3591,7 @@ public class MAIN extends MainBaseActivity implements Format {
         return 100;
     }
 
-    private void c74(Bitmap.CompressFormat format, int quality, View ll, String st) {
+    private void c74(Bitmap.CompressFormat format, int quality, View ll, final String st) {
         try {
             FileOutputStream c = new FileOutputStream(new java.io.File(st));
             getWebviumCurrentView(ll).compress(format, quality, c);
@@ -3188,7 +3603,13 @@ public class MAIN extends MainBaseActivity implements Format {
             c7(getString(R.string.w14));
         }
         c69(st);
-        Runnable p15 = () -> c70(st);
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                MAIN.this.c70(st);
+            }
+        };
         new Thread(p15).start();
         c171(st);
     }
@@ -3271,11 +3692,21 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setCancelable(true);
         a.setTitle(Package.c());
         a.setMessage(Html.b(getString(R.string.u12)));
-        a.setPositiveButton(getString(R.string.i6), (a6, o) -> {
-            Intent a4 = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-            startActivity(a4);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a6, int o) {
+                Intent a4 = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                MAIN.this.startActivity(a4);
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -3376,7 +3807,13 @@ public class MAIN extends MainBaseActivity implements Format {
             ed1.setTextColor(Resources.getColor(this, R.color.b));
         }
         Html.a(ed, ag9);
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> a12.dismiss());
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                a12.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
     }
@@ -3479,15 +3916,29 @@ public class MAIN extends MainBaseActivity implements Format {
             e.setTitle(getString(R.string.v10));
             e.setMessage(f);
             e.setCancelable(false);
-            e.setPositiveButton(getString(R.string.i14), (a1, i) -> {
-                b.proceed();
-                a1.dismiss();
+            e.setPositiveButton(getString(R.string.i14), new DialogInterface.OnClickListener() {
+
+            @Override
+                public void onClick(DialogInterface a1, int i) {
+                    b.proceed();
+                    a1.dismiss();
+                }
             });
-            e.setNegativeButton(getString(R.string.j4), (a1, i) -> {
-                b.cancel();
-                a1.dismiss();
+            e.setNegativeButton(getString(R.string.j4), new DialogInterface.OnClickListener() {
+
+            @Override
+                public void onClick(DialogInterface a1, int i) {
+                    b.cancel();
+                    a1.dismiss();
+                }
             });
-            e.setNeutralButton(getString(R.string.v11), (a1, i) -> c75());
+            e.setNeutralButton(getString(R.string.v11), new DialogInterface.OnClickListener() {
+
+            @Override
+                public void onClick(DialogInterface a1, int i) {
+                    MAIN.this.c75();
+                }
+            });
             AlertDialog g = e.create();
             g.show();
         } else {
@@ -3893,11 +4344,21 @@ public class MAIN extends MainBaseActivity implements Format {
         String sg = StorageDirectory.getDownloadDir() + "/" + sg11;
         ti3.setText(sg);
         ed.setText(sg11);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            c113(ed.getText().toString(), dt);
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                MAIN.this.c113(ed.getText().toString(), dt);
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -3935,7 +4396,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
-    public void c112(String url, int type) {
+    public void c112(String url, final int type) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -3987,32 +4448,36 @@ public class MAIN extends MainBaseActivity implements Format {
         bn.setText(getString(R.string.i6));
         ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io"));
         final AlertDialog g = a.create();
-        bn.setOnClickListener(view -> {
-            String a1 = ed.getText().toString();
-            if (type == SOURCE_CODE) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
-                startActivity(it);
-            } else if (type == HEADERS) {
-                c126(a1);
-            } else if (type == ROBOTS) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_ROBOTS);
-                startActivity(it);
-            } else if (type == ASSETLINKS) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
-                startActivity(it);
-            } else if (type == SITEMAPS) {
-                Intent it = new Intent(MAIN.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_SITEMAPS);
-                startActivity(it);
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String a1 = ed.getText().toString();
+                if (type == SOURCE_CODE) {
+                    Intent it = new Intent(MAIN.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+                    MAIN.this.startActivity(it);
+                } else if (type == HEADERS) {
+                    MAIN.this.c126(a1);
+                } else if (type == ROBOTS) {
+                    Intent it = new Intent(MAIN.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_ROBOTS);
+                    MAIN.this.startActivity(it);
+                } else if (type == ASSETLINKS) {
+                    Intent it = new Intent(MAIN.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
+                    MAIN.this.startActivity(it);
+                } else if (type == SITEMAPS) {
+                    Intent it = new Intent(MAIN.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_SITEMAPS);
+                    MAIN.this.startActivity(it);
+                }
+                g.dismiss();
             }
-            g.dismiss();
         });
         ed.addTextChangedListener(new TextWatcher() {
 
@@ -4038,23 +4503,39 @@ public class MAIN extends MainBaseActivity implements Format {
         g.show();
     }
 
-    private void c113(String a, String b) {
-        Runnable p15 = () -> {
-            try {
-                java.io.File a2 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
-                if (a2.createNewFile()) {
-                    FileOutputStream a3 = new FileOutputStream(a2);
-                    OutputStreamWriter a4 = new OutputStreamWriter(a3);
-                    a4.append(Base64.decode(b.split(",")[1]));
-                    a4.close();
-                    a3.close();
-                    runOnUiThread(() -> c8(getString(R.string.f38)));
-                    return;
+    private void c113(final String a, final String b) {
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    File a2 = new File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
+                    if (a2.createNewFile()) {
+                        FileOutputStream a3 = new FileOutputStream(a2);
+                        OutputStreamWriter a4 = new OutputStreamWriter(a3);
+                        a4.append(Base64.decode(b.split(",")[1]));
+                        a4.close();
+                        a3.close();
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MAIN.this.c8(MAIN.this.getString(R.string.f38));
+                            }
+                        });
+                        return;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+                MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        MAIN.this.c7(MAIN.this.getString(R.string.w14));
+                    }
+                });
             }
-            runOnUiThread(() -> c7(getString(R.string.w14)));
         };
         new Thread(p15).start();
     }
@@ -4104,30 +4585,58 @@ public class MAIN extends MainBaseActivity implements Format {
         ed.setTransformationMethod(new Password());
         bn.setText(getString(R.string.e28));
 
-        bn.setOnClickListener(view -> {
-            Runnable p15 = () -> {
-                String str = ed.getText().toString();
-                try {
-                    String sg = U1.a(Integer.parseInt(str));
-                    runOnUiThread(() -> ti.setText(sg));
-                } catch (NumberFormatException nfe) {
-                    nfe.printStackTrace();
-                }
-            };
-            new Thread(p15).start();
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Runnable p15 = new Runnable() {
+
+            @Override
+                    public void run() {
+                        String str = ed.getText().toString();
+                        try {
+                            final String sg = U1.a(Integer.parseInt(str));
+                            MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(sg);
+                                }
+                            });
+                        } catch (NumberFormatException nfe) {
+                            nfe.printStackTrace();
+                        }
+                    }
+                };
+                new Thread(p15).start();
+            }
         });
-        ed.setOnEditorActionListener((v, actionId, event) -> {
-            Runnable p15 = () -> {
-                String str = ed.getText().toString();
-                try {
-                    String sg = U1.a(Integer.parseInt(str));
-                    runOnUiThread(() -> ti.setText(sg));
-                } catch (NumberFormatException nfe) {
-                    nfe.printStackTrace();
-                }
-            };
-            new Thread(p15).start();
-            return true;
+        ed.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                Runnable p15 = new Runnable() {
+
+            @Override
+                    public void run() {
+                        String str = ed.getText().toString();
+                        try {
+                            final String sg = U1.a(Integer.parseInt(str));
+                            MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(sg);
+                                }
+                            });
+                        } catch (NumberFormatException nfe) {
+                            nfe.printStackTrace();
+                        }
+                    }
+                };
+                new Thread(p15).start();
+                return true;
+            }
         });
         final AlertDialog g = a.create();
         g.show();
@@ -4156,7 +4665,13 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         Html.a(ti, IdentityGenerator.a(getResources().getQuantityString(R.plurals.m23, 23)));
         bn.setText(getString(R.string.e28));
-        bn.setOnClickListener(view -> Html.a(ti, IdentityGenerator.a(getResources().getQuantityString(R.plurals.m23, 23))));
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Html.a(ti, IdentityGenerator.a(MAIN.this.getResources().getQuantityString(R.plurals.m23, 23)));
+            }
+        });
         final AlertDialog g = a.create();
         Objects.requireNonNull(g.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         g.show();
@@ -4175,30 +4690,44 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         if (!isSh) {
             final FrameLayout k = findViewById(R.id.i);
-            View c = View.inflate(this, R.layout.c6, null);
+            final View c = View.inflate(this, R.layout.c6, null);
             LinearLayout ll = c.findViewById(R.id.b6);
             final SeekBar c2 = c.findViewById(R.id.c18);
             c2.setElevation(5);
             c2.setBackgroundResource(R.drawable.a19);
             c2.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
-            Runnable p15 = () -> {
-                final Bitmap pp = Resources.getBitmapFromResource(MAIN.this, R.drawable.a6);
-                runOnUiThread(() -> c2.setThumb(new BitmapDrawable(getResources(), pp)));
+            Runnable p15 = new Runnable() {
+
+            @Override
+                public void run() {
+                    final Bitmap pp = Resources.getBitmapFromResource(MAIN.this, R.drawable.a6);
+                    MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            c2.setThumb(new BitmapDrawable(MAIN.this.getResources(), pp));
+                        }
+                    });
+                }
             };
             new Thread(p15).start();
             c2.setMax(mAudio.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
             c2.setOnSeekBarChangeListener(new W11() {
 
-                @Override
+            @Override
                 public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                     mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, i, AudioManager.FLAG_PLAY_SOUND);
 
                 }
             });
-            ll.setOnClickListener(view -> {
-                Animation.animate(MAIN.this, R.anim.d, c2);
-                k.removeView(c);
-                isSh = false;
+            ll.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    Animation.animate(MAIN.this, R.anim.d, c2);
+                    k.removeView(c);
+                    isSh = false;
+                }
             });
             k.addView(c);
             Animation.animate(this, R.anim.a, c2);
@@ -4210,7 +4739,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
-    public void c126(String url) {
+    public void c126(final String url) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -4231,9 +4760,19 @@ public class MAIN extends MainBaseActivity implements Format {
         }
         ti.setText(getString(R.string.v13));
         ed.setText(url);
-        Runnable p15 = () -> {
-            final String sg = Stream.d(url, getString(R.string.c33));
-            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final String sg = Stream.d(url, MAIN.this.getString(R.string.c33));
+                MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        ti.setText(Html.b(sg));
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
@@ -4242,64 +4781,31 @@ public class MAIN extends MainBaseActivity implements Format {
             bn.setBackgroundResource(R.drawable.c11);
         }
         bn.setText(getString(R.string.i6));
-        bn.setOnClickListener(view -> {
-            String ab = ed.getText().toString();
-            ti.setText(getString(R.string.v13));
-            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
-                Runnable p151 = () -> {
-                    final String sg = Stream.d(ab, getString(R.string.c33));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p151).start();
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final String ab = ed.getText().toString();
+                ti.setText(MAIN.this.getString(R.string.v13));
+                if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
+                    Runnable p151 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            final String sg = Stream.d(ab, MAIN.this.getString(R.string.c33));
+                            MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(Html.b(sg));
+                                }
+                            });
+                        }
+                    };
+                    new Thread(p151).start();
+                }
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -4393,10 +4899,14 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(f);
         }
         bn.setText(getString(R.string.f24));
-        bn.setOnClickListener(view -> {
-            String str = ed.getText().toString();
-            if (U3.b(str)) {
-                c170(str);
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String str = ed.getText().toString();
+                if (U3.b(str)) {
+                    MAIN.this.c170(str);
+                }
             }
         });
         a.create().show();
@@ -4444,7 +4954,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
-    public void c130(int type) {
+    public void c130(final int type) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.a5, null);
@@ -4545,7 +5055,13 @@ public class MAIN extends MainBaseActivity implements Format {
         c.setTitle(getString(R.string.l35));
         c.setCancelable(true);
         c.setMessage(Html.b(getString(R.string.l36)));
-        c.setPositiveButton(getString(R.string.i6), (a, intetg) -> a.dismiss());
+        c.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a, int intetg) {
+                a.dismiss();
+            }
+        });
         c.create().show();
     }
 
@@ -4554,11 +5070,21 @@ public class MAIN extends MainBaseActivity implements Format {
         a.setCancelable(true);
         a.setTitle(Package.c());
         a.setMessage(getString(R.string.l37));
-        a.setPositiveButton(getString(R.string.l39), (a12, intetg) -> {
-            c150();
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.l39), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                MAIN.this.c150();
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.l15), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.l15), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -4670,35 +5196,39 @@ public class MAIN extends MainBaseActivity implements Format {
     public void c144() {
         if (pm7 == null) {
             pm7 = new PopupMenu(this, tv7);
-            MenuItem.OnMenuItemClickListener e = a1 -> {
-                switch (a1.getItemId()) {
-                    case 4:
-                        c25();
-                        finishAndRemoveTask();
-                        return true;
-                    case 5:
-                        currentTab().clearCache(false);
-                        c8(getString(R.string.a27));
-                        return true;
+            MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
 
-                    case 0:
-                        Intents.a(MAIN.this, DOWN.class);
-                        return true;
-                    case 3:
-                        Intents.a(MAIN.this, SETT0.class);
-                        return true;
-                    case 1:
-                        currentTab().pageUp(true);
-                        return true;
-                    case 2:
-                        currentTab().pageDown(true);
-                        return true;
-                    case 6:
-                        Intents.f(this, HIST.class, 211);
-                        break;
+            @Override
+                public boolean onMenuItemClick(MenuItem a1) {
+                    switch (a1.getItemId()) {
+                        case 4:
+                            MAIN.this.c25();
+                            MAIN.this.finishAndRemoveTask();
+                            return true;
+                        case 5:
+                            MAIN.this.currentTab().clearCache(false);
+                            MAIN.this.c8(MAIN.this.getString(R.string.a27));
+                            return true;
 
+                        case 0:
+                            Intents.a(MAIN.this, DOWN.class);
+                            return true;
+                        case 3:
+                            Intents.a(MAIN.this, SETT0.class);
+                            return true;
+                        case 1:
+                            MAIN.this.currentTab().pageUp(true);
+                            return true;
+                        case 2:
+                            MAIN.this.currentTab().pageDown(true);
+                            return true;
+                        case 6:
+                            Intents.f(MAIN.this, HIST.class, 211);
+                            break;
+
+                    }
+                    return false;
                 }
-                return false;
             };
             Menu me = pm7.getMenu();
             if (BuildConfig.DEBUG) {
@@ -4716,162 +5246,204 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c146(int data) {
         if (data == WEBVIUM_SEARCH) {
-            Runnable p15 = () -> {
-                Cursor cs = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_SEARCH +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC", null);
-                try {
-                    if (cs.getCount() == 0) {
-                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm");
-                        if (fe.createNewFile()) {
-                            FileWriter fw = new FileWriter(fe, false);
-                            BufferedWriter br = new BufferedWriter(fw);
-                            br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.f39) + "</b></h1></center></body></html>");
-                            br.close();
-                            fw.close();
+            Runnable p15 = new Runnable() {
+
+            @Override
+                public void run() {
+                    Cursor cs = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
+                            Sqlite.TABLE_SEARCH +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC", null);
+                    try {
+                        if (cs.getCount() == 0) {
+                            File fe = new File(StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "Search") + ".htm");
+                            if (fe.createNewFile()) {
+                                FileWriter fw = new FileWriter(fe, false);
+                                BufferedWriter br = new BufferedWriter(fw);
+                                br.write("<!DOCTYPE html><html><head><title>" + MAIN.this.getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(MAIN.this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + MAIN.this.getString(R.string.f39) + "</b></h1></center></body></html>");
+                                br.close();
+                                fw.close();
+                            }
+                        } else {
+                            StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + MAIN.this.getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(MAIN.this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + MAIN.this.getString(R.string.x49) + "</th></tr>");
+                            while (cs.moveToNext()) {
+                                sg.append("<tr><td>")
+                                        .append(cs.getString(1))
+                                        .append("</td></tr>");
+                            }
+                            sg.append("</table></center></body></html>");
+                            File fe1 = new File(StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "Search") + ".htm");
+                            if (fe1.createNewFile()) {
+                                FileWriter fw1 = new FileWriter(fe1, false);
+                                BufferedWriter br1 = new BufferedWriter(fw1);
+                                br1.write(sg.toString());
+                                br1.close();
+                                fw1.close();
+                            }
                         }
-                    } else {
-                        StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.x49) + "</th></tr>");
-                        while (cs.moveToNext()) {
-                            sg.append("<tr><td>")
-                                    .append(cs.getString(1))
-                                    .append("</td></tr>");
-                        }
-                        sg.append("</table></center></body></html>");
-                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm");
-                        if (fe1.createNewFile()) {
-                            FileWriter fw1 = new FileWriter(fe1, false);
-                            BufferedWriter br1 = new BufferedWriter(fw1);
-                            br1.write(sg.toString());
-                            br1.close();
-                            fw1.close();
-                        }
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MAIN.this.currentTab().loadUrl("file://" + StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "Search") + ".htm");
+                            }
+                        });
+                        cs.close();
+                    } catch (Exception en) {
+                        en.printStackTrace();
                     }
-                    runOnUiThread(() -> currentTab().loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Search") + ".htm"));
-                    cs.close();
-                } catch (Exception en) {
-                    en.printStackTrace();
                 }
             };
             new Thread(p15).start();
         } else if (data == WEBVIUM_HISTORY) {
-            Runnable p15 = () -> {
-                Cursor cs5 = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_HISTORY +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC", null);
-                try {
-                    if (cs5.getCount() == 0) {
-                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm");
-                        if (fe.createNewFile()) {
-                            FileWriter fw = new FileWriter(fe, false);
-                            BufferedWriter br = new BufferedWriter(fw);
-                            br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.i15) + "</b></h1></center></body></html>");
-                            br.close();
-                            fw.close();
+            Runnable p15 = new Runnable() {
+
+            @Override
+                public void run() {
+                    Cursor cs5 = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
+                            Sqlite.TABLE_HISTORY +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC", null);
+                    try {
+                        if (cs5.getCount() == 0) {
+                            File fe = new File(StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "History") + ".htm");
+                            if (fe.createNewFile()) {
+                                FileWriter fw = new FileWriter(fe, false);
+                                BufferedWriter br = new BufferedWriter(fw);
+                                br.write("<!DOCTYPE html><html><head><title>" + MAIN.this.getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(MAIN.this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + MAIN.this.getString(R.string.i15) + "</b></h1></center></body></html>");
+                                br.close();
+                                fw.close();
+                            }
+                        } else {
+                            StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + MAIN.this.getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(MAIN.this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + MAIN.this.getString(R.string.q17) + "</th></tr>");
+                            while (cs5.moveToNext()) {
+                                sg.append("<tr><td>")
+                                        .append(cs5.getString(1))
+                                        .append(" - ")
+                                        .append(cs5.getString(2))
+                                        .append(" - ")
+                                        .append(cs5.getString(3))
+                                        .append("</td></tr>");
+                            }
+                            sg.append("</table></center></body></html>");
+                            File fe1 = new File(StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "History") + ".htm");
+                            if (fe1.createNewFile()) {
+                                FileWriter fw1 = new FileWriter(fe1, false);
+                                BufferedWriter br1 = new BufferedWriter(fw1);
+                                br1.write(sg.toString());
+                                br1.close();
+                                fw1.close();
+                            }
                         }
-                    } else {
-                        StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.q17) + "</th></tr>");
-                        while (cs5.moveToNext()) {
-                            sg.append("<tr><td>")
-                                    .append(cs5.getString(1))
-                                    .append(" - ")
-                                    .append(cs5.getString(2))
-                                    .append(" - ")
-                                    .append(cs5.getString(3))
-                                    .append("</td></tr>");
-                        }
-                        sg.append("</table></center></body></html>");
-                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm");
-                        if (fe1.createNewFile()) {
-                            FileWriter fw1 = new FileWriter(fe1, false);
-                            BufferedWriter br1 = new BufferedWriter(fw1);
-                            br1.write(sg.toString());
-                            br1.close();
-                            fw1.close();
-                        }
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MAIN.this.currentTab().loadUrl("file://" + StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "History") + ".htm");
+                            }
+                        });
+                        cs5.close();
+                    } catch (Exception en) {
+                        en.printStackTrace();
                     }
-                    runOnUiThread(() -> currentTab().loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "History") + ".htm"));
-                    cs5.close();
-                } catch (Exception en) {
-                    en.printStackTrace();
                 }
             };
             new Thread(p15).start();
         } else if (data == WEBVIUM_BOOKMARKS) {
-            Runnable p15 = () -> {
-                Cursor cs6 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_BOOKMARK +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC", null);
-                try {
-                    if (cs6.getCount() == 0) {
-                        java.io.File fe = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
-                        if (fe.createNewFile()) {
-                            FileWriter fw = new FileWriter(fe, false);
-                            BufferedWriter br = new BufferedWriter(fw);
-                            br.write("<!DOCTYPE html><html><head><title>" + getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + getString(R.string.g21) + "</b></h1></center></body></html>");
-                            br.close();
-                            fw.close();
+            Runnable p15 = new Runnable() {
+
+            @Override
+                public void run() {
+                    Cursor cs6 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+                            Sqlite.TABLE_BOOKMARK +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC", null);
+                    try {
+                        if (cs6.getCount() == 0) {
+                            File fe = new File(StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
+                            if (fe.createNewFile()) {
+                                FileWriter fw = new FileWriter(fe, false);
+                                BufferedWriter br = new BufferedWriter(fw);
+                                br.write("<!DOCTYPE html><html><head><title>" + MAIN.this.getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(MAIN.this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + MAIN.this.getString(R.string.g21) + "</b></h1></center></body></html>");
+                                br.close();
+                                fw.close();
+                            }
+                        } else {
+                            StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + MAIN.this.getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(MAIN.this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + MAIN.this.getString(R.string.y88) + "</th></tr>");
+                            while (cs6.moveToNext()) {
+                                sg.append("<tr><td>")
+                                        .append(cs6.getString(1))
+                                        .append(" - ")
+                                        .append(cs6.getString(2))
+                                        .append("</td></tr>");
+                            }
+                            sg.append("</table></center></body></html>");
+                            File fe1 = new File(StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
+                            if (fe1.createNewFile()) {
+                                FileWriter fw1 = new FileWriter(fe1, false);
+                                BufferedWriter br1 = new BufferedWriter(fw1);
+                                br1.write(sg.toString());
+                                br1.close();
+                                fw1.close();
+                            }
                         }
-                    } else {
-                        StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file://" + StorageDirectory.getClasses(this) + "\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + getString(R.string.y88) + "</th></tr>");
-                        while (cs6.moveToNext()) {
-                            sg.append("<tr><td>")
-                                    .append(cs6.getString(1))
-                                    .append(" - ")
-                                    .append(cs6.getString(2))
-                                    .append("</td></tr>");
-                        }
-                        sg.append("</table></center></body></html>");
-                        java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
-                        if (fe1.createNewFile()) {
-                            FileWriter fw1 = new FileWriter(fe1, false);
-                            BufferedWriter br1 = new BufferedWriter(fw1);
-                            br1.write(sg.toString());
-                            br1.close();
-                            fw1.close();
-                        }
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MAIN.this.currentTab().loadUrl("file://" + StorageDirectory.getFileDir(MAIN.this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
+                            }
+                        });
+                        cs6.close();
+                    } catch (Exception en) {
+                        en.printStackTrace();
                     }
-                    runOnUiThread(() -> currentTab().loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm"));
-                    cs6.close();
-                } catch (Exception en) {
-                    en.printStackTrace();
                 }
             };
             new Thread(p15).start();
         }
     }
 
-    public void c149(WebViews h) {
+    public void c149(final WebViews h) {
         if (a221().getBoolean("webviumB", false) && !this.set) {
-            Runnable re = () -> {
-                java.io.File fe = new java.io.File(StorageDirectory.getBackground(this));
-                if (fe.exists()) {
-                    Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(MAIN.this));
-                    runOnUiThread(() -> {
-                        this.set = true;
-                        h.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-                        this.o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-                        MAIN.this.back23.setBackground(new BitmapDrawable(MAIN.this.getResources(), bp));
-                        this.llt.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-                    });
-                } else {
-                    runOnUiThread(() -> {
-                        if (!a221().getBoolean("autoUpdate", false)) {
-                            h.setBackgroundColor(Resources.getColor(this, R.color.p));
-                            MAIN.this.back23.setBackgroundColor(Resources.getColor(this, R.color.p));
-                        } else {
-                            h.setBackgroundColor(Resources.getColor(this, R.color.m));
-                            MAIN.this.back23.setBackgroundColor(Resources.getColor(this, R.color.m));
-                        }
-                        this.o.setBackgroundResource(R.drawable.p);
-                        this.llt.setBackgroundResource(R.drawable.f1);
-                    });
+            Runnable re = new Runnable() {
+
+            @Override
+                public void run() {
+                    File fe = new File(StorageDirectory.getBackground(MAIN.this));
+                    if (fe.exists()) {
+                        final Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(MAIN.this));
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MAIN.this.set = true;
+                                h.setBackgroundColor(Resources.getColor(MAIN.this, android.R.color.transparent));
+                                MAIN.this.o.setBackgroundColor(Resources.getColor(MAIN.this, android.R.color.transparent));
+                                MAIN.this.back23.setBackground(new BitmapDrawable(MAIN.this.getResources(), bp));
+                                MAIN.this.llt.setBackgroundColor(Resources.getColor(MAIN.this, android.R.color.transparent));
+                            }
+                        });
+                    } else {
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                if (!MAIN.this.a221().getBoolean("autoUpdate", false)) {
+                                    h.setBackgroundColor(Resources.getColor(MAIN.this, R.color.p));
+                                    MAIN.this.back23.setBackgroundColor(Resources.getColor(MAIN.this, R.color.p));
+                                } else {
+                                    h.setBackgroundColor(Resources.getColor(MAIN.this, R.color.m));
+                                    MAIN.this.back23.setBackgroundColor(Resources.getColor(MAIN.this, R.color.m));
+                                }
+                                MAIN.this.o.setBackgroundResource(R.drawable.p);
+                                MAIN.this.llt.setBackgroundResource(R.drawable.f1);
+                            }
+                        });
+                    }
                 }
             };
             new Thread(re).start();
@@ -4941,10 +5513,14 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c153(int i) {
         if (pm1 == null) {
             pm1 = new PopupMenu(this, findViewById(R.id.f7));
-            pm1.setOnDismissListener(popupMenu -> {
-                popupMenu.getMenu().clear();
-                if (this.sg != null) {
-                    this.sg = null;
+            pm1.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    popupMenu.getMenu().clear();
+                    if (MAIN.this.sg != null) {
+                        MAIN.this.sg = null;
+                    }
                 }
             });
         }
@@ -4980,9 +5556,13 @@ public class MAIN extends MainBaseActivity implements Format {
             sm0.add(0, 25, 0, getString(R.string.y76)).setOnMenuItemClickListener(e1);
             sm0.add(0, 26, 0, getString(R.string.y77)).setOnMenuItemClickListener(e1);
             sm0.add(0, 12, 0, getString(R.string.i4)).setOnMenuItemClickListener(e1);
-            pm2.setOnDismissListener(popupMenu -> {
-                if (this.sg != null) {
-                    this.sg = null;
+            pm2.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    if (MAIN.this.sg != null) {
+                        MAIN.this.sg = null;
+                    }
                 }
             });
         }
@@ -4992,9 +5572,13 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c155() {
         if (pm3 == null) {
             pm3 = new PopupMenu(this, inf);
-            pm3.setOnDismissListener(popupMenu -> {
-                if (this.sg != null) {
-                    this.sg = null;
+            pm3.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    if (MAIN.this.sg != null) {
+                        MAIN.this.sg = null;
+                    }
                 }
             });
             Menu m = pm3.getMenu();
@@ -5008,9 +5592,13 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c156() {
         if (pm4 == null) {
             pm4 = new PopupMenu(this, inf);
-            pm4.setOnDismissListener(popupMenu -> {
-                if (this.sg != null) {
-                    this.sg = null;
+            pm4.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    if (MAIN.this.sg != null) {
+                        MAIN.this.sg = null;
+                    }
                 }
             });
             Menu m = pm4.getMenu();
@@ -5022,9 +5610,13 @@ public class MAIN extends MainBaseActivity implements Format {
     private void c157() {
         if (pm5 == null) {
             pm5 = new PopupMenu(this, inf);
-            pm5.setOnDismissListener(popupMenu -> {
-                if (this.sg != null) {
-                    this.sg = null;
+            pm5.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    if (MAIN.this.sg != null) {
+                        MAIN.this.sg = null;
+                    }
                 }
             });
             Menu a1 = pm5.getMenu();
@@ -5046,17 +5638,25 @@ public class MAIN extends MainBaseActivity implements Format {
         View e = d.inflate(R.layout.b4, null);
         a.setView(e);
         final TextView f = e.findViewById(R.id.x);
-        TextView f5 = e.findViewById(R.id.c20);
+        final TextView f5 = e.findViewById(R.id.c20);
         Button bn = e.findViewById(R.id.k12);
         f.setText(getString(R.string.v13));
         f5.setText(getString(R.string.v13));
-        Runnable p15 = () -> {
-            final String sg = Stream.h(getString(R.string.c33));
-            final String sg0 = Stream.b(getString(R.string.c33));
-            runOnUiThread(() -> {
-                f5.setText(sg);
-                f.setText(sg0);
-            });
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final String sg = Stream.h(MAIN.this.getString(R.string.c33));
+                final String sg0 = Stream.b(MAIN.this.getString(R.string.c33));
+                MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        f5.setText(sg);
+                        f.setText(sg0);
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         bn.setText(getString(R.string.h14));
@@ -5067,12 +5667,26 @@ public class MAIN extends MainBaseActivity implements Format {
             f.setTextColor(Resources.getColor(this, R.color.b));
             f5.setTextColor(Resources.getColor(this, R.color.b));
         }
-        bn.setOnClickListener(view -> {
-            Runnable p151 = () -> {
-                final String sg = Stream.b(getString(R.string.c33));
-                runOnUiThread(() -> f.setText(sg));
-            };
-            new Thread(p151).start();
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Runnable p151 = new Runnable() {
+
+            @Override
+                    public void run() {
+                        final String sg = Stream.b(MAIN.this.getString(R.string.c33));
+                        MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                f.setText(sg);
+                            }
+                        });
+                    }
+                };
+                new Thread(p151).start();
+            }
         });
         AlertDialog dd = a.create();
         Objects.requireNonNull(dd.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
@@ -5093,7 +5707,13 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm0.toString()));
-        a.setPositiveButton(getString(R.string.y89), (a2, i) -> a2.dismiss());
+        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
     }
@@ -5112,7 +5732,13 @@ public class MAIN extends MainBaseActivity implements Format {
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm2.toString()));
-        a.setPositiveButton(getString(R.string.y89), (a2, i) -> a2.dismiss());
+        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
     }
@@ -5132,8 +5758,14 @@ public class MAIN extends MainBaseActivity implements Format {
         return null;
     }
 
-    private void c170(String sg) {
-        currentTab().evaluateJavascript(sg, s -> android.util.Log.d(Package.c(), sg));
+    private void c170(final String sg) {
+        currentTab().evaluateJavascript(sg, new ValueCallback<String>() {
+
+            @Override
+            public void onReceiveValue(String s) {
+                android.util.Log.d(Package.c(), sg);
+            }
+        });
     }
 
     private void c171(final String sg) {
@@ -5142,9 +5774,19 @@ public class MAIN extends MainBaseActivity implements Format {
         final LinearLayout ll = c.findViewById(R.id.h20);
         final ImageView iv = c.findViewById(R.id.c19);
         ll.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-        Runnable p15 = () -> {
-            final Bitmap bp = BitmapFactory.decodeFile(sg);
-            runOnUiThread(() -> iv.setImageBitmap(bp));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final Bitmap bp = BitmapFactory.decodeFile(sg);
+                MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        iv.setImageBitmap(bp);
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         k.addView(c);
@@ -5497,97 +6139,6 @@ public class MAIN extends MainBaseActivity implements Format {
         return super.onKeyLongPress(a, b);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 24, 0, getString(R.string.h20)).setCheckable(true);
@@ -5782,7 +6333,7 @@ public class MAIN extends MainBaseActivity implements Format {
         String sg = a.getStringExtra("webvium");
         String sg0 = a.getStringExtra("value");
         String sg1 = a.getAction();
-        String sg12 = a.getDataString();
+        final String sg12 = a.getDataString();
         if (sg12 != null) {
             String pe;
             try {
@@ -5793,35 +6344,45 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             File fe2 = new File(pe.replace("file://", ""));
             if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile()) {
-                Runnable re = () -> {
-                    try {
-                        String pe1;
+                Runnable re = new Runnable() {
+
+            @Override
+                    public void run() {
                         try {
-                            pe1 = URLDecoder.decode(sg12, "UTF-8");
-                        } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                            unsupportedEncodingException.printStackTrace();
-                            pe1 = sg12;
-                        }
-                        java.io.File fe = new java.io.File(pe1.replace("file://", ""));
-                        FileReader fr = new FileReader(fe);
-                        BufferedReader br = new BufferedReader(fr);
-                        StringBuilder sb = new StringBuilder();
-                        String ln;
-                        while ((ln = br.readLine()) != null) {
-                            sb.append(ln);
-                            sb.append("<br>");
-                        }
-                        fr.close();
-                        br.close();
-                        String[] sgdd = sb.toString().split("<br>");
-                        for (String dt : sgdd) {
-                            if (dt.startsWith("URL=")) {
-                                runOnUiThread(() -> c3(dt.replace("URL=", "")));
-                                return;
+                            String pe1;
+                            try {
+                                pe1 = URLDecoder.decode(sg12, "UTF-8");
+                            } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                                unsupportedEncodingException.printStackTrace();
+                                pe1 = sg12;
                             }
+                            File fe = new File(pe1.replace("file://", ""));
+                            FileReader fr = new FileReader(fe);
+                            BufferedReader br = new BufferedReader(fr);
+                            StringBuilder sb = new StringBuilder();
+                            String ln;
+                            while ((ln = br.readLine()) != null) {
+                                sb.append(ln);
+                                sb.append("<br>");
+                            }
+                            fr.close();
+                            br.close();
+                            String[] sgdd = sb.toString().split("<br>");
+                            for (final String dt : sgdd) {
+                                if (dt.startsWith("URL=")) {
+                                    MAIN.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                        public void run() {
+                                            MAIN.this.c3(dt.replace("URL=", ""));
+                                        }
+                                    });
+                                    return;
+                                }
+                            }
+                        } catch (Exception en3) {
+                            en3.printStackTrace();
                         }
-                    } catch (Exception en3) {
-                        en3.printStackTrace();
                     }
                 };
                 new Thread(re).start();
@@ -5950,7 +6511,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private class R7 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
@@ -5964,7 +6525,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private class R6 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
@@ -5979,7 +6540,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private class R8 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
@@ -5993,7 +6554,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private class R36 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             try {
@@ -6017,7 +6578,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private class ca149 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

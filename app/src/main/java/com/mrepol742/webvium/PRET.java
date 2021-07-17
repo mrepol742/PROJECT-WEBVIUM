@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.ValueCallback;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -103,7 +104,13 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             }
             tv4.setOnClickListener(this);
             tv4.setOnLongClickListener(this);
-            tv4.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+            tv4.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+                }
+            });
         }
         w4.getSettings().setJavaScriptEnabled(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -121,12 +128,16 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
     private void a(String sg) {
         AwesomeToast.a(this, sg);
 
-        w4.evaluateJavascript("(function() { return eval(" + sg + "); })();", s -> {
-            try {
-                PRET.this.b(s);
-                tv.setText("s");
-            } catch (NoSuchStringToReturn l2) {
-               l2.printStackTrace();
+        w4.evaluateJavascript("(function() { return eval(" + sg + "); })();", new ValueCallback<String>() {
+
+            @Override
+            public void onReceiveValue(String s) {
+                try {
+                    PRET.this.b(s);
+                    tv.setText("s");
+                } catch (NoSuchStringToReturn l2) {
+                    l2.printStackTrace();
+                }
             }
         });
     }

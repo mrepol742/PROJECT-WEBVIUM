@@ -28,7 +28,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.MAIN;
-import com.mrepol742.webvium.PREF;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
@@ -48,55 +47,85 @@ public class InterfaceFragment extends BasePreferenceFragment {
     private static final int SECONDARY_FONT = 1235;
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 79 && data != null) {
-            Runnable p15 = () -> {
-                try {
-                    InputStream c = getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
-                    OutputStream d = new FileOutputStream(StorageDirectory.getBackground(getActivity()));
-                    byte[] e = new byte[1024];
-                    int f;
-                    if (c != null) {
-                        while ((f = c.read(e)) != -1) {
-                            d.write(e, 0, f);
+            Runnable p15 = new Runnable() {
+
+            @Override
+                public void run() {
+                    try {
+                        InputStream c = InterfaceFragment.this.getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
+                        OutputStream d = new FileOutputStream(StorageDirectory.getBackground(InterfaceFragment.this.getActivity()));
+                        byte[] e = new byte[1024];
+                        int f;
+                        if (c != null) {
+                            while ((f = c.read(e)) != -1) {
+                                d.write(e, 0, f);
+                            }
                         }
+                        Objects.requireNonNull(c).close();
+                        d.flush();
+                        d.close();
+                        BitmapCache.getInstance().b(StorageDirectory.getBackground(InterfaceFragment.this.getActivity()));
+                        Intent it = new Intent(Intents.ACTION_INVALIDATE);
+                        InterfaceFragment.this.getActivity().sendBroadcast(it);
+                        InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.o29));
+                            }
+                        });
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                        InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.p33));
+                            }
+                        });
                     }
-                    Objects.requireNonNull(c).close();
-                    d.flush();
-                    d.close();
-                    BitmapCache.getInstance().b(StorageDirectory.getBackground(getActivity()));
-                    Intent it = new Intent(Intents.ACTION_INVALIDATE);
-                    getActivity().sendBroadcast(it);
-                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.o29)));
-                } catch (Exception en) {
-                    en.printStackTrace();
-                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.p33)));
                 }
             };
             new Thread(p15).start();
         } else if ((requestCode == PRIMARY_FONT || requestCode == SECONDARY_FONT)&& data != null) {
-            Runnable p15 = () -> {
-                try {
-                    InputStream c = getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
-                    OutputStream d = new FileOutputStream(b20(requestCode));
-                    byte[] e = new byte[1024];
-                    int f;
-                    if (c != null) {
-                        while ((f = c.read(e)) != -1) {
-                            d.write(e, 0, f);
+            Runnable p15 = new Runnable() {
+
+            @Override
+                public void run() {
+                    try {
+                        InputStream c = InterfaceFragment.this.getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
+                        OutputStream d = new FileOutputStream(InterfaceFragment.this.b20(requestCode));
+                        byte[] e = new byte[1024];
+                        int f;
+                        if (c != null) {
+                            while ((f = c.read(e)) != -1) {
+                                d.write(e, 0, f);
+                            }
                         }
+                        Objects.requireNonNull(c).close();
+                        d.flush();
+                        d.close();
+                        InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.z55));
+                                InterfaceFragment.this.t();
+                            }
+                        });
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                        InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.z54));
+                            }
+                        });
                     }
-                    Objects.requireNonNull(c).close();
-                    d.flush();
-                    d.close();
-                    getActivity().runOnUiThread(() -> {
-AwesomeToast.b(getActivity(), getString(R.string.z55));
-t();
-                    });
-                } catch (Exception en) {
-                    en.printStackTrace();
-                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.z54)));
                 }
             };
             new Thread(p15).start();
@@ -113,35 +142,59 @@ t();
                 a5(R.xml.o);
             }
             Preference b = findPreference("autoUpdate");
-            b.setOnPreferenceClickListener(a -> {
-                t(1);
-                return true;
+            b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    InterfaceFragment.this.t(1);
+                    return true;
+                }
             });
             Preference b742 = findPreference("autoUpdate742");
-            b742.setOnPreferenceClickListener(a -> {
-                t(0);
-                return true;
+            b742.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    InterfaceFragment.this.t(0);
+                    return true;
+                }
             });
             Preference a4 = findPreference("cus");
-            a4.setOnPreferenceClickListener(a -> {
-                r();
-                return true;
+            a4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    InterfaceFragment.this.r();
+                    return true;
+                }
             });
 
             Preference a7 = findPreference("webviumB");
-            a7.setOnPreferenceClickListener(a -> {
-                t(0);
-                return true;
+            a7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    InterfaceFragment.this.t(0);
+                    return true;
+                }
             });
             Preference a455 = findPreference("cfnt5");
-            a455.setOnPreferenceClickListener(a -> {
-                b19(PRIMARY_FONT);
-                return true;
+            a455.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    InterfaceFragment.this.b19(PRIMARY_FONT);
+                    return true;
+                }
             });
             Preference a433 = findPreference("cfnt2");
-            a433.setOnPreferenceClickListener(a -> {
-                b19(SECONDARY_FONT);
-                return true;
+            a433.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    InterfaceFragment.this.b19(SECONDARY_FONT);
+                    return true;
+                }
             });
 
         } catch (Exception ex) {

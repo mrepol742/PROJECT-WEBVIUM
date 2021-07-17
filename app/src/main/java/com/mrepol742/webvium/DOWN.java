@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -91,7 +92,13 @@ public class DOWN extends BaseActivity {
         f4.setTypeface(type(Typeface.BOLD));
         a1.setNavigationIcon(R.drawable.a2);
         a2.setText(getString(R.string.f));
-        a1.setNavigationOnClickListener(view -> finish());
+        a1.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                DOWN.this.finish();
+            }
+        });
         a3 = findViewById(R.id.a3);
         Cursor res = d10.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_DOWNLOAD +
@@ -99,9 +106,13 @@ public class DOWN extends BaseActivity {
                 "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
-            runOnUiThread(() -> {
-                f2.setVisibility(View.VISIBLE);
-                a3.setVisibility(View.GONE);
+            runOnUiThread(new Runnable() {
+
+            @Override
+                public void run() {
+                    f2.setVisibility(View.VISIBLE);
+                    a3.setVisibility(View.GONE);
+                }
             });
         } else {
             downloadArrayDataModel = new ArrayList<>();
@@ -112,16 +123,26 @@ public class DOWN extends BaseActivity {
                         res.getString(4),
                         res.getString(5)));
             }
-            runOnUiThread(() -> {
-                iv.setVisibility(View.VISIBLE);
-                Animation.animate(this, R.anim.i, iv);
+            runOnUiThread(new Runnable() {
+
+            @Override
+                public void run() {
+                    iv.setVisibility(View.VISIBLE);
+                    Animation.animate(DOWN.this, R.anim.i, iv);
+                }
             });
         }
         res.close();
         iv = findViewById(R.id.l7);
         iv.setBackgroundResource(R.drawable.c6);
         iv.setImageResource(R.drawable.a23);
-        iv.setOnClickListener(view -> i());
+        iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                i();
+            }
+        });
         iv.setVisibility(View.VISIBLE);
         ImageView iv1 = findViewById(R.id.f3);
         iv1.setBackgroundResource(R.drawable.c6);
@@ -140,15 +161,25 @@ public class DOWN extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.f));
         a.setMessage(getString(R.string.v24));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            d10.delete();
-            f(getString(R.string.v23));
-            f2.setVisibility(View.VISIBLE);
-            a3.setVisibility(View.GONE);
-            iv.setVisibility(View.GONE);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                d10.delete();
+                DOWN.this.f(DOWN.this.getString(R.string.v23));
+                f2.setVisibility(View.VISIBLE);
+                a3.setVisibility(View.GONE);
+                iv.setVisibility(View.GONE);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 

@@ -23,7 +23,7 @@ import android.content.Intent;
 
 public class MainReceiver extends BroadcastReceiver {
 
-    @Override
+            @Override
     public void onReceive(Context context, Intent intent) {
     }
 }

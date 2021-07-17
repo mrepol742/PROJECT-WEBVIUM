@@ -20,12 +20,11 @@ package com.mrepol742.webvium.setting;
 import android.os.Bundle;
 
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.base.BaseFragment;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 
 public class FeatureFragment extends BasePreferenceFragment {
 
-    @Override
+            @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         a5(R.xml.a4);

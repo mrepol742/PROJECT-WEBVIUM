@@ -36,7 +36,7 @@ import java.util.Objects;
 // @Class BootCompleted
 public class BOOT extends MainReceiver {
 
-    @Override
+            @Override
     public void onReceive(Context a, Intent b) {
         super.onReceive(a, b);
         try {

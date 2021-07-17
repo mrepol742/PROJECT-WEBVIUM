@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -96,44 +97,72 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             }
 
             Preference n = findPreference("res");
-            n.setOnPreferenceClickListener(a -> {
-                a6();
-                return true;
+            n.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    DatabaseFragment.this.a6();
+                    return true;
+                }
             });
             Preference l = findPreference("ets");
-            l.setOnPreferenceClickListener(a -> {
-                a13();
-                return true;
+            l.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    DatabaseFragment.this.a13();
+                    return true;
+                }
             });
 
             Preference l1 = findPreference("se");
-            l1.setOnPreferenceClickListener(a -> {
-                a17();
-                return true;
+            l1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    DatabaseFragment.this.a17();
+                    return true;
+                }
             });
 
             Preference l11 = findPreference("he");
-            l11.setOnPreferenceClickListener(a -> {
-                b1();
-                return true;
+            l11.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    DatabaseFragment.this.b1();
+                    return true;
+                }
             });
 
             Preference l111 = findPreference("be");
-            l111.setOnPreferenceClickListener(a -> {
-                b5();
-                return true;
+            l111.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    DatabaseFragment.this.b5();
+                    return true;
+                }
             });
 
             Preference l111444 = findPreference("do");
-            l111444.setOnPreferenceClickListener(a -> {
-                b9();
-                return true;
+            l111444.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    DatabaseFragment.this.b9();
+                    return true;
+                }
             });
 
             Preference l111444a = findPreference("pe");
-            l111444a.setOnPreferenceClickListener(a -> {
-                b13();
-                return true;
+            l111444a.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    DatabaseFragment.this.b13();
+                    return true;
+                }
             });
 
             SWIT SWIT = (SWIT) findPreference("bcP");
@@ -141,11 +170,15 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
 
             Preference l114 = findPreference("se23");
             l114.setSummary(String.format(getActivity().getString(R.string.x48), StorageDirectory.getWebviumDir() + "/Backup"));
-            l114.setOnPreferenceClickListener(a -> {
-                Intent it = new Intent(getActivity(), BACK0.class);
-                it.putExtra("a", "a");
-                startActivity(it);
-                return true;
+            l114.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intent it = new Intent(DatabaseFragment.this.getActivity(), BACK0.class);
+                    it.putExtra("a", "a");
+                    DatabaseFragment.this.startActivity(it);
+                    return true;
+                }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -165,14 +198,24 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
         a.setMessage(getString(R.string.b24));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            SharedPreferences.Editor b = a221().edit();
-            b.clear();
-            b.apply();
-            t();
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                SharedPreferences.Editor b = DatabaseFragment.this.a221().edit();
+                b.clear();
+                b.apply();
+                DatabaseFragment.this.t();
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -200,34 +243,54 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Settings_" + format() + ".bac";
+        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Settings_" + format() + ".bac";
         a.setMessage(Html.b(String.format(getString(R.string.b38), file)));
-        a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-            Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-            write(file, PreferenceManager.getDefaultSharedPreferences(getActivity()).getAll());
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
+                Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
+                DatabaseFragment.this.write(file, PreferenceManager.getDefaultSharedPreferences(DatabaseFragment.this.getActivity()).getAll());
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
-    private void a16(String file) {
+    private void a16(final String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = () -> {
-            ArrayList<SDMS> al = new ArrayList<>();
-            SearchHelper d1 = SearchHelper.getInstance(getActivity().getApplicationContext());
-            Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
-            if (res.getCount() == 0) {
-                getActivity().runOnUiThread(() -> g(getString(R.string.z31)));
-            } else {
-                while (res.moveToNext()) {
-                    al.add(new SDMS(res.getString(1)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                ArrayList<SDMS> al = new ArrayList<>();
+                SearchHelper d1 = SearchHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
+                        }
+                    });
+                } else {
+                    while (res.moveToNext()) {
+                        al.add(new SDMS(res.getString(1)));
+                    }
+                    DatabaseFragment.this.write(file, al);
                 }
-                write(file, al);
+                res.close();
             }
-            res.close();
         };
         new Thread(p15).start();
     }
@@ -236,32 +299,52 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Search_" + format() + ".bac";
+        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Search_" + format() + ".bac";
         a.setMessage(Html.b(String.format(getString(R.string.b40), file)));
-        a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            a16(file);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                DatabaseFragment.this.a16(file);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
-    private void a20(String file) {
+    private void a20(final String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = () -> {
-            ArrayList<HDMS> al = new ArrayList<>();
-            HistoryHelper d1 = HistoryHelper.getInstance(getActivity().getApplicationContext());
-            Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
-            if (res.getCount() == 0) {
-                getActivity().runOnUiThread(() -> g(getString(R.string.z31)));
-            } else {
-                while (res.moveToNext()) {
-                    al.add(new HDMS(res.getString(1), res.getString(2), res.getLong(3)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                ArrayList<HDMS> al = new ArrayList<>();
+                HistoryHelper d1 = HistoryHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
+                        }
+                    });
+                } else {
+                    while (res.moveToNext()) {
+                        al.add(new HDMS(res.getString(1), res.getString(2), res.getLong(3)));
+                    }
+                    DatabaseFragment.this.write(file, al);
                 }
-                write(file, al);
+                res.close();
             }
-            res.close();
         };
         new Thread(p15).start();
     }
@@ -270,32 +353,52 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/History_" + format() + ".bac";
+        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/History_" + format() + ".bac";
         a.setMessage(Html.b(String.format(getString(R.string.c22), file)));
-        a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            a20(file);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                DatabaseFragment.this.a20(file);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
-    private void b4(String file) {
+    private void b4(final String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = () -> {
-            BookmarkHelper d1 = BookmarkHelper.getInstance(getActivity().getApplicationContext());
-            Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
-            if (res.getCount() == 0) {
-                getActivity().runOnUiThread(() -> g(getString(R.string.z31)));
-            } else {
-                ArrayList<BDMS> al = new ArrayList<>();
-                while (res.moveToNext()) {
-                    al.add(new BDMS(res.getString(1), res.getString(2)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                BookmarkHelper d1 = BookmarkHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
+                        }
+                    });
+                } else {
+                    ArrayList<BDMS> al = new ArrayList<>();
+                    while (res.moveToNext()) {
+                        al.add(new BDMS(res.getString(1), res.getString(2)));
+                    }
+                    DatabaseFragment.this.write(file, al);
                 }
-                write(file, al);
+                res.close();
             }
-            res.close();
         };
         new Thread(p15).start();
     }
@@ -304,32 +407,52 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Bookmarks_" + format() + ".bac";
+        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Bookmarks_" + format() + ".bac";
         a.setMessage(Html.b(String.format(getString(R.string.c24), file)));
-        a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            b4(file);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                DatabaseFragment.this.b4(file);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
-    private void b8(String file) {
+    private void b8(final String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = () -> {
-            DownloadHelper d1 = DownloadHelper.getInstance(getActivity().getApplicationContext());
-            Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
-            if (res.getCount() == 0) {
-                getActivity().runOnUiThread(() -> g(getString(R.string.z31)));
-            } else {
-                ArrayList<DDMS> al = new ArrayList<>();
-                while (res.moveToNext()) {
-                    al.add(new DDMS(res.getString(1), res.getString(2), res.getInt(3), res.getString(4), res.getString(5)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                DownloadHelper d1 = DownloadHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
+                        }
+                    });
+                } else {
+                    ArrayList<DDMS> al = new ArrayList<>();
+                    while (res.moveToNext()) {
+                        al.add(new DDMS(res.getString(1), res.getString(2), res.getInt(3), res.getString(4), res.getString(5)));
+                    }
+                    DatabaseFragment.this.write(file, al);
                 }
-                write(file, al);
+                res.close();
             }
-            res.close();
         };
         new Thread(p15).start();
     }
@@ -338,32 +461,52 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Downloads_" + format() + ".bac";
+        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Downloads_" + format() + ".bac";
         a.setMessage(Html.b(String.format(getString(R.string.z34), file)));
-        a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            b8(file);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                DatabaseFragment.this.b8(file);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
-    private void b12(String file) {
+    private void b12(final String file) {
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         Files.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = () -> {
-            PermissionHelper d1 = PermissionHelper.getInstance(getActivity().getApplicationContext());
-            Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
-            if (res.getCount() == 0) {
-                getActivity().runOnUiThread(() -> g(getString(R.string.z31)));
-            } else {
-                ArrayList<PDMS> al = new ArrayList<>();
-                while (res.moveToNext()) {
-                    al.add(new PDMS(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                PermissionHelper d1 = PermissionHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
+                        }
+                    });
+                } else {
+                    ArrayList<PDMS> al = new ArrayList<>();
+                    while (res.moveToNext()) {
+                        al.add(new PDMS(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
+                    }
+                    DatabaseFragment.this.write(file, al);
                 }
-                write(file, al);
+                res.close();
             }
-            res.close();
         };
         new Thread(p15).start();
     }
@@ -372,13 +515,23 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Permissions_" + format() + ".bac";
+        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Permissions_" + format() + ".bac";
         a.setMessage(Html.b(String.format(getString(R.string.z36), file)));
-        a.setPositiveButton(getString(R.string.q14), (a12, intetg) -> {
-            b12(file);
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                DatabaseFragment.this.b12(file);
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -396,19 +549,35 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         return sdf.format(new Date());
     }
 
-    private void write(String sg, Object al) {
+    private void write(final String sg, final Object al) {
         if (Build.VERSION.SDK_INT < 29) {
-            Runnable re = () -> {
-                try {
+            Runnable re = new Runnable() {
+
+            @Override
+                public void run() {
+                    try {
                         FileOutputStream fos = new FileOutputStream(sg);
                         ObjectOutputStream oos = new ObjectOutputStream(fos);
                         oos.writeObject(al);
                         oos.close();
                         fos.close();
-                        getActivity().runOnUiThread(() -> g(getString(R.string.b25)));
-                } catch (Exception en) {
-                    en.printStackTrace();
-                    getActivity().runOnUiThread(() -> d(getString(R.string.b26)));
+                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.b25));
+                            }
+                        });
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                            }
+                        });
+                    }
                 }
             };
             new Thread(re).start();
@@ -430,7 +599,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
 
     private class R7 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

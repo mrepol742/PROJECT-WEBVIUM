@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -31,6 +32,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.URLUtil;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -83,99 +85,103 @@ public class HIST extends BaseActivity {
     public static final int ASSETLINKS = 9;
     public static final int SITEMAPS = 10;
 
-    final MenuItem.OnMenuItemClickListener d = a1 -> {
-        try {
-            String a5 = w15.c(b).ls;
-            String a2 = w15.c(b).ls0;
-            long a4 = w15.c(b).ls2;
-            switch (a1.getItemId()) {
-                case 1:
-                    b(a2);
-                    return true;
-                case 2:
-                    Clipboard.a(HIST.this, a2);
-                    f(getString(R.string.k9));
-                    return true;
-                case 3:
-                    c(a2, a5, a4);
-                    return true;
-                case 4:
+    final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
-                    h(a5, a2);
-                    return true;
-                case 9:
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            try {
+                String a5 = w15.c(b).ls;
+                String a2 = w15.c(b).ls0;
+                long a4 = w15.c(b).ls2;
+                switch (a1.getItemId()) {
+                    case 1:
+                        HIST.this.b(a2);
+                        return true;
+                    case 2:
+                        Clipboard.a(HIST.this, a2);
+                        HIST.this.f(HIST.this.getString(R.string.k9));
+                        return true;
+                    case 3:
+                        HIST.this.c(a2, a5, a4);
+                        return true;
+                    case 4:
 
-                    Clipboard.a(HIST.this, a5);
-                    f(getString(R.string.k9));
-                    return true;
-                case 6:
-                    a(a2, a5);
-                    return true;
+                        HIST.this.h(a5, a2);
+                        return true;
+                    case 9:
 
-                case 5:
-                    l(a2, 7);
-                    return true;
-                case 13:
-                    c43(a2);
-                    return true;
-                case 15:
+                        Clipboard.a(HIST.this, a5);
+                        HIST.this.f(HIST.this.getString(R.string.k9));
+                        return true;
+                    case 6:
+                        HIST.this.a(a2, a5);
+                        return true;
 
-                    l(a2, 0);
+                    case 5:
+                        HIST.this.l(a2, 7);
+                        return true;
+                    case 13:
+                        HIST.this.c43(a2);
+                        return true;
+                    case 15:
 
-                    return true;
-                case 16:
+                        HIST.this.l(a2, 0);
 
-                    l(a2, 1);
+                        return true;
+                    case 16:
 
-                    return true;
-                case 17:
+                        HIST.this.l(a2, 1);
 
-                    l(a2, 2);
+                        return true;
+                    case 17:
 
-                    return true;
-                case 18:
+                        HIST.this.l(a2, 2);
 
-                    l(a2, 3);
+                        return true;
+                    case 18:
 
-                    return true;
-                case 19:
+                        HIST.this.l(a2, 3);
 
-                    l(a2, 5);
+                        return true;
+                    case 19:
 
-                    return true;
-                case 20:
+                        HIST.this.l(a2, 5);
 
-                    l(a2, 4);
+                        return true;
+                    case 20:
 
-                    return true;
-                case 21:
+                        HIST.this.l(a2, 4);
 
-                    l(a2, 6);
+                        return true;
+                    case 21:
 
-                    return true;
-                case 22:
+                        HIST.this.l(a2, 6);
 
-                    l(a2, 8);
+                        return true;
+                    case 22:
 
-                    return true;
-                case 23:
-                    b(a5);
+                        HIST.this.l(a2, 8);
 
-                    return true;
-                case 24:
-                    o(a5, a2, a4);
-                    break;
-                case 25:
-                    l(a2, ASSETLINKS);
-                    return true;
-                case 26:
-                    l(a2, SITEMAPS);
-                    return true;
+                        return true;
+                    case 23:
+                        HIST.this.b(a5);
+
+                        return true;
+                    case 24:
+                        HIST.this.o(a5, a2, a4);
+                        break;
+                    case 25:
+                        HIST.this.l(a2, ASSETLINKS);
+                        return true;
+                    case 26:
+                        HIST.this.l(a2, SITEMAPS);
+                        return true;
+                }
+            } catch (NoSuchItemToGet l4) {
+                l4.printStackTrace();
             }
-        } catch (NoSuchItemToGet l4) {
-            l4.printStackTrace();
+            return false;
         }
-        return false;
     };
 
     @Override
@@ -200,10 +206,14 @@ public class HIST extends BaseActivity {
                 "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
-            runOnUiThread(() -> {
-                f4.setVisibility(View.VISIBLE);
-                a3.setVisibility(View.GONE);
-                f2.setClickable(true);
+            runOnUiThread(new Runnable() {
+
+            @Override
+                public void run() {
+                    f4.setVisibility(View.VISIBLE);
+                    a3.setVisibility(View.GONE);
+                    f2.setClickable(true);
+                }
             });
         } else {
             al = new ArrayList<>();
@@ -212,11 +222,15 @@ public class HIST extends BaseActivity {
                         res.getString(2),
                         res.getLong(3)));
             }
-            runOnUiThread(() -> {
-                f4.setVisibility(View.GONE);
-                a3.setVisibility(View.VISIBLE);
-                o22.setVisibility(View.VISIBLE);
-                Animation.animate(this, R.anim.i, o22);
+            runOnUiThread(new Runnable() {
+
+            @Override
+                public void run() {
+                    f4.setVisibility(View.GONE);
+                    a3.setVisibility(View.VISIBLE);
+                    o22.setVisibility(View.VISIBLE);
+                    Animation.animate(HIST.this, R.anim.i, o22);
+                }
             });
         }
         res.close();
@@ -250,30 +264,56 @@ public class HIST extends BaseActivity {
             f4.setTextColor(g);
         }
         a1.setNavigationIcon(R.drawable.a2);
-        a1.setNavigationOnClickListener(view -> finish());
+        a1.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                HIST.this.finish();
+            }
+        });
         if (al != null) {
             w15 = new HistoryAdapter(this, al);
             a3.setAdapter(w15);
-            a3.setOnItemClickListener((a4, b, c, d) -> {
-                try {
-                    Intents.d("value", w15.c(c).ls0, HIST.this);
-                } catch (NoSuchItemToGet a34) {
-                    a34.printStackTrace();
+            a3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+                public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
+                    try {
+                        Intents.d("value", w15.c(c).ls0, HIST.this);
+                    } catch (NoSuchItemToGet a34) {
+                        a34.printStackTrace();
+                    }
+                    HIST.this.finish();
                 }
-                finish();
             });
-            a3.setOnItemLongClickListener((adapterView, view, i, l) -> {
-                n(view, i);
-                return true;
+            a3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    n(view, i);
+                    return true;
+                }
             });
         }
         o22.setBackgroundResource(R.drawable.c6);
         o22.setImageResource(R.drawable.a23);
-        o22.setOnClickListener(view -> i());
+        o22.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                i();
+            }
+        });
         o22.setVisibility(View.GONE);
         o21.setBackgroundResource(R.drawable.c6);
         o21.setImageResource(R.drawable.a24);
-        o21.setOnClickListener(view -> finish());
+        o21.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
@@ -319,11 +359,21 @@ public class HIST extends BaseActivity {
             ed.setText(hl.getHost());
         }
         ed1.setText(a23);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            shrt(ed.getText().toString(), ed1.getText().toString(), R.mipmap.x);
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                shrt(ed.getText().toString(), ed1.getText().toString(), R.mipmap.x);
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -363,18 +413,28 @@ public class HIST extends BaseActivity {
         startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + a + "\"")));
     }
 
-    private void c(String b, String kl, long b1) {
+    private void c(final String b, final String kl, final long b1) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.h18));
         a.setMessage(String.format(getString(R.string.l7), "\"" + b + "\""));
-        a.setPositiveButton(getString(R.string.i6), (a1, intetg) -> {
-            d1.b(b, kl, b1);
-            f(String.format(getString(R.string.h5), b));
-            k();
-            a1.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                d1.b( b, kl, b1);
+                HIST.this.f(String.format(HIST.this.getString(R.string.h5), b));
+                HIST.this.k();
+                a1.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a12, intetg) -> a12.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                a12.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -422,12 +482,22 @@ public class HIST extends BaseActivity {
             ed.setText(hl.getHost());
         }
         ed1.setText(asd);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            g(ed.getText().toString(), ed1.getText().toString());
-            f(getString(R.string.t2));
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                HIST.this.g(ed.getText().toString(), ed1.getText().toString());
+                HIST.this.f(HIST.this.getString(R.string.t2));
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -465,58 +535,84 @@ public class HIST extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.h18));
         a.setMessage(getString(R.string.t5));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            d1.delete();
-            f(getString(R.string.t1));
-            f4.setVisibility(View.VISIBLE);
-            a3.setVisibility(View.GONE);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
-            o22.setVisibility(View.GONE);
-            f2.setClickable(true);
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                d1.delete();
+                HIST.this.f(HIST.this.getString(R.string.t1));
+                f4.setVisibility(View.VISIBLE);
+                a3.setVisibility(View.GONE);
 
+                o22.setVisibility(View.GONE);
+                f2.setClickable(true);
+
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
     private void k() {
-        Runnable p15 = () -> {
-            ArrayList<HistoryDataModel> al = new ArrayList<>();
-            Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    Sqlite.TABLE_HISTORY +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC", null);
-            if (res.getCount() == 0) {
-                runOnUiThread(() -> {
-                    f4.setVisibility(View.VISIBLE);
-                    a3.setVisibility(View.GONE);
-                    o22.setVisibility(View.GONE);
-                    f2.setClickable(true);
-                });
-            } else {
-                while (res.moveToNext()) {
-                    al.add(new HistoryDataModel(res.getString(1),
-                            res.getString(2),
-                            res.getLong(3)));
-                }
-                if (al.size() == 0) {
-                    runOnUiThread(() -> {
-                        f4.setVisibility(View.VISIBLE);
-                        a3.setVisibility(View.GONE);
-                        o22.setVisibility(View.GONE);
-                        f2.setClickable(true);
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final ArrayList<HistoryDataModel> al = new ArrayList<>();
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
+                        Sqlite.TABLE_HISTORY +
+                        " ORDER BY " +
+                        "_id" +
+                        " DESC", null);
+                if (res.getCount() == 0) {
+                    HIST.this.runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            f4.setVisibility(View.VISIBLE);
+                            a3.setVisibility(View.GONE);
+                            o22.setVisibility(View.GONE);
+                            f2.setClickable(true);
+                        }
                     });
                 } else {
-                    runOnUiThread(() -> {
-                        w15.a(al);
-                        w15.notifyDataSetChanged();
-                        f4.setVisibility(View.GONE);
-                        a3.setVisibility(View.VISIBLE);
-                    });
+                    while (res.moveToNext()) {
+                        al.add(new HistoryDataModel(res.getString(1),
+                                res.getString(2),
+                                res.getLong(3)));
+                    }
+                    if (al.size() == 0) {
+                        HIST.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                f4.setVisibility(View.VISIBLE);
+                                a3.setVisibility(View.GONE);
+                                o22.setVisibility(View.GONE);
+                                f2.setClickable(true);
+                            }
+                        });
+                    } else {
+                        HIST.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                w15.a(al);
+                                w15.notifyDataSetChanged();
+                                f4.setVisibility(View.GONE);
+                                a3.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
                 }
+                res.close();
             }
-            res.close();
         };
         new Thread(p15).start();
     }
@@ -580,32 +676,36 @@ public class HIST extends BaseActivity {
         bn.setText(getString(R.string.i6));
         ti.setText(String.format(getString(R.string.f31), "https://mrepol742.github.io", "http://mrepol742.github.io"));
         final AlertDialog g = a.create();
-        bn.setOnClickListener(view -> {
-            String a1 = ed.getText().toString();
-            if (type == SOURCE_CODE) {
-                Intent it = new Intent(HIST.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
-                startActivity(it);
-            } else if (type == HEADERS) {
-                c126(a1);
-            } else if (type == ROBOTS) {
-                Intent it = new Intent(HIST.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_ROBOTS);
-                startActivity(it);
-            } else if (type == ASSETLINKS) {
-                Intent it = new Intent(HIST.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
-                startActivity(it);
-            } else if (type == SITEMAPS) {
-                Intent it = new Intent(HIST.this, TOOL.class);
-                it.putExtra("dat", a1);
-                it.putExtra("id", TOOL.TOOL_SITEMAPS);
-                startActivity(it);
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String a1 = ed.getText().toString();
+                if (type == SOURCE_CODE) {
+                    Intent it = new Intent(HIST.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_SOURCE_CODE);
+                    HIST.this.startActivity(it);
+                } else if (type == HEADERS) {
+                    HIST.this.c126(a1);
+                } else if (type == ROBOTS) {
+                    Intent it = new Intent(HIST.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_ROBOTS);
+                    HIST.this.startActivity(it);
+                } else if (type == ASSETLINKS) {
+                    Intent it = new Intent(HIST.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_ASSET_LINKS);
+                    HIST.this.startActivity(it);
+                } else if (type == SITEMAPS) {
+                    Intent it = new Intent(HIST.this, TOOL.class);
+                    it.putExtra("dat", a1);
+                    it.putExtra("id", TOOL.TOOL_SITEMAPS);
+                    HIST.this.startActivity(it);
+                }
+                g.dismiss();
             }
-            g.dismiss();
         });
         ed.addTextChangedListener(new TextWatcher() {
 
@@ -631,7 +731,7 @@ public class HIST extends BaseActivity {
         g.show();
     }
 
-    public void c126(String url) {
+    public void c126(final String url) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -652,9 +752,19 @@ public class HIST extends BaseActivity {
         }
         ti.setText(getString(R.string.v13));
         ed.setText(url);
-        Runnable p15 = () -> {
-            final String sg = Stream.d(url, getString(R.string.c33));
-            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final String sg = Stream.d(url, HIST.this.getString(R.string.c33));
+                HIST.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        ti.setText(Html.b(sg));
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
@@ -663,15 +773,29 @@ public class HIST extends BaseActivity {
             bn.setBackgroundResource(R.drawable.c11);
         }
         bn.setText(getString(R.string.i6));
-        bn.setOnClickListener(view -> {
-            String ab = ed.getText().toString();
-            ti.setText(getString(R.string.v13));
-            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
-                Runnable p151 = () -> {
-                    final String sg = Stream.d(ab, getString(R.string.c33));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p151).start();
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final String ab = ed.getText().toString();
+                ti.setText(HIST.this.getString(R.string.v13));
+                if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
+                    Runnable p151 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            final String sg = Stream.d(ab, HIST.this.getString(R.string.c33));
+                            HIST.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(Html.b(sg));
+                                }
+                            });
+                        }
+                    };
+                    new Thread(p151).start();
+                }
             }
         });
         ed.addTextChangedListener(new TextWatcher() {
@@ -735,7 +859,7 @@ public class HIST extends BaseActivity {
         pm.show();
     }
 
-    private void o(String oldTitle, String oldURl, long oldTIme) {
+    private void o(final String oldTitle, final String oldURl, final long oldTIme) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.z, null);
@@ -765,12 +889,22 @@ public class HIST extends BaseActivity {
         ed.setText(oldTitle);
 
         ed1.setText(oldURl);
-        a.setPositiveButton(getString(R.string.i6), (a2, it) -> {
-            d1.i(oldTitle, oldURl, oldTIme, ed.getText().toString(), ed1.getText().toString());
-            k();
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int it) {
+                d1.i(oldTitle, oldURl, oldTIme, ed.getText().toString(), ed1.getText().toString());
+                HIST.this.k();
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -805,7 +939,7 @@ public class HIST extends BaseActivity {
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
-    public void c43(String url) {
+    public void c43(final String url) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.b8, null);
@@ -826,9 +960,19 @@ public class HIST extends BaseActivity {
         }
         ti.setText(getString(R.string.v13));
         ed.setText(url);
-        Runnable p15 = () -> {
-            final String sg = Stream.a(url, getString(R.string.c33), getString(R.string.g25));
-            runOnUiThread(() -> ti.setText(Html.b(sg)));
+        Runnable p15 = new Runnable() {
+
+            @Override
+            public void run() {
+                final String sg = Stream.a(url, HIST.this.getString(R.string.c33), HIST.this.getString(R.string.g25));
+                HIST.this.runOnUiThread(new Runnable() {
+
+            @Override
+                    public void run() {
+                        ti.setText(Html.b(sg));
+                    }
+                });
+            }
         };
         new Thread(p15).start();
         bn.setText(getString(R.string.i6));
@@ -837,16 +981,30 @@ public class HIST extends BaseActivity {
         } else {
             bn.setBackgroundResource(R.drawable.c11);
         }
-        bn.setOnClickListener(view -> {
-            String ab = ed.getText().toString();
-            ti.setText(getString(R.string.v13));
+        bn.setOnClickListener(new View.OnClickListener() {
 
-            if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
-                Runnable p151 = () -> {
-                    final String sg = Stream.a(ab, getString(R.string.c33), getString(R.string.g25));
-                    runOnUiThread(() -> ti.setText(Html.b(sg)));
-                };
-                new Thread(p151).start();
+            @Override
+            public void onClick(View view) {
+                final String ab = ed.getText().toString();
+                ti.setText(HIST.this.getString(R.string.v13));
+
+                if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
+                    Runnable p151 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            final String sg = Stream.a(ab, HIST.this.getString(R.string.c33), HIST.this.getString(R.string.g25));
+                            HIST.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                public void run() {
+                                    ti.setText(Html.b(sg));
+                                }
+                            });
+                        }
+                    };
+                    new Thread(p151).start();
+                }
             }
         });
         ed.addTextChangedListener(new TextWatcher() {

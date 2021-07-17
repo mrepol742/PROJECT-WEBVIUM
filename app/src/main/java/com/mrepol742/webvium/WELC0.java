@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
@@ -61,7 +62,7 @@ a2();
 
     @SuppressLint("ClickableViewAccessibility")
     public void a2() {
-        View c = View.inflate(this, R.layout.a3, null);
+        final View c = View.inflate(this, R.layout.a3, null);
         TextView ed = c.findViewById(R.id.n23);
         final Button bn = c.findViewById(R.id.n24);
         TextView ed1 = c.findViewById(R.id.o28);
@@ -76,29 +77,43 @@ a2();
             ed.setTextColor(Resources.getColor(this, R.color.b));
             ed1.setTextColor(Resources.getColor(this, R.color.b));
         }
-        ScrollView sv = c.findViewById(R.id.j);
+        final ScrollView sv = c.findViewById(R.id.j);
         bn.setTypeface(type(Typeface.BOLD));
         bn.setAllCaps(true);
         sv.getViewTreeObserver()
-                .addOnScrollChangedListener(() -> {
-                    if (sv.getChildAt(0).getBottom()
-                            <= (sv.getHeight() + sv.getScrollY())) {
-                        if (!bn.getText().toString().equals(getString(R.string.n25))) {
-                            com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-                            bn.setText(getString(R.string.n25));
-                            bn.setBackgroundResource(R.drawable.c10);
-                            bn.setOnClickListener(view -> {
-                                fl.removeView(c);
-                                a3();
-                                SharedPreferences sp = getSharedPreferences("ag233", 0);
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putLong("ag233", new Date().getTime());
-                                editor.apply();
-                            });
+                .addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+
+            @Override
+                    public void onScrollChanged() {
+                        if (sv.getChildAt(0).getBottom()
+                                <= (sv.getHeight() + sv.getScrollY())) {
+                            if (!bn.getText().toString().equals(WELC0.this.getString(R.string.n25))) {
+                                com.mrepol742.webvium.view.Animation.animate(WELC0.this, R.anim.i, bn);
+                                bn.setText(WELC0.this.getString(R.string.n25));
+                                bn.setBackgroundResource(R.drawable.c10);
+                                bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                                    public void onClick(View view) {
+                                        fl.removeView(c);
+                                        WELC0.this.a3();
+                                        SharedPreferences sp = WELC0.this.getSharedPreferences("ag233", 0);
+                                        SharedPreferences.Editor editor = sp.edit();
+                                        editor.putLong("ag233", new Date().getTime());
+                                        editor.apply();
+                                    }
+                                });
+                            }
                         }
                     }
                 });
-        sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        sv.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         ed.setTypeface(type(Typeface.NORMAL));
         ed1.setTypeface(type(Typeface.BOLD));
         Html.a(ed, getString(R.string.n23));
@@ -107,7 +122,7 @@ a2();
 
     @SuppressLint("ClickableViewAccessibility")
     public void a3() {
-        View c = View.inflate(this, R.layout.a3, null);
+        final View c = View.inflate(this, R.layout.a3, null);
         TextView ed = c.findViewById(R.id.n23);
         final Button bn = c.findViewById(R.id.n24);
         TextView ed1 = c.findViewById(R.id.o28);
@@ -122,30 +137,44 @@ a2();
             ed.setTextColor(Resources.getColor(this, R.color.b));
             ed1.setTextColor(Resources.getColor(this, R.color.b));
         }
-        ScrollView sv = c.findViewById(R.id.j);
+        final ScrollView sv = c.findViewById(R.id.j);
         bn.setTypeface(type(Typeface.BOLD));
         bn.setAllCaps(true);
         sv.getViewTreeObserver()
-                .addOnScrollChangedListener(() -> {
-                    if (sv.getChildAt(0).getBottom()
-                            <= (sv.getHeight() + sv.getScrollY())) {
-                        if (!bn.getText().toString().equals(getString(R.string.n25))) {
-                            com.mrepol742.webvium.view.Animation.animate(this, R.anim.i, bn);
-                            bn.setText(getString(R.string.n25));
-                            bn.setBackgroundResource(R.drawable.c10);
-                            bn.setOnClickListener(view -> {
-                                fl.removeView(c);
-                                l3();
-                                l6();
-                                SharedPreferences sp = getSharedPreferences("ag233", 0);
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putLong("ag466", new Date().getTime());
-                                editor.apply();
-                            });
+                .addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+
+            @Override
+                    public void onScrollChanged() {
+                        if (sv.getChildAt(0).getBottom()
+                                <= (sv.getHeight() + sv.getScrollY())) {
+                            if (!bn.getText().toString().equals(WELC0.this.getString(R.string.n25))) {
+                                com.mrepol742.webvium.view.Animation.animate(WELC0.this, R.anim.i, bn);
+                                bn.setText(WELC0.this.getString(R.string.n25));
+                                bn.setBackgroundResource(R.drawable.c10);
+                                bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                                    public void onClick(View view) {
+                                        fl.removeView(c);
+                                        WELC0.this.l3();
+                                        WELC0.this.l6();
+                                        SharedPreferences sp = WELC0.this.getSharedPreferences("ag233", 0);
+                                        SharedPreferences.Editor editor = sp.edit();
+                                        editor.putLong("ag466", new Date().getTime());
+                                        editor.apply();
+                                    }
+                                });
+                            }
                         }
                     }
                 });
-        sv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        sv.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         ed.setTypeface(type(Typeface.NORMAL));
         ed1.setTypeface(type(Typeface.BOLD));
         Html.a(ed, getString(R.string.n24));

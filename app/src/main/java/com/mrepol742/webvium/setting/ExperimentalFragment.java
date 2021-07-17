@@ -17,25 +17,15 @@
 
 package com.mrepol742.webvium.setting;
 
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
-import com.mrepol742.webvium.MAIN;
-import com.mrepol742.webvium.PREF;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
-import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.os.CountDownTimer;
 
 public class ExperimentalFragment extends BasePreferenceFragment {
 
-    @Override
+            @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {

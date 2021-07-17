@@ -25,8 +25,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.R;
-
 import java.util.Objects;
 
 @SuppressWarnings("ALL")

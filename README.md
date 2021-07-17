@@ -1,3 +1,4 @@
+[//]: <> (AUTO GENERATED FILE)
 <p align="center">
  <img width="100px" src="https://github.com/mrepol742/PROJECT-WEBVIUM/blob/master/app/src/main/res/mipmap-xxxhdpi/c.png" align="center" alt="PROJECT-WEBVIUM" />
  <h2 align="center">PROJECT-WEBVIUM</h2>
@@ -5,13 +6,12 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Java-8-white.svg" />
+  <img src="https://img.shields.io/badge/Java-7-white.svg" />
   <img src="https://img.shields.io/badge/XML-blue.svg" />
    <img src="https://img.shields.io/badge/SQLite-gray.svg" />
-  <img src="https://img.shields.io/badge/HTML-5-orange.svg" />
+  <img src="https://img.shields.io/badge/HTML-orange.svg" />
   <img src="https://img.shields.io/badge/CSS-blue.svg" />
   <img src="https://img.shields.io/badge/JavaScript-green.svg" />
-  <img src="https://img.shields.io/badge/Firebase-yellow.svg" />
   <img src="https://img.shields.io/badge/Batch-black.svg" />
 </p>
 <p align="center">

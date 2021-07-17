@@ -21,11 +21,11 @@ import android.graphics.Bitmap;
 
 public class NewTabDataModel {
 
-    public Bitmap favicon;
-    public String title;
-    public String url;
+    public final Bitmap favicon;
+    public final String title;
+    public final String url;
 
-    public NewTabDataModel(Bitmap fav, String title, String ur) {
+    public NewTabDataModel(Bitmap fav, String title, String url) {
         this.favicon = fav;
         this.title = title;
         this.url = url;

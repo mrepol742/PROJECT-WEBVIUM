@@ -36,21 +36,29 @@ import com.mrepol742.webvium.os.CountDownTimer;
 
 public class AccessibilityFragment extends BasePreferenceFragment {
 
-    @Override
+            @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
 
             a5(R.xml.k);
             Preference l = findPreference("zoom");
-            l.setOnPreferenceClickListener(a -> {
-                t();
-                return true;
+            l.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    AccessibilityFragment.this.t();
+                    return true;
+                }
             });
             Preference a1 = findPreference("textS");
-            a1.setOnPreferenceClickListener(a -> {
-                Intents.a(getActivity(), TEXT.class);
-                return true;
+            a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.a(AccessibilityFragment.this.getActivity(), TEXT.class);
+                    return true;
+                }
             });
 
         } catch (Exception ex) {

@@ -41,7 +41,6 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.util.AppID;
-import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.File;
@@ -82,23 +81,27 @@ public class WELC extends BaseActivity {
         iv.startAnimation(d);
         timer = new A17a(5000, 5000);
         timer.start();
-        Runnable re = () -> {
-            try {
-                File fe = new File(StorageDirectory.getClasses(this));
-                if (!fe.exists()) {
-                    InputStream fos = getAssets().open(MAVEN_PRO);
-                    OutputStream d = new FileOutputStream(StorageDirectory.getClasses(this));
-                    byte[] e = new byte[1024];
-                    int f;
-                    while ((f = fos.read(e)) != -1) {
-                        d.write(e, 0, f);
+        Runnable re = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    File fe = new File(StorageDirectory.getClasses(WELC.this));
+                    if (!fe.exists()) {
+                        InputStream fos = WELC.this.getAssets().open(MAVEN_PRO);
+                        OutputStream d = new FileOutputStream(StorageDirectory.getClasses(WELC.this));
+                        byte[] e = new byte[1024];
+                        int f;
+                        while ((f = fos.read(e)) != -1) {
+                            d.write(e, 0, f);
+                        }
+                        d.flush();
+                        d.close();
+                        fos.close();
                     }
-                    d.flush();
-                    d.close();
-                    fos.close();
+                } catch (Exception en) {
+                    en.printStackTrace();
                 }
-            } catch (Exception en) {
-                en.printStackTrace();
             }
         };
         new Thread(re).start();

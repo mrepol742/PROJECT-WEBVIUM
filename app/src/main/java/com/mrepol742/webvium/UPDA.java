@@ -53,72 +53,76 @@ public class UPDA extends MainService {
     @Override
     public int onStartCommand(Intent a, int c, int d) {
         if (!Connectivity.isThereAnyInternetConnection(this)) {
-            Runnable runnable = () -> {
-                try {
-                    int b = Integer.parseInt(Package.e(this).replaceAll("\\.", ""));
-                    int newUpdate = Stream.i("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/newVersion.int?raw=true");
-                    if (newUpdate == 0) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.setTimeInMillis(System.currentTimeMillis());
-                        calendar.set(Calendar.HOUR_OF_DAY, 3);
-                        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                        PendingIntent it = PendingIntent.getService(this, 0, new Intent(this, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
-                    } else if (newUpdate > b) {
-                        MainNotification.b(this, getString(R.string.x11), getString(R.string.z2));
-                        android.app.Notification.Builder m = Notifications.a(this, getString(R.string.x11));
-                        m.setSmallIcon(R.drawable.j);
-                        android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
-                        bigText.bigText(getString(R.string.x12));
-                        bigText.setBigContentTitle(getString(R.string.x11));
-                        bigText.setSummaryText(getString(R.string.n21));
-                        m.setContentTitle(getString(R.string.x11));
-                        m.setContentText(getString(R.string.x12));
-                        m.setStyle(bigText);
-                        m.setColor(Resources.getColor(this, R.color.a));
-                        m.setAutoCancel(sp.getBoolean("eac", true));
-                        m.setDefaults(android.app.Notification.DEFAULT_ALL);
-                        if (Build.VERSION.SDK_INT < 26) {
-                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("1x")) {
-                                m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
-                            }
-                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("7x")) {
-                                m.setPriority(android.app.Notification.PRIORITY_HIGH);
-                            }
-                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("30x")) {
-                                m.setPriority(android.app.Notification.PRIORITY_LOW);
-                            }
-                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("60x")) {
-                                m.setPriority(android.app.Notification.PRIORITY_MAX);
-                            }
-                            if (Objects.requireNonNull(sp.getString("py", "1x")).equals("120x")) {
-                                m.setPriority(android.app.Notification.PRIORITY_MIN);
-                            }
-                        }
-                        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("1y")) {
+            Runnable runnable = new Runnable() {
 
-                            m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
-                        }
-                        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("7y")) {
-                            m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
-                        }
-                        if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("30y")) {
-                            m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
-                        }
-                        m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.j));
-                        Intent j = new Intent(this, MAIN.class);
-                        j.putExtra("value", "https://mrepol742.github.io/PROJECT-WEBVIUM");
-                        PendingIntent k = PendingIntent.getActivity(this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
-                        m.setContentIntent(k);
+            @Override
+                public void run() {
+                    try {
+                        int b = Integer.parseInt(Package.e(UPDA.this).replaceAll("\\.", ""));
+                        int newUpdate = Stream.i("https://github.com/" + UPDA.this.getString(R.string.github_username) + "/" + UPDA.this.getString(R.string.github_repository) + "/blob/" + UPDA.this.getString(R.string.github_branch) + "/" + UPDA.this.getString(R.string.github_path) + "/newVersion.int?raw=true");
+                        if (newUpdate == 0) {
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTimeInMillis(System.currentTimeMillis());
+                            calendar.set(Calendar.HOUR_OF_DAY, 3);
+                            AlarmManager alarmMgr = (AlarmManager) UPDA.this.getSystemService(Context.ALARM_SERVICE);
+                            PendingIntent it = PendingIntent.getService(UPDA.this, 0, new Intent(UPDA.this, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
+                        } else if (newUpdate > b) {
+                            MainNotification.b(UPDA.this, UPDA.this.getString(R.string.x11), UPDA.this.getString(R.string.z2));
+                            android.app.Notification.Builder m = Notifications.a(UPDA.this, UPDA.this.getString(R.string.x11));
+                            m.setSmallIcon(R.drawable.j);
+                            android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
+                            bigText.bigText(UPDA.this.getString(R.string.x12));
+                            bigText.setBigContentTitle(UPDA.this.getString(R.string.x11));
+                            bigText.setSummaryText(UPDA.this.getString(R.string.n21));
+                            m.setContentTitle(UPDA.this.getString(R.string.x11));
+                            m.setContentText(UPDA.this.getString(R.string.x12));
+                            m.setStyle(bigText);
+                            m.setColor(Resources.getColor(UPDA.this, R.color.a));
+                            m.setAutoCancel(sp.getBoolean("eac", true));
+                            m.setDefaults(android.app.Notification.DEFAULT_ALL);
+                            if (Build.VERSION.SDK_INT < 26) {
+                                if (Objects.requireNonNull(sp.getString("py", "1x")).equals("1x")) {
+                                    m.setPriority(android.app.Notification.PRIORITY_DEFAULT);
+                                }
+                                if (Objects.requireNonNull(sp.getString("py", "1x")).equals("7x")) {
+                                    m.setPriority(android.app.Notification.PRIORITY_HIGH);
+                                }
+                                if (Objects.requireNonNull(sp.getString("py", "1x")).equals("30x")) {
+                                    m.setPriority(android.app.Notification.PRIORITY_LOW);
+                                }
+                                if (Objects.requireNonNull(sp.getString("py", "1x")).equals("60x")) {
+                                    m.setPriority(android.app.Notification.PRIORITY_MAX);
+                                }
+                                if (Objects.requireNonNull(sp.getString("py", "1x")).equals("120x")) {
+                                    m.setPriority(android.app.Notification.PRIORITY_MIN);
+                                }
+                            }
+                            if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("1y")) {
 
-                        PendingIntent pi23 = PendingIntent.getActivity(this, 0, j, PendingIntent.FLAG_UPDATE_CURRENT);
-                        m.addAction(new android.app.Notification.Action(R.drawable.c2, getString(R.string.b32), pi23));
+                                m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
+                            }
+                            if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("7y")) {
+                                m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+                            }
+                            if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("30y")) {
+                                m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
+                            }
+                            m.setLargeIcon(BitmapFactory.decodeResource(UPDA.this.getResources(), R.drawable.j));
+                            Intent j = new Intent(UPDA.this, MAIN.class);
+                            j.putExtra("value", "https://mrepol742.github.io/PROJECT-WEBVIUM");
+                            PendingIntent k = PendingIntent.getActivity(UPDA.this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
+                            m.setContentIntent(k);
 
-                        NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                        nmc.notify(Notifications.c, m.build());
+                            PendingIntent pi23 = PendingIntent.getActivity(UPDA.this, 0, j, PendingIntent.FLAG_UPDATE_CURRENT);
+                            m.addAction(new android.app.Notification.Action(R.drawable.c2, UPDA.this.getString(R.string.b32), pi23));
+
+                            NotificationManager nmc = (NotificationManager) UPDA.this.getSystemService(Context.NOTIFICATION_SERVICE);
+                            nmc.notify(Notifications.c, m.build());
+                        }
+                    } catch (PackageManager.NameNotFoundException w) {
+                        w.printStackTrace();
                     }
-                } catch (PackageManager.NameNotFoundException w) {
-                    w.printStackTrace();
                 }
             };
             new Thread(runnable).start();

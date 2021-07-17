@@ -37,7 +37,7 @@ import com.mrepol742.webvium.text.Html;
 // @Class Credits
 public class CRED extends BaseActivity {
 
-    @Override
+            @Override
     protected void onCreate(Bundle a) {
         theme(T_WELCOME_SCREEN);
         super.onCreate(a);

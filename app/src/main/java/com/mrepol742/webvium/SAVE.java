@@ -30,7 +30,6 @@ import android.preference.PreferenceManager;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainService;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
@@ -47,32 +46,36 @@ import java.util.Objects;
 // @Class SaveLinkService
 public class SAVE extends MainService {
 
-    @Override
+            @Override
     public int onStartCommand(final Intent b34, int c5, int fl) {
         if (!Connectivity.isThereAnyInternetConnection(this)) {
-            Runnable runnable = () -> {
-                try {
-                    String a = b34.getStringExtra("a");
-                    String b = b34.getStringExtra("b");
-                    a1(a, b);
-                    URL b5 = new URL(b);
-                    File a2 = new File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
-                    if (!a2.exists()) {
-                        if (a2.createNewFile()) {
-                            BufferedReader c = new BufferedReader(new InputStreamReader(b5.openStream()));
-                            FileWriter fr = new FileWriter(a2, true);
-                            BufferedWriter br = new BufferedWriter(fr);
-                            String f;
-                            while ((f = c.readLine()) != null) {
-                                br.write(f);
+            Runnable runnable = new Runnable() {
+
+            @Override
+                public void run() {
+                    try {
+                        String a = b34.getStringExtra("a");
+                        String b = b34.getStringExtra("b");
+                        SAVE.this.a1(a, b);
+                        URL b5 = new URL(b);
+                        File a2 = new File(StorageDirectory.getWebviumDir() + "/Downloads/" + a);
+                        if (!a2.exists()) {
+                            if (a2.createNewFile()) {
+                                BufferedReader c = new BufferedReader(new InputStreamReader(b5.openStream()));
+                                FileWriter fr = new FileWriter(a2, true);
+                                BufferedWriter br = new BufferedWriter(fr);
+                                String f;
+                                while ((f = c.readLine()) != null) {
+                                    br.write(f);
+                                }
+                                br.close();
+                                fr.close();
+                                SAVE.this.a2(StorageDirectory.getWebviumDir() + "/Downloads/" + a, a);
                             }
-                            br.close();
-                            fr.close();
-                            a2(StorageDirectory.getWebviumDir() + "/Downloads/" + a, a);
                         }
+                    } catch (IOException mu) {
+                        mu.printStackTrace();
                     }
-                } catch (IOException mu) {
-                    mu.printStackTrace();
                 }
             };
             new Thread(runnable).start();

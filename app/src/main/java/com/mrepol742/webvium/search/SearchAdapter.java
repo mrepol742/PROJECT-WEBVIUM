@@ -70,6 +70,7 @@ public class SearchAdapter extends MainBaseAdapter {
 
     public Filter getFilter() {
         return new Filter() {
+
             @Override
             @SuppressWarnings("unchecked")
             protected void publishResults(CharSequence constraint, FilterResults results) {

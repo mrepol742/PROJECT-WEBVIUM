@@ -23,6 +23,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -37,6 +38,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -156,17 +158,33 @@ public class MANG extends BaseActivity {
         g5.setNavigationIcon(R.drawable.a2);
         g6.setTypeface(type(Typeface.BOLD));
         g6.setText(getString(R.string.l14));
-        g5.setNavigationOnClickListener(view -> finishAndRemoveTask());
+        g5.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MANG.this.finishAndRemoveTask();
+            }
+        });
         g5.setElevation(5);
         w19 = new ManageSpaceAdapter(this, new ManageSpaceDataModel(a, b, c, d));
         a3.setAdapter(w19);
-        a3.setOnItemClickListener((a, b, c, d) -> i(c));
+        a3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> a, View b, int c, long d) {
+                MANG.this.i(c);
+            }
+        });
         iv1 = findViewById(R.id.c8);
         iv1.setBackgroundResource(R.drawable.e16);
         iv1.setImageResource(R.drawable.a23);
-        iv1.setOnClickListener(view -> {
-            if (Permission.check(this, Permission.STORAGE, 5)) {
-                y(getString(R.string.l14), getString(R.string.u11));
+        iv1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (Permission.check(MANG.this, Permission.STORAGE, 5)) {
+                    MANG.this.y(MANG.this.getString(R.string.l14), MANG.this.getString(R.string.u11));
+                }
             }
         });
         if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
@@ -257,50 +275,98 @@ public class MANG extends BaseActivity {
 
     private void i(int a) {
         if (a == 0) {
-            Runnable re = () -> {
-                String sb5 = "SELECT * FROM " + "A" +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC";
-                Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
-                if (rest1.getCount() != 0) {
-                    runOnUiThread(() -> k(getString(R.string.l14), getString(R.string.u4)));
-                } else {
-                    runOnUiThread(() -> r(getString(R.string.v27)));
+            Runnable re = new Runnable() {
+
+            @Override
+                public void run() {
+                    String sb5 = "SELECT * FROM " + "A" +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC";
+                    Cursor rest1 = BookmarkHelper.getInstance(MANG.this.getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+                    if (rest1.getCount() != 0) {
+                        MANG.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MANG.this.k(MANG.this.getString(R.string.l14), MANG.this.getString(R.string.u4));
+                            }
+                        });
+                    } else {
+                        MANG.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MANG.this.r(MANG.this.getString(R.string.v27));
+                            }
+                        });
+                    }
+                    rest1.close();
                 }
-                rest1.close();
             };
             new Thread(re).start();
         } else if (a == 1) {
             m(getString(R.string.l14), getString(R.string.u5));
         } else if (a == 2) {
-            Runnable re = () -> {
-                String sb12 = "SELECT * FROM " + "A" +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC";
-                Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
-                if (rest.getCount() != 0) {
-                    runOnUiThread(() -> n(getString(R.string.l14), getString(R.string.t5)));
-                } else {
-                    runOnUiThread(() -> r(getString(R.string.v27)));
+            Runnable re = new Runnable() {
+
+            @Override
+                public void run() {
+                    String sb12 = "SELECT * FROM " + "A" +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC";
+                    Cursor rest = HistoryHelper.getInstance(MANG.this.getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+                    if (rest.getCount() != 0) {
+                        MANG.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MANG.this.n(MANG.this.getString(R.string.l14), MANG.this.getString(R.string.t5));
+                            }
+                        });
+                    } else {
+                        MANG.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MANG.this.r(MANG.this.getString(R.string.v27));
+                            }
+                        });
+                    }
+                    rest.close();
                 }
-                rest.close();
             };
             new Thread(re).start();
         } else if (a == 3) {
-            Runnable re = () -> {
-                String sb55 = "SELECT * FROM " + "A" +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC";
-                Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
-                if (res.getCount() != 0) {
-                    runOnUiThread(() -> o(getString(R.string.l14), getString(R.string.u6)));
-                } else {
-                    runOnUiThread(() -> r(getString(R.string.v27)));
+            Runnable re = new Runnable() {
+
+            @Override
+                public void run() {
+                    String sb55 = "SELECT * FROM " + "A" +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC";
+                    Cursor res = SearchHelper.getInstance(MANG.this.getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+                    if (res.getCount() != 0) {
+                        MANG.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MANG.this.o(MANG.this.getString(R.string.l14), MANG.this.getString(R.string.u6));
+                            }
+                        });
+                    } else {
+                        MANG.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                MANG.this.r(MANG.this.getString(R.string.v27));
+                            }
+                        });
+                    }
+                    res.close();
                 }
-                res.close();
             };
             new Thread(re).start();
         } else if (a == 4) {
@@ -344,13 +410,23 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
-            d3.delete();
-            a22.dismiss();
-            a1();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                BookmarkHelper d3 = BookmarkHelper.getInstance(MANG.this.getApplicationContext());
+                d3.delete();
+                a22.dismiss();
+                MANG.this.a1();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -372,13 +448,29 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            Runnable run = () -> l(StorageDirectory.getCacheDir(this));
-            new Thread(run).start();
-            a22.dismiss();
-            a1();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                Runnable run = new Runnable() {
+
+            @Override
+                    public void run() {
+                        MANG.this.l(StorageDirectory.getCacheDir(MANG.this));
+                    }
+                };
+                new Thread(run).start();
+                a22.dismiss();
+                MANG.this.a1();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -387,16 +479,26 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            HistoryHelper d1 = HistoryHelper.getInstance(getApplicationContext());
-            d1.delete();
-            if (MAIN.bl) {
-                MAIN.c63();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                HistoryHelper d1 = HistoryHelper.getInstance(MANG.this.getApplicationContext());
+                d1.delete();
+                if (MAIN.bl) {
+                    MAIN.c63();
+                }
+                a22.dismiss();
+                MANG.this.a1();
             }
-            a22.dismiss();
-            a1();
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -405,13 +507,23 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
-            d2.delete();
-            a22.dismiss();
-            a1();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                SearchHelper d2 = SearchHelper.getInstance(MANG.this.getApplicationContext());
+                d2.delete();
+                a22.dismiss();
+                MANG.this.a1();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -420,11 +532,21 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.l14));
         a.setMessage(Html.b(jk));
-        a.setPositiveButton(getString(R.string.u14), (a12, intetg) -> {
-            Intents.l(this, Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.u14), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Intents.l(MANG.this, Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
+                a12.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -514,12 +636,22 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            l(StorageDirectory.getWebviumDir() + "/Screenshot/");
-            a22.dismiss();
-            a1();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                MANG.this.l(StorageDirectory.getWebviumDir() + "/Screenshot/");
+                a22.dismiss();
+                MANG.this.a1();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -528,12 +660,22 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            l(StorageDirectory.getWebviumDir() + "/Downloads/");
-            a22.dismiss();
-            a1();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                MANG.this.l(StorageDirectory.getWebviumDir() + "/Downloads/");
+                a22.dismiss();
+                MANG.this.a1();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -542,17 +684,27 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-            C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-            getSharedPreferences("a", 0).edit().clear().apply();
-            a221().edit().clear().apply();
-            getSharedPreferences("wv", 0).edit().clear().apply();
-            a22.dismiss();
-            System.exit(0);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                C10.a(MANG.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+                C10.a(MANG.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                MANG.this.getSharedPreferences("a", 0).edit().clear().apply();
+                MANG.this.a221().edit().clear().apply();
+                MANG.this.getSharedPreferences("wv", 0).edit().clear().apply();
+                a22.dismiss();
+                System.exit(0);
+
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, intetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -561,32 +713,42 @@ public class MANG extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(a1);
         a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), (a22, intetg) -> {
-            C10.a(this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-            C10.a(this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-            getSharedPreferences("wv", 0).edit().clear().apply();
-            a221().edit().clear().apply();
-            getSharedPreferences("a", 0).edit().clear().apply();
-            HistoryHelper d1 = HistoryHelper.getInstance(getApplicationContext());
-            d1.delete();
-            SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
-            d2.delete();
-            BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
-            d3.delete();
-            DownloadHelper d9 = DownloadHelper.getInstance(getApplicationContext());
-            d9.delete();
-            PermissionHelper d91 = PermissionHelper.getInstance(getApplicationContext());
-            d91.delete();
-            if (Build.VERSION.SDK_INT < 29) {
-                l(StorageDirectory.getWebviumDir());
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                C10.a(MANG.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+                C10.a(MANG.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                MANG.this.getSharedPreferences("wv", 0).edit().clear().apply();
+                MANG.this.a221().edit().clear().apply();
+                MANG.this.getSharedPreferences("a", 0).edit().clear().apply();
+                HistoryHelper d1 = HistoryHelper.getInstance(MANG.this.getApplicationContext());
+                d1.delete();
+                SearchHelper d2 = SearchHelper.getInstance(MANG.this.getApplicationContext());
+                d2.delete();
+                BookmarkHelper d3 = BookmarkHelper.getInstance(MANG.this.getApplicationContext());
+                d3.delete();
+                DownloadHelper d9 = DownloadHelper.getInstance(MANG.this.getApplicationContext());
+                d9.delete();
+                PermissionHelper d91 = PermissionHelper.getInstance(MANG.this.getApplicationContext());
+                d91.delete();
+                if (Build.VERSION.SDK_INT < 29) {
+                    MANG.this.l(StorageDirectory.getWebviumDir());
+                }
+                if (MAIN.bl2) {
+                    MAIN.c63();
+                }
+                a22.dismiss();
+                System.exit(0);
             }
-            if (MAIN.bl2) {
-                MAIN.c63();
-            }
-            a22.dismiss();
-            System.exit(0);
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, inetg) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int inetg) {
+                a2.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -834,7 +996,7 @@ public class MANG extends BaseActivity {
 
     private class R7 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

@@ -29,7 +29,6 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.setting.AboutFragment;
@@ -91,7 +90,13 @@ public class SETT extends BaseActivity {
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
-        h17.setNavigationOnClickListener(view -> finish());
+        h17.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                SETT.this.finish();
+            }
+        });
         onNewIntent(getIntent());
     }
 

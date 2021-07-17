@@ -103,12 +103,11 @@ public class BookmarkAdapter extends MainBaseAdapter {
     private static class W3a {
         TextView tv;
         LinearLayout ll;
+
         @Keep
         private W3a() {
         }
     }
-
-
 }
 
 

@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -76,23 +77,35 @@ public class PretendModeFragment extends BasePreferenceFragment {
             a5(R.xml.a1);
 
             spe = (SWIT) findPreference("ptm");
-            spe.setOnPreferenceChangeListener((preference, newValue) -> {
-                if (newValue.toString().equals("true")) {
-                    a5();
-                } else {
-                    e();
+            spe.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.toString().equals("true")) {
+                        PretendModeFragment.this.a5();
+                    } else {
+                        PretendModeFragment.this.e();
+                    }
+                    return true;
                 }
-                return true;
             });
             Preference a1 = findPreference("cHANS");
-            a1.setOnPreferenceClickListener(a -> {
-                i();
-                return true;
+            a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    PretendModeFragment.this.i();
+                    return true;
+                }
             });
             Preference a12 = findPreference("cLANS");
-            a12.setOnPreferenceClickListener(a -> {
-                k();
-                return true;
+            a12.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    PretendModeFragment.this.k();
+                    return true;
+                }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -127,8 +140,20 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setView(a7);
         final EDIT e15 = a7.findViewById(R.id.e15);
         final EDIT a67 = a7.findViewById(R.id.a6);
-        e15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        a67.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        e15.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        a67.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         int c = Resources.getColor(getActivity(), R.color.c);
         int d1 = Resources.getColor(getActivity(), R.color.b);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -145,29 +170,49 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a67.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         e15.setTransformationMethod(new Password());
         a67.setTransformationMethod(new Password());
-        a5.setPositiveButton(getResources().getString(R.string.i6), (a, i) -> {
-            try {
-                c(a67.getText().toString());
-            } catch (NoSuchStringToReturn l2) {
-                l2.printStackTrace();
-            }
-            C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
-            C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 2);
-            AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j31), 0);
-            spe.setChecked(true);
-            a.dismiss();
-        });
-        a5.setNegativeButton(getResources().getString(R.string.i7), (a, i) -> {
-            spe.setChecked(false);
-            a.dismiss();
+        a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                try {
+                    PretendModeFragment.this.c(a67.getText().toString());
+                } catch (NoSuchStringToReturn l2) {
+                    l2.printStackTrace();
+                }
+                C10.a(PretendModeFragment.this.getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
+                C10.a(PretendModeFragment.this.getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 2);
+                AwesomeToast.a(PretendModeFragment.this.getActivity(), PretendModeFragment.this.getActivity().getResources().getString(R.string.j31), 0);
+                spe.setChecked(true);
+                a.dismiss();
+            }
+        });
+        a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                spe.setChecked(false);
+                a.dismiss();
+
+            }
         });
 
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         a67.addTextChangedListener(new TextWatcher() {
 
@@ -226,7 +271,13 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setView(a7);
         final EDIT e15 = a7.findViewById(R.id.e14);
 
-        e15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        e15.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
 
         int a15 = Resources.getColor(getActivity(), R.color.c);
         int a16 = Resources.getColor(getActivity(), R.color.b);
@@ -245,26 +296,46 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
         e15.setTransformationMethod(new Password());
-        a5.setPositiveButton(getResources().getString(R.string.i6), (a, i) -> {
-            try {
-                h(e15.getText().toString());
-            } catch (NoSuchStringToReturn l2) {
-                l2.printStackTrace();
-            }
-            a.dismiss();
+        a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                try {
+                    PretendModeFragment.this.h(e15.getText().toString());
+                } catch (NoSuchStringToReturn l2) {
+                    l2.printStackTrace();
+                }
+                a.dismiss();
+
+            }
         });
-        a5.setNegativeButton(getResources().getString(R.string.i7), (a, i) -> {
-            spe.setChecked(false);
-            a.dismiss();
+        a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                spe.setChecked(false);
+                a.dismiss();
+            }
         });
 
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         e15.addTextChangedListener(new TextWatcher() {
 
@@ -290,7 +361,13 @@ public class PretendModeFragment extends BasePreferenceFragment {
 
         final EDIT e16 = a7.findViewById(R.id.e16);
 
-        e16.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        e16.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         int a15 = Resources.getColor(getActivity(), R.color.c);
         int a16 = Resources.getColor(getActivity(), R.color.b);
 
@@ -307,18 +384,26 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e16.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
         e16.setTransformationMethod(new Password());
-        a5.setPositiveButton(getResources().getString(R.string.i6), (a, i) -> {
-            try {
-                g(e16.getText().toString());
-            } catch (NoSuchStringToReturn l2) {
-                l2.printStackTrace();
-            }
-            a.dismiss();
+        a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                try {
+                    PretendModeFragment.this.g(e16.getText().toString());
+                } catch (NoSuchStringToReturn l2) {
+                    l2.printStackTrace();
+                }
+                a.dismiss();
+
+            }
         });
-        a5.setNegativeButton(getResources().getString(R.string.i7), (a, i) -> {
-            spe.setChecked(true);
-            a.dismiss();
+        a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                spe.setChecked(true);
+                a.dismiss();
+            }
         });
 
         final AlertDialog d = a5.create();
@@ -326,8 +411,20 @@ public class PretendModeFragment extends BasePreferenceFragment {
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         e16.addTextChangedListener(new TextWatcher() {
 
@@ -392,9 +489,27 @@ public class PretendModeFragment extends BasePreferenceFragment {
         final EDIT e15 = a7.findViewById(R.id.l13);
         final EDIT a67 = a7.findViewById(R.id.l14);
         final EDIT l15 = a7.findViewById(R.id.l15);
-        e15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        a67.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        l15.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        e15.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        a67.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        l15.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         int c = Resources.getColor(getActivity(), R.color.c);
         int d1 = Resources.getColor(getActivity(), R.color.b);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -416,22 +531,44 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e15.setTransformationMethod(new Password());
         a67.setTransformationMethod(new Password());
         l15.setTransformationMethod(new Password());
-        a5.setPositiveButton(getResources().getString(R.string.i6), (a, i) -> {
-            try {
-                j(e15.getText().toString(), l15.getText().toString());
-            } catch (NoSuchStringToReturn l2) {
-                l2.printStackTrace();
-            }
+        a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
-            a.dismiss();
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                try {
+                    PretendModeFragment.this.j(e15.getText().toString(), l15.getText().toString());
+                } catch (NoSuchStringToReturn l2) {
+                    l2.printStackTrace();
+                }
+
+                a.dismiss();
+            }
         });
-        a5.setNegativeButton(getResources().getString(R.string.i7), (a, i) -> a.dismiss());
+        a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                a.dismiss();
+            }
+        });
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         a67.addTextChangedListener(new TextWatcher() {
 
@@ -542,24 +679,46 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e16.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
         e16.setTransformationMethod(new Password());
-        a5.setPositiveButton(getResources().getString(R.string.i6), (a, i) -> {
-            try {
-                l(e16.getText().toString());
-            } catch (NoSuchStringToReturn l2) {
-                l2.printStackTrace();
-            }
-            a.dismiss();
+        a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                try {
+                    PretendModeFragment.this.l(e16.getText().toString());
+                } catch (NoSuchStringToReturn l2) {
+                    l2.printStackTrace();
+                }
+                a.dismiss();
+
+            }
         });
-        a5.setNegativeButton(getResources().getString(R.string.i7), (a, i) -> a.dismiss());
+        a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a, int i) {
+                a.dismiss();
+            }
+        });
 
         final AlertDialog d = a5.create();
 
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+            }
+        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         e16.addTextChangedListener(new TextWatcher() {
 
@@ -598,7 +757,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
 
     private class R7 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

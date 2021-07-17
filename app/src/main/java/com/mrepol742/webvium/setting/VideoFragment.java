@@ -40,27 +40,39 @@ import static android.app.Activity.RESULT_OK;
 
 public class VideoFragment extends BasePreferenceFragment {
 
-    @Override
+            @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
             a5(R.xml.h);
             Preference o = findPreference("captions");
-            o.setOnPreferenceClickListener(a -> {
-                Intents.k(getActivity(), Settings.ACTION_CAPTIONING_SETTINGS);
+            o.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-                return true;
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.k(VideoFragment.this.getActivity(), Settings.ACTION_CAPTIONING_SETTINGS);
+
+                    return true;
+                }
             });
 
             Preference o5 = findPreference("shDCu");
-            o5.setOnPreferenceClickListener(a -> {
-                Intents.a(getActivity(), VIDE.class);
-                return true;
+            o5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    Intents.a(VideoFragment.this.getActivity(), VIDE.class);
+                    return true;
+                }
             });
             Preference a4 = findPreference("cusP");
-            a4.setOnPreferenceClickListener(a -> {
-                b24();
-                return true;
+            a4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    VideoFragment.this.b24();
+                    return true;
+                }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -70,27 +82,43 @@ public class VideoFragment extends BasePreferenceFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri uri = data.getData();
+        final Uri uri = data.getData();
         if (requestCode == 7423 && resultCode == RESULT_OK && uri != null) {
-            Runnable p15 = () -> {
-                try {
-                    InputStream c5 = getActivity().getContentResolver().openInputStream(uri);
-                    OutputStream d5 = new FileOutputStream(StorageDirectory.getVideoPoster(getActivity()));
-                    byte[] e5 = new byte[1024];
-                    int f5;
-                    if (c5 != null) {
-                        while ((f5 = c5.read(e5)) != -1) {
-                            d5.write(e5, 0, f5);
+            Runnable p15 = new Runnable() {
+
+            @Override
+                public void run() {
+                    try {
+                        InputStream c5 = VideoFragment.this.getActivity().getContentResolver().openInputStream(uri);
+                        OutputStream d5 = new FileOutputStream(StorageDirectory.getVideoPoster(VideoFragment.this.getActivity()));
+                        byte[] e5 = new byte[1024];
+                        int f5;
+                        if (c5 != null) {
+                            while ((f5 = c5.read(e5)) != -1) {
+                                d5.write(e5, 0, f5);
+                            }
                         }
+                        Objects.requireNonNull(c5).close();
+                        d5.flush();
+                        d5.close();
+                        BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(VideoFragment.this.getActivity()));
+                        VideoFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                AwesomeToast.b(VideoFragment.this.getActivity(), VideoFragment.this.getString(R.string.h21));
+                            }
+                        });
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                        VideoFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                AwesomeToast.b(VideoFragment.this.getActivity(), VideoFragment.this.getString(R.string.p30));
+                            }
+                        });
                     }
-                    Objects.requireNonNull(c5).close();
-                    d5.flush();
-                    d5.close();
-                    BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(getActivity()));
-                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.h21)));
-                } catch (Exception en) {
-                    en.printStackTrace();
-                    getActivity().runOnUiThread(() -> AwesomeToast.b(getActivity(), getString(R.string.p30)));
                 }
             };
             new Thread(p15).start();

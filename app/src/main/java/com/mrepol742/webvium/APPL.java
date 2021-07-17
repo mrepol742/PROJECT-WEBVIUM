@@ -20,7 +20,6 @@ package com.mrepol742.webvium;
 import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
-import android.app.UiModeManager;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.Intent;
@@ -57,16 +56,20 @@ public class APPL extends Application {
         }
         if (sp.getBoolean("thred", true)) {
             this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-            Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
-                Intent intent = new Intent(getApplicationContext(), EXCE.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("error", getStackTrace(ex));
-                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT);
-                AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(2);
-                uncaughtExceptionHandler.uncaughtException(thread, ex);
+            Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+
+            @Override
+                public void uncaughtException(Thread thread, Throwable ex) {
+                    Intent intent = new Intent(APPL.this.getApplicationContext(), EXCE.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("error", APPL.this.getStackTrace(ex));
+                    PendingIntent pendingIntent = PendingIntent.getActivity(APPL.this.getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT);
+                    AlarmManager am = (AlarmManager) APPL.this.getSystemService(Context.ALARM_SERVICE);
+                    am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(2);
+                    uncaughtExceptionHandler.uncaughtException(thread, ex);
+                }
             });
         }
         super.onCreate();

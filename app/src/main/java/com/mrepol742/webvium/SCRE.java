@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -32,6 +33,7 @@ import android.print.PrintManager;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,13 +84,25 @@ public class SCRE extends BaseActivity {
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
-        h17.setNavigationOnClickListener(view -> finishAndRemoveTask());
+        h17.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                SCRE.this.finishAndRemoveTask();
+            }
+        });
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         iv = findViewById(R.id.i1);
         h19.setElevation(5);
         iv.setImageResource(R.drawable.c7);
         iv.setBackgroundResource(R.drawable.c6);
-        iv.setOnClickListener(view -> b(h18.getText().toString()));
+        iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                SCRE.this.b(h18.getText().toString());
+            }
+        });
     }
 
     @Override
@@ -161,12 +175,22 @@ public class SCRE extends BaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.k1));
         a.setMessage(String.format(getString(R.string.l11), "\"" + b + "\""));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            Files.delete(st + b);
-            finish();
-            MainNotification.a(SCRE.this, Notifications.b);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                Files.delete(st + b);
+                SCRE.this.finish();
+                MainNotification.a(SCRE.this, Notifications.b);
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -182,7 +206,13 @@ public class SCRE extends BaseActivity {
        */
             a.setTitle(getString(R.string.k1));
             a.setMessage("This feature is not available for now... ");
-            a.setPositiveButton("Close", (a1, intetg) -> a1.dismiss());
+            a.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+
+            @Override
+                public void onClick(DialogInterface a1, int intetg) {
+                    a1.dismiss();
+                }
+            });
             a.create().show();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -210,9 +240,19 @@ public class SCRE extends BaseActivity {
             final String b = a.getStringExtra("a56hj");
             if (b != null) {
                 String c = b.replaceAll(StorageDirectory.a() + st, "");
-                Runnable p = () -> {
-                    final Bitmap bp = BitmapFactory.decodeFile(b);
-                    runOnUiThread(() -> h19.setImageBitmap(bp));
+                Runnable p = new Runnable() {
+
+            @Override
+                    public void run() {
+                        final Bitmap bp = BitmapFactory.decodeFile(b);
+                        SCRE.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                h19.setImageBitmap(bp);
+                            }
+                        });
+                    }
                 };
                 new Thread(p).start();
                 h18.setText(c);

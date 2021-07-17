@@ -88,12 +88,24 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 iw1.setImageResource(R.drawable.b27);
                 iw1.setOnClickListener(this);
                 iw1.setOnLongClickListener(this);
-                iw1.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+                iw1.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+                    }
+                });
             } else if (it2 == R.id.j1) {
                 ImageView j1 = findViewById(it2);
                 j1.setImageResource(R.drawable.b28);
                 j1.setOnClickListener(this);
-                j1.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+                j1.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+                    }
+                });
                 j1.setOnLongClickListener(this);
             } else {
                 TextView tv = findViewById(it2);
@@ -101,7 +113,13 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 tv.setBackgroundResource(R.drawable.a26);
                 tv.setOnClickListener(this);
                 tv.setOnLongClickListener(this);
-                tv.setOnTouchListener((v, event) -> (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0);
+                tv.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
+                    }
+                });
                 tv.setTypeface(type(Typeface.BOLD));
                 try {
                     tv.setText(a(it2));
@@ -112,9 +130,19 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
 
             final File fe = new File(StorageDirectory.getBackground(this));
             if (a221().getBoolean("webviumB", false) && fe.exists()) {
-                Runnable p155 = () -> {
-                    Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(this));
-                    runOnUiThread(() -> ll.setBackground(new BitmapDrawable(getResources(), bp)));
+                Runnable p155 = new Runnable() {
+
+            @Override
+                    public void run() {
+                        final Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(LOCK.this));
+                        LOCK.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                ll.setBackground(new BitmapDrawable(LOCK.this.getResources(), bp));
+                            }
+                        });
+                    }
                 };
                 new Thread(p155).start();
             } else {

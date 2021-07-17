@@ -29,7 +29,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.speech.SpeechRecognizer;
 import android.util.LruCache;
-import android.view.KeyEvent;
 import android.view.ViewGroup;
 
 import com.mrepol742.webvium.BuildConfig;

@@ -27,9 +27,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class EXCE extends BaseActivity {
     final String[] exceptionType = {
@@ -103,20 +101,28 @@ public class EXCE extends BaseActivity {
         bn1.setText(getString(R.string.y66));
         bn1.setBackgroundResource(R.drawable.g4);
         bn.setBackgroundResource(R.drawable.c10);
-        AlertDialog dd = bld.create();
-        bn.setOnClickListener((v) -> {
-            // TODO
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_EMAIL, "Test");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-            intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-            startActivity(Intent.createChooser(intent, "Send Email"));
-            finish();
+        final AlertDialog dd = bld.create();
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, "Test");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                EXCE.this.startActivity(Intent.createChooser(intent, "Send Email"));
+                EXCE.this.finish();
+            }
         });
-        bn1.setOnClickListener((v) -> {
-            finish();
-            dd.dismiss();
+        bn1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                EXCE.this.finish();
+                dd.dismiss();
+            }
         });
         dd.show();
     }

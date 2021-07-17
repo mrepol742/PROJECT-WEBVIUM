@@ -34,7 +34,6 @@ import android.webkit.URLUtil;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainService;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.util.Domain;
 
@@ -47,7 +46,7 @@ public class CLIP extends MainService {
 
     final OnPrimaryClipChangedListener b = new OnPrimaryClipChangedListener() {
 
-        @Override
+            @Override
         public void onPrimaryClipChanged() {
             ClipData c56 = a.getPrimaryClip();
             ClipData.Item d34 = null;
@@ -172,7 +171,13 @@ public class CLIP extends MainService {
     private void g() {
         a.removePrimaryClipChangedListener(b);
         final Handler handler = new Handler();
-        handler.postDelayed(() -> a.addPrimaryClipChangedListener(b), 500);
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                a.addPrimaryClipChangedListener(b);
+            }
+        }, 500);
     }
 
 }

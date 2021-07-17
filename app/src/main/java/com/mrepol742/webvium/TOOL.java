@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -26,6 +27,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -98,7 +100,13 @@ public class TOOL extends BaseActivity {
             ab.setDisplayShowTitleEnabled(false);
         }
         i.setNavigationIcon(R.drawable.a2);
-        i.setNavigationOnClickListener(view -> finish());
+        i.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                TOOL.this.finish();
+            }
+        });
         m.setWebChromeClient(new WebChromeClient() {
 
             @Override
@@ -106,7 +114,13 @@ public class TOOL extends BaseActivity {
                 AlertDialog.Builder bld = new AlertDialog.Builder(TOOL.this);
                 bld.setTitle(getString(R.string.y65));
                 bld.setMessage(Html.b(String.format(getString(R.string.v18), cm.message(), cm.lineNumber(), cm.sourceId())));
-                bld.setPositiveButton(getString(R.string.i6), (dialog, which) -> dialog.dismiss());
+                bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
                 bld.create().show();
                 return true;
             }
@@ -168,7 +182,7 @@ public class TOOL extends BaseActivity {
     protected void onNewIntent(Intent a) {
         try {
             int id = a.getIntExtra("id", 0);
-            String data = a.getStringExtra("dat");
+            final String data = a.getStringExtra("dat");
             switch (id) {
                 case TOOL_SOURCE_CODE:
                     tt.setText(getString(R.string.j));
@@ -180,19 +194,27 @@ public class TOOL extends BaseActivity {
                     }
                     break;
                 case TOOL_ROBOTS:
-                    Runnable runnable = () -> {
-                        try {
-                            URL url = new URL(data);
-                            boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
-                            runOnUiThread(() -> {
-                                if (bn) {
-                                    m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
-                                } else {
-                                    m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
-                                }
-                            });
-                        } catch (Exception en) {
-                            en.printStackTrace();
+                    Runnable runnable = new Runnable() {
+
+            @Override
+                        public void run() {
+                            try {
+                                final URL url = new URL(data);
+                                final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
+                                TOOL.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                    public void run() {
+                                        if (bn) {
+                                            m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
+                                        } else {
+                                            m.loadDataWithBaseURL(null, TOOL.this.getString(R.string.c33), "text", "UTF-8", null);
+                                        }
+                                    }
+                                });
+                            } catch (Exception en) {
+                                en.printStackTrace();
+                            }
                         }
                     };
                     new Thread(runnable).start();
@@ -200,20 +222,28 @@ public class TOOL extends BaseActivity {
                     k.setText(Uri.parse(data).getHost());
                     break;
                 case TOOL_ASSET_LINKS:
-                    Runnable runnable1 = () -> {
-                        try {
-                            URL url = new URL(data);
-                            boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
-                            runOnUiThread(() -> {
-                                if (bn) {
-                                    m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
-                                } else {
-                                    m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
-                                }
+                    Runnable runnable1 = new Runnable() {
 
-                            });
-                        } catch (Exception en) {
-                            en.printStackTrace();
+            @Override
+                        public void run() {
+                            try {
+                                final URL url = new URL(data);
+                                final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
+                                TOOL.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                    public void run() {
+                                        if (bn) {
+                                            m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
+                                        } else {
+                                            m.loadDataWithBaseURL(null, TOOL.this.getString(R.string.c33), "text", "UTF-8", null);
+                                        }
+
+                                    }
+                                });
+                            } catch (Exception en) {
+                                en.printStackTrace();
+                            }
                         }
                     };
                     new Thread(runnable1).start();
@@ -221,19 +251,27 @@ public class TOOL extends BaseActivity {
                     k.setText(Uri.parse(data).getHost());
                     break;
                 case TOOL_SITEMAPS:
-                    Runnable runnable2 = () -> {
-                        try {
-                            URL url = new URL(data);
-                            boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
-                            runOnUiThread(() -> {
-                                if (bn) {
-                                    m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
-                                } else {
-                                    m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
-                                }
-                            });
-                        } catch (Exception en) {
-                            en.printStackTrace();
+                    Runnable runnable2 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            try {
+                                final URL url = new URL(data);
+                                final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
+                                TOOL.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                    public void run() {
+                                        if (bn) {
+                                            m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
+                                        } else {
+                                            m.loadDataWithBaseURL(null, TOOL.this.getString(R.string.c33), "text", "UTF-8", null);
+                                        }
+                                    }
+                                });
+                            } catch (Exception en) {
+                                en.printStackTrace();
+                            }
                         }
                     };
                     new Thread(runnable2).start();
@@ -241,24 +279,34 @@ public class TOOL extends BaseActivity {
                     k.setText(Uri.parse(data).getHost());
                     break;
                 case TOOL_HEADERS:
-                    Runnable runnable3 = () -> {
-                        try {
-                            StringBuilder stringBuilder = new StringBuilder("<!DOCTYPE html><html><head></head><body>");
-                            stringBuilder.append(Stream.d(data, getString(R.string.c33)));
-                            stringBuilder.append("\n</body></html");
-                            File fe = new File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Headers.html") + ".html");
-                            if (fe.createNewFile()) {
-                                FileWriter fw = new FileWriter(fe, false);
-                                BufferedWriter br = new BufferedWriter(fw);
-                                br.write(stringBuilder.toString());
-                                br.close();
-                                fw.close();
-                                runOnUiThread(() -> m.loadUrl("file://" + StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Headers.html") + ".html"));
-                            } else {
-                                m.loadDataWithBaseURL(null, getString(R.string.c33), "text", "UTF-8", null);
+                    Runnable runnable3 = new Runnable() {
+
+            @Override
+                        public void run() {
+                            try {
+                                StringBuilder stringBuilder = new StringBuilder("<!DOCTYPE html><html><head></head><body>");
+                                stringBuilder.append(Stream.d(data, TOOL.this.getString(R.string.c33)));
+                                stringBuilder.append("\n</body></html");
+                                File fe = new File(StorageDirectory.getFileDir(TOOL.this) + "/" + Hash.a("SHA-1", "Headers.html") + ".html");
+                                if (fe.createNewFile()) {
+                                    FileWriter fw = new FileWriter(fe, false);
+                                    BufferedWriter br = new BufferedWriter(fw);
+                                    br.write(stringBuilder.toString());
+                                    br.close();
+                                    fw.close();
+                                    TOOL.this.runOnUiThread(new Runnable() {
+
+            @Override
+                                        public void run() {
+                                            m.loadUrl("file://" + StorageDirectory.getFileDir(TOOL.this) + "/" + Hash.a("SHA-1", "Headers.html") + ".html");
+                                        }
+                                    });
+                                } else {
+                                    m.loadDataWithBaseURL(null, TOOL.this.getString(R.string.c33), "text", "UTF-8", null);
+                                }
+                            } catch (Exception en) {
+                                en.printStackTrace();
                             }
-                        } catch (Exception en) {
-                            en.printStackTrace();
                         }
                     };
                     new Thread(runnable3).start();

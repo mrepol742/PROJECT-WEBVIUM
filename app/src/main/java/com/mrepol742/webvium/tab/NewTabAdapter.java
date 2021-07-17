@@ -21,8 +21,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +30,6 @@ import android.widget.TextView;
 
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.app.NoSuchItemToGet;
-import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
-import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.content.Resources;
 

@@ -31,7 +31,6 @@ import android.preference.PreferenceManager;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainService;
-import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.security.Hash;
@@ -54,29 +53,33 @@ public class NOTI extends MainService {
     @Override
     public int onStartCommand(Intent a, int c, int d) {
         if (!Connectivity.isThereAnyInternetConnection(this)) {
-            Runnable runnable = () -> {
-                try {
-                    String neTf = Stream.f("https://github.com/" + getString(R.string.github_username) + "/" + getString(R.string.github_repository) + "/blob/" + getString(R.string.github_branch) + "/" + getString(R.string.github_path) + "/newNotification.array?raw=true", "742");
-                    if (neTf.equals("742")) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.setTimeInMillis(System.currentTimeMillis());
-                        calendar.set(Calendar.HOUR_OF_DAY, 3);
-                        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                        PendingIntent it = PendingIntent.getService(this, 0, new Intent(this, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
-                    } else {
-                        String[] sp = neTf.split(";");
-                        SharedPreferences j988 = getSharedPreferences("wv", 0);
-                        if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(Hash.a("SHA-1", sp[0])) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(Hash.a("SHA-1", sp[1]))) {
-                            f(sp[0], sp[1], sp[2]);
-                            SharedPreferences.Editor gujh = j988.edit();
-                            gujh.putString("notif1", Hash.a("SHA-1", sp[0]));
-                            gujh.putString("notif2", Hash.a("SHA-1", sp[1]));
-                            gujh.apply();
+            Runnable runnable = new Runnable() {
+
+            @Override
+                public void run() {
+                    try {
+                        String neTf = Stream.f("https://github.com/" + NOTI.this.getString(R.string.github_username) + "/" + NOTI.this.getString(R.string.github_repository) + "/blob/" + NOTI.this.getString(R.string.github_branch) + "/" + NOTI.this.getString(R.string.github_path) + "/newNotification.array?raw=true", "742");
+                        if (neTf.equals("742")) {
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTimeInMillis(System.currentTimeMillis());
+                            calendar.set(Calendar.HOUR_OF_DAY, 3);
+                            AlarmManager alarmMgr = (AlarmManager) NOTI.this.getSystemService(Context.ALARM_SERVICE);
+                            PendingIntent it = PendingIntent.getService(NOTI.this, 0, new Intent(NOTI.this, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
+                        } else {
+                            String[] sp = neTf.split(";");
+                            SharedPreferences j988 = NOTI.this.getSharedPreferences("wv", 0);
+                            if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(Hash.a("SHA-1", sp[0])) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(Hash.a("SHA-1", sp[1]))) {
+                                NOTI.this.f(sp[0], sp[1], sp[2]);
+                                SharedPreferences.Editor gujh = j988.edit();
+                                gujh.putString("notif1", Hash.a("SHA-1", sp[0]));
+                                gujh.putString("notif2", Hash.a("SHA-1", sp[1]));
+                                gujh.apply();
+                            }
                         }
+                    } catch (Exception en) {
+                        en.printStackTrace();
                     }
-                } catch (Exception en) {
-                    en.printStackTrace();
                 }
             };
             new Thread(runnable).start();

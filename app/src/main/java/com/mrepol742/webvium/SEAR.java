@@ -20,6 +20,7 @@ package com.mrepol742.webvium;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
@@ -36,6 +37,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -95,40 +97,44 @@ public class SEAR extends MainBaseActivity {
     private PopupMenu pm;
     private String query23;
 
-    final MenuItem.OnMenuItemClickListener e = a1 -> {
-        switch (a1.getItemId()) {
-            case 0:
-                if (SEAR.this.getCallingActivity() != null) {
-                    Intents.d("result", query23, SEAR.this);
-                } else {
-                    Intents.e(SEAR.this, "value", query23, MAIN.class);
-                }
-                SEAR.this.finish();
-                return true;
-            case 1:
-                SEAR.this.f4(query23);
-                return true;
-            case 2:
-                Clipboard.a(SEAR.this, query23);
-                SEAR.this.f6(SEAR.this.getString(R.string.k9));
-                return true;
-            case 3:
-                SEAR.this.f5(query23);
-                return true;
-            case 4:
+    final MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
 
-                q(query23);
-                return true;
+            @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            switch (a1.getItemId()) {
+                case 0:
+                    if (SEAR.this.getCallingActivity() != null) {
+                        Intents.d("result", query23, SEAR.this);
+                    } else {
+                        Intents.e(SEAR.this, "value", query23, MAIN.class);
+                    }
+                    SEAR.this.finish();
+                    return true;
+                case 1:
+                    SEAR.this.f4(query23);
+                    return true;
+                case 2:
+                    Clipboard.a(SEAR.this, query23);
+                    SEAR.this.f6(SEAR.this.getString(R.string.k9));
+                    return true;
+                case 3:
+                    SEAR.this.f5(query23);
+                    return true;
+                case 4:
 
-            case 5:
-                s(query23);
-                return true;
-            case 6:
-                w(query23);
-                return true;
+                    SEAR.this.q(query23);
+                    return true;
 
+                case 5:
+                    SEAR.this.s(query23);
+                    return true;
+                case 6:
+                    SEAR.this.w(query23);
+                    return true;
+
+            }
+            return false;
         }
-        return false;
     };
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -164,7 +170,13 @@ public class SEAR extends MainBaseActivity {
                 "_id" +
                 " DESC ", null);
         if (res.getCount() == 0) {
-            runOnUiThread(() -> d.setVisibility(View.GONE));
+            runOnUiThread(new Runnable() {
+
+            @Override
+                public void run() {
+                    d.setVisibility(View.GONE);
+                }
+            });
         } else {
             if (ls == null) {
                 ls = new ArrayList<>();
@@ -229,20 +241,28 @@ public class SEAR extends MainBaseActivity {
                 Collections.reverse(ls);
             }
 
-            d.setOnItemClickListener((adapterView, view, c1, l) -> {
-                search(aa.getItem(c1).toString());
-                finish();
-                SoftKeyboard.hide(SEAR.this, b19);
+            d.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int c1, long l) {
+                    SEAR.this.search(aa.getItem(c1).toString());
+                    SEAR.this.finish();
+                    SoftKeyboard.hide(SEAR.this, b19);
+                }
             });
-            d.setOnItemLongClickListener((adapterView, view, i, l) -> {
-                query23 = aa.getItem(i).toString();
-                p(view);
-                return true;
+            d.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    query23 = aa.getItem(i).toString();
+                    SEAR.this.p(view);
+                    return true;
+                }
             });
             d.setAdapter(aa);
             p.addTextChangedListener(new TextWatcher() {
 
-                @Override
+            @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     aa.getFilter().filter(charSequence);
                 }
@@ -293,9 +313,19 @@ public class SEAR extends MainBaseActivity {
         cd.setBackgroundResource(R.drawable.w);
         if (a221().getBoolean("webviumB", false) && fe.exists()) {
             o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-            Runnable p155 = () -> {
-                Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(this));
-                runOnUiThread(() -> b19.setBackground(new BitmapDrawable(getResources(), bp)));
+            Runnable p155 = new Runnable() {
+
+            @Override
+                public void run() {
+                    final Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(SEAR.this));
+                    SEAR.this.runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            b19.setBackground(new BitmapDrawable(SEAR.this.getResources(), bp));
+                        }
+                    });
+                }
             };
             new Thread(p155).start();
 
@@ -310,21 +340,31 @@ public class SEAR extends MainBaseActivity {
             p.setHintTextColor(g);
         }
 
-        cd.setOnClickListener(view -> SoftKeyboard.show(SEAR.this, p));
+        cd.setOnClickListener(new View.OnClickListener() {
 
-        p.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                SoftKeyboard.hide(SEAR.this, b19);
-                String query = p.getText().toString();
-                if (U3.b(query)) {
-                    d2.c(query);
-                    search(query);
-                    finish();
-                }
-                return true;
+            @Override
+            public void onClick(View view) {
+                SoftKeyboard.show(SEAR.this, p);
             }
-            return false;
+        });
+
+        p.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    SEAR.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    SoftKeyboard.hide(SEAR.this, b19);
+                    String query = p.getText().toString();
+                    if (U3.b(query)) {
+                        d2.c(query);
+                        SEAR.this.search(query);
+                        SEAR.this.finish();
+                    }
+                    return true;
+                }
+                return false;
+            }
         });
         o();
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -336,16 +376,26 @@ public class SEAR extends MainBaseActivity {
             iv.setImageResource(R.drawable.c9);
             iv.setBackgroundResource(R.drawable.c6);
             iv.setVisibility(View.VISIBLE);
-            iv.setOnClickListener(view -> f3());
+            iv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                public void onClick(View view) {
+                    SEAR.this.f3();
+                }
+            });
             Animation.animate(this, R.anim.i, iv);
         } else {
             iv.setVisibility(View.GONE);
         }
-        iv1.setOnClickListener(view -> {
-            if (p.getText().toString().length() == 0) {
-                finishAndRemoveTask();
-            } else {
-                p.getText().clear();
+        iv1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (p.getText().toString().length() == 0) {
+                    SEAR.this.finishAndRemoveTask();
+                } else {
+                    p.getText().clear();
+                }
             }
         });
         ActionBar ab = getActionBar();
@@ -402,12 +452,22 @@ public class SEAR extends MainBaseActivity {
         a.setCancelable(true);
         a.setTitle(getString(R.string.e));
         a.setMessage(String.format(getString(R.string.l7), "\"" + b + "\""));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            d2.b(b);
-            f6(String.format(getString(R.string.h5), b));
-            k();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                d2.b(b);
+                SEAR.this.f6(String.format(SEAR.this.getString(R.string.h5), b));
+                SEAR.this.k();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -416,30 +476,50 @@ public class SEAR extends MainBaseActivity {
     }
 
     private void k() {
-        Runnable p15 = () -> {
-            ArrayList<String> itemIdsh = new ArrayList<>();
-            Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    Sqlite.TABLE_SEARCH +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC ", null);
-            if (res.getCount() == 0) {
-                runOnUiThread(() -> d.setVisibility(View.GONE));
-            } else {
-                while (res.moveToNext()) {
-                    itemIdsh.add(res.getString(1));
-                }
-                if (itemIdsh.size() == 0) {
-                    runOnUiThread(() -> d.setVisibility(View.GONE));
-                } else {
-                    runOnUiThread(() -> {
-                        aa.a(itemIdsh);
-                        aa.notifyDataSetChanged();
-                    });
-                }
-            }
-            res.close();
+        Runnable p15 = new Runnable() {
 
+            @Override
+            public void run() {
+                final ArrayList<String> itemIdsh = new ArrayList<>();
+                Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
+                        Sqlite.TABLE_SEARCH +
+                        " ORDER BY " +
+                        "_id" +
+                        " DESC ", null);
+                if (res.getCount() == 0) {
+                    SEAR.this.runOnUiThread(new Runnable() {
+
+            @Override
+                        public void run() {
+                            d.setVisibility(View.GONE);
+                        }
+                    });
+                } else {
+                    while (res.moveToNext()) {
+                        itemIdsh.add(res.getString(1));
+                    }
+                    if (itemIdsh.size() == 0) {
+                        SEAR.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                d.setVisibility(View.GONE);
+                            }
+                        });
+                    } else {
+                        SEAR.this.runOnUiThread(new Runnable() {
+
+            @Override
+                            public void run() {
+                                aa.a(itemIdsh);
+                                aa.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                }
+                res.close();
+
+            }
         };
         new Thread(p15).start();
     }
@@ -533,12 +613,22 @@ public class SEAR extends MainBaseActivity {
         ti1.setText(getString(R.string.t4));
         ed.setText("");
         ed1.setText(a23);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            u(ed.getText().toString(), ed1.getText().toString());
-            t(getString(R.string.t2));
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                SEAR.this.u(ed.getText().toString(), ed1.getText().toString());
+                SEAR.this.t(SEAR.this.getString(R.string.t2));
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -572,10 +662,14 @@ public class SEAR extends MainBaseActivity {
     private void p(View w) {
         if (pm == null) {
             pm = new PopupMenu(this, w);
-            pm.setOnDismissListener(popupMenu -> {
-                popupMenu.getMenu().clear();
-                if (this.query23 != null) {
-                    this.query23 = null;
+            pm.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    popupMenu.getMenu().clear();
+                    if (SEAR.this.query23 != null) {
+                        SEAR.this.query23 = null;
+                    }
                 }
             });
         }
@@ -624,11 +718,21 @@ public class SEAR extends MainBaseActivity {
         ti1.setText(getString(R.string.t4));
         ed.setText("");
         ed1.setText(a23);
-        a.setPositiveButton(getString(R.string.i6), (a2, i) -> {
-            shrt(ed.getText().toString(), ed1.getText().toString(), R.mipmap.b);
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                SEAR.this.shrt(ed.getText().toString(), ed1.getText().toString(), R.mipmap.b);
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -690,12 +794,22 @@ public class SEAR extends MainBaseActivity {
         ti.setText(getString(R.string.u24));
         ed.setText(oldTitle);
 
-        a.setPositiveButton(getString(R.string.i6), (a2, it) -> {
-            d2.f(oldTitle, ed.getText().toString());
-            k();
-            a2.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int it) {
+                d2.f(oldTitle, ed.getText().toString());
+                SEAR.this.k();
+                a2.dismiss();
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a2, i) -> a2.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int i) {
+                a2.dismiss();
+            }
+        });
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);

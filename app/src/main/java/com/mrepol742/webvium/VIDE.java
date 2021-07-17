@@ -72,7 +72,13 @@ public class VIDE extends BaseActivity {
         }
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
-        h17.setNavigationOnClickListener(view -> finish());
+        h17.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                VIDE.this.finish();
+            }
+        });
         w4.setWebViewClient(new MainWebViewClient());
         w4.setWebChromeClient(new WebChromeClient() {
 

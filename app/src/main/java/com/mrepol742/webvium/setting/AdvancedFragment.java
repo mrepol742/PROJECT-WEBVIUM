@@ -22,9 +22,11 @@ import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.webkit.WebStorage;
 
 import com.mrepol742.webvium.DEVI;
@@ -86,49 +88,69 @@ public class AdvancedFragment extends BasePreferenceFragment {
             final LIST lp90 = (LIST) findPreference("textE");
             final EDIT0 etp12 = (EDIT0) findPreference("CtextE");
             SWIT cbf = (SWIT) findPreference("fltWeb");
-            cbf.setOnPreferenceChangeListener((preference, newValue) -> {
-                if (newValue.toString().equals("true")) {
+            cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-                    Intents.b(getActivity(), FLOA.class);
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.toString().equals("true")) {
 
-                } else {
+                        Intents.b(AdvancedFragment.this.getActivity(), FLOA.class);
 
-                    Intents.i(getActivity(), FLOA.class);
-                    MainNotification.a(getActivity(), Notifications.e);
+                    } else {
+
+                        Intents.i(AdvancedFragment.this.getActivity(), FLOA.class);
+                        MainNotification.a(AdvancedFragment.this.getActivity(), Notifications.e);
+                    }
+                    return true;
                 }
-                return true;
             });
             etp12.setEnabled(Objects.equals(a221().getString("textE", ""), "3840a"));
             etp12.setSummary(a221().getString("CtextE", ""));
-            etp12.setOnPreferenceChangeListener((preference, newValue) -> {
-                etp12.setSummary(newValue.toString());
-                return true;
+            etp12.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    etp12.setSummary(newValue.toString());
+                    return true;
+                }
             });
-            lp90.setOnPreferenceChangeListener((preference, newValue) -> {
-                etp12.setEnabled(newValue.toString().equals("3840a"));
-                return true;
+            lp90.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    etp12.setEnabled(newValue.toString().equals("3840a"));
+                    return true;
+                }
             });
             PREF a9 = (PREF) findPreference("wLock");
-            a9.setOnPreferenceClickListener(a -> {
+            a9.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-                if (a221().getBoolean("lockWn99", false)) {
-                    Intent it = new Intent(getActivity(), LOCK.class);
-                    startActivityForResult(it, 345);
-                } else {
-                    Intents.e(getActivity(), "search", SETT.FRAGMENT_SECURITY_LOCK, SETT.class);
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+
+                    if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
+                        Intent it = new Intent(AdvancedFragment.this.getActivity(), LOCK.class);
+                        AdvancedFragment.this.startActivityForResult(it, 345);
+                    } else {
+                        Intents.e(AdvancedFragment.this.getActivity(), "search", SETT.FRAGMENT_SECURITY_LOCK, SETT.class);
+                    }
+                    return true;
                 }
-                return true;
             });
             PREF a9zx = (PREF) findPreference("wPretend");
-            a9zx.setOnPreferenceClickListener(a -> {
+            a9zx.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-                if (a221().getBoolean("lockWn99", false)) {
-                    Intent it = new Intent(getActivity(), LOCK.class);
-                    startActivityForResult(it, 123);
-                } else {
-                    Intents.e(getActivity(), "search", SETT.FRAGMENT_PRETEND_MODE, SETT.class);
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+
+                    if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
+                        Intent it = new Intent(AdvancedFragment.this.getActivity(), LOCK.class);
+                        AdvancedFragment.this.startActivityForResult(it, 123);
+                    } else {
+                        Intents.e(AdvancedFragment.this.getActivity(), "search", SETT.FRAGMENT_PRETEND_MODE, SETT.class);
+                    }
+                    return true;
                 }
-                return true;
             });
             final SWIT java9 = (SWIT) findPreference("Java9");
             final SWIT java10 = (SWIT) findPreference("Java10");
@@ -136,31 +158,43 @@ public class AdvancedFragment extends BasePreferenceFragment {
             final SWIT java12 = (SWIT) findPreference("Java12");
             final SWIT javaweb = (SWIT) findPreference("Javaweb");
             LIST java = (LIST) findPreference("java");
-            java.setOnPreferenceChangeListener((preference, newValue) -> {
-                if (newValue.toString().equals("7f")) {
-                    java9.setEnabled(false);
-                    java10.setEnabled(false);
-                    java11.setEnabled(false);
-                    java12.setEnabled(false);
-                    javaweb.setEnabled(false);
-                } else {
-                    java9.setEnabled(true);
-                    java10.setEnabled(true);
-                    java11.setEnabled(true);
-                    java12.setEnabled(true);
-                    javaweb.setEnabled(true);
+            java.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.toString().equals("7f")) {
+                        java9.setEnabled(false);
+                        java10.setEnabled(false);
+                        java11.setEnabled(false);
+                        java12.setEnabled(false);
+                        javaweb.setEnabled(false);
+                    } else {
+                        java9.setEnabled(true);
+                        java10.setEnabled(true);
+                        java11.setEnabled(true);
+                        java12.setEnabled(true);
+                        javaweb.setEnabled(true);
+                    }
+                    return true;
                 }
-                return true;
             });
             PREF pc = (PREF) findPreference("cjsa");
-            pc.setOnPreferenceClickListener(a -> {
-                b26();
-                return true;
+            pc.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    AdvancedFragment.this.b26();
+                    return true;
+                }
             });
             PREF a96755 = (PREF) findPreference("admn");
-            a96755.setOnPreferenceClickListener(a -> {
-                b16();
-                return true;
+            a96755.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+                public boolean onPreferenceClick(Preference a) {
+                    AdvancedFragment.this.b16();
+                    return true;
+                }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -187,13 +221,23 @@ public class AdvancedFragment extends BasePreferenceFragment {
         a.setCancelable(true);
         a.setTitle(getString(R.string.c));
         a.setMessage(getString(R.string.a33));
-        a.setPositiveButton(getString(R.string.i6), (a12, intetg) -> {
-            WebStorage.getInstance().deleteAllData();
-            g(getString(R.string.a34));
-            a12.dismiss();
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                WebStorage.getInstance().deleteAllData();
+                AdvancedFragment.this.g(AdvancedFragment.this.getString(R.string.a34));
+                a12.dismiss();
+
+            }
         });
-        a.setNegativeButton(getString(R.string.i7), (a1, intetg) -> a1.dismiss());
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a1, int intetg) {
+                a1.dismiss();
+            }
+        });
         a.create().show();
     }
 
@@ -203,7 +247,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
 
     private class R7 extends MainReceiver {
 
-        @Override
+            @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

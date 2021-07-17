@@ -24,7 +24,7 @@ import android.content.Intent;
 // @Class DeviceAdminReceiver
 public class DEVI extends DeviceAdminReceiver {
 
-    @Override
+            @Override
     public void onEnabled(Context context, Intent intent) {
     }
 
