@@ -97,19 +97,6 @@
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
 
-        <!-- Bug Report -->
-        <activity
-            a:name="com.mrepol742.webvium.FEED"
-            a:configChanges="keyboardHidden|orientation|screenSize"
-            a:launchMode="singleTask"
-            a:taskAffinity="com.mrepol742.webvium.task.FED"
-            a:process=":fed"
-            a:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action a:name="android.intent.action.BUG_REPORT" />
-                <category a:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <!-- DOWNLOADS -->
         <activity
             a:name="com.mrepol742.webvium.DOWN"

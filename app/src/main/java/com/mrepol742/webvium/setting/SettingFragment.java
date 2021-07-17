@@ -31,7 +31,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.mrepol742.webvium.FEED;
 import com.mrepol742.webvium.LOCK;
 import com.mrepol742.webvium.MANG;
 import com.mrepol742.webvium.R;
@@ -128,7 +127,15 @@ public class SettingFragment extends BaseFragment {
             iv.setBackgroundResource(R.drawable.c6);
             iv0.setBackgroundResource(R.drawable.c6);
             iv.setOnClickListener(view -> e());
-            iv0.setOnClickListener(view -> Intents.a(getActivity(), FEED.class));
+            iv0.setOnClickListener(view -> {
+                // TODO
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, "Test");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                startActivity(Intent.createChooser(intent, "Send Email"));
+            });
             iv.setImageResource(R.drawable.c7);
             iv0.setImageResource(R.drawable.c8);
         }

@@ -27,7 +27,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
+import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class EXCE extends BaseActivity {
     final String[] exceptionType = {
@@ -103,10 +105,13 @@ public class EXCE extends BaseActivity {
         bn.setBackgroundResource(R.drawable.c10);
         AlertDialog dd = bld.create();
         bn.setOnClickListener((v) -> {
-            Intent it = new Intent(this, FEED.class);
-            it.putExtra("webvium", madeErrMsg);
-            startActivity(it);
-            dd.dismiss();
+            // TODO
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_EMAIL, "Test");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+            intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+            startActivity(Intent.createChooser(intent, "Send Email"));
             finish();
         });
         bn1.setOnClickListener((v) -> {

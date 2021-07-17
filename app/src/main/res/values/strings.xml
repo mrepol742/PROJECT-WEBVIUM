@@ -910,20 +910,9 @@
     <string name="z63">MIDI Devices</string>
     <string name="z64">Close All</string>
 
-    <string name="firebase.apiKey">api_key</string>
-    <string name="firebase.authDomain">auth_domain</string>
-    <string name="firebase.projectId">project_id</string>
-    <string name="firebase.storageBucket">storage_bucket</string>
-    <string name="firebase.messagingSenderId">messaging_sender_id</string>
-    <string name="firebase.appId">app_id</string>
-    <string name="firebase.measurementId">measurement_id</string>
-
     <string name="github.username">mrepol742</string>
     <string name="github.repository">Server</string>
     <string name="github.branch">master</string>
     <string name="github.path">/</string>
-
-    <string name="server.domain" tools:keep="@string/server_domain">domain</string>
-    <string name="server.path" tools:keep="@string/server_path">path</string>
 
 </resources>

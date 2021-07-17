@@ -178,7 +178,15 @@ public class SETT0 extends BaseActivity {
         iv.setBackgroundResource(R.drawable.c6);
         iv0.setBackgroundResource(R.drawable.c6);
         iv.setOnClickListener(view -> b23());
-        iv0.setOnClickListener(view -> Intents.a(this, FEED.class));
+        iv0.setOnClickListener(view -> {
+            // TODO
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_EMAIL, "Test");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+            intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+            startActivity(Intent.createChooser(intent, "Send Email"));
+        });
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);
         b24(true);
@@ -219,7 +227,13 @@ public class SETT0 extends BaseActivity {
                 b23();
                 return true;
             case 1:
-                Intents.a(this, FEED.class);
+                // TODO
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, "Test");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                startActivity(Intent.createChooser(intent, "Send Email"));
                 return true;
             default:
                 return super.onOptionsItemSelected(a);

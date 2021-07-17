@@ -184,6 +184,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.lang.reflect.*;
@@ -270,6 +271,7 @@ public class MAIN extends MainBaseActivity implements Format {
     public int a9;
     public boolean bl5 = false;
     public RelativeLayout cd;
+    private boolean err = false;
     public RelativeLayout back23;
     public Timer timer;
     public int it7422;
@@ -311,6 +313,7 @@ public class MAIN extends MainBaseActivity implements Format {
     private GeolocationDataModel w6;
     private PermissionDataModel w8;
     private R36 br2;
+    private R8 r8;
     private ca149 br4;
     private ImageView iw;
     private ValueCallback<Uri[]> b;
@@ -683,7 +686,13 @@ public class MAIN extends MainBaseActivity implements Format {
         tv7.setOnClickListener(view -> c144());
         tv7.setBackgroundResource(R.drawable.b17);
         tv8.setBackgroundResource(R.drawable.b29);
-        tv8.setOnClickListener(view -> c10());
+        tv8.setOnClickListener(view -> {
+            if (BuildConfig.DEBUG) {
+                c10();
+            } else {
+                c18();
+            }
+        });
         tv9.setImageResource(R.drawable.d9);
         tv9.setBackgroundResource(R.drawable.b17);
         tv9.setOnClickListener(view -> Intents.f(this, BOOK.class, 2115));
@@ -1075,9 +1084,9 @@ public class MAIN extends MainBaseActivity implements Format {
          AlertDialog dd = bld.create();
          dd.show();
          lv.setOnItemClickListener((a4, b, c, d) -> {
-             AwesomeToast.b(this, tabs.size() + " " + c + 1);
+             AwesomeToast.b(this, (ws.size() - 1) + " " + c);
              try {
-                 if (tabs.size() == c + 1) {
+                 if (ws.size() == c) {
                      for (WebViews tab : tabs) {
                          tab.destroy();
                      }
@@ -1093,7 +1102,7 @@ public class MAIN extends MainBaseActivity implements Format {
                      ct = 0;
                      c8("Tabs Cleared.");
                      dd.dismiss();
-                 } else if (tabs.size() - 1 == c + 1) {
+                 } else if (ws.size() - 1 == c) {
                      currentTab().pauseTimers();
                      currentTab().onPause();
                      fl.removeAllViews();
@@ -1118,14 +1127,14 @@ public class MAIN extends MainBaseActivity implements Format {
                      ct = c - 2;
                      dd.dismiss();
                  }
-             } catch (Exception en) {
+             } catch (Exception ignored) {
 
              }
          });
     }
 
 
-    private void c10aaa() {
+    private void c18() {
         if (pm8 == null) {
             pm8 = new PopupMenu(this, tv8);
             pm8.setOnDismissListener(popupMenu -> popupMenu.getMenu().clear());
@@ -1680,6 +1689,11 @@ public class MAIN extends MainBaseActivity implements Format {
             @JavascriptInterface
             public void setTheme(String a) {
                 c36(a);
+            }
+
+            @JavascriptInterface
+            public boolean isDarkModeEnabled() {
+                return a221().getBoolean("autoUpdate", false);
             }
         }, Package.c()+"ThemeHelper");
         h.addJavascriptInterface(new Object() {
@@ -2352,6 +2366,7 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     public void c38(String a) {
         try {
             for (WebViews web: tabs) {
@@ -2778,7 +2793,14 @@ public class MAIN extends MainBaseActivity implements Format {
             default:
             case "x57":
                 if (currentSettings().getJavaScriptEnabled()) {
-                    c3(web, WEBVIUM_HOME);
+                    if (BuildConfig.DEBUG) {
+                        String[] key = {"SamiunNafis0", "mrepol742", "webvium", "webvium mrepol742", "Melvin Jones Repol", "Samiun Nafis"};
+                        c3(web, c46() + key[new Random().nextInt(key.length)]);
+                        O4 o4 = new O4(web, 3000, 3000);
+                        o4.start();
+                    } else {
+                        c3(web, WEBVIUM_HOME);
+                    }
                 } else {
                     c3(web, c48());
                 }
@@ -3363,6 +3385,14 @@ public class MAIN extends MainBaseActivity implements Format {
         try {
             c180();
             bl6 = false;
+            if (r8 == null) {
+                r8 =  new R8();
+            }
+            registerReceiver(r8, ift);
+
+            if (receivedErrorDataModel.b == WebViewClient.ERROR_TIMEOUT || receivedErrorDataModel.b == WebViewClient.ERROR_FAILED_SSL_HANDSHAKE) {
+                err = true;
+            }
             if (Build.VERSION.SDK_INT >= 23 && receivedErrorDataModel.c.startsWith("file://")) {
                 Permission.check(this, Permission.STORAGE, 2);
             }
@@ -3496,6 +3526,17 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page started
     public void c81(String b) {
         try {
+            if (r8 != null) {
+                unregisterReceiver(r8);
+            }
+            err = false;
+            if (BuildConfig.DEBUG) {
+                if (b.startsWith(WEBVIUM_HOME)) {
+                    ab.hide();
+                } else {
+                    ab.show();
+                }
+            }
             if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("tow", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(true);
@@ -4212,6 +4253,53 @@ public class MAIN extends MainBaseActivity implements Format {
                 new Thread(p151).start();
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -4739,9 +4827,6 @@ public class MAIN extends MainBaseActivity implements Format {
                                     .append(cs6.getString(2))
                                     .append("</td></tr>");
                         }
-                        // You code was crazy ass unreadabe!
-                        // You accused me of writing a unreadable code?
-                        // I refuse to comment!
                         sg.append("</table></center></body></html>");
                         java.io.File fe1 = new java.io.File(StorageDirectory.getFileDir(this) + "/" + Hash.a("SHA-1", "Bookmarks") + ".htm");
                         if (fe1.createNewFile()) {
@@ -5412,6 +5497,97 @@ public class MAIN extends MainBaseActivity implements Format {
         return super.onKeyLongPress(a, b);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 24, 0, getString(R.string.h20)).setCheckable(true);
@@ -5758,6 +5934,20 @@ public class MAIN extends MainBaseActivity implements Format {
         }
     }
 
+    private static class O4 extends CountDownTimer {
+        private final WebViews web;
+
+        public O4(WebViews web, long a, long b) {
+            super(a, b);
+            this.web = web;
+        }
+
+        @Override
+        public void onFinish() {
+            web.loadUrl(WEBVIUM_HOME);
+        }
+    }
+
     private class R7 extends MainReceiver {
 
         @Override
@@ -5773,12 +5963,28 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     private class R6 extends MainReceiver {
+
+        @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();
             if (sg.equals("android.net.conn.CONNECTIVITY_CHANGE") || sg.equals("android.net.wifi.WIFI_STATE_CHANGED") || sg.equals("android.intent.action.AIRPLANE_MODE")) {
                 c180();
-                if (Objects.equals(currentTitle(), getSharedPreferences("wv", 0).getString("di", "742"))) {
+                if (err) {
+                    currentTab().reload();
+                }
+            }
+        }
+    }
+
+    private class R8 extends MainReceiver {
+
+        @Override
+        public void onReceive(Context a, Intent b) {
+            super.onReceive(a, b);
+            String sg = b.getAction();
+            if (sg.equals("android.net.conn.CONNECTIVITY_CHANGE") || sg.equals("android.net.wifi.WIFI_STATE_CHANGED") || sg.equals("android.intent.action.AIRPLANE_MODE")) {
+                if (!Connectivity.isAirplaneMode(a) && !Connectivity.isThereAnyInternetConnection(a)) {
                     currentTab().reload();
                 }
             }
@@ -5822,9 +6028,4 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         }
     }
-
-    /*
-     * There was no Hentai here. Sorry 😂😂..
-     * come back to line 6, 765 next week!
-     */
 }
