@@ -729,6 +729,7 @@
     <string name="s28">Don\'t render the webpage images and video thumbnails to make the load much faster on low memory devices.</string>
     <string name="s29">JavaScript Storage</string>
     <string name="s30">Application Storage</string>
+	<string name="s31">Inspect Elements</string>
     <string name="t21">Backup</string>
     <string name="t22">Log appear here</string>
     <string name="t23">Refreshing…</string>

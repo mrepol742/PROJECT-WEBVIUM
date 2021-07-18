@@ -164,6 +164,7 @@ import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.view.SoftKeyboard;
 import com.mrepol742.webvium.widget.AwesomeToast;
 import com.mrepol742.webvium.widget.W11;
+import com.mrepol742.webvium.util.Inspector;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -393,6 +394,8 @@ public class MAIN extends MainBaseActivity implements Format {
     private String sg;
     private MainReceiver ipH;
     private int ct;
+	private boolean inE;
+	
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -3956,6 +3959,14 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             c54(b);
             c52();
+			
+			Inspector ins = new Inspector(this, MAIN.this, a);
+			if (inE) {
+			    ins.editCode(true);
+			} else {
+				ins.editCode(false);
+			}
+			
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -6161,6 +6172,7 @@ public class MAIN extends MainBaseActivity implements Format {
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
+		a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
         return super.onCreateOptionsMenu(a);
     }
 
@@ -6168,6 +6180,9 @@ public class MAIN extends MainBaseActivity implements Format {
     public boolean onPrepareOptionsMenu(Menu a) {
         if (ua) {
             a.findItem(24).setChecked(true);
+        }
+		if (inE) {
+            a.findItem(31).setChecked(true);
         }
         return super.onPrepareOptionsMenu(a);
     }
@@ -6253,6 +6268,15 @@ public class MAIN extends MainBaseActivity implements Format {
                     c20(true);
                 }
                 return true;
+			case 31:
+				if (a.isChecked()) {
+					a.setChecked(false);
+					inE = false;
+				} else {
+					a.setChecked(true);
+					inE = true;
+				}
+				return true;
             case 13:
                 if (cm.capacity() > 16) {
                     c47();
