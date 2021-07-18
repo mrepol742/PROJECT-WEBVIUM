@@ -394,7 +394,8 @@ public class MAIN extends MainBaseActivity implements Format {
     private String sg;
     private MainReceiver ipH;
     private int ct;
-	private boolean inE;
+	private boolean inE = false;
+	Inspector ins;
 	
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
@@ -3960,12 +3961,8 @@ public class MAIN extends MainBaseActivity implements Format {
             c54(b);
             c52();
 			
-			Inspector ins = new Inspector(this, MAIN.this, a);
-			if (inE) {
-			    ins.editCode(true);
-			} else {
-				ins.editCode(false);
-			}
+			ins = new Inspector(this, MAIN.this, a);
+            //ins.editCode(inE);
 			
         } catch (Exception e) {
             e.printStackTrace();
@@ -5889,7 +5886,10 @@ public class MAIN extends MainBaseActivity implements Format {
             rx.printStackTrace();
         }
     }
-
+	
+	private void c181(boolean in) {
+		ins.editCode(in);
+	}
     @Override
     @TargetApi(Build.VERSION_CODES.M)
     public void onRequestPermissionsResult(int a, String[] b, int[] c) {
@@ -6272,9 +6272,11 @@ public class MAIN extends MainBaseActivity implements Format {
 				if (a.isChecked()) {
 					a.setChecked(false);
 					inE = false;
+					ins.editCode(true);
 				} else {
 					a.setChecked(true);
 					inE = true;
+					ins.editCode(false);
 				}
 				return true;
             case 13:
@@ -6592,4 +6594,6 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         }
     }
+    
+    
 }
