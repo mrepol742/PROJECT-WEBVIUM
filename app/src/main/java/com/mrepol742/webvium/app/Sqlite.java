@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
-/* * AUTO GENERATED FILE */
+/*
+ * AUTO GENERATED FILE
+ */
+
 package com.mrepol742.webvium.app;
 
 public class Sqlite {

@@ -14,6 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+ * AUTO GENERATED FILE
+ */
 
 package com.mrepol742.webvium;
 
@@ -41,6 +44,7 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.security.Hash;
 import com.mrepol742.webvium.util.AppID;
+import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.io.File;
@@ -51,7 +55,6 @@ import java.util.Calendar;
 
 // @Class WelcomeScreen
 public class WELC extends BaseActivity {
-    public static final String INIT = "init_17";
     private static final String MAVEN_PRO = "classes";
     public RelativeLayout rl;
     public ImageView iv;
@@ -59,6 +62,7 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
+    public static final String INIT = "init_17";
     private RelativeLayout ll;
 
     @Override
@@ -86,22 +90,22 @@ public class WELC extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    File fe = new File(StorageDirectory.getClasses(WELC.this));
-                    if (!fe.exists()) {
-                        InputStream fos = WELC.this.getAssets().open(MAVEN_PRO);
-                        OutputStream d = new FileOutputStream(StorageDirectory.getClasses(WELC.this));
-                        byte[] e = new byte[1024];
-                        int f;
-                        while ((f = fos.read(e)) != -1) {
-                            d.write(e, 0, f);
-                        }
-                        d.flush();
-                        d.close();
-                        fos.close();
-                    }
-                } catch (Exception en) {
-                    en.printStackTrace();
-                }
+                     File fe = new File(StorageDirectory.getClasses(WELC.this));
+                     if (!fe.exists()) {
+                         InputStream fos = getAssets().open(MAVEN_PRO);
+                         OutputStream d = new FileOutputStream(StorageDirectory.getClasses(WELC.this));
+                         byte[] e = new byte[1024];
+                         int f;
+                         while ((f = fos.read(e)) != -1) {
+                             d.write(e, 0, f);
+                         }
+                         d.flush();
+                         d.close();
+                         fos.close();
+                     }
+                 } catch (Exception en) {
+                     en.printStackTrace();
+                 }
             }
         };
         new Thread(re).start();
