@@ -19,7 +19,7 @@
     <!-- SYSTEM FORCE NIGHT MODE -->
     <!-- TRANSFER LIGHT TO DARK -->
     <!-- CUSTOM BACKGROUND TRANSLUCENT THEME LIGHT -->
-    <style name="a" parent="g" >
+    <style name="a" parent="g">
         <item name="android:windowBackground">@null</item>
     </style>
     <!-- LIGHT THEME -->

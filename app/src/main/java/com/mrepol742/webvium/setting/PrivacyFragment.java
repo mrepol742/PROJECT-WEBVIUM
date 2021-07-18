@@ -102,7 +102,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             }
             etp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     etp.setSummary(newValue.toString());
                     return true;
@@ -111,7 +111,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             final LIST lp67 = (LIST) findPreference("userA");
             lp67.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     etp.setEnabled(newValue.toString().equals("7680e"));
                     return true;
@@ -120,7 +120,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference f = findPreference("clearCache");
             f.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PrivacyFragment.this.u();
                     return true;
@@ -129,7 +129,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference f6 = findPreference("clearBook");
             f6.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PrivacyFragment.this.a1();
                     return true;
@@ -138,7 +138,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference f67 = findPreference("clearSSL");
             f67.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PrivacyFragment.this.a2();
                     return true;
@@ -147,7 +147,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference f6767 = findPreference("clearHTTP");
             f6767.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     if (wd.hasHttpAuthUsernamePassword()) {
                         PrivacyFragment.this.a4();
@@ -159,7 +159,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference f2 = findPreference("clearSearch");
             f2.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PrivacyFragment.this.a3();
                     return true;
@@ -168,7 +168,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference g = findPreference("clearHistory");
             g.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PrivacyFragment.this.v();
                     return true;
@@ -177,7 +177,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             final Preference h = findPreference("clearCookies");
             h.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
 
                     if (cm.hasCookies()) {
@@ -189,7 +189,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             final Preference hS = findPreference("clearSCookies");
             hS.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
 
                     if (cm.hasCookies()) {
@@ -205,7 +205,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference i = findPreference("clearForm");
             i.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     if (wd.hasFormData()) {
                         PrivacyFragment.this.x();
@@ -218,7 +218,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             Preference j5 = findPreference("clearClipboard");
             j5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PrivacyFragment.this.b8();
                     return true;
@@ -227,7 +227,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             SWIT cbf = (SWIT) findPreference("nCV");
             cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
 
@@ -265,7 +265,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             public void onClick(DialogInterface a12, int intetg) {
                 Runnable p15 = new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         PrivacyFragment.this.h(StorageDirectory.getCacheDir(PrivacyFragment.this.getActivity()));
                     }
@@ -521,7 +521,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
 
     private class R7 extends MainReceiver {
 
-            @Override
+        @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

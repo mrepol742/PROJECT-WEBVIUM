@@ -100,7 +100,7 @@ public class SETT0 extends BaseActivity {
             tv0.setText(getString(R.string.y28));
             tv0.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     try {
                         Animation.animate(SETT0.this, R.anim.i, tv0);
@@ -123,7 +123,7 @@ public class SETT0 extends BaseActivity {
             tv1.setText(getString(R.string.t21));
             tv1.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     try {
                         Animation.animate(SETT0.this, R.anim.i, tv1);

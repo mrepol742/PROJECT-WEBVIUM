@@ -56,14 +56,14 @@ import java.net.URL;
 // @Class Tools
 public class TOOL extends BaseActivity {
 
-    private TextView k;
-    private TextView tt;
-    private MainWebView m;
     public static final int TOOL_SOURCE_CODE = 0;
     public static final int TOOL_ROBOTS = 2;
     public static final int TOOL_SITEMAPS = 1;
     public static final int TOOL_ASSET_LINKS = 3;
     public static final int TOOL_HEADERS = 4;
+    private TextView k;
+    private TextView tt;
+    private MainWebView m;
     private FrameLayout fl;
 
     @Override
@@ -116,7 +116,7 @@ public class TOOL extends BaseActivity {
                 bld.setMessage(Html.b(String.format(getString(R.string.v18), cm.message(), cm.lineNumber(), cm.sourceId())));
                 bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
-            @Override
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
@@ -190,20 +190,20 @@ public class TOOL extends BaseActivity {
                     if (data.startsWith("view-source:")) {
                         m.loadUrl(data);
                     } else {
-                        m.loadUrl("view-source:"+data);
+                        m.loadUrl("view-source:" + data);
                     }
                     break;
                 case TOOL_ROBOTS:
                     Runnable runnable = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             try {
                                 final URL url = new URL(data);
                                 final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
                                 TOOL.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                    @Override
                                     public void run() {
                                         if (bn) {
                                             m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
@@ -224,14 +224,14 @@ public class TOOL extends BaseActivity {
                 case TOOL_ASSET_LINKS:
                     Runnable runnable1 = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             try {
                                 final URL url = new URL(data);
                                 final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
                                 TOOL.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                    @Override
                                     public void run() {
                                         if (bn) {
                                             m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
@@ -253,14 +253,14 @@ public class TOOL extends BaseActivity {
                 case TOOL_SITEMAPS:
                     Runnable runnable2 = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             try {
                                 final URL url = new URL(data);
                                 final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
                                 TOOL.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                    @Override
                                     public void run() {
                                         if (bn) {
                                             m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
@@ -281,7 +281,7 @@ public class TOOL extends BaseActivity {
                 case TOOL_HEADERS:
                     Runnable runnable3 = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             try {
                                 StringBuilder stringBuilder = new StringBuilder("<!DOCTYPE html><html><head></head><body>");
@@ -296,7 +296,7 @@ public class TOOL extends BaseActivity {
                                     fw.close();
                                     TOOL.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                        @Override
                                         public void run() {
                                             m.loadUrl("file://" + StorageDirectory.getFileDir(TOOL.this) + "/" + Hash.a("SHA-1", "Headers.html") + ".html");
                                         }
@@ -327,6 +327,6 @@ public class TOOL extends BaseActivity {
         }
     }
 
-    
+
 }
  

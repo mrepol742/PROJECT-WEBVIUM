@@ -45,9 +45,6 @@ import com.mrepol742.webvium.view.Animation;
 
 public class SettingFragment extends BaseFragment {
 
-    private ImageView iv, iv0;
-    private boolean bn;
-
     private static final int[] header1 = {
             R.string.a,
             R.string.o10,
@@ -75,6 +72,8 @@ public class SettingFragment extends BaseFragment {
             R.string.t19,
             R.string.y70
     };
+    private ImageView iv, iv0;
+    private boolean bn;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -133,14 +132,14 @@ public class SettingFragment extends BaseFragment {
             iv0.setBackgroundResource(R.drawable.c6);
             iv.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     SettingFragment.this.e();
                 }
             });
             iv0.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     // TODO
                     Intent intent = new Intent(Intent.ACTION_SENDTO);

@@ -108,7 +108,7 @@ public class DOWN extends BaseActivity {
         if (res.getCount() == 0) {
             runOnUiThread(new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     f2.setVisibility(View.VISIBLE);
                     a3.setVisibility(View.GONE);
@@ -125,7 +125,7 @@ public class DOWN extends BaseActivity {
             }
             runOnUiThread(new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     iv.setVisibility(View.VISIBLE);
                     Animation.animate(DOWN.this, R.anim.i, iv);

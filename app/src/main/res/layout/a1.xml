@@ -18,15 +18,16 @@
 <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     a:layout_width="match_parent"
-    a:layout_height="wrap_content" a:gravity="center"
+    a:layout_height="wrap_content"
+    a:gravity="center"
     a:paddingStart="?m"
     a:paddingEnd="?m">
 
     <TextView
-        a:layout_centerHorizontal="true"
         a:id="@id/o30"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
+        a:layout_centerHorizontal="true"
         a:layout_marginTop="10dp"
         a:textSize="@dimen/h" />
 
@@ -38,10 +39,10 @@
         a:layout_marginBottom="10dp">
 
         <TextView
-            a:layout_gravity="top"
             a:id="@id/o31"
             a:layout_width="wrap_content"
             a:layout_height="wrap_content"
+            a:layout_gravity="top"
             a:layout_marginTop="10dp"
             a:textIsSelectable="true"
             a:textSize="@dimen/b" />

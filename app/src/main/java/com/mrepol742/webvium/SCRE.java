@@ -208,7 +208,7 @@ public class SCRE extends BaseActivity {
             a.setMessage("This feature is not available for now... ");
             a.setPositiveButton("Close", new DialogInterface.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(DialogInterface a1, int intetg) {
                     a1.dismiss();
                 }
@@ -242,12 +242,12 @@ public class SCRE extends BaseActivity {
                 String c = b.replaceAll(StorageDirectory.a() + st, "");
                 Runnable p = new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         final Bitmap bp = BitmapFactory.decodeFile(b);
                         SCRE.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 h19.setImageBitmap(bp);
                             }

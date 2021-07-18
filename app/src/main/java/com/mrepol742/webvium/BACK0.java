@@ -50,7 +50,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class BACK0 extends BaseActivity {
 
-            @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 742 && resultCode == RESULT_OK && data.getData() != null) {
@@ -104,7 +104,7 @@ public class BACK0 extends BaseActivity {
             }
         } catch (Exception en) {
             AwesomeToast.c(BACK0.this, getString(R.string.z21));
-           en.printStackTrace();
+            en.printStackTrace();
             finishAndRemoveTask();
         }
     }

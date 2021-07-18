@@ -82,7 +82,7 @@ public class LOGC extends BaseActivity {
             a1.setNavigationIcon(R.drawable.a2);
             a1.setNavigationOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     LOGC.this.finishAndRemoveTask();
                 }
@@ -92,7 +92,7 @@ public class LOGC extends BaseActivity {
             a5();
             iv.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     LOGC.this.a5();
                     AwesomeToast.b(LOGC.this, LOGC.this.getString(R.string.t23));
@@ -127,22 +127,22 @@ public class LOGC extends BaseActivity {
                     is.close();
                     LOGC.this.runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             if (sb.length() != 0) {
                                 tv.append(sb.toString());
                             }
                             timer.schedule(new TimerTask() {
 
-            @Override
+                                @Override
                                 public void run() {
                                     runOnUiThread(new Runnable() {
 
-            @Override
+                                        @Override
                                         public void run() {
                                             sv.post(new Runnable() {
 
-            @Override
+                                                @Override
                                                 public void run() {
                                                     sv.fullScroll(View.FOCUS_DOWN);
                                                 }

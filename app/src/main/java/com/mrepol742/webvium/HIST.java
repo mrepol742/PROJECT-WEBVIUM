@@ -63,16 +63,6 @@ import java.util.ArrayList;
 
 // @Class History
 public class HIST extends BaseActivity {
-    private HistoryHelper d1;
-    private HistoryAdapter w15;
-    private ListView a3;
-    private ArrayList<HistoryDataModel> al;
-    private RelativeLayout f2;
-    private ImageView o21;
-    private ImageView o22;
-    private TextView f4;
-    private PopupMenu pm;
-    private int b;
     public static final int LINKS = 0;
     public static final int TRANCEROUTE = 1;
     public static final int NPING = 2;
@@ -84,10 +74,19 @@ public class HIST extends BaseActivity {
     public static final int IP_GEO = 8;
     public static final int ASSETLINKS = 9;
     public static final int SITEMAPS = 10;
-
+    private HistoryHelper d1;
+    private HistoryAdapter w15;
+    private ListView a3;
+    private ArrayList<HistoryDataModel> al;
+    private RelativeLayout f2;
+    private ImageView o21;
+    private ImageView o22;
+    private TextView f4;
+    private PopupMenu pm;
+    private int b;
     final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
-            @Override
+        @Override
         public boolean onMenuItemClick(MenuItem a1) {
             try {
                 String a5 = w15.c(b).ls;
@@ -208,7 +207,7 @@ public class HIST extends BaseActivity {
         if (res.getCount() == 0) {
             runOnUiThread(new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     f4.setVisibility(View.VISIBLE);
                     a3.setVisibility(View.GONE);
@@ -224,7 +223,7 @@ public class HIST extends BaseActivity {
             }
             runOnUiThread(new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     f4.setVisibility(View.GONE);
                     a3.setVisibility(View.VISIBLE);
@@ -276,7 +275,7 @@ public class HIST extends BaseActivity {
             a3.setAdapter(w15);
             a3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
+                @Override
                 public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
                     try {
                         Intents.d("value", w15.c(c).ls0, HIST.this);
@@ -288,7 +287,7 @@ public class HIST extends BaseActivity {
             });
             a3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-            @Override
+                @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                     n(view, i);
                     return true;
@@ -422,7 +421,7 @@ public class HIST extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a1, int intetg) {
-                d1.b( b, kl, b1);
+                d1.b(b, kl, b1);
                 HIST.this.f(String.format(HIST.this.getString(R.string.h5), b));
                 HIST.this.k();
                 a1.dismiss();
@@ -573,7 +572,7 @@ public class HIST extends BaseActivity {
                 if (res.getCount() == 0) {
                     HIST.this.runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             f4.setVisibility(View.VISIBLE);
                             a3.setVisibility(View.GONE);
@@ -590,7 +589,7 @@ public class HIST extends BaseActivity {
                     if (al.size() == 0) {
                         HIST.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 f4.setVisibility(View.VISIBLE);
                                 a3.setVisibility(View.GONE);
@@ -601,7 +600,7 @@ public class HIST extends BaseActivity {
                     } else {
                         HIST.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 w15.a(al);
                                 w15.notifyDataSetChanged();
@@ -668,7 +667,7 @@ public class HIST extends BaseActivity {
             ti.setTextColor(f3);
         }
         ed.setText(url);
-        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
             bn.setBackgroundResource(R.drawable.c10);
         } else {
             bn.setBackgroundResource(R.drawable.c11);
@@ -713,13 +712,13 @@ public class HIST extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
-                    if (!Domain.isValidDomain(url)){
+                    if (!Domain.isValidDomain(url)) {
                         ed.setError(getString(R.string.y84));
                         bn.setBackgroundResource(R.drawable.c11);
                     } else {
                         bn.setBackgroundResource(R.drawable.c10);
                     }
-                }  else if (type != SOURCE_CODE && (url.startsWith("file://") || url.startsWith("content://"))){
+                } else if (type != SOURCE_CODE && (url.startsWith("file://") || url.startsWith("content://"))) {
                     ed.setError(getString(R.string.y83));
                     bn.setBackgroundResource(R.drawable.c11);
                 } else {
@@ -759,7 +758,7 @@ public class HIST extends BaseActivity {
                 final String sg = Stream.d(url, HIST.this.getString(R.string.c33));
                 HIST.this.runOnUiThread(new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         ti.setText(Html.b(sg));
                     }
@@ -767,7 +766,7 @@ public class HIST extends BaseActivity {
             }
         };
         new Thread(p15).start();
-        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
             bn.setBackgroundResource(R.drawable.c10);
         } else {
             bn.setBackgroundResource(R.drawable.c11);
@@ -782,12 +781,12 @@ public class HIST extends BaseActivity {
                 if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
                     Runnable p151 = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             final String sg = Stream.d(ab, HIST.this.getString(R.string.c33));
                             HIST.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                @Override
                                 public void run() {
                                     ti.setText(Html.b(sg));
                                 }
@@ -804,13 +803,13 @@ public class HIST extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
-                    if (!Domain.isValidDomain(url)){
+                    if (!Domain.isValidDomain(url)) {
                         ed.setError(getString(R.string.y84));
                         bn.setBackgroundResource(R.drawable.c11);
                     } else {
                         bn.setBackgroundResource(R.drawable.c10);
                     }
-                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                } else if (url.startsWith("file://") || url.startsWith("content://")) {
                     ed.setError(getString(R.string.y83));
                     bn.setBackgroundResource(R.drawable.c11);
                 } else {
@@ -967,7 +966,7 @@ public class HIST extends BaseActivity {
                 final String sg = Stream.a(url, HIST.this.getString(R.string.c33), HIST.this.getString(R.string.g25));
                 HIST.this.runOnUiThread(new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         ti.setText(Html.b(sg));
                     }
@@ -976,7 +975,7 @@ public class HIST extends BaseActivity {
         };
         new Thread(p15).start();
         bn.setText(getString(R.string.i6));
-        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
             bn.setBackgroundResource(R.drawable.c10);
         } else {
             bn.setBackgroundResource(R.drawable.c11);
@@ -991,12 +990,12 @@ public class HIST extends BaseActivity {
                 if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
                     Runnable p151 = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             final String sg = Stream.a(ab, HIST.this.getString(R.string.c33), HIST.this.getString(R.string.g25));
                             HIST.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                @Override
                                 public void run() {
                                     ti.setText(Html.b(sg));
                                 }
@@ -1013,13 +1012,13 @@ public class HIST extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
-                    if (!Domain.isValidDomain(url)){
+                    if (!Domain.isValidDomain(url)) {
                         ed.setError(getString(R.string.y84));
                         bn.setBackgroundResource(R.drawable.c11);
                     } else {
                         bn.setBackgroundResource(R.drawable.c10);
                     }
-                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                } else if (url.startsWith("file://") || url.startsWith("content://")) {
                     ed.setError(getString(R.string.y83));
                     bn.setBackgroundResource(R.drawable.c11);
                 } else {

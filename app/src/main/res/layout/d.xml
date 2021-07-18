@@ -34,22 +34,32 @@
             <TextView
                 a:id="@id/o29"
                 a:layout_width="wrap_content"
-                a:layout_height="wrap_content" a:paddingStart="0dp"
-                a:ellipsize="end" a:paddingEnd="20dp"
+                a:layout_height="wrap_content"
+                a:ellipsize="end"
                 a:maxLines="1"
+                a:paddingStart="0dp"
+                a:paddingEnd="20dp"
                 a:textSize="@dimen/a" />
-            <TextView a:layout_below="@id/o29"
+
+            <TextView
                 a:id="@id/l"
                 a:layout_width="wrap_content"
-                a:layout_height="wrap_content" a:paddingStart="0dp"
-                a:ellipsize="end" a:paddingEnd="20dp"
+                a:layout_height="wrap_content"
+                a:layout_below="@id/o29"
+                a:ellipsize="end"
                 a:maxLines="1"
+                a:paddingStart="0dp"
+                a:paddingEnd="20dp"
                 a:textSize="@dimen/b" />
 
         </RelativeLayout>
 
     </Toolbar>
 
-    <FrameLayout a:id="@id/c" a:layout_below="@id/k" a:layout_width="match_parent" a:layout_height="match_parent" />
+    <FrameLayout
+        a:id="@id/c"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:layout_below="@id/k" />
 
 </RelativeLayout>

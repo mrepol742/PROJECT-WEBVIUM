@@ -37,7 +37,7 @@ import java.io.Writer;
 // @class Application
 public class APPL extends Application {
     private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
-    private  SharedPreferences sp;
+    private SharedPreferences sp;
 
     @Override
     public void onCreate() {
@@ -58,7 +58,7 @@ public class APPL extends Application {
             this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
             Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 
-            @Override
+                @Override
                 public void uncaughtException(Thread thread, Throwable ex) {
                     Intent intent = new Intent(APPL.this.getApplicationContext(), EXCE.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -95,11 +95,11 @@ public class APPL extends Application {
         super.onTrimMemory(i);
     }
 
-    private String getStackTrace(Throwable th){
+    private String getStackTrace(Throwable th) {
         final Writer result = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(result);
         Throwable cause = th;
-        while (cause != null){
+        while (cause != null) {
             cause.printStackTrace(printWriter);
             cause = cause.getCause();
         }

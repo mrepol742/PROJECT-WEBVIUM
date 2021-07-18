@@ -88,12 +88,13 @@
         a:allowBackup="false"
         a:appCategory="productivity"
         a:hasFragileUserData="true"
-        a:icon="@mipmap/c" a:theme="@style/f"
+        a:icon="@mipmap/c"
         a:label="@string/p20"
         a:largeHeap="true"
         a:manageSpaceActivity="com.mrepol742.webvium.MANG"
         a:roundIcon="@mipmap/c"
         a:supportsRtl="true"
+        a:theme="@style/f"
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
 
@@ -114,7 +115,7 @@
         <activity
             a:name="com.mrepol742.webvium.EXCE"
             a:configChanges="keyboardHidden|orientation|screenSize"
-           a:theme="@style/m"
+            a:theme="@style/m"
             a:windowSoftInputMode="adjustResize" />
         <!-- SEARCH -->
         <activity
@@ -198,7 +199,7 @@
             a:excludeFromRecents="true"
             a:launchMode="singleTask"
             a:theme="@style/m"
-            a:windowSoftInputMode="stateHidden"/>
+            a:windowSoftInputMode="stateHidden" />
         <!-- DATABASE ERROR -->
         <!-- ASSISTANT -->
         <activity
@@ -415,8 +416,8 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="http"
-                    a:host="*" />
+                    a:host="*"
+                    a:scheme="http" />
             </intent-filter>
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
@@ -425,8 +426,8 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="https"
-                    a:host="*" />
+                    a:host="*"
+                    a:scheme="https" />
             </intent-filter>
         </activity>
         <!-- WELCOME SCREEN -->
@@ -468,7 +469,8 @@
             </intent-filter>
         </activity>
 
-        <activity a:name="com.mrepol742.webvium.MAIN"
+        <activity
+            a:name="com.mrepol742.webvium.MAIN"
             a:alwaysRetainTaskState="true"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
             a:launchMode="singleTask"
@@ -717,9 +719,9 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="http"
                     a:host="mrepol742.github.io"
-                    a:pathPattern="/webvium" />
+                    a:pathPattern="/webvium"
+                    a:scheme="http" />
             </intent-filter>
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
@@ -728,9 +730,9 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="http"
                     a:host="mrepol742.github.io"
-                    a:pathPattern="/PROJECT-WEBVIUM" />
+                    a:pathPattern="/PROJECT-WEBVIUM"
+                    a:scheme="http" />
             </intent-filter>
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
@@ -739,9 +741,9 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="https"
                     a:host="mrepol742.github.io"
-                    a:pathPattern="/webvium" />
+                    a:pathPattern="/webvium"
+                    a:scheme="https" />
             </intent-filter>
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
@@ -750,9 +752,9 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="https"
                     a:host="mrepol742.github.io"
-                    a:pathPattern="/PROJECT-WEBVIUM" />
+                    a:pathPattern="/PROJECT-WEBVIUM"
+                    a:scheme="https" />
             </intent-filter>
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
@@ -761,8 +763,8 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="http"
-                    a:host="*" />
+                    a:host="*"
+                    a:scheme="http" />
             </intent-filter>
             <intent-filter>
                 <action a:name="android.intent.action.VIEW" />
@@ -771,8 +773,8 @@
                 <category a:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    a:scheme="https"
-                    a:host="*" />
+                    a:host="*"
+                    a:scheme="https" />
             </intent-filter>
         </activity>
         <!-- LOGCAT -->
@@ -780,8 +782,8 @@
             a:name="com.mrepol742.webvium.LOGC"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
-            a:taskAffinity="com.mrepol742.webvium.task.LOT"
             a:process=":lot"
+            a:taskAffinity="com.mrepol742.webvium.task.LOT"
             a:windowSoftInputMode="stateHidden" />
 
         <!-- VOICE SPEECH RECOGNITION -->
@@ -922,9 +924,9 @@
             tools:ignore="ExportedService" />
 
         <service
-            tools:ignore="ExportedService"
             a:name="com.mrepol742.webvium.BACK"
-            a:label="@string/n22" />
+            a:label="@string/n22"
+            tools:ignore="ExportedService" />
 
 
     </application>

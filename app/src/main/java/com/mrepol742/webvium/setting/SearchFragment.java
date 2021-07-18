@@ -36,7 +36,7 @@ import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class SearchFragment extends BasePreferenceFragment {
 
-            @Override
+    @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
@@ -48,7 +48,7 @@ public class SearchFragment extends BasePreferenceFragment {
             PREF b = (PREF) findPreference("asst");
             b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     SearchFragment.this.b14();
                     return true;
@@ -57,7 +57,7 @@ public class SearchFragment extends BasePreferenceFragment {
             SWIT cbf = (SWIT) findPreference("qckS");
             cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
                         Intents.b(SearchFragment.this.getActivity(), QUIC.class);

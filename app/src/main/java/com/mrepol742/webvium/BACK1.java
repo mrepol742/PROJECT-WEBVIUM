@@ -35,9 +35,9 @@ import com.mrepol742.webvium.manifest.Permission;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
-public class BACK1  extends BaseActivity {
+public class BACK1 extends BaseActivity {
 
-            @Override
+    @Override
     protected void onCreate(Bundle be) {
         super.onCreate(be);
         if (Permission.check(this, Permission.STORAGE, 1)) {

@@ -81,9 +81,9 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
         LinearLayout ll = findViewById(R.id.l10);
         tv.setTextColor(f);
         w4 = new MainWebView(this);
-       if (!a221().getBoolean("autoUpdate", false)) {
-           ll.setBackgroundColor(Resources.getColor(this, R.color.b));
-             } else {
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ll.setBackgroundColor(Resources.getColor(this, R.color.b));
+        } else {
             ll.setBackgroundColor(Resources.getColor(this, R.color.n));
         }
         for (int i : ids) {
@@ -106,7 +106,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             tv4.setOnLongClickListener(this);
             tv4.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
+                @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
                 }
@@ -273,80 +273,80 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             a(sg1);
             //    tv.setText(sgg);
         } else if (id == R.id.n19) {
-                if (p(tv.getText().toString())) {
-                    tv.append(getString(R.string.r28));
-                }
+            if (p(tv.getText().toString())) {
+                tv.append(getString(R.string.r28));
+            }
         }
     }
 
     @Override
     public boolean onLongClick(View view) {
         int id = view.getId();
-         if (id == R.id.n2) {
-             String sg = tv.getText().toString();
-             tv.setText(o(sg, 2));
-             return true;
-         } else if (id == R.id.n3) {
-             tv.setText("");
-             return true;
-         } else if (id == R.id.n4) {
-             tv.append(getString(R.string.m11));
-             return true;
-         } else if (id == R.id.n5) {
-             tv.append(getString(R.string.m12));
-             return true;
-         } else if (id == R.id.n6) {
-             tv.append(getString(R.string.m13));
-             return true;
-         } else if (id == R.id.n7) {
-             if (p(tv.getText().toString())) {
-                 tv.append("/");
-             }
-             return true;
-         } else if (id == R.id.n8) {
-             tv.append(getString(R.string.m14));
-             return true;
-         } else if (id == R.id.n9) {
-             tv.append(getString(R.string.m15));
-             return true;
-         } else if (id == R.id.n10) {
-             tv.append(getString(R.string.m16));
-             return true;
-         } else if (id == R.id.n11) {
-             if (p(tv.getText().toString())) {
-                 tv.append("*");
-             }
-             return true;
-         } else if (id == R.id.n12) {
-             tv.append(getString(R.string.m17));
-             return true;
-         } else if (id == R.id.n13) {
-             tv.append(getString(R.string.m18));
-             return true;
-         } else if (id == R.id.n14) {
-             tv.append(getString(R.string.m19));
-             return true;
-         } else if (id == R.id.n15) {
-             if (p(tv.getText().toString())) {
-                 tv.append(getString(R.string.r27));
-             }
-             return true;
-         } else if (id == R.id.n16) {
-             if (p(tv.getText().toString())) {
-                 tv.append(getString(R.string.r29));
-             }
-             return true;
-         } else if (id == R.id.n17) {
-             tv.append(getString(R.string.m20));
-             return true;
-         } else if (id == R.id.n18) {
-             tv.append(getString(R.string.r30));
-             return true;
-         } else if (id == R.id.n19) {
-                if (p(tv.getText().toString())) {
-                    tv.append(getString(R.string.r28));
-                }
-                return true;
+        if (id == R.id.n2) {
+            String sg = tv.getText().toString();
+            tv.setText(o(sg, 2));
+            return true;
+        } else if (id == R.id.n3) {
+            tv.setText("");
+            return true;
+        } else if (id == R.id.n4) {
+            tv.append(getString(R.string.m11));
+            return true;
+        } else if (id == R.id.n5) {
+            tv.append(getString(R.string.m12));
+            return true;
+        } else if (id == R.id.n6) {
+            tv.append(getString(R.string.m13));
+            return true;
+        } else if (id == R.id.n7) {
+            if (p(tv.getText().toString())) {
+                tv.append("/");
+            }
+            return true;
+        } else if (id == R.id.n8) {
+            tv.append(getString(R.string.m14));
+            return true;
+        } else if (id == R.id.n9) {
+            tv.append(getString(R.string.m15));
+            return true;
+        } else if (id == R.id.n10) {
+            tv.append(getString(R.string.m16));
+            return true;
+        } else if (id == R.id.n11) {
+            if (p(tv.getText().toString())) {
+                tv.append("*");
+            }
+            return true;
+        } else if (id == R.id.n12) {
+            tv.append(getString(R.string.m17));
+            return true;
+        } else if (id == R.id.n13) {
+            tv.append(getString(R.string.m18));
+            return true;
+        } else if (id == R.id.n14) {
+            tv.append(getString(R.string.m19));
+            return true;
+        } else if (id == R.id.n15) {
+            if (p(tv.getText().toString())) {
+                tv.append(getString(R.string.r27));
+            }
+            return true;
+        } else if (id == R.id.n16) {
+            if (p(tv.getText().toString())) {
+                tv.append(getString(R.string.r29));
+            }
+            return true;
+        } else if (id == R.id.n17) {
+            tv.append(getString(R.string.m20));
+            return true;
+        } else if (id == R.id.n18) {
+            tv.append(getString(R.string.r30));
+            return true;
+        } else if (id == R.id.n19) {
+            if (p(tv.getText().toString())) {
+                tv.append(getString(R.string.r28));
+            }
+            return true;
         }
         return false;
     }

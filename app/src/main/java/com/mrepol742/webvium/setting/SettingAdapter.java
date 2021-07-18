@@ -113,6 +113,7 @@ public class SettingAdapter extends MainBaseAdapter {
         TextView a;
         TextView b;
         ImageView c;
+
         @Keep
         private W15a() {
         }

@@ -21,7 +21,7 @@ import android.text.Editable;
 
 public class TextWatcher implements android.text.TextWatcher {
 
-            @Override
+    @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
     }

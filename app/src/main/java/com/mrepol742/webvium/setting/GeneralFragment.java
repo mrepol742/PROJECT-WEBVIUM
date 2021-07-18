@@ -98,7 +98,7 @@ public class GeneralFragment extends BasePreferenceFragment {
 
             hj89.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue != null && U3.b((newValue.toString()))) {
                         hj89.setSummary(newValue.toString());
@@ -111,7 +111,7 @@ public class GeneralFragment extends BasePreferenceFragment {
             });
             hj9.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("1o")) {
                         hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.x17));
@@ -142,7 +142,7 @@ public class GeneralFragment extends BasePreferenceFragment {
             PREF a1 = (PREF) findPreference("cfu");
             a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     Intents.b(GeneralFragment.this.getActivity(), UPDA.class);
                     AwesomeToast.b(GeneralFragment.this.getActivity(), GeneralFragment.this.getString(R.string.m30));

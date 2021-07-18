@@ -24,7 +24,7 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 
 public class FeatureFragment extends BasePreferenceFragment {
 
-            @Override
+    @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         a5(R.xml.a4);

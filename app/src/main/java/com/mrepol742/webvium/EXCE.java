@@ -65,8 +65,8 @@ public class EXCE extends BaseActivity {
                         break;
                     }
                 }
-                if(madeErrMsg.isEmpty()) madeErrMsg = errMsg;
-            } catch (Exception e){
+                if (madeErrMsg.isEmpty()) madeErrMsg = errMsg;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             a(madeErrMsg);

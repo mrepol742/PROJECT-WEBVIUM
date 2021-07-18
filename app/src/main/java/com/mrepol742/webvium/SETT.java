@@ -52,7 +52,6 @@ import java.util.Objects;
 // @Class SettingLauncher
 public class SETT extends BaseActivity {
 
-    private TextView h18;
     public static final int FRAGMENT_TOOL = 1;
     public static final int FRAGMENT_GENERAL = 2;
     public static final int FRAGMENT_VIDEO = 3;
@@ -68,6 +67,7 @@ public class SETT extends BaseActivity {
     public static final int FRAGMENT_SECURITY_LOCK = 13;
     public static final int FRAGMENT_PRETEND_MODE = 14;
     public static final int FRAGMENT_DEFAULT = 742;
+    private TextView h18;
 
     @Override
     protected void onCreate(Bundle a) {

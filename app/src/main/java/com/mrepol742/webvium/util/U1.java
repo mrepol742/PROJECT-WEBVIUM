@@ -37,7 +37,7 @@ public class U1 {
         while (i < targetStringLength) {
             int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
             if (randomLimitedInt <= 90 || randomLimitedInt >= 98) {
-                buffer.append((char)randomLimitedInt);
+                buffer.append((char) randomLimitedInt);
             }
             i++;
         }

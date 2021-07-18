@@ -55,7 +55,7 @@ public class Hash {
                     SecureRandom random = new SecureRandom();
                     random.nextBytes(bytes);
                 }
-            } else if (w1.i == 0){
+            } else if (w1.i == 0) {
                 bytes = md.digest(w1.sg1.getBytes());
             }
             StringBuilder sb = new StringBuilder();

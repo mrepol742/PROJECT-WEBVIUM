@@ -52,7 +52,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
         if (requestCode == 79 && data != null) {
             Runnable p15 = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     try {
                         InputStream c = InterfaceFragment.this.getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
@@ -72,7 +72,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
                         InterfaceFragment.this.getActivity().sendBroadcast(it);
                         InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.o29));
                             }
@@ -81,7 +81,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
                         en.printStackTrace();
                         InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.p33));
                             }
@@ -90,10 +90,10 @@ public class InterfaceFragment extends BasePreferenceFragment {
                 }
             };
             new Thread(p15).start();
-        } else if ((requestCode == PRIMARY_FONT || requestCode == SECONDARY_FONT)&& data != null) {
+        } else if ((requestCode == PRIMARY_FONT || requestCode == SECONDARY_FONT) && data != null) {
             Runnable p15 = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     try {
                         InputStream c = InterfaceFragment.this.getActivity().getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
@@ -110,7 +110,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
                         d.close();
                         InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.z55));
                                 InterfaceFragment.this.t();
@@ -120,7 +120,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
                         en.printStackTrace();
                         InterfaceFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 AwesomeToast.b(InterfaceFragment.this.getActivity(), InterfaceFragment.this.getString(R.string.z54));
                             }
@@ -144,7 +144,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             Preference b = findPreference("autoUpdate");
             b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     InterfaceFragment.this.t(1);
                     return true;
@@ -153,7 +153,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             Preference b742 = findPreference("autoUpdate742");
             b742.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     InterfaceFragment.this.t(0);
                     return true;
@@ -162,7 +162,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             Preference a4 = findPreference("cus");
             a4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     InterfaceFragment.this.r();
                     return true;
@@ -172,7 +172,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             Preference a7 = findPreference("webviumB");
             a7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     InterfaceFragment.this.t(0);
                     return true;
@@ -181,7 +181,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             Preference a455 = findPreference("cfnt5");
             a455.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     InterfaceFragment.this.b19(PRIMARY_FONT);
                     return true;
@@ -190,7 +190,7 @@ public class InterfaceFragment extends BasePreferenceFragment {
             Preference a433 = findPreference("cfnt2");
             a433.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     InterfaceFragment.this.b19(SECONDARY_FONT);
                     return true;

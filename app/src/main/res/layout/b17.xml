@@ -28,14 +28,17 @@
         a:id="@id/k13"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
+        a:layout_above="@id/k14"
         a:layout_gravity="center_vertical"
         a:layout_marginTop="10dp"
-        a:textIsSelectable="true" a:layout_above="@id/k14"
+        a:textIsSelectable="true"
         a:textSize="@dimen/c" />
 
-    <Button a:layout_marginTop="10dp" a:layout_alignParentBottom="true"
+    <Button
         a:id="@id/k14"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
+        a:layout_alignParentBottom="true"
+        a:layout_marginTop="10dp"
         a:gravity="center" />
 </RelativeLayout>

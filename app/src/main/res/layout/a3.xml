@@ -21,10 +21,15 @@
     a:paddingStart="?m"
     a:paddingEnd="?m">
 
-    <TextView a:id="@id/o28" a:layout_width="wrap_content"  a:layout_alignParentTop="true"
-        a:layout_height="wrap_content" a:layout_centerHorizontal="true"
-        a:layout_marginLeft="10dp" a:padding="10dp"
-        a:layout_marginRight="10dp" />
+    <TextView
+        a:id="@id/o28"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_alignParentTop="true"
+        a:layout_centerHorizontal="true"
+        a:layout_marginLeft="10dp"
+        a:layout_marginRight="10dp"
+        a:padding="10dp" />
 
     <ScrollView
         a:id="@id/j"

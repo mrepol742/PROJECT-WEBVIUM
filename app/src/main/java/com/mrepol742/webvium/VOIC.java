@@ -83,7 +83,7 @@ public class VOIC extends BaseActivity {
             sr = SpeechRecognizer.createSpeechRecognizer(this);
             sr.setRecognitionListener(new RecognitionListener() {
 
-            @Override
+                @Override
                 public void onReadyForSpeech(Bundle bundle) {
                     ArrayList<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (sg == null) {

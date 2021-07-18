@@ -21,8 +21,7 @@
     <com.mrepol742.webvium.PREF
         a:key="p20"
         a:title="@string/p20" />
-    <com.mrepol742.webvium.PREF
-        a:key="ins12" />
+    <com.mrepol742.webvium.PREF a:key="ins12" />
     <com.mrepol742.webvium.PREF
         a:key="g5"
         a:summary="@string/g5"

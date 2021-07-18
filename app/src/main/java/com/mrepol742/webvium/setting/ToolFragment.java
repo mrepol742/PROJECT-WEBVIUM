@@ -40,24 +40,24 @@ import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class ToolFragment extends BasePreferenceFragment {
 
-            @Override
+    @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
-if (Build.VERSION.SDK_INT >= 29) {
-    a5(R.xml.a5);
-} else {
-    a5(R.xml.j);
-    Preference u1 = findPreference("clearScreen");
-    u1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            if (Build.VERSION.SDK_INT >= 29) {
+                a5(R.xml.a5);
+            } else {
+                a5(R.xml.j);
+                Preference u1 = findPreference("clearScreen");
+                u1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
-        public boolean onPreferenceClick(Preference a) {
-            ToolFragment.this.j();
-            return true;
-        }
-    });
-}
+                    @Override
+                    public boolean onPreferenceClick(Preference a) {
+                        ToolFragment.this.j();
+                        return true;
+                    }
+                });
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~
   ~ Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
   ~
@@ -17,33 +16,36 @@
   -->
 
 <LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
-    a:orientation="horizontal"
     a:layout_width="match_parent"
-    a:layout_height="match_parent">
+    a:layout_height="match_parent"
+    a:orientation="horizontal">
 
 
     <ImageView
         a:id="@id/o42"
-        a:src="@mipmap/c"
-        a:contentDescription="@string/p3"
-        a:layout_gravity="center" a:layout_margin="5dp"
         a:layout_width="24dp"
-        a:layout_height="24dp" />
+        a:layout_height="24dp"
+        a:layout_gravity="center"
+        a:layout_margin="5dp"
+        a:contentDescription="@string/p3"
+        a:src="@mipmap/c" />
 
-    <RelativeLayout a:layout_width="match_parent"
+    <RelativeLayout
+        a:layout_width="match_parent"
         a:layout_height="match_parent">
 
-    <TextView
-        a:id="@id/o43"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content"
-        a:layout_alignParentEnd="true"
-        a:layout_centerVertical="true"
-        a:ellipsize="end"
-        a:maxLines="1" a:text="10 mins"
-        a:paddingStart="5dp"
-        a:paddingEnd="0dp"
-        a:textSize="@dimen/c" />
+        <TextView
+            a:id="@id/o43"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:layout_alignParentEnd="true"
+            a:layout_centerVertical="true"
+            a:ellipsize="end"
+            a:maxLines="1"
+            a:paddingStart="5dp"
+            a:paddingEnd="0dp"
+            a:text="10 mins"
+            a:textSize="@dimen/c" />
 
         <TextView
             a:id="@id/o44"
@@ -54,8 +56,9 @@
             a:layout_toStartOf="@id/o43"
             a:ellipsize="end"
             a:maxLines="1"
-            a:paddingStart="0dp" a:text="https://google.com"
+            a:paddingStart="0dp"
             a:paddingEnd="5dp"
+            a:text="https://google.com"
             a:textSize="@dimen/b" />
 
     </RelativeLayout>

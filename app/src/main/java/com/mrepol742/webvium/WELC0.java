@@ -53,11 +53,11 @@ public class WELC0 extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle be) {
-      theme(T_DEFAULT);
+        theme(T_DEFAULT);
         super.onCreate(be);
         a225(R.layout.a10);
         fl = findViewById(R.id.o41);
-a2();
+        a2();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -83,7 +83,7 @@ a2();
         sv.getViewTreeObserver()
                 .addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 
-            @Override
+                    @Override
                     public void onScrollChanged() {
                         if (sv.getChildAt(0).getBottom()
                                 <= (sv.getHeight() + sv.getScrollY())) {
@@ -93,7 +93,7 @@ a2();
                                 bn.setBackgroundResource(R.drawable.c10);
                                 bn.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                                    @Override
                                     public void onClick(View view) {
                                         fl.removeView(c);
                                         WELC0.this.a3();
@@ -143,7 +143,7 @@ a2();
         sv.getViewTreeObserver()
                 .addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 
-            @Override
+                    @Override
                     public void onScrollChanged() {
                         if (sv.getChildAt(0).getBottom()
                                 <= (sv.getHeight() + sv.getScrollY())) {
@@ -153,7 +153,7 @@ a2();
                                 bn.setBackgroundResource(R.drawable.c10);
                                 bn.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                                    @Override
                                     public void onClick(View view) {
                                         fl.removeView(c);
                                         WELC0.this.l3();

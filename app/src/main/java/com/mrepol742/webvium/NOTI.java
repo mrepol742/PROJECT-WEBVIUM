@@ -55,7 +55,7 @@ public class NOTI extends MainService {
         if (!Connectivity.isThereAnyInternetConnection(this)) {
             Runnable runnable = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     try {
                         String neTf = Stream.f("https://github.com/" + NOTI.this.getString(R.string.github_username) + "/" + NOTI.this.getString(R.string.github_repository) + "/blob/" + NOTI.this.getString(R.string.github_branch) + "/" + NOTI.this.getString(R.string.github_path) + "/newNotification.array?raw=true", "742");

@@ -51,6 +51,7 @@ import java.util.Calendar;
 
 // @Class WelcomeScreen
 public class WELC extends BaseActivity {
+    public static final String INIT = "init_17";
     private static final String MAVEN_PRO = "classes";
     public RelativeLayout rl;
     public ImageView iv;
@@ -58,7 +59,6 @@ public class WELC extends BaseActivity {
     public FrameLayout fl;
     private A17a timer;
     private Animation d;
-    public static final String INIT = "init_17";
     private RelativeLayout ll;
 
     @Override

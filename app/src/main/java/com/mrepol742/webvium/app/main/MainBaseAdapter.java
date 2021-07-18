@@ -38,14 +38,14 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import java.io.File;
 
 public class MainBaseAdapter extends BaseAdapter implements View.OnTouchListener, View.OnDragListener {
+    private static final String MAVEN_PRO = "classes";
+    private static final int PRIMARY_CACHE = 99;
+    private static final int SECONDARY_CACHE = 100;
     private final LruCache<Integer, Typeface> cac;
     private final Typeface main;
-    private static final String MAVEN_PRO = "classes";
     private final SharedPreferences sp;
     private final String PRIMARY_FONT;
     private final String SECONDARY_FONT;
-    private static final int PRIMARY_CACHE = 99;
-    private static final int SECONDARY_CACHE = 100;
 
     public MainBaseAdapter(Context ct) {
         cac = new LruCache<>(32);

@@ -99,7 +99,7 @@ public class SEAR extends MainBaseActivity {
 
     final MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
 
-            @Override
+        @Override
         public boolean onMenuItemClick(MenuItem a1) {
             switch (a1.getItemId()) {
                 case 0:
@@ -172,7 +172,7 @@ public class SEAR extends MainBaseActivity {
         if (res.getCount() == 0) {
             runOnUiThread(new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     d.setVisibility(View.GONE);
                 }
@@ -243,7 +243,7 @@ public class SEAR extends MainBaseActivity {
 
             d.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
+                @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int c1, long l) {
                     SEAR.this.search(aa.getItem(c1).toString());
                     SEAR.this.finish();
@@ -252,7 +252,7 @@ public class SEAR extends MainBaseActivity {
             });
             d.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-            @Override
+                @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                     query23 = aa.getItem(i).toString();
                     SEAR.this.p(view);
@@ -262,7 +262,7 @@ public class SEAR extends MainBaseActivity {
             d.setAdapter(aa);
             p.addTextChangedListener(new TextWatcher() {
 
-            @Override
+                @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     aa.getFilter().filter(charSequence);
                 }
@@ -315,12 +315,12 @@ public class SEAR extends MainBaseActivity {
             o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
             Runnable p155 = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     final Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(SEAR.this));
                     SEAR.this.runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             b19.setBackground(new BitmapDrawable(SEAR.this.getResources(), bp));
                         }
@@ -367,18 +367,18 @@ public class SEAR extends MainBaseActivity {
             }
         });
         o();
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_dropdown_item_1line, webvium);
-            p.setAdapter(adapter);
-            p.setThreshold(4);
-            p.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, webvium);
+        p.setAdapter(adapter);
+        p.setThreshold(4);
+        p.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
         if (a221().getBoolean("voice", true) && !spr()) {
             iv.setImageResource(R.drawable.c9);
             iv.setBackgroundResource(R.drawable.c6);
             iv.setVisibility(View.VISIBLE);
             iv.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     SEAR.this.f3();
                 }
@@ -489,7 +489,7 @@ public class SEAR extends MainBaseActivity {
                 if (res.getCount() == 0) {
                     SEAR.this.runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             d.setVisibility(View.GONE);
                         }
@@ -501,7 +501,7 @@ public class SEAR extends MainBaseActivity {
                     if (itemIdsh.size() == 0) {
                         SEAR.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 d.setVisibility(View.GONE);
                             }
@@ -509,7 +509,7 @@ public class SEAR extends MainBaseActivity {
                     } else {
                         SEAR.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 aa.a(itemIdsh);
                                 aa.notifyDataSetChanged();
@@ -664,7 +664,7 @@ public class SEAR extends MainBaseActivity {
             pm = new PopupMenu(this, w);
             pm.setOnDismissListener(new PopupMenu.OnDismissListener() {
 
-            @Override
+                @Override
                 public void onDismiss(PopupMenu popupMenu) {
                     popupMenu.getMenu().clear();
                     if (SEAR.this.query23 != null) {

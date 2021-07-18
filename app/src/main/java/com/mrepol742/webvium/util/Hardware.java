@@ -17,6 +17,7 @@
 
 package com.mrepol742.webvium.util;
 
+import android.annotation.SuppressLint;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -41,6 +42,7 @@ public class Hardware {
         return E2.Phone.toString();
     }
 
+    @SuppressLint("SwitchIntDef")
     public static Object isNightMode(Context a) {
         UiModeManager ui = (UiModeManager) a.getSystemService(Context.UI_MODE_SERVICE);
         switch (ui.getNightMode()) {
@@ -51,7 +53,8 @@ public class Hardware {
             default:
             case UiModeManager.MODE_NIGHT_AUTO:
                 return E1.Auto;
-            case UiModeManager.MODE_NIGHT_CUSTOM:
+                // UiModeManager.MODE_NIGHT_CUSTOM == 3
+            case 3:
                 return E1.Custom;
         }
     }

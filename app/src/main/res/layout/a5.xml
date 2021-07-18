@@ -18,16 +18,25 @@
 <LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
     a:layout_width="match_parent"
     a:layout_height="match_parent"
+    a:orientation="vertical"
     a:paddingStart="?m"
-    a:paddingEnd="?m"
-    a:orientation="vertical">
+    a:paddingEnd="?m">
 
-    <com.mrepol742.webvium.EDIT a:id="@id/o34" a:inputType="text"
-        a:textSize="@dimen/c" a:layout_marginTop="10dp" a:layout_height="wrap_content"
-        a:layout_width="match_parent" />
+    <com.mrepol742.webvium.EDIT
+        a:id="@id/o34"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:layout_marginTop="10dp"
+        a:inputType="text"
+        a:textSize="@dimen/c" />
 
-    <com.mrepol742.webvium.EDIT  a:id="@id/o35" a:inputType="text"
-        a:textSize="@dimen/c" a:layout_marginTop="10dp" a:layout_marginBottom="20dp" a:layout_height="wrap_content"
-        a:layout_width="match_parent" />
+    <com.mrepol742.webvium.EDIT
+        a:id="@id/o35"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:layout_marginTop="10dp"
+        a:layout_marginBottom="20dp"
+        a:inputType="text"
+        a:textSize="@dimen/c" />
 
 </LinearLayout>

@@ -22,9 +22,12 @@
 
     <include layout="@layout/a16" />
 
-    <ScrollView a:layout_below="@id/b7"
-        a:layout_width="match_parent" a:layout_above="@id/l1"
-        a:layout_height="wrap_content" a:layout_marginTop="10dp">
+    <ScrollView
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:layout_above="@id/l1"
+        a:layout_below="@id/b7"
+        a:layout_marginTop="10dp">
 
         <TextView
             a:id="@id/u"
@@ -35,6 +38,7 @@
             a:textIsSelectable="true"
             a:textSize="@dimen/b" />
     </ScrollView>
+
     <TextView
         a:id="@id/l1"
         a:layout_width="wrap_content"

@@ -68,14 +68,14 @@ public class Files {
     }
 
     public static void createNewFolder(final String a) {
-       Runnable runnable = new Runnable() {
+        Runnable runnable = new Runnable() {
 
             @Override
-           public void run() {
-               createNewFolder(new File(a));
-           }
-       };
-      new Thread(runnable).start();
+            public void run() {
+                createNewFolder(new File(a));
+            }
+        };
+        new Thread(runnable).start();
     }
 
     public static void delete(final String a) {
@@ -117,7 +117,7 @@ public class Files {
             br.close();
             return sb.toString();
         } catch (Exception exception) {
-exception.printStackTrace();
+            exception.printStackTrace();
         }
         return null;
     }

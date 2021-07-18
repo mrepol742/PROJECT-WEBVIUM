@@ -99,7 +99,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             Preference n = findPreference("res");
             n.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     DatabaseFragment.this.a6();
                     return true;
@@ -108,7 +108,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             Preference l = findPreference("ets");
             l.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     DatabaseFragment.this.a13();
                     return true;
@@ -118,7 +118,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             Preference l1 = findPreference("se");
             l1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     DatabaseFragment.this.a17();
                     return true;
@@ -128,7 +128,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             Preference l11 = findPreference("he");
             l11.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     DatabaseFragment.this.b1();
                     return true;
@@ -138,7 +138,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             Preference l111 = findPreference("be");
             l111.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     DatabaseFragment.this.b5();
                     return true;
@@ -148,7 +148,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             Preference l111444 = findPreference("do");
             l111444.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     DatabaseFragment.this.b9();
                     return true;
@@ -158,7 +158,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             Preference l111444a = findPreference("pe");
             l111444a.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     DatabaseFragment.this.b13();
                     return true;
@@ -172,7 +172,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             l114.setSummary(String.format(getActivity().getString(R.string.x48), StorageDirectory.getWebviumDir() + "/Backup"));
             l114.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     Intent it = new Intent(DatabaseFragment.this.getActivity(), BACK0.class);
                     it.putExtra("a", "a");
@@ -278,7 +278,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
                         }
@@ -332,7 +332,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
                         }
@@ -385,7 +385,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
                         }
@@ -439,7 +439,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
                         }
@@ -493,7 +493,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
                         }
@@ -553,7 +553,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         if (Build.VERSION.SDK_INT < 29) {
             Runnable re = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     try {
                         FileOutputStream fos = new FileOutputStream(sg);
@@ -563,7 +563,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                         fos.close();
                         DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.b25));
                             }
@@ -572,7 +572,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                         en.printStackTrace();
                         DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
                             }
@@ -582,24 +582,24 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             };
             new Thread(re).start();
         } else {
-                try {
-                    ContentValues values = new ContentValues();
-                    values.put(MediaStore.MediaColumns.DISPLAY_NAME, "webvium_test.txt");
-                    values.put(MediaStore.MediaColumns.MIME_TYPE, "text/plain");
-                    values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Webvium");
-                    Uri uri = getActivity().getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
-                    ObjectOutputStream outputStream = (ObjectOutputStream) getActivity().getContentResolver().openOutputStream(uri);
-                    outputStream.writeObject(al);
-                    outputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            try {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.MediaColumns.DISPLAY_NAME, "webvium_test.txt");
+                values.put(MediaStore.MediaColumns.MIME_TYPE, "text/plain");
+                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Webvium");
+                Uri uri = getActivity().getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
+                ObjectOutputStream outputStream = (ObjectOutputStream) getActivity().getContentResolver().openOutputStream(uri);
+                outputStream.writeObject(al);
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private class R7 extends MainReceiver {
 
-            @Override
+        @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

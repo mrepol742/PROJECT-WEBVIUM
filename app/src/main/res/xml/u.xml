@@ -43,20 +43,20 @@
     <com.mrepol742.webvium.PREF0 a:title="@string/q5">
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
-            a:key="hst"
             a:dependency="maUU"
+            a:key="hst"
             a:summary="@string/q8"
             a:title="@string/q9" />
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
-            a:key="hste"
             a:dependency="maUU"
+            a:key="hste"
             a:summary="@string/q6"
             a:title="@string/q13" />
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
-            a:key="hste0"
             a:dependency="maUU"
+            a:key="hste0"
             a:summary="@string/x37"
             a:title="@string/x36" />
 
@@ -65,14 +65,14 @@
     <com.mrepol742.webvium.PREF0 a:title="@string/q7">
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
-            a:key="tow"
             a:dependency="maUU"
+            a:key="tow"
             a:summary="@string/q11"
             a:title="@string/q12" />
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
-            a:key="tow2"
             a:dependency="maUU"
+            a:key="tow2"
             a:summary="@string/q4"
             a:title="@string/q10" />
     </com.mrepol742.webvium.PREF0>
@@ -87,8 +87,8 @@
 
         <com.mrepol742.webvium.SWIT
             a:defaultValue="@bool/a"
-            a:key="stcMM6"
             a:dependency="maUU"
+            a:key="stcMM6"
             a:title="@string/z48" />
     </com.mrepol742.webvium.PREF0>
 
@@ -102,8 +102,8 @@
 
         <com.mrepol742.webvium.SWIT
             a:defaultValue="false"
-            a:key="asd71"
             a:dependency="maUU"
+            a:key="asd71"
             a:title="@string/x14" />
     </com.mrepol742.webvium.PREF0>
 

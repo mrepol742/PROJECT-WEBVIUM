@@ -90,7 +90,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 iw1.setOnLongClickListener(this);
                 iw1.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
+                    @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
                     }
@@ -101,7 +101,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 j1.setOnClickListener(this);
                 j1.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
+                    @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
                     }
@@ -115,7 +115,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 tv.setOnLongClickListener(this);
                 tv.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
+                    @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
                     }
@@ -124,7 +124,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                 try {
                     tv.setText(a(it2));
                 } catch (NoSuchObjectToReturn l1) {
-                   l1.printStackTrace();
+                    l1.printStackTrace();
                 }
             }
 
@@ -132,12 +132,12 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             if (a221().getBoolean("webviumB", false) && fe.exists()) {
                 Runnable p155 = new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         final Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(LOCK.this));
                         LOCK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 ll.setBackground(new BitmapDrawable(LOCK.this.getResources(), bp));
                             }

@@ -24,10 +24,10 @@
 
     <ScrollView
         a:layout_width="match_parent"
+        a:layout_height="wrap_content"
         a:layout_above="@id/o38"
         a:layout_alignParentTop="true"
-        a:layout_marginTop="10dp"
-        a:layout_height="wrap_content">
+        a:layout_marginTop="10dp">
 
         <TextView
             a:id="@id/e2"
@@ -35,9 +35,9 @@
             a:layout_height="wrap_content"
             a:layout_gravity="top"
             a:layout_marginTop="10dp"
-            a:textIsSelectable="true"
             a:layout_marginBottom="2dp"
             a:labelFor="@id/g8"
+            a:textIsSelectable="true"
             a:textSize="@dimen/x"
             tools:ignore="LabelFor" />
     </ScrollView>
@@ -62,8 +62,8 @@
         <Button
             a:id="@id/k20"
             a:layout_width="0dp"
-            a:layout_weight="0.1"
-            a:layout_height="wrap_content" />
+            a:layout_height="wrap_content"
+            a:layout_weight="0.1" />
     </LinearLayout>
 </RelativeLayout>
 

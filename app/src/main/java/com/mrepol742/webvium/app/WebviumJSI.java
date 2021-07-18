@@ -231,13 +231,13 @@ bigText.bigText(a.getResources().getString(R.string.g29));
             default:
             case 0:
                 AwesomeToast.a(a, b, d);
-            break;
+                break;
             case 1:
                 AwesomeToast.c(a, b);
-            break;
+                break;
             case 2:
                 AwesomeToast.b(a, b);
-            break;
+                break;
         }
     }
 }

@@ -77,7 +77,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
             spe = (SWIT) findPreference("lockWn99");
             spe.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
                         SecurityLockFragment.this.a5();
@@ -90,7 +90,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
             Preference a1 = findPreference("cHPIN");
             a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     SecurityLockFragment.this.i();
                     return true;
@@ -99,7 +99,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
             Preference a12 = findPreference("cLPIN");
             a12.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     SecurityLockFragment.this.k();
                     return true;
@@ -753,7 +753,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
     private class R7 extends MainReceiver {
 
-            @Override
+        @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

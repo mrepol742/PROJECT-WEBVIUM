@@ -182,7 +182,7 @@ public class HistoryAdapter extends MainBaseAdapter {
             w17.c.setImageResource(d(c(it).ls0));
             w17.b.setText(b(c(it).ls0), TextView.BufferType.SPANNABLE);
             Date date = new Date(c(it).ls2);
-            String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) +  " " + year.format(date);
+            String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
             w17.d.setText(fiDate);
         } catch (IndexOutOfBoundsException | NoSuchSpannableStringBuilderToReturn | NoSuchItemToGet ignored) {
 

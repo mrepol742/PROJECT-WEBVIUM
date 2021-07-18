@@ -176,10 +176,12 @@
             a:contentDescription="@string/q29" />
 
         <TextView
-            a:id="@id/m7" a:gravity="center"
+            a:id="@id/m7"
             a:layout_width="0dp"
-            a:layout_height="wrap_content" a:padding="3dp"
-            a:layout_weight="0.23" />
+            a:layout_height="wrap_content"
+            a:layout_weight="0.23"
+            a:gravity="center"
+            a:padding="3dp" />
 
         <ImageView
             a:id="@id/m8"
@@ -190,11 +192,12 @@
 
     </LinearLayout>
 
-    <FrameLayout a:id="@id/o45"
+    <FrameLayout
+        a:id="@id/o45"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
         a:layout_above="@id/m4"
         a:layout_alignParentEnd="true"
-        a:padding="20dp"
-        a:layout_height="wrap_content"
-        a:layout_width="wrap_content" />
+        a:padding="20dp" />
 
 </RelativeLayout>

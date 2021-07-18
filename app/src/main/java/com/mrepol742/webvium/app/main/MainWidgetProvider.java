@@ -23,7 +23,7 @@ import android.content.Context;
 
 public class MainWidgetProvider extends AppWidgetProvider {
 
-            @Override
+    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
     }
 }

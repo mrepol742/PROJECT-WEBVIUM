@@ -36,7 +36,7 @@ import java.util.Locale;
 // @Class Privacy Policy
 public class PRIV extends BaseActivity {
 
-            @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme(T_DEFAULT);
         super.onCreate(savedInstanceState);

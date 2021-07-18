@@ -33,7 +33,7 @@ import com.mrepol742.webvium.widget.AwesomeToast;
 
 public class DownloadFragment extends BasePreferenceFragment {
 
-            @Override
+    @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
@@ -48,7 +48,7 @@ public class DownloadFragment extends BasePreferenceFragment {
                 Preference d = findPreference("batt");
                 d.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                    @Override
                     public boolean onPreferenceClick(Preference a) {
                         DownloadFragment.this.p();
                         return true;

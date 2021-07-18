@@ -62,17 +62,6 @@ import java.util.ArrayList;
 
 // @Class Bookmarks
 public class BOOK extends BaseActivity {
-    private BookmarkHelper d3;
-    private GridView e;
-    private RelativeLayout f6;
-    private BookmarkAdapter w15;
-    private ArrayList<String> ls;
-    private ArrayList<String> ls0;
-    private ImageView iv;
-    private TextView f8;
-    private ImageView iv1;
-    private PopupMenu pm;
-    private int it;
     public static final int LINKS = 0;
     public static final int TRANCEROUTE = 1;
     public static final int NPING = 2;
@@ -84,10 +73,20 @@ public class BOOK extends BaseActivity {
     public static final int IP_GEO = 8;
     public static final int ASSETLINKS = 9;
     public static final int SITEMAPS = 10;
-
+    private BookmarkHelper d3;
+    private GridView e;
+    private RelativeLayout f6;
+    private BookmarkAdapter w15;
+    private ArrayList<String> ls;
+    private ArrayList<String> ls0;
+    private ImageView iv;
+    private TextView f8;
+    private ImageView iv1;
+    private PopupMenu pm;
+    private int it;
     final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
-            @Override
+        @Override
         public boolean onMenuItemClick(MenuItem a1) {
             String a5 = ls.get(it);
             String a2 = ls0.get(it);
@@ -259,7 +258,7 @@ public class BOOK extends BaseActivity {
             e.setAdapter(w15);
             e.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
+                @Override
                 public void onItemClick(AdapterView<?> a1, View b1, int c1, long d1) {
                     Intents.d("value", ls0.get(c1), BOOK.this);
                     BOOK.this.finish();
@@ -267,7 +266,7 @@ public class BOOK extends BaseActivity {
             });
             e.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-            @Override
+                @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                     BOOK.this.n(view, i);
                     return true;
@@ -546,7 +545,7 @@ public class BOOK extends BaseActivity {
                 if (res.getCount() == 0) {
                     BOOK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             f8.setVisibility(View.VISIBLE);
                             f6.setClickable(true);
@@ -561,7 +560,7 @@ public class BOOK extends BaseActivity {
                     if (itemIdsh.size() == 0) {
                         BOOK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 f8.setVisibility(View.VISIBLE);
                                 f6.setClickable(true);
@@ -572,7 +571,7 @@ public class BOOK extends BaseActivity {
                     } else {
                         BOOK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 w15.a(itemIdsh);
                                 w15.notifyDataSetChanged();
@@ -639,7 +638,7 @@ public class BOOK extends BaseActivity {
             ti.setTextColor(f3);
         }
         ed.setText(url);
-        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
             bn.setBackgroundResource(R.drawable.c10);
         } else {
             bn.setBackgroundResource(R.drawable.c11);
@@ -684,13 +683,13 @@ public class BOOK extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
-                    if (!Domain.isValidDomain(url)){
+                    if (!Domain.isValidDomain(url)) {
                         ed.setError(getString(R.string.y84));
                         bn.setBackgroundResource(R.drawable.c11);
                     } else {
                         bn.setBackgroundResource(R.drawable.c10);
                     }
-                }  else if (type != SOURCE_CODE && (url.startsWith("file://") || url.startsWith("content://"))){
+                } else if (type != SOURCE_CODE && (url.startsWith("file://") || url.startsWith("content://"))) {
                     ed.setError(getString(R.string.y83));
                     bn.setBackgroundResource(R.drawable.c11);
                 } else {
@@ -730,7 +729,7 @@ public class BOOK extends BaseActivity {
                 final String sg = Stream.d(url, BOOK.this.getString(R.string.c33));
                 BOOK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         ti.setText(Html.b(sg));
                     }
@@ -738,7 +737,7 @@ public class BOOK extends BaseActivity {
             }
         };
         new Thread(p15).start();
-        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
             bn.setBackgroundResource(R.drawable.c10);
         } else {
             bn.setBackgroundResource(R.drawable.c11);
@@ -753,12 +752,12 @@ public class BOOK extends BaseActivity {
                 if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
                     Runnable p151 = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             final String sg = Stream.d(ab, BOOK.this.getString(R.string.c33));
                             BOOK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                @Override
                                 public void run() {
                                     ti.setText(Html.b(sg));
                                 }
@@ -775,13 +774,13 @@ public class BOOK extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
-                    if (!Domain.isValidDomain(url)){
+                    if (!Domain.isValidDomain(url)) {
                         ed.setError(getString(R.string.y84));
                         bn.setBackgroundResource(R.drawable.c11);
                     } else {
                         bn.setBackgroundResource(R.drawable.c10);
                     }
-                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                } else if (url.startsWith("file://") || url.startsWith("content://")) {
                     ed.setError(getString(R.string.y83));
                     bn.setBackgroundResource(R.drawable.c11);
                 } else {
@@ -946,7 +945,7 @@ public class BOOK extends BaseActivity {
                 final String sg = Stream.a(url, BOOK.this.getString(R.string.c33), BOOK.this.getString(R.string.g25));
                 BOOK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         ti.setText(Html.b(sg));
                     }
@@ -955,7 +954,7 @@ public class BOOK extends BaseActivity {
         };
         new Thread(p15).start();
         bn.setText(getString(R.string.i6));
-        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)){
+        if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
             bn.setBackgroundResource(R.drawable.c11);
         } else {
             bn.setBackgroundResource(R.drawable.c10);
@@ -970,12 +969,12 @@ public class BOOK extends BaseActivity {
                 if ((url.startsWith("https://") || url.startsWith("http://")) && (!url.startsWith("file://") || !url.startsWith("content://")) && Domain.isValidDomain(url)) {
                     Runnable p151 = new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             final String sg = Stream.a(ab, BOOK.this.getString(R.string.c33), BOOK.this.getString(R.string.g25));
                             BOOK.this.runOnUiThread(new Runnable() {
 
-            @Override
+                                @Override
                                 public void run() {
                                     ti.setText(Html.b(sg));
                                 }
@@ -992,13 +991,13 @@ public class BOOK extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
-                    if (!Domain.isValidDomain(url)){
+                    if (!Domain.isValidDomain(url)) {
                         ed.setError(getString(R.string.y84));
                         bn.setBackgroundResource(R.drawable.c11);
                     } else {
                         bn.setBackgroundResource(R.drawable.c10);
                     }
-                }  else if (url.startsWith("file://") || url.startsWith("content://")){
+                } else if (url.startsWith("file://") || url.startsWith("content://")) {
                     ed.setError(getString(R.string.y83));
                     bn.setBackgroundResource(R.drawable.c11);
                 } else {

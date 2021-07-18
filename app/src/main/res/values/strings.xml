@@ -145,7 +145,7 @@
     <string name="f10">Captions</string>
     <string name="f11">Content to Captured</string>
     <string name="f12">Terms and Conditions</string>
-<string name="f13">You agreed on %1$s</string>
+    <string name="f13">You agreed on %1$s</string>
     <string name="f14">Feedback</string>
     <string name="f16">Databases, cache, cookies</string>
     <string name="f17">Clears all storage currently being used by the JavaScript storage APIs. This includes the Application Cache, Web SQL Database and the HTML5 Web Storage APIs.</string>

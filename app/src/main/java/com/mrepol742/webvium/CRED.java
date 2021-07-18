@@ -37,7 +37,7 @@ import com.mrepol742.webvium.text.Html;
 // @Class Credits
 public class CRED extends BaseActivity {
 
-            @Override
+    @Override
     protected void onCreate(Bundle a) {
         theme(T_WELCOME_SCREEN);
         super.onCreate(a);
@@ -54,7 +54,7 @@ public class CRED extends BaseActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("di", 0);
         String name = Build.MODEL;
         try {
-            ContentResolver cr=getContentResolver();
+            ContentResolver cr = getContentResolver();
             Cursor cursor = cr.query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
             if (cursor.getCount() > 0) {
                 cursor.moveToFirst();

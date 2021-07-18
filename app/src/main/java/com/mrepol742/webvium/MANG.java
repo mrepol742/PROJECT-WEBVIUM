@@ -277,7 +277,7 @@ public class MANG extends BaseActivity {
         if (a == 0) {
             Runnable re = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     String sb5 = "SELECT * FROM " + "A" +
                             " ORDER BY " +
@@ -287,7 +287,7 @@ public class MANG extends BaseActivity {
                     if (rest1.getCount() != 0) {
                         MANG.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 MANG.this.k(MANG.this.getString(R.string.l14), MANG.this.getString(R.string.u4));
                             }
@@ -295,7 +295,7 @@ public class MANG extends BaseActivity {
                     } else {
                         MANG.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 MANG.this.r(MANG.this.getString(R.string.v27));
                             }
@@ -310,7 +310,7 @@ public class MANG extends BaseActivity {
         } else if (a == 2) {
             Runnable re = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     String sb12 = "SELECT * FROM " + "A" +
                             " ORDER BY " +
@@ -320,7 +320,7 @@ public class MANG extends BaseActivity {
                     if (rest.getCount() != 0) {
                         MANG.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 MANG.this.n(MANG.this.getString(R.string.l14), MANG.this.getString(R.string.t5));
                             }
@@ -328,7 +328,7 @@ public class MANG extends BaseActivity {
                     } else {
                         MANG.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 MANG.this.r(MANG.this.getString(R.string.v27));
                             }
@@ -341,7 +341,7 @@ public class MANG extends BaseActivity {
         } else if (a == 3) {
             Runnable re = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     String sb55 = "SELECT * FROM " + "A" +
                             " ORDER BY " +
@@ -351,7 +351,7 @@ public class MANG extends BaseActivity {
                     if (res.getCount() != 0) {
                         MANG.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 MANG.this.o(MANG.this.getString(R.string.l14), MANG.this.getString(R.string.u6));
                             }
@@ -359,7 +359,7 @@ public class MANG extends BaseActivity {
                     } else {
                         MANG.this.runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 MANG.this.r(MANG.this.getString(R.string.v27));
                             }
@@ -454,7 +454,7 @@ public class MANG extends BaseActivity {
             public void onClick(DialogInterface a22, int intetg) {
                 Runnable run = new Runnable() {
 
-            @Override
+                    @Override
                     public void run() {
                         MANG.this.l(StorageDirectory.getCacheDir(MANG.this));
                     }
@@ -753,157 +753,157 @@ public class MANG extends BaseActivity {
     }
 
     private void a1() {
-            final ArrayList<String> a = new ArrayList<>();
-            final ArrayList<String> b = new ArrayList<>();
-            final ArrayList<Integer> c = new ArrayList<>();
-            final ArrayList<String> d = new ArrayList<>();
-            for (int i : getStrings()) {
-                a.add(getString(i));
-            }
-            for (int i5 : getDrawables()) {
-                c.add(i5);
-            }
-            for (int i5 = 0; i5 < 5; i5++) {
-                d.add("");
-            }
-            String sb5 = "SELECT * FROM " + "A" +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC";
-            Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
-            String sb55 = "SELECT * FROM " + "A" +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC";
-            Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
-            String sb12 = "SELECT * FROM " + "A" +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC";
-            Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
-            int cont = rest1.getCount();
-            if (cont == 0) {
-                b.add(getString(R.string.v27));
-            } else {
-                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
-            }
-            b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
-            int cont1 = rest.getCount();
-            if (cont1 == 0) {
-                b.add(getString(R.string.v27));
-            } else {
-                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
-            }
-            int cont11 = res.getCount();
-            if (cont11 == 0) {
-                b.add(getString(R.string.v27));
-            } else {
-                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
-            }
-            b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
-            rest1.close();
-            res.close();
-            rest.close();
-            if (Build.VERSION.SDK_INT < 29) {
-                boolean bn = Permission.checkOnly(this, Permission.STORAGE);
-                if (bn) {
-                    int lg = a7(Package.c() + "/Screenshot/");
-                    int lg1 = a7(Package.c() + "/Downloads/");
-                    if (lg == 0) {
-                        b.add(getString(R.string.v29));
-                    } else{
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
-                                c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
-                    }
-                    if (lg1 == 0) {
-                        b.add(getString(R.string.v29));
-                    } else {
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
-                                c(b(StorageDirectory.getDownloadDir()))));
-                    }
+        final ArrayList<String> a = new ArrayList<>();
+        final ArrayList<String> b = new ArrayList<>();
+        final ArrayList<Integer> c = new ArrayList<>();
+        final ArrayList<String> d = new ArrayList<>();
+        for (int i : getStrings()) {
+            a.add(getString(i));
+        }
+        for (int i5 : getDrawables()) {
+            c.add(i5);
+        }
+        for (int i5 = 0; i5 < 5; i5++) {
+            d.add("");
+        }
+        String sb5 = "SELECT * FROM " + "A" +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+        String sb55 = "SELECT * FROM " + "A" +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+        String sb12 = "SELECT * FROM " + "A" +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+        int cont = rest1.getCount();
+        if (cont == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
+        }
+        b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
+        int cont1 = rest.getCount();
+        if (cont1 == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
+        }
+        int cont11 = res.getCount();
+        if (cont11 == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+        }
+        b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
+        rest1.close();
+        res.close();
+        rest.close();
+        if (Build.VERSION.SDK_INT < 29) {
+            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
+            if (bn) {
+                int lg = a7(Package.c() + "/Screenshot/");
+                int lg1 = a7(Package.c() + "/Downloads/");
+                if (lg == 0) {
+                    b.add(getString(R.string.v29));
                 } else {
-                    b.add("Storage permission is required");
-                    b.add("Storage permission is required");
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
                 }
+                if (lg1 == 0) {
+                    b.add(getString(R.string.v29));
+                } else {
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
+                            c(b(StorageDirectory.getDownloadDir()))));
+                }
+            } else {
+                b.add("Storage permission is required");
+                b.add("Storage permission is required");
             }
-                w19.a(new ManageSpaceDataModel(a, b, c, d));
-                w19.notifyDataSetChanged();
+        }
+        w19.a(new ManageSpaceDataModel(a, b, c, d));
+        w19.notifyDataSetChanged();
     }
 
     private void a2() {
-            for (int i5 : getDrawables()) {
-                c.add(i5);
-            }
-            for (int i5 = 0; i5 < 5; i5++) {
-                d.add("");
-            }
-            for (int i : getStrings()) {
-                a.add(getString(i));
-            }
-            String sb5 = "SELECT * FROM " + "A" +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC";
-            Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
-            String sb55 = "SELECT * FROM " + "A" +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC";
-            Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
-            String sb12 = "SELECT * FROM " + "A" +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC";
-            Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
-            int cont = rest1.getCount();
-            if (cont == 0) {
-                b.add(getString(R.string.v27));
-            } else {
-                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
-            }
-            b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
-            int cont1 = rest.getCount();
-            if (cont1 == 0) {
-                b.add(getString(R.string.v27));
-            } else {
-                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
-            }
-            int cont11 = res.getCount();
-            if (cont11 == 0) {
-                b.add(getString(R.string.v27));
-            } else {
-                b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
-            }
-            b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
-            rest1.close();
-            res.close();
-            rest.close();
-             if (Build.VERSION.SDK_INT < 29) {
-                boolean bn = Permission.checkOnly(this, Permission.STORAGE);
-                if (bn) {
-                    int lg = a7(Package.c() + "/Screenshot/");
-                    int lg1 = a7(Package.c() + "/Downloads/");
-                    if (lg == 0) {
-                        b.add(getString(R.string.v29));
-                    } else{
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
-                                c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
-                    }
-                    if (lg1 == 0) {
-                        b.add(getString(R.string.v29));
-                    } else {
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
-                        b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
-                                c(b(StorageDirectory.getDownloadDir()))));
-                    }
+        for (int i5 : getDrawables()) {
+            c.add(i5);
+        }
+        for (int i5 = 0; i5 < 5; i5++) {
+            d.add("");
+        }
+        for (int i : getStrings()) {
+            a.add(getString(i));
+        }
+        String sb5 = "SELECT * FROM " + "A" +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+        String sb55 = "SELECT * FROM " + "A" +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+        String sb12 = "SELECT * FROM " + "A" +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+        int cont = rest1.getCount();
+        if (cont == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
+        }
+        b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
+        int cont1 = rest.getCount();
+        if (cont1 == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
+        }
+        int cont11 = res.getCount();
+        if (cont11 == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+        }
+        b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
+        rest1.close();
+        res.close();
+        rest.close();
+        if (Build.VERSION.SDK_INT < 29) {
+            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
+            if (bn) {
+                int lg = a7(Package.c() + "/Screenshot/");
+                int lg1 = a7(Package.c() + "/Downloads/");
+                if (lg == 0) {
+                    b.add(getString(R.string.v29));
                 } else {
-                    b.add("Storage permission is required");
-                    b.add("Storage permission is required");
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
                 }
+                if (lg1 == 0) {
+                    b.add(getString(R.string.v29));
+                } else {
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
+                            c(b(StorageDirectory.getDownloadDir()))));
+                }
+            } else {
+                b.add("Storage permission is required");
+                b.add("Storage permission is required");
             }
+        }
     }
 
     @Override
@@ -996,7 +996,7 @@ public class MANG extends BaseActivity {
 
     private class R7 extends MainReceiver {
 
-            @Override
+        @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

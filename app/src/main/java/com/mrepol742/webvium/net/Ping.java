@@ -29,7 +29,8 @@ import javax.net.ssl.HttpsURLConnection;
 public class Ping {
 
     @Keep
-    private Ping() {}
+    private Ping() {
+    }
 
     public static boolean isReachable(String url) {
         try {

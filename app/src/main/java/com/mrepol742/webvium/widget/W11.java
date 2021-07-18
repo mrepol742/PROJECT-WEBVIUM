@@ -21,7 +21,7 @@ import android.widget.SeekBar;
 
 public class W11 implements SeekBar.OnSeekBarChangeListener {
 
-            @Override
+    @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
     }

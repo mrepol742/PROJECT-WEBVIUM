@@ -14,7 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<shape xmlns:a="http://schemas.android.com/apk/res/android" a:shape="oval">
-        <corners a:radius="50dp" />
-        <stroke a:width="2dp" a:color="?a" />
+<shape xmlns:a="http://schemas.android.com/apk/res/android"
+    a:shape="oval">
+    <corners a:radius="50dp" />
+    <stroke
+        a:width="2dp"
+        a:color="?a" />
 </shape>

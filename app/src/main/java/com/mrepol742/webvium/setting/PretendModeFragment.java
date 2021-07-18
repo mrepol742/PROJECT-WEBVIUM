@@ -79,7 +79,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
             spe = (SWIT) findPreference("ptm");
             spe.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
                         PretendModeFragment.this.a5();
@@ -92,7 +92,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
             Preference a1 = findPreference("cHANS");
             a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PretendModeFragment.this.i();
                     return true;
@@ -101,7 +101,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
             Preference a12 = findPreference("cLANS");
             a12.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     PretendModeFragment.this.k();
                     return true;
@@ -757,7 +757,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
 
     private class R7 extends MainReceiver {
 
-            @Override
+        @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

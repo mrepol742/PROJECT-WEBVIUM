@@ -40,7 +40,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class VideoFragment extends BasePreferenceFragment {
 
-            @Override
+    @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
@@ -48,7 +48,7 @@ public class VideoFragment extends BasePreferenceFragment {
             Preference o = findPreference("captions");
             o.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     Intents.k(VideoFragment.this.getActivity(), Settings.ACTION_CAPTIONING_SETTINGS);
 
@@ -59,7 +59,7 @@ public class VideoFragment extends BasePreferenceFragment {
             Preference o5 = findPreference("shDCu");
             o5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     Intents.a(VideoFragment.this.getActivity(), VIDE.class);
                     return true;
@@ -68,7 +68,7 @@ public class VideoFragment extends BasePreferenceFragment {
             Preference a4 = findPreference("cusP");
             a4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     VideoFragment.this.b24();
                     return true;
@@ -86,7 +86,7 @@ public class VideoFragment extends BasePreferenceFragment {
         if (requestCode == 7423 && resultCode == RESULT_OK && uri != null) {
             Runnable p15 = new Runnable() {
 
-            @Override
+                @Override
                 public void run() {
                     try {
                         InputStream c5 = VideoFragment.this.getActivity().getContentResolver().openInputStream(uri);
@@ -104,7 +104,7 @@ public class VideoFragment extends BasePreferenceFragment {
                         BitmapCache.getInstance().b(StorageDirectory.getVideoPoster(VideoFragment.this.getActivity()));
                         VideoFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 AwesomeToast.b(VideoFragment.this.getActivity(), VideoFragment.this.getString(R.string.h21));
                             }
@@ -113,7 +113,7 @@ public class VideoFragment extends BasePreferenceFragment {
                         en.printStackTrace();
                         VideoFragment.this.getActivity().runOnUiThread(new Runnable() {
 
-            @Override
+                            @Override
                             public void run() {
                                 AwesomeToast.b(VideoFragment.this.getActivity(), VideoFragment.this.getString(R.string.p30));
                             }

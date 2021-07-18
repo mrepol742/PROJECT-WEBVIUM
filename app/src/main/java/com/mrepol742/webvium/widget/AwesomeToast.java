@@ -35,9 +35,9 @@ import java.io.File;
 
 public class AwesomeToast {
     private static final String MAVEN_PRO = "classes";
+    private static final int PRIMARY_CACHE = 99;
     private static Typeface type;
     private static LruCache<Integer, Typeface> cac;
-    private static final int PRIMARY_CACHE = 99;
 
     @Keep
     private AwesomeToast() {

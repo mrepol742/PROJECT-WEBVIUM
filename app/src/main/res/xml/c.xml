@@ -21,9 +21,10 @@
         <com.mrepol742.webvium.LIST
             a:defaultValue="x57"
             a:dialogTitle="@string/q"
-            a:entries="@array/a5" a:summary="%1$s"
+            a:entries="@array/a5"
             a:entryValues="@array/a6"
             a:key="general"
+            a:summary="%1$s"
             a:title="@string/n" />
         <com.mrepol742.webvium.EDIT0
             a:ellipsize="end"

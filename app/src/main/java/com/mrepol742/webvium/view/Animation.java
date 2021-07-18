@@ -33,7 +33,7 @@ public class Animation {
             android.view.animation.Animation d = AnimationUtils.loadAnimation(a, b);
             d.setAnimationListener(new android.view.animation.Animation.AnimationListener() {
 
-            @Override
+                @Override
                 public void onAnimationStart(android.view.animation.Animation animation) {
                     c.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 }
@@ -47,7 +47,7 @@ public class Animation {
                 public void onAnimationRepeat(android.view.animation.Animation animation) {
                     c.post(new Runnable() {
 
-            @Override
+                        @Override
                         public void run() {
                             c.setLayerType(View.LAYER_TYPE_NONE, null);
                         }

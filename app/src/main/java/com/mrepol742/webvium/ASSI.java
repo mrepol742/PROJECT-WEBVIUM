@@ -145,7 +145,7 @@ public class ASSI extends BaseActivity {
             iv1.setBackgroundResource(R.drawable.c6);
             iv1.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     ASSI.this.b();
                 }
@@ -177,7 +177,7 @@ public class ASSI extends BaseActivity {
         if (p.getText().toString().length() == 0) {
             iv.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     ASSI.this.finishAndRemoveTask();
                 }
@@ -185,7 +185,7 @@ public class ASSI extends BaseActivity {
         } else {
             iv.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+                @Override
                 public void onClick(View view) {
                     p.getText().clear();
                 }

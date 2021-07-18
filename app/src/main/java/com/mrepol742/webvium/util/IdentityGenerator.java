@@ -616,7 +616,7 @@ public class IdentityGenerator {
         Random random = new Random();
         int limit = 195;
         int low = 165;
-        return random.nextInt(limit-low) + low;
+        return random.nextInt(limit - low) + low;
     }
 
     private static int meterToCentimeter() {
@@ -626,7 +626,6 @@ public class IdentityGenerator {
     private static int getWeight() {
         return getHeight() / 2 + 13;
     }
-
 
 
 }

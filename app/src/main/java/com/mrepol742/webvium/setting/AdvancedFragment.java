@@ -90,7 +90,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             SWIT cbf = (SWIT) findPreference("fltWeb");
             cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
 
@@ -108,7 +108,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             etp12.setSummary(a221().getString("CtextE", ""));
             etp12.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     etp12.setSummary(newValue.toString());
                     return true;
@@ -116,7 +116,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             });
             lp90.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     etp12.setEnabled(newValue.toString().equals("3840a"));
                     return true;
@@ -125,7 +125,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             PREF a9 = (PREF) findPreference("wLock");
             a9.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
 
                     if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
@@ -140,7 +140,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             PREF a9zx = (PREF) findPreference("wPretend");
             a9zx.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
 
                     if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
@@ -160,7 +160,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             LIST java = (LIST) findPreference("java");
             java.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("7f")) {
                         java9.setEnabled(false);
@@ -181,7 +181,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             PREF pc = (PREF) findPreference("cjsa");
             pc.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     AdvancedFragment.this.b26();
                     return true;
@@ -190,7 +190,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
             PREF a96755 = (PREF) findPreference("admn");
             a96755.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
+                @Override
                 public boolean onPreferenceClick(Preference a) {
                     AdvancedFragment.this.b16();
                     return true;
@@ -247,7 +247,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
 
     private class R7 extends MainReceiver {
 
-            @Override
+        @Override
         public void onReceive(Context a, Intent b) {
             super.onReceive(a, b);
             String sg = b.getAction();

@@ -18,7 +18,6 @@
 <!--suppress ALL -->
 
 
-
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
     <com.mrepol742.webvium.PREF0 a:title="@string/t21">

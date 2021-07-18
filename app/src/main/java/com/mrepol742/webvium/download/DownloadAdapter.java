@@ -131,6 +131,7 @@ public class DownloadAdapter extends MainBaseAdapter {
         ImageView c;
         TextView d;
         TextView e;
+
         @Keep
         private W12a() {
         }

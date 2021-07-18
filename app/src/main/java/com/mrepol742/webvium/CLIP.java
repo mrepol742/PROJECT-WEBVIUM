@@ -46,7 +46,7 @@ public class CLIP extends MainService {
 
     final OnPrimaryClipChangedListener b = new OnPrimaryClipChangedListener() {
 
-            @Override
+        @Override
         public void onPrimaryClipChanged() {
             ClipData c56 = a.getPrimaryClip();
             ClipData.Item d34 = null;

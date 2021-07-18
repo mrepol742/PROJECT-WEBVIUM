@@ -31,7 +31,7 @@ import java.util.Objects;
 // @Class MyPackageReplaced
 public class MYPA extends MainReceiver {
 
-            @Override
+    @Override
     public void onReceive(Context a, Intent b) {
         if (Objects.requireNonNull(b.getAction()).equals("android.intent.action.MY_PACKAGE_REPLACED")) {
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("bcP", true) && Build.VERSION.SDK_INT < 29) {

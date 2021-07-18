@@ -136,7 +136,7 @@ public class DownloadHelper implements WebviumDatabase {
                 Uri uri = Uri.parse(sg);
                 return uri.getHost();
             } catch (Exception en) {
-                 en.printStackTrace();
+                en.printStackTrace();
             }
             return sg;
         }
