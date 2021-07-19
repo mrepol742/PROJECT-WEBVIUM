@@ -1,5 +1,4 @@
-[//]: <> (AUTO GENERATED FILE)
-<p align="center">
+[//]: <> (AUTO GENERATED FILE)<p align="center">
  <img width="100px" src="https://github.com/mrepol742/PROJECT-WEBVIUM/blob/master/app/src/main/res/mipmap-xxxhdpi/c.png" align="center" alt="PROJECT-WEBVIUM" />
  <h2 align="center">PROJECT-WEBVIUM</h2>
  <p align="center">Lightweight, material design and full-featured Android Browser</p>
