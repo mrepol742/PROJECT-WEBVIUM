@@ -76,7 +76,7 @@ public class EXCE extends BaseActivity {
 
     }
 
-    private void a(String madeErrMsg) {
+    private void a(final String madeErrMsg) {
         AlertDialog.Builder bld = new AlertDialog.Builder(this);
         LayoutInflater d = getLayoutInflater();
         View e = d.inflate(R.layout.a1, null);
@@ -106,13 +106,14 @@ public class EXCE extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_EMAIL, "Test");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-                EXCE.this.startActivity(Intent.createChooser(intent, "Send Email"));
+                Intent intent = new Intent("android.intent.action.SEND");
+                intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
+                intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z68));
+                intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66) + "\n\n\n\n\n" + getString(R.string.z67) + "\n\n" + madeErrMsg);
+                intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
+                intent.setType("text/html");
+                intent.setPackage("com.google.android.gm");
+                startActivity(Intent.createChooser(intent, getString(R.string.z65)));
                 EXCE.this.finish();
             }
         });

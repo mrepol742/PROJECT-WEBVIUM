@@ -479,4 +479,20 @@
         <item name="120y">120y</item>
 
     </string-array>
+
+
+    <string-array name="b19">
+        <item name="1z">@string/z70</item>
+        <item name="7z">@string/z71</item>
+        <item name="30z">@string/z72</item>
+        <item name="60z">@string/z73</item>
+    </string-array>
+    <string-array name="b20">
+        <item name="1z">1z</item>
+        <item name="7z">7z</item>
+        <item name="30z">30z</item>
+        <item name="60z">60z</item>
+        <item name="120z">120z</item>
+
+    </string-array>
 </resources>

@@ -359,9 +359,8 @@ public class MAIN extends MainBaseActivity implements Format {
     public Timer timer;
     public int it7422;
     public Timer cdt;
-    public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv9;
+    public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
     private boolean err = false;
-    private TextView tv8;
     private CookieManager cm1;
     private HistoryHelper d1;
     private SearchHelper d2;
@@ -762,7 +761,6 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         });
         this.u.setTypeface(type(Typeface.NORMAL));
-        this.tv8.setTypeface(type(Typeface.NORMAL));
         this.g.setMax(100);
         tv7.setImageResource(R.drawable.d7);
         tv7.setOnClickListener(new View.OnClickListener() {
@@ -773,7 +771,7 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         });
         tv7.setBackgroundResource(R.drawable.b17);
-        tv8.setBackgroundResource(R.drawable.b29);
+        tv8.setImageResource(R.drawable.b29);
         tv8.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -802,10 +800,8 @@ public class MAIN extends MainBaseActivity implements Format {
             c134();
             if (!a221().getBoolean("autoUpdate", false)) {
                 this.u.setTextColor(this.a7);
-                this.tv8.setTextColor(this.a7);
             } else {
                 this.u.setTextColor(this.a8);
-                this.tv8.setTextColor(this.a8);
             }
             cd.setBackgroundResource(R.drawable.w);
             tv.setBackgroundResource(R.drawable.f2);
@@ -1047,7 +1043,6 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             c99();
             c108();
-            tv8.setText(String.valueOf(tabs.size()));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1360,7 +1355,6 @@ public class MAIN extends MainBaseActivity implements Format {
                     fl.addView(web);
                     ct = tabs.size() - 1;
                 }
-                tv8.setText(String.valueOf(tabs.size()));
                 if (MAIN.this.currentUrl() != null && MAIN.this.currentTitle() != null) {
                     MAIN.this.c33(MAIN.this.currentUrl(), MAIN.this.currentTitle());
                 }
@@ -1911,6 +1905,19 @@ public class MAIN extends MainBaseActivity implements Format {
             @JavascriptInterface
             public boolean isDarkModeEnabled() {
                 return a221().getBoolean("autoUpdate", false);
+            }
+
+            @JavascriptInterface
+            public String getQuality() {
+                String bgQa9 = Objects.requireNonNull(a221().getString("bgQa9", "7z"));
+                if ("7z".equals(bgQa9)) {
+                    return "640x480";
+                } else if ("30z".equals(bgQa9)) {
+                    return "1280x720";
+                } else if ("60z".equals(bgQa9)) {
+                    return "1920×1080";
+                }
+                return "480×360";
             }
         }, Package.c() + "ThemeHelper");
         h.addJavascriptInterface(new Object() {

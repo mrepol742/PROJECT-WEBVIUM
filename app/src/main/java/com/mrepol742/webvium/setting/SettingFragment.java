@@ -141,13 +141,14 @@ public class SettingFragment extends BaseFragment {
 
                 @Override
                 public void onClick(View view) {
-                    // TODO
-                    Intent intent = new Intent(Intent.ACTION_SENDTO);
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_EMAIL, "Test");
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                    intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-                    SettingFragment.this.startActivity(Intent.createChooser(intent, "Send Email"));
+                    Intent intent = new Intent("android.intent.action.SEND");
+                    intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
+                    intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z69));
+                    intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66));
+                    intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
+                    intent.setType("text/html");
+                    intent.setPackage("com.google.android.gm");
+                    startActivity(Intent.createChooser(intent, getString(R.string.z65)));
                 }
             });
             iv.setImageResource(R.drawable.c7);

@@ -175,13 +175,12 @@
             a:layout_weight="0.5"
             a:contentDescription="@string/q29" />
 
-        <TextView
+        <ImageView
             a:id="@id/m7"
             a:layout_width="0dp"
             a:layout_height="wrap_content"
-            a:layout_weight="0.23"
-            a:gravity="center"
-            a:padding="3dp" />
+            a:layout_weight="0.5"
+            a:contentDescription="@string/z58" />
 
         <ImageView
             a:id="@id/m8"

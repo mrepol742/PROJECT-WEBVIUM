@@ -900,7 +900,18 @@
     <string name="z62">Media Identifier</string>
     <string name="z63">MIDI Devices</string>
     <string name="z64">Close All</string>
-
+    <string name="z65">Send Email</string>
+    <string name="z66">Briefly explain how can we reproduce the Problem?</string>
+    <string name="z67">Below are the captured logcat</string>
+    <string name="z68">Webvium Crashed Report</string>
+    <string name="z69">Webvium Bug Report</string>
+    <string name="z70">360p</string>
+    <string name="z71">480p</string>
+    <string name="z72">720p</string>
+    <string name="z73">1080p</string>
+    <string name="z74">Webvium Search Background Quality</string>
+    <string name="z75">Set Quality</string>
+    <string name="dev.mail">mrepol742@gmail.com</string>
     <string name="github.username">mrepol742</string>
     <string name="github.repository">Server</string>
     <string name="github.branch">master</string>

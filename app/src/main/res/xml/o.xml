@@ -83,6 +83,14 @@
             a:key="cus"
             a:summary="@string/g17"
             a:title="@string/g16" />
+    <com.mrepol742.webvium.LIST
+            a:defaultValue="7z"
+            a:dialogTitle="@string/z75"
+            a:entries="@array/b19"
+            a:entryValues="@array/b20"
+            a:key="bgQa9"
+            a:summary="%1$s"
+            a:title="@string/z74" />
     </com.mrepol742.webvium.PREF0>
     <com.mrepol742.webvium.PREF0 a:title="@string/f26">
         <com.mrepol742.webvium.SWIT
