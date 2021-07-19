@@ -6298,7 +6298,7 @@ public class MAIN extends MainBaseActivity implements Format {
 				}
 				return true;
             case 32:
-                if (a.isChecked()) {
+                if (dsM) {
                     a.setChecked(false);
                     dsM = false;
                     currentTab().loadUrl("javascript:document.designMode=\"off\";alert('Design mode is off');");
