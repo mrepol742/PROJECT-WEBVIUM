@@ -394,7 +394,8 @@ public class MAIN extends MainBaseActivity implements Format {
     private MainReceiver ipH;
     private int ct;
 	private boolean inE = false;
-	Inspector ins;
+    private boolean dsM = false;
+	private Inspector ins;
 	
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
@@ -3104,6 +3105,9 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c49(WebViews as, String a) {
+        if (BuildConfig.DEBUG && a.startsWith("javascript:")) {
+            as.loadUrl(a);
+        }
         String a5 = a.trim().toLowerCase();
         if (a5.equals("webvium://rickroll")) {
             as.loadUrl(Base64.decode("aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ"));
@@ -3968,9 +3972,9 @@ public class MAIN extends MainBaseActivity implements Format {
             c54(b);
             c52();
 			
-			ins = new Inspector(this, MAIN.this, a);
+			//ins = new Inspector(this, MAIN.this, a);
             //ins.editCode(inE);
-			
+            			
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -4003,6 +4007,7 @@ public class MAIN extends MainBaseActivity implements Format {
             this.iw.setImageResource(R.drawable.a15);
             Animation.animate(MAIN.this, R.anim.c, this.iw);
             this.cd.setBackgroundResource(R.drawable.w);
+            dsM = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -6179,7 +6184,10 @@ public class MAIN extends MainBaseActivity implements Format {
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
-		a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
+        if (BuildConfig.DEBUG) {
+		    a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
+            a.add(0, 32, 0, getString(R.string.s32)).setCheckable(true);
+        }
         return super.onCreateOptionsMenu(a);
     }
 
@@ -6190,6 +6198,9 @@ public class MAIN extends MainBaseActivity implements Format {
         }
 		if (inE) {
             a.findItem(31).setChecked(true);
+        }
+        if (dsM) {
+            a.findItem(32).setChecked(true);
         }
         return super.onPrepareOptionsMenu(a);
     }
@@ -6279,12 +6290,23 @@ public class MAIN extends MainBaseActivity implements Format {
 				if (a.isChecked()) {
 					a.setChecked(false);
 					inE = false;
-					ins.editCode(true);
+					//ins.editCode(true);
 				} else {
 					a.setChecked(true);
 					inE = true;
-					ins.editCode(false);
+					//ins.editCode(false);
 				}
+				return true;
+            case 32:
+                if (a.isChecked()) {
+                    a.setChecked(false);
+                    dsM = false;
+                    currentTab().loadUrl("javascript:document.designMode=\"off\";alert('Design mode is off');");
+                } else {
+                    a.setChecked(true);
+                    dsM = true;
+                    currentTab().loadUrl("javascript:document.designMode=\"on\";alert('Design mode is on');");
+                }
 				return true;
             case 13:
                 if (cm.capacity() > 16) {
