@@ -34,13 +34,13 @@ public class MainWebViewClient extends WebViewClient {
 
     @Override
     public void onReceivedError(WebView a, int b, String c, String d) {
-        receivedError(b, c, d, false, false);
+        receivedError(a, b, c, d, false, false);
     }
 
     @Override
     @TargetApi(23)
     public void onReceivedError(WebView a, WebResourceRequest b, WebResourceError c) {
-        receivedError(c.getErrorCode(), b.getUrl().toString(),
+        receivedError(a, c.getErrorCode(), b.getUrl().toString(),
                 c.getDescription().toString(), b.isForMainFrame(), b.hasGesture());
     }
 
@@ -67,7 +67,7 @@ public class MainWebViewClient extends WebViewClient {
         return wrs;
     }
 
-    public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
+    public void receivedError(WebView a, int b, String c, String d, boolean bn, boolean bn1) {
     }
 
     //on page load

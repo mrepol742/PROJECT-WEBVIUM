@@ -133,12 +133,12 @@ public class TOOL extends BaseActivity {
             }
 
             @Override
-            public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
+            public void receivedError(WebView a, int b, String c, String d, boolean bn, boolean bn1) {
                 if (Connectivity.isThereAnyInternetConnection(TOOL.this)) {
                     AwesomeToast.c(TOOL.this, getString(R.string.x38));
                     AwesomeToast.b(TOOL.this, getString(R.string.y72));
                 }
-                m.loadDataWithBaseURL("webvium", getString(R.string.c33), "html/text", "UTF-8", null);
+                a.loadDataWithBaseURL("webvium", getString(R.string.c33), "text/html", "UTF-8", null);
             }
         });
         WebSettings ws = m.getSettings();

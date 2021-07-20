@@ -166,7 +166,6 @@ import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.view.SoftKeyboard;
 import com.mrepol742.webvium.widget.AwesomeToast;
 import com.mrepol742.webvium.widget.W11;
-import com.mrepol742.webvium.util.Inspector;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -573,8 +572,6 @@ public class MAIN extends MainBaseActivity implements Format {
     };
     private boolean inE = false;
     private boolean dsM = false;
-    private Inspector ins;
-    private WebView onF;
     private boolean isSh = false;
 
     public static void c63() {
@@ -849,6 +846,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 }
             }
         });
+        tv3.setBackgroundResource(R.drawable.b17);
         if (a221().getBoolean("home", true)) {
             tv1.setOnClickListener(new View.OnClickListener() {
 
@@ -1533,26 +1531,18 @@ public class MAIN extends MainBaseActivity implements Format {
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
                 MAIN.this.b = b;
-                Intent d = fileChooserParams.createIntent();
+                Intent d = new Intent();
                 d.setAction(Intent.ACTION_GET_CONTENT);
                 d.addCategory(Intent.CATEGORY_OPENABLE);
-                String[] sg = fileChooserParams.getAcceptTypes();
-                if (sg.length != 0) {
-                    d.setType(sg[1]);
-                } else {
-                    d.setType("*/*");
-                }
-                if (d.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
-                    return true;
-                }
-                return false;
+                d.setType("*/*");
+                startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
+                return true;
             }
 
             @Override
             public void onProgressChanged(WebView a, int b) {
                 g.setProgress(b);
-                if (b == 100) {
+                if (b == 100 && g.getVisibility() != View.GONE) {
                     tv3.setImageResource(R.drawable.b11);
                     Animation.animate(MAIN.this, R.anim.c, tv3);
                     g.setVisibility(View.GONE);
@@ -1583,14 +1573,12 @@ public class MAIN extends MainBaseActivity implements Format {
                             cdt.purge();
                         }
                     }, 10000);
-                }
-                if (b != 100) {
+                } else if (b != 100 && g.getVisibility() != View.VISIBLE) {
                     g.setVisibility(View.VISIBLE);
                     Animation.animate(MAIN.this, R.anim.c, g);
                     tv3.setImageResource(R.drawable.a14);
                     Animation.animate(MAIN.this, R.anim.c, tv3);
                 }
-                tv3.setBackgroundResource(R.drawable.b17);
             }
 
             @Override
@@ -1663,13 +1651,15 @@ public class MAIN extends MainBaseActivity implements Format {
                         public void onClick(DialogInterface a13, int intetg) {
                             String uwe = sjs.getText().toString();
                             e.confirm(uwe);
+                            a13.dismiss();
                         }
                     });
                     a89.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface a12, int intetg) {
-                            e.cancel();
+                            e.cancel(); 
+                            a12.dismiss();
                         }
                     }).setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -1844,8 +1834,8 @@ public class MAIN extends MainBaseActivity implements Format {
             }
 
             @Override
-            public void receivedError(int b, String c, String d, boolean bn, boolean bn1) {
-                c77(new ReceivedErrorDataModel(b, c, d, bn, bn1));
+            public void receivedError(WebView a, int b, String c, String d, boolean bn, boolean bn1) {
+                c77(a, new ReceivedErrorDataModel(b, c, d, bn, bn1));
             }
 
             @Override
@@ -3831,7 +3821,7 @@ public class MAIN extends MainBaseActivity implements Format {
         g.show();
     }
 
-    public void c77(ReceivedErrorDataModel receivedErrorDataModel) {
+    public void c77(WebView a, ReceivedErrorDataModel receivedErrorDataModel) {
         try {
             c180();
             bl6 = false;
@@ -3839,10 +3829,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 r8 = new R8();
             }
             registerReceiver(r8, ift);
-
-            if (receivedErrorDataModel.b == WebViewClient.ERROR_TIMEOUT || receivedErrorDataModel.b == WebViewClient.ERROR_FAILED_SSL_HANDSHAKE) {
-                err = true;
-            }
+            err = receivedErrorDataModel.bn;
             if (Build.VERSION.SDK_INT >= 23 && receivedErrorDataModel.c.startsWith("file://")) {
                 Permission.check(this, Permission.STORAGE, 2);
             }
@@ -3858,9 +3845,40 @@ public class MAIN extends MainBaseActivity implements Format {
                         c175()));
             }
             cm0.append("<br><br>");
-           /* if (bn || Build.VERSION.SDK_INT == 21) {
-                h.load((c, Base64.a(W5.a7()).replace("%a", getString(R.string.c33)).replace("%b", getString(R.string.g23)).replace("%c", getString(R.string.r21)).replace("%d", c).replace("%e", c).replace("%f", c160(b)).replace("%g", d));
-            }*/
+if (receivedErrorDataModel.bn) {
+            a.loadUrl("about:blank");
+            String html = "<html>\n" +
+                    "    <head>\n" +
+                    "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"/>\n" +
+                    "        <title>Webpage not available</title>\n" +
+                    "        <style type=\"text/css\">\n" +
+                    "            @font-face {\n" +
+                    "            font-family: a;\n" +
+                    "            src: url(\"file:///android_asset/classes\")\n" +
+                    "            }\n" +
+                    "            *{\n" +
+                    "            color: #484848;\n" +
+                    "            font-family: a;\n" +
+                    "            }\n" +
+                    "            body {\n" +
+                    "            margin-top: 0px; \n" +
+                    "            padding-top: 0px;\n" +
+                    "            }\n" +
+                    "            h2 { \n" +
+                    "            margin-top: 5px; \n" +
+                    "            padding-top: 0px; \n" +
+                    "            }\n" +
+                    "        </style>\n" +
+                    "        <body>\n" +
+                    "            <img src=\"file:///android_asset/webkit/android-weberror.png\" align=\"top\" />\n" +
+                    "            <h3>Webpage not available</h3>\n" +
+                    "            <p>The webpage at <a href=\"" + receivedErrorDataModel.c + "\">" + receivedErrorDataModel.c + "</a> could not be loaded because:</p>\n" +
+                    "            <p>" + receivedErrorDataModel.d + "</p>\n" +
+                    "        </body>\n" +
+                    "    </head>\n" +
+                    "</html>";
+            a.loadDataWithBaseURL(receivedErrorDataModel.c, html, "text/html", "UTF-8", receivedErrorDataModel.c);
+}
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3962,7 +3980,6 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page finished
     public void c80(WebView a, String b) {
         try {
-            onF = a;
             c134();
             if (a.getSettings().getJavaScriptEnabled()) {
                 String js = "javascript:window." + Package.c() + "ThemeHelper.setTheme((function (){\n" +
