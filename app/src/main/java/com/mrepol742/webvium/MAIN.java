@@ -6383,7 +6383,7 @@ if (receivedErrorDataModel.bn) {
                                 "childNodesOfBody.forEach((children) => {\n" +
                                 "children.addEventListener('click', () => {\n" +
                                 "    WebviumInspectElements.showCode(children.innerHTML);\n" +
-                                "    e.id = 'cGV3cGV3';\n" +
+                                "    e.id = e.id || 'cGV3cGV3LGltc2Ft';\n" +
                                 "});\n" +
                                 "});";
                         cur.evaluateJavascript(js, null);
