@@ -75,6 +75,7 @@ import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.webkit.ConsoleMessage;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
@@ -101,6 +102,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -393,10 +395,6 @@ public class MAIN extends MainBaseActivity implements Format {
     private String sg;
     private MainReceiver ipH;
     private int ct;
-	private boolean inE = false;
-    private boolean dsM = false;
-	private Inspector ins;
-	
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -573,6 +571,10 @@ public class MAIN extends MainBaseActivity implements Format {
             return false;
         }
     };
+    private boolean inE = false;
+    private boolean dsM = false;
+    private Inspector ins;
+    private WebView onF;
     private boolean isSh = false;
 
     public static void c63() {
@@ -1002,9 +1004,6 @@ public class MAIN extends MainBaseActivity implements Format {
                 wl.acquire(10 * 60 * 1000L /*10 minutes*/);
             } else if (Build.VERSION.SDK_INT >= 23 && pm.isIgnoringBatteryOptimizations(Package.b())) {
                 wl.acquire(10 * 60 * 1000L /*10 minutes*/);
-            }
-            if (Objects.equals(currentTitle(), getSharedPreferences("di", 0).getString("di", "742"))) {
-                currentTab().reload();
             }
             if (Build.VERSION.SDK_INT >= 24) {
                 boolean bn1 = isInMultiWindowMode() || isInPictureInPictureMode();
@@ -1785,7 +1784,7 @@ public class MAIN extends MainBaseActivity implements Format {
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm1) {
                 cm.append(String.format(getString(R.string.v188).replaceAll("742", c6(cm1.messageLevel())), cm1.messageLevel().toString(), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
-                        .append("\n\n");
+                        .append("\n");
                 return true;
             }
 
@@ -1921,6 +1920,12 @@ public class MAIN extends MainBaseActivity implements Format {
                 return "480×360";
             }
         }, Package.c() + "ThemeHelper");
+        h.addJavascriptInterface(new Object() {
+            @JavascriptInterface
+            public void showCode(String code) {
+                c181(code);
+            }
+        }, Package.c() + "InspectElements");
         h.addJavascriptInterface(new Object() {
 
             @JavascriptInterface
@@ -3105,9 +3110,6 @@ public class MAIN extends MainBaseActivity implements Format {
     }
 
     public void c49(WebViews as, String a) {
-        if (BuildConfig.DEBUG && a.startsWith("javascript:")) {
-            as.loadUrl(a);
-        }
         String a5 = a.trim().toLowerCase();
         if (a5.equals("webvium://rickroll")) {
             as.loadUrl(Base64.decode("aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ"));
@@ -3525,7 +3527,16 @@ public class MAIN extends MainBaseActivity implements Format {
                 sendBroadcast(it);
             }
         }, Package.c() + "IpHelper");
-        currentTab().loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {" + Package.c() + "IpHelper.ip(dat);}");
+        final String js = "javascript: a();\n" +
+                "async function a() {\n" +
+                "    var myRequest = new Request('https://api.ipify.org');\n" +
+                "    fetch(myRequest).then(function(response) {\n" +
+                "        response.text().then(function(text) {\n" +
+                "            " + Package.c() + "IpHelper.ip(text);\n" +
+                "        });\n" +
+                "    });\n" +
+                "}";
+        currentTab().evaluateJavascript(js, null);
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.h7));
@@ -3560,7 +3571,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public void onClick(View view) {
-                MAIN.this.currentTab().loadUrl("javascript:a();async function a() {var myRequest = new Request('https://api.ipify.org');fetch(myRequest).then(function(response) {response.text().then(function(text) {print(text);});});}function print(dat) {" + Package.c() + "IpHelper.ip(dat);}");
+                currentTab().evaluateJavascript(js, null);
             }
         });
         a.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -3951,12 +3962,21 @@ public class MAIN extends MainBaseActivity implements Format {
     // on page finished
     public void c80(WebView a, String b) {
         try {
+            onF = a;
             c134();
             if (a.getSettings().getJavaScriptEnabled()) {
+                String js = "javascript:window." + Package.c() + "ThemeHelper.setTheme((function (){\n" +
+                        "    const metas = document.getElementsByTagName('meta');\n" +
+                        "    for (let i = 0; i < metas.length; i++) {\n" +
+                        "        if (metas[i].getAttribute('name') === 'theme-color') {\n" +
+                        "            return metas[i].getAttribute('content');\n" +
+                        "        }\n" +
+                        "    }\n" +
+                        "    return '';\n" +
+                        "})());";
                 if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj", false)) {
-                    a.loadUrl("javascript:window." + Package.c() + "ThemeHelper.setTheme( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'theme-color') { return metas[i].getAttribute('content'); } } return '';  } )() );");
+                    a.evaluateJavascript(js, null);
                 }
-                a.loadUrl("javascript:window." + Package.c() + "Webvium.description( (function (){ const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === 'description') { return metas[i].getAttribute('content'); } } return '';  } )() );");
             }
             if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("tow2", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -3971,10 +3991,6 @@ public class MAIN extends MainBaseActivity implements Format {
             }
             c54(b);
             c52();
-			
-			//ins = new Inspector(this, MAIN.this, a);
-            //ins.editCode(inE);
-            			
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3987,13 +4003,13 @@ public class MAIN extends MainBaseActivity implements Format {
                 unregisterReceiver(r8);
             }
             err = false;
-            if (BuildConfig.DEBUG) {
+            /* if (BuildConfig.DEBUG) {
                 if (b.startsWith(WEBVIUM_HOME)) {
                     ab.hide();
                 } else {
                     ab.show();
                 }
-            }
+            } */
             if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("tow", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 wifiManager.setWifiEnabled(true);
@@ -4907,9 +4923,7 @@ public class MAIN extends MainBaseActivity implements Format {
             @Override
             public void onClick(View view) {
                 String str = ed.getText().toString();
-                if (U3.b(str)) {
-                    MAIN.this.c170(str);
-                }
+                currentTab().evaluateJavascript(str, null);
             }
         });
         a.create().show();
@@ -5761,16 +5775,6 @@ public class MAIN extends MainBaseActivity implements Format {
         return null;
     }
 
-    private void c170(final String sg) {
-        currentTab().evaluateJavascript(sg, new ValueCallback<String>() {
-
-            @Override
-            public void onReceiveValue(String s) {
-                android.util.Log.d(Package.c(), sg);
-            }
-        });
-    }
-
     private void c171(final String sg) {
         final FrameLayout k = findViewById(R.id.i);
         View c = View.inflate(this, R.layout.a8, null);
@@ -5898,10 +5902,61 @@ public class MAIN extends MainBaseActivity implements Format {
             rx.printStackTrace();
         }
     }
-	
-	private void c181(boolean in) {
-		ins.editCode(in);
-	}
+
+    public void c181(Object msg) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.s01, null);
+        a.setTitle(getString(R.string.s31));
+        a.setCancelable(true);
+        a.setView(c);
+        final EditText ed = c.findViewById(R.id.o46);
+        ed.setText(msg.toString());
+        if (Build.VERSION.SDK_INT >= 26) {
+            ed.setImportantForAutofill(EditText.IMPORTANT_FOR_AUTOFILL_NO);
+        }
+        ed.setImeOptions(EditorInfo.IME_FLAG_NO_FULLSCREEN);
+        ed.setTypeface(type(Typeface.NORMAL));
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(Resources.getColor(this, R.color.c));
+        } else {
+            ed.setTextColor(Resources.getColor(this, R.color.b));
+        }
+        a.setPositiveButton(getString(R.string.z76), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a12, int intetg) {
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        String inject = ed.getText().toString();
+                        currentTab().loadUrl("javascript:cGV3cGV3.innerHTML = `" + inject + "`;");
+                        currentTab().removeJavascriptInterface(Package.c() + "InspectElements");
+                    }
+                });
+                a12.dismiss();
+            }
+        });
+        a.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface p1) {
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        currentTab().removeJavascriptInterface(Package.c() + "InspectElements");
+                    }
+                });
+                p1.dismiss();
+            }
+        });
+        final AlertDialog g = a.create();
+        g.show();
+    }
+
+
     @Override
     @TargetApi(Build.VERSION_CODES.M)
     public void onRequestPermissionsResult(int a, String[] b, int[] c) {
@@ -6148,6 +6203,10 @@ public class MAIN extends MainBaseActivity implements Format {
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 24, 0, getString(R.string.h20)).setCheckable(true);
+        if (BuildConfig.DEBUG) {
+            a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
+            a.add(0, 32, 0, getString(R.string.s32)).setCheckable(true);
+        }
         // web osint
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
         sm.add(0, 1, 0, getString(R.string.y15));
@@ -6184,10 +6243,6 @@ public class MAIN extends MainBaseActivity implements Format {
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
-        if (BuildConfig.DEBUG) {
-		    a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
-            a.add(0, 32, 0, getString(R.string.s32)).setCheckable(true);
-        }
         return super.onCreateOptionsMenu(a);
     }
 
@@ -6196,7 +6251,7 @@ public class MAIN extends MainBaseActivity implements Format {
         if (ua) {
             a.findItem(24).setChecked(true);
         }
-		if (inE) {
+        if (inE) {
             a.findItem(31).setChecked(true);
         }
         if (dsM) {
@@ -6286,28 +6341,55 @@ public class MAIN extends MainBaseActivity implements Format {
                     c20(true);
                 }
                 return true;
-			case 31:
-				if (a.isChecked()) {
-					a.setChecked(false);
-					inE = false;
-					//ins.editCode(true);
-				} else {
-					a.setChecked(true);
-					inE = true;
-					//ins.editCode(false);
-				}
-				return true;
-            case 32:
-                if (dsM) {
-                    a.setChecked(false);
-                    dsM = false;
-                    currentTab().loadUrl("javascript:document.designMode=\"off\";alert('Design mode is off');");
+            case 31:
+                // if you read this message,
+                // means you can read
+                if (currentSettings().getJavaScriptEnabled()) {
+                    WebViews cur = currentTab();
+                    if (a.isChecked()) {
+                        a.setChecked(false);
+                        inE = false;
+                        cur.removeJavascriptInterface(Package.c() + "InspectElements");
+                        cur.reload();
+                    } else {
+                        a.setChecked(true);
+                        inE = true;
+                        cur.addJavascriptInterface(new Object() {
+
+                            @JavascriptInterface
+                            public void showCode(String code) {
+                                c181(code);
+                                c7("Called from menu");
+                            }
+                        }, Package.c() + "InspectElements");
+                        String js = "childNodesOfBody = document.body.childNodes;\n" +
+                                "childNodesOfBody.forEach((children) => {\n" +
+                                "children.addEventListener('click', () => {\n" +
+                                "    WebviumInspectElements.showCode(children.innerHTML);\n" +
+                                "    e.id = 'cGV3cGV3';\n" +
+                                "});\n" +
+                                "});";
+                        cur.evaluateJavascript(js, null);
+                    }
                 } else {
-                    a.setChecked(true);
-                    dsM = true;
-                    currentTab().loadUrl("javascript:document.designMode=\"on\";alert('Design mode is on');");
+                    c7(getString(R.string.u13));
                 }
-				return true;
+                return true;
+            case 32:
+                if (currentSettings().getJavaScriptEnabled()) {
+                    if (dsM) {
+                        a.setChecked(false);
+                        dsM = false;
+                        currentTab().evaluateJavascript("javascript:document.designMode=\"off\";", null);
+                    } else {
+                        a.setChecked(true);
+                        dsM = true;
+                        currentTab().evaluateJavascript("javascript:document.designMode=\"on\";", null);
+                    }
+                } else {
+                    c7(getString(R.string.u13));
+                }
+                return true;
             case 13:
                 if (cm.capacity() > 16) {
                     c47();
@@ -6482,11 +6564,11 @@ public class MAIN extends MainBaseActivity implements Format {
         if (Objects.requireNonNull(a221().getString("hide", "")).equals("30d")) {
             if (a) {
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
-                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                            View.SYSTEM_UI_FLAG_FULLSCREEN);
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN);
             } else {
                 c98();
             }
@@ -6623,6 +6705,4 @@ public class MAIN extends MainBaseActivity implements Format {
             }
         }
     }
-    
-    
 }

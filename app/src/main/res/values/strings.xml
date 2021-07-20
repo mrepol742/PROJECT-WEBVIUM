@@ -184,7 +184,7 @@
     <string name="h17">Add to</string>
     <string name="h18">History</string>
     <string name="h19">Share</string>
-    <string name="h20">Desktop</string>
+    <string name="h20">Desktop Mode</string>
     <string name="i2">Paste and Search</string>
     <string name="i3">Paste</string>
     <string name="i4">Save Link</string>
@@ -404,7 +404,7 @@
     <string name="v16">%1$s request location permission denied.</string>
     <string name="v17">Allow</string>
     <string name="v18">&lt;b>Message:&lt;/b> %1$s&lt;br>&lt;b>Line:&lt;/b> %2$d&lt;br>&lt;b>Source ID:&lt;/b> %3$s</string>
-    <string name="v188"><font color="742">%1$s</font>\n\n<font color="742">Message:</font> %2$s\n<font color="742">Line:</font> %3$d\n<font color="742">Source ID:</font> %4$s</string>
+    <string name="v188"><font color="742">%1$s</font> -> {\n<font color="742">Message:</font> %2$s\n<font color="742">Line:</font> %3$d\n<font color="742">Source ID:</font> %4$s\n}\n</string>
     <string name="v19">Security Certificate</string>
     <string name="v20">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d&lt;br>&lt;b>Description:&lt;/b> %3$s</string>
     <plurals name="w1">
@@ -912,6 +912,7 @@
     <string name="z73">1080p</string>
     <string name="z74">Webvium Search Background Quality</string>
     <string name="z75">Set Quality</string>
+    <string name="z76">Inject</string>
     <string name="dev.mail">mrepol742@gmail.com</string>
     <string name="github.username">mrepol742</string>
     <string name="github.repository">Server</string>

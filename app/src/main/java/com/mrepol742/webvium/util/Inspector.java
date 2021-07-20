@@ -32,14 +32,16 @@ import android.view.View.OnClickListener;
 import android.view.View;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.BuildConfig;
+import com.mrepol742.webvium.app.WebViews;
 
 public class Inspector {
-	private Context ct;
-	private WebView web;
-	private Activity act;
+	/*
+	private final Context ct;
+	private final WebViews web;
+	private final Activity act;
 	private boolean isVisible = false;
 
-    public Inspector(Context ct, Activity act, WebView web) {
+    public Inspector(Context ct, Activity act, WebViews web) {
 		this.ct = ct;
 	    this.web = web;
 		this.act = act;
@@ -60,9 +62,8 @@ public class Inspector {
 						"	if (!bool) {" +
 						"		e.removeEventListener('click', showCodes); showCodes = ()=>{}" +
 						"	} else {" +
-						"		WebVium.showCode( e.innerHTML );" +
+						"		WebViumInspectElement.showCode( e.innerHTML );" +
 						"       e.id = 'cGV3cGV3'; " +
-						"       alert(e.id)" +
 						"	}" +
 						"}";
 
@@ -125,4 +126,6 @@ public class Inspector {
 				}
 			});
 	}
+
+	 */
 }
