@@ -394,6 +394,7 @@ public class MAIN extends MainBaseActivity implements Format {
     private String sg;
     private MainReceiver ipH;
     private int ct;
+    private boolean pageF;
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -1506,325 +1507,7 @@ public class MAIN extends MainBaseActivity implements Format {
                 MAIN.this.c83(new PendingDownloadDataModel(str, str3, str4, j, str2));
             }
         });
-        h.setWebChromeClient(new WebChromeClient() {
-
-            @Override
-            public Bitmap getDefaultVideoPoster() {
-                return c84();
-            }
-
-            @Override
-            public void onReceivedTitle(WebView a, String b) {
-                c86(a, b);
-            }
-
-            @Override
-            public void onHideCustomView() {
-                c87();
-            }
-
-            @Override
-            public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
-                c88(a, b);
-            }
-
-            @Override
-            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
-                MAIN.this.b = b;
-                Intent d = new Intent();
-                d.setAction(Intent.ACTION_GET_CONTENT);
-                d.addCategory(Intent.CATEGORY_OPENABLE);
-                d.setType("*/*");
-                startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
-                return true;
-            }
-
-            @Override
-            public void onProgressChanged(WebView a, int b) {
-                g.setProgress(b);
-                if (b == 100 && g.getVisibility() != View.GONE) {
-                    tv3.setImageResource(R.drawable.b11);
-                    Animation.animate(MAIN.this, R.anim.c, tv3);
-                    g.setVisibility(View.GONE);
-                    Animation.animate(MAIN.this, R.anim.b, g);
-                    MAIN.this.cm1.flush();
-                    cdt.cancel();
-                    cdt.purge();
-                    if (a224("a10", false) && bl6) {
-                        // if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
-                        c142(a.getTitle(), a.getUrl());
-                       /* } else {
-                            c142(getString(R.string.g29), getString(R.string.g30));
-                        }*/
-                    } else if (a224("a10", false) && !bl6) {
-                        //if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
-                        c143(a.getTitle(), a.getUrl());
-                      /*  } else {
-                            c143(getString(R.string.g29), getString(R.string.g30));
-                        }*/
-                    }
-                } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
-                    cdt.schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            c141();
-                            cdt.cancel();
-                            cdt.purge();
-                        }
-                    }, 10000);
-                } else if (b != 100 && g.getVisibility() != View.VISIBLE) {
-                    g.setVisibility(View.VISIBLE);
-                    Animation.animate(MAIN.this, R.anim.c, g);
-                    tv3.setImageResource(R.drawable.a14);
-                    Animation.animate(MAIN.this, R.anim.c, tv3);
-                }
-            }
-
-            @Override
-            public boolean onJsAlert(WebView a, String b, String c, final JsResult d) {
-                if (a221().getBoolean("Java10", true)) {
-                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater d1 = getLayoutInflater();
-                    View e5 = d1.inflate(R.layout.a13, null);
-                    bld.setView(e5);
-                    bld.setCancelable(true);
-                    TextView tv = e5.findViewById(R.id.o37);
-                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    tv.setText(c);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
-                    } else {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
-                    }
-                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a13, int intetg) {
-                            d.confirm();
-                            a13.dismiss();
-                        }
-                    });
-                    bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                        @Override
-                        public void onCancel(DialogInterface a1) {
-                            d.cancel();
-                            a1.dismiss();
-                        }
-                    });
-                    AlertDialog dd = bld.create();
-                    dd.show();
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onJsPrompt(WebView a, String b, String c, String d, final JsPromptResult e) {
-                if (a221().getBoolean("Java9", true)) {
-                    AlertDialog.Builder a89 = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater b54 = getLayoutInflater();
-                    View c34 = b54.inflate(R.layout.x, null);
-                    a89.setCancelable(true);
-                    a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    a89.setView(c34);
-                    TextView sjs1 = c34.findViewById(R.id.e1);
-                    final EDIT sjs = c34.findViewById(R.id.e3);
-                    int e78 = Resources.getColor(MAIN.this, R.color.c);
-                    int f = Resources.getColor(MAIN.this, R.color.b);
-                    int f1 = Resources.getColor(MAIN.this, R.color.j);
-                    int g1 = Resources.getColor(MAIN.this, R.color.k);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        sjs1.setTextColor(e78);
-                        sjs.setTextColor(e78);
-                        sjs.setHintTextColor(f1);
-                    } else {
-                        sjs1.setTextColor(f);
-                        sjs.setTextColor(f);
-                        sjs.setHintTextColor(g1);
-                    }
-                    sjs1.setText(c);
-                    a89.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a13, int intetg) {
-                            String uwe = sjs.getText().toString();
-                            e.confirm(uwe);
-                            a13.dismiss();
-                        }
-                    });
-                    a89.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            e.cancel(); 
-                            a12.dismiss();
-                        }
-                    }).setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                        @Override
-                        public void onCancel(DialogInterface a1) {
-                            e.cancel();
-                            a1.dismiss();
-                        }
-                    });
-                    final AlertDialog g = a89.create();
-                    g.show();
-                    final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-                    sjs.addTextChangedListener(new TextWatcher() {
-
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                            okButton.setEnabled(sjs.getText().toString().length() != 0);
-                        }
-                    });
-                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onJsConfirm(WebView a, String b, String c, final JsResult e) {
-                if (a221().getBoolean("Java11", true)) {
-                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater d1 = getLayoutInflater();
-                    View e5 = d1.inflate(R.layout.a13, null);
-                    bld.setView(e5);
-                    bld.setCancelable(true);
-                    TextView tv = e5.findViewById(R.id.o37);
-                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    tv.setText(c);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
-                    } else {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
-                    }
-                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a13, int intetg) {
-                            e.confirm();
-                            a13.dismiss();
-                        }
-                    });
-                    bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            e.cancel();
-                            a12.dismiss();
-                        }
-                    });
-                    bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                        @Override
-                        public void onCancel(DialogInterface a1) {
-                            e.cancel();
-                            a1.dismiss();
-                        }
-                    });
-                    AlertDialog dd = bld.create();
-                    dd.show();
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onJsBeforeUnload(WebView a, String b, String c, final JsResult e) {
-                if (a221().getBoolean("Java12", true)) {
-                    AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
-                    LayoutInflater d1 = getLayoutInflater();
-                    View e5 = d1.inflate(R.layout.a13, null);
-                    bld.setView(e5);
-                    bld.setCancelable(false);
-                    TextView tv = e5.findViewById(R.id.o37);
-                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    tv.setText(c);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
-                    } else {
-                        tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
-                    }
-                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a13, int intetg) {
-                            e.confirm();
-                            a13.dismiss();
-                        }
-                    });
-                    bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            e.cancel();
-                            a12.dismiss();
-                        }
-                    });
-                    AlertDialog dd = bld.create();
-                    dd.show();
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onConsoleMessage(ConsoleMessage cm1) {
-                cm.append(String.format(getString(R.string.v188).replaceAll("742", c6(cm1.messageLevel())), cm1.messageLevel().toString(), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
-                        .append("\n");
-                return true;
-            }
-
-            @Override
-            public void onGeolocationPermissionsShowPrompt(final String a, final GeolocationPermissions.Callback b) {
-                final boolean c = false;
-                AlertDialog.Builder d = new AlertDialog.Builder(MAIN.this);
-                d.setMessage(String.format(getString(R.string.v14), a));
-                d.setCancelable(false);
-                d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a1, int i) {
-                        if (Permission.check(MAIN.this, Permission.LOCATION, 5)) {
-                            b.invoke(a, true, c);
-                            c8(String.format(getString(R.string.v15), a));
-                        } else {
-                            w6 = new GeolocationDataModel(a, b);
-                        }
-                        a1.dismiss();
-                    }
-                });
-                d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a1, int i) {
-                        b.invoke(a, false, c);
-                        c7(String.format(getString(R.string.v16), a));
-                        a1.dismiss();
-                    }
-                });
-                AlertDialog e = d.create();
-                e.show();
-            }
-
-            @Override
-            public View getVideoLoadingProgressView() {
-                return c1();
-            }
-
-            @Override
-            public void onPermissionRequest(PermissionRequest pr) {
-                c129(pr);
-            }
-
-            @Override
-            public void onReceivedIcon(WebView a, Bitmap b) {
-                c5(b);
-            }
-        });
+        h.setWebChromeClient(new da150());
         h.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         h.setWebViewClient(new MainWebViewClient() {
 
@@ -1910,12 +1593,13 @@ public class MAIN extends MainBaseActivity implements Format {
                 return "480×360";
             }
         }, Package.c() + "ThemeHelper");
-        h.addJavascriptInterface(new Object() {
+        /*h.addJavascriptInterface(new Object() {
             @JavascriptInterface
             public void showCode(String code) {
                 c181(code);
             }
         }, Package.c() + "InspectElements");
+        */
         h.addJavascriptInterface(new Object() {
 
             @JavascriptInterface
@@ -4008,6 +3692,24 @@ if (receivedErrorDataModel.bn) {
             }
             c54(b);
             c52();
+            if (!pageF) {
+                String js = "let sc = document.createElement('script');" +
+                    "sc.innerHTML = `" +
+                    "function myfun(e) {" +
+                    "    mangaid = e.target;" +
+                    "    var getit = prompt('V2ViVml1bUpT', e.target.outerHTML);" +
+                    "    if (getit != null) {" +
+                    "        e.target.outerHTML = getit;" +
+                    "    }" +
+                    "    e.stopPropagation();" +
+                    "    e.preventDefault();" +
+                    "}`;" +
+                    "document.body.appendChild(sc);";
+                a.evaluateJavascript(js, null);
+                pageF = true;
+                return;
+            }
+            pageF = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -5502,7 +5204,7 @@ if (receivedErrorDataModel.bn) {
     }
 
     public void c151(WebView a, String b, Boolean c) {
-        if (!c) {
+        if (!c && (b.startsWith("https://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
             d1.c(a.getTitle(), b);
             SharedPreferences c56 = getSharedPreferences("wv", 0);
             SharedPreferences.Editor d56 = c56.edit();
@@ -5510,7 +5212,7 @@ if (receivedErrorDataModel.bn) {
             d56.apply();
         }
     }
-
+    
     private boolean c152() {
         WebView.HitTestResult d = currentTab().getHitTestResult();
         int te = d.getType();
@@ -5920,7 +5622,7 @@ if (receivedErrorDataModel.bn) {
         }
     }
 
-    public void c181(Object msg) {
+    public void c181(Object msg, final JsPromptResult result) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.s01, null);
@@ -5947,9 +5649,8 @@ if (receivedErrorDataModel.bn) {
 
                     @Override
                     public void run() {
-                        String inject = ed.getText().toString();
-                        currentTab().loadUrl("javascript:cGV3cGV3.innerHTML = `" + inject + "`;");
-                        currentTab().removeJavascriptInterface(Package.c() + "InspectElements");
+                        String data = ed.getText().toString();
+                        result.confirm(data);
                     }
                 });
                 a12.dismiss();
@@ -5963,7 +5664,7 @@ if (receivedErrorDataModel.bn) {
 
                     @Override
                     public void run() {
-                        currentTab().removeJavascriptInterface(Package.c() + "InspectElements");
+                        result.cancel();
                     }
                 });
                 p1.dismiss();
@@ -6358,7 +6059,7 @@ if (receivedErrorDataModel.bn) {
                     c20(true);
                 }
                 return true;
-            case 31:
+            /*case 31:
                 // if you read this message,
                 // means you can read
                 if (currentSettings().getJavaScriptEnabled()) {
@@ -6390,6 +6091,17 @@ if (receivedErrorDataModel.bn) {
                     }
                 } else {
                     c7(getString(R.string.u13));
+                }
+                return true;*/
+            case 31:
+                if (a.isChecked()) {
+                    a.setChecked(false);
+                    inE = false;
+                    currentTab().evaluateJavascript("javascript:document.removeEventListener('click', myfun, true);", null);
+                } else {
+                    a.setChecked(true);
+                    inE = true;
+                    currentTab().evaluateJavascript("javascript:document.addEventListener('click', myfun, true);", null);
                 }
                 return true;
             case 32:
@@ -6720,6 +6432,332 @@ if (receivedErrorDataModel.bn) {
                 cd.setBackgroundResource(R.drawable.w);
                 tv.setBackgroundResource(R.drawable.f2);
             }
+        }
+    }
+    
+    private class da150 extends WebChromeClient {
+
+        @Override
+        public Bitmap getDefaultVideoPoster() {
+            return c84();
+        }
+
+        @Override
+        public void onReceivedTitle(WebView a, String b) {
+            c86(a, b);
+        }
+
+        @Override
+        public void onHideCustomView() {
+            c87();
+        }
+
+        @Override
+        public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
+            c88(a, b);
+        }
+
+        @Override
+        public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
+            MAIN.this.b = b;
+            Intent d = new Intent();
+            d.setAction(Intent.ACTION_GET_CONTENT);
+            d.addCategory(Intent.CATEGORY_OPENABLE);
+            d.setType("*/*");
+            startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
+            return true;
+        }
+
+        @Override
+        public void onProgressChanged(WebView a, int b) {
+            g.setProgress(b);
+            if (b == 100 && g.getVisibility() != View.GONE) {
+                tv3.setImageResource(R.drawable.b11);
+                Animation.animate(MAIN.this, R.anim.c, tv3);
+                g.setVisibility(View.GONE);
+                Animation.animate(MAIN.this, R.anim.b, g);
+                MAIN.this.cm1.flush();
+                cdt.cancel();
+                cdt.purge();
+                if (a224("a10", false) && bl6) {
+                    // if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
+                    c142(a.getTitle(), a.getUrl());
+                    /* } else {
+                     c142(getString(R.string.g29), getString(R.string.g30));
+                     }*/
+                } else if (a224("a10", false) && !bl6) {
+                    //if (HDMS.b(Objects.requireNonNull(a.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(a.getUrl()).toLowerCase())) {
+                    c143(a.getTitle(), a.getUrl());
+                    /*  } else {
+                     c143(getString(R.string.g29), getString(R.string.g30));
+                     }*/
+                }
+            } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
+                cdt.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            c141();
+                            cdt.cancel();
+                            cdt.purge();
+                        }
+                    }, 10000);
+            } else if (b != 100 && g.getVisibility() != View.VISIBLE) {
+                g.setVisibility(View.VISIBLE);
+                Animation.animate(MAIN.this, R.anim.c, g);
+                tv3.setImageResource(R.drawable.a14);
+                Animation.animate(MAIN.this, R.anim.c, tv3);
+            }
+        }
+
+        @Override
+        public boolean onJsAlert(WebView a, String b, String c, final JsResult d) {
+            if (a221().getBoolean("Java10", true)) {
+                AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
+                LayoutInflater d1 = getLayoutInflater();
+                View e5 = d1.inflate(R.layout.a13, null);
+                bld.setView(e5);
+                bld.setCancelable(true);
+                TextView tv = e5.findViewById(R.id.o37);
+                bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                tv.setText(c);
+                if (!a221().getBoolean("autoUpdate", false)) {
+                    tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
+                } else {
+                    tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
+                }
+                bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            d.confirm();
+                            a13.dismiss();
+                        }
+                    });
+                bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface a1) {
+                            d.cancel();
+                            a1.dismiss();
+                        }
+                    });
+                AlertDialog dd = bld.create();
+                dd.show();
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onJsPrompt(WebView a, String b, String c, String d, final JsPromptResult e) {
+            if (a221().getBoolean("Java9", true)) {
+                if (c.equals("V2ViVml1bUpT")) {
+                    c181(d, e);
+                    return true;
+                } else {
+                    AlertDialog.Builder a89 = new AlertDialog.Builder(MAIN.this);
+                    LayoutInflater b54 = getLayoutInflater();
+                    View c34 = b54.inflate(R.layout.x, null);
+                    a89.setCancelable(true);
+                    a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    a89.setView(c34);
+                    TextView sjs1 = c34.findViewById(R.id.e1);
+                    final EDIT sjs = c34.findViewById(R.id.e3);
+                    int e78 = Resources.getColor(MAIN.this, R.color.c);
+                    int f = Resources.getColor(MAIN.this, R.color.b);
+                    int f1 = Resources.getColor(MAIN.this, R.color.j);
+                    int g1 = Resources.getColor(MAIN.this, R.color.k);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        sjs1.setTextColor(e78);
+                        sjs.setTextColor(e78);
+                        sjs.setHintTextColor(f1);
+                    } else {
+                        sjs1.setTextColor(f);
+                        sjs.setTextColor(f);
+                        sjs.setHintTextColor(g1);
+                    }
+                    sjs1.setText(c);
+                    sjs.setText(d);
+                    a89.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a13, int intetg) {
+                                String uwe = sjs.getText().toString();
+                                e.confirm(uwe);
+                                a13.dismiss();
+                            }
+                        });
+                    a89.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a12, int intetg) {
+                                e.cancel(); 
+                                a12.dismiss();
+                            }
+                        }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                            @Override
+                            public void onCancel(DialogInterface a1) {
+                                e.cancel();
+                                a1.dismiss();
+                            }
+                        });
+                    final AlertDialog g = a89.create();
+                    g.show();
+                    final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
+                    sjs.addTextChangedListener(new TextWatcher() {
+
+                            @Override
+                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                                okButton.setEnabled(sjs.getText().toString().length() != 0);
+                            }
+                        });
+                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onJsConfirm(WebView a, String b, String c, final JsResult e) {
+            if (a221().getBoolean("Java11", true)) {
+                AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
+                LayoutInflater d1 = getLayoutInflater();
+                View e5 = d1.inflate(R.layout.a13, null);
+                bld.setView(e5);
+                bld.setCancelable(true);
+                TextView tv = e5.findViewById(R.id.o37);
+                bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                tv.setText(c);
+                if (!a221().getBoolean("autoUpdate", false)) {
+                    tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
+                } else {
+                    tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
+                }
+                bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            e.confirm();
+                            a13.dismiss();
+                        }
+                    });
+                bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                            a12.dismiss();
+                        }
+                    });
+                bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface a1) {
+                            e.cancel();
+                            a1.dismiss();
+                        }
+                    });
+                AlertDialog dd = bld.create();
+                dd.show();
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onJsBeforeUnload(WebView a, String b, String c, final JsResult e) {
+            if (a221().getBoolean("Java12", true)) {
+                AlertDialog.Builder bld = new AlertDialog.Builder(MAIN.this);
+                LayoutInflater d1 = getLayoutInflater();
+                View e5 = d1.inflate(R.layout.a13, null);
+                bld.setView(e5);
+                bld.setCancelable(false);
+                TextView tv = e5.findViewById(R.id.o37);
+                bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                tv.setText(c);
+                if (!a221().getBoolean("autoUpdate", false)) {
+                    tv.setTextColor(Resources.getColor(MAIN.this, R.color.c));
+                } else {
+                    tv.setTextColor(Resources.getColor(MAIN.this, R.color.b));
+                }
+                bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            e.confirm();
+                            a13.dismiss();
+                        }
+                    });
+                bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                            a12.dismiss();
+                        }
+                    });
+                AlertDialog dd = bld.create();
+                dd.show();
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onConsoleMessage(ConsoleMessage cm1) {
+            cm.append(String.format(getString(R.string.v188).replaceAll("742", c6(cm1.messageLevel())), cm1.messageLevel().toString(), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
+                .append("\n");
+            return true;
+        }
+
+        @Override
+        public void onGeolocationPermissionsShowPrompt(final String a, final GeolocationPermissions.Callback b) {
+            final boolean c = false;
+            AlertDialog.Builder d = new AlertDialog.Builder(MAIN.this);
+            d.setMessage(String.format(getString(R.string.v14), a));
+            d.setCancelable(false);
+            d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        if (Permission.check(MAIN.this, Permission.LOCATION, 5)) {
+                            b.invoke(a, true, c);
+                            c8(String.format(getString(R.string.v15), a));
+                        } else {
+                            w6 = new GeolocationDataModel(a, b);
+                        }
+                        a1.dismiss();
+                    }
+                });
+            d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        b.invoke(a, false, c);
+                        c7(String.format(getString(R.string.v16), a));
+                        a1.dismiss();
+                    }
+                });
+            AlertDialog e = d.create();
+            e.show();
+        }
+
+        @Override
+        public View getVideoLoadingProgressView() {
+            return c1();
+        }
+
+        @Override
+        public void onPermissionRequest(PermissionRequest pr) {
+            c129(pr);
+        }
+
+        @Override
+        public void onReceivedIcon(WebView a, Bitmap b) {
+            c5(b);
         }
     }
 }
