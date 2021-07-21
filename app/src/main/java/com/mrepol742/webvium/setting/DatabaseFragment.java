@@ -447,7 +447,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 } else {
                     ArrayList<DDMS> al = new ArrayList<>();
                     while (res.moveToNext()) {
-                        al.add(new DDMS(res.getString(1), res.getString(2), res.getInt(3), res.getString(4), res.getString(5)));
+                        al.add(new DDMS(res.getString(1), res.getString(2), res.getString(3), res.getLong(4)));
                     }
                     DatabaseFragment.this.write(file, al);
                 }

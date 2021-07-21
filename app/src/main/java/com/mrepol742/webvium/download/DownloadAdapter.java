@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,47 +32,108 @@ import android.widget.TextView;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.NoSuchItemToGet;
+import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.content.Resources;
+import com.mrepol742.webvium.util.DateUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class DownloadAdapter extends MainBaseAdapter {
     private final Context a;
-    private final ArrayList<DownloadArrayDataModel> downloadArrayDataModel;
+    private final ArrayList<DownloadDataModel> al;
+    private final SimpleDateFormat day;
+    private final SimpleDateFormat month;
+    private final SimpleDateFormat year;
+    private final SharedPreferences sp;
+    private final ForegroundColorSpan A;
+    private final ForegroundColorSpan E;
+    private final ForegroundColorSpan S;
+    private final ForegroundColorSpan I;
+    private final ForegroundColorSpan B;
 
-    public DownloadAdapter(Context ct, ArrayList<DownloadArrayDataModel> downloadArrayDataModel) {
+    public DownloadAdapter(Context ct, ArrayList<DownloadDataModel> al) {
         super(ct);
-        this.downloadArrayDataModel = downloadArrayDataModel;
+        this.al = al;
         a = ct;
+        this.A = new ForegroundColorSpan(Resources.getColor(ct, R.color.a));
+        this.E = new ForegroundColorSpan(Resources.getColor(ct, R.color.e));
+        this.S = new ForegroundColorSpan(Resources.getColor(ct, R.color.s));
+        this.I = new ForegroundColorSpan(Resources.getColor(ct, R.color.i));
+        this.B = new ForegroundColorSpan(Resources.getColor(ct, R.color.b));
+        sp = PreferenceManager.getDefaultSharedPreferences(ct);
+        this.day = new SimpleDateFormat("dd", Locale.US);
+        this.month = new SimpleDateFormat("MM", Locale.US);
+        this.year = new SimpleDateFormat("yyyy", Locale.US);
     }
 
-    public void a(ArrayList<DownloadArrayDataModel> w) {
-        synchronized (this.downloadArrayDataModel) {
-            downloadArrayDataModel.clear();
-            downloadArrayDataModel.addAll(w);
+    public void a(ArrayList<DownloadDataModel> w) {
+        synchronized (this.al) {
+            al.clear();
+            al.addAll(w);
         }
     }
 
-    public DownloadArrayDataModel b(int i) throws NoSuchItemToGet {
-        DownloadArrayDataModel sync = (DownloadArrayDataModel) getItem(i);
+    public DownloadDataModel b(int i) throws NoSuchItemToGet {
+        DownloadDataModel sync = (DownloadDataModel) getItem(i);
         if (sync == null) {
             throw new NoSuchItemToGet();
         }
         return sync;
     }
 
+    private SpannableString c(String url) throws NoSuchSpannableStringBuilderToReturn {
+        try {
+            SpannableString ssb = new SpannableString(url);
+            if (url.startsWith("https://")) {
+                ssb.setSpan(this.A, 0, 8, 0);
+            } else if (url.startsWith("http://")) {
+                ssb.setSpan(this.E, 0, 7, 0);
+            } else if (url.startsWith("file://")) {
+                ssb.setSpan(this.S, 0, 7, 0);
+            } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
+                ssb.setSpan(this.S, 0, 10, 0);
+            } else {
+                if (!this.sp.getBoolean("autoUpdate", false)) {
+                    ssb.setSpan(this.I, 0, url.length(), 0);
+                } else {
+                    ssb.setSpan(this.B, 0, url.length(), 0);
+                }
+            }
+            return ssb;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        throw new NoSuchSpannableStringBuilderToReturn();
+    }
+
+    public static int d(String b) {
+        if (b.startsWith("https://")) {
+            return R.drawable.a15;
+        } else if (b.startsWith("http://")) {
+            return R.drawable.a16;
+        } else if (b.startsWith("file://") || b.startsWith("content://")) {
+            return R.drawable.a17;
+        } else if (b.startsWith("webvium://")) {
+            return R.mipmap.d;
+        }
+        return R.drawable.a8;
+    }
+
     @Override
     public int getCount() {
-        synchronized (this.downloadArrayDataModel) {
-            return this.downloadArrayDataModel.size();
+        synchronized (this.al) {
+            return this.al.size();
         }
     }
 
     @Override
     public Object getItem(int it) {
-        synchronized (this.downloadArrayDataModel) {
-            return this.downloadArrayDataModel.get(it);
+        synchronized (this.al) {
+            return this.al.get(it);
         }
     }
 
@@ -92,7 +155,6 @@ public class DownloadAdapter extends MainBaseAdapter {
                 w20.c = e.findViewById(R.id.n20);
                 w20.d = e.findViewById(R.id.b12);
                 w20.e = e.findViewById(R.id.b13);
-                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
                 if (!sp.getBoolean("autoUpdate", false)) {
                     w20.a.setTextColor(Resources.getColor(a, R.color.c));
                     w20.b.setTextColor(Resources.getColor(a, R.color.c));
@@ -114,11 +176,14 @@ public class DownloadAdapter extends MainBaseAdapter {
             } else {
                 w20 = (W12a) e.getTag();
             }
-            w20.a.setText(b(it).b);
-            w20.b.setText(b(it).d);
-            w20.c.setImageResource(b(it).e4);
-            w20.d.setText(b(it).f);
-            w20.e.setText(b(it).g);
+            w20.a.setText(b(it).a);
+            w20.b.setText(c(b(it).b));
+            // w20.c.setImageResource(b(it).e4);
+            w20.c.setImageResource(d(b(it).b));
+            w20.d.setText(b(it).c);
+            Date date = new Date(b(it).d);
+            String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
+            w20.e.setText(fiDate);
         } catch (IndexOutOfBoundsException | NoSuchItemToGet ignored) {
 
         }

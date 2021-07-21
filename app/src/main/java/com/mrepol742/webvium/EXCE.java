@@ -89,7 +89,7 @@ public class EXCE extends BaseActivity {
         tv1.setTypeface(type(Typeface.NORMAL));
         bn.setTypeface(type(Typeface.NORMAL));
         bn1.setTypeface(type(Typeface.NORMAL));
-        tv.setText(getString(R.string.y79));
+        tv.setText(madeErrMsg.split(":")[0]);
         tv1.setText(madeErrMsg);
         tv.setTextColor(Resources.getColor(this, R.color.e));
         if (!a221().getBoolean("autoUpdate", false)) {

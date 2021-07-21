@@ -20,17 +20,15 @@ package com.mrepol742.webvium;
 import java.io.Serializable;
 
 public class DDMS implements Serializable {
+    public final String a;
     public final String b;
-    public final String d;
-    public final int e4;
-    public final String f;
-    public final String g;
+    public final String c;
+    public final long d;
 
-    public DDMS(String al, String al2, int a13, String a14, String a15) {
-        b = al;
-        d = al2;
-        e4 = a13;
-        f = a14;
-        g = a15;
+    public DDMS(String a, String b, String c, long d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
     }
 }

@@ -80,24 +80,20 @@ public class DownloadHelper implements WebviumDatabase {
                             Sqlite.COL3_DOWNLOAD +
                             " =? AND " +
                             Sqlite.COL4_DOWNLOAD +
-                            " =? AND " +
-                            Sqlite.COL5_DOWNLOAD +
-                            " =? ", new String[]{w2.b,
-                            w2.a,
-                            Integer.toString(w2.c),
-                            w2.d,
-                            w2.e});
+                            " =?" , new String[]{w2.a,
+                            w2.b,
+                            w2.c,
+                            Long.toString(w2.d)});
         }
     }
 
-    public void c(DownloadNewDataModel downloadNewDataModel) {
+    public void c(String a, String b, String c) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_DOWNLOAD, h(downloadNewDataModel.a));
-            values.put(Sqlite.COL2_DOWNLOAD, downloadNewDataModel.b);
-            values.put(Sqlite.COL3_DOWNLOAD, downloadNewDataModel.s);
-            values.put(Sqlite.COL4_DOWNLOAD, f(downloadNewDataModel.d));
-            values.put(Sqlite.COL5_DOWNLOAD, g());
+            values.put(Sqlite.COL1_DOWNLOAD, a);
+            values.put(Sqlite.COL2_DOWNLOAD, b);
+            values.put(Sqlite.COL3_DOWNLOAD, c);
+            values.put(Sqlite.COL4_DOWNLOAD, System.currentTimeMillis());
             sld.insert(Sqlite.TABLE_DOWNLOAD, null, values);
         }
     }
@@ -105,52 +101,21 @@ public class DownloadHelper implements WebviumDatabase {
     public void d(DDMS w7) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_DOWNLOAD, w7.b);
-            values.put(Sqlite.COL2_DOWNLOAD, w7.d);
-            values.put(Sqlite.COL3_DOWNLOAD, w7.f);
-            values.put(Sqlite.COL4_DOWNLOAD, w7.g);
-            values.put(Sqlite.COL5_DOWNLOAD, w7.e4);
+            values.put(Sqlite.COL1_DOWNLOAD, w7.a);
+            values.put(Sqlite.COL2_DOWNLOAD, w7.b);
+            values.put(Sqlite.COL3_DOWNLOAD, w7.c);
+            values.put(Sqlite.COL4_DOWNLOAD, w7.d);
             sld.insert(Sqlite.TABLE_DOWNLOAD, null, values);
         }
     }
 
-    private int f(String b) {
-        if (b.startsWith("https://")) {
-            return R.drawable.a15;
-        } else if (b.startsWith("http://")) {
-            return R.drawable.a16;
-        } else if (b.startsWith("file://") || b.startsWith("content://")) {
-            return R.drawable.a17;
-        }
-        return R.drawable.a8;
-    }
-
-    private String g() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMddyy | HHmm", Locale.US);
-        return sdf.format(new Date());
-    }
-
-    private String h(String sg) {
-        if (URLUtil.isValidUrl(sg)) {
-            try {
-                Uri uri = Uri.parse(sg);
-                return uri.getHost();
-            } catch (Exception en) {
-                en.printStackTrace();
-            }
-            return sg;
-        }
-        return sg;
-    }
-
-    public void i(DownloadOldDataModel downloadOldDataModel, DownloadNewDataModel downloadNewDataModel) {
+    public void i(String oldTitle, String oldURl, String oldSize, long oldTIme, String newTitle, String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_DOWNLOAD, h(downloadNewDataModel.a));
-            values.put(Sqlite.COL2_DOWNLOAD, downloadNewDataModel.b);
-            values.put(Sqlite.COL3_DOWNLOAD, downloadNewDataModel.s);
-            values.put(Sqlite.COL4_DOWNLOAD, f(downloadNewDataModel.d));
-            values.put(Sqlite.COL5_DOWNLOAD, downloadOldDataModel.oldTime);
+            values.put(Sqlite.COL1_DOWNLOAD, newTitle);
+            values.put(Sqlite.COL2_DOWNLOAD, newUrl);
+            values.put(Sqlite.COL3_DOWNLOAD, oldSize);
+            values.put(Sqlite.COL4_DOWNLOAD, oldTIme);
             sld.update(Sqlite.TABLE_DOWNLOAD, values,
                     Sqlite.COL1_DOWNLOAD +
                             " LIKE ? AND " +
@@ -159,9 +124,7 @@ public class DownloadHelper implements WebviumDatabase {
                             Sqlite.COL3_DOWNLOAD +
                             " LIKE ? AND " +
                             Sqlite.COL4_DOWNLOAD +
-                            " LIKE ? AND " +
-                            Sqlite.COL5_DOWNLOAD +
-                            " LIKE ? ", new String[]{downloadOldDataModel.oldTitle, downloadOldDataModel.oldUrl, String.valueOf(downloadOldDataModel.oldDrawable), downloadOldDataModel.oldTime, downloadOldDataModel.oldSize});
+                            " LIKE ?", new String[]{oldTitle, oldURl, oldSize, Long.toString(oldTIme)});
         }
 
     }

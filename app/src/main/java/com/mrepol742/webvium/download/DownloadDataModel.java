@@ -17,18 +17,18 @@
 
 package com.mrepol742.webvium.download;
 
+import com.mrepol742.webvium.annotation.Keep;
+
 public class DownloadDataModel {
     public final String a;
     public final String b;
-    public final int c;
-    public final String d;
-    public final String e;
+    public final String c;
+    public final long d;
 
-    public DownloadDataModel(String a, String b, int c, String d, String e) {
+    public DownloadDataModel(String a, String b, String c, long d) {
         this.a = a;
         this.b = b;
         this.c = c;
         this.d = d;
-        this.e = e;
     }
 }

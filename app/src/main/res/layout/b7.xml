@@ -55,8 +55,10 @@
                 a:id="@id/b11"
                 a:layout_width="0dp"
                 a:layout_height="wrap_content"
-                a:layout_weight="1.0"
+                a:layout_weight="1.0" a:text="https://something.cs://something.cs://something.comaaaaaaaaa"
                 a:ellipsize="end"
+                a:paddingStart="0dp"
+                a:paddingEnd="4dp"
                 a:maxLines="1"
                 a:textSize="@dimen/c" />
 
@@ -64,8 +66,9 @@
                 a:id="@id/b12"
                 a:layout_width="0dp"
                 a:layout_height="wrap_content"
-                a:layout_weight="1.0"
-                a:ellipsize="end"
+                a:layout_weight="0.3"
+                a:gravity="center"
+                a:ellipsize="end" a:text="300KB"
                 a:maxLines="1"
                 a:textSize="@dimen/c" />
 
@@ -74,7 +77,8 @@
                 a:layout_width="0dp"
                 a:layout_height="wrap_content"
                 a:layout_weight=".5"
-                a:ellipsize="end"
+                a:gravity="end"
+                a:ellipsize="end" a:text="20 Dec 2021"
                 a:maxLines="1"
                 a:textSize="@dimen/c" />
 

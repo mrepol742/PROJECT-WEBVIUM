@@ -35,7 +35,7 @@ import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadAdapter;
-import com.mrepol742.webvium.download.DownloadArrayDataModel;
+import com.mrepol742.webvium.download.DownloadDataModel;
 import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.widget.AwesomeToast;
@@ -46,7 +46,7 @@ import java.util.ArrayList;
 public class DOWN extends BaseActivity {
 
     private ListView a3;
-    private ArrayList<DownloadArrayDataModel> downloadArrayDataModel;
+    private ArrayList<DownloadDataModel> al;
     private RelativeLayout f2;
     private ImageView iv;
     private DownloadHelper d10;
@@ -58,6 +58,8 @@ public class DOWN extends BaseActivity {
         a225(R.layout.c3);
         Toolbar a1 = findViewById(R.id.b7);
         TextView a2 = findViewById(R.id.b8);
+        iv = findViewById(R.id.l7);
+        ImageView iv1 = findViewById(R.id.f3);
         setActionBar(a1);
 
         d10 = DownloadHelper.getInstance(getApplicationContext());
@@ -106,34 +108,20 @@ public class DOWN extends BaseActivity {
                 "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    f2.setVisibility(View.VISIBLE);
-                    a3.setVisibility(View.GONE);
-                }
-            });
+            f2.setVisibility(View.VISIBLE);
+            a3.setVisibility(View.GONE);
         } else {
-            downloadArrayDataModel = new ArrayList<>();
+            al = new ArrayList<>();
             while (res.moveToNext()) {
-                downloadArrayDataModel.add(new DownloadArrayDataModel(res.getString(1),
+                al.add(new DownloadDataModel(res.getString(1),
                         res.getString(2),
-                        res.getInt(3),
-                        res.getString(4),
-                        res.getString(5)));
+                        res.getString(3),
+                        res.getLong(4)));
             }
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    iv.setVisibility(View.VISIBLE);
-                    Animation.animate(DOWN.this, R.anim.i, iv);
-                }
-            });
+            iv.setVisibility(View.VISIBLE);
+            Animation.animate(DOWN.this, R.anim.i, iv);
         }
         res.close();
-        iv = findViewById(R.id.l7);
         iv.setBackgroundResource(R.drawable.c6);
         iv.setImageResource(R.drawable.a23);
         iv.setOnClickListener(new View.OnClickListener() {
@@ -144,20 +132,17 @@ public class DOWN extends BaseActivity {
             }
         });
         iv.setVisibility(View.VISIBLE);
-        ImageView iv1 = findViewById(R.id.f3);
         iv1.setBackgroundResource(R.drawable.c6);
         iv1.setImageResource(R.drawable.c16);
         //  iv1.setOnClickListener(view -> c("",""));
-        if (downloadArrayDataModel != null) {
-            DownloadAdapter w12 = new DownloadAdapter(this, downloadArrayDataModel);
+        if (al != null) {
+            DownloadAdapter w12 = new DownloadAdapter(this, al);
             a3.setAdapter(w12);
         }
     }
 
     private void i() {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(getString(R.string.f));
         a.setMessage(getString(R.string.v24));
@@ -185,7 +170,6 @@ public class DOWN extends BaseActivity {
 
     private void f(String a) {
         AwesomeToast.b(this, a);
-
     }
 
 }

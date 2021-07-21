@@ -41,11 +41,9 @@ public class DownloadDatabase extends SQLiteOpenHelper {
                 Sqlite.COL2_DOWNLOAD +
                 " TEXT, " +
                 Sqlite.COL3_DOWNLOAD +
-                " INTEGER, " +
-                Sqlite.COL4_DOWNLOAD +
                 " TEXT, " +
-                Sqlite.COL5_DOWNLOAD +
-                " TEXT ) ");
+                Sqlite.COL4_DOWNLOAD +
+                " INTEGER)");
     }
 
     @Override

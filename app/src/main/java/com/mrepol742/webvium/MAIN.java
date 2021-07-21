@@ -3678,6 +3678,24 @@ if (receivedErrorDataModel.bn) {
                 if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("wthj", false)) {
                     a.evaluateJavascript(js, null);
                 }
+                if (!pageF) {
+                    String js1 = "let sc = document.createElement('script');" +
+                            "sc.innerHTML = `" +
+                            "function myfun(e) {" +
+                            "    mangaid = e.target;" +
+                            "    var getit = prompt('V2ViVml1bUpT', e.target.outerHTML);" +
+                            "    if (getit != null) {" +
+                            "        e.target.outerHTML = getit;" +
+                            "    }" +
+                            "    e.stopPropagation();" +
+                            "    e.preventDefault();" +
+                            "}`;" +
+                            "document.body.appendChild(sc);";
+                    a.evaluateJavascript(js1, null);
+                    pageF = true;
+                    return;
+                }
+                pageF = false;
             }
             if (a221().getBoolean("maUU", BuildConfig.DEBUG) && a221().getBoolean("tow2", false)) {
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -3692,24 +3710,6 @@ if (receivedErrorDataModel.bn) {
             }
             c54(b);
             c52();
-            if (!pageF) {
-                String js = "let sc = document.createElement('script');" +
-                    "sc.innerHTML = `" +
-                    "function myfun(e) {" +
-                    "    mangaid = e.target;" +
-                    "    var getit = prompt('V2ViVml1bUpT', e.target.outerHTML);" +
-                    "    if (getit != null) {" +
-                    "        e.target.outerHTML = getit;" +
-                    "    }" +
-                    "    e.stopPropagation();" +
-                    "    e.preventDefault();" +
-                    "}`;" +
-                    "document.body.appendChild(sc);";
-                a.evaluateJavascript(js, null);
-                pageF = true;
-                return;
-            }
-            pageF = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -5625,7 +5625,7 @@ if (receivedErrorDataModel.bn) {
     public void c181(Object msg, final JsPromptResult result) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
-        View c = b.inflate(R.layout.s01, null);
+        View c = b.inflate(R.layout.s, null);
         a.setTitle(getString(R.string.s31));
         a.setCancelable(true);
         a.setView(c);
@@ -6094,6 +6094,7 @@ if (receivedErrorDataModel.bn) {
                 }
                 return true;*/
             case 31:
+                if (currentSettings().getJavaScriptEnabled()) {
                 if (a.isChecked()) {
                     a.setChecked(false);
                     inE = false;
@@ -6102,6 +6103,10 @@ if (receivedErrorDataModel.bn) {
                     a.setChecked(true);
                     inE = true;
                     currentTab().evaluateJavascript("javascript:document.addEventListener('click', myfun, true);", null);
+                }
+                } else {
+                    a.setChecked(false);
+                    c7(getString(R.string.u13));
                 }
                 return true;
             case 32:
@@ -6116,6 +6121,7 @@ if (receivedErrorDataModel.bn) {
                         currentTab().evaluateJavascript("javascript:document.designMode=\"on\";", null);
                     }
                 } else {
+                    a.setChecked(false);
                     c7(getString(R.string.u13));
                 }
                 return true;
@@ -6502,7 +6508,8 @@ if (receivedErrorDataModel.bn) {
                             cdt.purge();
                         }
                     }, 10000);
-            } else if (b != 100 && g.getVisibility() != View.VISIBLE) {
+            }
+            if (b != 100 && g.getVisibility() != View.VISIBLE) {
                 g.setVisibility(View.VISIBLE);
                 Animation.animate(MAIN.this, R.anim.c, g);
                 tv3.setImageResource(R.drawable.a14);
@@ -6551,11 +6558,10 @@ if (receivedErrorDataModel.bn) {
 
         @Override
         public boolean onJsPrompt(WebView a, String b, String c, String d, final JsPromptResult e) {
-            if (a221().getBoolean("Java9", true)) {
-                if (c.equals("V2ViVml1bUpT")) {
-                    c181(d, e);
-                    return true;
-                } else {
+            if (c.equals("V2ViVml1bUpT")) {
+                c181(d, e);
+                return true;
+            } else if (a221().getBoolean("Java9", true)) {
                     AlertDialog.Builder a89 = new AlertDialog.Builder(MAIN.this);
                     LayoutInflater b54 = getLayoutInflater();
                     View c34 = b54.inflate(R.layout.x, null);
@@ -6615,7 +6621,6 @@ if (receivedErrorDataModel.bn) {
                         });
                     g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                     return true;
-                }
             }
             return false;
         }

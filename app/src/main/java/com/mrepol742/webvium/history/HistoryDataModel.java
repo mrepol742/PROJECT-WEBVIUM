@@ -17,21 +17,15 @@
 
 package com.mrepol742.webvium.history;
 
-import com.mrepol742.webvium.annotation.Keep;
-
 public class HistoryDataModel {
-    public String ls;
-    public String ls0;
-    public long ls2;
+    public final String ls;
+    public final String ls0;
+    public final long ls2;
 
     public HistoryDataModel(String ls, String ls0, long ls2) {
         this.ls = ls;
         this.ls0 = ls0;
         this.ls2 = ls2;
-    }
-
-    @Keep
-    private HistoryDataModel() {
     }
 
 }

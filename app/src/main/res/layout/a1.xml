@@ -27,7 +27,6 @@
         a:id="@id/o30"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
-        a:layout_centerHorizontal="true"
         a:layout_marginTop="10dp"
         a:textSize="@dimen/h" />
 
