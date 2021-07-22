@@ -167,6 +167,7 @@ import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.view.SoftKeyboard;
 import com.mrepol742.webvium.widget.AwesomeToast;
 import com.mrepol742.webvium.widget.W11;
+import com.mrepol742.webvium.download.DownloadHelper;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -1683,7 +1684,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
     private void c11(final PendingDownloadDataModel w18) {
         try {
-            String b = URLUtil.guessFileName(w18.a1, w18.a2, w18.a3);
+            final String b = URLUtil.guessFileName(w18.a1, w18.a2, w18.a3);
             AlertDialog.Builder c = new AlertDialog.Builder(this);
             LayoutInflater d = getLayoutInflater();
             View e = d.inflate(R.layout.j, null);
@@ -1797,8 +1798,8 @@ public class MAIN extends MainBaseActivity implements Format {
                         if (MAIN.this.a221().getBoolean("launch", false)) {
                             Intents.a(MAIN.this, DOWN.class);
                         }
-                        // DownloadHelper downloadHelper = DownloadHelper.getInstance(getApplicationContext());
-                        // downloadHelper.c(new DownloadNewDataModel("", "", "", ""));
+                        DownloadHelper dh = DownloadHelper.getInstance(getApplicationContext());
+                        dh.c(b, w18.a1, Long.toString(w18.a4));
                         SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
                         Intent it = new Intent(MAIN.this, DOWN0.class);
                         it.putExtra("a", c1);
@@ -6116,51 +6117,21 @@ if (receivedErrorDataModel.bn) {
                     c20(true);
                 }
                 return true;
-            /*case 31:
+            case 31:
                 // if you read this message,
                 // means you can read
                 if (currentSettings().getJavaScriptEnabled()) {
-                    WebViews cur = currentTab();
-                    if (a.isChecked()) {
-                        a.setChecked(false);
-                        inE = false;
-                        cur.removeJavascriptInterface(Package.c() + "InspectElements");
-                        cur.reload();
-                    } else {
-                        a.setChecked(true);
-                        inE = true;
-                        cur.addJavascriptInterface(new Object() {
-
-                            @JavascriptInterface
-                            public void showCode(String code) {
-                                c181(code);
-                                c7("Called from menu");
-                            }
-                        }, Package.c() + "InspectElements");
-                        String js = "childNodesOfBody = document.body.childNodes;\n" +
-                                "childNodesOfBody.forEach((children) => {\n" +
-                                "children.addEventListener('click', () => {\n" +
-                                "    WebviumInspectElements.showCode(children.innerHTML);\n" +
-                                "    e.id = e.id || 'cGV3cGV3LGltc2Ft';\n" +
-                                "});\n" +
-                                "});";
-                        cur.evaluateJavascript(js, null);
+                    if (!dsM) {
+                        if (a.isChecked()) {
+                            a.setChecked(false);
+                            inE = false;
+                            currentTab().evaluateJavascript("javascript:document.removeEventListener('click', myfun, true);", null);
+                        } else {
+                            a.setChecked(true);
+                            inE = true;
+                            currentTab().evaluateJavascript("javascript:document.addEventListener('click', myfun, true);", null);
+                        }
                     }
-                } else {
-                    c7(getString(R.string.u13));
-                }
-                return true;*/
-            case 31:
-                if (currentSettings().getJavaScriptEnabled()) {
-                if (a.isChecked()) {
-                    a.setChecked(false);
-                    inE = false;
-                    currentTab().evaluateJavascript("javascript:document.removeEventListener('click', myfun, true);", null);
-                } else {
-                    a.setChecked(true);
-                    inE = true;
-                    currentTab().evaluateJavascript("javascript:document.addEventListener('click', myfun, true);", null);
-                }
                 } else {
                     a.setChecked(false);
                     c7(getString(R.string.u13));
@@ -6168,14 +6139,16 @@ if (receivedErrorDataModel.bn) {
                 return true;
             case 32:
                 if (currentSettings().getJavaScriptEnabled()) {
-                    if (dsM) {
-                        a.setChecked(false);
-                        dsM = false;
-                        currentTab().evaluateJavascript("javascript:document.designMode=\"off\";", null);
-                    } else {
-                        a.setChecked(true);
-                        dsM = true;
-                        currentTab().evaluateJavascript("javascript:document.designMode=\"on\";", null);
+                    if (!inE) {
+                        if (dsM) {
+                            a.setChecked(false);
+                            dsM = false;
+                            currentTab().evaluateJavascript("javascript:document.designMode=\"off\";", null);
+                        } else {
+                            a.setChecked(true);
+                            dsM = true;
+                            currentTab().evaluateJavascript("javascript:document.designMode=\"on\";", null);
+                        }
                     }
                 } else {
                     a.setChecked(false);

@@ -97,7 +97,7 @@
         a:theme="@style/f"
         a:usesCleartextTraffic="true"
         tools:targetApi="30">
-
+        
         <!-- DOWNLOADS -->
         <activity
             a:name="com.mrepol742.webvium.DOWN"
@@ -913,8 +913,7 @@
             a:name="com.mrepol742.webvium.BACK"
             a:label="@string/n22"
             tools:ignore="ExportedService" />
-
-
+        
     </application>
 
 </manifest>
