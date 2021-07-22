@@ -22,17 +22,10 @@ package com.mrepol742.webvium.download;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.webkit.URLUtil;
 
 import com.mrepol742.webvium.DDMS;
-import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.Sqlite;
+import com.mrepol742.webvium.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class DownloadHelper implements WebviumDatabase {
 

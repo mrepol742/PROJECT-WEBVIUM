@@ -15,11 +15,7 @@
  * limitations under the License.
  */
 
-/*
- * AUTO GENERATED FILE
- */
-
-package com.mrepol742.webvium.app;
+package com.mrepol742.webvium;
 
 public class Sqlite {
     public static final String DATA_DOWNLOAD = "a";

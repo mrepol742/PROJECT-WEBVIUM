@@ -24,6 +24,7 @@ import android.preference.PreferenceManager;
 import android.webkit.JavascriptInterface;
 
 import com.mrepol742.webvium.MAIN;
+import com.mrepol742.webvium.Sqlite;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.history.HistoryHelper;

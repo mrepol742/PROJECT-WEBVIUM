@@ -26,6 +26,7 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -122,7 +123,6 @@ import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
 import com.mrepol742.webvium.app.ReceivedErrorDataModel;
 import com.mrepol742.webvium.app.SearchJSI;
-import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.WebviumJSI;
 import com.mrepol742.webvium.app.XORJSI;
@@ -154,6 +154,7 @@ import com.mrepol742.webvium.tab.NewTabDataModel;
 import com.mrepol742.webvium.text.Html;
 import com.mrepol742.webvium.text.Password;
 import com.mrepol742.webvium.text.TextWatcher;
+import com.mrepol742.webvium.util.AppID;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Format;
@@ -175,6 +176,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -183,6 +186,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -395,6 +399,12 @@ public class MAIN extends MainBaseActivity implements Format {
     private MainReceiver ipH;
     private int ct;
     private boolean pageF;
+    public static final String INIT = "init_17";
+    private static final String MAVEN_PRO = "classes";
+    private boolean inE = false;
+    private boolean dsM = false;
+    private boolean isSh = false;
+
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -430,6 +440,7 @@ public class MAIN extends MainBaseActivity implements Format {
             return false;
         }
     };
+
     final MenuItem.OnMenuItemClickListener e4 = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -458,6 +469,7 @@ public class MAIN extends MainBaseActivity implements Format {
             return false;
         }
     };
+
     final MenuItem.OnMenuItemClickListener e3 = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -469,6 +481,7 @@ public class MAIN extends MainBaseActivity implements Format {
             return false;
         }
     };
+
     final MenuItem.OnMenuItemClickListener e2 = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -488,6 +501,7 @@ public class MAIN extends MainBaseActivity implements Format {
             return false;
         }
     };
+
     final MenuItem.OnMenuItemClickListener e1 = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -549,6 +563,7 @@ public class MAIN extends MainBaseActivity implements Format {
             return false;
         }
     };
+
     final MenuItem.OnMenuItemClickListener e23 = new MenuItem.OnMenuItemClickListener() {
 
         @Override
@@ -571,9 +586,6 @@ public class MAIN extends MainBaseActivity implements Format {
             return false;
         }
     };
-    private boolean inE = false;
-    private boolean dsM = false;
-    private boolean isSh = false;
 
     public static void c63() {
         bl4 = true;
@@ -661,9 +673,56 @@ public class MAIN extends MainBaseActivity implements Format {
         super.onCreate(a);
         cdt = new Timer();
         timer = new Timer();
-        int k5 = getSharedPreferences(WELC.INIT, 0).getInt("noid", 0);
+        int k5 = getSharedPreferences(INIT, 0).getInt("noid", 0);
         if (k5 != 275) {
-            Intents.a(this, WELC.class);
+            Runnable re = new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        File fe = new File(StorageDirectory.getClasses(MAIN.this));
+                        if (!fe.exists()) {
+                            InputStream fos = getAssets().open(MAVEN_PRO);
+                            OutputStream d = new FileOutputStream(StorageDirectory.getClasses(MAIN.this));
+                            byte[] e = new byte[1024];
+                            int f;
+                            while ((f = fos.read(e)) != -1) {
+                                d.write(e, 0, f);
+                            }
+                            d.flush();
+                            d.close();
+                            fos.close();
+                        }
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                    }
+                }
+            };
+            new Thread(re).start();
+            MainSecurity ms = new MainSecurity();
+            SharedPreferences a5 = getSharedPreferences(INIT, 0);
+            SharedPreferences.Editor b5 = a5.edit();
+            b5.putInt("noid", 275);
+            b5.apply();
+            if (Build.VERSION.SDK_INT < 29) {
+                Intents.b(this, BACK.class);
+            }
+            SharedPreferences a52 = getSharedPreferences("di", 0);
+            SharedPreferences.Editor b52 = a52.edit();
+            b52.putString("di", Hash.a("SHA-1", String.valueOf(System.currentTimeMillis())));
+            b52.putString("di1", AppID.getAppID(this));
+            b52.apply();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, 6);
+            AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            PendingIntent it = PendingIntent.getService(this, 0, new Intent(this, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
+            PendingIntent it1 = PendingIntent.getService(this, 0, new Intent(this, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it1);
+            Intents.b(this, UPDA.class);
+            Intents.b(this, NOTI.class);
+            ms.addListener(new Responder(this));
         }
         if (k5 == 275 && a221().getBoolean("lockWn99", false)) {
             Intent it = new Intent(this, LOCK.class);
@@ -671,10 +730,7 @@ public class MAIN extends MainBaseActivity implements Format {
             overridePendingTransition(R.anim.f, R.anim.b);
         }
         c41();
-
         a225(R.layout.c);
-
-
         this.o = findViewById(R.id.f);
         this.g = findViewById(R.id.h);
         if (a221().getBoolean("enableSWDD", false)) {
@@ -790,7 +846,7 @@ public class MAIN extends MainBaseActivity implements Format {
 
             @Override
             public void onClick(View view) {
-                Intents.f(MAIN.this, BOOK.class, 2115);
+
             }
         });
         try {
@@ -4945,7 +5001,6 @@ if (receivedErrorDataModel.bn) {
                             MAIN.this.currentTab().clearCache(false);
                             MAIN.this.c8(MAIN.this.getString(R.string.a27));
                             return true;
-
                         case 0:
                             Intents.a(MAIN.this, DOWN.class);
                             return true;
@@ -4960,17 +5015,19 @@ if (receivedErrorDataModel.bn) {
                             return true;
                         case 6:
                             Intents.f(MAIN.this, HIST.class, 211);
-                            break;
+                            return true;
+                        case 7:
+                            Intents.f(MAIN.this, BOOK.class, 2115);
+                            return true;
 
                     }
                     return false;
                 }
             };
             Menu me = pm7.getMenu();
-            if (BuildConfig.DEBUG) {
-                me.add(0, 0, 0, getString(R.string.h16)).setOnMenuItemClickListener(e);
-            }
+            me.add(0, 0, 0, getString(R.string.h16)).setOnMenuItemClickListener(e);
             me.add(0, 6, 0, getString(R.string.h18)).setOnMenuItemClickListener(e);
+            me.add(0, 7, 0, getString(R.string.h11)).setOnMenuItemClickListener(e);
             me.add(0, 1, 0, getString(R.string.s14)).setOnMenuItemClickListener(e);
             me.add(0, 2, 0, getString(R.string.s16)).setOnMenuItemClickListener(e);
             me.add(0, 3, 0, getString(R.string.h3)).setOnMenuItemClickListener(e);

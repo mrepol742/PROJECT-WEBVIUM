@@ -28,7 +28,7 @@ import android.preference.PreferenceManager;
 import android.webkit.URLUtil;
 
 import com.mrepol742.webvium.HDMS;
-import com.mrepol742.webvium.app.Sqlite;
+import com.mrepol742.webvium.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
 
 public class HistoryHelper implements WebviumDatabase {

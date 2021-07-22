@@ -21,7 +21,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.mrepol742.webvium.app.Sqlite;
+import com.mrepol742.webvium.Sqlite;
 
 public class SearchDatabase extends SQLiteOpenHelper {
 

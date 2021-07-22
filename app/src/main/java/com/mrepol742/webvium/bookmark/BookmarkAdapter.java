@@ -53,8 +53,10 @@ public class BookmarkAdapter extends MainBaseAdapter {
     }
 
     public void a(ArrayList<String> a1) {
-        b.clear();
-        b.addAll(a1);
+        synchronized (b) {
+            b.clear();
+            b.addAll(a1);
+        }
     }
 
     @Override

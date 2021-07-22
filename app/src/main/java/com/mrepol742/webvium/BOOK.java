@@ -42,7 +42,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkAdapter;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
@@ -84,6 +83,7 @@ public class BOOK extends BaseActivity {
     private ImageView iv1;
     private PopupMenu pm;
     private int it;
+
     final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
         @Override

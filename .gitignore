@@ -40,8 +40,7 @@ assets/
 # Webvium
 app/src/main/c-playstore.png
 app/src/release/
-app/src/debug/
-.mrepol742/
+.etc
 /app/primaryDictionary.txt
 /app/secondaryDictionary.txt
 

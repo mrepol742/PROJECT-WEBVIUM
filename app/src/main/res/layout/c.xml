@@ -39,7 +39,7 @@
             a:layout_width="match_parent"
             a:layout_height="match_parent"
             a:layout_gravity="center_vertical"
-            a:gravity="center"
+            a:gravity="center" a:layout_margin="5dp"
             a:padding="10dp">
 
             <ImageView
@@ -182,12 +182,12 @@
             a:layout_weight="0.5"
             a:contentDescription="@string/z58" />
 
-        <ImageView
+        <ImageView a:visibility="gone"
             a:id="@id/m8"
             a:layout_width="0dp"
             a:layout_height="wrap_content"
             a:layout_weight="0.5"
-            a:contentDescription="@string/h11" />
+            a:contentDescription="@string/h10" />
 
     </LinearLayout>
 

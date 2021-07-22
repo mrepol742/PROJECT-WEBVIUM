@@ -42,7 +42,6 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.NoSuchItemToGet;
-import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
