@@ -731,6 +731,8 @@
     <string name="s30">Application Storage</string>
 	<string name="s31">Inspect Elements</string>
     <string name="s32">Design Mode</string>
+    <string name="s33">Can not use Design Mode when Inspect Elements is on.</string>
+    <string name="s34">Can not use Inspect Elements when Design Mode is on.</string>
     <string name="t21">Backup</string>
     <string name="t22">Log appear here</string>
     <string name="t23">Refreshing…</string>

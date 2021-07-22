@@ -6131,6 +6131,8 @@ if (receivedErrorDataModel.bn) {
                             inE = true;
                             currentTab().evaluateJavascript("javascript:document.addEventListener('click', myfun, true);", null);
                         }
+                    } else {
+                        c7(getString(R.string.s34));
                     }
                 } else {
                     a.setChecked(false);
@@ -6149,6 +6151,8 @@ if (receivedErrorDataModel.bn) {
                             dsM = true;
                             currentTab().evaluateJavascript("javascript:document.designMode=\"on\";", null);
                         }
+                    } else {
+                        c7(getString(R.string.s33));
                     }
                 } else {
                     a.setChecked(false);
