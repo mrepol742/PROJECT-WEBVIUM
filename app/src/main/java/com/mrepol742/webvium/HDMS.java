@@ -31,9 +31,4 @@ public class HDMS implements Serializable {
         this.ls0 = ls0;
         this.ls2 = ls2;
     }
-
-    @Keep
-    private HDMS() {
-    }
-
 }

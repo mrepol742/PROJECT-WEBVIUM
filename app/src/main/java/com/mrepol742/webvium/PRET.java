@@ -31,8 +31,6 @@ import android.webkit.ValueCallback;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.app.NoSuchObjectToReturn;
-import com.mrepol742.webvium.app.NoSuchStringToReturn;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.content.Resources;
@@ -90,11 +88,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             TextView tv4 = findViewById(i);
             tv4.setTextColor(g);
             tv4.setTypeface(type(Typeface.BOLD));
-            try {
-                tv4.setText(n(i));
-            } catch (NoSuchObjectToReturn l1) {
-                l1.printStackTrace();
-            }
+            tv4.setText(n(i));
             if (i == R.id.n2) {
                 tv4.setBackgroundResource(R.drawable.a27);
             } else if (i == R.id.n3) {
@@ -127,22 +121,17 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
 
     private void a(String sg) {
         AwesomeToast.a(this, sg);
-
         w4.evaluateJavascript("(function() { return eval(" + sg + "); })();", new ValueCallback<String>() {
 
             @Override
             public void onReceiveValue(String s) {
-                try {
-                    PRET.this.b(s);
-                    tv.setText("s");
-                } catch (NoSuchStringToReturn l2) {
-                    l2.printStackTrace();
-                }
+                PRET.this.b(s);
+                tv.setText("s");
             }
         });
     }
 
-    public void b(String url) throws NoSuchStringToReturn {
+    public void b(String url) {
         if (a221().getBoolean("ptm", false)) {
             SharedPreferences b = getSharedPreferences("a", 0);
             String c = b.getString("gsJsGsKSIgPes", "");
@@ -156,7 +145,7 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
         }
     }
 
-    private String n(int i) throws NoSuchObjectToReturn {
+    private String n(int i) {
         if (i == R.id.n2) {
             return getString(R.string.r23);
         } else if (i == R.id.n3) {
@@ -191,10 +180,8 @@ public class PRET extends MainBaseActivity implements View.OnClickListener, View
             return getString(R.string.m20);
         } else if (i == R.id.n18) {
             return getString(R.string.r30);
-        } else if (i == R.id.n19) {
-            return getString(R.string.r28);
         }
-        throw new NoSuchObjectToReturn();
+        return getString(R.string.r28);
     }
 
     private String o(String sg) {

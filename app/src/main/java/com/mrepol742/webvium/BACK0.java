@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,6 @@ import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.widget.AwesomeToast;
@@ -413,6 +413,11 @@ public class BACK0 extends BaseActivity {
         public O5(long a, long b, AlertDialog gj) {
             super(a, b);
             a5 = gj;
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
         }
 
         @Override

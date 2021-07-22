@@ -23,7 +23,6 @@
     package="com.mrepol742.webvium"
     a:installLocation="auto">
 
-    <queries />
     <supports-screens
         a:anyDensity="true"
         a:largeScreens="true"
@@ -37,13 +36,10 @@
     <uses-permission a:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission a:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission a:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission a:name="android.permission.BLUETOOTH" />
     <uses-permission a:name="android.permission.CAMERA" />
-    <uses-permission a:name="android.permission.CALL_PHONE" />
     <uses-permission a:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission a:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission a:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission a:name="android.permission.FLASHLIGHT" />
     <uses-permission a:name="android.permission.INTERNET" />
     <uses-permission a:name="android.permission.MICROPHONE" />
     <uses-permission a:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -58,8 +54,6 @@
         a:name="android.permission.WRITE_EXTERNAL_STORAGE"
         a:maxSdkVersion="28" />
     <uses-permission a:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <uses-permission a:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
-    <uses-permission a:name="android.permission.WAKE_LOCK" />
 
     <uses-feature
         a:name="android.hardware.camera"
@@ -763,15 +757,6 @@
                     a:scheme="https" />
             </intent-filter>
         </activity>
-        <!-- LOGCAT -->
-        <activity
-            a:name="com.mrepol742.webvium.LOGC"
-            a:configChanges="keyboardHidden|orientation|screenSize"
-            a:launchMode="singleTask"
-            a:process=":lot"
-            a:taskAffinity="com.mrepol742.webvium.task.LOT"
-            a:windowSoftInputMode="stateHidden" />
-
         <!-- VOICE SPEECH RECOGNITION -->
         <activity
             a:name="com.mrepol742.webvium.VOIC"

@@ -72,16 +72,6 @@ public class Stream {
         return problem;
     }
 
-    public static String c(String url, String problem) {
-        try {
-            InetAddress c = InetAddress.getByName(Uri.parse(url).getHost());
-            return c.getHostAddress();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return problem;
-    }
-
     // BitmapCache.d(url, getString(R.string.c33), getString(R.string.h35), getString(R.string.h36));
     public static String d(String url5, String problem) {
         try {
@@ -102,14 +92,6 @@ public class Stream {
             ex.printStackTrace();
         }
         return problem;
-    }
-
-    public static void e(String a) {
-        try {
-            new URL(a).openConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     public static String f(String url, String problem) {
@@ -148,32 +130,6 @@ public class Stream {
             ex.printStackTrace();
         }
         return problem;
-    }
-
-    public static int g(String url) {
-        try {
-            URL u = new URL(url);
-            URLConnection is = u.openConnection();
-            InputStream inputStream = is.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader c = new BufferedReader(inputStreamReader);
-            String tf5;
-            StringBuilder sb = new StringBuilder();
-            while ((tf5 = c.readLine()) != null) {
-                sb.append(tf5.trim());
-            }
-            c.close();
-            inputStreamReader.close();
-            inputStream.close();
-            try {
-                return Integer.parseInt(sb.toString());
-            } catch (NumberFormatException nfe) {
-                nfe.printStackTrace();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return 0;
     }
 
     public static String h(String problem) {

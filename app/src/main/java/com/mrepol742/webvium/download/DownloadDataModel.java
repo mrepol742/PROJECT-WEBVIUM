@@ -17,8 +17,6 @@
 
 package com.mrepol742.webvium.download;
 
-import com.mrepol742.webvium.annotation.Keep;
-
 public class DownloadDataModel {
     public final String a;
     public final String b;

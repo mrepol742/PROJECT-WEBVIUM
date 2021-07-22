@@ -19,17 +19,18 @@ package com.mrepol742.webvium;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
@@ -44,7 +45,7 @@ import java.net.URL;
 import java.util.Objects;
 
 // @Class SaveLinkService
-public class SAVE extends MainService {
+public class SAVE extends Service {
 
     @Override
     public int onStartCommand(final Intent b34, int c5, int fl) {
@@ -80,7 +81,7 @@ public class SAVE extends MainService {
             };
             new Thread(runnable).start();
         }
-        s1();
+        stopSelf();
         return super.onStartCommand(b34, c5, fl);
     }
 
@@ -88,7 +89,12 @@ public class SAVE extends MainService {
     public void onDestroy() {
         super.onDestroy();
         MainNotification.a(this, Notifications.f);
-        s2();
+        stopForeground(true);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
 

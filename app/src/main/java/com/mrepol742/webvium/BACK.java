@@ -19,17 +19,18 @@ package com.mrepol742.webvium;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.Files;
@@ -42,12 +43,12 @@ import java.io.OutputStream;
 import java.util.Objects;
 
 // @Class BackupService
-public class BACK extends MainService {
+public class BACK extends Service {
 
     @Override
     public int onStartCommand(Intent a, int flag, int c) {
         if (Build.VERSION.SDK_INT >= 29) {
-            s1();
+            stopSelf();
         }
         Runnable runnable = new Runnable() {
 
@@ -56,7 +57,7 @@ public class BACK extends MainService {
                 try {
                     String sg1 = BACK.this.dt();
                     if (new java.io.File(sg1).exists()) {
-                        BACK.this.s1();
+                        stopSelf();
                     }
                     try {
                         int t = 10;
@@ -91,8 +92,13 @@ public class BACK extends MainService {
             }
         };
         new Thread(runnable).start();
-        s1();
+        stopSelf();
         return super.onStartCommand(a, flag, c);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     private void d1(String loc) {

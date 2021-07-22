@@ -24,6 +24,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -37,7 +38,7 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.text.TextWatcher;
+import android.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.view.Animation;
 import com.mrepol742.webvium.view.SoftKeyboard;
@@ -93,18 +94,23 @@ public class ASSI extends BaseActivity {
         });
         p.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 e();
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
-
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(false);
-            // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
         p.setOnEditorActionListener(new TextView.OnEditorActionListener() {

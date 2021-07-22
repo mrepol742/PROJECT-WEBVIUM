@@ -20,7 +20,6 @@ package com.mrepol742.webvium.security;
 import android.os.Build;
 
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.app.NoSuchStringToReturn;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,6 +43,7 @@ public class Hash {
     }
 
     public static String a(HashDataModel w1) {
+        StringBuilder sb = new StringBuilder();
         try {
             MessageDigest md = getInstance(w1.sg);
             md.update(w1.e);
@@ -58,14 +58,12 @@ public class Hash {
             } else if (w1.i == 0) {
                 bytes = md.digest(w1.sg1.getBytes());
             }
-            StringBuilder sb = new StringBuilder();
             for (byte be2 : bytes) {
                 sb.append(Integer.toString((be2 & 0xff) + 0x100, 16).substring(1));
             }
-            return sb.toString();
         } catch (NoSuchAlgorithmException ne) {
             ne.printStackTrace();
         }
-        throw new NoSuchStringToReturn();
+        return sb.toString();
     }
 }

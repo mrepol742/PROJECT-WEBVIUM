@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium;
+package com.mrepol742.webvium.app;
 
 public class Sqlite {
     public static final String DATA_DOWNLOAD = "a";
@@ -25,8 +25,6 @@ public class Sqlite {
     public static final String COL2_DOWNLOAD = "c";
     public static final String COL3_DOWNLOAD = "d";
     public static final String COL4_DOWNLOAD = "e";
-    public static final String COL5_DOWNLOAD = "f";
-
 
     public static final String DATA_HISTORY = "b";
     public static final int VERSION_HISTORY = 1;
@@ -34,7 +32,6 @@ public class Sqlite {
     public static final String COL1_HISTORY = "b";
     public static final String COL2_HISTORY = "c";
     public static final String COL3_HISTORY = "d";
-
 
     public static final String DATA_PERMISSION = "c";
     public static final int VERSION_PERMISSION = 1;
@@ -44,18 +41,14 @@ public class Sqlite {
     public static final String COL3_PERMISSION = "d";
     public static final String COL4_PERMISSION = "e";
 
-
     public static final String DATA_SEARCH = "d";
     public static final int VERSION_SEARCH = 1;
     public static final String TABLE_SEARCH = "a";
     public static final String COL1_SEARCH = "b";
-
 
     public static final String DATA_BOOKMARK = "e";
     public static final int VERSION_BOOKMARK = 1;
     public static final String TABLE_BOOKMARK = "a";
     public static final String COL1_BOOKMARK = "b";
     public static final String COL2_BOOKMARK = "c";
-
-
 }

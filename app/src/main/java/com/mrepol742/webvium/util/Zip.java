@@ -18,7 +18,6 @@
 package com.mrepol742.webvium.util;
 
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.app.UnsupportedActions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,12 +52,12 @@ public class Zip {
         return false;
     }
 
-    private static byte[] getBytes(File file) throws UnsupportedActions, IOException {
+    private static byte[] getBytes(File file) throws IOException {
         try (RandomAccessFile f = new RandomAccessFile(file, "r")) {
             long longLength = f.length();
             int length = (int) longLength;
             if (length != longLength)
-                throw new UnsupportedActions();
+                throw new IOException();
             byte[] data = new byte[length];
             f.readFully(data);
             return data;

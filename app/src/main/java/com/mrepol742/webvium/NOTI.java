@@ -20,17 +20,18 @@ package com.mrepol742.webvium;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.security.Hash;
@@ -40,8 +41,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 // @Class NotificationService
-public class NOTI extends MainService {
-
+public class NOTI extends Service {
     private SharedPreferences sp;
 
     @Override
@@ -84,8 +84,13 @@ public class NOTI extends MainService {
             };
             new Thread(runnable).start();
         }
-        s1();
+        stopSelf();
         return super.onStartCommand(a, c, d);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     private void f(String title, String text, String url) {

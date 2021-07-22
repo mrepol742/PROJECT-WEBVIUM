@@ -19,15 +19,18 @@ package com.mrepol742.webvium.setting;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -47,15 +50,12 @@ import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.SDMS;
 import com.mrepol742.webvium.SWIT;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
-import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.io.Files;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.text.Html;
@@ -70,7 +70,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DatabaseFragment extends BasePreferenceFragment implements Format {
-    private final IntentsFilter is = new IntentsFilter();
+    private final IntentFilter is = new IntentFilter();
     private R7 r7;
 
     @Override
@@ -86,7 +86,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         super.onCreate(b1);
         try {
             if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-                is.act(Intent.ACTION_SCREEN_ON);
+                is.addAction(Intent.ACTION_SCREEN_ON);
                 r7 = new R7();
                 getActivity().registerReceiver(r7, is);
             }
@@ -597,11 +597,10 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         }
     }
 
-    private class R7 extends MainReceiver {
+    private class R7 extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context a, Intent b) {
-            super.onReceive(a, b);
             String sg = b.getAction();
             if (sg.equals(Intent.ACTION_SCREEN_ON)) {
                 if (a221().getBoolean("lockWn99", false)) {
@@ -622,6 +621,11 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         }
 
         @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+        @Override
         public void onFinish() {
             a5.dismiss();
             a5 = null;
@@ -633,6 +637,4 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             startActivity(it);
         }
     }
-
-
 }

@@ -25,7 +25,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.Sqlite;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
 import com.mrepol742.webvium.util.Inapproriate;
 

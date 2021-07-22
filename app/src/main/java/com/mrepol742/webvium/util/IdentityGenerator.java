@@ -627,5 +627,4 @@ public class IdentityGenerator {
         return getHeight() / 2 + 13;
     }
 
-
 }

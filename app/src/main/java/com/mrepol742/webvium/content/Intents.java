@@ -56,23 +56,6 @@ public class Intents {
         }
     }
 
-    public static boolean c(Context a, String b) {
-        try {
-            Intent c = a.getPackageManager().getLaunchIntentForPackage(b);
-            if (c == null) {
-                return false;
-            }
-            c.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (check(a, c)) {
-                a.startActivity(c);
-                return true;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
-
     public static void d(String b, String c, Activity e) {
         try {
             Intent d = new Intent();
@@ -116,21 +99,6 @@ public class Intents {
         }
     }
 
-    public static boolean g(Context a, String b, String c) {
-        try {
-            Intent d = new Intent(Intent.ACTION_MAIN);
-            d.setClassName(b, c);
-            d.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (check(a, d)) {
-                a.startActivity(d);
-                return true;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
-
     public static void h(Activity b, Class<?> c, int d, String h, String i) {
         try {
             Intent e = new Intent(b, c);
@@ -149,20 +117,6 @@ public class Intents {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public static boolean j(Context a, String b) {
-        try {
-            Intent c = new Intent(b);
-            c.setPackage(Package.b());
-            if (check(a, c)) {
-                a.startService(c);
-                return true;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
     }
 
     public static void k(Context a, String b) {

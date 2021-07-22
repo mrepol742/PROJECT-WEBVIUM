@@ -20,17 +20,18 @@ package com.mrepol742.webvium;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.net.Connectivity;
@@ -40,8 +41,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 // @Class UpdateService
-public class UPDA extends MainService {
-
+public class UPDA extends Service {
     private SharedPreferences sp;
 
     @Override
@@ -99,7 +99,6 @@ public class UPDA extends MainService {
                                 }
                             }
                             if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("1y")) {
-
                                 m.setVisibility(android.app.Notification.VISIBILITY_PRIVATE);
                             }
                             if (Objects.requireNonNull(sp.getString("vy", "7y")).equals("7y")) {
@@ -113,10 +112,8 @@ public class UPDA extends MainService {
                             j.putExtra("value", "https://mrepol742.github.io/PROJECT-WEBVIUM");
                             PendingIntent k = PendingIntent.getActivity(UPDA.this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
                             m.setContentIntent(k);
-
                             PendingIntent pi23 = PendingIntent.getActivity(UPDA.this, 0, j, PendingIntent.FLAG_UPDATE_CURRENT);
                             m.addAction(new android.app.Notification.Action(R.drawable.c2, UPDA.this.getString(R.string.b32), pi23));
-
                             NotificationManager nmc = (NotificationManager) UPDA.this.getSystemService(Context.NOTIFICATION_SERVICE);
                             nmc.notify(Notifications.c, m.build());
                         }
@@ -127,7 +124,12 @@ public class UPDA extends MainService {
             };
             new Thread(runnable).start();
         }
-        s1();
+        stopSelf();
         return super.onStartCommand(a, c, d);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }

@@ -17,19 +17,19 @@
 
 package com.mrepol742.webvium;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
 // @Class MyPackageReplaced
-public class MYPA extends MainReceiver {
+public class MYPA extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context a, Intent b) {
@@ -37,19 +37,12 @@ public class MYPA extends MainReceiver {
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("bcP", true) && Build.VERSION.SDK_INT < 29) {
                 Intents.b(a, BACK.class);
             }
-            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("maUU", isDebug()) && PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
+            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("maUU", false) && PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
                 Intents.a(a, MAIN.class);
             }
             AwesomeToast.f(a, a.getString(R.string.y61), 2);
             Intents.b(a, UPDA.class);
             Intents.b(a, NOTI.class);
         }
-        super.onReceive(a, b);
     }
-
-    private boolean isDebug() {
-        return BuildConfig.DEBUG;
-    }
-
-
 }

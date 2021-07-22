@@ -95,8 +95,6 @@ public class TOOL extends BaseActivity {
         i.setElevation(5);
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(true);
-            // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
         i.setNavigationIcon(R.drawable.a2);

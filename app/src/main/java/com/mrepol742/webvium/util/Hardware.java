@@ -21,7 +21,6 @@ import android.annotation.SuppressLint;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.PowerManager;
 
 import com.mrepol742.webvium.annotation.Keep;
 
@@ -32,14 +31,6 @@ public class Hardware {
 
     public static boolean isTablet(Context context) {
         return (context.getApplicationContext().getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
-
-    public static String c(Context a1) {
-        boolean a = Hardware.isTablet(a1);
-        if (a) {
-            return E2.Tablet.toString();
-        }
-        return E2.Phone.toString();
     }
 
     @SuppressLint("SwitchIntDef")
@@ -56,20 +47,6 @@ public class Hardware {
                 // UiModeManager.MODE_NIGHT_CUSTOM == 3
             case 3:
                 return E1.Custom;
-        }
-    }
-
-    public static boolean isBatterySaveMode(Context a) {
-        PowerManager pm = (PowerManager) a.getSystemService(Context.POWER_SERVICE);
-        return pm.isPowerSaveMode();
-    }
-
-    enum E2 {
-        Tablet, Phone;
-
-        @Keep
-        E2() {
-
         }
     }
 

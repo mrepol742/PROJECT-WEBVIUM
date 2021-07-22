@@ -49,6 +49,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
@@ -58,7 +59,7 @@ import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.search.SearchAdapter;
 import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.text.TextWatcher;
+import android.text.TextWatcher;
 import com.mrepol742.webvium.util.Base64;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.cache.BitmapCache;
@@ -262,6 +263,11 @@ public class SEAR extends MainBaseActivity {
             p.addTextChangedListener(new TextWatcher() {
 
                 @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     aa.getFilter().filter(charSequence);
                 }
@@ -272,7 +278,6 @@ public class SEAR extends MainBaseActivity {
                 }
 
             });
-
         }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         setActionBar(o);
@@ -282,7 +287,6 @@ public class SEAR extends MainBaseActivity {
         } else {
             d.setVisibility(View.GONE);
         }
-
         int d1 = Resources.getColor(this, R.color.c);
         int e = Resources.getColor(this, R.color.b);
         int f = Resources.getColor(this, R.color.j);
@@ -399,8 +403,7 @@ public class SEAR extends MainBaseActivity {
         });
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(false);
-            // ab.setDisplayShowHomeEnabled(false);
+
             ab.setDisplayShowTitleEnabled(false);
         }
     }
@@ -540,9 +543,6 @@ public class SEAR extends MainBaseActivity {
             startActivity(it);
         } else {
             switch (a) {
-                case "webvium://logcat":
-                    Intents.a(this, LOGC.class);
-                    break;
                 case "webvium://calculator":
                     Intents.a(this, PRET.class);
                     break;
@@ -634,16 +634,9 @@ public class SEAR extends MainBaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -654,6 +647,32 @@ public class SEAR extends MainBaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
@@ -738,16 +757,9 @@ public class SEAR extends MainBaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -757,13 +769,38 @@ public class SEAR extends MainBaseActivity {
                     okButton.setEnabled(false);
                 }
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
     private void t(String a) {
         AwesomeToast.b(this, a);
-
     }
 
     private void u(String a, String b) {
@@ -815,9 +852,19 @@ public class SEAR extends MainBaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                 okButton.setEnabled(U3.a(ed));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
 
         });

@@ -21,7 +21,6 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.app.UnsupportedActions;
 
 import java.io.File;
 
@@ -73,19 +72,11 @@ public class StorageDirectory {
     }
 
     public static File getCacheDir(Context context) {
-        File fe = context.getCacheDir();
-        if (fe.getAbsolutePath().contains("com.mrepol742.webvium")) {
-            return fe;
-        }
-        throw new UnsupportedActions();
+        return context.getCacheDir();
     }
 
     public static File getFileDir(Context context) {
-        File fe = context.getFilesDir();
-        if (fe.getAbsolutePath().contains("com.mrepol742.webvium")) {
-            return fe;
-        }
-        throw new UnsupportedActions();
+        return  context.getFilesDir();
     }
 
     public static class Backup {

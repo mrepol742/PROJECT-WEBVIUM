@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ClipboardManager.OnPrimaryClipChangedListener;
@@ -28,19 +29,19 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Handler;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.webkit.URLUtil;
 
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.util.Domain;
 
 import java.util.Objects;
 
 // @Class ClipboardService
-public class CLIP extends MainService {
+public class CLIP extends Service {
     static boolean c = false;
     ClipboardManager a;
 
@@ -89,6 +90,11 @@ public class CLIP extends MainService {
     public void onDestroy() {
         super.onDestroy();
         f();
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     private void a(String jk) {

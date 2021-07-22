@@ -18,7 +18,7 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
     <com.mrepol742.webvium.SWIT
-        a:defaultValue="@bool/b"
+        a:defaultValue="false"
         a:key="maUU"
         a:title="@string/y93" />
 
@@ -79,14 +79,14 @@
 
     <com.mrepol742.webvium.PREF0 a:title="@string/z46">
         <com.mrepol742.webvium.SWIT
-            a:defaultValue="@bool/a"
+            a:defaultValue="false"
             a:dependency="maUU"
             a:key="stcMM"
             a:summary="@string/z8"
             a:title="@string/z47" />
 
         <com.mrepol742.webvium.SWIT
-            a:defaultValue="@bool/a"
+            a:defaultValue="false"
             a:dependency="maUU"
             a:key="stcMM6"
             a:title="@string/z48" />

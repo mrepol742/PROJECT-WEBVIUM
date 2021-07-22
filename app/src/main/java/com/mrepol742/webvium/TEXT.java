@@ -34,7 +34,6 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.widget.W11;
 
 // @Class TextSize
 public class TEXT extends BaseActivity {
@@ -120,7 +119,7 @@ public class TEXT extends BaseActivity {
             a1.setProgress(a223("dr55"));
         }
         final SharedPreferences a35 = getSharedPreferences("wv", 0);
-        a10a.setOnSeekBarChangeListener(new W11() {
+        a10a.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -130,8 +129,18 @@ public class TEXT extends BaseActivity {
                 b5.putInt("dr", i);
                 b5.apply();
             }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
-        a1.setOnSeekBarChangeListener(new W11() {
+        a1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -140,6 +149,16 @@ public class TEXT extends BaseActivity {
                 SharedPreferences.Editor b5 = a35.edit();
                 b5.putInt("dr55", i);
                 b5.apply();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
 
         });
@@ -154,5 +173,4 @@ public class TEXT extends BaseActivity {
         }
         super.onDestroy();
     }
-
 }

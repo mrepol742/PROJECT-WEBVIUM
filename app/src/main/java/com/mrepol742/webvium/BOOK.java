@@ -26,6 +26,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkAdapter;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
@@ -49,7 +51,7 @@ import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.text.TextWatcher;
+import android.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.util.Stream;
@@ -197,8 +199,6 @@ public class BOOK extends BaseActivity {
         setActionBar(c);
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(true);
-            // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
         int f = Resources.getColor(this, R.color.c);
@@ -354,18 +354,9 @@ public class BOOK extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
             }
-
-
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -376,9 +367,32 @@ public class BOOK extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
+        ed1.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
@@ -449,17 +463,9 @@ public class BOOK extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
-
-
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -470,15 +476,37 @@ public class BOOK extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
     private void d() {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         a.setCancelable(true);
         a.setTitle(getString(R.string.h11));
         a.setMessage(getString(R.string.u4));
@@ -573,10 +601,14 @@ public class BOOK extends BaseActivity {
 
                             @Override
                             public void run() {
-                                w15.a(itemIdsh);
-                                w15.notifyDataSetChanged();
-                                f8.setVisibility(View.GONE);
-                                e.setVisibility(View.VISIBLE);
+                                if (itemIdsh != null) {
+                                    w15.a(itemIdsh);
+                                    w15.notifyDataSetChanged();
+                                    f8.setVisibility(View.GONE);
+                                    e.setVisibility(View.VISIBLE);
+                                } else {
+                                    AwesomeToast.c(BOOK.this, "error null");
+                                }
                             }
                         });
                     }
@@ -680,6 +712,11 @@ public class BOOK extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -696,6 +733,11 @@ public class BOOK extends BaseActivity {
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         g.show();
@@ -771,6 +813,11 @@ public class BOOK extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -787,6 +834,11 @@ public class BOOK extends BaseActivity {
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
 
 
@@ -854,9 +906,7 @@ public class BOOK extends BaseActivity {
         }
         ti.setText(getString(R.string.t3));
         ti1.setText(getString(R.string.t4));
-
         ed.setText(oldTitle);
-
         ed1.setText(oldURl);
         a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
@@ -880,16 +930,9 @@ public class BOOK extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
             }
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -898,6 +941,32 @@ public class BOOK extends BaseActivity {
                 } else {
                     okButton.setEnabled(false);
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
@@ -988,6 +1057,11 @@ public class BOOK extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -1006,10 +1080,12 @@ public class BOOK extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
         final AlertDialog g = a.create();
         g.show();
     }
-
 }

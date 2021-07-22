@@ -22,9 +22,11 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -32,6 +34,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
@@ -45,11 +48,9 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.C10;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadHelper;
@@ -59,7 +60,6 @@ import com.mrepol742.webvium.io.StorageDirectory;
 import com.mrepol742.webvium.manage.space.ManageSpaceAdapter;
 import com.mrepol742.webvium.manage.space.ManageSpaceDataModel;
 import com.mrepol742.webvium.manifest.Permission;
-import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.text.Html;
@@ -109,7 +109,7 @@ public class MANG extends BaseActivity {
     private final ArrayList<String> b = new ArrayList<>();
     private final ArrayList<Integer> c = new ArrayList<>();
     private final ArrayList<String> d = new ArrayList<>();
-    private final IntentsFilter ee = new IntentsFilter();
+    private final IntentFilter ee = new IntentFilter();
     private ManageSpaceAdapter w19;
     private ImageView iv1;
     private R7 r7;
@@ -188,7 +188,7 @@ public class MANG extends BaseActivity {
             }
         });
         if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-            ee.act(Intent.ACTION_SCREEN_ON);
+            ee.addAction(Intent.ACTION_SCREEN_ON);
             r7 = new R7();
             registerReceiver(r7, ee);
         }
@@ -230,10 +230,6 @@ public class MANG extends BaseActivity {
         return f;
     }
 
-    private long e(java.io.File a) {
-        return f(a);
-    }
-
     private long e(String a) {
         return f(new java.io.File(a));
     }
@@ -253,24 +249,6 @@ public class MANG extends BaseActivity {
             }
         }
         return b;
-    }
-
-    private String g(String as) {
-        long h = 0;
-        java.io.File a = new java.io.File(as);
-        if (a.exists()) {
-            h = a.length();
-        }
-        return Long.toString(h);
-    }
-
-    private long h(String as) {
-        long h = 0;
-        java.io.File a = new java.io.File(as);
-        if (a.exists()) {
-            h = a.length();
-        }
-        return h;
     }
 
     private void i(int a) {
@@ -399,10 +377,6 @@ public class MANG extends BaseActivity {
             }
         }
 
-    }
-
-    private void j(String a) {
-        Files.delete(a);
     }
 
     private void k(String a1, String b1) {
@@ -552,10 +526,6 @@ public class MANG extends BaseActivity {
 
     public void r(String a) {
         AwesomeToast.c(this, a);
-    }
-
-    public void s(String a) {
-        AwesomeToast.b(this, a);
     }
 
     @Override
@@ -995,11 +965,10 @@ public class MANG extends BaseActivity {
         return strings1;
     }
 
-    private class R7 extends MainReceiver {
+    private class R7 extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context a, Intent b) {
-            super.onReceive(a, b);
             String sg = b.getAction();
             if (sg.equals(Intent.ACTION_SCREEN_ON)) {
                 if (a221().getBoolean("lockWn99", false)) {
@@ -1029,7 +998,6 @@ public class MANG extends BaseActivity {
             a5.dismiss();
             a5 = null;
             a55();
-
         }
     }
 }

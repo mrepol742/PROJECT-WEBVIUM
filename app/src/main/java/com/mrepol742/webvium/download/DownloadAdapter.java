@@ -31,8 +31,6 @@ import android.widget.TextView;
 
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.app.NoSuchItemToGet;
-import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.util.DateUtil;
@@ -77,37 +75,28 @@ public class DownloadAdapter extends MainBaseAdapter {
         }
     }
 
-    public DownloadDataModel b(int i) throws NoSuchItemToGet {
-        DownloadDataModel sync = (DownloadDataModel) getItem(i);
-        if (sync == null) {
-            throw new NoSuchItemToGet();
-        }
-        return sync;
+    public DownloadDataModel b(int i) {
+        return (DownloadDataModel) getItem(i);
     }
 
-    private SpannableString c(String url) throws NoSuchSpannableStringBuilderToReturn {
-        try {
-            SpannableString ssb = new SpannableString(url);
-            if (url.startsWith("https://")) {
-                ssb.setSpan(this.A, 0, 8, 0);
-            } else if (url.startsWith("http://")) {
-                ssb.setSpan(this.E, 0, 7, 0);
-            } else if (url.startsWith("file://")) {
-                ssb.setSpan(this.S, 0, 7, 0);
-            } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
-                ssb.setSpan(this.S, 0, 10, 0);
+    private SpannableString c(String url) {
+        SpannableString ssb = new SpannableString(url);
+        if (url.startsWith("https://")) {
+            ssb.setSpan(this.A, 0, 8, 0);
+        } else if (url.startsWith("http://")) {
+            ssb.setSpan(this.E, 0, 7, 0);
+        } else if (url.startsWith("file://")) {
+            ssb.setSpan(this.S, 0, 7, 0);
+        } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
+            ssb.setSpan(this.S, 0, 10, 0);
+        } else {
+            if (!this.sp.getBoolean("autoUpdate", false)) {
+                ssb.setSpan(this.I, 0, url.length(), 0);
             } else {
-                if (!this.sp.getBoolean("autoUpdate", false)) {
-                    ssb.setSpan(this.I, 0, url.length(), 0);
-                } else {
-                    ssb.setSpan(this.B, 0, url.length(), 0);
-                }
+                ssb.setSpan(this.B, 0, url.length(), 0);
             }
-            return ssb;
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
-        throw new NoSuchSpannableStringBuilderToReturn();
+        return ssb;
     }
 
     public static int d(String b) {
@@ -184,7 +173,7 @@ public class DownloadAdapter extends MainBaseAdapter {
             Date date = new Date(b(it).d);
             String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
             w20.e.setText(fiDate);
-        } catch (IndexOutOfBoundsException | NoSuchItemToGet ignored) {
+        } catch (IndexOutOfBoundsException ignored) {
 
         }
         return e;

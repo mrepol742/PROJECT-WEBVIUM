@@ -19,18 +19,19 @@ package com.mrepol742.webvium;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.IBinder;
 
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Resources;
 
 // @Class QuickSearch
-public class QUIC extends MainService {
+public class QUIC extends Service {
 
     @Override
     public int onStartCommand(Intent a1, int c555, int c) {
@@ -53,8 +54,13 @@ public class QUIC extends MainService {
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.b));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nmc.notify(Notifications.d, m.build());
-        s1();
+        stopSelf();
         return super.onStartCommand(a1, c555, c);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
 }

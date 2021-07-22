@@ -36,10 +36,6 @@ public class Resources {
         return a.getDrawable(i);
     }
 
-    public static int[] getArray(Context a, int i) {
-        return a.getResources().getIntArray(i);
-    }
-
     @SuppressWarnings("deprecation")
     public static int getColor(Context a, int i) {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -57,15 +53,6 @@ public class Resources {
         drawable.draw(canvas);
         return bitmap;
     }
-
-    public static Boolean getBoolean(Context ct, int i) {
-        return ct.getResources().getBoolean(i);
-    }
-
-    public static int getInteger(Context ct, int i) {
-        return ct.getResources().getInteger(i);
-    }
-
 
     public static Drawable toDrawable(int i, float[] fl, int j) {
         GradientDrawable shape = new GradientDrawable();

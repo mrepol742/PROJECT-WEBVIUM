@@ -31,7 +31,6 @@ public class Permission {
     public static final String STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     public static final String CAMERA = Manifest.permission.CAMERA;
     public static final String MICROPHONE = Manifest.permission.RECORD_AUDIO;
-    public static final String PHONE = Manifest.permission.CALL_PHONE;
 
     @Keep
     private Permission() {

@@ -19,9 +19,11 @@ package com.mrepol742.webvium.setting;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -36,12 +38,10 @@ import com.mrepol742.webvium.MAIN;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.SWIT;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.io.Files;
@@ -63,7 +63,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
             "Mozilla/5.0 (Linux; Android 8.0.0;) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36",
             "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/69.0.3497.100 Mobile Safari/537.36",
     };
-    private final IntentsFilter is = new IntentsFilter();
+    private final IntentFilter is = new IntentFilter();
     private CookieManager cm;
     private WebViewDatabase wd;
     private R7 r7;
@@ -81,7 +81,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
         super.onCreate(b1);
         try {
             if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-                is.act(Intent.ACTION_SCREEN_ON);
+                is.addAction(Intent.ACTION_SCREEN_ON);
                 r7 = new R7();
                 getActivity().registerReceiver(r7, is);
             }
@@ -519,11 +519,10 @@ public class PrivacyFragment extends BasePreferenceFragment {
         a.create().show();
     }
 
-    private class R7 extends MainReceiver {
+    private class R7 extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context a, Intent b) {
-            super.onReceive(a, b);
             String sg = b.getAction();
             if (sg.equals(Intent.ACTION_SCREEN_ON)) {
                 if (a221().getBoolean("lockWn99", false)) {

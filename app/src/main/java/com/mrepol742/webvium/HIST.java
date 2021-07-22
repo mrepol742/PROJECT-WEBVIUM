@@ -25,6 +25,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +42,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.NoSuchItemToGet;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.content.Clipboard;
@@ -51,7 +52,7 @@ import com.mrepol742.webvium.history.HistoryAdapter;
 import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.text.Html;
-import com.mrepol742.webvium.text.TextWatcher;
+import android.text.TextWatcher;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Stream;
 import com.mrepol742.webvium.util.U3;
@@ -83,100 +84,78 @@ public class HIST extends BaseActivity {
     private TextView f4;
     private PopupMenu pm;
     private int b;
+
     final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
         @Override
         public boolean onMenuItemClick(MenuItem a1) {
-            try {
-                String a5 = w15.c(b).ls;
-                String a2 = w15.c(b).ls0;
-                long a4 = w15.c(b).ls2;
-                switch (a1.getItemId()) {
-                    case 1:
-                        HIST.this.b(a2);
-                        return true;
-                    case 2:
-                        Clipboard.a(HIST.this, a2);
-                        HIST.this.f(HIST.this.getString(R.string.k9));
-                        return true;
-                    case 3:
-                        HIST.this.c(a2, a5, a4);
-                        return true;
-                    case 4:
+            String a5 = w15.c(b).ls;
+            String a2 = w15.c(b).ls0;
+            long a4 = w15.c(b).ls2;
+            switch (a1.getItemId()) {
+                case 1:
+                    HIST.this.b(a2);
+                    return true;
+                case 2:
+                    Clipboard.a(HIST.this, a2);
+                    HIST.this.f(HIST.this.getString(R.string.k9));
+                    return true;
+                case 3:
+                    HIST.this.c(a2, a5, a4);
+                    return true;
+                case 4:
+                    HIST.this.h(a5, a2);
+                    return true;
+                case 9:
+                    Clipboard.a(HIST.this, a5);
+                    HIST.this.f(HIST.this.getString(R.string.k9));
+                    return true;
+                case 6:
+                    HIST.this.a(a2, a5);
+                    return true;
+                case 5:
+                    HIST.this.l(a2, 7);
+                    return true;
+                case 13:
+                    HIST.this.c43(a2);
+                    return true;
+                case 15:
+                    HIST.this.l(a2, 0);
+                    return true;
+                case 16:
+                    HIST.this.l(a2, 1);
+                    return true;
+                case 17:
+                    HIST.this.l(a2, 2);
+                    return true;
+                case 18:
+                    HIST.this.l(a2, 3);
+                    return true;
+                case 19:
+                    HIST.this.l(a2, 5);
 
-                        HIST.this.h(a5, a2);
-                        return true;
-                    case 9:
-
-                        Clipboard.a(HIST.this, a5);
-                        HIST.this.f(HIST.this.getString(R.string.k9));
-                        return true;
-                    case 6:
-                        HIST.this.a(a2, a5);
-                        return true;
-
-                    case 5:
-                        HIST.this.l(a2, 7);
-                        return true;
-                    case 13:
-                        HIST.this.c43(a2);
-                        return true;
-                    case 15:
-
-                        HIST.this.l(a2, 0);
-
-                        return true;
-                    case 16:
-
-                        HIST.this.l(a2, 1);
-
-                        return true;
-                    case 17:
-
-                        HIST.this.l(a2, 2);
-
-                        return true;
-                    case 18:
-
-                        HIST.this.l(a2, 3);
-
-                        return true;
-                    case 19:
-
-                        HIST.this.l(a2, 5);
-
-                        return true;
-                    case 20:
-
-                        HIST.this.l(a2, 4);
-
-                        return true;
-                    case 21:
-
-                        HIST.this.l(a2, 6);
-
-                        return true;
-                    case 22:
-
-                        HIST.this.l(a2, 8);
-
-                        return true;
-                    case 23:
-                        HIST.this.b(a5);
-
-                        return true;
-                    case 24:
-                        HIST.this.o(a5, a2, a4);
-                        break;
-                    case 25:
-                        HIST.this.l(a2, ASSETLINKS);
-                        return true;
-                    case 26:
-                        HIST.this.l(a2, SITEMAPS);
-                        return true;
-                }
-            } catch (NoSuchItemToGet l4) {
-                l4.printStackTrace();
+                    return true;
+                case 20:
+                    HIST.this.l(a2, 4);
+                    return true;
+                case 21:
+                    HIST.this.l(a2, 6);
+                    return true;
+                case 22:
+                    HIST.this.l(a2, 8);
+                    return true;
+                case 23:
+                    HIST.this.b(a5);
+                    return true;
+                case 24:
+                    HIST.this.o(a5, a2, a4);
+                    break;
+                case 25:
+                    HIST.this.l(a2, ASSETLINKS);
+                    return true;
+                case 26:
+                    HIST.this.l(a2, SITEMAPS);
+                    return true;
             }
             return false;
         }
@@ -276,11 +255,7 @@ public class HIST extends BaseActivity {
 
                 @Override
                 public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
-                    try {
-                        Intents.d("value", w15.c(c).ls0, HIST.this);
-                    } catch (NoSuchItemToGet a34) {
-                        a34.printStackTrace();
-                    }
+                    Intents.d("value", w15.c(c).ls0, HIST.this);
                     HIST.this.finish();
                 }
             });
@@ -378,17 +353,9 @@ public class HIST extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
-
-
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -399,7 +366,31 @@ public class HIST extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
@@ -502,17 +493,9 @@ public class HIST extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
-
-
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -523,7 +506,31 @@ public class HIST extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
+        });
+        ed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
@@ -708,6 +715,11 @@ public class HIST extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -724,6 +736,11 @@ public class HIST extends BaseActivity {
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         g.show();
@@ -799,6 +816,11 @@ public class HIST extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -817,7 +839,10 @@ public class HIST extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
         final AlertDialog g = a.create();
         g.show();
@@ -909,18 +934,9 @@ public class HIST extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
             }
-
-
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -931,9 +947,32 @@ public class HIST extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
+        ed1.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (U3.a(ed)) {
+                    okButton.setEnabled(U3.a(ed1));
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
@@ -1008,6 +1047,11 @@ public class HIST extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -1026,7 +1070,10 @@ public class HIST extends BaseActivity {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
         final AlertDialog g = a.create();
         g.show();

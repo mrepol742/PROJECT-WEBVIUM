@@ -88,9 +88,4 @@ public class MainNotification {
             ec.printStackTrace();
         }
     }
-
-    public static void d(Context c) {
-
-    }
-
 }

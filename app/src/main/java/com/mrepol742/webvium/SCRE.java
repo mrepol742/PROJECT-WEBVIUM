@@ -73,8 +73,6 @@ public class SCRE extends BaseActivity {
         int e = Resources.getColor(this, R.color.b);
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(true);
-            // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
         if (!a221().getBoolean("autoUpdate", false)) {

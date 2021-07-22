@@ -20,14 +20,18 @@ package com.mrepol742.webvium.setting;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,23 +41,20 @@ import android.widget.Button;
 import com.mrepol742.webvium.EDIT;
 import com.mrepol742.webvium.LOCK;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.SWIT;
-import com.mrepol742.webvium.app.NoSuchStringToReturn;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.C10;
-import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.security.Hash;
-import com.mrepol742.webvium.text.Password;
-import com.mrepol742.webvium.text.TextWatcher;
+
+import android.text.TextWatcher;
 import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
 public class PretendModeFragment extends BasePreferenceFragment {
-    private final IntentsFilter is = new IntentsFilter();
+    private final IntentFilter is = new IntentFilter();
     private SWIT spe;
     private R7 r7;
 
@@ -70,7 +71,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
         super.onCreate(b1);
         try {
             if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-                is.act(Intent.ACTION_SCREEN_ON);
+                is.addAction(Intent.ACTION_SCREEN_ON);
                 r7 = new R7();
                 getActivity().registerReceiver(r7, is);
             }
@@ -168,17 +169,25 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a67.setHint(getActivity().getResources().getString(R.string.j30));
         e15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         a67.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        e15.setTransformationMethod(new Password());
-        a67.setTransformationMethod(new Password());
+        e15.setTransformationMethod(new PasswordTransformationMethod() {
+
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
+        a67.setTransformationMethod(new PasswordTransformationMethod() {
+
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                try {
-                    PretendModeFragment.this.c(a67.getText().toString());
-                } catch (NoSuchStringToReturn l2) {
-                    l2.printStackTrace();
-                }
+                PretendModeFragment.this.c(a67.getText().toString());
                 C10.a(PretendModeFragment.this.getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
                 C10.a(PretendModeFragment.this.getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 2);
                 AwesomeToast.a(PretendModeFragment.this.getActivity(), PretendModeFragment.this.getActivity().getResources().getString(R.string.j31), 0);
@@ -192,7 +201,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
             public void onClick(DialogInterface a, int i) {
                 spe.setChecked(false);
                 a.dismiss();
-
             }
         });
 
@@ -217,21 +225,9 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a67.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (e15.getText().toString().length() >= 4) {
-                    if (a67.getText().toString().length() >= 4) {
-                        okButton.setEnabled(a67.getText().toString().equals(e15.getText().toString()));
-                    } else {
-                        okButton.setEnabled(false);
-                    }
-                } else {
-                    okButton.setEnabled(false);
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
-
-
-        });
-        e15.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -246,23 +242,48 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
+        });
+        e15.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (e15.getText().toString().length() >= 4) {
+                    if (a67.getText().toString().length() >= 4) {
+                        okButton.setEnabled(a67.getText().toString().equals(e15.getText().toString()));
+                    } else {
+                        okButton.setEnabled(false);
+                    }
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    private void c(String a1) throws NoSuchStringToReturn {
+    private void c(String a1) {
         SharedPreferences a = getActivity().getSharedPreferences("a", 0);
-
         SharedPreferences.Editor b5 = a.edit();
         b5.putString("gsJsGsKSIgPes", Hash.a("SHA-512", a1));
         b5.apply();
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void d() {
-
         AlertDialog.Builder a5 = new AlertDialog.Builder(getActivity());
         LayoutInflater a6 = LayoutInflater.from(getActivity());
         View a7 = a6.inflate(R.layout.r, null);
@@ -270,7 +291,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setTitle(getActivity().getResources().getString(R.string.j32));
         a5.setView(a7);
         final EDIT e15 = a7.findViewById(R.id.e14);
-
         e15.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -278,35 +298,29 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
             }
         });
-
         int a15 = Resources.getColor(getActivity(), R.color.c);
         int a16 = Resources.getColor(getActivity(), R.color.b);
-
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
-
             e15.setTextColor(a15);
-
         } else {
-
             e15.setTextColor(a16);
         }
         e15.setHint(getActivity().getResources().getString(R.string.j29));
-
         e15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        e15.setTransformationMethod(new PasswordTransformationMethod() {
 
-        e15.setTransformationMethod(new Password());
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                try {
-                    PretendModeFragment.this.h(e15.getText().toString());
-                } catch (NoSuchStringToReturn l2) {
-                    l2.printStackTrace();
-                }
+                PretendModeFragment.this.h(e15.getText().toString());
                 a.dismiss();
-
             }
         });
         a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -317,10 +331,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 a.dismiss();
             }
         });
-
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         d.show();
         d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
 
@@ -340,14 +352,21 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e15.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 okButton.setEnabled(e15.getText().toString().length() >= 4);
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -358,9 +377,7 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setCancelable(false);
         a5.setTitle(getActivity().getResources().getString(R.string.j33));
         a5.setView(a7);
-
         final EDIT e16 = a7.findViewById(R.id.e16);
-
         e16.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -370,31 +387,26 @@ public class PretendModeFragment extends BasePreferenceFragment {
         });
         int a15 = Resources.getColor(getActivity(), R.color.c);
         int a16 = Resources.getColor(getActivity(), R.color.b);
-
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
-
             e16.setTextColor(a15);
-
         } else {
-
             e16.setTextColor(a16);
         }
         e16.setHint(getActivity().getResources().getString(R.string.j29));
         e16.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        e16.setTransformationMethod(new PasswordTransformationMethod() {
 
-        e16.setTransformationMethod(new Password());
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                try {
-                    PretendModeFragment.this.g(e16.getText().toString());
-                } catch (NoSuchStringToReturn l2) {
-                    l2.printStackTrace();
-                }
-                a.dismiss();
-
+                PretendModeFragment.this.g(e16.getText().toString());
             }
         });
         a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -405,11 +417,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 a.dismiss();
             }
         });
-
         final AlertDialog d = a5.create();
-
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         d.show();
         d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
 
@@ -429,22 +438,28 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e16.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 okButton.setEnabled(e16.getText().toString().length() >= 4);
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-
     }
 
-    private void h(String a1) throws NoSuchStringToReturn {
+    private void h(String a1) {
         SharedPreferences a = getActivity().getSharedPreferences("a", 0);
         String c727 = a.getString("gsJsGsKSIgPes", "");
         if (c727 != null) {
             if (Hash.a("SHA-512", a1).equals(c727)) {
-
                 spe.setChecked(true);
                 C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
                 String[] sg28 = new String[]{"com.DROID_MJ.a21.b0", "com.DROID_MJ.a21.b1", "com.mrepol742.webvium.activity.alias.MAY", "com.DROID_MJ.a21.b3", "com.DROID_MJ.a21.b4", "com.DROID_MJ.a21.b5", "com.DROID_MJ.a21.b6", "com.DROID_MJ.a21.b7", "com.DROID_MJ.a21.b8", "com.DROID_MJ.a21.b9", "com.DROID_MJ.a21.b10", "com.DROID_MJ.a21.b11", "com.DROID_MJ.a21.b12", "com.DROID_MJ.a21.b13", "com.DROID_MJ.a21.b14", "com.DROID_MJ.a21.b15", "com.DROID_MJ.a21.b16", "com.DROID_MJ.a21.b17", "com.DROID_MJ.a21.b18", "com.DROID_MJ.a21.b19"};
@@ -453,14 +468,12 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 }
             } else {
                 spe.setChecked(false);
-
                 AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
             }
-
         }
     }
 
-    private void g(String a1) throws NoSuchStringToReturn {
+    private void g(String a1) {
         SharedPreferences a = getActivity().getSharedPreferences("a", 0);
         String c727 = a.getString("gsJsGsKSIgPes", "");
         if (c727 != null) {
@@ -468,13 +481,10 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 2);
                 C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 1);
                 spe.setChecked(false);
-
             } else {
-
                 spe.setChecked(true);
                 AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
             }
-
         }
     }
 
@@ -528,19 +538,32 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         a67.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         l15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        e15.setTransformationMethod(new Password());
-        a67.setTransformationMethod(new Password());
-        l15.setTransformationMethod(new Password());
+        e15.setTransformationMethod(new PasswordTransformationMethod() {
+
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
+        a67.setTransformationMethod(new PasswordTransformationMethod() {
+
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
+        l15.setTransformationMethod(new PasswordTransformationMethod() {
+
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                try {
-                    PretendModeFragment.this.j(e15.getText().toString(), l15.getText().toString());
-                } catch (NoSuchStringToReturn l2) {
-                    l2.printStackTrace();
-                }
-
+                PretendModeFragment.this.j(e15.getText().toString(), l15.getText().toString());
                 a.dismiss();
             }
         });
@@ -553,7 +576,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
         });
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         d.show();
         d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
 
@@ -573,6 +595,11 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a67.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (e15.getText().toString().length() >= 4) {
                     if (a67.getText().toString().length() >= 4 && !a67.getText().toString().equals(e15.getText().toString())) {
@@ -589,30 +616,17 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
         e15.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (e15.getText().toString().length() >= 4) {
-                    if (a67.getText().toString().length() >= 4 && !a67.getText().toString().equals(e15.getText().toString())) {
-                        if (l15.getText().toString().length() >= 4 && !l15.getText().toString().equals(e15.getText().toString())) {
-                            okButton.setEnabled(a67.getText().toString().equals(l15.getText().toString()));
-                        } else {
-                            okButton.setEnabled(false);
-                        }
-                    } else {
-                        okButton.setEnabled(false);
-                    }
-                } else {
-                    okButton.setEnabled(false);
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
-
-
-        });
-        l15.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -631,12 +645,44 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 }
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
+        });
+        l15.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (e15.getText().toString().length() >= 4) {
+                    if (a67.getText().toString().length() >= 4 && !a67.getText().toString().equals(e15.getText().toString())) {
+                        if (l15.getText().toString().length() >= 4 && !l15.getText().toString().equals(e15.getText().toString())) {
+                            okButton.setEnabled(a67.getText().toString().equals(l15.getText().toString()));
+                        } else {
+                            okButton.setEnabled(false);
+                        }
+                    } else {
+                        okButton.setEnabled(false);
+                    }
+                } else {
+                    okButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    private void j(String a1, String a2) throws NoSuchStringToReturn {
+    private void j(String a1, String a2) {
         SharedPreferences a = getActivity().getSharedPreferences("a", 0);
         String c727 = a.getString("gsJsGsKSIgPes", "");
         if (c727 != null) {
@@ -659,37 +705,30 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setCancelable(true);
         a5.setTitle(getActivity().getResources().getString(R.string.k32));
         a5.setView(a7);
-
         final EDIT e16 = a7.findViewById(R.id.e16);
-
-
         int a15 = Resources.getColor(getActivity(), R.color.c);
         int a16 = Resources.getColor(getActivity(), R.color.b);
-
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
-
             e16.setTextColor(a15);
-
         } else {
-
             e16.setTextColor(a16);
         }
         e16.setHint(getActivity().getResources().getString(R.string.g6));
         e16.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        e16.setTransformationMethod(new PasswordTransformationMethod() {
 
-        e16.setTransformationMethod(new Password());
+            @Override
+            public CharSequence getTransformation(CharSequence source, View view) {
+                return source;
+            }
+        });
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                try {
-                    PretendModeFragment.this.l(e16.getText().toString());
-                } catch (NoSuchStringToReturn l2) {
-                    l2.printStackTrace();
-                }
+                PretendModeFragment.this.l(e16.getText().toString());
                 a.dismiss();
-
             }
         });
         a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -699,11 +738,8 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 a.dismiss();
             }
         });
-
         final AlertDialog d = a5.create();
-
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         d.show();
         d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
 
@@ -723,23 +759,28 @@ public class PretendModeFragment extends BasePreferenceFragment {
         e16.addTextChangedListener(new TextWatcher() {
 
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 okButton.setEnabled(e16.getText().toString().length() >= 4);
             }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
         });
-
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-
     }
 
-    private void l(String a1) throws NoSuchStringToReturn {
+    private void l(String a1) {
         SharedPreferences a = getActivity().getSharedPreferences("a", 0);
         String c727 = a.getString("gsJsGsKSIgPes", "");
         if (c727 != null) {
             if (Hash.a("SHA-512", a1).equals(c727)) {
-
                 SharedPreferences.Editor b5 = a.edit();
                 b5.clear();
                 b5.apply();
@@ -748,18 +789,15 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 2);
                 C10.a(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 1);
             } else {
-
                 AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
             }
-
         }
     }
 
-    private class R7 extends MainReceiver {
+    private class R7 extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context a, Intent b) {
-            super.onReceive(a, b);
             String sg = b.getAction();
             if (sg.equals(Intent.ACTION_SCREEN_ON)) {
                 if (a221().getBoolean("lockWn99", false)) {
@@ -770,5 +808,4 @@ public class PretendModeFragment extends BasePreferenceFragment {
             }
         }
     }
-
 }

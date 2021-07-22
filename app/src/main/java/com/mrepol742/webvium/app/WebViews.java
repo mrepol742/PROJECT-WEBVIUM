@@ -23,7 +23,6 @@ import android.view.View;
 
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainWebView;
-import com.mrepol742.webvium.content.Package;
 
 import java.util.ArrayList;
 
@@ -60,9 +59,5 @@ public class WebViews extends MainWebView {
     public void goForward() {
         w4.add(new ForwardBackwardHistoryDataModel(getUrl(), ""));
         super.goForward();
-    }
-
-    public void load(String baseUrl, String html) {
-        loadDataWithBaseURL(Package.c(), html, "text/html", getTextEncoding(), baseUrl);
     }
 }

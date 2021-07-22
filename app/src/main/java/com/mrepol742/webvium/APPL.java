@@ -42,13 +42,13 @@ public class APPL extends Application {
     @Override
     public void onCreate() {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean("maUU", BuildConfig.DEBUG) && sp.getBoolean("stcMM", BuildConfig.DEBUG)) {
+        if (sp.getBoolean("maUU", false) && sp.getBoolean("stcMM", BuildConfig.DEBUG)) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
                     .build());
         }
-        if (sp.getBoolean("maUU", BuildConfig.DEBUG) && sp.getBoolean("stcMM6", BuildConfig.DEBUG)) {
+        if (sp.getBoolean("maUU", false) && sp.getBoolean("stcMM6", BuildConfig.DEBUG)) {
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                     .detectAll()
                     .penaltyLog()

@@ -53,8 +53,6 @@ public class PRIV extends BaseActivity {
         c.setElevation(5);
         ActionBar ab = getActionBar();
         if (ab != null) {
-            // ab.setDisplayHomeAsUpEnabled(true);
-            // ab.setDisplayShowHomeEnabled(false);
             ab.setDisplayShowTitleEnabled(false);
         }
         c.setNavigationIcon(R.drawable.a14);

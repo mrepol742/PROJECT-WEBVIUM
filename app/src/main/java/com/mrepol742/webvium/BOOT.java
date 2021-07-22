@@ -20,6 +20,7 @@ package com.mrepol742.webvium;
 import android.app.AlarmManager;
 import android.app.DownloadManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,18 +28,16 @@ import android.database.Cursor;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Notifications;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.content.Intents;
 
 import java.util.Calendar;
 import java.util.Objects;
 
 // @Class BootCompleted
-public class BOOT extends MainReceiver {
+public class BOOT extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context a, Intent b) {
-        super.onReceive(a, b);
         try {
             if (Objects.requireNonNull(b.getAction()).equals("android.intent.action.BOOT_COMPLETED")) {
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);

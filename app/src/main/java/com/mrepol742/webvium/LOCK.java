@@ -35,7 +35,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.app.NoSuchObjectToReturn;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
@@ -121,11 +120,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
                     }
                 });
                 tv.setTypeface(type(Typeface.BOLD));
-                try {
-                    tv.setText(a(it2));
-                } catch (NoSuchObjectToReturn l1) {
-                    l1.printStackTrace();
-                }
+                tv.setText(a(it2));
             }
 
             final File fe = new File(StorageDirectory.getBackground(this));
@@ -155,7 +150,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
         }
     }
 
-    private String a(int i) throws NoSuchObjectToReturn {
+    private String a(int i) {
         if (i == R.id.i11) {
             return getString(R.string.m11);
         } else if (i == R.id.i12) {
@@ -174,13 +169,11 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             return getString(R.string.m18);
         } else if (i == R.id.i19) {
             return getString(R.string.m19);
-        } else if (i == R.id.i20) {
-            return getString(R.string.m20);
         }
-        throw new NoSuchObjectToReturn();
+        return getString(R.string.m20);
     }
 
-    private void b(String a) throws NoSuchObjectToReturn {
+    private void b(String a) {
         if (a.length() == 0) {
             return;
         }
@@ -272,11 +265,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             sb.append(getString(R.string.m20));
             d();
         } else if (id == R.id.j1) {
-            try {
-                b(sb.toString());
-            } catch (NoSuchObjectToReturn l2) {
-                l2.printStackTrace();
-            }
+            b(sb.toString());
         } else if (id == R.id.i9) {
             String sg5 = tv1.getText().toString();
             String temp = sb.toString();
@@ -341,11 +330,7 @@ public class LOCK extends MainBaseActivity implements View.OnClickListener, View
             d();
             return true;
         } else if (id == R.id.j1) {
-            try {
-                b(sb.toString());
-            } catch (NoSuchObjectToReturn l2) {
-                l2.printStackTrace();
-            }
+            b(sb.toString());
             return true;
         } else if (id == R.id.i9) {
             tv1.setText("");

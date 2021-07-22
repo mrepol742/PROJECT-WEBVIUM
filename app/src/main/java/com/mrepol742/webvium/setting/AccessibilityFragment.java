@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,6 @@ import com.mrepol742.webvium.TEXT;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
-import com.mrepol742.webvium.os.CountDownTimer;
 
 public class AccessibilityFragment extends BasePreferenceFragment {
 
@@ -103,11 +103,15 @@ public class AccessibilityFragment extends BasePreferenceFragment {
         }
 
         @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+        @Override
         public void onFinish() {
             a5.dismiss();
             a5 = null;
             a();
-
         }
     }
 }

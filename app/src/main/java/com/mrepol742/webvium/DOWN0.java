@@ -20,23 +20,24 @@ package com.mrepol742.webvium;
 import android.app.DownloadManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.webkit.CookieManager;
 
 import com.mrepol742.webvium.app.Notifications;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.main.MainService;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.content.Package;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.download.DownloadServiceDataModel;
@@ -48,7 +49,7 @@ import com.mrepol742.webvium.widget.AwesomeToast;
 import java.util.Objects;
 
 // @Class DownloadService
-public class DOWN0 extends MainService {
+public class DOWN0 extends Service {
     private final R37 br = new R37();
     private final R7 br1 = new R7();
     private CookieManager cm;
@@ -126,47 +127,47 @@ public class DOWN0 extends MainService {
             case DownloadManager.ERROR_CANNOT_RESUME:
                 g();
                 b(getString(R.string.w30), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_DEVICE_NOT_FOUND:
                 g();
                 b(getString(R.string.x21), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_FILE_ALREADY_EXISTS:
                 g();
                 b(getString(R.string.x22), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_FILE_ERROR:
                 g();
                 b(getString(R.string.x23), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_HTTP_DATA_ERROR:
                 g();
                 b(getString(R.string.x24), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_INSUFFICIENT_SPACE:
                 g();
                 b(getString(R.string.x25), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_TOO_MANY_REDIRECTS:
                 g();
                 b(getString(R.string.x26), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_UNHANDLED_HTTP_CODE:
                 g();
                 b(getString(R.string.x27), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.ERROR_UNKNOWN:
                 g();
                 b(getString(R.string.x28), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.PAUSED_QUEUED_FOR_WIFI:
                 h();
@@ -187,7 +188,7 @@ public class DOWN0 extends MainService {
             case DownloadManager.STATUS_FAILED:
                 g();
                 b(getString(R.string.x33), getString(R.string.u21), w9.c, w9.e);
-                s2();
+                stopForeground(true);
                 break;
             case DownloadManager.STATUS_SUCCESSFUL:
                 java.io.File file4 = new java.io.File(w9.d.replace("file://", ""));
@@ -200,7 +201,7 @@ public class DOWN0 extends MainService {
                     }
                 }
                 AwesomeToast.a(this, getString(R.string.x34));
-                s2();
+                stopForeground(true);
                 break;
 
         }
@@ -329,7 +330,7 @@ public class DOWN0 extends MainService {
 
     private void g() {
         AwesomeToast.a(this, getString(R.string.u21));
-        s1();
+        stopSelf();
     }
 
     private void h() {
@@ -343,8 +344,8 @@ public class DOWN0 extends MainService {
         cm = CookieManager.getInstance();
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        registerReceiver(br, new IntentsFilter("android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"));
-        registerReceiver(br1, new IntentsFilter("android.intent.action.DOWNLOAD_COMPLETE"));
+        registerReceiver(br, new IntentFilter("android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"));
+        registerReceiver(br1, new IntentFilter("android.intent.action.DOWNLOAD_COMPLETE"));
     }
 
     @Override
@@ -359,14 +360,18 @@ public class DOWN0 extends MainService {
         unregisterReceiver(br);
         unregisterReceiver(br1);
         MainNotification.a(this, Notifications.g);
-        s2();
+        stopForeground(true);
     }
 
-    static class R37 extends MainReceiver {
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    static class R37 extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context a, Intent b) {
-            super.onReceive(a, b);
             try {
                 if (Objects.requireNonNull(b.getAction()).equals("android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED")) {
                     Intents.a(a, DOWN.class);
@@ -377,11 +382,10 @@ public class DOWN0 extends MainService {
         }
     }
 
-    class R7 extends MainReceiver {
+    class R7 extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context a, Intent b) {
-            super.onReceive(a, b);
             if (Objects.requireNonNull(b.getAction()).equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
                 if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("launchF", false)) {
                     Intents.a(a, DOWN.class);

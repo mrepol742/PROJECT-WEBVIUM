@@ -31,8 +31,6 @@ import android.widget.TextView;
 
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.app.NoSuchItemToGet;
-import com.mrepol742.webvium.app.NoSuchSpannableStringBuilderToReturn;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.util.DateUtil;
@@ -91,37 +89,28 @@ public class HistoryAdapter extends MainBaseAdapter {
         }
     }
 
-    private SpannableString b(String url) throws NoSuchSpannableStringBuilderToReturn {
-        try {
-            SpannableString ssb = new SpannableString(url);
-            if (url.startsWith("https://")) {
-                ssb.setSpan(this.A, 0, 8, 0);
-            } else if (url.startsWith("http://")) {
-                ssb.setSpan(this.E, 0, 7, 0);
-            } else if (url.startsWith("file://")) {
-                ssb.setSpan(this.S, 0, 7, 0);
-            } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
-                ssb.setSpan(this.S, 0, 10, 0);
+    private SpannableString b(String url) {
+        SpannableString ssb = new SpannableString(url);
+        if (url.startsWith("https://")) {
+            ssb.setSpan(this.A, 0, 8, 0);
+        } else if (url.startsWith("http://")) {
+            ssb.setSpan(this.E, 0, 7, 0);
+        } else if (url.startsWith("file://")) {
+            ssb.setSpan(this.S, 0, 7, 0);
+        } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
+            ssb.setSpan(this.S, 0, 10, 0);
+        } else {
+            if (!this.sp.getBoolean("autoUpdate", false)) {
+                ssb.setSpan(this.I, 0, url.length(), 0);
             } else {
-                if (!this.sp.getBoolean("autoUpdate", false)) {
-                    ssb.setSpan(this.I, 0, url.length(), 0);
-                } else {
-                    ssb.setSpan(this.B, 0, url.length(), 0);
-                }
+                ssb.setSpan(this.B, 0, url.length(), 0);
             }
-            return ssb;
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
-        throw new NoSuchSpannableStringBuilderToReturn();
+        return ssb;
     }
 
-    public HistoryDataModel c(int i) throws NoSuchItemToGet {
-        HistoryDataModel sync = (HistoryDataModel) getItem(i);
-        if (sync == null) {
-            throw new NoSuchItemToGet();
-        }
-        return sync;
+    public HistoryDataModel c(int i) {
+        return (HistoryDataModel) getItem(i);
     }
 
     @Override
@@ -184,7 +173,7 @@ public class HistoryAdapter extends MainBaseAdapter {
             Date date = new Date(c(it).ls2);
             String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
             w17.d.setText(fiDate);
-        } catch (IndexOutOfBoundsException | NoSuchSpannableStringBuilderToReturn | NoSuchItemToGet ignored) {
+        } catch (IndexOutOfBoundsException ignored) {
 
         }
         return e;

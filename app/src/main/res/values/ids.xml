@@ -17,8 +17,6 @@
 
 <resources>
 
-    <item name="a" type="id" />
-    <item name="b" type="id" />
     <item name="c" type="id" />
     <item name="d" type="id" />
     <item name="e" type="id" />
@@ -26,10 +24,8 @@
     <item name="g" type="id" />
     <item name="h" type="id" />
     <item name="i" type="id" />
-    <item name="j" type="id" />
     <item name="k" type="id" />
     <item name="l" type="id" />
-    <item name="m" type="id" />
     <item name="n" type="id" />
     <item name="o" type="id" />
     <item name="p" type="id" />
@@ -66,10 +62,8 @@
     <item name="b17" type="id" />
     <item name="b18" type="id" />
     <item name="b19" type="id" />
-    <item name="b20" type="id" />
     <item name="c1" type="id" />
     <item name="c3" type="id" />
-    <item name="c6" type="id" />
     <item name="c8" type="id" />
     <item name="c10" type="id" />
     <item name="c11" type="id" />
@@ -120,9 +114,6 @@
     <item name="g4" type="id" />
     <item name="g7" type="id" />
     <item name="g8" type="id" />
-    <item name="h9" type="id" />
-    <item name="h10" type="id" />
-    <item name="h11" type="id" />
     <item name="h17" type="id" />
     <item name="h18" type="id" />
     <item name="h19" type="id" />
@@ -213,8 +204,6 @@
     <item name="n20" type="id" />
     <item name="n21" type="id" />
     <item name="n22" type="id" />
-    <item name="n23" type="id" />
-    <item name="n24" type="id" />
     <item name="n27" type="id" />
     <item name="n28" type="id" />
     <item name="n29" type="id" />
@@ -223,7 +212,6 @@
     <item name="o23" type="id" />
     <item name="o25" type="id" />
     <item name="o26" type="id" />
-    <item name="o28" type="id" />
     <item name="o29" type="id" />
     <item name="o30" type="id" />
     <item name="o31" type="id" />
@@ -236,7 +224,6 @@
     <item name="o38" type="id" />
     <item name="o39" type="id" />
     <item name="o40" type="id" />
-    <item name="o41" type="id" />
     <item name="o42" type="id" />
     <item name="o43" type="id" />
     <item name="o44" type="id" />

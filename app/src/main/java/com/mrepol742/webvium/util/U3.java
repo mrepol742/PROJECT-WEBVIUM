@@ -35,8 +35,4 @@ public class U3 {
         return !b.isEmpty();
     }
 
-    public static boolean c(String sg, String w) {
-        return sg.equals(w);
-    }
-
 }

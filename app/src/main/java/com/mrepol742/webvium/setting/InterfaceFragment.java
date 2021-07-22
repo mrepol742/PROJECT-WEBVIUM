@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,6 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.content.Intents;
 import com.mrepol742.webvium.content.Resources;
 import com.mrepol742.webvium.io.StorageDirectory;
-import com.mrepol742.webvium.os.CountDownTimer;
 import com.mrepol742.webvium.util.cache.BitmapCache;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
@@ -287,13 +287,15 @@ public class InterfaceFragment extends BasePreferenceFragment {
         }
 
         @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+        @Override
         public void onFinish() {
             a5.dismiss();
             a5 = null;
             a();
-
         }
     }
-
-
 }

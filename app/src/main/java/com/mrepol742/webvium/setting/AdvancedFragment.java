@@ -20,10 +20,12 @@ package com.mrepol742.webvium.setting;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -37,19 +39,17 @@ import com.mrepol742.webvium.LIST;
 import com.mrepol742.webvium.PREF;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.Notifications;
-import com.mrepol742.webvium.app.main.MainReceiver;
 import com.mrepol742.webvium.SETT;
 import com.mrepol742.webvium.SWIT;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.content.Intents;
-import com.mrepol742.webvium.content.IntentsFilter;
 import com.mrepol742.webvium.widget.AwesomeToast;
 
 import java.util.Objects;
 
 public class AdvancedFragment extends BasePreferenceFragment {
-    private final IntentsFilter is = new IntentsFilter();
+    private final IntentFilter is = new IntentFilter();
     private R7 r7;
 
     @Override
@@ -72,7 +72,7 @@ public class AdvancedFragment extends BasePreferenceFragment {
         super.onCreate(b1);
         try {
             if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-                is.act(Intent.ACTION_SCREEN_ON);
+                is.addAction(Intent.ACTION_SCREEN_ON);
                 r7 = new R7();
                 getActivity().registerReceiver(r7, is);
             }
@@ -245,11 +245,10 @@ public class AdvancedFragment extends BasePreferenceFragment {
         AwesomeToast.b(getActivity(), a);
     }
 
-    private class R7 extends MainReceiver {
+    private class R7 extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context a, Intent b) {
-            super.onReceive(a, b);
             String sg = b.getAction();
             if (sg.equals(Intent.ACTION_SCREEN_ON)) {
                 if (a221().getBoolean("lockWn99", false)) {

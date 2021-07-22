@@ -46,12 +46,7 @@ public class AppID {
                 Build.TYPE.length() % 10 +
                 Build.USER.length() % 10;
         String b = Settings.Secure.getString(ct.getContentResolver(), Settings.Secure.ANDROID_ID);
-        BluetoothAdapter d = BluetoothAdapter.getDefaultAdapter();
-        String c = "";
-        if (d != null) {
-            c = d.getAddress();
-        }
-        String id = a + b + c + UUID.randomUUID().toString();
+        String id = a + b + UUID.randomUUID().toString();
         return Hash.a("SHA-1", id);
     }
 }
