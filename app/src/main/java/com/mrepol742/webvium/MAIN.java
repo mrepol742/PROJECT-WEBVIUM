@@ -28,6 +28,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
@@ -60,6 +61,7 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Message;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -1864,18 +1866,41 @@ public class MAIN extends MainBaseActivity implements Format {
                         if (MAIN.this.a221().getBoolean("launch", false)) {
                             Intents.a(MAIN.this, DOWN.class);
                         }
+                        // TODO
                         DownloadHelper dh = DownloadHelper.getInstance(getApplicationContext());
                         dh.c(b, w18.a1, Long.toString(w18.a4));
+
+                        DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                        DownloadManager.Request f = new DownloadManager.Request(Uri.parse(w18.a1));
+                        f.setTitle(b);
+                        if (a221().getBoolean("drh1", true)) {
+                            f.setMimeType(w18.a3);
+                        }
+                        f.setAllowedOverMetered(a221().getBoolean("drh2", true));
+                        f.setAllowedOverRoaming(a221().getBoolean("drh3", false));
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            f.setRequiresCharging(a221().getBoolean("drh4", false));
+                            f.setRequiresDeviceIdle(a221().getBoolean("drh5", false));
+                        }
+                        if (a221().getBoolean("drh", true)) {
+                            //f.addRequestHeader("cookie", cm.getCookie(sg4));
+                        }
+                        if (a221().getBoolean("drh0", true)) {
+                           // f.addRequestHeader("User-Agent", sg5);
+                        }
+                        if (Build.VERSION.SDK_INT >= 30) {
+                            f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b);
+                        } else if (Build.VERSION.SDK_INT >= 23 && Permission.checkOnly(MAIN.this, Permission.STORAGE)) {
+                            f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b );
+                        } else {
+                            f.setDestinationInExternalPublicDir(Package.c() + "/Downloads", b);
+                        }
+                        DownloadManager.Query dmq = new DownloadManager.Query();
+                        dmq.setFilterById(dm.enqueue(f), 0);
+
+
+
                         SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
-                        Intent it = new Intent(MAIN.this, DOWN0.class);
-                        it.putExtra("a", c1);
-                        it.putExtra("b", w18.a1);
-                        it.putExtra("c", true);
-                        it.putExtra("d", true);
-                        it.putExtra("e", w18.a3);
-                        it.putExtra("f", w18.a1);
-                        it.putExtra("g", w18.a6);
-                        Notifications.b(MAIN.this, it);
                         if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
                             MAIN.this.c71();
                             SharedPreferences.Editor spe = sp9.edit();
@@ -3774,7 +3799,6 @@ bigText.bigText(a.getResources().getString(R.string.g29));
                 if (URLUtil.isValidUrl(w18.a1)) {
                     if (a221().getBoolean("wifi", false)) {
                         if (b.isWifiEnabled()) {
-
                             if (Permission.check(this, Permission.STORAGE, 1)) {
                                 c11(w18);
                             } else {
@@ -3795,8 +3819,8 @@ bigText.bigText(a.getResources().getString(R.string.g29));
                 }
             } else {
                 if (Permission.check(this, Permission.STORAGE, 1)) {
+                    // TODO:
                     c11(w18);
-                    // auto download unfinished system 0001
                 } else {
                     pend = w18;
                 }
@@ -4171,14 +4195,12 @@ if (receivedErrorDataModel.bn) {
 
     public void c83(PendingDownloadDataModel w18) {
         try {
-
             WifiManager b = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (!a221().getBoolean("autoD", false)) {
                 if (a221().getBoolean("wifi", false)) {
                     if (b.isWifiEnabled()) {
                         if (Permission.check(this, Permission.STORAGE, 1)) {
                             c11(w18);
-
                         } else {
                             pend = w18;
                         }
@@ -4195,11 +4217,9 @@ if (receivedErrorDataModel.bn) {
             } else {
                 if (a221().getBoolean("wifi", false)) {
                     if (b.isWifiEnabled()) {
-
                         if (Permission.check(this, Permission.STORAGE, 1)) {
-// auto download 003
+                            // TODO:
                             c11(w18);
-
                         } else {
                             pend = w18;
                         }
@@ -4208,7 +4228,7 @@ if (receivedErrorDataModel.bn) {
                     }
                 } else {
                     if (Permission.check(this, Permission.STORAGE, 1)) {
-// auto download  002
+                        // TODO:
                         c11(w18);
                     } else {
                         pend = w18;

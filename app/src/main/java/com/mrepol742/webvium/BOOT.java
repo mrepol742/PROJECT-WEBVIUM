@@ -45,21 +45,6 @@ public class BOOT extends BroadcastReceiver {
                 calendar.setTimeInMillis(System.currentTimeMillis());
                 calendar.set(Calendar.HOUR_OF_DAY, 6);
                 AlarmManager alarmMgr = (AlarmManager) a.getSystemService(Context.ALARM_SERVICE);
-                try {
-                    DownloadManager dm = (DownloadManager) a.getSystemService(Context.DOWNLOAD_SERVICE);
-                    Cursor cursor = dm.query(new DownloadManager.Query());
-                    if (cursor.moveToFirst()) {
-                        if (cursor.getCount() > 0) {
-                            int status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                            if (status == DownloadManager.STATUS_RUNNING) {
-                                Notifications.b(a, new Intent(a, DOWN0.class));
-                            }
-                        }
-                    }
-                    cursor.close();
-                } catch (Exception n) {
-                    n.printStackTrace();
-                }
                 if (sp.getBoolean("qckS", false)) {
                     Intents.b(a, QUIC.class);
                 }

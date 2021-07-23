@@ -39,7 +39,6 @@ assets/
 
 # Webvium
 app/src/main/c-playstore.png
-app/src/release/
 .etc
 /app/primaryDictionary.txt
 /app/secondaryDictionary.txt
