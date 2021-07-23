@@ -849,6 +849,22 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            a:exported="true"
+            a:name="com.mrepol742.webvium.DOWN0">
+            <intent-filter>
+                <action a:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.VIEW_DOWNLOADS" />
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action a:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <category a:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
 
         <service
             a:name="com.mrepol742.webvium.SAVE"
@@ -862,14 +878,15 @@
             a:exported="false"
             a:label="@string/l33"
             a:process=":qui" />
-
+<!--
         <service
             a:name="com.mrepol742.webvium.DOWN0"
             a:exported="false"
             a:foregroundServiceType="dataSync"
             a:label="@string/n15"
             a:process=":dow" />
-
+        -->
+        
         <service
             a:name="com.mrepol742.webvium.CLIP"
             a:exported="false"

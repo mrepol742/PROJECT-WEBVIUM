@@ -1873,7 +1873,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                         DownloadManager.Request f = new DownloadManager.Request(Uri.parse(w18.a1));
                         f.setTitle(b);
-                        if (a221().getBoolean("drh1", true)) {
+                      /*  if (a221().getBoolean("drh1", true)) {
                             f.setMimeType(w18.a3);
                         }
                         f.setAllowedOverMetered(a221().getBoolean("drh2", true));
@@ -1887,7 +1887,7 @@ public class MAIN extends MainBaseActivity implements Format {
                         }
                         if (a221().getBoolean("drh0", true)) {
                            // f.addRequestHeader("User-Agent", sg5);
-                        }
+                        }*/
                         if (Build.VERSION.SDK_INT >= 30) {
                             f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b);
                         } else if (Build.VERSION.SDK_INT >= 23 && Permission.checkOnly(MAIN.this, Permission.STORAGE)) {
@@ -1895,11 +1895,13 @@ public class MAIN extends MainBaseActivity implements Format {
                         } else {
                             f.setDestinationInExternalPublicDir(Package.c() + "/Downloads", b);
                         }
-                        DownloadManager.Query dmq = new DownloadManager.Query();
-                        dmq.setFilterById(dm.enqueue(f), 0);
+                        f.allowScanningByMediaScanner();
+                        f.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-
-
+                        //DownloadManager.Query dmq = new DownloadManager.Query();
+                        dm.enqueue(f);
+                        
+                        
                         SharedPreferences sp9 = MAIN.this.getSharedPreferences("wv", 0);
                         if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
                             MAIN.this.c71();
