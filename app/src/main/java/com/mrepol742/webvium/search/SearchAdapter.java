@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -30,7 +30,7 @@ import android.widget.TextView;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
-import com.mrepol742.webvium.content.Resources;
+import com.mrepol742.webvium.app.Resources;
 
 import java.util.ArrayList;
 
@@ -128,7 +128,7 @@ public class SearchAdapter extends MainBaseAdapter {
                 w18 = (W16a) vw.getTag();
             }
 
-            //  w18.a.setText(U8.a(b.get(it)));
+            //  w18.changedTo.setText(U8.changedTo(b.get(it)));
             w18.a.setText(b.get(it));
 
         } catch (IndexOutOfBoundsException ignored) {

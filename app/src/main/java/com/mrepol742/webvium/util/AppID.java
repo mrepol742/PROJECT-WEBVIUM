@@ -18,13 +18,12 @@
 package com.mrepol742.webvium.util;
 
 import android.annotation.SuppressLint;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
 
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.security.Hash;
+import com.mrepol742.webvium.security.SHA;
 
 import java.util.UUID;
 
@@ -47,6 +46,6 @@ public class AppID {
                 Build.USER.length() % 10;
         String b = Settings.Secure.getString(ct.getContentResolver(), Settings.Secure.ANDROID_ID);
         String id = a + b + UUID.randomUUID().toString();
-        return Hash.a("SHA-1", id);
+        return SHA.a("SHA-1", id);
     }
 }

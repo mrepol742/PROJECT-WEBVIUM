@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -18,28 +18,28 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/t21">
-        <com.mrepol742.webvium.PREF
+    <com.mrepol742.webvium.Pref0 a:title="@string/t21">
+        <com.mrepol742.webvium.Pref
             a:key="clearBook"
             a:title="@string/i13" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="pHistory"
             a:title="@string/d13" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="clearHistory"
             a:title="@string/d12" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="pSearch"
             a:title="@string/d15" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="clearSearch"
             a:title="@string/d14" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/d16">
-        <com.mrepol742.webvium.LIST
+    <com.mrepol742.webvium.Pref0 a:title="@string/d16">
+        <com.mrepol742.webvium.List
             a:defaultValue="1e"
             a:dialogTitle="@string/d17"
             a:entries="@array/k"
@@ -47,62 +47,62 @@
             a:key="userA"
             a:summary="%1$s"
             a:title="@string/d16" />
-        <com.mrepol742.webvium.EDIT0
+        <com.mrepol742.webvium.Edit0
             a:key="CustomuserA"
             a:title="@string/d18" />
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/d19">
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/d19">
 
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="showSO"
             a:summary="@string/e3"
             a:title="@string/e2" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="clearSSL"
             a:title="@string/e4" />
 
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/e5">
-        <com.mrepol742.webvium.PREF
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/e5">
+        <com.mrepol742.webvium.Pref
             a:key="clearHTTP"
             a:summary="@string/g3"
             a:title="@string/e6" />
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/e7">
-        <com.mrepol742.webvium.SWIT
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/e7">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="clearPr"
             a:summary="@string/e9"
             a:title="@string/e8" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="clearP"
             a:summary="@string/e11"
             a:title="@string/e10" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="clearH"
             a:summary="@string/e13"
             a:title="@string/e12" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="clearC"
             a:summary="@string/e15"
             a:title="@string/e14" />
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/m5">
-        <com.mrepol742.webvium.SWIT
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/m5">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="nCV"
             a:summary="@string/x10"
             a:title="@string/l17" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="clearClipboard"
             a:title="@string/e14" />
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/z">
-        <com.mrepol742.webvium.LIST
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/z">
+        <com.mrepol742.webvium.List
             a:defaultValue="7"
             a:dialogTitle="@string/e16"
             a:entries="@array/a9"
@@ -110,18 +110,18 @@
             a:key="cookies"
             a:summary="%1$s"
             a:title="@string/a4" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="clearCookies"
             a:summary="@string/f4"
             a:title="@string/e17" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="clearSCookies"
             a:summary="@string/f5"
             a:title="@string/z6" />
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/a2">
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/a2">
 
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="1h"
             a:dialogTitle="@string/f2"
             a:entries="@array/q"
@@ -129,16 +129,16 @@
             a:key="location"
             a:summary="%1$s"
             a:title="@string/f1" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:enabled="false"
             a:key="clearLocation"
             a:title="@string/f3" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/f6">
+    <com.mrepol742.webvium.Pref0 a:title="@string/f6">
 
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="1m"
             a:dialogTitle="@string/f8"
             a:entries="@array/a1"
@@ -146,18 +146,18 @@
             a:key="caches"
             a:summary="%1$s"
             a:title="@string/f7" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="clearCache"
             a:title="@string/d11" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/s29">
+    <com.mrepol742.webvium.Pref0 a:title="@string/s29">
 
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="cjsa"
             a:summary="@string/f17"
             a:title="@string/a30" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
 </PreferenceScreen>
 

@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -35,7 +35,7 @@
         a:textSize="@dimen/c"
         tools:ignore="LabelFor" />
 
-    <com.mrepol742.webvium.EDIT
+    <com.mrepol742.webvium.Edit
         a:id="@id/f10"
         a:layout_width="fill_parent"
         a:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         a:textSize="@dimen/c"
         tools:ignore="LabelFor" />
 
-    <com.mrepol742.webvium.EDIT
+    <com.mrepol742.webvium.Edit
         a:id="@id/f12"
         a:layout_width="fill_parent"
         a:layout_height="wrap_content"

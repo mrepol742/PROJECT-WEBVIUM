@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -18,26 +18,26 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
-    <com.mrepol742.webvium.PREF
+    <com.mrepol742.webvium.Pref
         a:key="p20"
         a:title="@string/p20" />
-    <com.mrepol742.webvium.PREF a:key="ins12" />
-    <com.mrepol742.webvium.PREF
+    <com.mrepol742.webvium.Pref a:key="ins12" />
+    <com.mrepol742.webvium.Pref
         a:key="g5"
         a:summary="@string/g5"
         a:title="@string/f12" />
-    <com.mrepol742.webvium.PREF
+    <com.mrepol742.webvium.Pref
         a:key="g6"
         a:summary="@string/x53"
         a:title="@string/x44" />
 
-    <com.mrepol742.webvium.PREF
+    <com.mrepol742.webvium.Pref
         a:key="m7"
         a:summary="@string/y30"
         a:title="@string/m7" />
-    <com.mrepol742.webvium.PREF0 a:title="@string/n12">
-        <com.mrepol742.webvium.PREF a:key="ml1" />
-    </com.mrepol742.webvium.PREF0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/n12">
+        <com.mrepol742.webvium.Pref a:key="ml1" />
+    </com.mrepol742.webvium.Pref0>
 
 </PreferenceScreen>
 

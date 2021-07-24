@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -18,7 +18,7 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
-    <com.mrepol742.webvium.LIST
+    <com.mrepol742.webvium.List
         a:defaultValue="1d"
         a:dialogTitle="@string/a5"
         a:entries="@array/i"
@@ -27,7 +27,7 @@
         a:summary="%1$s"
         a:title="@string/o" />
 
-    <com.mrepol742.webvium.LIST
+    <com.mrepol742.webvium.List
         a:defaultValue="30c"
         a:dialogTitle="@string/a6"
         a:entries="@array/g"
@@ -35,12 +35,12 @@
         a:key="hori"
         a:summary="%1$s"
         a:title="@string/p" />
-    <com.mrepol742.webvium.SWIT
+    <com.mrepol742.webvium.Swit
         a:defaultValue="false"
         a:key="showW"
         a:summary="@string/a10"
         a:title="@string/a9" />
-    <com.mrepol742.webvium.LIST
+    <com.mrepol742.webvium.List
         a:defaultValue="1j"
         a:dialogTitle="@string/a17"
         a:entries="@array/u"
@@ -48,47 +48,47 @@
         a:key="screen"
         a:summary="%1$s"
         a:title="@string/a16" />
-    <com.mrepol742.webvium.PREF0 a:title="@string/n1">
+    <com.mrepol742.webvium.Pref0 a:title="@string/n1">
 
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="autoUpdate"
             a:title="@string/h" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="wfdM01"
             a:title="@string/m29" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="autoUpdate742"
             a:title="@string/h38" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="autoUpdate55"
             a:title="@string/y13" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="tstt"
             a:title="@string/z5" />
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/o11">
-        <com.mrepol742.webvium.SWIT
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/o11">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="home"
             a:title="@string/o14" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/d">
-        <com.mrepol742.webvium.SWIT
+    <com.mrepol742.webvium.Pref0 a:title="@string/d">
+        <com.mrepol742.webvium.Swit
             a:key="webviumB"
             a:title="@string/g15" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:dependency="webviumB"
             a:key="cus"
             a:summary="@string/g17"
             a:title="@string/g16" />
 
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="7z"
             a:dialogTitle="@string/z75"
             a:entries="@array/b19"
@@ -96,24 +96,24 @@
             a:key="bgQa9"
             a:summary="%1$s"
             a:title="@string/z74" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
 
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/f26">
-        <com.mrepol742.webvium.SWIT
+    <com.mrepol742.webvium.Pref0 a:title="@string/f26">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="cFNT"
             a:title="@string/f27" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:dependency="cFNT"
             a:key="cfnt5"
             a:title="@string/f28" />
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:dependency="cFNT"
             a:key="cfnt2"
             a:title="@string/f29" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
 </PreferenceScreen>
 

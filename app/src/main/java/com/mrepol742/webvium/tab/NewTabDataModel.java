@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -19,12 +19,14 @@ package com.mrepol742.webvium.tab;
 
 import android.graphics.Bitmap;
 
+@Deprecated
 public class NewTabDataModel {
 
     public final Bitmap favicon;
     public final String title;
     public final String url;
 
+    @Deprecated
     public NewTabDataModel(Bitmap fav, String title, String url) {
         this.favicon = fav;
         this.title = title;

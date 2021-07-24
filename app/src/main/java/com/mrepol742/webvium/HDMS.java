@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -21,11 +21,17 @@ import com.mrepol742.webvium.annotation.Keep;
 
 import java.io.Serializable;
 
+/*
+ * HistoryDataModelSerilizable
+ */
+
+@Deprecated
 public class HDMS implements Serializable {
     public String ls;
     public String ls0;
     public long ls2;
 
+    @Deprecated
     public HDMS(String ls, String ls0, long ls2) {
         this.ls = ls;
         this.ls0 = ls0;

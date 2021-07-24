@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -18,9 +18,9 @@
 package com.mrepol742.webvium.app;
 
 public class Sqlite {
-    public static final String DATA_DOWNLOAD = "a";
+    public static final String DATA_DOWNLOAD = "changedTo";
     public static final int VERSION_DOWNLOAD = 1;
-    public static final String TABLE_DOWNLOAD = "a";
+    public static final String TABLE_DOWNLOAD = "changedTo";
     public static final String COL1_DOWNLOAD = "b";
     public static final String COL2_DOWNLOAD = "c";
     public static final String COL3_DOWNLOAD = "d";
@@ -28,14 +28,14 @@ public class Sqlite {
 
     public static final String DATA_HISTORY = "b";
     public static final int VERSION_HISTORY = 1;
-    public static final String TABLE_HISTORY = "a";
+    public static final String TABLE_HISTORY = "changedTo";
     public static final String COL1_HISTORY = "b";
     public static final String COL2_HISTORY = "c";
     public static final String COL3_HISTORY = "d";
 
     public static final String DATA_PERMISSION = "c";
     public static final int VERSION_PERMISSION = 1;
-    public static final String TABLE_PERMISSION = "a";
+    public static final String TABLE_PERMISSION = "changedTo";
     public static final String COL1_PERMISSION = "b";
     public static final String COL2_PERMISSION = "c";
     public static final String COL3_PERMISSION = "d";
@@ -43,12 +43,12 @@ public class Sqlite {
 
     public static final String DATA_SEARCH = "d";
     public static final int VERSION_SEARCH = 1;
-    public static final String TABLE_SEARCH = "a";
+    public static final String TABLE_SEARCH = "changedTo";
     public static final String COL1_SEARCH = "b";
 
     public static final String DATA_BOOKMARK = "e";
     public static final int VERSION_BOOKMARK = 1;
-    public static final String TABLE_BOOKMARK = "a";
+    public static final String TABLE_BOOKMARK = "changedTo";
     public static final String COL1_BOOKMARK = "b";
     public static final String COL2_BOOKMARK = "c";
 }

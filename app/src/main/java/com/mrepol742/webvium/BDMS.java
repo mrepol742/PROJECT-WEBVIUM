@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -19,10 +19,16 @@ package com.mrepol742.webvium;
 
 import java.io.Serializable;
 
+/*
+ * BookmarkDataModelSerilizable
+ */
+
+@Deprecated
 public class BDMS implements Serializable {
     public final String sg;
     public final String sg0;
 
+    @Deprecated
     public BDMS(String sg, String sg0) {
         this.sg = sg;
         this.sg0 = sg0;

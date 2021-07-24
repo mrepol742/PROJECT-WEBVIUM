@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -18,13 +18,13 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android"
     a:key="aaaa">
-    <com.mrepol742.webvium.PREF0 a:title="@string/k1">
-        <com.mrepol742.webvium.SWIT
+    <com.mrepol742.webvium.Pref0 a:title="@string/k1">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="blocksv"
             a:summary="@string/s27"
             a:title="@string/c20" />
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="1a2"
             a:dialogTitle="@string/k37"
             a:entries="@array/b13"
@@ -32,7 +32,7 @@
             a:key="SVCTb"
             a:summary="%1$s"
             a:title="@string/f11" />
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="1q"
             a:dialogTitle="@string/k4"
             a:entries="@array/a11"
@@ -42,7 +42,7 @@
             a:title="@string/k3" />
 
 
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="1w"
             a:dialogTitle="@string/p14"
             a:entries="@array/b3"
@@ -50,5 +50,5 @@
             a:key="shotQq"
             a:summary="%1$s"
             a:title="@string/p13" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 </PreferenceScreen>

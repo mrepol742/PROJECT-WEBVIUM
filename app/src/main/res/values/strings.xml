@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -909,5 +909,10 @@
     <string name="z74">Webvium Search Background Quality</string>
     <string name="z75">Set Quality</string>
     <string name="z76">Inject</string>
+    <string name="z77">Webvium just got Updated</string>
+    <string name="z78">Click here to check it out</string>
+    <string name="z79">Package Changed Broadcast Receiver</string>
+    <string name="z80">Notify you when Webvium finish updating.</string>
+    <string name="z81">Restart</string>
 
 </resources>

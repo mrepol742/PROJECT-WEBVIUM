@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -18,8 +18,8 @@
 <!--suppress ALL -->
 
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
-    <com.mrepol742.webvium.PREF0 a:title="@string/o11">
-        <com.mrepol742.webvium.LIST
+    <com.mrepol742.webvium.Pref0 a:title="@string/o11">
+        <com.mrepol742.webvium.List
             a:defaultValue="x57"
             a:dialogTitle="@string/q"
             a:entries="@array/a5"
@@ -27,16 +27,16 @@
             a:key="general"
             a:summary="%1$s"
             a:title="@string/n" />
-        <com.mrepol742.webvium.EDIT0
+        <com.mrepol742.webvium.Edit0
             a:ellipsize="end"
             a:key="cGeneral"
             a:maxLines="1"
             a:title="@string/o13" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/w12">
-        <com.mrepol742.webvium.LIST
+    <com.mrepol742.webvium.Pref0 a:title="@string/w12">
+        <com.mrepol742.webvium.List
             a:defaultValue="1x"
             a:dialogTitle="@string/y8"
             a:entries="@array/b5"
@@ -44,7 +44,7 @@
             a:key="py"
             a:summary="%1$s"
             a:title="@string/y7" />
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="7y"
             a:dialogTitle="@string/y10"
             a:entries="@array/b7"
@@ -52,40 +52,40 @@
             a:key="vy"
             a:summary="%1$s"
             a:title="@string/y9" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="eac"
             a:summary="@string/w11"
             a:title="@string/w10" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="eac"
             a:summary="@string/l20"
             a:title="@string/l19" />
-        <com.mrepol742.webvium.SWIT
+        <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="pnd"
             a:summary="@string/x6"
             a:title="@string/n13" />
-    </com.mrepol742.webvium.PREF0>
-    <com.mrepol742.webvium.PREF0 a:title="@string/n12">
-        <com.mrepol742.webvium.SWIT
+    </com.mrepol742.webvium.Pref0>
+    <com.mrepol742.webvium.Pref0 a:title="@string/n12">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="acu"
             a:title="@string/n11" />
 
-        <com.mrepol742.webvium.PREF
+        <com.mrepol742.webvium.Pref
             a:key="cfu"
             a:title="@string/m2" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 
-    <com.mrepol742.webvium.PREF0 a:title="@string/y">
-        <com.mrepol742.webvium.SWIT
+    <com.mrepol742.webvium.Pref0 a:title="@string/y">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="tab"
             a:summary="@string/v"
             a:title="@string/t" />
-        <com.mrepol742.webvium.LIST
+        <com.mrepol742.webvium.List
             a:defaultValue="60k"
             a:dialogTitle="@string/x"
             a:entries="@array/w"
@@ -94,5 +94,5 @@
             a:summary="%1$s"
             a:title="@string/w" />
 
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 </PreferenceScreen>

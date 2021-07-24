@@ -4,7 +4,7 @@
   *
   * License under the GNU General Public License, Version 3.0 (the "License");
   * you may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at
+  * You may obtain changedTo copy of the License at
   *
   *     https://www.gnu.org/licenses/gpl-3.0.en.html
   *
@@ -31,11 +31,10 @@
  import android.util.LruCache;
  import android.view.ViewGroup;
 
- import com.mrepol742.webvium.BuildConfig;
  import com.mrepol742.webvium.R;
- import com.mrepol742.webvium.content.Intents;
- import com.mrepol742.webvium.io.StorageDirectory;
- import com.mrepol742.webvium.widget.AwesomeToast;
+ import com.mrepol742.webvium.app.Intents;
+ import com.mrepol742.webvium.app.StorageDirectory;
+ import com.mrepol742.webvium.util.AwesomeToast;
 
  import java.io.File;
 

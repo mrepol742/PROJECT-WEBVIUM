@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -19,12 +19,18 @@ package com.mrepol742.webvium;
 
 import java.io.Serializable;
 
+/*
+ * PermissionDataModelSerializable
+ */
+
+@Deprecated
 public class PDMS implements Serializable {
     public final String nm;
     public final String pm;
     public final String gt;
     public final String dnt;
 
+    @Deprecated
     public PDMS(String nm, String pm, String gt, String dnt) {
         this.nm = nm;
         this.pm = pm;

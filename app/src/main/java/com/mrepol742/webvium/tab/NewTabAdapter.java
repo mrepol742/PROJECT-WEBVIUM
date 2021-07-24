@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -31,15 +31,17 @@ import android.widget.TextView;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
-import com.mrepol742.webvium.content.Resources;
+import com.mrepol742.webvium.app.Resources;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class NewTabAdapter extends MainBaseAdapter {
     private final Context a;
     private final ArrayList<NewTabDataModel> ws;
     private final SharedPreferences sp;
 
+    @Deprecated
     public NewTabAdapter(Context ct, ArrayList<NewTabDataModel> ws) {
         super(ct);
         this.a = ct;
@@ -110,11 +112,13 @@ public class NewTabAdapter extends MainBaseAdapter {
         return view;
     }
 
+    @Deprecated
     private static class AN {
         ImageView a;
         TextView b;
         TextView c;
 
+        @Deprecated
         @Keep
         private AN() {
         }

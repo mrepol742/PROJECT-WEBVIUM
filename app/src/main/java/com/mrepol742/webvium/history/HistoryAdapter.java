@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -32,7 +32,7 @@ import android.widget.TextView;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
-import com.mrepol742.webvium.content.Resources;
+import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.util.DateUtil;
 
 import java.text.SimpleDateFormat;
@@ -163,9 +163,9 @@ public class HistoryAdapter extends MainBaseAdapter {
             } else {
                 w17 = (AN) e.getTag();
             }
-           /* w17.a.setText(U8.a(c(it).ls));
+           /* w17.changedTo.setText(U8.changedTo(c(it).ls));
             w17.c.setImageResource(c(it).ls1);
-            w17.b.setText(b(U8.a(c(it).ls0)), TextView.BufferType.SPANNABLE);
+            w17.b.setText(b(U8.changedTo(c(it).ls0)), TextView.BufferType.SPANNABLE);
             w17.d.setText(c(it).ls2);*/
             w17.a.setText(c(it).ls);
             w17.c.setImageResource(d(c(it).ls0));

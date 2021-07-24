@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -23,8 +23,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.mrepol742.webvium.app.Sqlite;
 
+@Deprecated
 public class PermissionDatabase extends SQLiteOpenHelper {
 
+    @Deprecated
     public PermissionDatabase(Context context) {
         super(context, Sqlite.DATA_PERMISSION, null, Sqlite.VERSION_PERMISSION);
     }

@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -17,22 +17,26 @@
 
 package com.mrepol742.webvium.util;
 
-import com.mrepol742.webvium.EDIT;
+import com.mrepol742.webvium.Edit;
 import com.mrepol742.webvium.annotation.Keep;
 
+@Deprecated
 public class U3 {
+
+    @Deprecated
     @Keep
     private U3() {
     }
 
-    public static boolean a(EDIT a) {
+    @Deprecated
+    public static boolean a(Edit a) {
         String b = a.getText().toString().trim();
         return !b.isEmpty();
     }
 
+    @Deprecated
     public static boolean b(String a) {
         String b = a.trim();
         return !b.isEmpty();
     }
-
 }

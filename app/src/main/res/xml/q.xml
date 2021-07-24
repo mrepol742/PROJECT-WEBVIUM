@@ -4,7 +4,7 @@
   ~
   ~ License under the GNU General Public License, Version 3.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ You may obtain changedTo copy of the License at
   ~
   ~     https://www.gnu.org/licenses/gpl-3.0.en.html
   ~
@@ -17,28 +17,28 @@
 
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
-    <com.mrepol742.webvium.SWIT
+    <com.mrepol742.webvium.Swit
         a:defaultValue="false"
         a:key="lockWn99"
         a:summary="@string/q2"
         a:title="@string/q3" />
-    <com.mrepol742.webvium.PREF
+    <com.mrepol742.webvium.Pref
         a:dependency="lockWn99"
         a:key="cHPIN"
         a:summary="@string/k25"
         a:title="@string/j38" />
-    <com.mrepol742.webvium.PREF
+    <com.mrepol742.webvium.Pref
         a:dependency="lockWn99"
         a:key="cLPIN"
         a:summary="@string/k26"
         a:title="@string/k23" />
-    <com.mrepol742.webvium.PREF0 a:title="@string/y">
-        <com.mrepol742.webvium.SWIT
+    <com.mrepol742.webvium.Pref0 a:title="@string/y">
+        <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:dependency="lockWn99"
             a:key="scrON"
             a:summary="@string/w29"
             a:title="@string/u27" />
-    </com.mrepol742.webvium.PREF0>
+    </com.mrepol742.webvium.Pref0>
 </PreferenceScreen>
 

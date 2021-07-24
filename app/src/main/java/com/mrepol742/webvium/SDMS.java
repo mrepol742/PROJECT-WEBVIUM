@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -19,9 +19,15 @@ package com.mrepol742.webvium;
 
 import java.io.Serializable;
 
+/*
+ * SearchDataModelSerializable
+ */
+
+@Deprecated
 public class SDMS implements Serializable {
     public final String sg;
 
+    @Deprecated
     public SDMS(String sg) {
         this.sg = sg;
     }
