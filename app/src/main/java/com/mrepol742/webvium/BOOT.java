@@ -38,33 +38,27 @@ public class BOOT extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context a, Intent b) {
-        try {
-            if (Objects.requireNonNull(b.getAction()).equals("android.intent.action.BOOT_COMPLETED")) {
-                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 6);
-                AlarmManager alarmMgr = (AlarmManager) a.getSystemService(Context.ALARM_SERVICE);
-                if (sp.getBoolean("qckS", false)) {
-                    Intents.b(a, QUIC.class);
-                }
-                if (sp.getBoolean("acu", true)) {
-                    PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                    alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
-                }
-                if (sp.getBoolean("pnd", true)) {
-                    PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                    alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
-                }
-                if (sp.getBoolean("fltWeb", false)) {
-                    Intents.b(a, FLOA.class);
-                }
-                if (sp.getBoolean("nCV", false)) {
-                    Intents.b(a, CLIP.class);
-                }
-            }
-        } catch (Exception en) {
-            en.printStackTrace();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 6);
+        AlarmManager alarmMgr = (AlarmManager) a.getSystemService(Context.ALARM_SERVICE);
+        if (sp.getBoolean("qckS", false)) {
+            Intents.b(a, QUIC.class);
+        }
+        if (sp.getBoolean("acu", true)) {
+            PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, UPDA.class), PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
+        }
+        if (sp.getBoolean("pnd", true)) {
+            PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, NOTI.class), PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
+        }
+        if (sp.getBoolean("fltWeb", false)) {
+            Intents.b(a, FLOA.class);
+        }
+        if (sp.getBoolean("nCV", false)) {
+            Intents.b(a, CLIP.class);
         }
     }
 }

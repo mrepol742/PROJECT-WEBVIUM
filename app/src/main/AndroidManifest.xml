@@ -849,9 +849,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver
-            a:exported="true"
-            a:name="com.mrepol742.webvium.DOWN0">
+        <receiver a:name="com.mrepol742.webvium.DOWN0">
             <intent-filter>
                 <action a:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
                 <category a:name="android.intent.category.DEFAULT" />
@@ -870,45 +868,31 @@
             a:name="com.mrepol742.webvium.SAVE"
             a:exported="false"
             a:foregroundServiceType="dataSync"
-            a:label="@string/l4"
-            a:process=":sav" />
+            a:label="@string/l4" />
 
         <service
             a:name="com.mrepol742.webvium.QUIC"
             a:exported="false"
-            a:label="@string/l33"
-            a:process=":qui" />
-<!--
-        <service
-            a:name="com.mrepol742.webvium.DOWN0"
-            a:exported="false"
-            a:foregroundServiceType="dataSync"
-            a:label="@string/n15"
-            a:process=":dow" />
-        -->
+            a:label="@string/l33" />
         
         <service
             a:name="com.mrepol742.webvium.CLIP"
             a:exported="false"
-            a:label="@string/x8"
-            a:process=":cli" />
+            a:label="@string/x8" />
 
         <service
             a:name="com.mrepol742.webvium.NOTI"
             a:exported="false"
-            a:label="@string/m6"
-            a:process=":not" />
+            a:label="@string/m6" />
 
         <service
             a:name="com.mrepol742.webvium.FLOA"
             a:exported="false"
-            a:label="@string/l32"
-            a:process=":flo" />
+            a:label="@string/l32" />
 
         <service
             a:name="com.mrepol742.webvium.UPDA"
             a:label="@string/n21"
-            a:process=":upd"
             tools:ignore="ExportedService" />
 
         <service
