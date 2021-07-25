@@ -587,7 +587,6 @@ public class Book extends BaseActivity {
                 } else {
                     while (res.moveToNext()) {
                         itemIdsh.add(res.getString(1));
-                        AwesomeToast.c(Book.this, "cursor data = " + res.getString(1));
                     }
                     if (itemIdsh.size() == 0) {
                         Book.this.runOnUiThread(new Runnable() {

@@ -37,9 +37,14 @@ import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.security.SHA;
 import com.mrepol742.webvium.net.Stream;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.Objects;
 
+import org.json.*;
 /*
  * @NotificationService
  */
@@ -60,22 +65,16 @@ public class Noti extends Service {
                 @Override
                 public void run() {
                     try {
-                        String neTf = Stream.f("https://github.com/" + Noti.this.getString(R.string.github_username) + "/" + Noti.this.getString(R.string.github_repository) + "/blob/" + Noti.this.getString(R.string.github_branch) + "/" + Noti.this.getString(R.string.github_path) + "/newNotification.array?raw=true", "742");
-                        if (neTf.equals("742")) {
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, 3);
-                            AlarmManager alarmMgr = (AlarmManager) Noti.this.getSystemService(Context.ALARM_SERVICE);
-                            PendingIntent it = PendingIntent.getService(Noti.this, 0, new Intent(Noti.this, Noti.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
+                        String[] neTf = a(Stream.f("https://github.com/" + Noti.this.getString(R.string.github_username) + "/" + Noti.this.getString(R.string.github_repository) + "/blob/" + Noti.this.getString(R.string.github_branch) + "/" + Noti.this.getString(R.string.github_path) + "/Noti.json?raw=true", "742"));
+                        if (neTf[0].equals("742")) {
+                           b();
                         } else {
-                            String[] sp = neTf.split(";");
                             SharedPreferences j988 = Noti.this.getSharedPreferences("wv", 0);
-                            if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(SHA.a("SHA-1", sp[0])) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(SHA.a("SHA-1", sp[1]))) {
-                                Noti.this.f(sp[0], sp[1], sp[2]);
+                            if (!Objects.requireNonNull(j988.getString("notif1", "")).equals(SHA.a("SHA-1", neTf[0])) && !Objects.requireNonNull(j988.getString("notif2", "")).equals(SHA.a("SHA-1", neTf[1]))) {
+                                Noti.this.f(neTf[0], neTf[1], neTf[2]);
                                 SharedPreferences.Editor gujh = j988.edit();
-                                gujh.putString("notif1", SHA.a("SHA-1", sp[0]));
-                                gujh.putString("notif2", SHA.a("SHA-1", sp[1]));
+                                gujh.putString("notif1", SHA.a("SHA-1", neTf[0]));
+                                gujh.putString("notif2", SHA.a("SHA-1", neTf[1]));
                                 gujh.apply();
                             }
                         }
@@ -85,6 +84,8 @@ public class Noti extends Service {
                 }
             };
             new Thread(runnable).start();
+        } else {
+            b();
         }
         stopSelf();
         return super.onStartCommand(a, c, d);
@@ -153,6 +154,27 @@ public class Noti extends Service {
         m.addAction(new android.app.Notification.Action(R.drawable.q, String.format(getString(R.string.g28), Objects.requireNonNull(Uri.parse(url).getHost())), pi235));
         NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nmc.notify(Notifications.a, m.build());
+    }
+
+    private String[] a(String sg) {
+        try {
+            JSONObject root = new JSONObject(sg);
+            return new String[]{root.getString("title"),
+                    root.getString("content"),
+                    root.getString("url")};
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new String[]{"742", null, null};
+    }
+
+    private void b() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 3);
+        AlarmManager alarmMgr = (AlarmManager) Noti.this.getSystemService(Context.ALARM_SERVICE);
+        PendingIntent it = PendingIntent.getService(Noti.this, 0, new Intent(Noti.this, Noti.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
     }
 
 }

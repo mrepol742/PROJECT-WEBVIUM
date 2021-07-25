@@ -25,6 +25,7 @@
     a:paddingEnd="12dp">
 
     <ImageView
+        a:src="@drawable/a15"
         a:id="@id/n20"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
@@ -47,42 +48,40 @@
             a:maxLines="1"
             a:textSize="@dimen/c" />
 
-        <LinearLayout
+        <RelativeLayout
             a:layout_width="match_parent"
             a:layout_height="wrap_content">
 
             <TextView
-                a:id="@id/b11"
-                a:layout_width="0dp"
-                a:layout_height="wrap_content"
-                a:layout_weight="1.0" a:text="https://something.cs://something.cs://something.comaaaaaaaaa"
-                a:ellipsize="end"
-                a:paddingStart="0dp"
-                a:paddingEnd="4dp"
-                a:maxLines="1"
-                a:textSize="@dimen/c" />
-
-            <TextView
                 a:id="@id/b12"
-                a:layout_width="0dp"
+                a:layout_width="wrap_content"
                 a:layout_height="wrap_content"
-                a:layout_weight="0.3"
-                a:gravity="center"
-                a:ellipsize="end" a:text="300KB"
+                a:text="300KB"
+                a:layout_alignParentStart="true"
                 a:maxLines="1"
                 a:textSize="@dimen/c" />
 
             <TextView
                 a:id="@id/b13"
-                a:layout_width="0dp"
+                a:layout_width="wrap_content"
                 a:layout_height="wrap_content"
-                a:layout_weight=".5"
-                a:gravity="end"
-                a:ellipsize="end" a:text="20 Dec 2021"
+                a:layout_alignParentEnd="true"
+                a:text="20 Dec 2021"
                 a:maxLines="1"
                 a:textSize="@dimen/c" />
 
-        </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            a:id="@id/b11"
+            a:layout_width="match_parent"
+            a:layout_height="wrap_content"
+            a:text="https://something.cs://something.cs://something.comaaaaaaaaa"
+            a:ellipsize="end"
+            a:paddingStart="0dp"
+            a:paddingEnd="4dp"
+            a:maxLines="1"
+            a:textSize="@dimen/c" />
 
     </LinearLayout>
 

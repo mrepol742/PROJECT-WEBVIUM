@@ -11,6 +11,7 @@
   <img src="https://img.shields.io/badge/HTML-blue.svg" />
   <img src="https://img.shields.io/badge/CSS-blue.svg" />
   <img src="https://img.shields.io/badge/JavaScript-blue.svg" />
+    <img src="https://img.shields.io/badge/JSON-blue.svg" />
 </p>
 <p align="center">
  <img src="https://github.com/mrepol742/PROJECT-WEBVIUM/actions/workflows/gradle.yml/badge.svg" />

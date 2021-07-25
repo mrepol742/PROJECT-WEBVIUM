@@ -46,6 +46,8 @@ public class Back1 extends BaseActivity {
         if (Permission.check(this, Permission.STORAGE, 1)) {
             Intents.b(this, Back.class);
             finish();
+        } else {
+            finish();
         }
     }
 

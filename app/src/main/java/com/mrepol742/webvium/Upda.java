@@ -40,6 +40,7 @@ import com.mrepol742.webvium.net.Stream;
 import java.util.Calendar;
 import java.util.Objects;
 
+import org.json.*;
 /*
  * @UpdateService
  */
@@ -61,15 +62,10 @@ public class Upda extends Service {
                 public void run() {
                     try {
                         int b = Integer.parseInt(Package.e(Upda.this).replaceAll("\\.", ""));
-                        int newUpdate = Stream.i("https://github.com/" + Upda.this.getString(R.string.github_username) + "/" + Upda.this.getString(R.string.github_repository) + "/blob/" + Upda.this.getString(R.string.github_branch) + "/" + Upda.this.getString(R.string.github_path) + "/newVersion.int?raw=true");
-                        if (newUpdate == 0) {
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, 3);
-                            AlarmManager alarmMgr = (AlarmManager) Upda.this.getSystemService(Context.ALARM_SERVICE);
-                            PendingIntent it = PendingIntent.getService(Upda.this, 0, new Intent(Upda.this, Upda.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
-                        } else if (newUpdate > b) {
+                        int[] newUpdate = a(Stream.f("https://github.com/" + Upda.this.getString(R.string.github_username) + "/" + Upda.this.getString(R.string.github_repository) + "/blob/" + Upda.this.getString(R.string.github_branch) + "/" + Upda.this.getString(R.string.github_path) + "/Upda.json?raw=true", "742"));
+                        if (newUpdate[0] == 0) {
+                            b();
+                        } else if (newUpdate[0] > b) {
                             MainNotification.b(Upda.this, Upda.this.getString(R.string.x11), Upda.this.getString(R.string.z2));
                             android.app.Notification.Builder m = Notifications.a(Upda.this, Upda.this.getString(R.string.x11));
                             m.setSmallIcon(R.drawable.j);
@@ -125,6 +121,8 @@ public class Upda extends Service {
                 }
             };
             new Thread(runnable).start();
+        } else {
+            b();
         }
         stopSelf();
         return super.onStartCommand(a, c, d);
@@ -134,4 +132,24 @@ public class Upda extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    private int[] a(String sg) {
+        try {
+            JSONObject root = new JSONObject(sg);
+            return new int[]{root.getInt("versionName"), root.getInt("versionCode")};
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new int[]{0, 0};
+    }
+
+    private void b() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 3);
+        AlarmManager alarmMgr = (AlarmManager) Upda.this.getSystemService(Context.ALARM_SERVICE);
+        PendingIntent it = PendingIntent.getService(Upda.this, 0, new Intent(Upda.this, Upda.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
+    }
+
 }

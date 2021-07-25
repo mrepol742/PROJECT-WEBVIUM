@@ -764,21 +764,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver a:name="com.mrepol742.webvium.Down0">
-            <intent-filter>
-                <action a:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
-                <category a:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action a:name="android.intent.action.VIEW_DOWNLOADS" />
-                <category a:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action a:name="android.intent.action.DOWNLOAD_COMPLETE" />
-                <category a:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
         <service
             a:name="com.mrepol742.webvium.Save"
             a:exported="false"

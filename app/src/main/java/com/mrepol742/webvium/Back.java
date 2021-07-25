@@ -61,7 +61,6 @@ public class Back extends Service {
                     if (new java.io.File(sg1).exists()) {
                         stopSelf();
                     }
-                    try {
                         int t = 10;
                         String sg = Back.this.getPackageName();
                         String sg0 = StorageDirectory.getBaseApk();
@@ -84,10 +83,6 @@ public class Back extends Service {
                                 break;
                             }
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
