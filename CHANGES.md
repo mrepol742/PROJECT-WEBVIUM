@@ -22,3 +22,5 @@
 * updated app shortcuts
 * fixed security issues on Javascript side
 * deleted CODE_OF_CONDUCT.md who the hell reads them anyway
+* simplified fragments
+* delete e3.png

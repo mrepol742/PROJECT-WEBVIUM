@@ -36,7 +36,7 @@ import com.mrepol742.webvium.setting.fragment.AccessibilityFragment;
 import com.mrepol742.webvium.setting.fragment.AdvancedFragment;
 import com.mrepol742.webvium.setting.fragment.DatabaseFragment;
 import com.mrepol742.webvium.setting.fragment.DownloadFragment;
-import com.mrepol742.webvium.setting.fragment.ExperimentalFragment;
+import com.mrepol742.webvium.setting.fragment.DevelopmentFragment;
 import com.mrepol742.webvium.setting.fragment.GeneralFragment;
 import com.mrepol742.webvium.setting.fragment.InterfaceFragment;
 import com.mrepol742.webvium.setting.fragment.PretendModeFragment;
@@ -178,7 +178,7 @@ public class Sett extends BaseActivity {
                     h18.setText(getString(R.string.l));
                     break;
                 case FRAGMENT_EXPERIMENTAL:
-                    as(i, new ExperimentalFragment());
+                    as(i, new DevelopmentFragment());
                     h18.setText(getString(R.string.t7));
                     break;
                 case FRAGMENT_DATABASE:

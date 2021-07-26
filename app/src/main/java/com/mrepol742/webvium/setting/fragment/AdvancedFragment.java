@@ -199,8 +199,29 @@ public class AdvancedFragment extends BasePreferenceFragment {
             pc.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                 @Override
-                public boolean onPreferenceClick(Preference a) {
-                    AdvancedFragment.this.b26();
+                public boolean onPreferenceClick(Preference a5) {
+                    final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                    a.setCancelable(true);
+                    a.setTitle(getString(R.string.c));
+                    a.setMessage(getString(R.string.a33));
+                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            WebStorage.getInstance().deleteAllData();
+                            AwesomeToast.b(getActivity(), AdvancedFragment.this.getString(R.string.a34));
+                            a12.dismiss();
+
+                        }
+                    });
+                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a1, int intetg) {
+                            a1.dismiss();
+                        }
+                    });
+                    a.create().show();
                     return true;
                 }
             });
@@ -209,7 +230,10 @@ public class AdvancedFragment extends BasePreferenceFragment {
 
                 @Override
                 public boolean onPreferenceClick(Preference a) {
-                    AdvancedFragment.this.b16();
+                    Intent i = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                    i.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, new ComponentName(getActivity(), Devi.class));
+                    i.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "");
+                    startActivityForResult(i, 5);
                     return true;
                 }
             });
@@ -224,42 +248,6 @@ public class AdvancedFragment extends BasePreferenceFragment {
         if (r7 != null) {
             getActivity().unregisterReceiver(r7);
         }
-    }
-
-    private void b16() {
-        Intent i = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-        i.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, new ComponentName(getActivity(), Devi.class));
-        i.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "");
-        startActivityForResult(i, 5);
-    }
-
-    private void b26() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.c));
-        a.setMessage(getString(R.string.a33));
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                WebStorage.getInstance().deleteAllData();
-                AdvancedFragment.this.g(AdvancedFragment.this.getString(R.string.a34));
-                a12.dismiss();
-
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void g(String a) {
-        AwesomeToast.b(getActivity(), a);
     }
 
     private class R7 extends BroadcastReceiver {

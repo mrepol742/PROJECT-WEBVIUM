@@ -81,7 +81,13 @@ public class SecurityLockFragment extends BasePreferenceFragment {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
-                        SecurityLockFragment.this.a5();
+                        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
+                        String sg = a.getString("ajGjbduTwibdi", "");
+                        if (sg == null) {
+                            b();
+                        } else {
+                            d();
+                        }
                     } else {
                         SecurityLockFragment.this.e();
                     }
@@ -116,16 +122,6 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         super.onDestroy();
         if (r7 != null) {
             getActivity().unregisterReceiver(r7);
-        }
-    }
-
-    private void a5() {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String sg = a.getString("ajGjbduTwibdi", "");
-        if (sg == null || !U3.b(sg)) {
-            b();
-        } else {
-            d();
         }
     }
 
@@ -185,7 +181,10 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SecurityLockFragment.this.c(a67.getText().toString());
+                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                SharedPreferences.Editor b5 = a1.edit();
+                b5.putString("ajGjbduTwibdi", SHA.a("SHA-512", a67.getText().toString()));
+                b5.apply();
                 AwesomeToast.a(SecurityLockFragment.this.getActivity(), SecurityLockFragment.this.getActivity().getResources().getString(R.string.l3), 0);
                 spe.setChecked(true);
                 a.dismiss();
@@ -270,13 +269,6 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    private void c(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        SharedPreferences.Editor b5 = a.edit();
-        b5.putString("ajGjbduTwibdi", SHA.a("SHA-512", a1));
-        b5.apply();
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void d() {
         AlertDialog.Builder a5 = new AlertDialog.Builder(getActivity());
@@ -314,7 +306,16 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SecurityLockFragment.this.h(e15.getText().toString());
+                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a1.getString("ajGjbduTwibdi", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e15.getText().toString()).equals(c727)) {
+                        spe.setChecked(true);
+                    } else {
+                        spe.setChecked(false);
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                    }
+                }
                 a.dismiss();
             }
         });
@@ -401,7 +402,16 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SecurityLockFragment.this.g(e16.getText().toString());
+                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a1.getString("ajGjbduTwibdi", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e16.getText().toString()).equals(c727)) {
+                        spe.setChecked(false);
+                    } else {
+                        spe.setChecked(true);
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                    }
+                }
                 a.dismiss();
             }
         });
@@ -449,32 +459,6 @@ public class SecurityLockFragment extends BasePreferenceFragment {
             }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-    }
-
-    private void h(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("ajGjbduTwibdi", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                spe.setChecked(true);
-            } else {
-                spe.setChecked(false);
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
-            }
-        }
-    }
-
-    private void g(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("ajGjbduTwibdi", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                spe.setChecked(false);
-            } else {
-                spe.setChecked(true);
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
-            }
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -552,7 +536,18 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SecurityLockFragment.this.j(e15.getText().toString(), l15.getText().toString());
+                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a1.getString("ajGjbduTwibdi", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e15.getText().toString()).equals(c727)) {
+                        SharedPreferences.Editor b5 = a1.edit();
+                        b5.putString("ajGjbduTwibdi", SHA.a("SHA-512", l15.getText().toString()));
+                        b5.apply();
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k22), 0);
+                    } else {
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                    }
+                }
                 a.dismiss();
             }
         });
@@ -672,21 +667,6 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    private void j(String a1, String a2) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("ajGjbduTwibdi", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                SharedPreferences.Editor b5 = a.edit();
-                b5.putString("ajGjbduTwibdi", SHA.a("SHA-512", a2));
-                b5.apply();
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k22), 0);
-            } else {
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
-            }
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void k() {
         AlertDialog.Builder a5 = new AlertDialog.Builder(getActivity());
@@ -724,7 +704,19 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SecurityLockFragment.this.l(e16.getText().toString());
+                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a1.getString("ajGjbduTwibdi", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e16.getText().toString()).equals(c727)) {
+                        SharedPreferences.Editor b5 = a1.edit();
+                        b5.clear();
+                        b5.apply();
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k24), 0);
+                        spe.setChecked(false);
+                    } else {
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
+                    }
+                }
                 a.dismiss();
             }
         });
@@ -771,22 +763,6 @@ public class SecurityLockFragment extends BasePreferenceFragment {
             }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-    }
-
-    private void l(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("ajGjbduTwibdi", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                SharedPreferences.Editor b5 = a.edit();
-                b5.clear();
-                b5.apply();
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k24), 0);
-                spe.setChecked(false);
-            } else {
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.l2), 0);
-            }
-        }
     }
 
     private class R7 extends BroadcastReceiver {

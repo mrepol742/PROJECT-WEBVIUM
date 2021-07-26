@@ -65,46 +65,39 @@ public class GeneralFragment extends BasePreferenceFragment {
                 a5(R.xml.c);
             }
             final List hj9 = (List) findPreference("general");
-
             final Edit0 hj89 = (Edit0) findPreference("cGeneral");
-
-            final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
             SharedPreferences a19 = getActivity().getSharedPreferences("wv", 0);
             final String a20 = a19.getString("MyURL", c48());
-
-            if (Objects.equals(sp.getString("general", ""), "1o")) {
+            if (Objects.equals(a221().getString("general", ""), "1o")) {
                 hj9.setSummary(getActivity().getResources().getString(R.string.x17));
                 hj89.setEnabled(false);
-                hj89.setSummary(sp.getString("cGeneral", ""));
-            } else if (Objects.equals(sp.getString("general", ""), "7o")) {
+                hj89.setSummary(a221().getString("cGeneral", ""));
+            } else if (Objects.equals(a221().getString("general", ""), "7o")) {
                 hj9.setSummary(a20);
                 hj89.setEnabled(false);
-                hj89.setSummary(sp.getString("cGeneral", ""));
-            } else if (Objects.equals(sp.getString("general", ""), "30o")) {
+                hj89.setSummary(a221().getString("cGeneral", ""));
+            } else if (Objects.equals(a221().getString("general", ""), "30o")) {
                 hj9.setSummary(getActivity().getResources().getString(R.string.c26));
                 hj89.setEnabled(false);
-                hj89.setSummary(sp.getString("cGeneral", ""));
-            } else if (Objects.equals(sp.getString("general", ""), "60o")) {
+                hj89.setSummary(a221().getString("cGeneral", ""));
+            } else if (Objects.equals(a221().getString("general", ""), "60o")) {
                 hj9.setSummary(getActivity().getResources().getString(R.string.q20));
                 hj89.setEnabled(true);
-                String pre = sp.getString("cGeneral", "");
-                if (pre != null && U3.b(pre)) {
+                String pre = a221().getString("cGeneral", "");
+                if (pre != null) {
                     hj89.setSummary(pre);
                 } else {
                     hj89.setSummary(c48());
                 }
             }
-
             hj89.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue != null && U3.b((newValue.toString()))) {
+                    if (newValue != null) {
                         hj89.setSummary(newValue.toString());
                     } else {
                         hj89.setSummary(GeneralFragment.this.c48());
-
                     }
                     return true;
                 }
@@ -116,24 +109,23 @@ public class GeneralFragment extends BasePreferenceFragment {
                     if (newValue.toString().equals("1o")) {
                         hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.x17));
                         hj89.setEnabled(false);
-                        hj89.setSummary(sp.getString("cGeneral", ""));
+                        hj89.setSummary(a221().getString("cGeneral", ""));
                     } else if (newValue.toString().equals("7o")) {
                         hj9.setSummary(a20);
                         hj89.setEnabled(false);
-                        hj89.setSummary(sp.getString("cGeneral", ""));
+                        hj89.setSummary(a221().getString("cGeneral", ""));
                     } else if (newValue.toString().equals("30o")) {
                         hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.c26));
                         hj89.setEnabled(false);
-                        hj89.setSummary(sp.getString("cGeneral", ""));
+                        hj89.setSummary(a221().getString("cGeneral", ""));
                     } else if (newValue.toString().equals("60o")) {
                         hj89.setEnabled(true);
                         hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.q20));
-                        String pre = sp.getString("cGeneral", "");
-                        if (pre != null && U3.b(pre)) {
+                        String pre = a221().getString("cGeneral", "");
+                        if (pre != null) {
                             hj89.setSummary(pre);
                         } else {
                             hj89.setSummary(GeneralFragment.this.c48());
-
                         }
                     }
                     return true;
@@ -146,7 +138,6 @@ public class GeneralFragment extends BasePreferenceFragment {
                 public boolean onPreferenceClick(Preference a) {
                     Intents.b(GeneralFragment.this.getActivity(), Upda.class);
                     AwesomeToast.b(GeneralFragment.this.getActivity(), GeneralFragment.this.getString(R.string.m30));
-
                     return true;
                 }
             });
@@ -155,7 +146,7 @@ public class GeneralFragment extends BasePreferenceFragment {
         }
     }
 
-    public String c48() {
+    private String c48() {
         switch (Objects.requireNonNull(a221().getString("searchP", "7b"))) {
             case "1b":
                 return eng[1];

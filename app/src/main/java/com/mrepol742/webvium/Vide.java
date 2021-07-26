@@ -86,12 +86,18 @@ public class Vide extends BaseActivity {
 
             @Override
             public Bitmap getDefaultVideoPoster() {
-                return a();
+                if (new File(StorageDirectory.getVideoPoster(Vide.this)).exists()) {
+                    return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(Vide.this));
+                }
+                return null;
             }
 
             @Override
             public View getVideoLoadingProgressView() {
-                return b();
+                View v = View.inflate(Vide.this, R.layout.a21, null);
+                ImageView v4 = v.findViewById(R.id.n28);
+                v4.setImageResource(R.drawable.a21);
+                return v;
             }
         });
         w4.loadDataWithBaseURL(null, Base64.decode("PCFET0NUW VBFIGh0bWw+PGh0bWw+PGhlYWQ+PHRpdGxlPldlYnZpdW0gVmlkZW8gUG9zdGVyPC90aXRsZT48bWV0YSBuYW1lPVwidmlld3BvcnRcIiBjb250ZW50PVwid2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCwgbW F4aW11bS1zY2FsZT0xLjAsIG1pbmltdW0tc2NhbGU9MS4wLCB1c2VyLXNjYWxhYmxlPW5vXCIvPjwvaGVhZD48Ym9keT48Y2VudGVyPjx2aWRlbyBzdHlsZT1cIm1heC13aWR0a DogMTAwJTsgaGVpZ2h0OiBhdXRvO1wiLz48L2NlbnRlcj48L2Jv ZHk+PC9odG1sPg").replaceAll("\\\\", ""), "text/html", w4.getTextEncoding(), null);
@@ -105,19 +111,5 @@ public class Vide extends BaseActivity {
             w4.destroy();
         }
         super.onDestroy();
-    }
-
-    public Bitmap a() {
-        if (new File(StorageDirectory.getVideoPoster(this)).exists()) {
-            return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(this));
-        }
-        return BitmapFactory.decodeResource(getResources(), R.drawable.e3);
-    }
-
-    public View b() {
-        View v = View.inflate(this, R.layout.a21, null);
-        ImageView v4 = v.findViewById(R.id.n28);
-        v4.setImageResource(R.drawable.a21);
-        return v;
     }
 }

@@ -51,11 +51,9 @@ public class VideoFragment extends BasePreferenceFragment {
                 @Override
                 public boolean onPreferenceClick(Preference a) {
                     Intents.k(VideoFragment.this.getActivity(), Settings.ACTION_CAPTIONING_SETTINGS);
-
                     return true;
                 }
             });
-
             Preference o5 = findPreference("shDCu");
             o5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -70,7 +68,10 @@ public class VideoFragment extends BasePreferenceFragment {
 
                 @Override
                 public boolean onPreferenceClick(Preference a) {
-                    VideoFragment.this.b24();
+                    Intent d = new Intent(Intent.ACTION_GET_CONTENT);
+                    d.setType("image/*");
+                    d.addCategory(Intent.CATEGORY_OPENABLE);
+                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 7423);
                     return true;
                 }
             });
@@ -125,12 +126,5 @@ public class VideoFragment extends BasePreferenceFragment {
         } else {
             AwesomeToast.b(getActivity(), getString(R.string.p30));
         }
-    }
-
-    private void b24() {
-        Intent d = new Intent(Intent.ACTION_GET_CONTENT);
-        d.setType("image/*");
-        d.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 7423);
     }
 }

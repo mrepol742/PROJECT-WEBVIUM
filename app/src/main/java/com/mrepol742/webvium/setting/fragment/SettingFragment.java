@@ -119,7 +119,52 @@ public class SettingFragment extends BaseFragment {
                 if (bn) {
                     SettingFragment.this.b(c);
                 } else {
-                    SettingFragment.this.a(c);
+                    switch (c) {
+                        case 0:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_GENERAL, Sett.class);
+                            break;
+                        case 1:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_INTERFACE, Sett.class);
+                            break;
+                        case 2:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_SEARCH, Sett.class);
+                            break;
+                        case 3:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_DOWNLOAD, Sett.class);
+                            break;
+                        case 4:
+                            if (a221().getBoolean("lockWn99", false)) {
+                                Intent it = new Intent(getActivity(), Lock.class);
+                                startActivityForResult(it, 345);
+                            } else {
+                                Intents.e(getActivity(), "search", Sett.FRAGMENT_PRIVACY, Sett.class);
+                            }
+                            break;
+                        case 5:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_ACCESSIBILITY, Sett.class);
+                            break;
+                        case 6:
+                            if (a221().getBoolean("lockWn99", false)) {
+                                Intent it = new Intent(getActivity(), Lock.class);
+                                startActivityForResult(it, 456);
+                            } else {
+                                Intents.e(getActivity(), "search", Sett.FRAGMENT_ADVANCED, Sett.class);
+                            }
+                            break;
+                        case 7:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_VIDEO, Sett.class);
+                            break;
+                        case 8:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_TOOL, Sett.class);
+                            break;
+                        case 9:
+                            Intents.a(getActivity(), Mana.class);
+                            break;
+
+                        case 10:
+                            Intents.e(getActivity(), "search", Sett.FRAGMENT_EXPERIMENTAL, Sett.class);
+                            break;
+                    }
                 }
             }
         });
@@ -134,7 +179,10 @@ public class SettingFragment extends BaseFragment {
 
                 @Override
                 public void onClick(View view) {
-                    SettingFragment.this.e();
+                    Intent b = new Intent("android.intent.action.SEND");
+                    b.setType("text/plain");
+                    b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
+                    startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
                 }
             });
             iv0.setOnClickListener(new View.OnClickListener() {
@@ -166,76 +214,20 @@ public class SettingFragment extends BaseFragment {
         }
     }
 
-    private void a(int a) {
-
-        switch (a) {
-
-            case 0:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_GENERAL, Sett.class);
-                break;
-            case 1:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_INTERFACE, Sett.class);
-                break;
-            case 2:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_SEARCH, Sett.class);
-                break;
-            case 3:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_DOWNLOAD, Sett.class);
-                break;
-            case 4:
-                if (a221().getBoolean("lockWn99", false)) {
-                    Intent it = new Intent(getActivity(), Lock.class);
-                    startActivityForResult(it, 345);
-                } else {
-                    Intents.e(getActivity(), "search", Sett.FRAGMENT_PRIVACY, Sett.class);
-                }
-                break;
-            case 5:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_ACCESSIBILITY, Sett.class);
-                break;
-            case 6:
-                if (a221().getBoolean("lockWn99", false)) {
-                    Intent it = new Intent(getActivity(), Lock.class);
-                    startActivityForResult(it, 456);
-                } else {
-                    Intents.e(getActivity(), "search", Sett.FRAGMENT_ADVANCED, Sett.class);
-                }
-                break;
-            case 7:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_VIDEO, Sett.class);
-                break;
-            case 8:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_TOOL, Sett.class);
-                break;
-            case 9:
-                Intents.a(getActivity(), Mana.class);
-                break;
-
-            case 10:
-                Intents.e(getActivity(), "search", Sett.FRAGMENT_EXPERIMENTAL, Sett.class);
-                break;
-        }
-    }
-
     private void b(int a) {
         int i = R.id.i6;
         switch (a) {
-
             case 0:
                 as(i, new GeneralFragment());
-                // h18.setText(getString(R.string.changedTo));
                 break;
             case 1:
                 as(i, new InterfaceFragment());
-                // h18.setText(getString(R.string.o10));
                 break;
             case 2:
                 as(i, new SearchFragment());
-                // h18.setText(getString(R.string.e));
                 break;
             case 3:
                 as(i, new DownloadFragment());
-                // h18.setText(getString(R.string.f));
                 break;
             case 4:
                 if (a221().getBoolean("lockWn99", false)) {
@@ -243,12 +235,10 @@ public class SettingFragment extends BaseFragment {
                     startActivityForResult(it, 345);
                 } else {
                     as(i, new PrivacyFragment());
-                    // h18.setText(getString(R.string.b));
                 }
                 break;
             case 5:
                 as(i, new AccessibilityFragment());
-                //h18.setText(getString(R.string.g));
                 break;
             case 6:
                 if (a221().getBoolean("lockWn99", false)) {
@@ -256,24 +246,19 @@ public class SettingFragment extends BaseFragment {
                     startActivityForResult(it, 456);
                 } else {
                     as(i, new AdvancedFragment());
-                    // h18.setText(getString(R.string.c));
                 }
                 break;
             case 7:
                 as(i, new VideoFragment());
-                //  h18.setText(getString(R.string.i));
                 break;
             case 8:
                 as(i, new ToolFragment());
-                //  h18.setText(getString(R.string.h10));
                 break;
             case 9:
                 Intents.a(getActivity(), Mana.class);
                 break;
-
             case 10:
-                as(i, new ExperimentalFragment());
-                // h18.setText(getString(R.string.t7));
+                as(i, new DevelopmentFragment());
                 break;
         }
     }
@@ -290,13 +275,4 @@ public class SettingFragment extends BaseFragment {
             ft.commit();
         }
     }
-
-    private void e() {
-        Intent b = new Intent("android.intent.action.SEND");
-        b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
-        startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
-    }
-
-
 }

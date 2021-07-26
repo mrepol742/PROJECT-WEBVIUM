@@ -36,6 +36,7 @@ import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.Stream;
+import com.mrepol742.webvium.util.JSON;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -62,7 +63,7 @@ public class Upda extends Service {
                 public void run() {
                     try {
                         int b = Integer.parseInt(Package.e(Upda.this).replaceAll("\\.", ""));
-                        int[] newUpdate = a(Stream.f("https://github.com/" + Upda.this.getString(R.string.github_username) + "/" + Upda.this.getString(R.string.github_repository) + "/blob/" + Upda.this.getString(R.string.github_branch) + "/" + Upda.this.getString(R.string.github_path) + "/Upda.json?raw=true", "742"));
+                        int[] newUpdate = JSON.getUpdate(Stream.f("https://github.com/" + Upda.this.getString(R.string.github_username) + "/" + Upda.this.getString(R.string.github_repository) + "/blob/" + Upda.this.getString(R.string.github_branch) + "/" + Upda.this.getString(R.string.github_path) + "/Upda.json?raw=true", "742"));
                         if (newUpdate[0] == 0) {
                             b();
                         } else if (newUpdate[0] > b) {
@@ -131,16 +132,6 @@ public class Upda extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    private int[] a(String sg) {
-        try {
-            JSONObject root = new JSONObject(sg);
-            return new int[]{root.getInt("versionName"), root.getInt("versionCode")};
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return new int[]{0, 0};
     }
 
     private void b() {

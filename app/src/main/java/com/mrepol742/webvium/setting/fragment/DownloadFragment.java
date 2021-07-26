@@ -49,8 +49,27 @@ public class DownloadFragment extends BasePreferenceFragment {
                 d.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                     @Override
-                    public boolean onPreferenceClick(Preference a) {
-                        DownloadFragment.this.p();
+                    public boolean onPreferenceClick(Preference a5) {
+                        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                        a.setCancelable(true);
+                        a.setTitle(getString(R.string.f));
+                        a.setMessage(Html.b(getString(R.string.u12)));
+                        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a12, int intetg) {
+                                Intents.k(DownloadFragment.this.getActivity(), Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                                AwesomeToast.d(DownloadFragment.this.getActivity(), Html.b(DownloadFragment.this.getString(R.string.a25)).toString());
+                            }
+                        });
+                        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a1, int intetg) {
+                                a1.dismiss();
+                            }
+                        });
+                        a.create().show();
                         return true;
                     }
                 });
@@ -59,29 +78,4 @@ public class DownloadFragment extends BasePreferenceFragment {
             ex.printStackTrace();
         }
     }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    private void p() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.f));
-        a.setMessage(Html.b(getString(R.string.u12)));
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                Intents.k(DownloadFragment.this.getActivity(), Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-                AwesomeToast.d(DownloadFragment.this.getActivity(), Html.b(DownloadFragment.this.getString(R.string.a25)).toString());
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
 }

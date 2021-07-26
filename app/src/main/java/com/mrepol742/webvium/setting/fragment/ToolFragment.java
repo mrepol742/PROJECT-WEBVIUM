@@ -53,7 +53,9 @@ public class ToolFragment extends BasePreferenceFragment {
 
                     @Override
                     public boolean onPreferenceClick(Preference a) {
-                        ToolFragment.this.j();
+                        if (Permission.check(getActivity(), Permission.STORAGE, 2)) {
+                            f();
+                        }
                         return true;
                     }
                 });
@@ -65,75 +67,42 @@ public class ToolFragment extends BasePreferenceFragment {
 
     @Override
     @TargetApi(Build.VERSION_CODES.M)
-    public void onRequestPermissionsResult(int a, String[] b, int[] c) {
-        super.onRequestPermissionsResult(a, b, c);
-        if (a == 2) {
+    public void onRequestPermissionsResult(int a1, String[] b, int[] c) {
+        super.onRequestPermissionsResult(a1, b, c);
+        if (a1 == 2) {
             if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
                 f();
             } else {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    d(getString(R.string.u15));
+                    AwesomeToast.c(getActivity(), getString(R.string.u15));
                 } else {
-                    a(getString(R.string.u16));
+                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                    a.setCancelable(true);
+                    a.setTitle(getString(R.string.s26));
+                    a.setMessage(Html.b(getString(R.string.u16)));
+                    a.setPositiveButton(getString(R.string.u14), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            Intents.l(ToolFragment.this.getActivity(), Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
+                            a12.dismiss();
+                        }
+                    });
+                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a1, int intetg) {
+                            a1.dismiss();
+                        }
+                    });
+                    a.create().show();
                 }
             }
         }
-    }
-
-    private void a(String jk) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.s26));
-        a.setMessage(Html.b(jk));
-        a.setPositiveButton(getString(R.string.u14), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                Intents.l(ToolFragment.this.getActivity(), Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", Package.b(), null));
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void d(String a) {
-        AwesomeToast.c(getActivity(), a);
-    }
-
-    private void j() {
-        if (Permission.check(getActivity(), Permission.STORAGE, 2)) {
-            f();
-        }
-    }
-
-    private void g(String a) {
-        AwesomeToast.b(getActivity(), a);
-    }
-
-    private void h(final String a) {
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    FileUtil.deleteAll(new java.io.File(a));
-                } catch (Exception en) {
-                    en.printStackTrace();
-                }
-            }
-        };
-        new Thread(p15).start();
     }
 
     private void f() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.h10));
         a.setMessage(getString(R.string.u9));
@@ -141,9 +110,20 @@ public class ToolFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                ToolFragment.this.h(StorageDirectory.getWebviumDir() + "/Screenshot/");
-                ToolFragment.this.g(ToolFragment.this.getString(R.string.l16));
+                Runnable p15 = new Runnable() {
 
+                    @Override
+                    public void run() {
+                        try {
+                            FileUtil.deleteAll(new java.io.File(StorageDirectory.getWebviumDir() + "/Screenshot/"));
+                        } catch (Exception en) {
+                            en.printStackTrace();
+                        }
+                    }
+                };
+                new Thread(p15).start();
+                AwesomeToast.b(getActivity(), getString(R.string.l16));
+                a12.dismiss();
             }
         });
         a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {

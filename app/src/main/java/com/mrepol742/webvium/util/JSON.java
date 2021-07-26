@@ -15,27 +15,27 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.setting.fragment;
+package com.mrepol742.webvium.util;
 
-import android.os.Build;
-import android.os.Bundle;
+import com.mrepol742.webvium.annotation.Keep;
 
-import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.app.base.BasePreferenceFragment;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class ExperimentalFragment extends BasePreferenceFragment {
+public class JSON {
 
-    @Override
-    public void onCreate(Bundle b1) {
-        super.onCreate(b1);
+    @Keep
+    private JSON() {
+
+    }
+
+    public static int[] getUpdate(String sg) {
         try {
-            if (Build.VERSION.SDK_INT >= 29) {
-                a5(R.xml.a7);
-            } else {
-                a5(R.xml.u);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            JSONObject root = new JSONObject(sg);
+            return new int[]{root.getInt("versionName"), root.getInt("versionCode")};
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return new int[]{0, 0};
     }
 }

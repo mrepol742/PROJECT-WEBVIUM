@@ -69,6 +69,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+@Deprecated
 public class DatabaseFragment extends BasePreferenceFragment implements Format {
     private final IntentFilter is = new IntentFilter();
     private R7 r7;
@@ -95,7 +96,6 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             } else {
                 a5(R.xml.a6);
             }
-
             Preference n = findPreference("res");
             n.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 

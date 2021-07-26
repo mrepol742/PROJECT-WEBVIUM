@@ -55,8 +55,28 @@ public class SearchFragment extends BasePreferenceFragment {
             b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                 @Override
-                public boolean onPreferenceClick(Preference a) {
-                    SearchFragment.this.b14();
+                public boolean onPreferenceClick(Preference a1) {
+                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                    a.setCancelable(true);
+                    a.setTitle(getString(R.string.z18));
+                    a.setMessage(getString(R.string.a21));
+                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            Intents.k(SearchFragment.this.getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
+                            AwesomeToast.d(SearchFragment.this.getActivity(), Html.b(SearchFragment.this.getString(R.string.b33)).toString());
+                            a12.dismiss();
+                        }
+                    });
+                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a1, int intetg) {
+                            a1.dismiss();
+                        }
+                    });
+                    a.create().show();
                     return true;
                 }
             });
@@ -96,29 +116,4 @@ public class SearchFragment extends BasePreferenceFragment {
             ex.printStackTrace();
         }
     }
-
-    private void b14() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.z18));
-        a.setMessage(getString(R.string.a21));
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                Intents.k(SearchFragment.this.getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
-                AwesomeToast.d(SearchFragment.this.getActivity(), Html.b(SearchFragment.this.getString(R.string.b33)).toString());
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
 }

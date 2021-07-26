@@ -76,14 +76,19 @@ public class PretendModeFragment extends BasePreferenceFragment {
                 getActivity().registerReceiver(r7, is);
             }
             a5(R.xml.a1);
-
             spe = (Swit) findPreference("ptm");
             spe.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
-                        PretendModeFragment.this.a5();
+                        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
+                        String sg = a.getString("gsJsGsKSIgPes", "");
+                        if (sg != null) {
+                            b();
+                        } else {
+                            d();
+                        }
                     } else {
                         PretendModeFragment.this.e();
                     }
@@ -118,16 +123,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
         super.onDestroy();
         if (r7 != null) {
             getActivity().unregisterReceiver(r7);
-        }
-    }
-
-    private void a5() {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String sg = a.getString("gsJsGsKSIgPes", "");
-        if (sg != null && U3.b(sg)) {
-            b();
-        } else {
-            d();
         }
     }
 
@@ -187,7 +182,10 @@ public class PretendModeFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                PretendModeFragment.this.c(a67.getText().toString());
+                SharedPreferences a21 = getActivity().getSharedPreferences("changedTo", 0);
+                SharedPreferences.Editor b5 = a21.edit();
+                b5.putString("gsJsGsKSIgPes", SHA.a("SHA-512", a67.getText().toString()));
+                b5.apply();
                 ActivityState.changedTo(PretendModeFragment.this.getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
                 ActivityState.changedTo(PretendModeFragment.this.getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 2);
                 AwesomeToast.a(PretendModeFragment.this.getActivity(), PretendModeFragment.this.getActivity().getResources().getString(R.string.j31), 0);
@@ -275,13 +273,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    private void c(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        SharedPreferences.Editor b5 = a.edit();
-        b5.putString("gsJsGsKSIgPes", SHA.a("SHA-512", a1));
-        b5.apply();
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void d() {
         AlertDialog.Builder a5 = new AlertDialog.Builder(getActivity());
@@ -318,9 +309,23 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface a, int i) {
-                PretendModeFragment.this.h(e15.getText().toString());
-                a.dismiss();
+            public void onClick(DialogInterface a1, int i) {
+                SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a.getString("gsJsGsKSIgPes", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e15.getText().toString()).equals(c727)) {
+                        spe.setChecked(true);
+                        ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
+                        String[] sg28 = new String[]{"com.DROID_MJ.a21.b0", "com.DROID_MJ.a21.b1", "com.mrepol742.webvium.activity.alias.MAY", "com.DROID_MJ.a21.b3", "com.DROID_MJ.a21.b4", "com.DROID_MJ.a21.b5", "com.DROID_MJ.a21.b6", "com.DROID_MJ.a21.b7", "com.DROID_MJ.a21.b8", "com.DROID_MJ.a21.b9", "com.DROID_MJ.a21.b10", "com.DROID_MJ.a21.b11", "com.DROID_MJ.a21.b12", "com.DROID_MJ.a21.b13", "com.DROID_MJ.a21.b14", "com.DROID_MJ.a21.b15", "com.DROID_MJ.a21.b16", "com.DROID_MJ.a21.b17", "com.DROID_MJ.a21.b18", "com.DROID_MJ.a21.b19"};
+                        for (String s : sg28) {
+                            ActivityState.changedTo(getActivity(), s, 2);
+                        }
+                    } else {
+                        spe.setChecked(false);
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
+                    }
+                }
+                a1.dismiss();
             }
         });
         a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -405,8 +410,20 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface a, int i) {
-                PretendModeFragment.this.g(e16.getText().toString());
+            public void onClick(DialogInterface a1, int i) {
+                SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a.getString("gsJsGsKSIgPes", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e16.getText().toString()).equals(c727)) {
+                        ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 2);
+                        ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 1);
+                        spe.setChecked(false);
+                    } else {
+                        spe.setChecked(true);
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
+                    }
+                }
+                a1.dismiss();
             }
         });
         a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -453,39 +470,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
             }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-    }
-
-    private void h(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("gsJsGsKSIgPes", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                spe.setChecked(true);
-                ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 1);
-                String[] sg28 = new String[]{"com.DROID_MJ.a21.b0", "com.DROID_MJ.a21.b1", "com.mrepol742.webvium.activity.alias.MAY", "com.DROID_MJ.a21.b3", "com.DROID_MJ.a21.b4", "com.DROID_MJ.a21.b5", "com.DROID_MJ.a21.b6", "com.DROID_MJ.a21.b7", "com.DROID_MJ.a21.b8", "com.DROID_MJ.a21.b9", "com.DROID_MJ.a21.b10", "com.DROID_MJ.a21.b11", "com.DROID_MJ.a21.b12", "com.DROID_MJ.a21.b13", "com.DROID_MJ.a21.b14", "com.DROID_MJ.a21.b15", "com.DROID_MJ.a21.b16", "com.DROID_MJ.a21.b17", "com.DROID_MJ.a21.b18", "com.DROID_MJ.a21.b19"};
-                for (String s : sg28) {
-                    ActivityState.changedTo(getActivity(), s, 2);
-                }
-            } else {
-                spe.setChecked(false);
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
-            }
-        }
-    }
-
-    private void g(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("gsJsGsKSIgPes", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 2);
-                ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 1);
-                spe.setChecked(false);
-            } else {
-                spe.setChecked(true);
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.j34), 0);
-            }
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -562,9 +546,20 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface a, int i) {
-                PretendModeFragment.this.j(e15.getText().toString(), l15.getText().toString());
-                a.dismiss();
+            public void onClick(DialogInterface a2, int i) {
+                SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a.getString("gsJsGsKSIgPes", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e15.getText().toString()).equals(c727)) {
+                        SharedPreferences.Editor b5 = a.edit();
+                        b5.putString("gsJsGsKSIgPes", SHA.a("SHA-512", l15.getText().toString()));
+                        b5.apply();
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k31), 0);
+                    } else {
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
+                    }
+                }
+                a2.dismiss();
             }
         });
         a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -682,21 +677,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    private void j(String a1, String a2) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("gsJsGsKSIgPes", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                SharedPreferences.Editor b5 = a.edit();
-                b5.putString("gsJsGsKSIgPes", SHA.a("SHA-512", a2));
-                b5.apply();
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k31), 0);
-            } else {
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
-            }
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void k() {
         AlertDialog.Builder a5 = new AlertDialog.Builder(getActivity());
@@ -726,9 +706,23 @@ public class PretendModeFragment extends BasePreferenceFragment {
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface a, int i) {
-                PretendModeFragment.this.l(e16.getText().toString());
-                a.dismiss();
+            public void onClick(DialogInterface a1, int i) {
+                SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
+                String c727 = a.getString("gsJsGsKSIgPes", "");
+                if (c727 != null) {
+                    if (SHA.a("SHA-512", e16.getText().toString()).equals(c727)) {
+                        SharedPreferences.Editor b5 = a.edit();
+                        b5.clear();
+                        b5.apply();
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k33), 0);
+                        spe.setChecked(false);
+                        ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 2);
+                        ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 1);
+                    } else {
+                        AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
+                    }
+                }
+                a1.dismiss();
             }
         });
         a5.setNegativeButton(getResources().getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -774,24 +768,6 @@ public class PretendModeFragment extends BasePreferenceFragment {
             }
         });
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-    }
-
-    private void l(String a1) {
-        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
-        String c727 = a.getString("gsJsGsKSIgPes", "");
-        if (c727 != null) {
-            if (SHA.a("SHA-512", a1).equals(c727)) {
-                SharedPreferences.Editor b5 = a.edit();
-                b5.clear();
-                b5.apply();
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k33), 0);
-                spe.setChecked(false);
-                ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.PRE", 2);
-                ActivityState.changedTo(getActivity(), "com.mrepol742.webvium.activity.alias.MAY", 1);
-            } else {
-                AwesomeToast.a(getActivity(), getActivity().getResources().getString(R.string.k36), 0);
-            }
-        }
     }
 
     private class R7 extends BroadcastReceiver {

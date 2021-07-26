@@ -1575,7 +1575,7 @@ public class Webv extends MainBaseActivity implements Format {
                         return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(Webv.this));
                     }
                 }
-                return BitmapFactory.decodeResource(getResources(), R.drawable.e3);
+                return null;
             }
 
             @Override
@@ -2553,13 +2553,7 @@ public class Webv extends MainBaseActivity implements Format {
             @JavascriptInterface
             public void a(final String a) {
                 if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj", false)) {
-                    if (!sg.isEmpty()) {
-                        if (BuildConfig.DEBUG) {
-                            SharedPreferences sharedPreferences = getSharedPreferences("th", 0);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("changedTo", sg);
-                            editor.apply();
-                        }
+                    if (!a.isEmpty()) {
                         Runnable re = new Runnable() {
 
                             @Override

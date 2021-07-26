@@ -40,14 +40,28 @@ public class AccessibilityFragment extends BasePreferenceFragment {
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
-
             a5(R.xml.k);
             Preference l = findPreference("zoom");
             l.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                 @Override
                 public boolean onPreferenceClick(Preference a) {
-                    AccessibilityFragment.this.t();
+                    AlertDialog.Builder c = new AlertDialog.Builder(getActivity());
+                    LayoutInflater d = LayoutInflater.from(getActivity());
+                    View e = d.inflate(R.layout.a12, null);
+                    c.setCancelable(false);
+                    c.setView(e);
+                    TextView f = e.findViewById(R.id.g1);
+                    f.setText(getString(R.string.o1));
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        f.setTextColor(Resources.getColor(getActivity(), R.color.c));
+                    } else {
+                        f.setTextColor(Resources.getColor(getActivity(), R.color.b));
+                    }
+                    AlertDialog j5 = c.create();
+                    O5 timer = new O5(2000, 2000, j5);
+                    timer.start();
+                    j5.show();
                     return true;
                 }
             });
@@ -64,34 +78,6 @@ public class AccessibilityFragment extends BasePreferenceFragment {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    private void t() {
-        AlertDialog.Builder c = new AlertDialog.Builder(getActivity());
-        LayoutInflater d = LayoutInflater.from(getActivity());
-        View e = d.inflate(R.layout.a12, null);
-        c.setCancelable(false);
-        c.setView(e);
-        TextView f = e.findViewById(R.id.g1);
-        f.setText(getString(R.string.o1));
-        if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.getColor(getActivity(), R.color.c));
-        } else {
-            f.setTextColor(Resources.getColor(getActivity(), R.color.b));
-        }
-        AlertDialog j5 = c.create();
-        O5 timer = new O5(2000, 2000, j5);
-        timer.start();
-        j5.show();
-    }
-
-    private void a() {
-        getActivity().finish();
-        SharedPreferences c56 = getActivity().getSharedPreferences("wv", 0);
-        Intent it = new Intent(getActivity(), Webv.class);
-        it.putExtra("value", c56.getString("MyURL", ""));
-        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(it);
     }
 
     class O5 extends CountDownTimer {
@@ -111,7 +97,12 @@ public class AccessibilityFragment extends BasePreferenceFragment {
         public void onFinish() {
             a5.dismiss();
             a5 = null;
-            a();
+            getActivity().finish();
+            SharedPreferences c56 = getActivity().getSharedPreferences("wv", 0);
+            Intent it = new Intent(getActivity(), Webv.class);
+            it.putExtra("value", c56.getString("MyURL", ""));
+            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(it);
         }
     }
 }
