@@ -1,3 +1,5 @@
+## Hello World
+
 <p align="center">
  <img width="100px" src="https://github.com/mrepol742/PROJECT-WEBVIUM/blob/master/app/src/main/res/mipmap-xxxhdpi/c.png" align="center" alt="PROJECT-WEBVIUM" />
  <h2 align="center">PROJECT-WEBVIUM</h2>
@@ -22,15 +24,9 @@
   <img src="https://img.shields.io/badge/SDK-30-blue.svg" />
   <img src="https://img.shields.io/badge/Build%20Tools-30%2E0%2E3-blue.svg" />
  </p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mrepol742/PROJECT-WEBVIUM/master/cloc.svg" />
-</p>
-<p align="center">
-<img src="https://github.com/mrepol742/PROJECT-WEBVIUM/blob/master/preview.gif?raw=true" width="900px">
-</p>
 
   <p>Webvium is a weightless android app that has a size of 570KB. It's Fast, Material Design and Full-Featured Web Browser for Android. And its absolutely free to download and without any ads.</p>
-        <div><h3>CUSTOMIZATION</h3><p>Use the Interface settings, to change the app theme to dark or light. Add a little curved on edge of screen or make your favorite photo or wallpaper as app main background. Redefined your browsing experience.</p></div>
+        <div><h3>CUSTOMIZATION</h3>Use the Interface settings, to change the app theme to dark or light. Add a little curved on edge of screen or make your favorite photo or wallpaper as app main background. Redefined your browsing experience.</div>
         <div><h3>LIGHTWEIGHT AND FASTER</h3>Webvium is programmed and developed to be the most lightweight app possible. Lightweight means faster installation time. Faster download time. And better browsing experience. Share this app to your friends within fraction of a seconds.</div>
         <div><h3>MATERIAL DESIGN</h3>Immerse yourself in one of the most awesome browser fully material based designed. The colors and icons are carefully picked. And it uses one of the coolest fonts ever The Maven Pro.</div>
         <div><h3>ULTIMATE BROWSING CONTROL</h3>Here you can customize your web settings preferences if you wanted to anytime. Webvium guaranteed that your the admin of the app.</div>

@@ -462,7 +462,7 @@ public class Mana extends BaseActivity {
                 HistoryHelper d1 = HistoryHelper.getInstance(Mana.this.getApplicationContext());
                 d1.delete();
                 if (Webv.bl) {
-                    Webv.c63();
+                    Webv.bl4 = true;
                 }
                 a22.dismiss();
                 Mana.this.a1();
@@ -708,7 +708,7 @@ public class Mana extends BaseActivity {
                     Mana.this.l(StorageDirectory.getWebviumDir());
                 }
                 if (Webv.bl2) {
-                    Webv.c63();
+                    Webv.bl4 = true;
                 }
                 a22.dismiss();
                 System.exit(0);

@@ -37,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.json.*;
+
 public class AboutFragment extends BasePreferenceFragment {
 
     @Override
@@ -112,11 +114,11 @@ public class AboutFragment extends BasePreferenceFragment {
             public void run() {
                 try {
                     int b = Integer.parseInt(Package.e(AboutFragment.this.getActivity()).replaceAll("\\.", ""));
-                    int newUpdate = Stream.i("https://github.com/" + AboutFragment.this.getString(R.string.github_username) + "/" + AboutFragment.this.getString(R.string.github_repository) + "/blob/" + AboutFragment.this.getString(R.string.github_branch) + "/" + AboutFragment.this.getString(R.string.github_path) + "/newVersion.int?raw=true");
+                    int[] newUpdate = a(Stream.f("https://github.com/" + AboutFragment.this.getString(R.string.github_username) + "/" + AboutFragment.this.getString(R.string.github_repository) + "/blob/" + AboutFragment.this.getString(R.string.github_branch) + "/" + AboutFragment.this.getString(R.string.github_path) + "/Upda.json?raw=true", "742"));
                     if (AboutFragment.this.getActivity() == null) {
                         return;
                     }
-                    if (newUpdate > b) {
+                    if (newUpdate[0] > b) {
                         AboutFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
@@ -157,6 +159,16 @@ public class AboutFragment extends BasePreferenceFragment {
             }
         };
         new Thread(re).start();
+    }
+
+    private int[] a(String sg) {
+        try {
+            JSONObject root = new JSONObject(sg);
+            return new int[]{root.getInt("versionName"), root.getInt("versionCode")};
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new int[]{0, 0};
     }
 
 }

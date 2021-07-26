@@ -192,7 +192,7 @@
     <string name="h18">History</string>
     <string name="h19">Share</string>
     <string name="h20">Desktop Mode</string>
-    <string name="i2">Paste and Search</string>
+    <string name="i2">Paste &amp; Search</string>
     <string name="i3">Paste</string>
     <string name="i4">Save Link</string>
     <string name="i6">OK</string>
@@ -411,7 +411,11 @@
     <string name="v16">%1$s request location permission denied.</string>
     <string name="v17">Allow</string>
     <string name="v18">&lt;b>Message:&lt;/b> %1$s&lt;br>&lt;b>Line:&lt;/b> %2$d&lt;br>&lt;b>Source ID:&lt;/b> %3$s</string>
-    <string name="v188"><font color="742">%1$s</font> -> {\n<font color="742">Message:</font> %2$s\n<font color="742">Line:</font> %3$d\n<font color="742">Source ID:</font> %4$s\n}\n</string>
+    <string name="v188"><font color="742">%1$s</font> -> {\n
+        <font color="742">Message:</font> %2$s\n
+        <font color="742">Line:</font> %3$d\n
+        <font color="742">Source ID:</font> %4$s\n
+        }\n</string>
     <string name="v19">Security Certificate</string>
     <string name="v20">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d&lt;br>&lt;b>Description:&lt;/b> %3$s</string>
     <plurals name="w1">
@@ -521,9 +525,13 @@
     <string name="b36">Do you really want to clear Clipboard?</string>
     <string name="b37">Clipboard Cleared.</string>
     <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
-    <string name="b39">Do you really want to import Settings Database\nThis will override your current Settings\n\nnWebvium will restart automatically after importing the database.</string>
+    <string name="b39">Do you really want to import Settings Database
+        This will override your current Settings
+
+        Webvium will restart automatically after importing the database.</string>
     <string name="b40">&lt;b>Wze will export:&lt;/b>&lt;br>• All Search History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
-    <string name="c21">Do you really want to import Search Database\nThis will override your Search History</string>
+    <string name="c21">Do you really want to import Search Database
+        This will override your Search History</string>
     <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
     <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="c26">about:blank</string>
@@ -536,8 +544,10 @@
     <string name="c37">Clear All Data</string>
     <string name="c38">Size: </string>
     <string name="c40">Incorrect PIN</string>
-    <string name="d33">Do you really want to import History Database\nThis will override your Browsing History</string>
-    <string name="d34">Do you really want to import Bookmarks Database\nThis will override your Bookmarks</string>
+    <string name="d33">Do you really want to import History Database\n
+        This will override your Browsing History</string>
+    <string name="d34">Do you really want to import Bookmarks Database\n
+        This will override your Bookmarks</string>
 
     <string name="d38">Ongoing Download</string>
     <string name="d39">Searching for %1$s</string>
@@ -561,7 +571,12 @@
     <string name="f29">Custom Secondary Font</string>
     <string name="f31">Examples: \n%1$s \n%2$s</string>
     <string name="f32">Robots.txt</string>
-    <string name="f33">Webvium - Lightweight, Fast, Material and Full-Featured Android Web Browser.\n\nWebvium is a weightless android app that size about 600KB. It\'s Fast, Material Design and Full-Featured Web Browser for Android. Download the latest version here: \n%1$s</string>
+    <string name="f33">Webvium - Lightweight, Fast, Material and Full-Featured Android Web Browser.\n\n
+
+        Webvium is a weightless android app that size about 600KB.\n
+        It\'s Fast, Material Design and Full-Featured Web Browser for Android.\n
+        Download the latest version here: \n
+        %1$s</string>
     <string name="f34">There\'s no email app that can handle this action.</string>
     <string name="f37">Font Size</string>
     <string name="f38">Image Saved.</string>
@@ -756,7 +771,9 @@
     <string name="t38">Media Scanning</string>
     <string name="t39">Allow media scanning when download finish</string>
     <string name="u21">Download Failed</string>
-    <string name="u22">Name: %1$s\nLink: %2$s\nReason: %3$s</string>
+    <string name="u22">Name: %1$s\n
+        Link: %2$s\n
+        Reason: %3$s</string>
     <string name="u23">Edit</string>
     <string name="u24">Query</string>
     <string name="u25">Manage Space Icon</string>
@@ -814,15 +831,18 @@
     <string name="z26">Version Checked</string>
     <string name="z27">Your currently using the latest version of webvium</string>
     <string name="z28">Latest Update</string>
-    <string name="z29">A new update of webvium was now available to download\nClick here to download</string>
+    <string name="z29">A new update of webvium was now available to download\n
+    click to start the download</string>
     <string name="z30">Unknown error, couldn\'t check for update</string>
     <string name="z31">The database doesn\'t contain any item\'s</string>
     <string name="z32">Download</string>
     <string name="z33">Permission</string>
     <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
-    <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
+    <string name="z35">Do you really want to import Downloads Database\n
+        This will override your Downloads History</string>
     <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
-    <string name="z37">Do you really want to import Permission Database\nThis will override your Permission Settings</string>
+    <string name="z37">Do you really want to import Permission Database\n
+        This will override your Permission Settings</string>
     <string name="z38">APK</string>
     <string name="z39">Automatically backup Webvium apk upon installing of new update</string>
     <string name="z40">New Update</string>
@@ -873,7 +893,7 @@
     <string name="y97">Terminate if render become unresponsive</string>
     <string name="y98">Notify you that Webvium was in foreground</string>
     <string name="y99">Notify you that Webvium was saving the url.</string>
-    <string name="y100">Adblocker</string>
+    <string name="y100">ADBlocker</string>
     <string name="z41">Block ads and make the page load faster.</string>
     <string name="z42">Notify you that Backup Service failed to backup Webvium APK.</string>
     <string name="z43">Failed to Backup Webvium</string>
@@ -898,8 +918,30 @@
     <string name="z63">MIDI Devices</string>
     <string name="z64">Close All</string>
     <string name="z65">Send Email</string>
-    <string name="z66">Briefly explain how can we reproduce the Problem?</string>
-    <string name="z67">Below are the captured logcat</string>
+    <string name="z66">**Describe the bug**\n
+        Briefly explain what the bug is.\n\n
+
+        **To Reproduce**\n
+        Steps to reproduce the behavior:\n
+        1. Go to …\n
+        2. Click on …\n
+        3. Scroll down to …\n
+        4. See error\n\n
+
+        **Expected behavior**\n
+        A clear and concise description of what you expected to happen.\n\n
+
+        **Screenshots**\n
+        If applicable, add screenshots to help explain your problem.\n\n
+
+        **Android (please complete the following information):**\n
+        - Device: [e.g. Samsung]\n
+        - OS: [e.g. Android 5]\n
+        - Webvium version: [e.g. v1.o]\n\n
+
+        **Additional context**\n
+        Add any other context about the problem here.</string>
+    <string name="z67">**Below are the captured logcat**</string>
     <string name="z68">Webvium Crashed Report</string>
     <string name="z69">Webvium Bug Report</string>
     <string name="z70">360p</string>
@@ -914,5 +956,8 @@
     <string name="z79">Package Changed Broadcast Receiver</string>
     <string name="z80">Notify you when Webvium finish updating.</string>
     <string name="z81">Restart</string>
+    <string name="z82">Failed! Page not yet fully loaded.</string>
+    <string name="z83">Paste and then Search</string>
+    <string name="z84">Paste Only</string>
 
 </resources>

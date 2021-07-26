@@ -106,8 +106,6 @@ public class DownloadAdapter extends MainBaseAdapter {
             return R.drawable.a16;
         } else if (b.startsWith("file://") || b.startsWith("content://")) {
             return R.drawable.a17;
-        } else if (b.startsWith("webvium://")) {
-            return R.mipmap.d;
         }
         return R.drawable.a8;
     }
@@ -143,36 +141,30 @@ public class DownloadAdapter extends MainBaseAdapter {
                 w20.b = e.findViewById(R.id.b11);
                 w20.c = e.findViewById(R.id.n20);
                 w20.d = e.findViewById(R.id.b12);
-                w20.e = e.findViewById(R.id.b13);
                 if (!sp.getBoolean("autoUpdate", false)) {
                     w20.a.setTextColor(Resources.getColor(a, R.color.c));
                     w20.b.setTextColor(Resources.getColor(a, R.color.c));
                     w20.d.setTextColor(Resources.getColor(a, R.color.c));
-                    w20.e.setTextColor(Resources.getColor(a, R.color.c));
                     w20.c.setBackgroundResource(R.drawable.v);
                 } else {
                     w20.a.setTextColor(Resources.getColor(a, R.color.b));
                     w20.b.setTextColor(Resources.getColor(a, R.color.b));
                     w20.d.setTextColor(Resources.getColor(a, R.color.b));
-                    w20.e.setTextColor(Resources.getColor(a, R.color.b));
                     w20.c.setBackgroundResource(R.drawable.y);
                 }
                 w20.a.setTypeface(type(Typeface.BOLD));
                 w20.b.setTypeface(type(Typeface.NORMAL));
                 w20.d.setTypeface(type(Typeface.NORMAL));
-                w20.e.setTypeface(type(Typeface.NORMAL));
                 e.setTag(w20);
             } else {
                 w20 = (W12a) e.getTag();
             }
             w20.a.setText(b(it).a);
             w20.b.setText(c(b(it).b));
-            // w20.c.setImageResource(b(it).e4);
             w20.c.setImageResource(d(b(it).b));
-            w20.d.setText(b(it).c);
             Date date = new Date(b(it).d);
             String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
-            w20.e.setText(fiDate);
+            w20.d.setText(b(it).c + " | " + fiDate);
         } catch (IndexOutOfBoundsException ignored) {
 
         }
@@ -184,7 +176,6 @@ public class DownloadAdapter extends MainBaseAdapter {
         TextView b;
         ImageView c;
         TextView d;
-        TextView e;
 
         @Keep
         private W12a() {

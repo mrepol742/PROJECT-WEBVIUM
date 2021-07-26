@@ -230,13 +230,9 @@ public class PrivacyFragment extends BasePreferenceFragment {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
-
                         Intents.b(PrivacyFragment.this.getActivity(), Clip.class);
-
                     } else {
-
                         Intents.i(PrivacyFragment.this.getActivity(), Clip.class);
-
                     }
                     return true;
                 }
@@ -421,7 +417,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
                 HistoryHelper d1 = HistoryHelper.getInstance(PrivacyFragment.this.getActivity().getApplicationContext());
                 d1.delete();
                 if (Webv.bl2) {
-                    Webv.c63();
+                    Webv.bl4 = true;
                 }
                 PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.t1));
                 a12.dismiss();

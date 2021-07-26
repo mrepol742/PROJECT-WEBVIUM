@@ -141,30 +141,4 @@ public class Stream {
         }
         return problem;
     }
-
-    public static int i(String url) {
-        try {
-            URL u = new URL(url);
-            URLConnection is = u.openConnection();
-            InputStream inputStream = is.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader c = new BufferedReader(inputStreamReader);
-            String tf5;
-            StringBuilder sb = new StringBuilder();
-            while ((tf5 = c.readLine()) != null) {
-                sb.append(tf5.trim());
-            }
-            c.close();
-            inputStreamReader.close();
-            inputStream.close();
-            try {
-                return Integer.parseInt(sb.toString());
-            } catch (NumberFormatException nfe) {
-                nfe.printStackTrace();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return Integer.parseInt("0");
-    }
 }

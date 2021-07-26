@@ -119,7 +119,7 @@ public class Exce extends BaseActivity {
                 Intent intent = new Intent("android.intent.action.SEND");
                 intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
                 intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z68));
-                intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66) + "\n\n\n\n\n" + getString(R.string.z67) + "\n" + madeErrMsg);
+                intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66) + "\n\n" + getString(R.string.z67) + "\n" + madeErrMsg);
                 intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
                 intent.setType("text/html");
                 intent.setPackage("com.google.android.gm");

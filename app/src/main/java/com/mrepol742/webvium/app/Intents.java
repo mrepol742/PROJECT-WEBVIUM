@@ -27,10 +27,11 @@ import com.mrepol742.webvium.annotation.Keep;
 public class Intents {
 
     public static final String ACTION_INVALIDATE = "com.mrepol742.webvium.intent.action.INVALIDATE";
-    public static final String CATEGORY_GENIUS = "com.mrepol742.webvium.intent.category.LEGENDS";
+    public static final String ACTION_IP = "com.mrepol742.webvium.intent.action.IP";
     public static final String ACTION_LAUNCH = "com.mrepol742.webvium.intent.action.LAUNCH";
     public static final String ACTION_PASTE_SEARCH = "com.mrepol742.webvium.action.PASTE_SEARCH";
     public static final String ACTION_PASTE = "com.mrepol742.webvium.action.PASTE";
+    public static final String CATEGORY_GENIUS = "com.mrepol742.webvium.intent.category.GENIUS";
 
     @Keep
     private Intents() {
@@ -60,9 +61,7 @@ public class Intents {
         try {
             Intent d = new Intent();
             d.putExtra(b, c);
-
             e.setResult(Activity.RESULT_OK, d);
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -122,7 +121,6 @@ public class Intents {
     public static void k(Context a, String b) {
         try {
             Intent c = new Intent(b);
-
             c.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             a.startActivity(c);
         } catch (Exception ex) {
@@ -139,9 +137,5 @@ public class Intents {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public static boolean check(Context a, Intent c) {
-        return c.resolveActivity(a.getPackageManager()) != null;
     }
 }

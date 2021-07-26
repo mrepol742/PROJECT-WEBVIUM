@@ -37,13 +37,6 @@ captures/
 # Android Studio assets folder
 assets/
 
-# Webvium
-app/src/main/c-playstore.png
-.etc
-/app/primaryDictionary.txt
-/app/secondaryDictionary.txt
-
-
 # IntelliJ
 *.iml
 .idea/workspace.xml

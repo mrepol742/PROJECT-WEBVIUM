@@ -76,9 +76,7 @@ public class HistoryAdapter extends MainBaseAdapter {
             return R.drawable.a16;
         } else if (b.startsWith("file://") || b.startsWith("content://")) {
             return R.drawable.a17;
-        } else if (b.startsWith("webvium://")) {
-            return R.mipmap.d;
-        }
+        } 
         return R.drawable.a8;
     }
 

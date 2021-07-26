@@ -17,34 +17,27 @@
 
 <shortcuts xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- TODO: -->
     <shortcut
         a:enabled="true"
-        a:shortcutId="s78"
+        a:icon="@mipmap/b"
         a:shortcutShortLabel="@string/i2"
+        a:shortcutLongLabel="@string/z83"
         tools:targetApi="n_mr1">
         <intent
             a:action="com.mrepol742.webvium.intent.action.PASTE_SEARCH"
-            a:category="com.mrepol742.webvium.intent.category.LEGENDS"
+            a:category="com.mrepol742.webvium.intent.category.GENIUS"
             a:targetPackage="com.mrepol742.webvium" />
     </shortcut>
     <shortcut
         a:enabled="true"
-        a:shortcutId="lk9"
+        a:icon="@mipmap/b"
         a:shortcutShortLabel="@string/i3"
+        a:shortcutLongLabel="@string/z84"
         tools:targetApi="n_mr1">
         <intent
             a:action="com.mrepol742.webvium.intent.action.PASTE"
-            a:category="com.mrepol742.webvium.intent.category.LEGENDS"
-            a:targetPackage="com.mrepol742.webvium" />
-    </shortcut>
-    <shortcut
-        a:enabled="true"
-        a:shortcutId="lk9"
-        a:shortcutShortLabel="@string/l24"
-        tools:targetApi="n_mr1">
-        <intent
-            a:action="com.mrepol742.webvium.intent.action.ASSIST"
-            a:category="com.mrepol742.webvium.intent.category.LEGENDS"
+            a:category="com.mrepol742.webvium.intent.category.GENIUS"
             a:targetPackage="com.mrepol742.webvium" />
     </shortcut>
 </shortcuts>

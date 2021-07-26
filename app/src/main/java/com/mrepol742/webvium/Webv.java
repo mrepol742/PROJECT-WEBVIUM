@@ -40,6 +40,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -50,6 +52,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.Icon;
 import android.graphics.drawable.InsetDrawable;
 import android.media.AudioManager;
 import android.net.MailTo;
@@ -123,11 +126,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.GeolocationDataModel;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
-import com.mrepol742.webvium.app.ReceivedErrorDataModel;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
@@ -170,16 +171,12 @@ import com.mrepol742.webvium.app.SoftKeyboard;
 import com.mrepol742.webvium.util.AwesomeToast;
 import com.mrepol742.webvium.download.DownloadHelper;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -395,11 +392,11 @@ public class Webv extends MainBaseActivity implements Format {
     private int ct;
     private boolean pageF;
     public static final String INIT = "init_17";
-    private static final String MAVEN_PRO = "classes";
     public static boolean bl = false;
     public static boolean bl2 = false;
     private boolean bl3, bl6, err, ua, set, inE, dsM, isSh = false;
-    private static boolean bl4 = false;
+    public static boolean bl4 = false;
+    private String des;
 
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
@@ -407,10 +404,32 @@ public class Webv extends MainBaseActivity implements Format {
         public boolean onMenuItemClick(MenuItem a1) {
             switch (a1.getItemId()) {
                 case POPUPMENU_TOOLBAR_PASTE_AND_SEARCH:
-                    Webv.this.c13();
+                    try {
+                        String c = Clipboard.b(Webv.this);
+                        if (c != null) {
+                            c49(c);
+                            d2.c(c);
+                        } else {
+                            c7(getString(R.string.t20));
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        c7(getString(R.string.t20));
+                    }
                     return true;
                 case POPUPMENU_TOOLBAR_PASTE:
-                    Webv.this.c17();
+                    try {
+                        String c = Clipboard.b(Webv.this);
+                        if (c != null) {
+                            Intents.h(Webv.this, Sear.class, 911, "value", c);
+                            overridePendingTransition(R.anim.a, R.anim.f);
+                        } else {
+                            c7(getString(R.string.t20));
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        c7(getString(R.string.t20));
+                    }
                     return true;
                 case POPUPMENU_TOOLBAR_COPY_LINK:
                     Clipboard.a(Webv.this, Webv.this.currentUrl());
@@ -485,7 +504,14 @@ public class Webv extends MainBaseActivity implements Format {
                     Webv.this.c8(Webv.this.getString(R.string.k9));
                     return true;
                 case POPUPMENU_MAIL_SEND_EMAIL:
-                    Webv.this.c65(Objects.requireNonNull(sg));
+                    Intent a = new Intent(Intent.ACTION_SENDTO, Uri.parse(sg));
+                    a.putExtra(Intent.EXTRA_SUBJECT, "");
+                    a.putExtra(Intent.EXTRA_TEXT, "");
+                    if (a.resolveActivity(getPackageManager()) != null) {
+                        startActivity(Intent.createChooser(a, getString(R.string.a26)));
+                    } else {
+                        AwesomeToast.c(Webv.this, getString(R.string.f34));
+                    }
                     return true;
                 case POPUPMENU_MAIL_SHARE:
                     Webv.this.c16(sg, 1);
@@ -579,10 +605,6 @@ public class Webv extends MainBaseActivity implements Format {
             return false;
         }
     };
-
-    public static void c63() {
-        bl4 = true;
-    }
 
     public static void forceShowIcon(PopupMenu popupMenu) {
         try {
@@ -799,11 +821,11 @@ public class Webv extends MainBaseActivity implements Format {
 
             @Override
             public void onClick(View view) {
-                if (BuildConfig.DEBUG) {
-                    Webv.this.c10();
-                } else {
+                // if (BuildConfig.DEBUG) {
+                //    Webv.this.c10();
+                // } else {
                     Webv.this.c18();
-                }
+                // }
             }
         });
         tv9.setImageResource(R.drawable.d9);
@@ -925,11 +947,37 @@ public class Webv extends MainBaseActivity implements Format {
                 Menu me = pm0.getMenu();
                 int size = Webv.this.currentTab().w4.size();
                 for (int i = 0; i < size; i++) {
-                    if (U3.b(Webv.this.currentTab().w4.get(i).sg))
-                        me.add(0, i, 0, Webv.this.currentTab().w4.get(i).sg).setOnMenuItemClickListener(e);
+                    me.add(0, i, 0, Webv.this.currentTab().w4.get(i).sg).setOnMenuItemClickListener(e);
                 }
                 pm0.show();
                 return true;
+            }
+        });
+        tv5.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (currentSettings().getJavaScriptEnabled()) {
+                    if (Webv.this.des != null) {
+                        AlertDialog.Builder a = new AlertDialog.Builder(Webv.this);
+                        a.setTitle(currentTitle());
+                        a.setCancelable(true);
+                        a.setMessage(Webv.this.des);
+                        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a2, int i) {
+                                a2.dismiss();
+                            }
+                        });
+                        final AlertDialog g = a.create();
+                        g.show();
+                    } else {
+                        c7(getString(R.string.z82));
+                    }
+                } else {
+                    c7(getString(R.string.u13));
+                }
             }
         });
         tv6.setOnClickListener(new View.OnClickListener() {
@@ -961,8 +1009,7 @@ public class Webv extends MainBaseActivity implements Format {
                 Menu me = pm0.getMenu();
                 int size = Webv.this.currentTab().w4.size();
                 for (int i = 0; i < size; i++) {
-                    if (U3.b(Webv.this.currentTab().w4.get(i).sg0))
-                        me.add(0, i, 0, Webv.this.currentTab().w4.get(i).sg0).setOnMenuItemClickListener(e);
+                    me.add(0, i, 0, Webv.this.currentTab().w4.get(i).sg0).setOnMenuItemClickListener(e);
                 }
                 pm0.show();
                 return true;
@@ -1104,13 +1151,6 @@ public class Webv extends MainBaseActivity implements Format {
         }
     }
 
-    public View c1() {
-        View v = View.inflate(this, R.layout.a21, null);
-        ImageView v4 = v.findViewById(R.id.n28);
-        v4.setImageResource(R.drawable.a21);
-        return v;
-    }
-
     private void c3(String a) {
         c33(a, "");
         WebViews as = currentTab();
@@ -1120,35 +1160,6 @@ public class Webv extends MainBaseActivity implements Format {
     private void c3(WebViews web, String a) {
         c33(a, "");
         web.loadUrl(a);
-    }
-
-    public void c4(final Message b, final Message c) {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(false);
-        a.setTitle(getString(R.string.g36));
-        a.setMessage(getString(R.string.g34));
-        a.setPositiveButton(getString(R.string.g36), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                c.sendToTarget();
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                b.sendToTarget();
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void c5(Bitmap b) {
-        tv5.setImageBitmap(b);
-        Animation.animate(Webv.this, R.anim.c, tv5);
     }
 
     private String c6(ConsoleMessage.MessageLevel lev) {
@@ -1363,7 +1374,8 @@ public class Webv extends MainBaseActivity implements Format {
                     Webv.this.c33(Webv.this.currentUrl(), Webv.this.currentTitle());
                 }
                 if (Webv.this.currentFavicon() != null) {
-                    Webv.this.c5(Webv.this.currentFavicon());
+                    tv5.setImageBitmap(Webv.this.currentFavicon());
+                    tv5.setContentDescription(Webv.this.currentTitle());
                 }
                 return true;
             }
@@ -1509,67 +1521,905 @@ public class Webv extends MainBaseActivity implements Format {
 
             @Override
             public void onDownloadStart(String str, String str2, String str3, String str4, long j) {
-                Webv.this.c83(new PendingDownloadDataModel(str, str3, str4, j, str2));
+                PendingDownloadDataModel w18 = new PendingDownloadDataModel(str, str3, str4, j, str2);
+                try {
+                    WifiManager b = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                    if (!a221().getBoolean("autoD", false)) {
+                        if (a221().getBoolean("wifi", false)) {
+                            if (b.isWifiEnabled()) {
+                                if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                                    c11(w18);
+                                } else {
+                                    pend = w18;
+                                }
+                            } else {
+                                c7(getString(R.string.v12));
+                            }
+                        } else {
+                            if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                                c11(w18);
+                            } else {
+                                pend = w18;
+                            }
+                        }
+                    } else {
+                        if (a221().getBoolean("wifi", false)) {
+                            if (b.isWifiEnabled()) {
+                                if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                                    c182(w18, URLUtil.guessFileName(w18.a1, w18.a2, w18.a3));
+                                } else {
+                                    pend = w18;
+                                }
+                            } else {
+                                c7(getString(R.string.v12));
+                            }
+                        } else {
+                            if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                                c182(w18, URLUtil.guessFileName(w18.a1, w18.a2, w18.a3));
+                            } else {
+                                pend = w18;
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
-        h.setWebChromeClient(new da150());
+        h.setWebChromeClient(new WebChromeClient() {
+
+            @Override
+            public Bitmap getDefaultVideoPoster() {
+                if (a221().getBoolean("webviumP", false)) {
+                    if (new java.io.File(StorageDirectory.getVideoPoster(Webv.this)).exists()) {
+                        return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(Webv.this));
+                    }
+                }
+                return BitmapFactory.decodeResource(getResources(), R.drawable.e3);
+            }
+
+            @Override
+            public void onReceivedTitle(WebView a, String b) {
+                c33(a.getUrl(), b);
+            }
+
+            @Override
+            public void onHideCustomView() {
+                try {
+                    ab.show();
+                    currentTab().invalidate();
+                    bl3 = false;
+                    c98();
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    c99();
+                    ((FrameLayout) getWindow().getDecorView()).removeView(Webv.this.cv);
+                    Webv.this.cv = null;
+                    getWindow().getDecorView().setSystemUiVisibility(Webv.this.it7422);
+                    Webv.this.setRequestedOrientation(Webv.this.it742);
+                    Webv.this.cvc.onCustomViewHidden();
+                    Webv.this.cvc = null;
+                } catch (Exception asd) {
+                    asd.printStackTrace();
+                }
+            }
+
+            @SuppressLint("SourceLockedOrientationActivity")
+            @Override
+            public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
+                try {
+                    ab.hide();
+                    bl3 = true;
+                    currentTab().invalidate();
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("1a1")) {
+                        Webv.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    }
+                    if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("7a1")) {
+                        Webv.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+                    }
+                    if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("30a1")) {
+                        Webv.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    }
+                    if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("60a1")) {
+                        Webv.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                    }
+                    if (Webv.this.cv != null) {
+                        return;
+                    }
+                    Webv.this.cv = a;
+                    Webv.this.it7422 = getWindow().getDecorView().getSystemUiVisibility();
+                    Webv.this.cvc = b;
+                    ((FrameLayout) getWindow().getDecorView()).addView(Webv.this.cv, new FrameLayout.LayoutParams(-1, -1));
+                    getWindow().getDecorView().setSystemUiVisibility(3846);
+                } catch (Exception asd) {
+                    asd.printStackTrace();
+                }
+            }
+
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
+                Webv.this.b = b;
+                Intent d = new Intent();
+                d.setAction(Intent.ACTION_GET_CONTENT);
+                d.addCategory(Intent.CATEGORY_OPENABLE);
+                d.setType("*/*");
+                Webv.this.startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
+                return true;
+            }
+
+            @Override
+            public void onProgressChanged(WebView a, int b) {
+                g.setProgress(b);
+                if (b == 100 && g.getVisibility() != View.GONE) {
+                    tv3.setImageResource(R.drawable.b11);
+                    Animation.animate(Webv.this, R.anim.c, tv3);
+                    g.setVisibility(View.GONE);
+                    Animation.animate(Webv.this, R.anim.b, g);
+                    Webv.this.cm1.flush();
+                    cdt.cancel();
+                    cdt.purge();
+                    if (a224("a10", false) && bl6) {
+                        // if (HDMS.b(Objects.requireNonNull(changedTo.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(changedTo.getUrl()).toLowerCase())) {
+                        c142(a.getTitle(), a.getUrl());
+                    /* } else {
+                     c142(getString(R.string.g29), getString(R.string.g30));
+                     }*/
+                    } else if (a224("a10", false) && !bl6) {
+                        //if (HDMS.b(Objects.requireNonNull(changedTo.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(changedTo.getUrl()).toLowerCase())) {
+                        c143(a.getTitle(), a.getUrl());
+                    /*  } else {
+                     c143(getString(R.string.g29), getString(R.string.g30));
+                     }*/
+                    }
+                } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
+                    cdt.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            c141();
+                            cdt.cancel();
+                            cdt.purge();
+                        }
+                    }, 10000);
+                }
+                if (b != 100 && g.getVisibility() != View.VISIBLE) {
+                    g.setVisibility(View.VISIBLE);
+                    Animation.animate(Webv.this, R.anim.c, g);
+                    tv3.setImageResource(R.drawable.a14);
+                    Animation.animate(Webv.this, R.anim.c, tv3);
+                }
+            }
+
+            @Override
+            public boolean onJsAlert(WebView a, String b, String c, final JsResult d) {
+                if (a221().getBoolean("Java10", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(Webv.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(true);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(Webv.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(Webv.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            d.confirm();
+                            a13.dismiss();
+                        }
+                    });
+                    bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface a1) {
+                            d.cancel();
+                            a1.dismiss();
+                        }
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onJsPrompt(WebView a, String b, String c, String d, final JsPromptResult e) {
+                if (c.equals(getSharedPreferences("di", 0).getString("di", ""))) {
+                    c181(d, e);
+                    return true;
+                } else if (a221().getBoolean("Java9", true)) {
+                    AlertDialog.Builder a89 = new AlertDialog.Builder(Webv.this);
+                    LayoutInflater b54 = getLayoutInflater();
+                    View c34 = b54.inflate(R.layout.x, null);
+                    a89.setCancelable(true);
+                    a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    a89.setView(c34);
+                    TextView sjs1 = c34.findViewById(R.id.e1);
+                    final Edit sjs = c34.findViewById(R.id.e3);
+                    int e78 = Resources.getColor(Webv.this, R.color.c);
+                    int f = Resources.getColor(Webv.this, R.color.b);
+                    int f1 = Resources.getColor(Webv.this, R.color.j);
+                    int g1 = Resources.getColor(Webv.this, R.color.k);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        sjs1.setTextColor(e78);
+                        sjs.setTextColor(e78);
+                        sjs.setHintTextColor(f1);
+                    } else {
+                        sjs1.setTextColor(f);
+                        sjs.setTextColor(f);
+                        sjs.setHintTextColor(g1);
+                    }
+                    sjs1.setText(c);
+                    sjs.setText(d);
+                    a89.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            String uwe = sjs.getText().toString();
+                            e.confirm(uwe);
+                            a13.dismiss();
+                        }
+                    });
+                    a89.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                            a12.dismiss();
+                        }
+                    }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface a1) {
+                            e.cancel();
+                            a1.dismiss();
+                        }
+                    });
+                    final AlertDialog g = a89.create();
+                    g.show();
+                    final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
+                    sjs.addTextChangedListener(new TextWatcher() {
+
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            okButton.setEnabled(sjs.getText().toString().length() != 0);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                        }
+                    });
+                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onJsConfirm(WebView a, String b, String c, final JsResult e) {
+                if (a221().getBoolean("Java11", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(Webv.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(true);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(Webv.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(Webv.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            e.confirm();
+                            a13.dismiss();
+                        }
+                    });
+                    bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                            a12.dismiss();
+                        }
+                    });
+                    bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface a1) {
+                            e.cancel();
+                            a1.dismiss();
+                        }
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onJsBeforeUnload(WebView a, String b, String c, final JsResult e) {
+                if (a221().getBoolean("Java12", true)) {
+                    AlertDialog.Builder bld = new AlertDialog.Builder(Webv.this);
+                    LayoutInflater d1 = getLayoutInflater();
+                    View e5 = d1.inflate(R.layout.a13, null);
+                    bld.setView(e5);
+                    bld.setCancelable(false);
+                    TextView tv = e5.findViewById(R.id.o37);
+                    bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
+                    tv.setText(c);
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        tv.setTextColor(Resources.getColor(Webv.this, R.color.c));
+                    } else {
+                        tv.setTextColor(Resources.getColor(Webv.this, R.color.b));
+                    }
+                    bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a13, int intetg) {
+                            e.confirm();
+                            a13.dismiss();
+                        }
+                    });
+                    bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            e.cancel();
+                            a12.dismiss();
+                        }
+                    });
+                    AlertDialog dd = bld.create();
+                    dd.show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage cm1) {
+                cm.append(String.format(getString(R.string.v188).replaceAll("742", c6(cm1.messageLevel())), cm1.messageLevel().toString(), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
+                        .append("\n");
+                return true;
+            }
+
+            @Override
+            public void onGeolocationPermissionsShowPrompt(final String a, final GeolocationPermissions.Callback b) {
+                final boolean c = false;
+                AlertDialog.Builder d = new AlertDialog.Builder(Webv.this);
+                d.setMessage(String.format(getString(R.string.v14), a));
+                d.setCancelable(false);
+                d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        if (Permission.check(Webv.this, Permission.LOCATION, 5)) {
+                            b.invoke(a, true, c);
+                            c8(String.format(getString(R.string.v15), a));
+                        } else {
+                            w6 = new GeolocationDataModel(a, b);
+                        }
+                        a1.dismiss();
+                    }
+                });
+                d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        b.invoke(a, false, c);
+                        c7(String.format(getString(R.string.v16), a));
+                        a1.dismiss();
+                    }
+                });
+                AlertDialog e = d.create();
+                e.show();
+            }
+
+            @Override
+            public View getVideoLoadingProgressView() {
+                View v = View.inflate(Webv.this, R.layout.a21, null);
+                ImageView v4 = v.findViewById(R.id.n28);
+                v4.setImageResource(R.drawable.a21);
+                return v;
+            }
+
+            @Override
+            public void onPermissionRequest(final PermissionRequest pr) {
+                if (BuildConfig.DEBUG) {
+                    Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
+                            Sqlite.TABLE_PERMISSION +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC", null);
+                    if (res.getCount() == 0) {
+                        c9(pr);
+                    } else {
+                        while (res.moveToNext()) {
+                            String sg1 = res.getString(1);
+                            String sg = res.getString(2);
+                            if (sg1.equals(SHA.a("SHA-1", pr.getOrigin().toString())) && SHA.a("SHA-1", Arrays.toString(pr.getResources())).equals(sg)) {
+                                pr.grant(pr.getResources());
+                            } else {
+                                c9(pr);
+                            }
+                        }
+                    }
+                    res.close();
+                } else {
+                    c9(pr);
+                }
+            }
+
+            @Override
+            public void onReceivedIcon(WebView a, Bitmap b) {
+                tv5.setImageBitmap(b);
+                tv5.setContentDescription(a.getTitle());
+                Animation.animate(Webv.this, R.anim.c, tv5);
+            }
+        });
         h.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         h.setWebViewClient(new MainWebViewClient() {
 
             @Override
             public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-                c172(handler, host, realm);
+                String a = null;
+                String b = null;
+                boolean c = handler.useHttpAuthUsernamePassword();
+                if (c) {
+                    String[] cre = currentTab().getHttpAuthUsernamePassword(host, realm);
+                    if (cre != null && cre.length == 2) {
+                        a = cre[0];
+                        b = cre[1];
+                    }
+                }
+                if (a != null && b != null) {
+                    handler.proceed(a, b);
+                }
             }
 
             @Override
             public void receivedError(WebView a, int b, String c, String d, boolean bn, boolean bn1) {
-                c77(a, new ReceivedErrorDataModel(b, c, d, bn, bn1));
+                try {
+                    c180();
+                    bl6 = false;
+                    if (r8 == null) {
+                        r8 = new R8();
+                    }
+                    registerReceiver(r8, ift);
+                    err = bn;
+                    if (Build.VERSION.SDK_INT >= 23 && c.startsWith("file://")) {
+                        Permission.check(Webv.this, Permission.STORAGE, 2);
+                    }
+                    String sg = String.format(getString(R.string.v20), c, b, d);
+                    cm0.append(sg);
+                    if (Build.VERSION.SDK_INT >= 23) {
+                        cm0.append(String.format(getString(R.string.r22),
+                                bn,
+                                bn1,
+                                c175()));
+                    }
+                    cm0.append("<br><br>");
+                    if (bn) {
+                        a.loadUrl("about:blank");
+                        String html = "<html>\n" +
+                                "    <head>\n" +
+                                "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"/>\n" +
+                                "        <title>Webpage not available</title>\n" +
+                                "        <style type=\"text/css\">\n" +
+                                "            @font-face {\n" +
+                                "            font-family: changedTo;\n" +
+                                "            src: url(\"file:///android_asset/classes\")\n" +
+                                "            }\n" +
+                                "            *{\n" +
+                                "            color: #484848;\n" +
+                                "            font-family: changedTo;\n" +
+                                "            }\n" +
+                                "            body {\n" +
+                                "            margin-top: 0px; \n" +
+                                "            padding-top: 0px;\n" +
+                                "            }\n" +
+                                "            h2 { \n" +
+                                "            margin-top: 5px; \n" +
+                                "            padding-top: 0px; \n" +
+                                "            }\n" +
+                                "        </style>\n" +
+                                "        <body>\n" +
+                                "            <img src=\"file:///android_asset/webkit/android-weberror.png\" align=\"top\" />\n" +
+                                "            <h3>Webpage not available</h3>\n" +
+                                "            <p>The webpage at <changedTo href=\"" + c + "\">" + c + "</changedTo> could not be loaded because:</p>\n" +
+                                "            <p>" + d + "</p>\n" +
+                                "        </body>\n" +
+                                "    </head>\n" +
+                                "</html>";
+                        a.loadDataWithBaseURL(c, html, "text/html", "UTF-8", c);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onReceivedHttpError(WebView a, WebResourceRequest b, WebResourceResponse c) {
-                c78(b, c);
+                try {
+                    c180();
+                    if (b == null || c == null || b.getUrl() == null || c.getData() == null || c.getResponseHeaders() == null) {
+                        return;
+                    }
+                    String sg9 = String.format(getString(R.string.v2),
+                            b.getUrl().toString(),
+                            c.getData().toString(),
+                            c.getEncoding(),
+                            c.getMimeType(),
+                            c.getReasonPhrase(),
+                            c.getResponseHeaders().toString(),
+                            c.getStatusCode(),
+                            b.isForMainFrame(),
+                            b.hasGesture(),
+                            c175());
+                    cm0.append(sg9).append("<br><br>");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            public void onReceivedSslError(WebView a, SslErrorHandler b, SslError c) {
-                c79(b, c);
+            public void onReceivedSslError(WebView a, final SslErrorHandler b, SslError c) {
+                Webv.this.iw.setImageResource(R.drawable.a16);
+                Animation.animate(Webv.this, R.anim.c, iw);
+                String sg = String.format(getString(R.string.g19),
+                        c.getUrl(),
+                        c.getPrimaryError());
+                cm2.append(sg);
+                cm2.append("<br><br>");
+                SpannableString xjendndj = new SpannableString(c.getUrl());
+                xjendndj.setSpan(Webv.this.E, 0, 8, 0);
+                Webv.this.u.setText(xjendndj);
+                cd.setBackgroundResource(R.drawable.f4);
+                if (a221().getBoolean("showSO", true)) {
+                    AlertDialog.Builder e = new AlertDialog.Builder(Webv.this);
+                    String f = getString(R.string.v3);
+                    switch (c.getPrimaryError()) {
+                        case SslError.SSL_UNTRUSTED:
+                            f = getString(R.string.v4);
+                            break;
+                        case SslError.SSL_EXPIRED:
+                            f = getString(R.string.v5);
+                            break;
+                        case SslError.SSL_IDMISMATCH:
+                            f = getString(R.string.v6);
+                            break;
+                        case SslError.SSL_NOTYETVALID:
+                            f = getString(R.string.v7);
+                            break;
+                        case SslError.SSL_DATE_INVALID:
+                            f = getString(R.string.v8);
+                            break;
+                        case SslError.SSL_INVALID:
+                            f = getString(R.string.v9);
+                            break;
+                    }
+                    e.setTitle(getString(R.string.v10));
+                    e.setMessage(f);
+                    e.setCancelable(false);
+                    e.setPositiveButton(getString(R.string.i14), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a1, int i) {
+                            b.proceed();
+                            a1.dismiss();
+                        }
+                    });
+                    e.setNegativeButton(getString(R.string.j4), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a1, int i) {
+                            b.cancel();
+                            a1.dismiss();
+                        }
+                    });
+                    e.setNeutralButton(getString(R.string.v11), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a1, int i) {
+                            Webv.this.c75();
+                        }
+                    });
+                    AlertDialog g = e.create();
+                    g.show();
+                } else {
+                    b.proceed();
+                }
             }
 
             @Override
             public void onPageFinished(WebView a, String b) {
-                c80(a, b);
+                try {
+                    c134();
+                    if (a.getSettings().getJavaScriptEnabled()) {
+                        String js = "javascript:window." + getSharedPreferences("di", 0).getString("di1", "") + ".a((function (){\n" +
+                                "    const metas = document.getElementsByTagName('meta');\n" +
+                                "    for (let i = 0; i < metas.length; i++) {\n" +
+                                "        if (metas[i].getAttribute('name') === 'theme-color') {\n" +
+                                "            return metas[i].getAttribute('content');\n" +
+                                "        }\n" +
+                                "    }\n" +
+                                "    return '';\n" +
+                                "})());";
+                        if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj", false)) {
+                            a.evaluateJavascript(js, null);
+                        }
+                        if (!pageF) {
+                            String js1 = "let sc = document.createElement('script');" +
+                                    "sc.innerHTML = `" +
+                                    "function myfun(e) {" +
+                                    "    mangaid = e.target;" +
+                                    "    var getit = prompt('"+ getSharedPreferences("di", 0).getString("di", "") +"', e.target.outerHTML);" +
+                                    "    if (getit != null) {" +
+                                    "        e.target.outerHTML = getit;" +
+                                    "    }" +
+                                    "    e.stopPropagation();" +
+                                    "    e.preventDefault();" +
+                                    "}`;" +
+                                    "document.body.appendChild(sc);";
+                            a.evaluateJavascript(js1, null);
+                            pageF = true;
+                            return;
+                        }
+                        pageF = false;
+                        String js2 = "javascript:window." + getSharedPreferences("di", 0).getString("di1", "") + ".c((function (){\n" +
+                                "    const metas = document.getElementsByTagName('meta');\n" +
+                                "    for (let i = 0; i < metas.length; i++) {\n" +
+                                "        if (metas[i].getAttribute('name') === 'description') {\n" +
+                                "            return metas[i].getAttribute('content');\n" +
+                                "        }\n" +
+                                "    }\n" +
+                                "    return '';\n" +
+                                "})());";
+                        a.evaluateJavascript(js2, null);
+                    }
+                    if (a221().getBoolean("maUU", false) && a221().getBoolean("tow2", false)) {
+                        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                        wifiManager.setWifiEnabled(false);
+                    }
+                    bl6 = true;
+                    c38(b);
+                    if (bl4) {
+                        bl4 = false;
+                        a.clearHistory();
+                    }
+                    c54(b);
+                    c52();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onPageStarted(WebView a, String b, Bitmap b5) {
-                c81(b);
+                try {
+                    if (r8 != null) {
+                        unregisterReceiver(r8);
+                    }
+                    err = false;
+            /* if (BuildConfig.DEBUG) {
+                if (b.startsWith(WEBVIUM_HOME)) {
+                    ab.hide();
+                } else {
+                    ab.show();
+                }
+            } */
+                    if (a221().getBoolean("maUU", false) && a221().getBoolean("tow", false)) {
+                        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                        wifiManager.setWifiEnabled(true);
+                    }
+                    tv5.setImageResource(R.drawable.a18);
+                    tv5.setBackgroundResource(R.drawable.b17);
+                    Animation.animate(Webv.this, R.anim.c, tv5);
+                    c38(b);
+                    c33(b, getString(R.string.v13));
+                    Webv.this.iw.setImageResource(R.drawable.a15);
+                    Animation.animate(Webv.this, R.anim.c, Webv.this.iw);
+                    Webv.this.cd.setBackgroundResource(R.drawable.w);
+                    dsM = false;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            @Keep
             public boolean url(WebView a, String b) {
-                return c82(b);
+                try {
+                    c38(b);
+                    if (b.startsWith("mailto:")) {
+                        MailTo sg = MailTo.parse(b);
+                        if (sg.getTo().length() > 0) {
+                            Map<String, String> hd = sg.getHeaders();
+                            Intent it = new Intent(Intent.ACTION_SEND);
+                            it.setType("text/plain");
+                            it.putExtra("android.intent.extra.EMAIL", new String[]{sg.getTo()});
+                            it.putExtra("android.intent.extra.SUBJECT", sg.getSubject());
+                            it.putExtra("andorid.intent.extra.CC", sg.getCc());
+                            if (hd.containsKey("bcc")) {
+                                it.putExtra("android.intent.extra.BCC", hd.get("bcc"));
+                            }
+                            it.putExtra("android.intent.extra.TEXT", sg.getBody());
+                            if (it.resolveActivity(getPackageManager()) != null) {
+                                startActivity(it);
+                                return true;
+                            }
+                        }
+                        return false;
+                    } else if (b.startsWith("smsto:")) {
+                        String[] sg5 = sg.split(":");
+                        Intent it = new Intent(Intent.ACTION_SENDTO);
+                        it.setData(Uri.parse("smsto:" + sg5[1]));
+                        it.putExtra("address", sg5[1]);
+                        it.putExtra("sms_body", sg5[2]);
+                        if (it.resolveActivity(getPackageManager()) != null) {
+                            startActivity(it);
+                            return true;
+                        }
+                        return false;
+                    } else if (b.startsWith("tel:")) {
+                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(b)));
+                        return true;
+                    } else if (b.startsWith("intent://")) {
+                        try {
+                            Intent it = Intent.parseUri(b, Intent.URI_INTENT_SCHEME);
+                            if (it.resolveActivity(getPackageManager()) != null) {
+                                startActivity(it);
+                            }
+                            String fa = it.getStringExtra("browser_fallback_url");
+                            if (!Objects.requireNonNull(fa).startsWith("market://") && !fa.startsWith("geo:") && fa.contains("/store/apps/details?id=")) {
+                                return c179(b);
+                            }
+                            c3(fa);
+                            return true;
+                        } catch (URISyntaxException use) {
+                            use.printStackTrace();
+                        }
+                    } else if (!b.startsWith("market://") && !b.startsWith("geo:") && b.contains("/store/apps/details?id=")) {
+                        return c179(b);
+                    } else {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(b));
+                        if (intent.resolveActivity(getPackageManager()) != null && !(b.startsWith("https://") || b.startsWith("http://") || b.startsWith("file://") || b.startsWith("content://") || b.startsWith("about:blank"))) {
+                            startActivity(intent);
+                            return true;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return false;
             }
 
+            @TargetApi(Build.VERSION_CODES.O_MR1)
             @Override
-            public void onSafeBrowsingHit(WebView view, WebResourceRequest ess, int type, SafeBrowsingResponse sbh) {
-                c60(view, type, sbh);
+            public void onSafeBrowsingHit(WebView view, WebResourceRequest ess, int type5, final SafeBrowsingResponse sbh) {
+                if (a221().getBoolean("safe", true)) {
+                    if (a221().getBoolean("safeDG", true)) {
+                        String type = getString(R.string.i23);
+                        String wde = getString(R.string.i28);
+                        switch (type5) {
+                            case WebViewClient.SAFE_BROWSING_THREAT_UNKNOWN:
+                                type = getString(R.string.i23);
+                                wde = getString(R.string.i28);
+                                break;
+                            case WebViewClient.SAFE_BROWSING_THREAT_MALWARE:
+                                type = getString(R.string.i24);
+                                wde = getString(R.string.i29);
+                                break;
+                            case WebViewClient.SAFE_BROWSING_THREAT_PHISHING:
+                                type = getString(R.string.i25);
+                                wde = getString(R.string.i30);
+                                break;
+                            case WebViewClient.SAFE_BROWSING_THREAT_UNWANTED_SOFTWARE:
+                                type = getString(R.string.i26);
+                                wde = getString(R.string.i31);
+                                break;
+                            case WebViewClient.SAFE_BROWSING_THREAT_BILLING:
+                                type = getString(R.string.i27);
+                                wde = getString(R.string.i32);
+                                break;
+                        }
+                        AlertDialog.Builder a = new AlertDialog.Builder(Webv.this);
+                        a.setCancelable(false);
+                        a.setTitle(getString(R.string.h40));
+                        a.setMessage(Html.b(String.format(getString(R.string.h39), Objects.requireNonNull(Uri.parse(view.getUrl()).getHost()), wde, type)));
+                        a.setPositiveButton(getString(R.string.i21), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a2, int i) {
+                                sbh.backToSafety(true);
+                                a2.dismiss();
+                            }
+                        });
+                        a.setNegativeButton(getString(R.string.i22), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a2, int i) {
+                                sbh.proceed(true);
+                                a2.dismiss();
+                            }
+                        });
+                        a.create().show();
+                    } else {
+                        sbh.backToSafety(true);
+                    }
+                } else {
+                    sbh.proceed(true);
+                }
             }
 
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
-                c151(a, b, c);
+                if (!c && (b.startsWith("http://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
+                    d1.c(a.getTitle(), b);
+                    SharedPreferences c56 = getSharedPreferences("wv", 0);
+                    SharedPreferences.Editor d56 = c56.edit();
+                    d56.putString("MyURL", b);
+                    d56.apply();
+                }
             }
 
             @Override
-            public void onFormResubmission(WebView a, Message b, Message c) {
-                c4(b, c);
+            public void onFormResubmission(WebView a5, final Message b, final Message c) {
+                AlertDialog.Builder a = new AlertDialog.Builder(Webv.this);
+                a.setCancelable(false);
+                a.setTitle(getString(R.string.g36));
+                a.setMessage(getString(R.string.g34));
+                a.setPositiveButton(getString(R.string.g36), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a12, int intetg) {
+                        c.sendToTarget();
+                        a12.dismiss();
+                    }
+                });
+                a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int intetg) {
+                        b.sendToTarget();
+                        a1.dismiss();
+                    }
+                });
+                a.create().show();
             }
 
             @Override
             public WebResourceResponse r(WebResourceRequest wr) {
-                return c168(wr);
+                if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj123", false)) {
+                    String url = Uri.parse(wr.getUrl().toString()).getHost();
+                    for (String sg : ads) {
+                        if (url.contains(sg)) {
+                            return new WebResourceResponse("text/plain",
+                                    "UTF-8",
+                                    new ByteArrayInputStream(String.format(getString(R.string.g20), url).getBytes()));
+                        }
+                    }
+                    return null;
+                }
+                return null;
             }
         });
         h.addJavascriptInterface(new Object() {
@@ -1680,11 +2530,6 @@ public class Webv extends MainBaseActivity implements Format {
         h.addJavascriptInterface(new Object() {
 
             @JavascriptInterface
-            public void setTheme(String a) {
-                c36(a);
-            }
-
-            @JavascriptInterface
             public boolean isDarkModeEnabled() {
                 return a221().getBoolean("autoUpdate", false);
             }
@@ -1703,6 +2548,102 @@ public class Webv extends MainBaseActivity implements Format {
                 return "480×360";
             }
         }, Package.c() + "ThemeHelper");
+        h.addJavascriptInterface(new Object() {
+
+            @JavascriptInterface
+            public void a(final String a) {
+                if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj", false)) {
+                    if (!sg.isEmpty()) {
+                        if (BuildConfig.DEBUG) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("th", 0);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("changedTo", sg);
+                            editor.apply();
+                        }
+                        Runnable re = new Runnable() {
+
+                            @Override
+                            public void run() {
+                                File fe = new File(StorageDirectory.getBackground(Webv.this));
+                                if (!Webv.this.a221().getBoolean("webviumB", false) && !fe.exists()) {
+                                    Webv.this.runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            int co = Color.parseColor(sg);
+                                            InsetDrawable inset = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
+                                                    new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 10, 0, 10, 0);
+                                            Webv.this.o.setBackground(inset);
+                                            InsetDrawable inset1 = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
+                                                    new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co), 10, 0, 10, 0);
+                                            Webv.this.llt.setBackground(inset1);
+                                            if (Build.VERSION.SDK_INT >= 23) {
+                                                if (!Resources.isColorDark(co)) {
+                                                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                                    if (Build.VERSION.SDK_INT >= 26) {
+                                                        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                                                    }
+                                                }
+                                                getWindow().setStatusBarColor(co);
+                                                getWindow().setNavigationBarColor(co);
+                                            }
+                                            Webv.this.cd.setBackgroundResource(R.drawable.a10);
+                                        }
+                                    });
+                                }
+                            }
+                        };
+                        new Thread(re).start();
+                    } else {
+                        Runnable re1 = new Runnable() {
+
+                            @Override
+                            public void run() {
+                                File fe = new File(StorageDirectory.getBackground(Webv.this));
+                                if (!Webv.this.a221().getBoolean("webviumB", false) && !fe.exists()) {
+                                    Webv.this.runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            Webv.this.llt.setBackgroundResource(R.drawable.f1);
+                                            Webv.this.o.setBackgroundResource(R.drawable.p);
+                                            if (!Webv.this.a221().getBoolean("autoUpdate", false)) {
+                                                if (Build.VERSION.SDK_INT >= 23) {
+                                                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                                }
+                                                getWindow().setStatusBarColor(Resources.getColor(Webv.this, R.color.b));
+                                                getWindow().setNavigationBarColor(Resources.getColor(Webv.this, R.color.m));
+                                            } else {
+                                                getWindow().setStatusBarColor(Resources.getColor(Webv.this, R.color.n));
+                                                getWindow().setNavigationBarColor(Resources.getColor(Webv.this, R.color.n));
+                                            }
+                                            if (Webv.this.currentUrl().startsWith("http://")) {
+                                                Webv.this.cd.setBackgroundResource(R.drawable.f4);
+                                            } else {
+                                                Webv.this.cd.setBackgroundResource(R.drawable.w);
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        };
+                        new Thread(re1).start();
+                    }
+                }
+            }
+
+            @JavascriptInterface
+            public void b(String sg) {
+                Intent it = new Intent(Intents.ACTION_IP);
+                it.putExtra("ip", sg);
+                sendBroadcast(it);
+            }
+
+            @JavascriptInterface
+            public void c(String sg) {
+                Webv.this.des = sg;
+            }
+        }, getSharedPreferences("di", 0).getString("di1", ""));
         if (Build.VERSION.SDK_INT >= 29) {
             h.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
 
@@ -1913,21 +2854,6 @@ public class Webv extends MainBaseActivity implements Format {
             }
         });
         pm6.show();
-    }
-
-    public void c13() {
-        try {
-            String c = Clipboard.b(this);
-            if (c != null) {
-                c49(c);
-                d2.c(c);
-            } else {
-                c7(getString(R.string.t20));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            c7(getString(R.string.t20));
-        }
     }
 
     public void c14(String a23, String asd) {
@@ -2415,21 +3341,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         startActivity(Intent.createChooser(b, c45));
     }
 
-    public void c17() {
-        try {
-            String c = Clipboard.b(this);
-            if (c != null) {
-                Intents.h(this, Sear.class, 911, "value", c);
-                overridePendingTransition(R.anim.a, R.anim.f);
-            } else {
-                c7(getString(R.string.t20));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            c7(getString(R.string.t20));
-        }
-    }
-
     public void c20(boolean a) {
         if (a) {
             currentSettings().setUserAgentString(currentSettings().getUserAgentString().replace("Mobile", "eliboM").replace("Android", "diordnA"));
@@ -2455,14 +3366,16 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             }
         }
         if (a221().getBoolean("clearH", false)) {
-            c63();
+            bl4 = true;
             d1.delete();
         }
         if (a221().getBoolean("clearC", false)) {
             Clipboard.a(this, " ");
         }
         if (a221().getBoolean("clearPr", false)) {
-            c31();
+            for (WebViews web : tabs) {
+                web.clearSslPreferences();
+            }
             if (wd == null) {
                 wd = WebViewDatabase.getInstance(this);
             }
@@ -2472,12 +3385,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             if (Build.VERSION.SDK_INT <= 26 && wd.hasFormData()) {
                 wd.clearFormData();
             }
-        }
-    }
-
-    public void c31() {
-        for (WebViews web : tabs) {
-            web.clearSslPreferences();
         }
     }
 
@@ -2513,111 +3420,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             this.u.setText(ssb, TextView.BufferType.SPANNABLE);
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-    }
-
-    private void c36(final String sg) {
-        if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj", false)) {
-            if (!sg.isEmpty()) {
-                if (BuildConfig.DEBUG) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("th", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("changedTo", sg);
-                    editor.apply();
-                }
-                Runnable re = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        File fe = new File(StorageDirectory.getBackground(Webv.this));
-                        if (!Webv.this.a221().getBoolean("webviumB", false) && !fe.exists()) {
-                            Webv.this.runOnUiThread(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    int co = Color.parseColor(sg);
-                                    InsetDrawable inset = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
-                                            new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 10, 0, 10, 0);
-                                    Webv.this.o.setBackground(inset);
-                                    InsetDrawable inset1 = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
-                                            new float[]{10f, 10f, 10f, 10f, 0f, 0f, 0f, 0f}, co), 10, 0, 10, 0);
-                                    Webv.this.llt.setBackground(inset1);
-                                    if (Build.VERSION.SDK_INT >= 23) {
-                                        if (!Resources.isColorDark(co)) {
-                                            Webv.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                                            if (Build.VERSION.SDK_INT >= 26) {
-                                                Webv.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-                                            }
-                                        }
-                                        Webv.this.getWindow().setStatusBarColor(co);
-                                        Webv.this.getWindow().setNavigationBarColor(co);
-                                    }
-                                    Webv.this.cd.setBackgroundResource(R.drawable.a10);
-                                }
-                            });
-                        }
-                    }
-                };
-                new Thread(re).start();
-            } else {
-                Runnable re1 = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        File fe = new File(StorageDirectory.getBackground(Webv.this));
-                        if (!Webv.this.a221().getBoolean("webviumB", false) && !fe.exists()) {
-                            Webv.this.runOnUiThread(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    Webv.this.llt.setBackgroundResource(R.drawable.f1);
-                                    Webv.this.o.setBackgroundResource(R.drawable.p);
-                                    if (!Webv.this.a221().getBoolean("autoUpdate", false)) {
-                                        if (Build.VERSION.SDK_INT >= 23) {
-                                            Webv.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                                        }
-                                        Webv.this.getWindow().setStatusBarColor(Resources.getColor(Webv.this, R.color.b));
-                                        Webv.this.getWindow().setNavigationBarColor(Resources.getColor(Webv.this, R.color.m));
-                                    } else {
-                                        Webv.this.getWindow().setStatusBarColor(Resources.getColor(Webv.this, R.color.n));
-                                        Webv.this.getWindow().setNavigationBarColor(Resources.getColor(Webv.this, R.color.n));
-                                    }
-                                    if (Webv.this.currentUrl().startsWith("http://")) {
-                                        Webv.this.cd.setBackgroundResource(R.drawable.f4);
-                                    } else {
-                                        Webv.this.cd.setBackgroundResource(R.drawable.w);
-                                    }
-                                }
-                            });
-                        }
-                    }
-                };
-                new Thread(re1).start();
-            }
-        }
-    }
-
-    public void c37(String a, String c) {
-        try {
-            Intent e = new Intent(Intents.ACTION_LAUNCH);
-            e.addCategory(Intents.CATEGORY_GENIUS);
-            e.putExtra("duplicate", false);
-            e.putExtra("webvium", c);
-            Intent f = new Intent();
-            f.putExtra("android.intent.extra.shortcut.INTENT", e);
-            f.putExtra("android.intent.extra.shortcut.NAME", a);
-            if (currentTab().getFavicon() != null) {
-                f.putExtra("android.intent.extra.shortcut.ICON", currentTab().getFavicon());
-            } else {
-                f.putExtra("android.intent.extra.shortcut.ICON_RESOURCE",
-                        Intent.ShortcutIconResource.fromContext(this, R.mipmap.c));
-            }
-            f.putExtra("duplicate", false);
-            f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-            sendBroadcast(f);
-            AwesomeToast.b(this, getString(R.string.q26));
-        } catch (Exception et) {
-            AwesomeToast.e(this, getString(R.string.a36), 2);
         }
     }
 
@@ -2664,7 +3466,28 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
                 @Override
                 public void run() {
-                    c42();
+                    AlertDialog.Builder a = new AlertDialog.Builder(Webv.this);
+                    a.setCancelable(true);
+                    a.setTitle(getString(R.string.w2));
+                    int i = timeSet() / 60000;
+                    a.setMessage(String.format(getResources().getQuantityString(R.plurals.w1, i), i));
+                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int i1) {
+                            Webv.this.c41();
+                            dialog.dismiss();
+                        }
+                    });
+                    a.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface a1) {
+                            Webv.this.c41();
+                            a1.dismiss();
+                        }
+                    });
+                    a.create().show();
                     timer.cancel();
                     timer.purge();
                 }
@@ -2705,30 +3528,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         return 3600000; // for 60k
     }
 
-    public void c42() {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.w2));
-        int i = timeSet() / 60000;
-        a.setMessage(String.format(getResources().getQuantityString(R.plurals.w1, i), i));
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int i1) {
-                Webv.this.c41();
-                dialog.dismiss();
-            }
-        });
-        a.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            @Override
-            public void onCancel(DialogInterface a1) {
-                Webv.this.c41();
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
 
     public void c43(final String url) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
@@ -3396,7 +4195,47 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             @Override
             public void onClick(DialogInterface a2, int i) {
-                Webv.this.c37(ed.getText().toString(), ed1.getText().toString());
+                try {
+                    Intent e = new Intent(Intents.ACTION_LAUNCH);
+                    e.addCategory(Intents.CATEGORY_GENIUS);
+                    e.putExtra("duplicate", false);
+                    e.putExtra("webvium", ed1.getText().toString());
+                    /*if (Build.VERSION.SDK_INT < 25) {
+
+                     */
+                        Intent f = new Intent();
+                        f.putExtra("android.intent.extra.shortcut.INTENT", e);
+                        f.putExtra("android.intent.extra.shortcut.NAME", ed.getText().toString());
+                        if (currentTab().getFavicon() != null) {
+                            f.putExtra("android.intent.extra.shortcut.ICON", currentTab().getFavicon());
+                        } else {
+                            f.putExtra("android.intent.extra.shortcut.ICON_RESOURCE",
+                                    Intent.ShortcutIconResource.fromContext(Webv.this, R.mipmap.c));
+                        }
+                        f.putExtra("duplicate", false);
+                        f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+                        sendBroadcast(f);
+                    /* } else {
+                        ShortcutInfo shortcut = new ShortcutInfo.Builder(Webv.this, "id1").build();
+                        shortcut.setShortLabel(ed.getText().toString());
+                        shortcut.setLongLabel("Open the website");
+                        if (currentTab().getFavicon() != null) {
+                            shortcut.setIcon(Icon.createWithAdaptiveBitmap(currentTab().getFavicon()));
+                        } else {
+                            shortcut.setIcon(Icon.createWithResource(Webv.this, R.mipmap.c));
+                        }
+                        shortcut.setIntent(e);
+                        shortcut.build();
+                        ShortcutManager sm = (ShortcutManager) getSystemService("shortcut");
+                        sm.
+                        sm.pushDynamicShortcut(shortcut);
+                    }
+
+                     */
+                    AwesomeToast.b(Webv.this, getString(R.string.q26));
+                } catch (Exception et) {
+                    AwesomeToast.e(Webv.this, getString(R.string.a36), 2);
+                }
                 a2.dismiss();
             }
         });
@@ -3455,144 +4294,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
     }
 
-    @TargetApi(Build.VERSION_CODES.O_MR1)
-    public void c60(WebView view, int type5, final SafeBrowsingResponse sbh) {
-        if (a221().getBoolean("safe", true)) {
-            if (a221().getBoolean("safeDG", true)) {
-                String type = getString(R.string.i23);
-                String wde = getString(R.string.i28);
-                switch (type5) {
-                    case WebViewClient.SAFE_BROWSING_THREAT_UNKNOWN:
-                        type = getString(R.string.i23);
-                        wde = getString(R.string.i28);
-                        break;
-                    case WebViewClient.SAFE_BROWSING_THREAT_MALWARE:
-                        type = getString(R.string.i24);
-                        wde = getString(R.string.i29);
-                        break;
-                    case WebViewClient.SAFE_BROWSING_THREAT_PHISHING:
-                        type = getString(R.string.i25);
-                        wde = getString(R.string.i30);
-                        break;
-                    case WebViewClient.SAFE_BROWSING_THREAT_UNWANTED_SOFTWARE:
-                        type = getString(R.string.i26);
-                        wde = getString(R.string.i31);
-                        break;
-                    case WebViewClient.SAFE_BROWSING_THREAT_BILLING:
-                        type = getString(R.string.i27);
-                        wde = getString(R.string.i32);
-                        break;
-                }
-                AlertDialog.Builder a = new AlertDialog.Builder(this);
-                a.setCancelable(false);
-                a.setTitle(getString(R.string.h40));
-                a.setMessage(Html.b(String.format(getString(R.string.h39), Objects.requireNonNull(Uri.parse(view.getUrl()).getHost()), wde, type)));
-                a.setPositiveButton(getString(R.string.i21), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a2, int i) {
-                        sbh.backToSafety(true);
-                        a2.dismiss();
-                    }
-                });
-                a.setNegativeButton(getString(R.string.i22), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a2, int i) {
-                        sbh.proceed(true);
-                        a2.dismiss();
-                    }
-                });
-                a.create().show();
-            } else {
-                sbh.backToSafety(true);
-            }
-        } else {
-            sbh.proceed(true);
-        }
-    }
-
-    public void c65(String c) {
-        Intent a = new Intent(Intent.ACTION_SENDTO, Uri.parse(c));
-        a.putExtra(Intent.EXTRA_SUBJECT, "");
-        a.putExtra(Intent.EXTRA_TEXT, "");
-        if (a.resolveActivity(getPackageManager()) != null) {
-            startActivity(Intent.createChooser(a, getString(R.string.a26)));
-        } else {
-            AwesomeToast.c(this, getString(R.string.f34));
-        }
-    }
-
-    public void c67() {
-        currentTab().addJavascriptInterface(new Object() {
-
-            @JavascriptInterface
-            public void ip(String sg) {
-                Intent it = new Intent("com.mrepol742.webvium.WebviumIpHelper");
-                it.putExtra("ip", sg);
-                sendBroadcast(it);
-            }
-        }, Package.c() + "IpHelper");
-        final String js = "javascript: changedTo();\n" +
-                "async function changedTo() {\n" +
-                "    var myRequest = new Request('https://api.ipify.org');\n" +
-                "    fetch(myRequest).then(function(response) {\n" +
-                "        response.text().then(function(text) {\n" +
-                "            " + Package.c() + "IpHelper.ip(text);\n" +
-                "        });\n" +
-                "    });\n" +
-                "}";
-        currentTab().evaluateJavascript(js, null);
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.h7));
-        LayoutInflater d = getLayoutInflater();
-        View e = d.inflate(R.layout.b4, null);
-        a.setView(e);
-        final TextView f = e.findViewById(R.id.x);
-        f.setText(getString(R.string.v13));
-        TextView f5 = e.findViewById(R.id.c20);
-        Button bn = e.findViewById(R.id.k12);
-        f5.setText(getString(R.string.o7));
-        this.ipH = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                f.setText(intent.getStringExtra("ip"));
-            }
-        };
-        IntentFilter af = new IntentFilter();
-        af.addAction("com.mrepol742.webvium.WebviumIpHelper");
-        registerReceiver(this.ipH, af);
-        bn.setText(getString(R.string.h14));
-        if (!a221().getBoolean("autoUpdate", false)) {
-            f.setTextColor(Resources.getColor(this, R.color.c));
-            f5.setTextColor(Resources.getColor(this, R.color.c));
-        } else {
-            f.setTextColor(Resources.getColor(this, R.color.b));
-            f5.setTextColor(Resources.getColor(this, R.color.b));
-        }
-        bn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                currentTab().evaluateJavascript(js, null);
-            }
-        });
-        a.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                Webv.this.unregisterReceiver(Webv.this.ipH);
-                Webv.this.currentTab().removeJavascriptInterface(Package.c() + "IpHelper");
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dd = a.create();
-        Objects.requireNonNull(dd.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        dd.show();
-    }
-
     private void c68(View a) {
         FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Screenshot");
         if (Objects.requireNonNull(a221().getString("shotSs", "1q")).equals("1q")) {
@@ -3627,7 +4328,10 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             e.printStackTrace();
             c7(getString(R.string.w14));
         }
-        c69(st);
+        Uri contentUri = Uri.fromFile(new java.io.File(st));
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        mediaScanIntent.setData(contentUri);
+        sendBroadcast(mediaScanIntent);
         Runnable p15 = new Runnable() {
 
             @Override
@@ -3636,14 +4340,30 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             }
         };
         new Thread(p15).start();
-        c171(st);
-    }
+        final FrameLayout k = findViewById(R.id.i);
+        View c = View.inflate(this, R.layout.a8, null);
+        final LinearLayout ll1 = c.findViewById(R.id.h20);
+        final ImageView iv = c.findViewById(R.id.c19);
+        ll1.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
+        Runnable p151 = new Runnable() {
 
-    private void c69(String a) {
-        Uri contentUri = Uri.fromFile(new java.io.File(a));
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        mediaScanIntent.setData(contentUri);
-        sendBroadcast(mediaScanIntent);
+            @Override
+            public void run() {
+                final Bitmap bp = BitmapFactory.decodeFile(st);
+                Webv.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        iv.setImageBitmap(bp);
+                    }
+                });
+            }
+        };
+        new Thread(p151).start();
+        k.addView(c);
+        Animation.animate(this, R.anim.e, iv);
+        O3 timer = new O3(1000, 1000, k, c);
+        timer.start();
     }
 
     private void c70(String a) {
@@ -3832,401 +4552,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         });
         final AlertDialog g = a.create();
         g.show();
-    }
-
-    public void c77(WebView a, ReceivedErrorDataModel receivedErrorDataModel) {
-        try {
-            c180();
-            bl6 = false;
-            if (r8 == null) {
-                r8 = new R8();
-            }
-            registerReceiver(r8, ift);
-            err = receivedErrorDataModel.bn;
-            if (Build.VERSION.SDK_INT >= 23 && receivedErrorDataModel.c.startsWith("file://")) {
-                Permission.check(this, Permission.STORAGE, 2);
-            }
-            String sg = String.format(getString(R.string.v20),
-                    receivedErrorDataModel.c,
-                    receivedErrorDataModel.b,
-                    receivedErrorDataModel.d);
-            cm0.append(sg);
-            if (Build.VERSION.SDK_INT >= 23) {
-                cm0.append(String.format(getString(R.string.r22),
-                        receivedErrorDataModel.bn,
-                        receivedErrorDataModel.bn1,
-                        c175()));
-            }
-            cm0.append("<br><br>");
-if (receivedErrorDataModel.bn) {
-            a.loadUrl("about:blank");
-            String html = "<html>\n" +
-                    "    <head>\n" +
-                    "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"/>\n" +
-                    "        <title>Webpage not available</title>\n" +
-                    "        <style type=\"text/css\">\n" +
-                    "            @font-face {\n" +
-                    "            font-family: changedTo;\n" +
-                    "            src: url(\"file:///android_asset/classes\")\n" +
-                    "            }\n" +
-                    "            *{\n" +
-                    "            color: #484848;\n" +
-                    "            font-family: changedTo;\n" +
-                    "            }\n" +
-                    "            body {\n" +
-                    "            margin-top: 0px; \n" +
-                    "            padding-top: 0px;\n" +
-                    "            }\n" +
-                    "            h2 { \n" +
-                    "            margin-top: 5px; \n" +
-                    "            padding-top: 0px; \n" +
-                    "            }\n" +
-                    "        </style>\n" +
-                    "        <body>\n" +
-                    "            <img src=\"file:///android_asset/webkit/android-weberror.png\" align=\"top\" />\n" +
-                    "            <h3>Webpage not available</h3>\n" +
-                    "            <p>The webpage at <changedTo href=\"" + receivedErrorDataModel.c + "\">" + receivedErrorDataModel.c + "</changedTo> could not be loaded because:</p>\n" +
-                    "            <p>" + receivedErrorDataModel.d + "</p>\n" +
-                    "        </body>\n" +
-                    "    </head>\n" +
-                    "</html>";
-            a.loadDataWithBaseURL(receivedErrorDataModel.c, html, "text/html", "UTF-8", receivedErrorDataModel.c);
-}
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // on httpreceive error
-    public void c78(WebResourceRequest b, WebResourceResponse c) {
-        try {
-            c180();
-            if (b == null || c == null || b.getUrl() == null || c.getData() == null || c.getResponseHeaders() == null) {
-                return;
-            }
-            String sg9 = String.format(getString(R.string.v2),
-                    b.getUrl().toString(),
-                    c.getData().toString(),
-                    c.getEncoding(),
-                    c.getMimeType(),
-                    c.getReasonPhrase(),
-                    c.getResponseHeaders().toString(),
-                    c.getStatusCode(),
-                    b.isForMainFrame(),
-                    b.hasGesture(),
-                    c175());
-            cm0.append(sg9).append("<br><br>");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // on sslreceive error
-    public void c79(final SslErrorHandler b, SslError c) {
-        this.iw.setImageResource(R.drawable.a16);
-        Animation.animate(this, R.anim.c, iw);
-        String sg = String.format(getString(R.string.g19),
-                c.getUrl(),
-                c.getPrimaryError());
-        cm2.append(sg);
-        cm2.append("<br><br>");
-        SpannableString xjendndj = new SpannableString(c.getUrl());
-        xjendndj.setSpan(this.E, 0, 8, 0);
-        this.u.setText(xjendndj);
-        cd.setBackgroundResource(R.drawable.f4);
-        if (a221().getBoolean("showSO", true)) {
-            AlertDialog.Builder e = new AlertDialog.Builder(this);
-            String f = getString(R.string.v3);
-            switch (c.getPrimaryError()) {
-                case SslError.SSL_UNTRUSTED:
-                    f = getString(R.string.v4);
-                    break;
-                case SslError.SSL_EXPIRED:
-                    f = getString(R.string.v5);
-                    break;
-                case SslError.SSL_IDMISMATCH:
-                    f = getString(R.string.v6);
-                    break;
-                case SslError.SSL_NOTYETVALID:
-                    f = getString(R.string.v7);
-                    break;
-                case SslError.SSL_DATE_INVALID:
-                    f = getString(R.string.v8);
-                    break;
-                case SslError.SSL_INVALID:
-                    f = getString(R.string.v9);
-                    break;
-            }
-            e.setTitle(getString(R.string.v10));
-            e.setMessage(f);
-            e.setCancelable(false);
-            e.setPositiveButton(getString(R.string.i14), new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface a1, int i) {
-                    b.proceed();
-                    a1.dismiss();
-                }
-            });
-            e.setNegativeButton(getString(R.string.j4), new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface a1, int i) {
-                    b.cancel();
-                    a1.dismiss();
-                }
-            });
-            e.setNeutralButton(getString(R.string.v11), new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface a1, int i) {
-                    Webv.this.c75();
-                }
-            });
-            AlertDialog g = e.create();
-            g.show();
-        } else {
-            b.proceed();
-        }
-    }
-
-    // on page finished
-    public void c80(WebView a, String b) {
-        try {
-            c134();
-            if (a.getSettings().getJavaScriptEnabled()) {
-                String js = "javascript:window." + Package.c() + "ThemeHelper.setTheme((function (){\n" +
-                        "    const metas = document.getElementsByTagName('meta');\n" +
-                        "    for (let i = 0; i < metas.length; i++) {\n" +
-                        "        if (metas[i].getAttribute('name') === 'theme-color') {\n" +
-                        "            return metas[i].getAttribute('content');\n" +
-                        "        }\n" +
-                        "    }\n" +
-                        "    return '';\n" +
-                        "})());";
-                if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj", false)) {
-                    a.evaluateJavascript(js, null);
-                }
-                if (!pageF) {
-                    String js1 = "let sc = document.createElement('script');" +
-                            "sc.innerHTML = `" +
-                            "function myfun(e) {" +
-                            "    mangaid = e.target;" +
-                            "    var getit = prompt('V2ViVml1bUpT', e.target.outerHTML);" +
-                            "    if (getit != null) {" +
-                            "        e.target.outerHTML = getit;" +
-                            "    }" +
-                            "    e.stopPropagation();" +
-                            "    e.preventDefault();" +
-                            "}`;" +
-                            "document.body.appendChild(sc);";
-                    a.evaluateJavascript(js1, null);
-                    pageF = true;
-                    return;
-                }
-                pageF = false;
-            }
-            if (a221().getBoolean("maUU", false) && a221().getBoolean("tow2", false)) {
-                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                wifiManager.setWifiEnabled(false);
-            }
-            bl6 = true;
-            c38(b);
-            if (bl4) {
-                bl4 = false;
-                a.clearHistory();
-            }
-            c54(b);
-            c52();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // on page started
-    public void c81(String b) {
-        try {
-            if (r8 != null) {
-                unregisterReceiver(r8);
-            }
-            err = false;
-            /* if (BuildConfig.DEBUG) {
-                if (b.startsWith(WEBVIUM_HOME)) {
-                    ab.hide();
-                } else {
-                    ab.show();
-                }
-            } */
-            if (a221().getBoolean("maUU", false) && a221().getBoolean("tow", false)) {
-                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                wifiManager.setWifiEnabled(true);
-            }
-            tv5.setImageResource(R.drawable.a18);
-            tv5.setBackgroundResource(R.drawable.b17);
-            Animation.animate(Webv.this, R.anim.c, tv5);
-            c38(b);
-            c33(b, getString(R.string.v13));
-            this.iw.setImageResource(R.drawable.a15);
-            Animation.animate(Webv.this, R.anim.c, this.iw);
-            this.cd.setBackgroundResource(R.drawable.w);
-            dsM = false;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // ShouldOverrideUrlLoading
-    public boolean c82(String b) {
-        try {
-            c38(b);
-            if (b.equals("webvium://history")) {
-                c146(WEBVIUM_HISTORY);
-                return true;
-            } else if (b.equals("webvium://search")) {
-                c146(WEBVIUM_SEARCH);
-                return true;
-            } else if (b.equals("webvium://bookmarks")) {
-                c146(WEBVIUM_BOOKMARKS);
-                return true;
-            } else if (b.equals("webvium://launch?search")) {
-                Intents.a(this, Sear.class);
-                return true;
-            } else if (MailTo.isMailTo(b)) {
-                return c177(b);
-            } else if (b.startsWith("smsto:")) {
-                return c178(b);
-            } else if (b.startsWith("tel:")) {
-                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(b)));
-                return true;
-            } else if (b.startsWith("intent://")) {
-                try {
-                    Intent it = Intent.parseUri(b, Intent.URI_INTENT_SCHEME);
-                    if (it.resolveActivity(getPackageManager()) != null) {
-                        startActivity(it);
-                    }
-                    String fa = it.getStringExtra("browser_fallback_url");
-                    if (!Objects.requireNonNull(fa).startsWith("market://") && !fa.startsWith("geo:") && fa.contains("/store/apps/details?id=")) {
-                        return c179(b);
-                    }
-                    c3(fa);
-                    return true;
-                } catch (URISyntaxException use) {
-                    use.printStackTrace();
-                }
-            } else if (!b.startsWith("market://") && !b.startsWith("geo:") && b.contains("/store/apps/details?id=")) {
-                return c179(b);
-            } else {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(b));
-                if (intent.resolveActivity(getPackageManager()) != null && !(b.startsWith("https://") || b.startsWith("http://") || b.startsWith("file://") || b.startsWith("content://") || b.startsWith("about:blank"))) {
-                    startActivity(intent);
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public void c83(PendingDownloadDataModel w18) {
-        try {
-            WifiManager b = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            if (!a221().getBoolean("autoD", false)) {
-                if (a221().getBoolean("wifi", false)) {
-                    if (b.isWifiEnabled()) {
-                        if (Permission.check(this, Permission.STORAGE, 1)) {
-                            c11(w18);
-                        } else {
-                            pend = w18;
-                        }
-                    } else {
-                        c7(getString(R.string.v12));
-                    }
-                } else {
-                    if (Permission.check(this, Permission.STORAGE, 1)) {
-                        c11(w18);
-                    } else {
-                        pend = w18;
-                    }
-                }
-            } else {
-                if (a221().getBoolean("wifi", false)) {
-                    if (b.isWifiEnabled()) {
-                        if (Permission.check(this, Permission.STORAGE, 1)) {
-                            c182(w18, URLUtil.guessFileName(w18.a1, w18.a2, w18.a3));
-                        } else {
-                            pend = w18;
-                        }
-                    } else {
-                        c7(getString(R.string.v12));
-                    }
-                } else {
-                    if (Permission.check(this, Permission.STORAGE, 1)) {
-                        c182(w18, URLUtil.guessFileName(w18.a1, w18.a2, w18.a3));
-                    } else {
-                        pend = w18;
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public Bitmap c84() {
-        if (a221().getBoolean("webviumP", false)) {
-            if (new java.io.File(StorageDirectory.getVideoPoster(this)).exists()) {
-                return BitmapCache.getInstance().a(StorageDirectory.getVideoPoster(this));
-            }
-        }
-        return BitmapFactory.decodeResource(getResources(), R.drawable.e3);
-    }
-
-    // on receive title
-    public void c86(WebView a, String b) {
-        c33(a.getUrl(), b);
-    }
-
-    // on hide custom view
-    public void c87() {
-        try {
-            ab.show();
-            currentTab().invalidate();
-            bl3 = false;
-            c98();
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            c99();
-            ((FrameLayout) getWindow().getDecorView()).removeView(this.cv);
-            this.cv = null;
-            getWindow().getDecorView().setSystemUiVisibility(this.it7422);
-            setRequestedOrientation(this.it742);
-            this.cvc.onCustomViewHidden();
-            this.cvc = null;
-        } catch (Exception asd) {
-            asd.printStackTrace();
-        }
-    }
-
-    // on show custom view
-    public void c88(View a, WebChromeClient.CustomViewCallback b) {
-        try {
-            ab.hide();
-            bl3 = true;
-            currentTab().invalidate();
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            c128();
-            if (this.cv != null) {
-                return;
-            }
-            this.cv = a;
-            this.it7422 = getWindow().getDecorView().getSystemUiVisibility();
-            this.cvc = b;
-            ((FrameLayout) getWindow().getDecorView()).addView(this.cv, new FrameLayout.LayoutParams(-1, -1));
-            getWindow().getDecorView().setSystemUiVisibility(3846);
-        } catch (Exception asd) {
-            asd.printStackTrace();
-        }
     }
 
     private void c98() {
@@ -4995,48 +5320,6 @@ if (receivedErrorDataModel.bn) {
         a.create().show();
     }
 
-    @SuppressLint("SourceLockedOrientationActivity")
-    public void c128() {
-        if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("1a1")) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-        if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("7a1")) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-        }
-        if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("30a1")) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-        if (Objects.requireNonNull(a221().getString("horiVD", "60a1")).equals("60a1")) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-        }
-    }
-
-    public void c129(final PermissionRequest pr) {
-        if (BuildConfig.DEBUG) {
-            Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
-                    Sqlite.TABLE_PERMISSION +
-                    " ORDER BY " +
-                    "_id" +
-                    " DESC", null);
-            if (res.getCount() == 0) {
-                c9(pr);
-            } else {
-                while (res.moveToNext()) {
-                    String sg1 = res.getString(1);
-                    String sg = res.getString(2);
-                    if (sg1.equals(SHA.a("SHA-1", pr.getOrigin().toString())) && SHA.a("SHA-1", Arrays.toString(pr.getResources())).equals(sg)) {
-                        pr.grant(pr.getResources());
-                    } else {
-                        c9(pr);
-                    }
-                }
-            }
-            res.close();
-        } else {
-            c9(pr);
-        }
-    }
-
     public void c130(final int type) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
@@ -5559,16 +5842,6 @@ if (receivedErrorDataModel.bn) {
         spe.apply();
     }
 
-    public void c151(WebView a, String b, Boolean c) {
-        if (!c && (b.startsWith("http://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
-            d1.c(a.getTitle(), b);
-            SharedPreferences c56 = getSharedPreferences("wv", 0);
-            SharedPreferences.Editor d56 = c56.edit();
-            d56.putString("MyURL", b);
-            d56.apply();
-        }
-    }
-    
     private boolean c152() {
         WebView.HitTestResult d = currentTab().getHitTestResult();
         int te = d.getType();
@@ -5834,64 +6107,6 @@ if (receivedErrorDataModel.bn) {
         g.show();
     }
 
-    public WebResourceResponse c168(WebResourceRequest wr) {
-        if (a221().getBoolean("maUU", false) && a221().getBoolean("wthj123", false)) {
-            String url = Uri.parse(wr.getUrl().toString()).getHost();
-            for (String sg : ads) {
-                if (url.contains(sg)) {
-                    return new WebResourceResponse("text/plain",
-                            "UTF-8",
-                            new ByteArrayInputStream(String.format(getString(R.string.g20), url).getBytes()));
-                }
-            }
-            return null;
-        }
-        return null;
-    }
-
-    private void c171(final String sg) {
-        final FrameLayout k = findViewById(R.id.i);
-        View c = View.inflate(this, R.layout.a8, null);
-        final LinearLayout ll = c.findViewById(R.id.h20);
-        final ImageView iv = c.findViewById(R.id.c19);
-        ll.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                final Bitmap bp = BitmapFactory.decodeFile(sg);
-                Webv.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        iv.setImageBitmap(bp);
-                    }
-                });
-            }
-        };
-        new Thread(p15).start();
-        k.addView(c);
-        Animation.animate(this, R.anim.e, iv);
-        O3 timer = new O3(1000, 1000, k, c);
-        timer.start();
-    }
-
-    private void c172(HttpAuthHandler handler, String host, String realm) {
-        String a = null;
-        String b = null;
-        boolean c = handler.useHttpAuthUsernamePassword();
-        if (c) {
-            String[] cre = currentTab().getHttpAuthUsernamePassword(host, realm);
-            if (cre != null && cre.length == 2) {
-                a = cre[0];
-                b = cre[1];
-            }
-        }
-        if (a != null && b != null) {
-            handler.proceed(a, b);
-        }
-    }
-
     public String c175() {
         SimpleDateFormat sdf = new SimpleDateFormat("HHmmss:SSS | aa", Locale.US);
         return sdf.format(new Date());
@@ -5905,40 +6120,6 @@ if (receivedErrorDataModel.bn) {
             ab.show();
             llt.setVisibility(View.VISIBLE);
         }
-    }
-
-    private boolean c177(String b) {
-        MailTo sg = MailTo.parse(b);
-        if (sg.getTo().length() > 0) {
-            Map<String, String> hd = sg.getHeaders();
-            Intent it = new Intent(Intent.ACTION_SEND);
-            it.setType("text/plain");
-            it.putExtra("android.intent.extra.EMAIL", new String[]{sg.getTo()});
-            it.putExtra("android.intent.extra.SUBJECT", sg.getSubject());
-            it.putExtra("andorid.intent.extra.CC", sg.getCc());
-            if (hd.containsKey("bcc")) {
-                it.putExtra("android.intent.extra.BCC", hd.get("bcc"));
-            }
-            it.putExtra("android.intent.extra.TEXT", sg.getBody());
-            if (it.resolveActivity(getPackageManager()) != null) {
-                startActivity(it);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean c178(String sg) {
-        String[] sg5 = sg.split(":");
-        Intent it = new Intent(Intent.ACTION_SENDTO);
-        it.setData(Uri.parse("smsto:" + sg5[1]));
-        it.putExtra("address", sg5[1]);
-        it.putExtra("sms_body", sg5[2]);
-        if (it.resolveActivity(getPackageManager()) != null) {
-            startActivity(it);
-            return true;
-        }
-        return false;
     }
 
     private boolean c179(String sg) {
@@ -6496,17 +6677,77 @@ if (receivedErrorDataModel.bn) {
                 }
                 return true;
             case 15:
-                c67();
+                if (currentSettings().getJavaScriptEnabled()) {
+                    final String js = "javascript: a();\n" +
+                            "async function a() {\n" +
+                            "    var myRequest = new Request('https://api.ipify.org');\n" +
+                            "    fetch(myRequest).then(function(response) {\n" +
+                            "        response.text().then(function(text) {\n" +
+                            "            " + getSharedPreferences("di", 0).getString("di1", "") + ".a(text);\n" +
+                            "        });\n" +
+                            "    });\n" +
+                            "}";
+                    currentTab().evaluateJavascript(js, null);
+                    AlertDialog.Builder a12 = new AlertDialog.Builder(Webv.this);
+                    a12.setCancelable(true);
+                    a12.setTitle(getString(R.string.h7));
+                    LayoutInflater d = getLayoutInflater();
+                    View e = d.inflate(R.layout.b4, null);
+                    a12.setView(e);
+                    final TextView f = e.findViewById(R.id.x);
+                    f.setText(getString(R.string.v13));
+                    TextView f5 = e.findViewById(R.id.c20);
+                    Button bn = e.findViewById(R.id.k12);
+                    f5.setText(getString(R.string.o7));
+                    this.ipH = new BroadcastReceiver() {
+
+                        @Override
+                        public void onReceive(Context context, Intent intent) {
+                            f.setText(intent.getStringExtra("ip"));
+                        }
+                    };
+                    IntentFilter af = new IntentFilter();
+                    af.addAction(Intents.ACTION_IP);
+                    registerReceiver(this.ipH, af);
+                    bn.setText(getString(R.string.h14));
+                    if (!a221().getBoolean("autoUpdate", false)) {
+                        f.setTextColor(Resources.getColor(this, R.color.c));
+                        f5.setTextColor(Resources.getColor(this, R.color.c));
+                    } else {
+                        f.setTextColor(Resources.getColor(this, R.color.b));
+                        f5.setTextColor(Resources.getColor(this, R.color.b));
+                    }
+                    bn.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            currentTab().evaluateJavascript(js, null);
+                        }
+                    });
+                    a12.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            Webv.this.unregisterReceiver(Webv.this.ipH);
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dd = a12.create();
+                    Objects.requireNonNull(dd.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+                    dd.show();
+                } else {
+                    c7(getString(R.string.u13));
+                }
                 return true;
             case 7:
                 c43(currentUrl());
                 return true;
             case 23:
-                Intent d = new Intent(Intent.ACTION_GET_CONTENT);
-                d.addCategory(Intent.CATEGORY_OPENABLE);
-                d.setType("*/*");
-                if (d.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 3);
+                Intent d12 = new Intent(Intent.ACTION_GET_CONTENT);
+                d12.addCategory(Intent.CATEGORY_OPENABLE);
+                d12.setType("*/*");
+                if (d12.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(Intent.createChooser(d12, getString(R.string.a26)), 3);
                 }
                 return true;
             case 14:
@@ -6546,61 +6787,6 @@ if (receivedErrorDataModel.bn) {
         String sg = a.getStringExtra("webvium");
         String sg0 = a.getStringExtra("value");
         String sg1 = a.getAction();
-        final String sg12 = a.getDataString();
-        if (sg12 != null) {
-            String pe;
-            try {
-                pe = URLDecoder.decode(sg12, "UTF-8");
-            } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                unsupportedEncodingException.printStackTrace();
-                pe = sg12;
-            }
-            File fe2 = new File(pe.replace("file://", ""));
-            if (sg12.startsWith("file://") && sg12.endsWith(".url") && fe2.exists() && fe2.isFile()) {
-                Runnable re = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        try {
-                            String pe1;
-                            try {
-                                pe1 = URLDecoder.decode(sg12, "UTF-8");
-                            } catch (UnsupportedEncodingException unsupportedEncodingException) {
-                                unsupportedEncodingException.printStackTrace();
-                                pe1 = sg12;
-                            }
-                            File fe = new File(pe1.replace("file://", ""));
-                            FileReader fr = new FileReader(fe);
-                            BufferedReader br = new BufferedReader(fr);
-                            StringBuilder sb = new StringBuilder();
-                            String ln;
-                            while ((ln = br.readLine()) != null) {
-                                sb.append(ln);
-                                sb.append("<br>");
-                            }
-                            fr.close();
-                            br.close();
-                            String[] sgdd = sb.toString().split("<br>");
-                            for (final String dt : sgdd) {
-                                if (dt.startsWith("URL=")) {
-                                    Webv.this.runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            Webv.this.c3(dt.replace("URL=", ""));
-                                        }
-                                    });
-                                    return;
-                                }
-                            }
-                        } catch (Exception en3) {
-                            en3.printStackTrace();
-                        }
-                    }
-                };
-                new Thread(re).start();
-            }
-        }
         String queryq = a.getStringExtra("b");
         if (queryq != null) {
             c146(0);
@@ -6625,9 +6811,6 @@ if (receivedErrorDataModel.bn) {
                 ex.printStackTrace();
                 AwesomeToast.c(this, getString(R.string.t20));
             }
-        } else if (sg1.equals(Intents.ACTION_LAUNCH)) {
-            c3(sg);
-            a.removeExtra("webvium");
         } else {
             String sg2 = a.getStringExtra(Intent.EXTRA_TEXT);
             String sg3 = a.getDataString();
@@ -6635,7 +6818,6 @@ if (receivedErrorDataModel.bn) {
                 c49(sg2);
             } else if (sg1.equals(Intent.ACTION_VIEW) && sg3 != null) {
                 c3(sg3);
-
             } else if (sg1.equals(Intent.ACTION_SEARCH) || sg1.equals(Intent.ACTION_WEB_SEARCH) || sg1.equals("android.speech.action.VOICE_SPEECH_RESULTS")) {
                 c49(SearchManager.QUERY);
             } else if (sg1.equals(MediaStore.INTENT_ACTION_MEDIA_SEARCH)) {
@@ -6788,7 +6970,6 @@ if (receivedErrorDataModel.bn) {
                 ex.printStackTrace();
             }
         }
-
     }
 
     private class ca149 extends BroadcastReceiver {
@@ -6801,341 +6982,6 @@ if (receivedErrorDataModel.bn) {
                 cd.setBackgroundResource(R.drawable.w);
                 tv.setBackgroundResource(R.drawable.f2);
             }
-        }
-    }
-    
-    private class da150 extends WebChromeClient {
-
-        @Override
-        public Bitmap getDefaultVideoPoster() {
-            return c84();
-        }
-
-        @Override
-        public void onReceivedTitle(WebView a, String b) {
-            c86(a, b);
-        }
-
-        @Override
-        public void onHideCustomView() {
-            c87();
-        }
-
-        @Override
-        public void onShowCustomView(View a, WebChromeClient.CustomViewCallback b) {
-            c88(a, b);
-        }
-
-        @Override
-        public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> b, FileChooserParams fileChooserParams) {
-            Webv.this.b = b;
-            Intent d = new Intent();
-            d.setAction(Intent.ACTION_GET_CONTENT);
-            d.addCategory(Intent.CATEGORY_OPENABLE);
-            d.setType("*/*");
-            startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 2);
-            return true;
-        }
-
-        @Override
-        public void onProgressChanged(WebView a, int b) {
-            g.setProgress(b);
-            if (b == 100 && g.getVisibility() != View.GONE) {
-                tv3.setImageResource(R.drawable.b11);
-                Animation.animate(Webv.this, R.anim.c, tv3);
-                g.setVisibility(View.GONE);
-                Animation.animate(Webv.this, R.anim.b, g);
-                Webv.this.cm1.flush();
-                cdt.cancel();
-                cdt.purge();
-                if (a224("a10", false) && bl6) {
-                    // if (HDMS.b(Objects.requireNonNull(changedTo.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(changedTo.getUrl()).toLowerCase())) {
-                    c142(a.getTitle(), a.getUrl());
-                    /* } else {
-                     c142(getString(R.string.g29), getString(R.string.g30));
-                     }*/
-                } else if (a224("a10", false) && !bl6) {
-                    //if (HDMS.b(Objects.requireNonNull(changedTo.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(changedTo.getUrl()).toLowerCase())) {
-                    c143(a.getTitle(), a.getUrl());
-                    /*  } else {
-                     c143(getString(R.string.g29), getString(R.string.g30));
-                     }*/
-                }
-            } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
-                cdt.schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            c141();
-                            cdt.cancel();
-                            cdt.purge();
-                        }
-                    }, 10000);
-            }
-            if (b != 100 && g.getVisibility() != View.VISIBLE) {
-                g.setVisibility(View.VISIBLE);
-                Animation.animate(Webv.this, R.anim.c, g);
-                tv3.setImageResource(R.drawable.a14);
-                Animation.animate(Webv.this, R.anim.c, tv3);
-            }
-        }
-
-        @Override
-        public boolean onJsAlert(WebView a, String b, String c, final JsResult d) {
-            if (a221().getBoolean("Java10", true)) {
-                AlertDialog.Builder bld = new AlertDialog.Builder(Webv.this);
-                LayoutInflater d1 = getLayoutInflater();
-                View e5 = d1.inflate(R.layout.a13, null);
-                bld.setView(e5);
-                bld.setCancelable(true);
-                TextView tv = e5.findViewById(R.id.o37);
-                bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                tv.setText(c);
-                if (!a221().getBoolean("autoUpdate", false)) {
-                    tv.setTextColor(Resources.getColor(Webv.this, R.color.c));
-                } else {
-                    tv.setTextColor(Resources.getColor(Webv.this, R.color.b));
-                }
-                bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a13, int intetg) {
-                            d.confirm();
-                            a13.dismiss();
-                        }
-                    });
-                bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                        @Override
-                        public void onCancel(DialogInterface a1) {
-                            d.cancel();
-                            a1.dismiss();
-                        }
-                    });
-                AlertDialog dd = bld.create();
-                dd.show();
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean onJsPrompt(WebView a, String b, String c, String d, final JsPromptResult e) {
-            if (c.equals("V2ViVml1bUpT")) {
-                c181(d, e);
-                return true;
-            } else if (a221().getBoolean("Java9", true)) {
-                    AlertDialog.Builder a89 = new AlertDialog.Builder(Webv.this);
-                    LayoutInflater b54 = getLayoutInflater();
-                    View c34 = b54.inflate(R.layout.x, null);
-                    a89.setCancelable(true);
-                    a89.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                    a89.setView(c34);
-                    TextView sjs1 = c34.findViewById(R.id.e1);
-                    final Edit sjs = c34.findViewById(R.id.e3);
-                    int e78 = Resources.getColor(Webv.this, R.color.c);
-                    int f = Resources.getColor(Webv.this, R.color.b);
-                    int f1 = Resources.getColor(Webv.this, R.color.j);
-                    int g1 = Resources.getColor(Webv.this, R.color.k);
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        sjs1.setTextColor(e78);
-                        sjs.setTextColor(e78);
-                        sjs.setHintTextColor(f1);
-                    } else {
-                        sjs1.setTextColor(f);
-                        sjs.setTextColor(f);
-                        sjs.setHintTextColor(g1);
-                    }
-                    sjs1.setText(c);
-                    sjs.setText(d);
-                    a89.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface a13, int intetg) {
-                                String uwe = sjs.getText().toString();
-                                e.confirm(uwe);
-                                a13.dismiss();
-                            }
-                        });
-                    a89.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface a12, int intetg) {
-                                e.cancel(); 
-                                a12.dismiss();
-                            }
-                        }).setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                            @Override
-                            public void onCancel(DialogInterface a1) {
-                                e.cancel();
-                                a1.dismiss();
-                            }
-                        });
-                    final AlertDialog g = a89.create();
-                    g.show();
-                    final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-                    sjs.addTextChangedListener(new TextWatcher() {
-
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                            okButton.setEnabled(sjs.getText().toString().length() != 0);
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-
-                        }
-                    });
-                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                    return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean onJsConfirm(WebView a, String b, String c, final JsResult e) {
-            if (a221().getBoolean("Java11", true)) {
-                AlertDialog.Builder bld = new AlertDialog.Builder(Webv.this);
-                LayoutInflater d1 = getLayoutInflater();
-                View e5 = d1.inflate(R.layout.a13, null);
-                bld.setView(e5);
-                bld.setCancelable(true);
-                TextView tv = e5.findViewById(R.id.o37);
-                bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                tv.setText(c);
-                if (!a221().getBoolean("autoUpdate", false)) {
-                    tv.setTextColor(Resources.getColor(Webv.this, R.color.c));
-                } else {
-                    tv.setTextColor(Resources.getColor(Webv.this, R.color.b));
-                }
-                bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a13, int intetg) {
-                            e.confirm();
-                            a13.dismiss();
-                        }
-                    });
-                bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            e.cancel();
-                            a12.dismiss();
-                        }
-                    });
-                bld.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                        @Override
-                        public void onCancel(DialogInterface a1) {
-                            e.cancel();
-                            a1.dismiss();
-                        }
-                    });
-                AlertDialog dd = bld.create();
-                dd.show();
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean onJsBeforeUnload(WebView a, String b, String c, final JsResult e) {
-            if (a221().getBoolean("Java12", true)) {
-                AlertDialog.Builder bld = new AlertDialog.Builder(Webv.this);
-                LayoutInflater d1 = getLayoutInflater();
-                View e5 = d1.inflate(R.layout.a13, null);
-                bld.setView(e5);
-                bld.setCancelable(false);
-                TextView tv = e5.findViewById(R.id.o37);
-                bld.setTitle(String.format(getString(R.string.f25), Objects.requireNonNull(a.getTitle())));
-                tv.setText(c);
-                if (!a221().getBoolean("autoUpdate", false)) {
-                    tv.setTextColor(Resources.getColor(Webv.this, R.color.c));
-                } else {
-                    tv.setTextColor(Resources.getColor(Webv.this, R.color.b));
-                }
-                bld.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a13, int intetg) {
-                            e.confirm();
-                            a13.dismiss();
-                        }
-                    });
-                bld.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            e.cancel();
-                            a12.dismiss();
-                        }
-                    });
-                AlertDialog dd = bld.create();
-                dd.show();
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean onConsoleMessage(ConsoleMessage cm1) {
-            cm.append(String.format(getString(R.string.v188).replaceAll("742", c6(cm1.messageLevel())), cm1.messageLevel().toString(), cm1.message(), cm1.lineNumber(), cm1.sourceId()))
-                .append("\n");
-            return true;
-        }
-
-        @Override
-        public void onGeolocationPermissionsShowPrompt(final String a, final GeolocationPermissions.Callback b) {
-            final boolean c = false;
-            AlertDialog.Builder d = new AlertDialog.Builder(Webv.this);
-            d.setMessage(String.format(getString(R.string.v14), a));
-            d.setCancelable(false);
-            d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a1, int i) {
-                        if (Permission.check(Webv.this, Permission.LOCATION, 5)) {
-                            b.invoke(a, true, c);
-                            c8(String.format(getString(R.string.v15), a));
-                        } else {
-                            w6 = new GeolocationDataModel(a, b);
-                        }
-                        a1.dismiss();
-                    }
-                });
-            d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a1, int i) {
-                        b.invoke(a, false, c);
-                        c7(String.format(getString(R.string.v16), a));
-                        a1.dismiss();
-                    }
-                });
-            AlertDialog e = d.create();
-            e.show();
-        }
-
-        @Override
-        public View getVideoLoadingProgressView() {
-            return c1();
-        }
-
-        @Override
-        public void onPermissionRequest(PermissionRequest pr) {
-            c129(pr);
-        }
-
-        @Override
-        public void onReceivedIcon(WebView a, Bitmap b) {
-            c5(b);
         }
     }
 }

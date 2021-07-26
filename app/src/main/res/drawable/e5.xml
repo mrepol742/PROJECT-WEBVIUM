@@ -24,7 +24,7 @@
         <bitmap
             a:autoMirrored="true"
             a:gravity="center"
-            a:src="@mipmap/d" />
+            a:src="@mipmap/c" />
     </item>
 
 </layer-list>

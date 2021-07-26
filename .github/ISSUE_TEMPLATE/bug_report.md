@@ -26,8 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Android (please complete the following information):**
  - Device: [e.g. Samsung]
  - OS: [e.g. Android 5]
- - Browser [e.g. stock browser, webview, chrome]
- - Version [e.g. 22]
+ - Webvium version: [e.g. v1.o]
 
 **Additional context**
 Add any other context about the problem here.

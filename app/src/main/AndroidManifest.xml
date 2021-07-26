@@ -117,12 +117,12 @@
             a:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action a:name="com.mrepol742.webvium.intent.action.PASTE" />
-                <category a:name="com.mrepol742.webvium.intent.category.LEGENDS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
                 <action a:name="com.mrepol742.webvium.intent.action.SEARCH" />
-                <category a:name="com.mrepol742.webvium.intent.category.LEGENDS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -231,7 +231,7 @@
             </intent-filter>
             <intent-filter>
                 <action a:name="com.mrepol742.webvium.intent.action.ASSIST" />
-                <category a:name="com.mrepol742.webvium.intent.category.LEGENDS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -414,45 +414,6 @@
                 <data a:scheme="content" />
                 <data a:mimeType="*/*" />
                 <data a:host="*" />
-                <data a:pathPattern=".*.url" />
-                <data a:pathPattern=".*..*.url" />
-                <data a:pathPattern=".*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.url" />
-                <data a:pathPattern=".*.desktop" />
-                <data a:pathPattern=".*..*.desktop" />
-                <data a:pathPattern=".*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.desktop" />
-            </intent-filter>
-            <intent-filter>
-                <action a:name="android.intent.action.VIEW" />
-                <category a:name="android.intent.category.BROWSABLE" />
-                <category a:name="android.intent.category.DEFAULT" />
-                <data a:scheme="file" />
-                <data a:scheme="content" />
-                <data a:mimeType="*/*" />
-                <data a:host="*" />
                 <data a:pathPattern=".*.HTML" />
                 <data a:pathPattern=".*..*.HTML" />
                 <data a:pathPattern=".*..*..*.HTML" />
@@ -522,7 +483,7 @@
             </intent-filter>
             <intent-filter>
                 <action a:name="com.mrepol742.webvium.intent.action.LAUNCH" />
-                <category a:name="com.mrepol742.webvium.intent.category.LEGENDS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -565,7 +526,7 @@
             </intent-filter>
             <intent-filter>
                 <action a:name="com.mrepol742.webvium.intent.action.PASTE_SEARCH" />
-                <category a:name="com.mrepol742.webvium.intent.category.LEGENDS" />
+                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
                 <category a:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -609,7 +570,7 @@
                 <category a:name="android.intent.category.DEFAULT" />
                 <category a:name="android.intent.category.BROWSABLE" />
                 <data
-                    a:host="SamiunNafis.github.io"
+                    a:host="samiunnafis.github.io"
                     a:pathPattern="/PROJECT-WEBVIUM"
                     a:scheme="http" />
             </intent-filter>
@@ -654,7 +615,7 @@
                 <category a:name="android.intent.category.DEFAULT" />
                 <category a:name="android.intent.category.BROWSABLE" />
                 <data
-                    a:host="SamiunNafis.github.io"
+                    a:host="samiunnafis.github.io"
                     a:pathPattern="/PROJECT-WEBVIUM"
                     a:scheme="https" />
             </intent-filter>
