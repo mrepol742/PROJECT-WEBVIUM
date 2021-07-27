@@ -85,15 +85,39 @@ public class Text extends BaseActivity {
             h18.setTextColor(Resources.getColor(this, R.color.c));
             a11.setTextColor(Resources.getColor(this, R.color.c));
             a9.setTextColor(Resources.getColor(this, R.color.c));
-            w4.setBackgroundColor(Resources.getColor(this, R.color.p));
-            w4.loadDataWithBaseURL(null, "<!DOCTYPE html><html><style name=\"text/css\">@font-face { font-family: classes; src: url(\"file:///android_asset/classes\"); } * { color: #212121; font-family: classes;} ::selection { background-color: #4285f4; color: #ffffff}  </style></html><body><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><p>Paragraph</p></body></html>", "text/html", w4.getTextEncoding(), null);
         } else {
             h18.setTextColor(Resources.getColor(this, R.color.b));
             a11.setTextColor(Resources.getColor(this, R.color.b));
             a9.setTextColor(Resources.getColor(this, R.color.b));
-            w4.setBackgroundColor(Resources.getColor(this, R.color.m));
-            w4.loadDataWithBaseURL(null, "<!DOCTYPE html><html><style name=\"text/css\">@font-face { font-family: classes; src: url(\"file:///android_asset/classes\"); } * { color: #ffffff; font-family: classes;} ::selection { background-color: #4285f4; color: #ffffff} </style></html><body><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><p>Paragraph</p></body></html>", "text/html", w4.getTextEncoding(), null);
         }
+        String html = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<style name=\"text/css\">\n" +
+                "@font-face { \n" +
+                "font-family: classes; \n" +
+                "src: url(\"file:///android_asset/classes\");\n" +
+                "} \n" +
+                "* { \n" +
+                "color: #212121; \n" +
+                "font-family: classes;\n" +
+                "} \n" +
+                "::selection { \n" +
+                "background-color: #4285f4; \n" +
+                "color: #ffffff\n" +
+                "} \n" +
+                "</style>\n" +
+                "</html>\n" +
+                "<body>\n" +
+                "<h1>Heading 1</h1>\n" +
+                "<h2>Heading 2</h2>\n" +
+                "<h3>Heading 3</h3>\n" +
+                "<h4>Heading 4</h4>\n" +
+                "<h5>Heading 5</h5>\n" +
+                "<h6>Heading 6</h6>\n" +
+                "<p>Paragraph</p>\n" +
+                "</body>\n" +
+                "</html>";
+        w4.loadDataWithBaseURL(null, html, "text/html", w4.getTextEncoding(), null);
         h17.setBackgroundResource(R.drawable.p);
         h17.setNavigationIcon(R.drawable.a2);
         h17.setNavigationOnClickListener(new View.OnClickListener() {

@@ -284,25 +284,24 @@ public class Tool extends BaseActivity {
                         @Override
                         public void run() {
                             try {
-                                StringBuilder stringBuilder = new StringBuilder("<!DOCTYPE html><html><head></head><body>");
-                                stringBuilder.append(Stream.d(data, Tool.this.getString(R.string.c33)));
-                                stringBuilder.append("\n</body></html");
-                                File fe = new File(StorageDirectory.getFileDir(Tool.this) + "/" + SHA.a("SHA-1", "Headers.html") + ".html");
-                                if (fe.createNewFile()) {
-                                    FileWriter fw = new FileWriter(fe, false);
-                                    BufferedWriter br = new BufferedWriter(fw);
-                                    br.write(stringBuilder.toString());
-                                    br.close();
-                                    fw.close();
+                                String fat = Stream.d(data, "742");
+                                if (!fat.equals("742")) {
+                                final String html = "<!DOCTYPE html>\n" +
+                                        "<html>\n" +
+                                        "<head>\n" +
+                                        "</head>\n" +
+                                        "<body>\n" +
+                                        fat +
+                                        "\n</body></html";
                                     Tool.this.runOnUiThread(new Runnable() {
 
                                         @Override
                                         public void run() {
-                                            m.loadUrl("file://" + StorageDirectory.getFileDir(Tool.this) + "/" + SHA.a("SHA-1", "Headers.html") + ".html");
+                                            m.loadDataWithBaseURL(null, html, "text/html", m.getTextEncoding(), null);
                                         }
                                     });
                                 } else {
-                                    m.loadDataWithBaseURL(null, Tool.this.getString(R.string.c33), "text", "UTF-8", null);
+                                    m.loadDataWithBaseURL(null, Tool.this.getString(R.string.c33), "text", m.getTextEncoding(), null);
                                 }
                             } catch (Exception en) {
                                 en.printStackTrace();

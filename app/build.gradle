@@ -29,9 +29,11 @@ android {
         applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 20210723
+        // only change versionCode when building the final release apk
+        versionCode 20210727
         // versionCode Integer.parseInt(new Date().format("yyyyMMdd"))
-        versionName "1.7"
+        // only change versionName when building the final release apk
+        versionName "1.8"
         // < 1.0 The version i know what i am doing,
         // > 1.5 Now only god knows.
         proguardFiles getDefaultProguardFile(

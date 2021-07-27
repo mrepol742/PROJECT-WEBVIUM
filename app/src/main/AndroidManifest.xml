@@ -269,6 +269,7 @@
             a:name="com.mrepol742.webvium.Tool"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:windowSoftInputMode="adjustResize">
+            <!--
             <intent-filter a:label="@string/h10">
                 <action a:name="android.intent.action.WEB_SEARCH" />
                 <category a:name="android.intent.category.DEFAULT" />
@@ -321,6 +322,7 @@
                     a:host="*"
                     a:scheme="https" />
             </intent-filter>
+            -->
         </activity>
 
         <activity

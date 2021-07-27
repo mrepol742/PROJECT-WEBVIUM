@@ -24,3 +24,8 @@
 * deleted CODE_OF_CONDUCT.md who the hell reads them anyway
 * simplified fragments
 * delete e3.png
+* headers in tools wont now save the data
+* backup service will now only run if app was been updated
+* fixed back and forward icons not refreshing after creating and switching tab
+* tab #2 was been obsolete tho source code are not going to remove from the app
+* remastered app icon

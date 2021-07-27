@@ -100,7 +100,19 @@ public class Vide extends BaseActivity {
                 return v;
             }
         });
-        w4.loadDataWithBaseURL(null, Base64.decode("PCFET0NUW VBFIGh0bWw+PGh0bWw+PGhlYWQ+PHRpdGxlPldlYnZpdW0gVmlkZW8gUG9zdGVyPC90aXRsZT48bWV0YSBuYW1lPVwidmlld3BvcnRcIiBjb250ZW50PVwid2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCwgbW F4aW11bS1zY2FsZT0xLjAsIG1pbmltdW0tc2NhbGU9MS4wLCB1c2VyLXNjYWxhYmxlPW5vXCIvPjwvaGVhZD48Ym9keT48Y2VudGVyPjx2aWRlbyBzdHlsZT1cIm1heC13aWR0a DogMTAwJTsgaGVpZ2h0OiBhdXRvO1wiLz48L2NlbnRlcj48L2Jv ZHk+PC9odG1sPg").replaceAll("\\\\", ""), "text/html", w4.getTextEncoding(), null);
+        String html = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "<title>Webvium Video Poster</title>\n" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\"/>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<center>\n" +
+                "<video style=\"max-width: 100%; height: auto;\"/>\n" +
+                "</center>\n" +
+                "</body>\n" +
+                "</html>";
+        w4.loadDataWithBaseURL(null, html, "text/html", w4.getTextEncoding(), null);
     }
 
     @Override

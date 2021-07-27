@@ -200,9 +200,6 @@ import java.lang.reflect.*;
  * @WebviumActivity
  */
 
-/*
- * Welcome to Hell says Mj with laughing facial expression.
- */
 public class Webv extends MainBaseActivity implements Format {
     public static final String UA_DEFAULT = "1e";
     public static final String UA_ANDROID_STOCK = "7e";
@@ -694,9 +691,6 @@ public class Webv extends MainBaseActivity implements Format {
             SharedPreferences.Editor b5 = a5.edit();
             b5.putInt("noid", 275);
             b5.apply();
-            if (Build.VERSION.SDK_INT < 29) {
-                Intents.b(this, Back.class);
-            }
             SharedPreferences a52 = getSharedPreferences("di", 0);
             SharedPreferences.Editor b52 = a52.edit();
             b52.putString("di", SHA.a("SHA-1", String.valueOf(System.currentTimeMillis())));
@@ -909,7 +903,6 @@ public class Webv extends MainBaseActivity implements Format {
                 }
             });
         }
-
         tv4.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -1332,32 +1325,7 @@ public class Webv extends MainBaseActivity implements Format {
 
             @Override
             public boolean onMenuItemClick(MenuItem a1) {
-                if (a1.getItemId() != 742 && a1.getItemId() != 743) {
-                    Webv.this.currentTab().pauseTimers();
-                    Webv.this.currentTab().onPause();
-                    fl.removeAllViews();
-                    WebViews webb = tabs.get(a1.getItemId());
-                    webb.resumeTimers();
-                    webb.onResume();
-                    Webv.this.c149(webb);
-                    fl.addView(webb);
-                    ct = a1.getItemId();
-                } else if (a1.getItemId() == 743) {
-                    for (WebViews tab : tabs) {
-                        tab.destroy();
-                    }
-                    tabs.clear();
-                    WebViews web = new WebViews(Webv.this);
-                    tabs.add(web);
-                    fl.removeAllViews();
-                    Webv.this.c50(web);
-                    Webv.this.c34(web);
-                    Webv.this.c15(web);
-                    Webv.this.c149(web);
-                    fl.addView(web);
-                    ct = 0;
-                    Webv.this.c8("Tabs Cleared.");
-                } else {
+                if (a1.getItemId() == 742) {
                     Webv.this.currentTab().pauseTimers();
                     Webv.this.currentTab().onPause();
                     fl.removeAllViews();
@@ -1369,6 +1337,31 @@ public class Webv extends MainBaseActivity implements Format {
                     Webv.this.c149(web);
                     fl.addView(web);
                     ct = tabs.size() - 1;
+                } else if (a1.getItemId() == 743) {
+                    Webv.this.currentTab().pauseTimers();
+                    Webv.this.currentTab().onPause();
+                    fl.removeAllViews();
+                 
+                    tabs.clear();
+WebViews web = new WebViews(Webv.this);
+                    tabs.add(web);
+ct = 0;
+                    Webv.this.c50(web);
+                    Webv.this.c34(web);
+                    Webv.this.c15(web);
+                    Webv.this.c149(web);
+                    fl.addView(web);
+                   
+                } else {
+                    Webv.this.currentTab().pauseTimers();
+                    Webv.this.currentTab().onPause();
+                    fl.removeAllViews();
+                    WebViews webb = tabs.get(a1.getItemId());
+                    webb.resumeTimers();
+                    webb.onResume();
+                    Webv.this.c149(webb);
+                    fl.addView(webb);
+                    ct = a1.getItemId();
                 }
                 if (Webv.this.currentUrl() != null && Webv.this.currentTitle() != null) {
                     Webv.this.c33(Webv.this.currentUrl(), Webv.this.currentTitle());
@@ -1377,6 +1370,7 @@ public class Webv extends MainBaseActivity implements Format {
                     tv5.setImageBitmap(Webv.this.currentFavicon());
                     tv5.setContentDescription(Webv.this.currentTitle());
                 }
+                c134();
                 return true;
             }
         };
@@ -1384,7 +1378,6 @@ public class Webv extends MainBaseActivity implements Format {
         int len = tabs.size();
         for (int i = 0; i < len; i++) {
             me.add(0, i, 0, getTitleNonNull(i)).setOnMenuItemClickListener(e).setIcon(getFaviconNonNull(i));
-
         }
         me.add(0, 742, 0, "New Tab").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a22));
         me.add(0, 743, 0, "Close All").setOnMenuItemClickListener(e).setIcon(Resources.getDrawable(this, R.drawable.a25));
@@ -2020,7 +2013,8 @@ public class Webv extends MainBaseActivity implements Format {
                     cm0.append("<br><br>");
                     if (bn) {
                         a.loadUrl("about:blank");
-                        String html = "<html>\n" +
+                        String html = "<!DOCTYPE html>\n" +
+                                "<html>\n" +
                                 "    <head>\n" +
                                 "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"/>\n" +
                                 "        <title>Webpage not available</title>\n" +
@@ -4152,6 +4146,9 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         }
     }
 
+    /*
+     * ANIMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+     */
     public void c58(String a23, String asd) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();

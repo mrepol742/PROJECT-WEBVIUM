@@ -100,7 +100,12 @@ public class Scre extends BaseActivity {
 
             @Override
             public void onClick(View view) {
-                Scre.this.b(h18.getText().toString());
+                Intent f = new Intent(Intent.ACTION_SEND);
+                f.setType("image/*");
+                f.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +
+                        StorageDirectory.a() + st + h18.getText().toString()));
+                startActivity(Intent.createChooser(f, String.format(getString(R.string.l8), "\"" + h18.getText().toString() + "\"")));
+
             }
         });
     }
@@ -114,44 +119,66 @@ public class Scre extends BaseActivity {
         return false;
     }
 
-
     @Override
     @SuppressLint("AlwaysShowAction")
     public boolean onCreateOptionsMenu(Menu a) {
-
         if (on == Configuration.ORIENTATION_LANDSCAPE) {
             a.add(0, 0, 0, getString(R.string.a13)).setIcon(Resources.getDrawable(this, R.drawable.b10)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            a.add(0, 1, 0, getString(R.string.a14)).setIcon(Resources.getDrawable(this, R.drawable.c4)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         } else {
             a.add(0, 0, 0, getString(R.string.a13));
-            a.add(0, 1, 0, getString(R.string.a14));
         }
         a.add(0, 2, 0, getString(R.string.w3));
         a.add(0, 3, 0, getString(R.string.h3));
-
         return super.onCreateOptionsMenu(a);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem a) {
-        switch (a.getItemId()) {
-
+    public boolean onOptionsItemSelected(MenuItem a1) {
+        switch (a1.getItemId()) {
             case 0:
-                d(h18.getText().toString());
-                return true;
-            case 1:
-                e();
+                AlertDialog.Builder a = new AlertDialog.Builder(this);
+                a.setCancelable(true);
+                a.setTitle(getString(R.string.k1));
+                a.setMessage(String.format(getString(R.string.l11), "\"" + h18.getText().toString() + "\""));
+                a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a12, int intetg) {
+                        FileUtil.delete(st + h18.getText().toString());
+                        Scre.this.finish();
+                        MainNotification.a(Scre.this, Notifications.b);
+                    }
+                });
+                a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int intetg) {
+                        a1.dismiss();
+                    }
+                });
+                a.create().show();
                 return true;
             case 2:
-                f(h18.getText().toString());
+                MainWebView w4 = new MainWebView(this);
+                String html = "<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "<head>\n" +
+                        "<title></title>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<img src=\"%1$s\"/>\n" +
+                        "</body>\n" +
+                        "</html>";
+                w4.loadDataWithBaseURL(null, String.format(html, "file://" + StorageDirectory.getWebviumDir() + "/Screenshot/" + h18.getText().toString()), "text/html", w4.getTextEncoding(), null);
+                PrintManager aa = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+                aa.print(h18.getText().toString(), w4.createPrintDocumentAdapter(h18.getText().toString()), null);
+                w4.destroy();
                 return true;
             case 3:
-                f(h18.getText().toString());
                 Intents.e(this, "search", Sett.FRAGMENT_TOOL, Sett.class);
-
                 return true;
             default:
-                return super.onOptionsItemSelected(a);
+                return super.onOptionsItemSelected(a1);
         }
     }
 
@@ -160,71 +187,6 @@ public class Scre extends BaseActivity {
         super.onResume();
         onNewIntent(getIntent());
         Animation.animate(this, R.anim.i, iv);
-    }
-
-    private void b(String a) {
-        Intent f = new Intent(Intent.ACTION_SEND);
-        f.setType("image/*");
-        f.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +
-                StorageDirectory.a() + st + a));
-        startActivity(Intent.createChooser(f, String.format(getString(R.string.l8), "\"" + a + "\"")));
-    }
-
-    private void d(final String b) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.k1));
-        a.setMessage(String.format(getString(R.string.l11), "\"" + b + "\""));
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                FileUtil.delete(st + b);
-                Scre.this.finish();
-                MainNotification.a(Scre.this, Notifications.b);
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void e() {
-        try {
-            final AlertDialog.Builder a = new AlertDialog.Builder(this);
-            a.setCancelable(true);
-/*
-        Files b67 = new Files(st+b);
-        Files[] cj = b67.listFiles();
-        long lg = cj.length;
-        String sg2 = Formatter.formatFileSize(getApplicationContext(), lg);
-       */
-            a.setTitle(getString(R.string.k1));
-            a.setMessage("This feature is not available for now... ");
-            a.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface a1, int intetg) {
-                    a1.dismiss();
-                }
-            });
-            a.create().show();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private void f(String a) {
-        MainWebView w4 = new MainWebView(this);
-        w4.loadDataWithBaseURL(null, "<!DOCTYPE html><html><head><title></title></head><body><img src=\"file://" + StorageDirectory.getWebviumDir() + "/Screenshot/" + a + "\"/></body></html>", "text/html", "UTF-8", null);
-        PrintManager aa = (PrintManager) getSystemService(Context.PRINT_SERVICE);
-        aa.print(a, w4.createPrintDocumentAdapter(a), null);
-        w4.destroy();
     }
 
     @Override

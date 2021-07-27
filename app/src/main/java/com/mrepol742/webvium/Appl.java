@@ -76,7 +76,7 @@ public class Appl extends Application {
         }
         super.onCreate();
         try {
-            if (sp.getBoolean("autoUpdate55", false)) {
+            if (sp.getBoolean("autoUpdate55", true)) {
                 boolean bn = Hardware.isNightMode(this) == Hardware.E1.Yes;
                 if (!sp.getBoolean("autoUpdate", false) && bn) {
                     SharedPreferences.Editor se = sp.edit();

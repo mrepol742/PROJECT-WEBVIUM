@@ -59,7 +59,7 @@
             a:key="autoUpdate742"
             a:title="@string/h38" />
         <com.mrepol742.webvium.Swit
-            a:defaultValue="false"
+            a:defaultValue="true"
             a:key="autoUpdate55"
             a:title="@string/y13" />
         <com.mrepol742.webvium.Swit

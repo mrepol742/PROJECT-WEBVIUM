@@ -48,32 +48,29 @@
 
     </ScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         a:id="@id/o36"
         a:layout_width="match_parent"
         a:layout_height="wrap_content"
         a:layout_alignParentBottom="true">
 
         <Button
-            a:id="@id/o45"
-            a:layout_width="0dp"
+            a:id="@id/o45"  a:layout_alignParentEnd="true"
+            a:layout_width="wrap_content"
             a:layout_height="wrap_content"
-            a:layout_weight="0.1"
             tools:ignore="ButtonStyle" />
 
         <Button
-            a:id="@id/o32"
-            a:layout_width="0dp"
+            a:id="@id/o32"  a:layout_alignParentEnd="true"
+            a:layout_width="wrap_content" a:layout_below="@id/o45"
             a:layout_height="wrap_content"
-            a:layout_weight="0.1"
             tools:ignore="ButtonStyle" />
 
         <Button
-            a:id="@id/o33"
-            a:layout_width="0dp"
+            a:id="@id/o33"  a:layout_alignParentEnd="true"
+            a:layout_width="wrap_content" a:layout_below="@id/o32"
             a:layout_height="wrap_content"
-            a:layout_weight="0.1"
             tools:ignore="ButtonStyle" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

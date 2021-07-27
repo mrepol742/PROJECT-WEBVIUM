@@ -20,6 +20,7 @@
     <!-- TODO: -->
     <shortcut
         a:enabled="true"
+        a:shortcutId="i2"
         a:icon="@mipmap/b"
         a:shortcutShortLabel="@string/i2"
         a:shortcutLongLabel="@string/z83"
@@ -32,6 +33,7 @@
     <shortcut
         a:enabled="true"
         a:icon="@mipmap/b"
+        a:shortcutId="i3"
         a:shortcutShortLabel="@string/i3"
         a:shortcutLongLabel="@string/z84"
         tools:targetApi="n_mr1">
