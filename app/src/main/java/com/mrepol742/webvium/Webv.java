@@ -6515,6 +6515,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
+        a.add(0, 33, 0, getString(R.string.d40));
         return super.onCreateOptionsMenu(a);
     }
 
