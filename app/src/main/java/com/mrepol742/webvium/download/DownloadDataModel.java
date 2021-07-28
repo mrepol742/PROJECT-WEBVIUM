@@ -20,10 +20,10 @@ package com.mrepol742.webvium.download;
 public class DownloadDataModel {
     public final String a;
     public final String b;
-    public final String c;
+    public final long c;
     public final long d;
 
-    public DownloadDataModel(String a, String b, String c, long d) {
+    public DownloadDataModel(String a, String b, long c, long d) {
         this.a = a;
         this.b = b;
         this.c = c;

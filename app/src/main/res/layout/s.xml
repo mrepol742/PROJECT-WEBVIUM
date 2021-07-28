@@ -4,6 +4,7 @@
     a:layout_height="fill_parent"
     a:orientation="vertical"
     a:paddingStart="?m"
+    a:layout_marginTop="10dp"
     a:paddingEnd="?m">
 
     <EditText

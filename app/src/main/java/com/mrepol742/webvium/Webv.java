@@ -198,7 +198,6 @@ import android.view.View.OnClickListener;
 /*
  * @WebviumActivity
  */
-
 public class Webv extends MainBaseActivity implements Format {
     public static final String UA_DEFAULT = "1e";
     public static final String UA_ANDROID_STOCK = "7e";
@@ -2012,6 +2011,40 @@ ct = 0;
                     }
                     cm0.append("<br><br>");
                     if (bn) {
+                        if (a.getSettings().getJavaScriptEnabled()) {
+                            String js = "let er = document.createElement('style');\n" +
+                                    "newStyle.appendChild(document.createTextNode(`\n" +
+                                    "::selection {\n" +
+                                    "    background-color: #4285f4;\n" +
+                                    "    color: #ffffff;\n" +
+                                    "}\n" +
+                                    "\n" +
+                                    "@font-face {\n" +
+                                    "    font-family: 'Classes';\n" +
+                                    "    src: url('file:///android_asset/classes');\n" +
+                                    "}\n" +
+                                    "`));\n" +
+                                    "\n" +
+                                    "a {\n" +
+                                    "    color: #4285f4;\n" +
+                                    "    text-decoration: none;\n" +
+                                    "}\n" +
+                                    "\n" +
+                                    "a:hover {\n" +
+                                    "    color: #212121;\n" +
+                                    "}\n" +
+                                    "\n" +
+                                    "* {\n" +
+                                    "    font-family: Classes;\n" +
+                                    "}" +
+                                    "\n" +
+                                    "p {\n" +
+                                    "  color: ea4335;" +
+                                    "}\n" +
+                                    "document.head.appendChild(er);";
+                            a.evaluateJavascript(js, null);
+                        }
+                        /*
                         a.loadUrl("about:blank");
                         String html = "<!DOCTYPE html>\n" +
                                 "<html>\n" +
@@ -2045,6 +2078,8 @@ ct = 0;
                                 "    </head>\n" +
                                 "</html>";
                         a.loadDataWithBaseURL(c, html, "text/html", "UTF-8", c);
+
+                         */
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -2366,13 +2401,15 @@ ct = 0;
 
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
+               // try {
                 if (!c && (b.startsWith("http://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
-                    d1.c(a.getTitle(), b);
+                    d1.c(a.getFavicon(), a.getTitle(), b);
                     SharedPreferences c56 = getSharedPreferences("wv", 0);
                     SharedPreferences.Editor d56 = c56.edit();
                     d56.putString("MyURL", b);
                     d56.apply();
                 }
+                //} catch (Exception e) {}*/
             }
 
             @Override
@@ -6108,8 +6145,10 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             ab.hide();
             llt.setVisibility(View.GONE);
         } else {
-            ab.show();
-            llt.setVisibility(View.VISIBLE);
+            if (!iFP) {
+                ab.show();
+                llt.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -6206,7 +6245,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             Intents.a(this, Down.class);
         }
         DownloadHelper dh = DownloadHelper.getInstance(getApplicationContext());
-        dh.c(b, w18.a1, Formatter.formatFileSize(this, w18.a4));
+        dh.c(b, w18.a1, w18.a4);
         DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request f = new DownloadManager.Request(Uri.parse(w18.a1));
         f.setTitle(b);
@@ -6249,9 +6288,25 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         LayoutInflater u_r_hentai = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null, false);
         final int childCount = never_gonna_give_you_up.getChildCount();
-        
+
         ImageView ppp = u_r_idiot.findViewById(R.id.o48);
         Edit jjj = u_r_idiot.findViewById(R.id.o47);
+        
+        ImageView prev = u_r_idiot.findViewById(R.id.o51);
+        ImageView next = u_r_idiot.findViewById(R.id.o49);
+        
+        prev.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    currentTab().findNext(false);
+                }
+            });
+        next.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    currentTab().findNext(true);
+                }
+            });
         jjj.addTextChangedListener(new TextWatcher() {
 
                 @Override
@@ -6279,10 +6334,9 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 }
             }
             never_gonna_give_you_up.addView(u_r_idiot);
-            AwesomeToast.c(this, "Show");
             iFP = true;
         }
-        
+
         ppp.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -6293,37 +6347,14 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                             i_am_running_out_of_variable_names.setVisibility(View.VISIBLE);
                         }
                     }
-                    AwesomeToast.c(Webv.this, "Halelelele");
                     iFP = false;
                 }
             });
-           
-            /*
-        if (!iFP) {
-            for (int i = 0; i < childCount; i++) {
-                View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
-                if (i_am_running_out_of_variable_names instanceof ImageView) {
-                    i_am_running_out_of_variable_names.setVisibility(View.GONE);
-                }
-            }
-            never_gonna_give_you_up.addView(u_r_idiot);
-            AwesomeToast.c(this, "Show");
-            iFP = true;
-        } else {
-           for (int i = 0; i < childCount; i++) {
-                View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
-                if (i_am_running_out_of_variable_names instanceof ImageView) {
-                    i_am_running_out_of_variable_names.setVisibility(View.VISIBLE);
-                }
-            }
-            iFP = false;
-        }
-        
         float away;
         char coal;
-        
+
         away = 742f;
-        
+
         /*
          * I am eating user's RAM
          * It's really delicious

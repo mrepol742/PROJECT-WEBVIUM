@@ -21,7 +21,7 @@
 		android:layout_height="match_parent"
 		android:layout_width="wrap_content"
 		android:src="@drawable/c13"
-		
+		android:id="@id/o51"
 		android:layout_marginRight="10dp"
 		android:layout_marginLeft="10dp"/>
 

@@ -19,10 +19,13 @@ package com.mrepol742.webvium.history;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +38,7 @@ import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.util.DateUtil;
 
+import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,6 +82,11 @@ public class HistoryAdapter extends MainBaseAdapter {
             return R.drawable.a17;
         } 
         return R.drawable.a8;
+    }
+
+    public static Bitmap d1(String b) {
+        byte[] by = Base64.decode(b, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(by, 0, 0);
     }
 
     public void a(ArrayList<HistoryDataModel> w3) {
@@ -166,7 +175,7 @@ public class HistoryAdapter extends MainBaseAdapter {
             w17.b.setText(b(U8.changedTo(c(it).ls0)), TextView.BufferType.SPANNABLE);
             w17.d.setText(c(it).ls2);*/
             w17.a.setText(c(it).ls);
-            w17.c.setImageResource(d(c(it).ls0));
+            w17.c.setImageBitmap(d1(c(it).ls3));
             w17.b.setText(b(c(it).ls0), TextView.BufferType.SPANNABLE);
             Date date = new Date(c(it).ls2);
             String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);

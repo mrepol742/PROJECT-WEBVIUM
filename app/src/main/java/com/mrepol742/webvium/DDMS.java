@@ -27,11 +27,11 @@ import java.io.Serializable;
 public class DDMS implements Serializable {
     public final String a;
     public final String b;
-    public final String c;
+    public final long c;
     public final long d;
 
     @Deprecated
-    public DDMS(String a, String b, String c, long d) {
+    public DDMS(String a, String b, long c, long d) {
         this.a = a;
         this.b = b;
         this.c = c;

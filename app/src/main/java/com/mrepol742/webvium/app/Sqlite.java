@@ -18,37 +18,38 @@
 package com.mrepol742.webvium.app;
 
 public class Sqlite {
-    public static final String DATA_DOWNLOAD = "changedTo";
+    public static final String DATA_DOWNLOAD = "a1";
     public static final int VERSION_DOWNLOAD = 1;
-    public static final String TABLE_DOWNLOAD = "changedTo";
-    public static final String COL1_DOWNLOAD = "b";
-    public static final String COL2_DOWNLOAD = "c";
-    public static final String COL3_DOWNLOAD = "d";
-    public static final String COL4_DOWNLOAD = "e";
+    public static final String TABLE_DOWNLOAD = "a2";
+    public static final String COL1_DOWNLOAD = "a3";
+    public static final String COL2_DOWNLOAD = "a4";
+    public static final String COL3_DOWNLOAD = "a5";
+    public static final String COL4_DOWNLOAD = "a6";
 
-    public static final String DATA_HISTORY = "b";
+    public static final String DATA_HISTORY = "b1";
     public static final int VERSION_HISTORY = 1;
-    public static final String TABLE_HISTORY = "changedTo";
-    public static final String COL1_HISTORY = "b";
-    public static final String COL2_HISTORY = "c";
-    public static final String COL3_HISTORY = "d";
+    public static final String TABLE_HISTORY = "b2";
+    public static final String COL1_HISTORY = "b3";
+    public static final String COL2_HISTORY = "b4";
+    public static final String COL3_HISTORY = "b5";
+    public static final String COL4_HISTORY = "b6";
 
-    public static final String DATA_PERMISSION = "c";
+    public static final String DATA_PERMISSION = "c1";
     public static final int VERSION_PERMISSION = 1;
-    public static final String TABLE_PERMISSION = "changedTo";
-    public static final String COL1_PERMISSION = "b";
-    public static final String COL2_PERMISSION = "c";
-    public static final String COL3_PERMISSION = "d";
-    public static final String COL4_PERMISSION = "e";
+    public static final String TABLE_PERMISSION = "c2";
+    public static final String COL1_PERMISSION = "c3";
+    public static final String COL2_PERMISSION = "c4";
+    public static final String COL3_PERMISSION = "c5";
+    public static final String COL4_PERMISSION = "c6";
 
-    public static final String DATA_SEARCH = "d";
+    public static final String DATA_SEARCH = "d1";
     public static final int VERSION_SEARCH = 1;
-    public static final String TABLE_SEARCH = "changedTo";
-    public static final String COL1_SEARCH = "b";
+    public static final String TABLE_SEARCH = "d2";
+    public static final String COL1_SEARCH = "d3";
 
-    public static final String DATA_BOOKMARK = "e";
+    public static final String DATA_BOOKMARK = "d4";
     public static final int VERSION_BOOKMARK = 1;
-    public static final String TABLE_BOOKMARK = "changedTo";
-    public static final String COL1_BOOKMARK = "b";
-    public static final String COL2_BOOKMARK = "c";
+    public static final String TABLE_BOOKMARK = "d5";
+    public static final String COL1_BOOKMARK = "d6";
+    public static final String COL2_BOOKMARK = "d7";
 }

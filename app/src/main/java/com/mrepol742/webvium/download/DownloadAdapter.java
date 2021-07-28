@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
+import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -164,7 +165,7 @@ public class DownloadAdapter extends MainBaseAdapter {
             w20.c.setImageResource(d(b(it).b));
             Date date = new Date(b(it).d);
             String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
-            w20.d.setText(b(it).c + " | " + fiDate);
+            w20.d.setText(Formatter.formatFileSize(a, b(it).c) + " | " + fiDate);
         } catch (IndexOutOfBoundsException ignored) {
 
         }
