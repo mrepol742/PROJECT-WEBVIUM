@@ -40,8 +40,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -52,7 +50,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.Icon;
 import android.graphics.drawable.InsetDrawable;
 import android.media.AudioManager;
 import android.net.MailTo;
@@ -85,6 +82,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.ConsoleMessage;
@@ -124,53 +122,52 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
-
+import com.mrepol742.webvium.app.Clipboard;
+import com.mrepol742.webvium.app.Format;
 import com.mrepol742.webvium.app.GeolocationDataModel;
+import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Notifications;
+import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.PendingDownloadDataModel;
+import com.mrepol742.webvium.app.Permission;
+import com.mrepol742.webvium.app.Resources;
+import com.mrepol742.webvium.app.SoftKeyboard;
 import com.mrepol742.webvium.app.Sqlite;
+import com.mrepol742.webvium.app.StorageDirectory;
+import com.mrepol742.webvium.app.Vibrator;
 import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
-import com.mrepol742.webvium.app.Clipboard;
-import com.mrepol742.webvium.app.Intents;
-import com.mrepol742.webvium.app.Package;
-import com.mrepol742.webvium.app.Resources;
+import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.util.FileUtil;
-import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.app.Permission;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.net.Ping;
-import com.mrepol742.webvium.app.Vibrator;
+import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.permission.PermissionDataModel;
 import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.permission.PermissionObjectDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
+import com.mrepol742.webvium.security.Base64;
+import com.mrepol742.webvium.security.Caesar;
 import com.mrepol742.webvium.security.SHA;
 import com.mrepol742.webvium.security.XOR;
-import com.mrepol742.webvium.security.Caesar;
 import com.mrepol742.webvium.tab.NewTabAdapter;
 import com.mrepol742.webvium.tab.NewTabDataModel;
-import com.mrepol742.webvium.util.Html;
+import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AppID;
-import com.mrepol742.webvium.security.Base64;
+import com.mrepol742.webvium.util.AwesomeToast;
+import com.mrepol742.webvium.util.BitmapCache;
 import com.mrepol742.webvium.util.Domain;
-import com.mrepol742.webvium.app.Format;
+import com.mrepol742.webvium.util.FileUtil;
+import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.IdentityGenerator;
-import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.util.PassGen;
 import com.mrepol742.webvium.util.U3;
-import com.mrepol742.webvium.util.BitmapCache;
-import com.mrepol742.webvium.util.Animation;
-import com.mrepol742.webvium.app.SoftKeyboard;
-import com.mrepol742.webvium.util.AwesomeToast;
-import com.mrepol742.webvium.download.DownloadHelper;
-
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -179,6 +176,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -194,7 +193,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.lang.reflect.*;
+import android.view.View.OnClickListener;
 
 /*
  * @WebviumActivity
@@ -394,6 +393,7 @@ public class Webv extends MainBaseActivity implements Format {
     private boolean bl3, bl6, err, ua, set, inE, dsM, isSh = false;
     public static boolean bl4 = false;
     private String des;
+    private boolean iFP = false;
 
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
@@ -1062,7 +1062,7 @@ public class Webv extends MainBaseActivity implements Format {
             if (Build.VERSION.SDK_INT >= 24) {
                 boolean bn1 = isInMultiWindowMode() || isInPictureInPictureMode();
                 if (bn1) {
-                    c176(true);
+                   c176(true);
                 }
             }
             currentTab().resumeTimers();
@@ -6243,8 +6243,93 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             spe.apply();
         }
     }
+    
+    private void c183() {
+        final LinearLayout never_gonna_give_you_up = findViewById(R.id.m4);
+        LayoutInflater u_r_hentai = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null, false);
+        final int childCount = never_gonna_give_you_up.getChildCount();
+        
+        ImageView ppp = u_r_idiot.findViewById(R.id.o48);
+        Edit jjj = u_r_idiot.findViewById(R.id.o47);
+        jjj.addTextChangedListener(new TextWatcher() {
 
+                @Override
+                public void beforeTextChanged(CharSequence p1, int p2, int p3, int p4) {
+                }
 
+                @Override
+                public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
+                    if (!p1.toString().trim().equals("")) {
+                        currentTab().findAllAsync(p1.toString());
+                    } else {
+                        currentTab().findAllAsync("");
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable p1) {
+                }
+            });
+        if (!iFP) {
+            for (int i = 0; i < childCount; i++) {
+                View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
+                if (i_am_running_out_of_variable_names instanceof ImageView) {
+                    i_am_running_out_of_variable_names.setVisibility(View.GONE);
+                }
+            }
+            never_gonna_give_you_up.addView(u_r_idiot);
+            AwesomeToast.c(this, "Show");
+            iFP = true;
+        }
+        
+        ppp.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    never_gonna_give_you_up.removeView((LinearLayout) u_r_idiot.findViewById(R.id.o50));
+                    for (int i = 0; i < childCount; i++) {
+                        View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
+                        if (i_am_running_out_of_variable_names instanceof ImageView) {
+                            i_am_running_out_of_variable_names.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    AwesomeToast.c(Webv.this, "Halelelele");
+                    iFP = false;
+                }
+            });
+           
+            /*
+        if (!iFP) {
+            for (int i = 0; i < childCount; i++) {
+                View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
+                if (i_am_running_out_of_variable_names instanceof ImageView) {
+                    i_am_running_out_of_variable_names.setVisibility(View.GONE);
+                }
+            }
+            never_gonna_give_you_up.addView(u_r_idiot);
+            AwesomeToast.c(this, "Show");
+            iFP = true;
+        } else {
+           for (int i = 0; i < childCount; i++) {
+                View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
+                if (i_am_running_out_of_variable_names instanceof ImageView) {
+                    i_am_running_out_of_variable_names.setVisibility(View.VISIBLE);
+                }
+            }
+            iFP = false;
+        }
+        
+        float away;
+        char coal;
+        
+        away = 742f;
+        
+        /*
+         * I am eating user's RAM
+         * It's really delicious
+         */
+    }
+    
     @Override
     @TargetApi(Build.VERSION_CODES.M)
     public void onRequestPermissionsResult(int a, String[] b, int[] c) {
@@ -6515,7 +6600,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
-        a.add(0, 33, 0, getString(R.string.d40));
+        a.add(0, 33, 0, getString(R.string.d41));
         return super.onCreateOptionsMenu(a);
     }
 
@@ -6655,6 +6740,9 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     a.setChecked(false);
                     c7(getString(R.string.u13));
                 }
+                return true;
+            case 33:
+                c183();
                 return true;
             case 13:
                 if (cm.capacity() > 16) {
