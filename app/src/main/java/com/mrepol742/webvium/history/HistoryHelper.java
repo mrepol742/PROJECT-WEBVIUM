@@ -23,13 +23,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.webkit.URLUtil;
 
 import com.mrepol742.webvium.HDMS;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.WebviumDatabase;
+
+import java.io.ByteArrayOutputStream;
 
 public class HistoryHelper implements WebviumDatabase {
 
@@ -92,7 +96,24 @@ public class HistoryHelper implements WebviumDatabase {
                 values.put(Sqlite.COL3_HISTORY, System.currentTimeMillis());
                 sld.insert(Sqlite.TABLE_HISTORY, null, values);
             }
+        }
+    }
 
+    public void c(Bitmap bi, String a, String b) {
+        if (!sp.getBoolean("pHistory", false)) {
+            if (sld != null && sld.isOpen()) {
+                //if (HDMS.b(changedTo.toLowerCase())) {
+                // if (HDMS.b(b.toLowerCase()
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bi.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream .toByteArray();
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_HISTORY, h(a));
+                values.put(Sqlite.COL2_HISTORY, b);
+                values.put(Sqlite.COL3_HISTORY, System.currentTimeMillis());
+                values.put(Sqlite.COL4_HISTORY, e(bi));
+                sld.insert(Sqlite.TABLE_HISTORY, null, values);
+            }
         }
     }
 
@@ -109,6 +130,18 @@ public class HistoryHelper implements WebviumDatabase {
             }
 
         }
+    }
+
+    private String e(Bitmap bi) {
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bi.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        } catch (Exception en) {
+            en.printStackTrace();
+        }
+        return null;
     }
 
     private String h(String sg) {

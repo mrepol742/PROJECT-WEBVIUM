@@ -117,7 +117,7 @@ public class Down extends BaseActivity {
             while (res.moveToNext()) {
                 al.add(new DownloadDataModel(res.getString(1),
                         res.getString(2),
-                        res.getString(3),
+                        res.getLong(3),
                         res.getLong(4)));
             }
             iv.setVisibility(View.VISIBLE);

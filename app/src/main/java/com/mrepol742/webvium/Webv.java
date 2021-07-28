@@ -199,7 +199,6 @@ import java.lang.reflect.*;
 /*
  * @WebviumActivity
  */
-
 public class Webv extends MainBaseActivity implements Format {
     public static final String UA_DEFAULT = "1e";
     public static final String UA_ANDROID_STOCK = "7e";
@@ -2012,6 +2011,40 @@ ct = 0;
                     }
                     cm0.append("<br><br>");
                     if (bn) {
+                        if (a.getSettings().getJavaScriptEnabled()) {
+                            String js = "let er = document.createElement('style');\n" +
+                                    "newStyle.appendChild(document.createTextNode(`\n" +
+                                    "::selection {\n" +
+                                    "    background-color: #4285f4;\n" +
+                                    "    color: #ffffff;\n" +
+                                    "}\n" +
+                                    "\n" +
+                                    "@font-face {\n" +
+                                    "    font-family: 'Classes';\n" +
+                                    "    src: url('file:///android_asset/classes');\n" +
+                                    "}\n" +
+                                    "`));\n" +
+                                    "\n" +
+                                    "a {\n" +
+                                    "    color: #4285f4;\n" +
+                                    "    text-decoration: none;\n" +
+                                    "}\n" +
+                                    "\n" +
+                                    "a:hover {\n" +
+                                    "    color: #212121;\n" +
+                                    "}\n" +
+                                    "\n" +
+                                    "* {\n" +
+                                    "    font-family: Classes;\n" +
+                                    "}" +
+                                    "\n" +
+                                    "p {\n" +
+                                    "  color: ea4335;" +
+                                    "}\n" +
+                                    "document.head.appendChild(er);";
+                            a.evaluateJavascript(js, null);
+                        }
+                        /*
                         a.loadUrl("about:blank");
                         String html = "<!DOCTYPE html>\n" +
                                 "<html>\n" +
@@ -2045,6 +2078,8 @@ ct = 0;
                                 "    </head>\n" +
                                 "</html>";
                         a.loadDataWithBaseURL(c, html, "text/html", "UTF-8", c);
+
+                         */
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -2367,7 +2402,7 @@ ct = 0;
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
                 if (!c && (b.startsWith("http://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
-                    d1.c(a.getTitle(), b);
+                    d1.c(a.getFavicon(), a.getTitle(), b);
                     SharedPreferences c56 = getSharedPreferences("wv", 0);
                     SharedPreferences.Editor d56 = c56.edit();
                     d56.putString("MyURL", b);
@@ -6206,7 +6241,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             Intents.a(this, Down.class);
         }
         DownloadHelper dh = DownloadHelper.getInstance(getApplicationContext());
-        dh.c(b, w18.a1, Formatter.formatFileSize(this, w18.a4));
+        dh.c(b, w18.a1, w18.a4);
         DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request f = new DownloadManager.Request(Uri.parse(w18.a1));
         f.setTitle(b);

@@ -75,12 +75,12 @@ public class DownloadHelper implements WebviumDatabase {
                             Sqlite.COL4_DOWNLOAD +
                             " =?" , new String[]{w2.a,
                             w2.b,
-                            w2.c,
+                            Long.toString(w2.c),
                             Long.toString(w2.d)});
         }
     }
 
-    public void c(String a, String b, String c) {
+    public void c(String a, String b, long c) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
             values.put(Sqlite.COL1_DOWNLOAD, a);
@@ -102,7 +102,7 @@ public class DownloadHelper implements WebviumDatabase {
         }
     }
 
-    public void i(String oldTitle, String oldURl, String oldSize, long oldTIme, String newTitle, String newUrl) {
+    public void i(String oldTitle, String oldURl, long oldSize, long oldTIme, String newTitle, String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
             values.put(Sqlite.COL1_DOWNLOAD, newTitle);
@@ -117,7 +117,7 @@ public class DownloadHelper implements WebviumDatabase {
                             Sqlite.COL3_DOWNLOAD +
                             " LIKE ? AND " +
                             Sqlite.COL4_DOWNLOAD +
-                            " LIKE ?", new String[]{oldTitle, oldURl, oldSize, Long.toString(oldTIme)});
+                            " LIKE ?", new String[]{oldTitle, oldURl, Long.toString(oldSize), Long.toString(oldTIme)});
         }
 
     }
