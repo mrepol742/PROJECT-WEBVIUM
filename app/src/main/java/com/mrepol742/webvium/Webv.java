@@ -6340,6 +6340,8 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                         }
                     }
                     iFP = false;
+                    currentTab().findAllAsync("");
+                    tv9.setVisibility(View.GONE);
                 }
             });
 
