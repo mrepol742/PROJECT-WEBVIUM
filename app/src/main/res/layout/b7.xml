@@ -52,8 +52,6 @@
             a:id="@id/b12"
             a:layout_width="wrap_content"
             a:layout_height="wrap_content"
-            a:text="300KB | 20 Dec 2021"
-            a:layout_alignParentStart="true"
             a:maxLines="1"
             a:textSize="@dimen/c" />
 

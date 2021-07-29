@@ -136,18 +136,6 @@
             a:windowSoftInputMode="stateHidden" />
 
         <activity
-            a:name="com.mrepol742.webvium.Term"
-            a:configChanges="keyboardHidden|orientation|screenSize"
-            a:exported="false"
-            a:windowSoftInputMode="stateHidden" />
-
-        <activity
-            a:name="com.mrepol742.webvium.Priv"
-            a:configChanges="keyboardHidden|orientation|screenSize"
-            a:exported="false"
-            a:windowSoftInputMode="stateHidden" />
-
-        <activity
             a:name="com.mrepol742.webvium.Back0"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:excludeFromRecents="true"

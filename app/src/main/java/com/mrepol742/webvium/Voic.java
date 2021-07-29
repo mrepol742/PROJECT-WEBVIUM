@@ -207,7 +207,7 @@ public class Voic extends BaseActivity {
 
     private void a(String sg) {
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("changedTo", sg);
+        resultIntent.putExtra("a", sg);
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
         overridePendingTransition(R.anim.f, R.anim.b);

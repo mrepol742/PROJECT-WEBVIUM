@@ -73,6 +73,7 @@ import java.util.Objects;
 /*
  * @ManageSpaceActivity
  */
+@Deprecated
 public class Mana extends BaseActivity {
 
     private static final int[] drawables = {
@@ -80,6 +81,7 @@ public class Mana extends BaseActivity {
             R.drawable.d16,
             R.drawable.d17,
             R.drawable.d18,
+            R.drawable.e15,
             R.drawable.d19,
             R.drawable.e14,
             R.drawable.e15
@@ -89,6 +91,7 @@ public class Mana extends BaseActivity {
             R.string.e10,
             R.string.d12,
             R.string.d14,
+            R.string.z90,
             R.string.c35,
             R.string.p12,
             R.string.c36
@@ -98,6 +101,7 @@ public class Mana extends BaseActivity {
             R.drawable.d16,
             R.drawable.d17,
             R.drawable.d18,
+            R.drawable.e15,
             R.drawable.d19
     };
     private static final int[] strings1 = {
@@ -105,6 +109,7 @@ public class Mana extends BaseActivity {
             R.string.e10,
             R.string.d12,
             R.string.d14,
+            R.string.z90,
             R.string.c35
     };
     private final ArrayList<String> a = new ArrayList<>();
@@ -255,103 +260,61 @@ public class Mana extends BaseActivity {
 
     private void i(int a) {
         if (a == 0) {
-            Runnable re = new Runnable() {
-
-                @Override
-                public void run() {
                     String sb5 = "SELECT * FROM " + "A" +
                             " ORDER BY " +
                             "_id" +
                             " DESC";
                     Cursor rest1 = BookmarkHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
                     if (rest1.getCount() != 0) {
-                        Mana.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
                                 Mana.this.k(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.u4));
-                            }
-                        });
                     } else {
-                        Mana.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
                                 Mana.this.r(Mana.this.getString(R.string.v27));
-                            }
-                        });
                     }
                     rest1.close();
-                }
-            };
-            new Thread(re).start();
         } else if (a == 1) {
             m(getString(R.string.l14), getString(R.string.u5));
         } else if (a == 2) {
-            Runnable re = new Runnable() {
-
-                @Override
-                public void run() {
                     String sb12 = "SELECT * FROM " + "A" +
                             " ORDER BY " +
                             "_id" +
                             " DESC";
                     Cursor rest = HistoryHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
                     if (rest.getCount() != 0) {
-                        Mana.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
                                 Mana.this.n(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.t5));
-                            }
-                        });
                     } else {
-                        Mana.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
                                 Mana.this.r(Mana.this.getString(R.string.v27));
-                            }
-                        });
                     }
                     rest.close();
-                }
-            };
-            new Thread(re).start();
         } else if (a == 3) {
-            Runnable re = new Runnable() {
-
-                @Override
-                public void run() {
                     String sb55 = "SELECT * FROM " + "A" +
                             " ORDER BY " +
                             "_id" +
                             " DESC";
                     Cursor res = SearchHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
                     if (res.getCount() != 0) {
-                        Mana.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
                                 Mana.this.o(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.u6));
-                            }
-                        });
                     } else {
-                        Mana.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
                                 Mana.this.r(Mana.this.getString(R.string.v27));
-                            }
-                        });
+
                     }
                     res.close();
-                }
-            };
-            new Thread(re).start();
+
         } else if (a == 4) {
-            x(getString(R.string.l14), getString(R.string.u7));
+            String sb55 = "SELECT * FROM " + "A" +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC";
+                    Cursor res = DownloadHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+                    if (res.getCount() != 0) {
+                                Mana.this.p(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.z92));
+                    } else {
+                                Mana.this.r(Mana.this.getString(R.string.v27));
+
+                    }
+                    res.close();
         } else if (a == 5) {
+            x(getString(R.string.l14), getString(R.string.u7));
+        } else if (a == 6) {
             if (Permission.check(this, Permission.STORAGE, 3)) {
                 java.io.File fe = new java.io.File(StorageDirectory.getWebviumDir() + "/Screenshot");
                 int i = 0;
@@ -364,7 +327,7 @@ public class Mana extends BaseActivity {
                     r(getString(R.string.v29));
                 }
             }
-        } else if (a == 6) {
+        } else if (a == 7) {
             if (Permission.check(this, Permission.STORAGE, 4)) {
                 java.io.File fe = new java.io.File(StorageDirectory.getDownloadDir());
                 int i = 0;
@@ -488,6 +451,31 @@ public class Mana extends BaseActivity {
             @Override
             public void onClick(DialogInterface a22, int intetg) {
                 SearchHelper d2 = SearchHelper.getInstance(Mana.this.getApplicationContext());
+                d2.delete();
+                a22.dismiss();
+                Mana.this.a1();
+            }
+        });
+        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a2, int intetg) {
+                a2.dismiss();
+            }
+        });
+        a.create().show();
+    }
+
+    private void p(String a1, String b1) {
+        final AlertDialog.Builder a = new AlertDialog.Builder(this);
+        a.setCancelable(true);
+        a.setTitle(a1);
+        a.setMessage(b1);
+        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface a22, int intetg) {
+                DownloadHelper d2 = DownloadHelper.getInstance(Mana.this.getApplicationContext());
                 d2.delete();
                 a22.dismiss();
                 Mana.this.a1();
@@ -662,7 +650,7 @@ public class Mana extends BaseActivity {
             public void onClick(DialogInterface a22, int intetg) {
                 ActivityState.changedTo(Mana.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
                 ActivityState.changedTo(Mana.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-                Mana.this.getSharedPreferences("changedTo", 0).edit().clear().apply();
+                Mana.this.getSharedPreferences("a", 0).edit().clear().apply();
                 Mana.this.a221().edit().clear().apply();
                 Mana.this.getSharedPreferences("wv", 0).edit().clear().apply();
                 a22.dismiss();
@@ -693,7 +681,7 @@ public class Mana extends BaseActivity {
                 ActivityState.changedTo(Mana.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
                 Mana.this.getSharedPreferences("wv", 0).edit().clear().apply();
                 Mana.this.a221().edit().clear().apply();
-                Mana.this.getSharedPreferences("changedTo", 0).edit().clear().apply();
+                Mana.this.getSharedPreferences("a", 0).edit().clear().apply();
                 HistoryHelper d1 = HistoryHelper.getInstance(Mana.this.getApplicationContext());
                 d1.delete();
                 SearchHelper d2 = SearchHelper.getInstance(Mana.this.getApplicationContext());
@@ -753,6 +741,11 @@ public class Mana extends BaseActivity {
                 "_id" +
                 " DESC";
         Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+        String sb122 = "SELECT * FROM " + "A" +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor restt = DownloadHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb122, null);
         int cont = rest1.getCount();
         if (cont == 0) {
             b.add(getString(R.string.v27));
@@ -772,10 +765,17 @@ public class Mana extends BaseActivity {
         } else {
             b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
         }
+        int cont111 = restt.getCount();
+        if (cont111 == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+        }
         b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
         rest1.close();
         res.close();
         rest.close();
+        restt.close();
         if (Build.VERSION.SDK_INT < 29) {
             boolean bn = Permission.checkOnly(this, Permission.STORAGE);
             if (bn) {

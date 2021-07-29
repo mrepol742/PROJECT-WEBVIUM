@@ -19,7 +19,6 @@ package com.mrepol742.webvium;
 
 import android.app.ActionBar;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +33,6 @@ import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.BitmapCache;
 
 import java.io.File;

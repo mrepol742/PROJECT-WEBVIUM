@@ -21,7 +21,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.Edit0;
 import com.mrepol742.webvium.List;
@@ -30,7 +29,6 @@ import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.Upda;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.Intents;
-import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.Objects;

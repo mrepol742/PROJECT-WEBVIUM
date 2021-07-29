@@ -17,7 +17,6 @@
 
 package com.mrepol742.webvium.setting.fragment;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -37,20 +36,14 @@ public class DownloadFragment extends BasePreferenceFragment {
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
         try {
-            if (Build.VERSION.SDK_INT >= 24) {
-                a5(R.xml.n);
-            } else if (Build.VERSION.SDK_INT >= 23) {
-                a5(R.xml.m);
-            } else {
-                a5(R.xml.e);
-            }
             if (Build.VERSION.SDK_INT >= 23) {
+                a5(R.xml.m);
                 Preference d = findPreference("batt");
                 d.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                     @Override
                     public boolean onPreferenceClick(Preference a5) {
-                        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                        AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
                         a.setCancelable(true);
                         a.setTitle(getString(R.string.f));
                         a.setMessage(Html.b(getString(R.string.u12)));
@@ -73,6 +66,8 @@ public class DownloadFragment extends BasePreferenceFragment {
                         return true;
                     }
                 });
+            } else {
+                a5(R.xml.e);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

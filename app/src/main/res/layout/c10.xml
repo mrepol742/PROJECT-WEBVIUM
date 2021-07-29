@@ -10,17 +10,14 @@
 
 	<com.mrepol742.webvium.Edit
 		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:id="@id/o47"
 		android:singleLine="true"
-		android:layout_weight="1.0"
-		android:minWidth="250dp"
-        android:hint="Search here"/>
+		android:layout_weight="1.0" />
 
 	<ImageView
 		android:layout_height="match_parent"
 		android:layout_width="wrap_content"
-		android:src="@drawable/c13"
 		android:id="@id/o51"
 		android:layout_marginRight="10dp"
 		android:layout_marginLeft="10dp"/>
@@ -28,14 +25,12 @@
 	<ImageView
 		android:layout_height="match_parent"
 		android:layout_width="wrap_content"
-		android:src="@drawable/b13"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
 		android:id="@id/o49"/>
     
     <ImageView
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:src="@drawable/g10"
         android:id="@id/o48" />
 
 </LinearLayout>

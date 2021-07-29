@@ -22,13 +22,10 @@
         a:key="p20"
         a:title="@string/p20" />
     <com.mrepol742.webvium.Pref a:key="ins12" />
-    <com.mrepol742.webvium.Pref
-        a:key="g5"
-        a:summary="@string/g5"
-        a:title="@string/f12" />
+
     <com.mrepol742.webvium.Pref
         a:key="g6"
-        a:summary="@string/x53"
+        a:summary="@string/g5"
         a:title="@string/x44" />
 
     <com.mrepol742.webvium.Pref

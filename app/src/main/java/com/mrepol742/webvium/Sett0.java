@@ -47,8 +47,8 @@ import com.mrepol742.webvium.util.Animation;
  */
 public class Sett0 extends BaseActivity {
     private LinearLayout ll;
-    private String id = "changedTo";
-    private ImageView iv, iv0;
+    private String id = "a";
+    private ImageView iv, iv0, iv1;
 
     @Override
     protected void onCreate(Bundle a) {
@@ -92,7 +92,7 @@ public class Sett0 extends BaseActivity {
                 }
                 Animation.animate(Sett0.this, R.anim.i, tv);
                 Sett0.this.as(R.id.m10, new SettingFragment());
-                id = "changedTo";
+                id = "a";
                 Sett0.this.b24(true);
                 Sett0.this.invalidateOptionsMenu();
             }
@@ -198,8 +198,10 @@ public class Sett0 extends BaseActivity {
         tv2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g12), null, null);
         iv = findViewById(R.id.o25);
         iv0 = findViewById(R.id.o26);
+        iv1 = findViewById(R.id.a);
         iv.setBackgroundResource(R.drawable.c6);
         iv0.setBackgroundResource(R.drawable.c6);
+        iv1.setBackgroundResource(R.drawable.c6);
         iv.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -211,18 +213,19 @@ public class Sett0 extends BaseActivity {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.SEND");
-                intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
-                intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z69));
-                intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66));
-                intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
-                intent.setType("text/html");
-                intent.setPackage("com.google.android.gm");
-                startActivity(Intent.createChooser(intent, getString(R.string.z65)));
+                a(true);
+            }
+        });
+        iv1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                a(false);
             }
         });
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);
+        iv1.setImageResource(R.drawable.b18);
         b24(true);
     }
 
@@ -233,6 +236,7 @@ public class Sett0 extends BaseActivity {
         if (iv.getVisibility() == View.VISIBLE && iv0.getVisibility() == View.VISIBLE && id.equals("a2")) {
             Animation.animate(this, R.anim.i, iv);
             Animation.animate(this, R.anim.i, iv0);
+            Animation.animate(this, R.anim.i, iv1);
         }
     }
 
@@ -247,9 +251,10 @@ public class Sett0 extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
-        if (Hardware.isTablet(this) && (id.equals("changedTo") || id.equals("a1"))) {
+        if (Hardware.isTablet(this) && (id.equals("a") || id.equals("a1"))) {
             a.add(0, 0, 0, getString(R.string.a8));
             a.add(0, 1, 0, getString(R.string.f14));
+            a.add(0, 2, 0, getString(R.string.z86));
         }
         return super.onCreateOptionsMenu(a);
     }
@@ -261,14 +266,10 @@ public class Sett0 extends BaseActivity {
                 b23();
                 return true;
             case 1:
-                Intent intent = new Intent("android.intent.action.SEND");
-                intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
-                intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z69));
-                intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66));
-                intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
-                intent.setType("text/html");
-                intent.setPackage("com.google.android.gm");
-                startActivity(Intent.createChooser(intent, getString(R.string.z65)));
+                a(true);
+                return true;
+            case 2:
+                a(false);
                 return true;
             default:
                 return super.onOptionsItemSelected(a);
@@ -286,9 +287,27 @@ public class Sett0 extends BaseActivity {
         if (bn) {
             iv.setVisibility(View.GONE);
             iv0.setVisibility(View.GONE);
+            iv1.setVisibility(View.GONE);
         } else {
             iv.setVisibility(View.VISIBLE);
             iv.setVisibility(View.VISIBLE);
+            iv.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void a(boolean bn) {
+        Intent intent = new Intent("android.intent.action.SEND");
+        intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
+        if (bn) {
+            intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z69));
+            intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66));
+        } else {
+            intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z86));
+            intent.putExtra("android.intent.extra.TEXT", getString(R.string.z87));
+        }
+        intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
+        intent.setType("text/html");
+        intent.setPackage("com.google.android.gm");
+        startActivity(Intent.createChooser(intent, getString(R.string.z65)));
     }
 }

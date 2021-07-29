@@ -82,7 +82,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.ConsoleMessage;
@@ -122,7 +121,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Format;
@@ -634,11 +632,11 @@ public class Webv extends MainBaseActivity implements Format {
         super.onActivityResult(a, b, c);
         if (a == 742) {
             if (b == Activity.RESULT_OK && null != c) {
-                String query = c.getStringExtra("changedTo");
+                String query = c.getStringExtra("a");
                 c8(String.format(getString(R.string.d39), Objects.requireNonNull(query)));
                 c49(query);
                 d2.c(query);
-                c.removeExtra("changedTo");
+                c.removeExtra("a");
             }
         }
         if (a == 911 || a == 211 || a == 2115) {
@@ -2401,15 +2399,13 @@ ct = 0;
 
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
-               // try {
                 if (!c && (b.startsWith("http://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
-                    d1.c(a.getFavicon(), a.getTitle(), b);
+                    d1.c(a.getTitle(), b);
                     SharedPreferences c56 = getSharedPreferences("wv", 0);
                     SharedPreferences.Editor d56 = c56.edit();
                     d56.putString("MyURL", b);
                     d56.apply();
                 }
-                //} catch (Exception e) {}*/
             }
 
             @Override
@@ -4101,7 +4097,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             @Override
             public void onClick(DialogInterface a2, int i) {
                 Intent it = new Intent(Webv.this, SHA.class);
-                it.putExtra("changedTo", ed.getText().toString());
+                it.putExtra("a", ed.getText().toString());
                 it.putExtra("b", ed1.getText().toString());
                 Notifications.b(Webv.this, it);
                 a2.dismiss();
@@ -6249,21 +6245,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request f = new DownloadManager.Request(Uri.parse(w18.a1));
         f.setTitle(b);
-        if (a221().getBoolean("drh1", true)) {
-            f.setMimeType(w18.a3);
-        }
-        f.setAllowedOverMetered(a221().getBoolean("drh2", true));
-        f.setAllowedOverRoaming(a221().getBoolean("drh3", false));
-        if (Build.VERSION.SDK_INT >= 24) {
-            f.setRequiresCharging(a221().getBoolean("drh4", false));
-            f.setRequiresDeviceIdle(a221().getBoolean("drh5", false));
-        }
-        if (a221().getBoolean("drh", true)) {
-            //f.addRequestHeader("cookie", cm.getCookie(sg4));
-        }
-        if (a221().getBoolean("drh0", true)) {
-            // f.addRequestHeader("User-Agent", sg5);
-        }
+        f.setMimeType(w18.a3);
         if (Build.VERSION.SDK_INT >= 30) {
             f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b);
         } else if (Build.VERSION.SDK_INT >= 23 && Permission.checkOnly(Webv.this, Permission.STORAGE)) {
@@ -6275,10 +6257,10 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         f.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         dm.enqueue(f);
         SharedPreferences sp9 = getSharedPreferences("wv", 0);
-        if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("changedTo")) {
+        if (Build.VERSION.SDK_INT >= 23 && !Objects.requireNonNull(sp9.getString("downAlert", "")).equals("a")) {
             c71();
             SharedPreferences.Editor spe = sp9.edit();
-            spe.putString("downAlert", "changedTo");
+            spe.putString("downAlert", "a");
             spe.apply();
         }
     }
@@ -6288,13 +6270,23 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         LayoutInflater u_r_hentai = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null, false);
         final int childCount = never_gonna_give_you_up.getChildCount();
-
         ImageView ppp = u_r_idiot.findViewById(R.id.o48);
         Edit jjj = u_r_idiot.findViewById(R.id.o47);
-        
+        jjj.setHint(getString(R.string.z85));
         ImageView prev = u_r_idiot.findViewById(R.id.o51);
+        prev.setImageResource(R.drawable.c15);
         ImageView next = u_r_idiot.findViewById(R.id.o49);
-        
+        next.setImageResource(R.drawable.b14);
+        ppp.setImageResource(R.drawable.g10);
+        prev.setBackgroundResource(R.drawable.b17);
+        next.setBackgroundResource(R.drawable.b17);
+        ppp.setBackgroundResource(R.drawable.b17);
+        jjj.setTypeface(type(Typeface.NORMAL));
+        if (!a221().getBoolean("autoUpdate", false)) {
+            jjj.setTextColor(Resources.getColor(this, R.color.c));
+        } else {
+            jjj.setTextColor(Resources.getColor(this, R.color.b));
+        }
         prev.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -6302,11 +6294,12 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 }
             });
         next.setOnClickListener(new OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     currentTab().findNext(true);
                 }
-            });
+        });
         jjj.addTextChangedListener(new TextWatcher() {
 
                 @Override
@@ -6336,11 +6329,10 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             never_gonna_give_you_up.addView(u_r_idiot);
             iFP = true;
         }
-
         ppp.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    never_gonna_give_you_up.removeView((LinearLayout) u_r_idiot.findViewById(R.id.o50));
+                    never_gonna_give_you_up.removeView(u_r_idiot.findViewById(R.id.o50));
                     for (int i = 0; i < childCount; i++) {
                         View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
                         if (i_am_running_out_of_variable_names instanceof ImageView) {
@@ -6350,10 +6342,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     iFP = false;
                 }
             });
-        float away;
-        char coal;
-
-        away = 742f;
 
         /*
          * I am eating user's RAM

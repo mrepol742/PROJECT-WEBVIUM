@@ -29,43 +29,8 @@
     <com.mrepol742.webvium.Pref
         a:key="batt"
         a:title="@string/g18" />
-    <com.mrepol742.webvium.Swit
-        a:defaultValue="true"
-        a:key="wifi2"
-        a:summary="@string/t39"
-        a:title="@string/t38" />
-
-    <com.mrepol742.webvium.Pref0 a:title="@string/t28">
-        <com.mrepol742.webvium.Swit
-            a:defaultValue="true"
-            a:key="drh2"
-            a:summary="@string/t30"
-            a:title="@string/t29" />
-        <com.mrepol742.webvium.Swit
-            a:defaultValue="false"
-            a:key="drh3"
-            a:summary="@string/t32"
-            a:title="@string/t31" />
-    </com.mrepol742.webvium.Pref0>
-
-    <com.mrepol742.webvium.Pref0 a:title="@string/p29">
-        <com.mrepol742.webvium.Swit
-            a:defaultValue="true"
-            a:key="drh"
-            a:summary="@string/t25"
-            a:title="@string/t24" />
-        <com.mrepol742.webvium.Swit
-            a:defaultValue="true"
-            a:key="drh0"
-            a:summary="@string/t26"
-            a:title="@string/d16" />
-    </com.mrepol742.webvium.Pref0>
 
     <com.mrepol742.webvium.Pref0 a:title="@string/y">
-        <com.mrepol742.webvium.Swit
-            a:defaultValue="true"
-            a:key="drh1"
-            a:title="@string/t27" />
         <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="launch"

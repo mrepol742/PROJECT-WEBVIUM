@@ -42,61 +42,63 @@ public class Boot extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context a, Intent b) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 6);
-        AlarmManager alarmMgr = (AlarmManager) a.getSystemService(Context.ALARM_SERVICE);
-        if (sp.getBoolean("qckS", false)) {
-            MainNotification.b(a, a.getString(R.string.l33), a.getString(R.string.y18));
-            android.app.Notification.Builder m = Notifications.a(a, a.getString(R.string.l33));
-            m.setSmallIcon(R.drawable.a18);
-            m.setContentTitle(a.getString(R.string.l33));
-            m.setContentText(a.getString(R.string.n39));
-            m.setOngoing(true);
-            m.setColor(Resources.getColor(a, R.color.a));
-            m.setAutoCancel(false);
-            Intent j11 = new Intent(a, Sear.class);
-            PendingIntent k567 = PendingIntent.getActivity(a, 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
-            m.setContentIntent(k567);
-            if (Build.VERSION.SDK_INT <= 26) {
-                m.setPriority(android.app.Notification.PRIORITY_LOW);
+        if (b.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, 6);
+            AlarmManager alarmMgr = (AlarmManager) a.getSystemService(Context.ALARM_SERVICE);
+            if (sp.getBoolean("qckS", false)) {
+                MainNotification.b(a, a.getString(R.string.l33), a.getString(R.string.y18));
+                android.app.Notification.Builder m = Notifications.a(a, a.getString(R.string.l33));
+                m.setSmallIcon(R.drawable.a18);
+                m.setContentTitle(a.getString(R.string.l33));
+                m.setContentText(a.getString(R.string.n39));
+                m.setOngoing(true);
+                m.setColor(Resources.getColor(a, R.color.a));
+                m.setAutoCancel(false);
+                Intent j11 = new Intent(a, Sear.class);
+                PendingIntent k567 = PendingIntent.getActivity(a, 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
+                m.setContentIntent(k567);
+                if (Build.VERSION.SDK_INT <= 26) {
+                    m.setPriority(android.app.Notification.PRIORITY_LOW);
+                }
+                m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+                m.setLargeIcon(BitmapFactory.decodeResource(a.getResources(), R.mipmap.b));
+                NotificationManager nmc = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
+                nmc.notify(Notifications.d, m.build());
             }
-            m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
-            m.setLargeIcon(BitmapFactory.decodeResource(a.getResources(), R.mipmap.b));
-            NotificationManager nmc = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
-            nmc.notify(Notifications.d, m.build());
-        }
-        if (sp.getBoolean("acu", true)) {
-            PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, Upda.class), PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
-        }
-        if (sp.getBoolean("pnd", true)) {
-            PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, Noti.class), PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
-        }
-        if (sp.getBoolean("fltWeb", false)) {
-            MainNotification.c(a, a.getString(R.string.l32), a.getString(R.string.l34));
-            android.app.Notification.Builder m = Notifications.a(a, a.getString(R.string.l32));
-            m.setSmallIcon(R.drawable.a18);
-            m.setContentTitle(a.getString(R.string.l32));
-            m.setContentText(a.getString(R.string.n40));
-            m.setOngoing(true);
-            m.setColor(Resources.getColor(a, R.color.a));
-            m.setAutoCancel(false);
-            Intent j11 = new Intent(a, Webv.class);
-            PendingIntent k567 = PendingIntent.getActivity(a, 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
-            m.setContentIntent(k567);
-            if (Build.VERSION.SDK_INT <= 26) {
-                m.setPriority(android.app.Notification.PRIORITY_MIN);
+            if (sp.getBoolean("acu", true)) {
+                PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, Upda.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
             }
-            m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
-            m.setLargeIcon(BitmapFactory.decodeResource(a.getResources(), R.mipmap.c));
-            NotificationManager nmc = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
-            nmc.notify(Notifications.e, m.build());
-        }
-        if (sp.getBoolean("nCV", false)) {
-            Intents.b(a, Clip.class);
+            if (sp.getBoolean("pnd", true)) {
+                PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, Noti.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
+            }
+            if (sp.getBoolean("fltWeb", false)) {
+                MainNotification.c(a, a.getString(R.string.l32), a.getString(R.string.l34));
+                android.app.Notification.Builder m = Notifications.a(a, a.getString(R.string.l32));
+                m.setSmallIcon(R.drawable.a18);
+                m.setContentTitle(a.getString(R.string.l32));
+                m.setContentText(a.getString(R.string.n40));
+                m.setOngoing(true);
+                m.setColor(Resources.getColor(a, R.color.a));
+                m.setAutoCancel(false);
+                Intent j11 = new Intent(a, Webv.class);
+                PendingIntent k567 = PendingIntent.getActivity(a, 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
+                m.setContentIntent(k567);
+                if (Build.VERSION.SDK_INT <= 26) {
+                    m.setPriority(android.app.Notification.PRIORITY_MIN);
+                }
+                m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+                m.setLargeIcon(BitmapFactory.decodeResource(a.getResources(), R.mipmap.c));
+                NotificationManager nmc = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
+                nmc.notify(Notifications.e, m.build());
+            }
+            if (sp.getBoolean("nCV", false)) {
+                Intents.b(a, Clip.class);
+            }
         }
     }
 }

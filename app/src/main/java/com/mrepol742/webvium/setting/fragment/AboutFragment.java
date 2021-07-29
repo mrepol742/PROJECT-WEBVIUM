@@ -17,16 +17,17 @@
 
 package com.mrepol742.webvium.setting.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.provider.Settings;
 
+import com.mrepol742.webvium.BuildConfig;
 import com.mrepol742.webvium.Cred;
 import com.mrepol742.webvium.Webv;
-import com.mrepol742.webvium.Priv;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.Term;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
@@ -54,26 +55,32 @@ public class AboutFragment extends BasePreferenceFragment {
                     return true;
                 }
             });
-            Preference a7 = findPreference("g5");
-            a7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intents.a(AboutFragment.this.getActivity(), Term.class);
-                    return true;
-                }
-            });
             Preference a722 = findPreference("g6");
             a722.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                 @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intents.a(AboutFragment.this.getActivity(), Priv.class);
+                public boolean onPreferenceClick(Preference a45) {
+                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                    a.setCancelable(true);
+                    a.setTitle(getString(R.string.x44));
+                    a.setMessage(getString(R.string.g5));
+                    a.setPositiveButton(getString(R.string.l15), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            a12.dismiss();
+                        }
+                    });
+                    a.create().show();
                     return true;
                 }
             });
             Preference a5 = findPreference("p20");
-            a5.setSummary(Package.e(getActivity()) + " | " + Package.f(getActivity()));
+            if (BuildConfig.DEBUG) {
+                a5.setSummary(Package.e(getActivity()) + " | " + Package.f(getActivity()) + "-development");
+            } else {
+                a5.setSummary(Package.e(getActivity()) + " | " + Package.f(getActivity()));
+            }
             a5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                 @Override

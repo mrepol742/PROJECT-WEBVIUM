@@ -41,9 +41,7 @@ public class HistoryDatabase extends SQLiteOpenHelper {
                 Sqlite.COL2_HISTORY +
                 " TEXT, " +
                 Sqlite.COL3_HISTORY +
-                " INTEGER, " +
-                Sqlite.COL4_HISTORY +
-                " TEXT )");
+                " INTEGER)");
     }
 
     @Override

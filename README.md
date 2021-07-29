@@ -21,8 +21,9 @@
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Android%20Gradle%20Plugin-4%2E2%2E2-blue.svg" />
+    <img src="https://img.shields.io/badge/Gradle-7%2E1%2E1-blue.svg" />
   <img src="https://img.shields.io/badge/SDK-30-blue.svg" />
-  <img src="https://img.shields.io/badge/Build%20Tools-30%2E0%2E3-blue.svg" />
+  <img src="https://img.shields.io/badge/Build%20Tools-30.0.3-blue.svg" />
  </p>
 
   <p>Webvium is a weightless android app that has a size of 570KB. It's Fast, Material Design and Full-Featured Web Browser for Android. And its absolutely free to download and without any ads.</p>
@@ -33,4 +34,3 @@
         <div><h3>PRIVACY</h3>Protect your privacy, Webvium does not collect any information no crash log collection, no diagnotics data collection, no telemetry. Your browsing activity is at highest security.</div>
         <div><h3>YOUR IN CONTROL</h3>Yeah, the only browser that allows you to backup all of your data settings preferences, history, searches, bookmarks and download list. And export it when you needed.</div>
         <div ><h3>MANAGABLE SPACE</h3>It does not mean Webvium is lightweight we wont care about your storage free space. Here we revolutionize how browser should look like. In Webvium Manage Space you can see what part of webvium tool so much space and delete them whenever you want.</div>
-        <div>

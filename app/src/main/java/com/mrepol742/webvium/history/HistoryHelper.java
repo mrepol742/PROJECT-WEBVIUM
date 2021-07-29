@@ -99,24 +99,6 @@ public class HistoryHelper implements WebviumDatabase {
         }
     }
 
-    public void c(Bitmap bi, String a, String b) {
-        if (!sp.getBoolean("pHistory", false)) {
-            if (sld != null && sld.isOpen()) {
-                //if (HDMS.b(changedTo.toLowerCase())) {
-                // if (HDMS.b(b.toLowerCase()
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bi.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                byte[] byteArray = byteArrayOutputStream .toByteArray();
-                ContentValues values = new ContentValues();
-                values.put(Sqlite.COL1_HISTORY, h(a));
-                values.put(Sqlite.COL2_HISTORY, b);
-                values.put(Sqlite.COL3_HISTORY, System.currentTimeMillis());
-                values.put(Sqlite.COL4_HISTORY, e(bi));
-                sld.insert(Sqlite.TABLE_HISTORY, null, values);
-            }
-        }
-    }
-
     public void d(HDMS HDMS) {
         if (!sp.getBoolean("pHistory", false)) {
             if (sld != null && sld.isOpen()) {

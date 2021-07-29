@@ -162,7 +162,7 @@ public class Assi extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             if (resultCode == RESULT_OK && null != data) {
-                String speechText = data.getStringExtra("changedTo");
+                String speechText = data.getStringExtra("a");
                 d2.c(speechText);
                 p.setText(speechText);
 

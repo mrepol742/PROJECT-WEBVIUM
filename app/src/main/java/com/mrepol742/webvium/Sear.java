@@ -416,7 +416,7 @@ public class Sear extends MainBaseActivity {
 
         if (requestCode == 100) {
             if (resultCode == RESULT_OK && null != data) {
-                String speechText = data.getStringExtra("changedTo");
+                String speechText = data.getStringExtra("a");
                 d2.c(speechText);
                 p.setText(speechText);
             }
@@ -551,14 +551,8 @@ public class Sear extends MainBaseActivity {
                 case "webvium://credits":
                     Intents.a(this, Cred.class);
                     break;
-                case "webvium://termsandcondition":
-                    Intents.a(this, Term.class);
-                    break;
                 case "webvium://managespace":
                     Intents.a(this, Mana.class);
-                    break;
-                case "webvium://privacypolicy":
-                    Intents.a(this, Priv.class);
                     break;
                 case "webvium://blank":
                     send("about:blank");

@@ -21,13 +21,10 @@ public class HistoryDataModel {
     public final String ls;
     public final String ls0;
     public final long ls2;
-    public final String ls3;
 
-    public HistoryDataModel(String ls, String ls0, long ls2, String ls3) {
+    public HistoryDataModel(String ls, String ls0, long ls2) {
         this.ls = ls;
         this.ls0 = ls0;
         this.ls2 = ls2;
-        this.ls3 = ls3;
     }
-
 }

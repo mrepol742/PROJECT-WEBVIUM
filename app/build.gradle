@@ -19,7 +19,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    buildToolsVersion '30.0.3'
 
     lintOptions {
         abortOnError false
@@ -29,10 +29,7 @@ android {
         applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
-        // only change versionCode when building the final release apk
-        versionCode 20210727
-        // versionCode Integer.parseInt(new Date().format("yyyyMMdd"))
-        // only change versionName when building the final release apk
+        versionCode 20210728
         versionName "1.8"
         // < 1.0 The version i know what i am doing,
         // > 1.5 Now only god knows.
@@ -40,7 +37,7 @@ android {
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
         android.applicationVariants.all { variant ->
             variant.outputs.all {
-                outputFileName = "webvium-${variant.name}.apk"
+                outputFileName = "webvium-v${versionName}-${variant.name}.apk"
             }
         }
     }
@@ -55,7 +52,6 @@ android {
         release {
             debuggable false
             minifyEnabled true
-            shrinkResources true
         }
     }
 

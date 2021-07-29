@@ -179,7 +179,7 @@ public class Lock extends MainBaseActivity implements View.OnClickListener, View
         if (a.length() == 0) {
             return;
         }
-        SharedPreferences sp = getSharedPreferences("changedTo", 0);
+        SharedPreferences sp = getSharedPreferences("a", 0);
         String sg1 = sp.getString("ajGjbduTwibdi", "");
         if (Objects.requireNonNull(sg1).equals(SHA.a("SHA-512", a))) {
             Intent resultIntent = new Intent();
@@ -210,11 +210,11 @@ public class Lock extends MainBaseActivity implements View.OnClickListener, View
         if (a2.length() == 0) {
             return;
         }
-        SharedPreferences sp3 = getSharedPreferences("changedTo", 0);
+        SharedPreferences sp3 = getSharedPreferences("a", 0);
         String sg1 = sp3.getString("ajGjbduTwibdi", "");
         if (Objects.requireNonNull(sg1).equals(SHA.a("SHA-512", a2))) {
             Intent resultIntent = new Intent();
-            resultIntent.putExtra("changedTo", "changedTo");
+            resultIntent.putExtra("a", "a");
             setResult(Activity.RESULT_OK, resultIntent);
             finish();
             finishAndRemoveTask();

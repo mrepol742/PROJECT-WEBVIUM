@@ -175,7 +175,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 @Override
                 public boolean onPreferenceClick(Preference a) {
                     Intent it = new Intent(DatabaseFragment.this.getActivity(), Back0.class);
-                    it.putExtra("changedTo", "changedTo");
+                    it.putExtra("a", "a");
                     DatabaseFragment.this.startActivity(it);
                     return true;
                 }

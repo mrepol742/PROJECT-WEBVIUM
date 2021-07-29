@@ -199,8 +199,7 @@ public class Hist extends BaseActivity {
             while (res.moveToNext()) {
                 al.add(new HistoryDataModel(res.getString(1),
                         res.getString(2),
-                        res.getLong(3),
-                        res.getString(4)));
+                        res.getLong(3)));
             }
             runOnUiThread(new Runnable() {
 
@@ -593,8 +592,7 @@ public class Hist extends BaseActivity {
                     while (res.moveToNext()) {
                         al.add(new HistoryDataModel(res.getString(1),
                                 res.getString(2),
-                                res.getLong(3),
-                                res.getString(4)));
+                                res.getLong(3)));
                     }
                     if (al.size() == 0) {
                         Hist.this.runOnUiThread(new Runnable() {

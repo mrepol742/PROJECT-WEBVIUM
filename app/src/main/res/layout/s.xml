@@ -8,6 +8,7 @@
     a:paddingEnd="?m">
 
     <EditText
+        a:inputType="text"
         a:textSize="@dimen/c"
         a:layout_height="wrap_content"
         a:layout_width="match_parent"

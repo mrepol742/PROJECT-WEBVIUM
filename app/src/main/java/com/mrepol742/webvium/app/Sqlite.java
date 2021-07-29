@@ -32,7 +32,6 @@ public class Sqlite {
     public static final String COL1_HISTORY = "b3";
     public static final String COL2_HISTORY = "b4";
     public static final String COL3_HISTORY = "b5";
-    public static final String COL4_HISTORY = "b6";
 
     public static final String DATA_PERMISSION = "c1";
     public static final int VERSION_PERMISSION = 1;

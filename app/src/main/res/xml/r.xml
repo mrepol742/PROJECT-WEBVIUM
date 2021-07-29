@@ -18,7 +18,7 @@
 <!--suppress ALL -->
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
 
-    <com.mrepol742.webvium.Pref0 a:title="@string/t21">
+    <com.mrepol742.webvium.Pref0 a:title="@string/z88">
         <com.mrepol742.webvium.Pref
             a:key="clearBook"
             a:title="@string/i13" />
@@ -36,6 +36,13 @@
         <com.mrepol742.webvium.Pref
             a:key="clearSearch"
             a:title="@string/d14" />
+        <com.mrepol742.webvium.Swit
+            a:defaultValue="false"
+            a:key="pDownload"
+            a:title="@string/z89" />
+        <com.mrepol742.webvium.Pref
+            a:key="clearDownload"
+            a:title="@string/z90" />
     </com.mrepol742.webvium.Pref0>
 
     <com.mrepol742.webvium.Pref0 a:title="@string/d16">

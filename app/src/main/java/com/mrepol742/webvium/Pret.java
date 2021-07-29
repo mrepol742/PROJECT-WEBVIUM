@@ -135,7 +135,7 @@ public class Pret extends MainBaseActivity implements View.OnClickListener, View
 
     public void b(String url) {
         if (a221().getBoolean("ptm", false)) {
-            SharedPreferences b = getSharedPreferences("changedTo", 0);
+            SharedPreferences b = getSharedPreferences("a", 0);
             String c = b.getString("gsJsGsKSIgPes", "");
             if (c != null) {
                 if (c.equals(SHA.a("SHA-512", url))) {

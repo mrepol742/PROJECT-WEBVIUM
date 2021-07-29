@@ -40,17 +40,12 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.app.StorageDirectory;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.Ping;
-import com.mrepol742.webvium.security.SHA;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.util.AwesomeToast;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.net.URL;
 
 /*

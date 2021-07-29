@@ -145,7 +145,7 @@ public class Back0 extends BaseActivity {
                     spe.apply();
                     ActivityState.changedTo(Back0.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
                     ActivityState.changedTo(Back0.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-                    Back0.this.getSharedPreferences("changedTo", 0).edit().putString("ajGjbduTwibdi", "").putString("gsJsGsKSIgPes", "").apply();
+                    Back0.this.getSharedPreferences("a", 0).edit().putString("ajGjbduTwibdi", "").putString("gsJsGsKSIgPes", "").apply();
                     Back0.this.g(Back0.this.getString(R.string.b27));
                     Back0.this.t();
                 } catch (Exception en) {
@@ -384,9 +384,9 @@ public class Back0 extends BaseActivity {
         try {
             String action = a.getAction();
             String data = a.getDataString();
-            String as = a.getStringExtra("changedTo");
+            String as = a.getStringExtra("a");
             if (as != null) {
-                a.removeExtra("changedTo");
+                a.removeExtra("a");
                 Intent d = new Intent(Intent.ACTION_GET_CONTENT);
                 d.setType("*/*");
                 d.addCategory(Intent.CATEGORY_OPENABLE);

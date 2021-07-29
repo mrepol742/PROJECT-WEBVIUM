@@ -47,7 +47,7 @@ import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.security.SHA;
 
 import android.text.TextWatcher;
-import com.mrepol742.webvium.util.U3;
+
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.Objects;
@@ -81,7 +81,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (newValue.toString().equals("true")) {
-                        SharedPreferences a = getActivity().getSharedPreferences("changedTo", 0);
+                        SharedPreferences a = getActivity().getSharedPreferences("a", 0);
                         String sg = a.getString("ajGjbduTwibdi", "");
                         if (sg == null) {
                             b();
@@ -181,7 +181,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                SharedPreferences a1 = getActivity().getSharedPreferences("a", 0);
                 SharedPreferences.Editor b5 = a1.edit();
                 b5.putString("ajGjbduTwibdi", SHA.a("SHA-512", a67.getText().toString()));
                 b5.apply();
@@ -306,7 +306,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                SharedPreferences a1 = getActivity().getSharedPreferences("a", 0);
                 String c727 = a1.getString("ajGjbduTwibdi", "");
                 if (c727 != null) {
                     if (SHA.a("SHA-512", e15.getText().toString()).equals(c727)) {
@@ -402,7 +402,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                SharedPreferences a1 = getActivity().getSharedPreferences("a", 0);
                 String c727 = a1.getString("ajGjbduTwibdi", "");
                 if (c727 != null) {
                     if (SHA.a("SHA-512", e16.getText().toString()).equals(c727)) {
@@ -536,7 +536,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                SharedPreferences a1 = getActivity().getSharedPreferences("a", 0);
                 String c727 = a1.getString("ajGjbduTwibdi", "");
                 if (c727 != null) {
                     if (SHA.a("SHA-512", e15.getText().toString()).equals(c727)) {
@@ -704,7 +704,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a, int i) {
-                SharedPreferences a1 = getActivity().getSharedPreferences("changedTo", 0);
+                SharedPreferences a1 = getActivity().getSharedPreferences("a", 0);
                 String c727 = a1.getString("ajGjbduTwibdi", "");
                 if (c727 != null) {
                     if (SHA.a("SHA-512", e16.getText().toString()).equals(c727)) {

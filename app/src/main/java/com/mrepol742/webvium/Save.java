@@ -57,7 +57,7 @@ public class Save extends Service {
                 @Override
                 public void run() {
                     try {
-                        String a = b34.getStringExtra("changedTo");
+                        String a = b34.getStringExtra("a");
                         String b = b34.getStringExtra("b");
                         Save.this.a1(a, b);
                         URL b5 = new URL(b);

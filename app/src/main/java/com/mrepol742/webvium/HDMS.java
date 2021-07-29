@@ -17,8 +17,6 @@
 
 package com.mrepol742.webvium;
 
-import com.mrepol742.webvium.annotation.Keep;
-
 import java.io.Serializable;
 
 /*
@@ -27,9 +25,9 @@ import java.io.Serializable;
 
 @Deprecated
 public class HDMS implements Serializable {
-    public String ls;
-    public String ls0;
-    public long ls2;
+    public final String ls;
+    public final String ls0;
+    public final long ls2;
 
     @Deprecated
     public HDMS(String ls, String ls0, long ls2) {

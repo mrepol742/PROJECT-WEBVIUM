@@ -19,8 +19,6 @@ package com.mrepol742.webvium.security;
 
 import com.mrepol742.webvium.annotation.Keep;
 
-import java.util.Arrays;
-
 public class Base64 {
 
     @Keep

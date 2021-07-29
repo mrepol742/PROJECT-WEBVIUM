@@ -43,6 +43,7 @@ import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
+import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.app.StorageDirectory;
@@ -307,6 +308,36 @@ public class PrivacyFragment extends BasePreferenceFragment {
                             PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.t1));
                             a12.dismiss();
 
+                        }
+                    });
+                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a1, int intetg) {
+                            a1.dismiss();
+                        }
+                    });
+                    a.create().show();
+                    return true;
+                }
+            });
+            Preference g123 = findPreference("clearHistory");
+            g123.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+                @Override
+                public boolean onPreferenceClick(Preference a1) {
+                    final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                    a.setCancelable(true);
+                    a.setTitle(getString(R.string.b));
+                    a.setMessage(getString(R.string.t5));
+                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            DownloadHelper d1 = DownloadHelper.getInstance(PrivacyFragment.this.getActivity().getApplicationContext());
+                            d1.delete();
+                            PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.z91));
+                            a12.dismiss();
                         }
                     });
                     a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {

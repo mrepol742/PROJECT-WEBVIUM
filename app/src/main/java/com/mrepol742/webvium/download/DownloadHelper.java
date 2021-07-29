@@ -21,7 +21,9 @@ package com.mrepol742.webvium.download;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.DDMS;
 import com.mrepol742.webvium.app.Sqlite;
@@ -31,9 +33,11 @@ public class DownloadHelper implements WebviumDatabase {
 
     private static DownloadHelper d10;
     private final SQLiteDatabase sld;
+    private final SharedPreferences sp;
 
     private DownloadHelper(Context ct) {
         DownloadDatabase d9 = new DownloadDatabase(ct);
+        sp = PreferenceManager.getDefaultSharedPreferences(ct);
         sld = d9.getWritableDatabase();
     }
 
@@ -81,13 +85,15 @@ public class DownloadHelper implements WebviumDatabase {
     }
 
     public void c(String a, String b, long c) {
-        if (sld != null && sld.isOpen()) {
-            ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_DOWNLOAD, a);
-            values.put(Sqlite.COL2_DOWNLOAD, b);
-            values.put(Sqlite.COL3_DOWNLOAD, c);
-            values.put(Sqlite.COL4_DOWNLOAD, System.currentTimeMillis());
-            sld.insert(Sqlite.TABLE_DOWNLOAD, null, values);
+        if (!sp.getBoolean("pDownload", false)) {
+            if (sld != null && sld.isOpen()) {
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_DOWNLOAD, a);
+                values.put(Sqlite.COL2_DOWNLOAD, b);
+                values.put(Sqlite.COL3_DOWNLOAD, c);
+                values.put(Sqlite.COL4_DOWNLOAD, System.currentTimeMillis());
+                sld.insert(Sqlite.TABLE_DOWNLOAD, null, values);
+            }
         }
     }
 
