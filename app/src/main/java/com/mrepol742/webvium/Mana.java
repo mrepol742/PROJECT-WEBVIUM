@@ -47,6 +47,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.ActivityState;
@@ -67,13 +68,13 @@ import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
 /*
  * @ManageSpaceActivity
  */
-@Deprecated
 public class Mana extends BaseActivity {
 
     private static final int[] drawables = {
@@ -143,7 +144,89 @@ public class Mana extends BaseActivity {
         } else {
             Permission.check(this, Permission.STORAGE, 1);
         }
-        a2();
+         for (int i5 : getDrawables()) {
+            c.add(i5);
+        }
+        for (int i5 = 0; i5 < 5; i5++) {
+            d.add("");
+        }
+        for (int i : getStrings()) {
+            a.add(getString(i));
+        }
+        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+        String sb12a = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
+                " ORDER BY " +
+                "_id" +
+                " DESC";
+        Cursor resta = DownloadHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12a, null);
+        int cont = rest1.getCount();
+        if (cont == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
+        }
+        b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
+        int cont1 = rest.getCount();
+        if (cont1 == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
+        }
+        int cont11 = res.getCount();
+        if (cont11 == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+        }
+        int cont11a = resta.getCount();
+        if (cont11a == 0) {
+            b.add(getString(R.string.v27));
+        } else {
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11a), cont11a));
+        }
+        b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
+        rest1.close();
+        res.close();
+        rest.close();
+        resta.close();
+        if (Build.VERSION.SDK_INT < 29) {
+            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
+            if (bn) {
+                int lg = a7(Package.c() + "/Screenshot/");
+                int lg1 = a7(Package.c() + "/Downloads/");
+                if (lg == 0) {
+                    b.add(getString(R.string.v29));
+                } else {
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
+                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
+                }
+                if (lg1 == 0) {
+                    b.add(getString(R.string.v29));
+                } else {
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
+                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
+                            c(b(StorageDirectory.getDownloadDir()))));
+                }
+            } else {
+                b.add("Storage permission is required");
+                b.add("Storage permission is required");
+            }
+        }
         a225(R.layout.a4);
 
         Toolbar g5 = findViewById(R.id.b7);
@@ -179,7 +262,239 @@ public class Mana extends BaseActivity {
 
             @Override
             public void onItemClick(AdapterView<?> a, View b, int c, long d) {
-                Mana.this.i(c);
+                switch (c) {
+                    case 0:
+                        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
+                                " ORDER BY " +
+                                "_id" +
+                                " DESC";
+                        Cursor rest1 = BookmarkHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+                        if (rest1.getCount() != 0) {
+                            AlertDialog.Builder a12 = new AlertDialog.Builder(Mana.this);
+                            a12.setCancelable(true);
+                            a12.setTitle(Mana.this.getString(R.string.l14));
+                            a12.setMessage(Mana.this.getString(R.string.u4));
+                            a12.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a22, int intetg) {
+                                    BookmarkHelper d3 = BookmarkHelper.getInstance(Mana.this.getApplicationContext());
+                                    d3.delete();
+                                    a22.dismiss();
+                                    Mana.this.a1();
+                                }
+                            });
+                            a12.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a2, int intetg) {
+                                    a2.dismiss();
+                                }
+                            });
+                            a12.create().show();
+                        } else {
+                            AwesomeToast.c(Mana.this, getString(R.string.v27));
+                        }
+                        rest1.close();
+                        break;
+                    case 1:
+                        AlertDialog.Builder a12 = new AlertDialog.Builder(Mana.this);
+                        a12.setCancelable(true);
+                        a12.setTitle(getString(R.string.l14));
+                        a12.setMessage(getString(R.string.u5));
+                        a12.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a22, int intetg) {
+                                Runnable run = new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        File b = StorageDirectory.getCacheDir(Mana.this);
+                                        if (b.exists()) {
+                                            FileUtil.deleteAll(b);
+                                        }
+                                    }
+                                };
+                                new Thread(run).start();
+                                a22.dismiss();
+                                Mana.this.a1();
+                            }
+                        });
+                        a12.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a2, int intetg) {
+                                a2.dismiss();
+                            }
+                        });
+                        a12.create().show();
+                        break;
+                    case 2:
+                        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
+                                " ORDER BY " +
+                                "_id" +
+                                " DESC";
+                        Cursor rest = HistoryHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+                        if (rest.getCount() != 0) {
+                            AlertDialog.Builder a121 = new AlertDialog.Builder(Mana.this);
+                            a121.setCancelable(true);
+                            a121.setTitle(Mana.this.getString(R.string.l14));
+                            a121.setMessage(Mana.this.getString(R.string.t5));
+                            a121.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a22, int intetg) {
+                                    HistoryHelper d1 = HistoryHelper.getInstance(Mana.this.getApplicationContext());
+                                    d1.delete();
+                                    if (Webv.bl) {
+                                        Webv.bl4 = true;
+                                    }
+                                    a22.dismiss();
+                                    Mana.this.a1();
+                                }
+                            });
+                            a121.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a2, int intetg) {
+                                    a2.dismiss();
+                                }
+                            });
+                            a121.create().show();
+                        } else {
+                            AwesomeToast.c(Mana.this, getString(R.string.v27));
+                        }
+                        rest.close();
+                        break;
+                    case 3:
+                        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
+                                " ORDER BY " +
+                                "_id" +
+                                " DESC";
+                        Cursor res = SearchHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+                        if (res.getCount() != 0) {
+                            AlertDialog.Builder a13 = new AlertDialog.Builder(Mana.this);
+                            a13.setCancelable(true);
+                            a13.setTitle(getString(R.string.l14));
+                            a13.setMessage(getString(R.string.u6));
+                            a13.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a22, int intetg) {
+                                    SearchHelper d2 = SearchHelper.getInstance(Mana.this.getApplicationContext());
+                                    d2.delete();
+                                    a22.dismiss();
+                                    Mana.this.a1();
+                                }
+                            });
+                            a13.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a2, int intetg) {
+                                    a2.dismiss();
+                                }
+                            });
+                            a13.create().show();
+                        } else {
+                            AwesomeToast.c(Mana.this, getString(R.string.v27));
+
+                        }
+                        res.close();
+                        break;
+                    case 4:
+                        String sb551 = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
+                                " ORDER BY " +
+                                "_id" +
+                                " DESC";
+                        Cursor res1 = DownloadHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb551, null);
+                        if (res1.getCount() != 0) {
+                            AlertDialog.Builder a11 = new AlertDialog.Builder(Mana.this);
+                            a11.setCancelable(true);
+                            a11.setTitle(getString(R.string.l14));
+                            a11.setMessage(getString(R.string.z92));
+                            a11.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a22, int intetg) {
+                                    DownloadHelper d2 = DownloadHelper.getInstance(Mana.this.getApplicationContext());
+                                    d2.delete();
+                                    a22.dismiss();
+                                    Mana.this.a1();
+                                }
+                            });
+                            a11.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface a2, int intetg) {
+                                    a2.dismiss();
+                                }
+                            });
+                            a11.create().show();
+                        } else {
+                            AwesomeToast.c(Mana.this, getString(R.string.v27));
+
+                        }
+                        res1.close();
+                        break;
+                    case 5:
+                        AlertDialog.Builder a14 = new AlertDialog.Builder(Mana.this);
+                        a14.setCancelable(true);
+                        a14.setTitle(getString(R.string.l14));
+                        a14.setMessage(getString(R.string.u7));
+                        a14.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a22, int intetg) {
+                                ActivityState.changedTo(Mana.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+                                ActivityState.changedTo(Mana.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                                Mana.this.getSharedPreferences("a", 0).edit().clear().apply();
+                                Mana.this.a221().edit().clear().apply();
+                                Mana.this.getSharedPreferences("wv", 0).edit().clear().apply();
+                                a22.dismiss();
+                                System.exit(0);
+                            }
+                        });
+                        a14.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface a2, int intetg) {
+                                a2.dismiss();
+                            }
+                        });
+                        a14.create().show();
+                        break;
+                    case 6:
+                        if (Permission.check(Mana.this, Permission.STORAGE, 3)) {
+                            java.io.File fe = new java.io.File(StorageDirectory.getWebviumDir() + "/Screenshot");
+                            int i = 0;
+                            if (fe.exists() && fe.isDirectory()) {
+                                i = Objects.requireNonNull(fe.list()).length;
+                            }
+                            if (i > 0) {
+                                u();
+                            } else {
+                                AwesomeToast.c(Mana.this, getString(R.string.v29));
+                            }
+                        }
+                        break;
+                    case 7:
+                        if (Permission.check(Mana.this, Permission.STORAGE, 4)) {
+                            java.io.File fe = new java.io.File(StorageDirectory.getDownloadDir());
+                            int i = 0;
+                            if (fe.exists() && fe.isDirectory()) {
+                                i = Objects.requireNonNull(fe.list()).length;
+                            }
+                            if (i > 0) {
+                                v();
+                            } else {
+                                AwesomeToast.c(Mana.this, getString(R.string.v29));
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         });
         iv1 = findViewById(R.id.c8);
@@ -190,7 +505,7 @@ public class Mana extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (Permission.check(Mana.this, Permission.STORAGE, 5)) {
-                    Mana.this.y(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.u11));
+                    y();
                 }
             }
         });
@@ -225,18 +540,6 @@ public class Mana extends BaseActivity {
         return Formatter.formatFileSize(this, a);
     }
 
-    private int d(String as) {
-        int f = 0;
-        java.io.File a = new java.io.File(as);
-        if (a.exists()) {
-            String[] b = a.list();
-            if (b != null) {
-                f = b.length;
-            }
-        }
-        return f;
-    }
-
     private long e(String a) {
         return f(new java.io.File(a));
     }
@@ -258,117 +561,6 @@ public class Mana extends BaseActivity {
         return b;
     }
 
-    private void i(int a) {
-        if (a == 0) {
-                    String sb5 = "SELECT * FROM " + "A" +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC";
-                    Cursor rest1 = BookmarkHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
-                    if (rest1.getCount() != 0) {
-                                Mana.this.k(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.u4));
-                    } else {
-                                Mana.this.r(Mana.this.getString(R.string.v27));
-                    }
-                    rest1.close();
-        } else if (a == 1) {
-            m(getString(R.string.l14), getString(R.string.u5));
-        } else if (a == 2) {
-                    String sb12 = "SELECT * FROM " + "A" +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC";
-                    Cursor rest = HistoryHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
-                    if (rest.getCount() != 0) {
-                                Mana.this.n(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.t5));
-                    } else {
-                                Mana.this.r(Mana.this.getString(R.string.v27));
-                    }
-                    rest.close();
-        } else if (a == 3) {
-                    String sb55 = "SELECT * FROM " + "A" +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC";
-                    Cursor res = SearchHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
-                    if (res.getCount() != 0) {
-                                Mana.this.o(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.u6));
-                    } else {
-                                Mana.this.r(Mana.this.getString(R.string.v27));
-
-                    }
-                    res.close();
-
-        } else if (a == 4) {
-            String sb55 = "SELECT * FROM " + "A" +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC";
-                    Cursor res = DownloadHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
-                    if (res.getCount() != 0) {
-                                Mana.this.p(Mana.this.getString(R.string.l14), Mana.this.getString(R.string.z92));
-                    } else {
-                                Mana.this.r(Mana.this.getString(R.string.v27));
-
-                    }
-                    res.close();
-        } else if (a == 5) {
-            x(getString(R.string.l14), getString(R.string.u7));
-        } else if (a == 6) {
-            if (Permission.check(this, Permission.STORAGE, 3)) {
-                java.io.File fe = new java.io.File(StorageDirectory.getWebviumDir() + "/Screenshot");
-                int i = 0;
-                if (fe.exists() && fe.isDirectory()) {
-                    i = Objects.requireNonNull(fe.list()).length;
-                }
-                if (i > 0) {
-                    u(getString(R.string.l14), getString(R.string.u9));
-                } else {
-                    r(getString(R.string.v29));
-                }
-            }
-        } else if (a == 7) {
-            if (Permission.check(this, Permission.STORAGE, 4)) {
-                java.io.File fe = new java.io.File(StorageDirectory.getDownloadDir());
-                int i = 0;
-                if (fe.exists() && fe.isDirectory()) {
-                    i = Objects.requireNonNull(fe.list()).length;
-                }
-                if (i > 0) {
-                    v(getString(R.string.l14), getString(R.string.u10));
-                } else {
-                    r(getString(R.string.v29));
-                }
-            }
-        }
-
-    }
-
-    private void k(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a22, int intetg) {
-                BookmarkHelper d3 = BookmarkHelper.getInstance(Mana.this.getApplicationContext());
-                d3.delete();
-                a22.dismiss();
-                Mana.this.a1();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
     private void l(String a) {
         java.io.File b = new java.io.File(a);
         if (b.exists()) {
@@ -376,123 +568,8 @@ public class Mana extends BaseActivity {
         }
     }
 
-    private void l(java.io.File b) {
-        if (b.exists()) {
-            FileUtil.deleteAll(b);
-        }
-    }
-
-    private void m(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a22, int intetg) {
-                Runnable run = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        Mana.this.l(StorageDirectory.getCacheDir(Mana.this));
-                    }
-                };
-                new Thread(run).start();
-                a22.dismiss();
-                Mana.this.a1();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void n(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a22, int intetg) {
-                HistoryHelper d1 = HistoryHelper.getInstance(Mana.this.getApplicationContext());
-                d1.delete();
-                if (Webv.bl) {
-                    Webv.bl4 = true;
-                }
-                a22.dismiss();
-                Mana.this.a1();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void o(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a22, int intetg) {
-                SearchHelper d2 = SearchHelper.getInstance(Mana.this.getApplicationContext());
-                d2.delete();
-                a22.dismiss();
-                Mana.this.a1();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void p(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a22, int intetg) {
-                DownloadHelper d2 = DownloadHelper.getInstance(Mana.this.getApplicationContext());
-                d2.delete();
-                a22.dismiss();
-                Mana.this.a1();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
     private void q(String jk) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
         a.setTitle(getString(R.string.l14));
         a.setMessage(Html.b(jk));
@@ -514,10 +591,6 @@ public class Mana extends BaseActivity {
         a.create().show();
     }
 
-    public void r(String a) {
-        AwesomeToast.c(this, a);
-    }
-
     @Override
     @TargetApi(Build.VERSION_CODES.M)
     public void onRequestPermissionsResult(int a, String[] b, int[] c) {
@@ -528,7 +601,7 @@ public class Mana extends BaseActivity {
                     a1();
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        r(getString(R.string.u17));
+                        AwesomeToast.c(Mana.this, getString(R.string.u17));
                     } else {
                         q(getString(R.string.u18));
                     }
@@ -543,13 +616,13 @@ public class Mana extends BaseActivity {
                         i = Objects.requireNonNull(fe.list()).length;
                     }
                     if (i > 0) {
-                        u(getString(R.string.l14), getString(R.string.u9));
+                        u();
                     } else {
-                        r(getString(R.string.v29));
+                        AwesomeToast.c(Mana.this, getString(R.string.v29));
                     }
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        r(getString(R.string.u15));
+                        AwesomeToast.c(Mana.this, getString(R.string.u15));
                     } else {
                         q(getString(R.string.u16));
                     }
@@ -564,13 +637,13 @@ public class Mana extends BaseActivity {
                         i = Objects.requireNonNull(fe.list()).length;
                     }
                     if (i > 0) {
-                        v(getString(R.string.l14), getString(R.string.u10));
+                        v();
                     } else {
-                        r(getString(R.string.v29));
+                        AwesomeToast.c(Mana.this, getString(R.string.v29));
                     }
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        r(getString(R.string.u15));
+                        AwesomeToast.c(Mana.this, getString(R.string.u15));
                     } else {
                         q(getString(R.string.u16));
                     }
@@ -579,10 +652,10 @@ public class Mana extends BaseActivity {
             case 5:
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
                     a1();
-                    y(getString(R.string.l14), getString(R.string.u11));
+                    y();
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        r(getString(R.string.u15));
+                        AwesomeToast.c(Mana.this, getString(R.string.u15));
                     } else {
                         q(getString(R.string.u16));
                     }
@@ -591,11 +664,11 @@ public class Mana extends BaseActivity {
         }
     }
 
-    private void u(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
+    private void u() {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
+        a.setTitle(getString(R.string.l14));
+        a.setMessage(getString(R.string.u9));
         a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -615,11 +688,11 @@ public class Mana extends BaseActivity {
         a.create().show();
     }
 
-    private void v(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
+    private void v() {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
+        a.setTitle(getString(R.string.l14));
+        a.setMessage(getString(R.string.u10));
         a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -639,40 +712,11 @@ public class Mana extends BaseActivity {
         a.create().show();
     }
 
-    private void x(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
+    private void y() {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a22, int intetg) {
-                ActivityState.changedTo(Mana.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-                ActivityState.changedTo(Mana.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-                Mana.this.getSharedPreferences("a", 0).edit().clear().apply();
-                Mana.this.a221().edit().clear().apply();
-                Mana.this.getSharedPreferences("wv", 0).edit().clear().apply();
-                a22.dismiss();
-                System.exit(0);
-
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void y(String a1, String b1) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(true);
-        a.setTitle(a1);
-        a.setMessage(b1);
+        a.setTitle(getString(R.string.l14));
+        a.setMessage(getString(R.string.u11));
         a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -726,22 +770,22 @@ public class Mana extends BaseActivity {
         for (int i5 = 0; i5 < 5; i5++) {
             d.add("");
         }
-        String sb5 = "SELECT * FROM " + "A" +
+        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
         Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
-        String sb55 = "SELECT * FROM " + "A" +
+        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
         Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
-        String sb12 = "SELECT * FROM " + "A" +
+        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
         Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
-        String sb122 = "SELECT * FROM " + "A" +
+        String sb122 = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
@@ -769,7 +813,7 @@ public class Mana extends BaseActivity {
         if (cont111 == 0) {
             b.add(getString(R.string.v27));
         } else {
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
+            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont111), cont111));
         }
         b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
         rest1.close();
@@ -804,80 +848,6 @@ public class Mana extends BaseActivity {
         w19.notifyDataSetChanged();
     }
 
-    private void a2() {
-        for (int i5 : getDrawables()) {
-            c.add(i5);
-        }
-        for (int i5 = 0; i5 < 5; i5++) {
-            d.add("");
-        }
-        for (int i : getStrings()) {
-            a.add(getString(i));
-        }
-        String sb5 = "SELECT * FROM " + "A" +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
-        Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
-        String sb55 = "SELECT * FROM " + "A" +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
-        Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
-        String sb12 = "SELECT * FROM " + "A" +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
-        Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
-        int cont = rest1.getCount();
-        if (cont == 0) {
-            b.add(getString(R.string.v27));
-        } else {
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont), cont));
-        }
-        b.add(getString(R.string.c38) + c(e(StorageDirectory.getCacheDir(this).toString())));
-        int cont1 = rest.getCount();
-        if (cont1 == 0) {
-            b.add(getString(R.string.v27));
-        } else {
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont1), cont1));
-        }
-        int cont11 = res.getCount();
-        if (cont11 == 0) {
-            b.add(getString(R.string.v27));
-        } else {
-            b.add(String.format(getResources().getQuantityString(R.plurals.v25, cont11), cont11));
-        }
-        b.add(getString(R.string.c38) + c(b(StorageDirectory.getSharedPref(this))));
-        rest1.close();
-        res.close();
-        rest.close();
-        if (Build.VERSION.SDK_INT < 29) {
-            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
-            if (bn) {
-                int lg = a7(Package.c() + "/Screenshot/");
-                int lg1 = a7(Package.c() + "/Downloads/");
-                if (lg == 0) {
-                    b.add(getString(R.string.v29));
-                } else {
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg), lg));
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg),
-                            c(b(StorageDirectory.getWebviumDir() + "/Screenshot/"))));
-                }
-                if (lg1 == 0) {
-                    b.add(getString(R.string.v29));
-                } else {
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v27, lg1), lg1));
-                    b.add(String.format(getResources().getQuantityString(R.plurals.v28, lg1),
-                            c(b(StorageDirectory.getDownloadDir()))));
-                }
-            } else {
-                b.add("Storage permission is required");
-                b.add("Storage permission is required");
-            }
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 0, 0, getString(R.string.a8));
@@ -889,7 +859,10 @@ public class Mana extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem a) {
         switch (a.getItemId()) {
             case 0:
-                a3();
+                Intent b = new Intent("android.intent.action.SEND");
+                b.setType("text/plain");
+                b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
+                startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
                 return true;
             case 1:
                 Intent intent = new Intent("android.intent.action.SEND");
@@ -906,51 +879,16 @@ public class Mana extends BaseActivity {
         }
     }
 
-    private void a3() {
-        Intent b = new Intent("android.intent.action.SEND");
-        b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
-        startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
-    }
-
-    public void a6(int vr) {
-        AlertDialog.Builder c = new AlertDialog.Builder(this);
-        LayoutInflater d = getLayoutInflater();
-        View e = d.inflate(R.layout.a12, null);
-        c.setCancelable(false);
-        c.setView(e);
-        TextView f = e.findViewById(R.id.g1);
-        f.setText(getString(R.string.o1));
-        if (!a221().getBoolean("autoUpdate", false)) {
-            if (vr == 1) {
-                f.setTextColor(Resources.getColor(this, R.color.b));
-            } else {
-                f.setTextColor(Resources.getColor(this, R.color.c));
-            }
-        } else {
-            if (vr == 1) {
-                f.setTextColor(Resources.getColor(this, R.color.c));
-            } else {
-                f.setTextColor(Resources.getColor(this, R.color.b));
+    private int a7(String sg) {
+        int f = 0;
+        java.io.File a = new java.io.File(StorageDirectory.a() + "/" + sg);
+        if (a.exists()) {
+            String[] b = a.list();
+            if (b != null) {
+                f = b.length;
             }
         }
-        AlertDialog j5 = c.create();
-        O5 timer = new O5(2000, 2000, j5);
-        timer.start();
-        j5.show();
-    }
-
-    private void a55() {
-        finish();
-        SharedPreferences c56 = getSharedPreferences("wv", 0);
-        Intent it = new Intent(this, Webv.class);
-        it.putExtra("value", c56.getString("MyURL", ""));
-        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(it);
-    }
-
-    private int a7(String sg) {
-        return d(StorageDirectory.a() + "/" + sg);
+        return f;
     }
 
     private int[] getDrawables() {
@@ -979,27 +917,6 @@ public class Mana extends BaseActivity {
                     overridePendingTransition(R.anim.f, R.anim.b);
                 }
             }
-        }
-    }
-
-    class O5 extends CountDownTimer {
-        AlertDialog a5;
-
-        public O5(long a, long b, AlertDialog gj) {
-            super(a, b);
-            a5 = gj;
-        }
-
-        @Override
-        public void onTick(long l) {
-
-        }
-
-        @Override
-        public void onFinish() {
-            a5.dismiss();
-            a5 = null;
-            a55();
         }
     }
 }

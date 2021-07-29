@@ -46,9 +46,9 @@ public class Sqlite {
     public static final String TABLE_SEARCH = "d2";
     public static final String COL1_SEARCH = "d3";
 
-    public static final String DATA_BOOKMARK = "d4";
+    public static final String DATA_BOOKMARK = "e1";
     public static final int VERSION_BOOKMARK = 1;
-    public static final String TABLE_BOOKMARK = "d5";
-    public static final String COL1_BOOKMARK = "d6";
-    public static final String COL2_BOOKMARK = "d7";
+    public static final String TABLE_BOOKMARK = "e2";
+    public static final String COL1_BOOKMARK = "e3";
+    public static final String COL2_BOOKMARK = "e4";
 }
