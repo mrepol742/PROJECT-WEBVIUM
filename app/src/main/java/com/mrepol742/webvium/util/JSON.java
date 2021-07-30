@@ -17,8 +17,9 @@
 
 package com.mrepol742.webvium.util;
 
+import android.database.Cursor;
 import com.mrepol742.webvium.annotation.Keep;
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,5 +38,37 @@ public class JSON {
             e.printStackTrace();
         }
         return new int[]{0, 0};
+    }
+
+    public static String toHistJson(Cursor cursor) {
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("db", "hist");
+
+            int len = cursor.getCount();
+            
+            while (cursor.moveToNext()) {
+                JSONArray array = new JSONArray();
+                JSONObject item = new JSONObject();
+                item.put("title", cursor.getString(1));
+                item.put("url", cursor.getString(2));
+                item.put("timestamp", cursor.getString(3));
+                array.put(item);
+                json.put("" + cursor.getInt(0), array);
+            }
+            
+//            for (int i = 0; i < len; i++) {
+//                JSONArray array = new JSONArray();
+//                JSONObject item = new JSONObject();
+//                item.put("title", cursor.getString(1));
+//                item.put("url", cursor.getString(2));
+//                item.put("timestamp", cursor.getString(3));
+//                array.put(item);
+//                json.put(Integer.toString(i), array);
+//            }
+            cursor.close();
+        } catch (JSONException e) {}
+        return json.toString();
     }
 }
