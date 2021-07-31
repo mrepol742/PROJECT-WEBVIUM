@@ -19,6 +19,8 @@ package com.mrepol742.webvium.util;
 
 import android.database.Cursor;
 import com.mrepol742.webvium.annotation.Keep;
+import com.mrepol742.webvium.app.Sqlite;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,35 +42,48 @@ public class JSON {
         return new int[]{0, 0};
     }
 
-    public static String toHistJson(Cursor cursor) {
-
+    public static String toString(Cursor cursor, int id) {
         JSONObject json = new JSONObject();
         try {
-            json.put("db", "hist");
-
-            int len = cursor.getCount();
-            
+            json.put("db", getName(id));
             while (cursor.moveToNext()) {
                 JSONArray array = new JSONArray();
                 JSONObject item = new JSONObject();
-                item.put("title", cursor.getString(1));
-                item.put("url", cursor.getString(2));
-                item.put("timestamp", cursor.getString(3));
+                if (id == 0) {
+                    item.put(Sqlite.COL1_BOOKMARK, cursor.getString(1));
+                    item.put(Sqlite.COL2_BOOKMARK, cursor.getString(2));
+                } else if (id == 1) {
+                    item.put(Sqlite.COL1_DOWNLOAD, cursor.getString(1));
+                    item.put(Sqlite.COL2_DOWNLOAD, cursor.getString(2));
+                    item.put(Sqlite.COL3_DOWNLOAD, cursor.getString(3));
+                    item.put(Sqlite.COL4_DOWNLOAD, cursor.getString(4));
+                } else if (id == 2) {
+                    item.put(Sqlite.COL1_HISTORY, cursor.getString(1));
+                    item.put(Sqlite.COL2_HISTORY, cursor.getString(2));
+                    item.put(Sqlite.COL3_HISTORY, cursor.getString(3));
+                } else {
+                    item.put(Sqlite.COL1_SEARCH, cursor.getString(1));
+                }
                 array.put(item);
-                json.put("" + cursor.getInt(0), array);
+                json.put(Integer.toString(cursor.getInt(0)), array);
             }
-            
-//            for (int i = 0; i < len; i++) {
-//                JSONArray array = new JSONArray();
-//                JSONObject item = new JSONObject();
-//                item.put("title", cursor.getString(1));
-//                item.put("url", cursor.getString(2));
-//                item.put("timestamp", cursor.getString(3));
-//                array.put(item);
-//                json.put(Integer.toString(i), array);
-//            }
+            return json.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
             cursor.close();
-        } catch (JSONException e) {}
-        return json.toString();
+        }
+        return "null";
+    }
+
+    private static String getName(int id) {
+        if (id == 0) {
+            return Sqlite.TABLE_BOOKMARK;
+        } else if (id == 1) {
+            return Sqlite.TABLE_DOWNLOAD;
+        } else if (id == 2) {
+            return Sqlite.TABLE_HISTORY;
+        }
+        return Sqlite.TABLE_SEARCH;
     }
 }

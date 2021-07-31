@@ -49,6 +49,7 @@ import com.mrepol742.webvium.PDMS;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.SDMS;
 import com.mrepol742.webvium.Swit;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.Resources;
@@ -61,7 +62,9 @@ import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.app.Format;
 import com.mrepol742.webvium.util.AwesomeToast;
+import com.mrepol742.webvium.util.JSON;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
@@ -69,7 +72,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-@Deprecated
 public class DatabaseFragment extends BasePreferenceFragment implements Format {
     private final IntentFilter is = new IntentFilter();
     private R7 r7;
@@ -274,7 +276,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             public void run() {
                 ArrayList<SDMS> al = new ArrayList<>();
                 SearchHelper d1 = SearchHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
@@ -284,10 +286,13 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                         }
                     });
                 } else {
-                    while (res.moveToNext()) {
+                    write(res, 3);
+                    /* while (res.moveToNext()) {
                         al.add(new SDMS(res.getString(1)));
                     }
                     DatabaseFragment.this.write(file, al);
+
+                     */
                 }
                 res.close();
             }
@@ -328,7 +333,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             public void run() {
                 ArrayList<HDMS> al = new ArrayList<>();
                 HistoryHelper d1 = HistoryHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
@@ -338,10 +343,13 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                         }
                     });
                 } else {
-                    while (res.moveToNext()) {
+                    write(res, 2);
+                    /* while (res.moveToNext()) {
                         al.add(new HDMS(res.getString(1), res.getString(2), res.getLong(3)));
                     }
                     DatabaseFragment.this.write(file, al);
+
+                     */
                 }
                 res.close();
             }
@@ -381,7 +389,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             @Override
             public void run() {
                 BookmarkHelper d1 = BookmarkHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
@@ -391,11 +399,14 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                         }
                     });
                 } else {
-                    ArrayList<BDMS> al = new ArrayList<>();
+                    write(res, 0);
+                    /* ArrayList<BDMS> al = new ArrayList<>();
                     while (res.moveToNext()) {
                         al.add(new BDMS(res.getString(1), res.getString(2)));
                     }
                     DatabaseFragment.this.write(file, al);
+
+                     */
                 }
                 res.close();
             }
@@ -435,7 +446,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             @Override
             public void run() {
                 DownloadHelper d1 = DownloadHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
                     DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
@@ -445,11 +456,14 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                         }
                     });
                 } else {
-                    ArrayList<DDMS> al = new ArrayList<>();
+                    write(res, 1);
+                    /* ArrayList<DDMS> al = new ArrayList<>();
                     while (res.moveToNext()) {
                         al.add(new DDMS(res.getString(1), res.getString(2), res.getLong(3), res.getLong(4)));
                     }
                     DatabaseFragment.this.write(file, al);
+
+                     */
                 }
                 res.close();
             }
@@ -481,6 +495,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         a.create().show();
     }
 
+    @Deprecated
     private void b12(final String file) {
         FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
@@ -549,6 +564,50 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         return sdf.format(new Date());
     }
 
+    private String getName(int id) {
+        if (id == 0) {
+            return Sqlite.TABLE_BOOKMARK;
+        } else if (id == 1) {
+            return Sqlite.TABLE_DOWNLOAD;
+        } else if (id == 2) {
+            return Sqlite.TABLE_HISTORY;
+        }
+        return Sqlite.TABLE_SEARCH;
+    }
+
+    private void write(Cursor cr, int id) {
+                try {
+                    String sg = JSON.toString(cr, id);
+                    if (FileUtil.write(new File(StorageDirectory.getWebviumDir() + "/Backup/" + DatabaseFragment.this.getName(id)), sg, false)) {
+                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
+                            }
+                        });
+                    } else {
+                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                            }
+                        });
+                    }
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                        }
+                    });
+                }
+    }
+
+    @Deprecated
     private void write(final String sg, final Object al) {
         if (Build.VERSION.SDK_INT < 29) {
             Runnable re = new Runnable() {

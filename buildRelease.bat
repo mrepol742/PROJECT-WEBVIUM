@@ -29,7 +29,8 @@ call apksigner sign --ks %WEBVIUM_KEY% --ks-key-alias %KEY_ALIAS% --ks-pass pass
 
 call apksigner verify webvium-released.signed.apk
 
-call explorer release
+@rem %WEBVIUM_PATH% location to the PROJECT-WEBVIUM
+call explorer %WEBVIUM_PATH%\app\build\outputs\apk\release
 
 call taskkill /F /IM java.exe /T
 call taskkill /F /IM adb.exe /T
