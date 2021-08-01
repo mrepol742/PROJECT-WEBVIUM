@@ -121,7 +121,6 @@ public class Sett0 extends BaseActivity {
             tv0.setVisibility(View.GONE);
         }
         final TextView tv1 = findViewById(R.id.m20);
-        if (Build.VERSION.SDK_INT < 29 && BuildConfig.DEBUG) {
             tv1.setText(getString(R.string.t21));
             tv1.setOnClickListener(new View.OnClickListener() {
 
@@ -141,9 +140,6 @@ public class Sett0 extends BaseActivity {
                     Sett0.this.invalidateOptionsMenu();
                 }
             });
-        } else {
-            tv1.setVisibility(View.GONE);
-        }
         final TextView tv2 = findViewById(R.id.m1);
         tv2.setText(getString(R.string.l));
         tv2.setOnClickListener(new View.OnClickListener() {

@@ -17,6 +17,12 @@
 
 package com.mrepol742.webvium.util;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+
 import com.mrepol742.webvium.annotation.Keep;
 
 import java.io.BufferedReader;
@@ -27,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 @SuppressWarnings("ALL")
@@ -135,6 +142,24 @@ public class FileUtil {
             return true;
         } catch (Exception exception) {
             exception.printStackTrace();
+        }
+        return false;
+    }
+
+    //Environment.DIRECTORY_DOCUMENTS + "/Webvium"
+    public static boolean write(Context a, String name, String meme, String loc, String data) {
+        try {
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
+            values.put(MediaStore.MediaColumns.MIME_TYPE, meme);
+            values.put(MediaStore.MediaColumns.RELATIVE_PATH, loc);
+            Uri uri = a.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
+            ObjectOutputStream outputStream = (ObjectOutputStream) a.getContentResolver().openOutputStream(uri);
+            outputStream.writeObject(data);
+            outputStream.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

@@ -6251,7 +6251,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         } else if (Build.VERSION.SDK_INT >= 23 && Permission.checkOnly(Webv.this, Permission.STORAGE)) {
             f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b );
         } else {
-            f.setDestinationInExternalPublicDir(Package.c() + "/Downloads", b);
+            f.setDestinationInExternalPublicDir(Package.c() + "/Download", b);
         }
         f.allowScanningByMediaScanner();
         f.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -6899,7 +6899,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         } else if (sg1.equals(Intents.ACTION_PASTE_SEARCH)) {
             try {
                 String c = Clipboard.b(this);
-                if (c != null && U3.b(c)) {
+                if (c != null) {
                     SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
                     d2.c(c);
                     c49(c);

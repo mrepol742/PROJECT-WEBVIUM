@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 public class JSON {
 
     @Keep
@@ -72,6 +74,24 @@ public class JSON {
             e.printStackTrace();
         } finally {
             cursor.close();
+        }
+        return "null";
+    }
+
+    public static String toString(Map<String, ?> map) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("db", "sett");
+            JSONArray array = new JSONArray();
+            JSONObject item = new JSONObject();
+            for (Map.Entry<String, ?> sg : map.entrySet()) {
+                item.put(sg.getKey(), sg.getValue());
+            }
+            array.put(item);
+            json.put("0", array);
+            return json.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         return "null";
     }

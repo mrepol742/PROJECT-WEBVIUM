@@ -41,9 +41,7 @@
         <com.mrepol742.webvium.Pref
             a:key="do"
             a:title="@string/z32" />
-        <com.mrepol742.webvium.Pref
-            a:key="pe"
-            a:title="@string/z33" />
+
     </com.mrepol742.webvium.Pref0>
 
     <com.mrepol742.webvium.Pref0 a:title="@string/x46">

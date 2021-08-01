@@ -18,6 +18,3 @@
 call gradlew assembleDebug
 
 call explorer app\build\outputs\apk\debug
-
-call taskkill /F /IM java.exe /T
-call taskkill /F /IM adb.exe /T

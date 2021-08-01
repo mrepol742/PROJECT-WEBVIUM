@@ -40,14 +40,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.Back0;
-import com.mrepol742.webvium.BDMS;
-import com.mrepol742.webvium.DDMS;
-import com.mrepol742.webvium.HDMS;
 import com.mrepol742.webvium.Lock;
 import com.mrepol742.webvium.Webv;
-import com.mrepol742.webvium.PDMS;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.SDMS;
 import com.mrepol742.webvium.Swit;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
@@ -57,7 +52,6 @@ import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.app.Format;
@@ -68,9 +62,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 public class DatabaseFragment extends BasePreferenceFragment implements Format {
     private final IntentFilter is = new IntentFilter();
@@ -93,11 +87,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                 r7 = new R7();
                 getActivity().registerReceiver(r7, is);
             }
-            if (Build.VERSION.SDK_INT < 29) {
-                a5(R.xml.x);
-            } else {
-                a5(R.xml.a6);
-            }
+            a5(R.xml.x);
             Preference n = findPreference("res");
             n.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -156,17 +146,6 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                     return true;
                 }
             });
-
-            Preference l111444a = findPreference("pe");
-            l111444a.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    DatabaseFragment.this.b13();
-                    return true;
-                }
-            });
-
             Swit SWIT = (Swit) findPreference("bcP");
             SWIT.setSummary(getString(R.string.z39));
 
@@ -242,18 +221,16 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
     }
 
     private void a13() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Settings_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.b38), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.b38), StorageDirectory.a() + "Settings_" + format() + ".bac")));
         a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-                FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-                DatabaseFragment.this.write(file, PreferenceManager.getDefaultSharedPreferences(DatabaseFragment.this.getActivity()).getAll());
+                createFolder();
+                write(PreferenceManager.getDefaultSharedPreferences(DatabaseFragment.this.getActivity()).getAll());
                 a12.dismiss();
             }
         });
@@ -265,52 +242,26 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             }
         });
         a.create().show();
-    }
-
-    private void a16(final String file) {
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                ArrayList<SDMS> al = new ArrayList<>();
-                SearchHelper d1 = SearchHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
-                        }
-                    });
-                } else {
-                    write(res, 3);
-                    /* while (res.moveToNext()) {
-                        al.add(new SDMS(res.getString(1)));
-                    }
-                    DatabaseFragment.this.write(file, al);
-
-                     */
-                }
-                res.close();
-            }
-        };
-        new Thread(p15).start();
     }
 
     private void a17() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Search_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.b40), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.b40), location(3))));
         a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                DatabaseFragment.this.a16(file);
+                createFolder();
+                SearchHelper d1 = SearchHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    g(DatabaseFragment.this.getString(R.string.z31));
+                } else {
+                    write(res, 3);
+                }
+                res.close();
                 a12.dismiss();
             }
         });
@@ -322,52 +273,26 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             }
         });
         a.create().show();
-    }
-
-    private void a20(final String file) {
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                ArrayList<HDMS> al = new ArrayList<>();
-                HistoryHelper d1 = HistoryHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
-                        }
-                    });
-                } else {
-                    write(res, 2);
-                    /* while (res.moveToNext()) {
-                        al.add(new HDMS(res.getString(1), res.getString(2), res.getLong(3)));
-                    }
-                    DatabaseFragment.this.write(file, al);
-
-                     */
-                }
-                res.close();
-            }
-        };
-        new Thread(p15).start();
     }
 
     private void b1() {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/History_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.c22), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.c22), location(2))));
         a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                DatabaseFragment.this.a20(file);
+                createFolder();
+                HistoryHelper d1 = HistoryHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    g(DatabaseFragment.this.getString(R.string.z31));
+                } else {
+                    write(res, 2);
+                }
+                res.close();
                 a12.dismiss();
             }
         });
@@ -379,52 +304,26 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             }
         });
         a.create().show();
-    }
-
-    private void b4(final String file) {
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                BookmarkHelper d1 = BookmarkHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
-                        }
-                    });
-                } else {
-                    write(res, 0);
-                    /* ArrayList<BDMS> al = new ArrayList<>();
-                    while (res.moveToNext()) {
-                        al.add(new BDMS(res.getString(1), res.getString(2)));
-                    }
-                    DatabaseFragment.this.write(file, al);
-
-                     */
-                }
-                res.close();
-            }
-        };
-        new Thread(p15).start();
     }
 
     private void b5() {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Bookmarks_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.c24), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.c24), location(0))));
         a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                DatabaseFragment.this.b4(file);
+                createFolder();
+                BookmarkHelper d1 = BookmarkHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
+                if (res.getCount() == 0) {
+                    g(DatabaseFragment.this.getString(R.string.z31));
+                } else {
+                    write(res, 0);
+                }
+                res.close();
                 a12.dismiss();
             }
         });
@@ -436,107 +335,26 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             }
         });
         a.create().show();
-    }
-
-    private void b8(final String file) {
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                DownloadHelper d1 = DownloadHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
-                        }
-                    });
-                } else {
-                    write(res, 1);
-                    /* ArrayList<DDMS> al = new ArrayList<>();
-                    while (res.moveToNext()) {
-                        al.add(new DDMS(res.getString(1), res.getString(2), res.getLong(3), res.getLong(4)));
-                    }
-                    DatabaseFragment.this.write(file, al);
-
-                     */
-                }
-                res.close();
-            }
-        };
-        new Thread(p15).start();
     }
 
     private void b9() {
         final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
         a.setCancelable(true);
         a.setTitle(getString(R.string.t6));
-        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Downloads_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.z34), file)));
+        a.setMessage(Html.b(String.format(getString(R.string.z34), location(1))));
         a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                DatabaseFragment.this.b8(file);
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    @Deprecated
-    private void b12(final String file) {
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-        FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                PermissionHelper d1 = PermissionHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + "A" + " ORDER BY " + "_id" + " DESC", null);
+                createFolder();
+                DownloadHelper d1 = DownloadHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
-                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.z31));
-                        }
-                    });
+                   g(DatabaseFragment.this.getString(R.string.z31));
                 } else {
-                    ArrayList<PDMS> al = new ArrayList<>();
-                    while (res.moveToNext()) {
-                        al.add(new PDMS(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
-                    }
-                    DatabaseFragment.this.write(file, al);
+                    write(res, 1);
                 }
                 res.close();
-            }
-        };
-        new Thread(p15).start();
-    }
-
-    private void b13() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.t6));
-        final String file = StorageDirectory.getWebviumDir() + "/Backup/Databases/Permissions_" + format() + ".bac";
-        a.setMessage(Html.b(String.format(getString(R.string.z36), file)));
-        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                DatabaseFragment.this.b12(file);
                 a12.dismiss();
             }
         });
@@ -566,19 +384,38 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
 
     private String getName(int id) {
         if (id == 0) {
-            return Sqlite.TABLE_BOOKMARK;
+            return "Bookmark_" + format() + ".bac";
         } else if (id == 1) {
-            return Sqlite.TABLE_DOWNLOAD;
+            return "Download_" + format() + ".bac";
         } else if (id == 2) {
-            return Sqlite.TABLE_HISTORY;
+            return "History_" + format() + ".bac";
         }
-        return Sqlite.TABLE_SEARCH;
+        return "Search_" + format() + ".bac";
     }
 
-    private void write(Cursor cr, int id) {
+    private String location(int id) {
+        if (Build.VERSION.SDK_INT >= 30) {
+            return StorageDirectory.a() + "/Documents/Webvium/" + DatabaseFragment.this.getName(id);
+        }
+        return StorageDirectory.getWebviumDir() + "/Backup/Databases/" + getName(id);
+    }
+
+    private void write(Map<String, ?> map) {
+        final String sg = JSON.toString(map);
+        Runnable re = new Runnable() {
+
+            @Override
+            public void run() {
                 try {
-                    String sg = JSON.toString(cr, id);
-                    if (FileUtil.write(new File(StorageDirectory.getWebviumDir() + "/Backup/" + DatabaseFragment.this.getName(id)), sg, false)) {
+                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(), Environment.DIRECTORY_DOCUMENTS + "/Webvium/Setting_" + format() + ".bac", "text/plain", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup", sg)) {
+                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
+                            }
+                        });
+                    } else if (FileUtil.write(new File(StorageDirectory.getWebviumDir() + "/Backup/Setting_" + format() + ".bac"), sg, false)) {
                         DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
@@ -605,30 +442,35 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                         }
                     });
                 }
+            }
+        };
+        new Thread(re).start();
     }
 
-    @Deprecated
-    private void write(final String sg, final Object al) {
-        if (Build.VERSION.SDK_INT < 29) {
-            Runnable re = new Runnable() {
+    private void write(Cursor cr, final int id) {
+        final String sg = JSON.toString(cr, id);
+        Runnable re = new Runnable() {
 
-                @Override
-                public void run() {
-                    try {
-                        FileOutputStream fos = new FileOutputStream(sg);
-                        ObjectOutputStream oos = new ObjectOutputStream(fos);
-                        oos.writeObject(al);
-                        oos.close();
-                        fos.close();
+            @Override
+            public void run() {
+                try {
+                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(),Environment.DIRECTORY_DOCUMENTS + "/Webvium/" + DatabaseFragment.this.getName(id), "text/plain", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup", sg)) {
                         DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-                                DatabaseFragment.this.g(DatabaseFragment.this.getString(R.string.b25));
+                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
                             }
                         });
-                    } catch (Exception en) {
-                        en.printStackTrace();
+                    } else if (FileUtil.write(new File(location(id)), sg, false)) {
+                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
+                            }
+                        });
+                    } else {
                         DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
@@ -637,22 +479,26 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
                             }
                         });
                     }
+                } catch (Exception en) {
+                    en.printStackTrace();
+                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                        }
+                    });
                 }
-            };
-            new Thread(re).start();
-        } else {
-            try {
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.MediaColumns.DISPLAY_NAME, "webvium_test.txt");
-                values.put(MediaStore.MediaColumns.MIME_TYPE, "text/plain");
-                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Webvium");
-                Uri uri = getActivity().getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
-                ObjectOutputStream outputStream = (ObjectOutputStream) getActivity().getContentResolver().openOutputStream(uri);
-                outputStream.writeObject(al);
-                outputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        };
+        new Thread(re).start();
+        cr.close();
+    }
+
+    private void createFolder() {
+        if (Build.VERSION.SDK_INT < 30) {
+            FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
+            FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
         }
     }
 

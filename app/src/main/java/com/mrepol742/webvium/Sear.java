@@ -78,11 +78,8 @@ import java.util.Objects;
 public class Sear extends MainBaseActivity {
     private final String[] webvium = {
             "webvium-source:",
-            "webvium://logcat",
             "webvium://calculator",
             "webvium://credits",
-            "webvium://termsandcondition",
-            "webvium://privacypolicy",
             "webvium://blank",
             "webvium://search",
             "webvium://history",
@@ -877,7 +874,7 @@ public class Sear extends MainBaseActivity {
             } else if (sg.equals(Intents.ACTION_PASTE)) {
                 try {
                     String c = Clipboard.b(this);
-                    if (U3.b(Objects.requireNonNull(c))) {
+                    if (c != null) {
                         p.setText(c);
                     } else {
                         AwesomeToast.c(this, getString(R.string.t20));
