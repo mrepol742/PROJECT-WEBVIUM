@@ -17,8 +17,10 @@
 
 @rem %WIKI_WEBVIUM% location to the wiki folder
 @rem %WEBVIUM_PATH% location to the PROJECT-WEBVIUM folder
-javadoc -d %WIKI_WEBVIUM% -doctitle "PROJECT-WEBVIUM" -windowtitle "PROJECT-WEBVIUM Documentation" -footer "<a href="https://mrepol742.github.io">Copyright (c) 2021. Melvin Jones Repol</a>" -keywords -sourcepath %WEBVIUM_PATH%\app\src\main\java -stylesheetfile %WEBVIUM_PATH%\stylesheet.css -top "Download PROJECT-WEBVIUM <a href="https://mrepol742.github.io/PROJECT-WEBVIUM">https://mrepol742.github.io/PROJECT-WEBVIUM</a>" -bottom "PROJECT-WEBVIUM was Programmed by <a href="https://mrepol742.github.io">mrepol742</a> with assistance of <a href="SamiunNafis.github.io">SamiunNafis</a>" -header "PROJECT-WEBVIUM" -notimestamp -subpackages com
+
+m:
 cd %WIKI_WEBVIUM%
+javadoc -d %WIKI_WEBVIUM% -doctitle "PROJECT-WEBVIUM" -windowtitle "PROJECT-WEBVIUM Documentation" -footer "<a href="https://mrepol742.github.io">Copyright (c) 2021. Melvin Jones Repol</a>" -keywords -sourcepath %WEBVIUM_PATH%\app\src\main\java -stylesheetfile %WEBVIUM_PATH%\stylesheet.css -top "Download PROJECT-WEBVIUM <a href="https://mrepol742.github.io/PROJECT-WEBVIUM">https://mrepol742.github.io/PROJECT-WEBVIUM</a>" -bottom "PROJECT-WEBVIUM was Programmed by <a href="https://mrepol742.github.io">mrepol742</a> with assistance of <a href="SamiunNafis.github.io">SamiunNafis</a>" -header "PROJECT-WEBVIUM" -notimestamp -subpackages com
 git add .
 git commit -m "Update JavaDoc"
 git push origin master

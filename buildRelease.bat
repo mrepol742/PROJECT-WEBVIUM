@@ -15,6 +15,10 @@
 @rem limitations under the License.
 @rem
 
+m:
+
+cd %WEBVIUM_PATH%
+
 call gradlew assembleRelease
 
 cd "app\build\outputs\apk\release"

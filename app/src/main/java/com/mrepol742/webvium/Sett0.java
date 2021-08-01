@@ -121,7 +121,7 @@ public class Sett0 extends BaseActivity {
             tv0.setVisibility(View.GONE);
         }
         final TextView tv1 = findViewById(R.id.m20);
-        if (Build.VERSION.SDK_INT < 29) {
+        if (Build.VERSION.SDK_INT < 29 && BuildConfig.DEBUG) {
             tv1.setText(getString(R.string.t21));
             tv1.setOnClickListener(new View.OnClickListener() {
 
