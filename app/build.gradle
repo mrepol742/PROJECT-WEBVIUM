@@ -29,7 +29,7 @@ android {
         applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 20210801
+        versionCode 20210802
         versionName "1.8"
         // < 1.0 The version i know what i am doing,
         // > 1.5 Now only god knows.

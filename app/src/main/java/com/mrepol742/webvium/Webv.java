@@ -6581,10 +6581,8 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 24, 0, getString(R.string.h20)).setCheckable(true);
-        if (BuildConfig.DEBUG) {
-            a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
-            a.add(0, 32, 0, getString(R.string.s32)).setCheckable(true);
-        }
+        a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
+        a.add(0, 32, 0, getString(R.string.s32)).setCheckable(true);
         // web osint
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
         sm.add(0, 1, 0, getString(R.string.y15));
