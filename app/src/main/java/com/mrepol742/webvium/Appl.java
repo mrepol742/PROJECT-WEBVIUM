@@ -60,6 +60,7 @@ public class Appl extends Application {
             this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
             Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 
+                @SuppressWarnings("NullableProblems")
                 @Override
                 public void uncaughtException(Thread thread, Throwable ex) {
                     Intent intent = new Intent(Appl.this.getApplicationContext(), Exce.class);

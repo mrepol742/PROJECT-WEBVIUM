@@ -34,6 +34,7 @@ import com.mrepol742.webvium.Clip;
 import com.mrepol742.webvium.Edit0;
 import com.mrepol742.webvium.List;
 import com.mrepol742.webvium.Lock;
+import com.mrepol742.webvium.Mana;
 import com.mrepol742.webvium.Webv;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.Swit;
@@ -122,38 +123,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
 
                 @Override
                 public boolean onPreferenceClick(Preference a1) {
-                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                    a.setCancelable(true);
-                    a.setTitle(getString(R.string.b));
-                    a.setMessage(getString(R.string.u5));
-                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            Runnable p15 = new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    try {
-                                        FileUtil.deleteAll(StorageDirectory.getCacheDir(PrivacyFragment.this.getActivity()));
-                                    } catch (Exception en) {
-                                        en.printStackTrace();
-                                    }
-                                }
-                            };
-                            new Thread(p15).start();
-                            PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.a27));
-                            a12.dismiss();
-                        }
-                    });
-                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a1, int intetg) {
-                            a1.dismiss();
-                        }
-                    });
-                    a.create().show();
+                    Intents.a(getActivity(), Mana.class);
                     return true;
                 }
             });
@@ -162,29 +132,7 @@ public class PrivacyFragment extends BasePreferenceFragment {
 
                 @Override
                 public boolean onPreferenceClick(Preference a1) {
-                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                    a.setCancelable(true);
-                    a.setTitle(getString(R.string.b));
-                    a.setMessage(getString(R.string.u4));
-                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            SearchHelper d2 = SearchHelper.getInstance(PrivacyFragment.this.getActivity().getApplicationContext());
-                            d2.delete();
-                            PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.u3));
-                            a12.dismiss();
-
-                        }
-                    });
-                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a1, int intetg) {
-                            a1.dismiss();
-                        }
-                    });
-                    a.create().show();
+                    Intents.a(getActivity(), Mana.class);
                     return true;
                 }
             });
@@ -256,101 +204,6 @@ public class PrivacyFragment extends BasePreferenceFragment {
                     return true;
                 }
             });
-
-            Preference f2 = findPreference("clearSearch");
-            f2.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a1) {
-                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                    a.setCancelable(true);
-                    a.setTitle(getString(R.string.b));
-                    a.setMessage(getString(R.string.u6));
-                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            BookmarkHelper d3 = BookmarkHelper.getInstance(PrivacyFragment.this.getActivity().getApplicationContext());
-                            d3.delete();
-                            PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.a40));
-                            a12.dismiss();
-                        }
-                    });
-                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a1, int intetg) {
-                            a1.dismiss();
-                        }
-                    });
-                    a.create().show();
-                    return true;
-                }
-            });
-            Preference g = findPreference("clearHistory");
-            g.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a1) {
-                    final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                    a.setCancelable(true);
-                    a.setTitle(getString(R.string.b));
-                    a.setMessage(getString(R.string.t5));
-                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            HistoryHelper d1 = HistoryHelper.getInstance(PrivacyFragment.this.getActivity().getApplicationContext());
-                            d1.delete();
-                            if (Webv.bl2) {
-                                Webv.bl4 = true;
-                            }
-                            PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.t1));
-                            a12.dismiss();
-
-                        }
-                    });
-                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a1, int intetg) {
-                            a1.dismiss();
-                        }
-                    });
-                    a.create().show();
-                    return true;
-                }
-            });
-            Preference g123 = findPreference("clearHistory");
-            g123.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a1) {
-                    final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                    a.setCancelable(true);
-                    a.setTitle(getString(R.string.b));
-                    a.setMessage(getString(R.string.t5));
-                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            DownloadHelper d1 = DownloadHelper.getInstance(PrivacyFragment.this.getActivity().getApplicationContext());
-                            d1.delete();
-                            PrivacyFragment.this.g(PrivacyFragment.this.getString(R.string.z91));
-                            a12.dismiss();
-                        }
-                    });
-                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a1, int intetg) {
-                            a1.dismiss();
-                        }
-                    });
-                    a.create().show();
-                    return true;
-                }
-            });
             final Preference h = findPreference("clearCookies");
             h.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -368,7 +221,6 @@ public class PrivacyFragment extends BasePreferenceFragment {
 
                 @Override
                 public boolean onPreferenceClick(Preference a1) {
-
                     if (cm.hasCookies()) {
                         PrivacyFragment.this.w(false);
                     }
@@ -410,8 +262,6 @@ public class PrivacyFragment extends BasePreferenceFragment {
                     return true;
                 }
             });
-
-
             Preference j5 = findPreference("clearClipboard");
             j5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -522,5 +372,4 @@ public class PrivacyFragment extends BasePreferenceFragment {
             }
         }
     }
-
 }

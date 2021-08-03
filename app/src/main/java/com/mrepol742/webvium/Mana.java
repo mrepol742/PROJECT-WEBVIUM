@@ -27,17 +27,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.text.format.Formatter;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,7 +58,6 @@ import com.mrepol742.webvium.app.StorageDirectory;
 import com.mrepol742.webvium.manage.space.ManageSpaceAdapter;
 import com.mrepol742.webvium.manage.space.ManageSpaceDataModel;
 import com.mrepol742.webvium.app.Permission;
-import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.security.Base64;
@@ -734,8 +730,6 @@ public class Mana extends BaseActivity {
                 d3.delete();
                 DownloadHelper d9 = DownloadHelper.getInstance(Mana.this.getApplicationContext());
                 d9.delete();
-                PermissionHelper d91 = PermissionHelper.getInstance(Mana.this.getApplicationContext());
-                d91.delete();
                 if (Build.VERSION.SDK_INT < 29) {
                     Mana.this.l(StorageDirectory.getWebviumDir());
                 }

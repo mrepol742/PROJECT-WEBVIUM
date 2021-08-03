@@ -116,8 +116,8 @@ public class Save extends Service {
         }
         m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
         m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.c2));
-        startForeground(Notifications.f, m.build());
-
+        NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nmc.notify(Notifications.f, m.build());
     }
 
     private void a2(String str, String jk) {

@@ -21,28 +21,19 @@
     <com.mrepol742.webvium.Pref0 a:title="@string/z88">
         <com.mrepol742.webvium.Pref
             a:key="clearBook"
-            a:title="@string/i13" />
+            a:title="@string/z93" />
         <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="pHistory"
             a:title="@string/d13" />
-        <com.mrepol742.webvium.Pref
-            a:key="clearHistory"
-            a:title="@string/d12" />
         <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="pSearch"
             a:title="@string/d15" />
-        <com.mrepol742.webvium.Pref
-            a:key="clearSearch"
-            a:title="@string/d14" />
         <com.mrepol742.webvium.Swit
             a:defaultValue="false"
             a:key="pDownload"
             a:title="@string/z89" />
-        <com.mrepol742.webvium.Pref
-            a:key="clearDownload"
-            a:title="@string/z90" />
     </com.mrepol742.webvium.Pref0>
 
     <com.mrepol742.webvium.Pref0 a:title="@string/d16">

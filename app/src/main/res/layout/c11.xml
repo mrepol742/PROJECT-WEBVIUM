@@ -59,7 +59,7 @@
                 a:textColor="?h"
                 a:textSize="@dimen/c" />
 
-            <AutoCompleteTextView
+            <com.mrepol742.webvium.Edit
                 a:id="@id/p"
                 a:layout_width="match_parent"
                 a:layout_height="match_parent"

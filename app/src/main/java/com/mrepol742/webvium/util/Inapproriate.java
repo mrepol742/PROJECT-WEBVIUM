@@ -696,8 +696,9 @@ public class Inapproriate {
     }
 
     public static boolean isInapproriate(String data) {
+        String low = data.toLowerCase();
         for (String s : inapproriateData) {
-            if (data.toLowerCase().contains(s)) {
+            if (low.contains(s)) {
                 return false;
             }
         }

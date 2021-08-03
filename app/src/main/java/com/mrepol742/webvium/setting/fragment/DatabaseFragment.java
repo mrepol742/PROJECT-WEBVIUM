@@ -20,21 +20,18 @@ package com.mrepol742.webvium.setting.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -54,19 +51,16 @@ import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.app.StorageDirectory;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.util.Html;
-import com.mrepol742.webvium.app.Format;
 import com.mrepol742.webvium.util.AwesomeToast;
 import com.mrepol742.webvium.util.JSON;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-public class DatabaseFragment extends BasePreferenceFragment implements Format {
+public class DatabaseFragment extends BasePreferenceFragment {
     private final IntentFilter is = new IntentFilter();
     private R7 r7;
 
@@ -376,7 +370,6 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
         AwesomeToast.b(getActivity(), a);
     }
 
-    @Override
     public String format() {
         SimpleDateFormat sdf = new SimpleDateFormat("MMddyy_HHmm", Locale.US);
         return sdf.format(new Date());
@@ -395,9 +388,9 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
 
     private String location(int id) {
         if (Build.VERSION.SDK_INT >= 30) {
-            return StorageDirectory.a() + "/Documents/Webvium/" + DatabaseFragment.this.getName(id);
+            return StorageDirectory.a() + "/Documents/Webvium/Backup/" + DatabaseFragment.this.getName(id);
         }
-        return StorageDirectory.getWebviumDir() + "/Backup/Databases/" + getName(id);
+        return StorageDirectory.getWebviumDir() + "/Backup/" + getName(id);
     }
 
     private void write(Map<String, ?> map) {
@@ -407,7 +400,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             @Override
             public void run() {
                 try {
-                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(), Environment.DIRECTORY_DOCUMENTS + "/Webvium/Setting_" + format() + ".bac", "text/plain", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup", sg)) {
+                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(), Environment.DIRECTORY_DOCUMENTS + "/Webvium/Setting_" + format() + ".bac", "", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup/", sg)) {
                         DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
@@ -454,7 +447,7 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
             @Override
             public void run() {
                 try {
-                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(),Environment.DIRECTORY_DOCUMENTS + "/Webvium/" + DatabaseFragment.this.getName(id), "text/plain", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup", sg)) {
+                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(),Environment.DIRECTORY_DOCUMENTS + "/Webvium/" + DatabaseFragment.this.getName(id), "", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup/", sg)) {
                         DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
@@ -498,7 +491,6 @@ public class DatabaseFragment extends BasePreferenceFragment implements Format {
     private void createFolder() {
         if (Build.VERSION.SDK_INT < 30) {
             FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-            FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup/Databases");
         }
     }
 

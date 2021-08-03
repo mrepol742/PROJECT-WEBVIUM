@@ -25,7 +25,7 @@
 
     <com.mrepol742.webvium.Pref
         a:key="g6"
-        a:summary="@string/g5"
+        a:summary="@string/g8"
         a:title="@string/x44" />
 
     <com.mrepol742.webvium.Pref

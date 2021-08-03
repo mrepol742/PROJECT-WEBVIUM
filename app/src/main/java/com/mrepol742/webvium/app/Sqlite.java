@@ -33,14 +33,6 @@ public class Sqlite {
     public static final String COL2_HISTORY = "b4";
     public static final String COL3_HISTORY = "b5";
 
-    public static final String DATA_PERMISSION = "c1";
-    public static final int VERSION_PERMISSION = 1;
-    public static final String TABLE_PERMISSION = "c2";
-    public static final String COL1_PERMISSION = "c3";
-    public static final String COL2_PERMISSION = "c4";
-    public static final String COL3_PERMISSION = "c5";
-    public static final String COL4_PERMISSION = "c6";
-
     public static final String DATA_SEARCH = "d1";
     public static final int VERSION_SEARCH = 1;
     public static final String TABLE_SEARCH = "d2";

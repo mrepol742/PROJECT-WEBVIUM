@@ -19,20 +19,27 @@ package com.mrepol742.webvium.setting.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.provider.Settings;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.mrepol742.webvium.BuildConfig;
-import com.mrepol742.webvium.Cred;
 import com.mrepol742.webvium.Webv;
 import com.mrepol742.webvium.R;
+import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.Stream;
+import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.JSON;
 
 import java.text.SimpleDateFormat;
@@ -50,8 +57,30 @@ public class AboutFragment extends BasePreferenceFragment {
             j5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
                 @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intents.a(AboutFragment.this.getActivity(), Cred.class);
+                public boolean onPreferenceClick(Preference a1) {
+                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                    LayoutInflater b = getActivity().getLayoutInflater();
+                    View c = b.inflate(R.layout.c20, null);
+                    a.setView(c);
+                    TextView tv = c.findViewById(R.id.c10);
+                    ScrollView rl = c.findViewById(R.id.c3);
+                    ImageView iv = c.findViewById(R.id.o39);
+                    TextView tv1 = c.findViewById(R.id.o40);
+                    iv.setImageResource(R.mipmap.c);
+                    tv.setTextColor(Resources.getColor(getActivity(), R.color.b));
+                    tv1.setTextColor(Resources.getColor(getActivity(), R.color.b));
+                    rl.setBackground(Resources.getDrawable(getActivity(), R.drawable.f11));
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("di", 0);
+                    try {
+                        tv.setText(Html.b(String.format(getString(R.string.y64),
+                                sharedPreferences.getString("di", ""),
+                                sharedPreferences.getString("di1", ""))));
+                        tv1.setText(Html.b(String.format(getString(R.string.y90), Package.e(getActivity()))));
+                    } catch (Exception en) {
+                        en.printStackTrace();
+                    }
+                    a.setCancelable(true);
+                    a.create().show();
                     return true;
                 }
             });
@@ -77,9 +106,9 @@ public class AboutFragment extends BasePreferenceFragment {
             });
             Preference a5 = findPreference("p20");
             if (BuildConfig.DEBUG) {
-                a5.setSummary(Package.e(getActivity()) + " | " + Package.f(getActivity()) + "-development");
+                a5.setSummary("v" + Package.e(getActivity()) + " c" + Package.f(getActivity()) + " dev");
             } else {
-                a5.setSummary(Package.e(getActivity()) + " | " + Package.f(getActivity()));
+                a5.setSummary("v" + Package.e(getActivity()) + " c" + Package.f(getActivity()));
             }
             a5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -100,13 +129,13 @@ public class AboutFragment extends BasePreferenceFragment {
                 }
             });
             Preference preference = findPreference("ins12");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, yyyy | hh:mm:ss", Locale.US);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh.mm aa, MMMM dd, yyyy", Locale.US);
             try {
                 preference.setTitle(getString(R.string.x56));
                 preference.setSummary(simpleDateFormat.format(new Date(Package.g(getActivity()))));
             } catch (Exception exception) {
                 exception.printStackTrace();
-                preference.setSummary(getString(R.string.x58));
+                preference.setSummary(simpleDateFormat.format(new Date()));
             }
         } catch (Exception ex) {
             ex.printStackTrace();

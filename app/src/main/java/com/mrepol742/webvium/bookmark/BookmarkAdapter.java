@@ -29,8 +29,10 @@ import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.app.Resources;
+import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BookmarkAdapter extends MainBaseAdapter {
@@ -41,18 +43,18 @@ public class BookmarkAdapter extends MainBaseAdapter {
             R.drawable.g6
     };
     private final Context a;
-    private final ArrayList<String> b;
+    private final List<String> b;
     private final Random rm;
 
 
-    public BookmarkAdapter(Context ct, ArrayList<String> al) {
+    public BookmarkAdapter(Context ct, List<String> al) {
         super(ct);
         a = ct;
         b = al;
         rm = new Random();
     }
 
-    public void a(ArrayList<String> a1) {
+    public void a(List<String> a1) {
         synchronized (b) {
             b.clear();
             b.addAll(a1);

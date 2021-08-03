@@ -22,17 +22,6 @@
     @com.mrepol742.webvium.annotation.Keep <methods>;
 }
 
-#deprecated
--keep class com.mrepol742.webvium.BDMS
-#deprecated
--keep class com.mrepol742.webvium.DDMS
-#deprecated
--keep class com.mrepol742.webvium.PDMS
-#deprecated
--keep class com.mrepol742.webvium.SDMS
-#deprecated
--keep class com.mrepol742.webvium.HDMS
-
 -keepattributes *Annotation*
 -optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
 -repackageclasses 'com.mrepol742.webvium'

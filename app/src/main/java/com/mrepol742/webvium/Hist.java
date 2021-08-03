@@ -26,6 +26,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,14 +53,16 @@ import com.mrepol742.webvium.history.HistoryAdapter;
 import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.util.Html;
+
 import android.text.TextWatcher;
+
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.net.Stream;
-import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * @HistoryActivity
@@ -79,7 +82,7 @@ public class Hist extends BaseActivity {
     private HistoryHelper d1;
     private HistoryAdapter w15;
     private ListView a3;
-    private ArrayList<HistoryDataModel> al;
+    private final List<HistoryDataModel> al = new ArrayList<>();
     private RelativeLayout f2;
     private ImageView o21;
     private ImageView o22;
@@ -135,7 +138,6 @@ public class Hist extends BaseActivity {
                     return true;
                 case 19:
                     Hist.this.l(a2, 5);
-
                     return true;
                 case 20:
                     Hist.this.l(a2, 4);
@@ -195,7 +197,6 @@ public class Hist extends BaseActivity {
                 }
             });
         } else {
-            al = new ArrayList<>();
             while (res.moveToNext()) {
                 al.add(new HistoryDataModel(res.getString(1),
                         res.getString(2),
@@ -235,7 +236,6 @@ public class Hist extends BaseActivity {
         a2.setText(getString(R.string.h18));
         a1.setBackgroundResource(R.drawable.p);
         if (!a221().getBoolean("autoUpdate", false)) {
-
             a2.setTextColor(f);
             f4.setTextColor(f);
         } else {
@@ -250,26 +250,24 @@ public class Hist extends BaseActivity {
                 Hist.this.finish();
             }
         });
-        if (al != null) {
-            w15 = new HistoryAdapter(this, al);
-            a3.setAdapter(w15);
-            a3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        w15 = new HistoryAdapter(this, al);
+        a3.setAdapter(w15);
+        a3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                @Override
-                public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
-                    Intents.d("value", w15.c(c).ls0, Hist.this);
-                    Hist.this.finish();
-                }
-            });
-            a3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
+                Intents.d("value", w15.c(c).ls0, Hist.this);
+                Hist.this.finish();
+            }
+        });
+        a3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-                @Override
-                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    n(view, i);
-                    return true;
-                }
-            });
-        }
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                n(view, i);
+                return true;
+            }
+        });
         o22.setBackgroundResource(R.drawable.c6);
         o22.setImageResource(R.drawable.a23);
         o22.setOnClickListener(new View.OnClickListener() {
@@ -289,7 +287,6 @@ public class Hist extends BaseActivity {
                 finish();
             }
         });
-
     }
 
     @Override
@@ -361,11 +358,7 @@ public class Hist extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -382,11 +375,7 @@ public class Hist extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -394,7 +383,7 @@ public class Hist extends BaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void b(String a) {
@@ -501,11 +490,7 @@ public class Hist extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -522,11 +507,7 @@ public class Hist extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -534,7 +515,7 @@ public class Hist extends BaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void i() {
@@ -567,61 +548,36 @@ public class Hist extends BaseActivity {
     }
 
     private void k() {
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                final ArrayList<HistoryDataModel> al = new ArrayList<>();
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_HISTORY +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC", null);
-                if (res.getCount() == 0) {
-                    Hist.this.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            f4.setVisibility(View.VISIBLE);
-                            a3.setVisibility(View.GONE);
-                            o22.setVisibility(View.GONE);
-                            f2.setClickable(true);
-                        }
-                    });
-                } else {
-                    while (res.moveToNext()) {
-                        al.add(new HistoryDataModel(res.getString(1),
-                                res.getString(2),
-                                res.getLong(3)));
-                    }
-                    if (al.size() == 0) {
-                        Hist.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                f4.setVisibility(View.VISIBLE);
-                                a3.setVisibility(View.GONE);
-                                o22.setVisibility(View.GONE);
-                                f2.setClickable(true);
-                            }
-                        });
-                    } else {
-                        Hist.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                w15.a(al);
-                                w15.notifyDataSetChanged();
-                                f4.setVisibility(View.GONE);
-                                a3.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }
-                }
-                res.close();
+        List<HistoryDataModel> al = new ArrayList<>();
+        Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
+                Sqlite.TABLE_HISTORY +
+                " ORDER BY " +
+                "_id" +
+                " DESC", null);
+        if (res.getCount() == 0) {
+            f4.setVisibility(View.VISIBLE);
+            a3.setVisibility(View.GONE);
+            o22.setVisibility(View.GONE);
+            f2.setClickable(true);
+        } else {
+            while (res.moveToNext()) {
+                al.add(new HistoryDataModel(res.getString(1),
+                        res.getString(2),
+                        res.getLong(3)));
             }
-        };
-        new Thread(p15).start();
+            if (al.size() == 0) {
+                f4.setVisibility(View.VISIBLE);
+                a3.setVisibility(View.GONE);
+                o22.setVisibility(View.GONE);
+                f2.setClickable(true);
+            } else {
+                w15.a(al);
+                w15.notifyDataSetChanged();
+                f4.setVisibility(View.GONE);
+                a3.setVisibility(View.VISIBLE);
+            }
+        }
+        res.close();
     }
 
     public void l(String url, final int type) {
@@ -942,11 +898,7 @@ public class Hist extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -963,11 +915,7 @@ public class Hist extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -975,7 +923,7 @@ public class Hist extends BaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     public void c43(final String url) {

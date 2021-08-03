@@ -86,17 +86,6 @@
             a:textSize="16sp" />
 
         <TextView
-            a:id="@id/m18"
-            a:layout_width="0dp"
-            a:layout_height="wrap_content"
-            a:layout_weight="0.5"
-            a:ellipsize="end"
-            a:gravity="center"
-            a:maxLines="1"
-            a:padding="5dp"
-            a:textSize="16sp" />
-
-        <TextView
             a:id="@id/m20"
             a:layout_width="0dp"
             a:layout_height="wrap_content"

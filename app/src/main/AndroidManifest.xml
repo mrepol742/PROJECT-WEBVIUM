@@ -21,7 +21,7 @@
 <manifest xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mrepol742.webvium"
-    a:installLocation="auto">
+    a:installLocation="internalOnly">
 
     <supports-screens
         a:anyDensity="true"
@@ -32,23 +32,15 @@
         a:xlargeScreens="true" />
 
     <uses-permission a:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission a:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission a:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission a:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission a:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission a:name="android.permission.CAMERA" />
     <uses-permission a:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission a:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <uses-permission a:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission a:name="android.permission.INTERNET" />
-    <uses-permission a:name="android.permission.MICROPHONE" />
-    <uses-permission a:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission a:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission a:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission a:name="android.permission.RECORD_AUDIO" />
-    <uses-permission a:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission a:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission a:name="android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
     <uses-permission a:name="android.permission.VIBRATE" />
     <uses-permission
         a:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -114,6 +106,7 @@
             a:name="com.mrepol742.webvium.Sear"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
+            a:theme="@style/m"
             a:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action a:name="com.mrepol742.webvium.intent.action.PASTE" />
@@ -631,6 +624,7 @@
             a:name="com.mrepol742.webvium.Voic"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
+            a:theme="@style/m"
             a:windowSoftInputMode="stateHidden" />
 
         <activity
@@ -643,13 +637,6 @@
         <activity
             a:name="com.mrepol742.webvium.Lock"
             a:configChanges="keyboardHidden|orientation|screenSize"
-            a:exported="false"
-            a:launchMode="singleTask"
-            a:windowSoftInputMode="stateHidden" />
-
-        <activity
-            a:name="com.mrepol742.webvium.Cred"
-            a:configChanges="keyboard|keyboardHidden|orientation|screenSize|layoutDirection|screenLayout|locale"
             a:exported="false"
             a:launchMode="singleTask"
             a:windowSoftInputMode="stateHidden" />
@@ -718,7 +705,6 @@
         <service
             a:name="com.mrepol742.webvium.Save"
             a:exported="false"
-            a:foregroundServiceType="dataSync"
             a:label="@string/l4" />
         
         <service

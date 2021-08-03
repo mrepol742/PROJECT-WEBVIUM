@@ -19,11 +19,9 @@ package com.mrepol742.webvium.permission;
 
 import android.webkit.PermissionRequest;
 
-@Deprecated
 public class PermissionDataModel {
     public final PermissionRequest pr;
 
-    @Deprecated
     public PermissionDataModel(PermissionRequest pr) {
         this.pr = pr;
     }

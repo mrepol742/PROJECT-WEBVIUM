@@ -15,6 +15,10 @@
 @rem limitations under the License.
 @rem
 
+m:
+
+cd %WEBVIUM_PATH%
+
 call gradlew assembleDebug
 
 call explorer app\build\outputs\apk\debug

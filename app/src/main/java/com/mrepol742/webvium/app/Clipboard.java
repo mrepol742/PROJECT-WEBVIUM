@@ -22,7 +22,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 
 import com.mrepol742.webvium.annotation.Keep;
-import com.mrepol742.webvium.util.U3;
 
 public class Clipboard {
     @Keep
@@ -57,9 +56,7 @@ public class Clipboard {
     }
 
     public static boolean c(Context a) {
-        String sg = b(a);
-        return sg != null && U3.b(sg);
+        return b(a) != null;
     }
-
 }
 

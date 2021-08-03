@@ -32,6 +32,7 @@ import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -46,6 +47,7 @@ import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -58,15 +60,18 @@ public class Voic extends BaseActivity {
     private ScrollView sv;
 
     @Override
-    protected void onCreate(Bundle a) {
-        theme(T_DEFAULT);
-        super.onCreate(a);
-        a225(R.layout.q);
-        tv = findViewById(R.id.n21);
+    protected void onCreate(Bundle a123) {
+        theme(T_ASSISTANT);
+        super.onCreate(a123);
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.q, null);
+        a.setView(c);
+        tv = c.findViewById(R.id.n21);
         int f = Resources.getColor(this, R.color.c);
         int g = Resources.getColor(this, R.color.b);
-        sv = findViewById(R.id.n);
-        RelativeLayout rl = findViewById(R.id.w);
+        sv = c.findViewById(R.id.n);
+        RelativeLayout rl = c.findViewById(R.id.w);
 
         tv.setTypeface(type(Typeface.NORMAL));
         if (!a221().getBoolean("autoUpdate", false)) {
@@ -87,7 +92,7 @@ public class Voic extends BaseActivity {
 
                 @Override
                 public void onReadyForSpeech(Bundle bundle) {
-                    ArrayList<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    List<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (sg == null) {
                         return;
                     }
@@ -160,7 +165,7 @@ public class Voic extends BaseActivity {
 
                 @Override
                 public void onResults(Bundle bundle) {
-                    ArrayList<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    List<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (sg == null) {
                         return;
                     }
@@ -172,7 +177,7 @@ public class Voic extends BaseActivity {
 
                 @Override
                 public void onPartialResults(Bundle bundle) {
-                    ArrayList<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    List<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (sg == null) {
                         return;
                     }
@@ -183,7 +188,7 @@ public class Voic extends BaseActivity {
 
                 @Override
                 public void onEvent(int i, Bundle bundle) {
-                    ArrayList<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    List<String> sg = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (sg == null) {
                         return;
                     }
@@ -195,6 +200,8 @@ public class Voic extends BaseActivity {
             b();
             c();
         }
+        a.setCancelable(true);
+        a.create().show();
     }
 
     @Override

@@ -51,7 +51,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
-import android.media.AudioManager;
 import android.net.MailTo;
 import android.net.Uri;
 import android.net.http.SslCertificate;
@@ -71,6 +70,7 @@ import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.Formatter;
 import android.text.method.PasswordTransformationMethod;
@@ -106,7 +106,6 @@ import android.webkit.WebViewClient;
 import android.webkit.WebViewDatabase;
 import android.webkit.WebViewRenderProcess;
 import android.webkit.WebViewRenderProcessClient;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -115,15 +114,12 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 import com.mrepol742.webvium.app.Clipboard;
-import com.mrepol742.webvium.app.Format;
 import com.mrepol742.webvium.app.GeolocationDataModel;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Notifications;
@@ -141,21 +137,18 @@ import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.download.DownloadHelper;
+import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.permission.PermissionDataModel;
-import com.mrepol742.webvium.permission.PermissionHelper;
-import com.mrepol742.webvium.permission.PermissionObjectDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.security.Caesar;
 import com.mrepol742.webvium.security.SHA;
 import com.mrepol742.webvium.security.XOR;
-import com.mrepol742.webvium.tab.NewTabAdapter;
-import com.mrepol742.webvium.tab.NewTabDataModel;
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AppID;
 import com.mrepol742.webvium.util.AwesomeToast;
@@ -165,7 +158,7 @@ import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.IdentityGenerator;
 import com.mrepol742.webvium.util.PassGen;
-import com.mrepol742.webvium.util.U3;
+
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -185,6 +178,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -196,7 +190,7 @@ import android.view.View.OnClickListener;
 /*
  * @WebviumActivity
  */
-public class Webv extends MainBaseActivity implements Format {
+public class Webv extends MainBaseActivity {
     public static final String UA_DEFAULT = "1e";
     public static final String UA_ANDROID_STOCK = "7e";
     public static final String UA_INTERNET_EXPLORER = "30e";
@@ -375,7 +369,6 @@ public class Webv extends MainBaseActivity implements Format {
     private WebViewDatabase wd;
     private PendingDownloadDataModel pend;
     private ForegroundColorSpan A, E, S, I, B;
-    private PermissionHelper d12;
     private R7 r7;
     private FrameLayout fl;
     private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7, pm8;
@@ -387,10 +380,11 @@ public class Webv extends MainBaseActivity implements Format {
     public static final String INIT = "init_17";
     public static boolean bl = false;
     public static boolean bl2 = false;
-    private boolean bl3, bl6, err, ua, set, inE, dsM, isSh = false;
+    private boolean bl3, bl6, err, ua, set, inE, dsM = false;
     public static boolean bl4 = false;
     private String des;
     private boolean iFP = false;
+    private final List<HistoryDataModel> penHis = new ArrayList<>();
 
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
@@ -469,7 +463,11 @@ public class Webv extends MainBaseActivity implements Format {
                     Webv.this.c8(Webv.this.getString(R.string.k9));
                     return true;
                 case POPUPMENU_PHONE_ADD_TO_CONTACTS:
-                    Webv.this.c110(sg);
+                    Intent it = new Intent();
+                    it.setAction(ContactsContract.Intents.Insert.ACTION);
+                    it.putExtra(ContactsContract.Intents.Insert.PHONE, sg);
+                    it.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+                    startActivity(it);
                     return true;
             }
             return false;
@@ -501,11 +499,7 @@ public class Webv extends MainBaseActivity implements Format {
                     Intent a = new Intent(Intent.ACTION_SENDTO, Uri.parse(sg));
                     a.putExtra(Intent.EXTRA_SUBJECT, "");
                     a.putExtra(Intent.EXTRA_TEXT, "");
-                    if (a.resolveActivity(getPackageManager()) != null) {
-                        startActivity(Intent.createChooser(a, getString(R.string.a26)));
-                    } else {
-                        AwesomeToast.c(Webv.this, getString(R.string.f34));
-                    }
+                    startActivity(Intent.createChooser(a, getString(R.string.a26)));
                     return true;
                 case POPUPMENU_MAIL_SHARE:
                     Webv.this.c16(sg, 1);
@@ -607,11 +601,13 @@ public class Webv extends MainBaseActivity implements Format {
                 if ("mPopup".equals(field.getName())) {
                     field.setAccessible(true);
                     Object menuPopupHelper = field.get(popupMenu);
-                    Class<?> classPopupHelper = Class.forName(menuPopupHelper
-                            .getClass().getName());
+                    if (menuPopupHelper != null) {
+                        Class<?> classPopupHelper = Class.forName(menuPopupHelper
+                                .getClass().getName());
                     Method setForceIcons = classPopupHelper.getMethod(
                             "setForceShowIcon", boolean.class);
                     setForceIcons.invoke(menuPopupHelper, true);
+                    }
                     break;
                 }
             }
@@ -645,12 +641,6 @@ public class Webv extends MainBaseActivity implements Format {
                 if (z != null) {
                     c49(Objects.requireNonNull(z));
                     c.removeExtra("value");
-                    return;
-                }
-                String queryq = c.getStringExtra("b");
-                if (queryq != null) {
-                    c146(0);
-                    c.removeExtra("b");
                     return;
                 }
             }
@@ -812,11 +802,7 @@ public class Webv extends MainBaseActivity implements Format {
 
             @Override
             public void onClick(View view) {
-                // if (BuildConfig.DEBUG) {
-                //    Webv.this.c10();
-                // } else {
-                    Webv.this.c18();
-                // }
+                Webv.this.c18();
             }
         });
         tv9.setImageResource(R.drawable.d9);
@@ -832,7 +818,6 @@ public class Webv extends MainBaseActivity implements Format {
             this.d1 = HistoryHelper.getInstance(getApplicationContext());
             this.d2 = SearchHelper.getInstance(getApplicationContext());
             this.d3 = BookmarkHelper.getInstance(getApplicationContext());
-            this.d12 = PermissionHelper.getInstance(getApplicationContext());
             c134();
             if (!a221().getBoolean("autoUpdate", false)) {
                 this.u.setTextColor(this.a7);
@@ -1109,6 +1094,7 @@ public class Webv extends MainBaseActivity implements Format {
             }
             currentTab().pauseTimers();
             currentTab().onPause();
+            c184();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1174,137 +1160,6 @@ public class Webv extends MainBaseActivity implements Format {
 
     public void c8(String a) {
         AwesomeToast.b(this, a);
-    }
-
-    public void c9(final PermissionRequest pr) {
-        AlertDialog.Builder d = new AlertDialog.Builder(this);
-        d.setMessage(Html.b(String.format(getString(R.string.i38), c12(pr.getOrigin()), c11(Arrays.toString(pr.getResources())))));
-        d.setCancelable(false);
-        d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int i) {
-                if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE) && Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
-                    if (!Permission.check(Webv.this, Permission.CAMERA, 9) && !Permission.check(Webv.this, Permission.MICROPHONE, 10)) {
-                        w8 = new PermissionDataModel(pr);
-                    } else {
-                        pr.grant(pr.getResources());
-                        d12.c(new PermissionObjectDataModel(SHA.a("SHA-1", pr.getOrigin().toString()),
-                                SHA.a("SHA-1", Arrays.toString(pr.getResources())),
-                                "true",
-                                "false"));
-                        Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
-                    }
-                } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
-                    if (!Permission.check(Webv.this, Permission.CAMERA, 6)) {
-                        w8 = new PermissionDataModel(pr);
-                    } else {
-                        pr.grant(pr.getResources());
-                        d12.c(new PermissionObjectDataModel(SHA.a("SHA-1", pr.getOrigin().toString()),
-                                SHA.a("SHA-1", Arrays.toString(pr.getResources())),
-                                "true",
-                                "false"));
-                        Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
-                    }
-                } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
-                    if (!Permission.check(Webv.this, Permission.MICROPHONE, 7)) {
-                        w8 = new PermissionDataModel(pr);
-                    } else {
-                        pr.grant(pr.getResources());
-                        d12.c(new PermissionObjectDataModel(SHA.a("SHA-1", pr.getOrigin().toString()),
-                                SHA.a("SHA-1", Arrays.toString(pr.getResources())),
-                                "true",
-                                "false"));
-                        Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
-                    }
-                }
-                a1.dismiss();
-            }
-        });
-        d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int i) {
-                pr.deny();
-                Webv.this.c7(String.format(Webv.this.getString(R.string.j21), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
-                a1.dismiss();
-            }
-        });
-        AlertDialog e = d.create();
-        e.show();
-    }
-
-    private void c10() {
-        ListView lv = new ListView(this);
-        final ArrayList<NewTabDataModel> ws = new ArrayList<>();
-        int size = tabs.size();
-        for (int i = 0; i < size; i++) {
-            ws.add(new NewTabDataModel(getFavicon(i), getTitle(i), getUrl(i)));
-        }
-        lv.setPadding(10, 10, 10, 10);
-        ws.add(new NewTabDataModel(null, "webvium://newtab", null));
-        ws.add(new NewTabDataModel(null, "webvium://closealltab", null));
-        NewTabAdapter nta = new NewTabAdapter(this, ws);
-        lv.setAdapter(nta);
-        // fl.addView(lv);
-
-        AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        bld.setView(lv);
-        bld.setCancelable(true);
-        final AlertDialog dd = bld.create();
-        dd.show();
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
-                AwesomeToast.b(Webv.this, (ws.size() - 1) + " " + c);
-                try {
-                    if (ws.size() == c) {
-                        for (WebViews tab : tabs) {
-                            tab.destroy();
-                        }
-                        tabs.clear();
-                        WebViews web = new WebViews(Webv.this);
-                        tabs.add(web);
-                        fl.removeAllViews();
-                        Webv.this.c50(web);
-                        Webv.this.c34(web);
-                        Webv.this.c15(web);
-                        Webv.this.c149(web);
-                        fl.addView(web);
-                        ct = 0;
-                        Webv.this.c8("Tabs Cleared.");
-                        dd.dismiss();
-                    } else if (ws.size() - 1 == c) {
-                        Webv.this.currentTab().pauseTimers();
-                        Webv.this.currentTab().onPause();
-                        fl.removeAllViews();
-                        WebViews web = new WebViews(Webv.this);
-                        tabs.add(web);
-                        Webv.this.c50(web);
-                        Webv.this.c34(web);
-                        Webv.this.c15(web);
-                        Webv.this.c149(web);
-                        fl.addView(web);
-                        ct = tabs.size() - 1;
-                        dd.dismiss();
-                    } else {
-                        Webv.this.currentTab().pauseTimers();
-                        Webv.this.currentTab().onPause();
-                        fl.removeAllViews();
-                        WebViews webb = tabs.get(c);
-                        webb.resumeTimers();
-                        webb.onResume();
-                        Webv.this.c149(webb);
-                        fl.addView(webb);
-                        ct = c - 2;
-                        dd.dismiss();
-                    }
-                } catch (Exception ignored) {
-
-                }
-            }
-        });
     }
 
     private void c18() {
@@ -1650,17 +1505,9 @@ ct = 0;
                     cdt.cancel();
                     cdt.purge();
                     if (a224("a10", false) && bl6) {
-                        // if (HDMS.b(Objects.requireNonNull(changedTo.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(changedTo.getUrl()).toLowerCase())) {
                         c142(a.getTitle(), a.getUrl());
-                    /* } else {
-                     c142(getString(R.string.g29), getString(R.string.g30));
-                     }*/
                     } else if (a224("a10", false) && !bl6) {
-                        //if (HDMS.b(Objects.requireNonNull(changedTo.getTitle()).toLowerCase()) || HDMS.b(Objects.requireNonNull(changedTo.getUrl()).toLowerCase())) {
                         c143(a.getTitle(), a.getUrl());
-                    /*  } else {
-                     c143(getString(R.string.g29), getString(R.string.g30));
-                     }*/
                     }
                 } else if (a.getUrl() != null && cdt == null && !(a.getUrl().startsWith("file://") || a.getUrl().startsWith("webvium://"))) {
                     cdt.schedule(new TimerTask() {
@@ -1934,29 +1781,49 @@ ct = 0;
 
             @Override
             public void onPermissionRequest(final PermissionRequest pr) {
-                if (BuildConfig.DEBUG) {
-                    Cursor res = d12.getReadableDatabase().rawQuery("SELECT * FROM " +
-                            Sqlite.TABLE_PERMISSION +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC", null);
-                    if (res.getCount() == 0) {
-                        c9(pr);
-                    } else {
-                        while (res.moveToNext()) {
-                            String sg1 = res.getString(1);
-                            String sg = res.getString(2);
-                            if (sg1.equals(SHA.a("SHA-1", pr.getOrigin().toString())) && SHA.a("SHA-1", Arrays.toString(pr.getResources())).equals(sg)) {
-                                pr.grant(pr.getResources());
+                AlertDialog.Builder d = new AlertDialog.Builder(Webv.this);
+                d.setMessage(Html.b(String.format(getString(R.string.i38), c12(pr.getOrigin()), c11(Arrays.toString(pr.getResources())))));
+                d.setCancelable(false);
+                d.setPositiveButton(getString(R.string.v17), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE) && Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
+                            if (!Permission.check(Webv.this, Permission.CAMERA, 9) && !Permission.check(Webv.this, Permission.MICROPHONE, 10)) {
+                                w8 = new PermissionDataModel(pr);
                             } else {
-                                c9(pr);
+                                pr.grant(pr.getResources());
+                                Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
+                            }
+                        } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
+                            if (!Permission.check(Webv.this, Permission.CAMERA, 6)) {
+                                w8 = new PermissionDataModel(pr);
+                            } else {
+                                pr.grant(pr.getResources());
+                                Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
+                            }
+                        } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
+                            if (!Permission.check(Webv.this, Permission.MICROPHONE, 7)) {
+                                w8 = new PermissionDataModel(pr);
+                            } else {
+                                pr.grant(pr.getResources());
+                                Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
                             }
                         }
+                        a1.dismiss();
                     }
-                    res.close();
-                } else {
-                    c9(pr);
-                }
+                });
+                d.setNegativeButton(getString(R.string.i39), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int i) {
+                        pr.deny();
+                        Webv.this.c7(String.format(Webv.this.getString(R.string.j21), pr.getOrigin().getHost(), Arrays.toString(pr.getResources())));
+                        a1.dismiss();
+                    }
+                });
+                AlertDialog e = d.create();
+                e.show();
             }
 
             @Override
@@ -2289,10 +2156,8 @@ ct = 0;
                                 it.putExtra("android.intent.extra.BCC", hd.get("bcc"));
                             }
                             it.putExtra("android.intent.extra.TEXT", sg.getBody());
-                            if (it.resolveActivity(getPackageManager()) != null) {
-                                startActivity(it);
-                                return true;
-                            }
+                            startActivity(it);
+                            return true;
                         }
                         return false;
                     } else if (b.startsWith("smsto:")) {
@@ -2317,7 +2182,8 @@ ct = 0;
                             }
                             String fa = it.getStringExtra("browser_fallback_url");
                             if (!Objects.requireNonNull(fa).startsWith("market://") && !fa.startsWith("geo:") && fa.contains("/store/apps/details?id=")) {
-                                return c179(b);
+                                c179(b);
+                                return true;
                             }
                             c3(fa);
                             return true;
@@ -2325,10 +2191,11 @@ ct = 0;
                             use.printStackTrace();
                         }
                     } else if (!b.startsWith("market://") && !b.startsWith("geo:") && b.contains("/store/apps/details?id=")) {
-                        return c179(b);
+                        c179(b);
+                        return true;
                     } else {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(b));
-                        if (intent.resolveActivity(getPackageManager()) != null && !(b.startsWith("https://") || b.startsWith("http://") || b.startsWith("file://") || b.startsWith("content://") || b.startsWith("about:blank"))) {
+                        if (!(b.startsWith("https://") || b.startsWith("http://") || b.startsWith("file://") || b.startsWith("content://") || b.startsWith("about:blank"))) {
                             startActivity(intent);
                             return true;
                         }
@@ -2400,7 +2267,7 @@ ct = 0;
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
                 if (!c && (b.startsWith("http://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
-                    d1.c(a.getTitle(), b);
+                    penHis.add(new HistoryDataModel(a.getTitle(), b, System.currentTimeMillis()));
                     SharedPreferences c56 = getSharedPreferences("wv", 0);
                     SharedPreferences.Editor d56 = c56.edit();
                     d56.putString("MyURL", b);
@@ -2815,11 +2682,10 @@ ct = 0;
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    String jhh56 = s.getText().toString();
-                    String sg78 = StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56;
+                    String sg78 = StorageDirectory.getWebviumDir() + "/Downloads/" + charSequence;
                     j.setText(sg78);
-                    if (U3.b(jhh56)) {
-                        java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56 + "." + Package.c().toLowerCase());
+                    if (TextUtils.isEmpty(charSequence)) {
+                        java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + charSequence);
                         if (a90.exists()) {
                             s.setError(getString(R.string.u19));
                             okButton.setEnabled(false);
@@ -2837,7 +2703,7 @@ ct = 0;
                 }
             });
             String jhh56 = s.getText().toString();
-            java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56 + "." + Package.c().toLowerCase());
+            java.io.File a90 = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + jhh56);
             if (a90.exists()) {
                 s.setError(getString(R.string.u19));
                 g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
@@ -2937,11 +2803,7 @@ ct = 0;
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -2958,11 +2820,7 @@ ct = 0;
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -2970,7 +2828,7 @@ ct = 0;
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -3899,12 +3757,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         String a5 = a.trim().toLowerCase();
         if (a5.equals("webvium://rickroll")) {
             as.loadUrl(Base64.decode("aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ"));
-        } else if (a5.equals("webvium://history")) {
-            c146(WEBVIUM_HISTORY);
-        } else if (a5.equals("webvium://search")) {
-            c146(WEBVIUM_SEARCH);
-        } else if (a5.equals("webvium://bookmarks")) {
-            c146(WEBVIUM_BOOKMARKS);
         } else if (a.startsWith("view-source:") && (a.contains("https://") || a.contains("http://") || a.contains("file://") || a.contains("content://"))) {
             Intent it = new Intent(this, Tool.class);
             it.putExtra("id", Tool.TOOL_SOURCE_CODE);
@@ -3986,7 +3838,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 break;
             case "60o":
                 String sg1 = a221().getString("cGeneral", "");
-                if (sg1 != null && U3.b(sg1)) {
+                if (TextUtils.isEmpty(sg1)) {
                     c49(web, sg1);
                 } else {
                     c3(web, c48());
@@ -4123,9 +3975,9 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    if (U3.a(ed1)) {
-                        java.io.File file = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + ed.getText().toString());
+                if (TextUtils.isEmpty(charSequence)) {
+                    if (TextUtils.isEmpty(ed1.getText().toString())) {
+                        java.io.File file = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + charSequence);
                         if (file.exists()) {
                             ed.setError(getString(R.string.u19));
                             okButton.setEnabled(false);
@@ -4154,11 +4006,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -4166,7 +4014,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             }
         });
-        if (U3.a(ed) && U3.a(ed1)) {
+        if (TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString())) {
             java.io.File file = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + ed.getText().toString());
             if (file.exists()) {
                 ed.setError(getString(R.string.u19));
@@ -4182,6 +4030,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     /*
      * ANIMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
      */
+    // TODO: fix error
     public void c58(String a23, String asd) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
@@ -4282,11 +4131,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString()) && TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -4303,11 +4148,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -4315,7 +4156,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void c68(View a) {
@@ -4628,9 +4469,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     public void c105(String b) {
         Intent d = new Intent(Intent.ACTION_VIEW);
         d.setData(Uri.parse(c109(b)));
-        if (d.resolveActivity(getPackageManager()) != null) {
-            startActivity(Intent.createChooser(d, getString(R.string.a26)));
-        }
+        startActivity(Intent.createChooser(d, getString(R.string.a26)));
     }
 
     public String c107(String sg) {
@@ -4694,16 +4533,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         return "smsto:" + sg;
     }
 
-    private void c110(String sg) {
-        Intent it = new Intent();
-        it.setAction(ContactsContract.Intents.Insert.ACTION);
-        it.putExtra(ContactsContract.Intents.Insert.PHONE, sg);
-        it.setType(ContactsContract.RawContacts.CONTENT_TYPE);
-        if (it.resolveActivity(getPackageManager()) != null) {
-            startActivity(it);
-        }
-    }
-
     public void c111(final String dt) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
@@ -4761,10 +4590,10 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String sg = StorageDirectory.getWebviumDir() + "/Downloads/" + ed.getText().toString();
+                String sg = StorageDirectory.getWebviumDir() + "/Downloads/" + charSequence;
                 ti3.setText(sg);
-                if (U3.a(ed)) {
-                    if (new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + ed.getText().toString()).exists()) {
+                if (TextUtils.isEmpty(charSequence)) {
+                    if (new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + charSequence).exists()) {
                         ed.setError(getString(R.string.u19));
                         okButton.setEnabled(false);
                     } else {
@@ -4780,7 +4609,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             }
         });
-        if (U3.a(ed)) {
+        if (TextUtils.isEmpty(ed.getText().toString())) {
             if (new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + ed.getText().toString()).exists()) {
                 g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                 ed.setError(getString(R.string.u19));
@@ -5091,74 +4920,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
     public void c124(String tg) {
         c3(c46() + tg);
-    }
-
-    private void c125(int type) {
-        final AudioManager mAudio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        if (type == 1) {
-            mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) + 1, AudioManager.FLAG_PLAY_SOUND);
-        } else if (type == 0) {
-            mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, mAudio.getStreamVolume(AudioManager.STREAM_MUSIC) - 1, AudioManager.FLAG_PLAY_SOUND);
-        }
-        if (!isSh) {
-            final FrameLayout k = findViewById(R.id.i);
-            final View c = View.inflate(this, R.layout.c6, null);
-            LinearLayout ll = c.findViewById(R.id.b6);
-            final SeekBar c2 = c.findViewById(R.id.c18);
-            c2.setElevation(5);
-            c2.setBackgroundResource(R.drawable.a19);
-            c2.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
-            Runnable p15 = new Runnable() {
-
-                @Override
-                public void run() {
-                    final Bitmap pp = Resources.getBitmapFromResource(Webv.this, R.drawable.a6);
-                    Webv.this.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            c2.setThumb(new BitmapDrawable(Webv.this.getResources(), pp));
-                        }
-                    });
-                }
-            };
-            new Thread(p15).start();
-            c2.setMax(mAudio.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-            c2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                    mAudio.setStreamVolume(AudioManager.STREAM_MUSIC, i, AudioManager.FLAG_PLAY_SOUND);
-
-                }
-
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
-
-                }
-
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
-
-                }
-            });
-            ll.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    Animation.animate(Webv.this, R.anim.d, c2);
-                    k.removeView(c);
-                    isSh = false;
-                }
-            });
-            k.addView(c);
-            Animation.animate(this, R.anim.a, c2);
-            isSh = true;
-        } else {
-            final FrameLayout k123 = findViewById(R.id.i);
-            final SeekBar c55 = k123.findViewById(R.id.c18);
-            c55.setProgress(mAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
-        }
     }
 
     public void c126(final String url) {
@@ -5643,169 +5404,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         pm7.show();
     }
 
-    private void c146(int data) {
-        if (data == WEBVIUM_SEARCH) {
-            Runnable p15 = new Runnable() {
-
-                @Override
-                public void run() {
-                    Cursor cs = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                            Sqlite.TABLE_SEARCH +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC", null);
-                    try {
-                        if (cs.getCount() == 0) {
-                            File fe = new File(StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "Search") + ".htm");
-                            if (fe.createNewFile()) {
-                                FileWriter fw = new FileWriter(fe, false);
-                                BufferedWriter br = new BufferedWriter(fw);
-                                br.write("<!DOCTYPE html><html><head><title>" + Webv.this.getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file:///android_asset/classes\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + Webv.this.getString(R.string.f39) + "</b></h1></center></body></html>");
-                                br.close();
-                                fw.close();
-                            }
-                        } else {
-                            StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + Webv.this.getString(R.string.i9) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file:///android_asset/classes\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + Webv.this.getString(R.string.x49) + "</th></tr>");
-                            while (cs.moveToNext()) {
-                                sg.append("<tr><td>")
-                                        .append(cs.getString(1))
-                                        .append("</td></tr>");
-                            }
-                            sg.append("</table></center></body></html>");
-                            File fe1 = new File(StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "Search") + ".htm");
-                            if (fe1.createNewFile()) {
-                                FileWriter fw1 = new FileWriter(fe1, false);
-                                BufferedWriter br1 = new BufferedWriter(fw1);
-                                br1.write(sg.toString());
-                                br1.close();
-                                fw1.close();
-                            }
-                        }
-                        Webv.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                Webv.this.currentTab().loadUrl("file://" + StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "Search") + ".htm");
-                            }
-                        });
-                        cs.close();
-                    } catch (Exception en) {
-                        en.printStackTrace();
-                    }
-                }
-            };
-            new Thread(p15).start();
-        } else if (data == WEBVIUM_HISTORY) {
-            Runnable p15 = new Runnable() {
-
-                @Override
-                public void run() {
-                    Cursor cs5 = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
-                            Sqlite.TABLE_HISTORY +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC", null);
-                    try {
-                        if (cs5.getCount() == 0) {
-                            File fe = new File(StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "History") + ".htm");
-                            if (fe.createNewFile()) {
-                                FileWriter fw = new FileWriter(fe, false);
-                                BufferedWriter br = new BufferedWriter(fw);
-                                br.write("<!DOCTYPE html><html><head><title>" + Webv.this.getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file:///android_asset/classes\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + Webv.this.getString(R.string.i15) + "</b></h1></center></body></html>");
-                                br.close();
-                                fw.close();
-                            }
-                        } else {
-                            StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + Webv.this.getString(R.string.i16) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file:///android_asset/classes\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + Webv.this.getString(R.string.q17) + "</th></tr>");
-                            while (cs5.moveToNext()) {
-                                sg.append("<tr><td>")
-                                        .append(cs5.getString(1))
-                                        .append(" - ")
-                                        .append(cs5.getString(2))
-                                        .append(" - ")
-                                        .append(cs5.getString(3))
-                                        .append("</td></tr>");
-                            }
-                            sg.append("</table></center></body></html>");
-                            File fe1 = new File(StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "History") + ".htm");
-                            if (fe1.createNewFile()) {
-                                FileWriter fw1 = new FileWriter(fe1, false);
-                                BufferedWriter br1 = new BufferedWriter(fw1);
-                                br1.write(sg.toString());
-                                br1.close();
-                                fw1.close();
-                            }
-                        }
-                        Webv.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                Webv.this.currentTab().loadUrl("file://" + StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "History") + ".htm");
-                            }
-                        });
-                        cs5.close();
-                    } catch (Exception en) {
-                        en.printStackTrace();
-                    }
-                }
-            };
-            new Thread(p15).start();
-        } else if (data == WEBVIUM_BOOKMARKS) {
-            Runnable p15 = new Runnable() {
-
-                @Override
-                public void run() {
-                    Cursor cs6 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                            Sqlite.TABLE_BOOKMARK +
-                            " ORDER BY " +
-                            "_id" +
-                            " DESC", null);
-                    try {
-                        if (cs6.getCount() == 0) {
-                            File fe = new File(StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "Bookmarks") + ".htm");
-                            if (fe.createNewFile()) {
-                                FileWriter fw = new FileWriter(fe, false);
-                                BufferedWriter br = new BufferedWriter(fw);
-                                br.write("<!DOCTYPE html><html><head><title>" + Webv.this.getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file:///android_asset/classes\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><h1><b>" + Webv.this.getString(R.string.g21) + "</b></h1></center></body></html>");
-                                br.close();
-                                fw.close();
-                            }
-                        } else {
-                            StringBuilder sg = new StringBuilder("<!DOCTYPE html><html><head><title>" + Webv.this.getString(R.string.h11) + "</title><style type=\"text/css\">@font-face { font-family: b; src: url(\"file:///android_asset/classes\"); } html, body {background-color: #ffffff; color: #212121; font-family: b; } ::selection { background-color: #4285f4; color: #ffffff }</style></head><body><center><table><tr><th>" + Webv.this.getString(R.string.y88) + "</th></tr>");
-                            while (cs6.moveToNext()) {
-                                sg.append("<tr><td>")
-                                        .append(cs6.getString(1))
-                                        .append(" - ")
-                                        .append(cs6.getString(2))
-                                        .append("</td></tr>");
-                            }
-                            sg.append("</table></center></body></html>");
-                            File fe1 = new File(StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "Bookmarks") + ".htm");
-                            if (fe1.createNewFile()) {
-                                FileWriter fw1 = new FileWriter(fe1, false);
-                                BufferedWriter br1 = new BufferedWriter(fw1);
-                                br1.write(sg.toString());
-                                br1.close();
-                                fw1.close();
-                            }
-                        }
-                        Webv.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                Webv.this.currentTab().loadUrl("file://" + StorageDirectory.getFileDir(Webv.this) + "/" + SHA.a("SHA-1", "Bookmarks") + ".htm");
-                            }
-                        });
-                        cs6.close();
-                    } catch (Exception en) {
-                        en.printStackTrace();
-                    }
-                }
-            };
-            new Thread(p15).start();
-        }
-    }
-
     public void c149(final WebViews h) {
         if (a221().getBoolean("webviumB", false) && !this.set) {
             Runnable re = new Runnable() {
@@ -6148,15 +5746,11 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         }
     }
 
-    private boolean c179(String sg) {
+    private void c179(String sg) {
         String str = sg.substring(sg.indexOf("/store/apps/details?id=") + 23);
         Intent it = new Intent(Intent.ACTION_VIEW);
         it.setData(Uri.parse("market://details?id=" + str));
-        if (it.resolveActivity(getPackageManager()) != null) {
-            startActivity(it);
-            return true;
-        }
-        return false;
+        startActivity(it);
     }
 
     private void c180() {
@@ -6268,7 +5862,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     private void c183() {
         final LinearLayout never_gonna_give_you_up = findViewById(R.id.m4);
         LayoutInflater u_r_hentai = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null, false);
+        final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null);
         final int childCount = never_gonna_give_you_up.getChildCount();
         ImageView ppp = u_r_idiot.findViewById(R.id.o48);
         Edit jjj = u_r_idiot.findViewById(R.id.o47);
@@ -6350,6 +5944,15 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
          * It's really delicious
          */
     }
+
+    private void c184() {
+        if (penHis.size() != 0) {
+            for (HistoryDataModel hdm: penHis) {
+                d1.c(hdm.ls, hdm.ls0, hdm.ls2);
+            }
+            penHis.clear();
+        }
+    }
     
     @Override
     @TargetApi(Build.VERSION_CODES.M)
@@ -6385,7 +5988,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                             c53(getString(R.string.u18));
                         }
                     }
-
                 }
                 break;
             case 3:
@@ -6406,9 +6008,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 break;
             case 4:
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
-
                     c55(currentUrl(), currentTitle());
-
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
@@ -6429,7 +6029,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     }
                 } else {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-
                         c7(getString(R.string.w4));
                     } else {
                         c53(getString(R.string.w5));
@@ -6437,42 +6036,34 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     w6 = null;
                 }
                 break;
-
             case 6:
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
                     if (w8 != null) {
                         w8.pr.grant(w8.pr.getResources());
-                        d12.c(new PermissionObjectDataModel(w8.pr.getOrigin().getHost(), Arrays.toString(w8.pr.getResources()), "true", "false"));
-
                         c8(String.format(getString(R.string.i40), Objects.requireNonNull(w8.pr.getOrigin().getHost()), Arrays.toString(w8.pr.getResources())));
                         w8 = null;
                     } else {
                         currentTab().reload();
                     }
                 } else {
-
                     if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                         c7(getString(R.string.j22));
                     } else {
                         c53(getString(R.string.j23));
                     }
                     w8 = null;
-
                 }
                 break;
-
             case 7:
                 if (c.length > 0 && c[0] == PackageManager.PERMISSION_GRANTED) {
                     if (w8 != null) {
                         w8.pr.grant(w8.pr.getResources());
-                        d12.c(new PermissionObjectDataModel(w8.pr.getOrigin().getHost(), Arrays.toString(w8.pr.getResources()), "true", "false"));
                         c8(String.format(getString(R.string.i40), Objects.requireNonNull(w8.pr.getOrigin().getHost()), Arrays.toString(w8.pr.getResources())));
                         w8 = null;
                     } else {
                         currentTab().reload();
                     }
                 } else {
-
                     if (shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
                         c7(getString(R.string.j24));
                     } else {
@@ -6487,48 +6078,40 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     @Override
     public boolean onKeyDown(int a, KeyEvent b) {
         if (a == KeyEvent.KEYCODE_VOLUME_UP) {
-            if (Objects.equals(a221().getString("VU", "1u"), "1u")) {
-                c125(1);
-                return true;
-            } else if (Objects.equals(a221().getString("VU", ""), "7u")) {
+            if (Objects.equals(a221().getString("VU", "1u"), "7u")) {
                 currentTab().pageUp(true);
                 return true;
-            } else if (Objects.equals(a221().getString("VU", ""), "30u")) {
+            } else if (Objects.equals(a221().getString("VU", "1u"), "30u")) {
                 currentTab().zoomIn();
                 return true;
-            } else if (Objects.equals(a221().getString("VU", ""), "60u") && currentTab().canGoBack()) {
+            } else if (Objects.equals(a221().getString("VU", "1u"), "60u") && currentTab().canGoBack()) {
                 currentTab().goBack();
                 return true;
-            } else if (Objects.equals(a221().getString("VU", ""), "120u")) {
+            } else if (Objects.equals(a221().getString("VU", "1u"), "120u")) {
                 currentTab().reload();
                 return true;
-            } else if (Objects.equals(a221().getString("VU", ""), "140u")) {
+            } else if (Objects.equals(a221().getString("VU", "1u"), "140u")) {
                 Intents.f(this, Book.class, 2115);
                 return true;
             }
-            return true;
         } else if (a == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            if (Objects.equals(a221().getString("VD", "1v"), "1v")) {
-                c125(0);
-                return true;
-            } else if (Objects.equals(a221().getString("VD", ""), "7v")) {
+            if (Objects.equals(a221().getString("VD", "1v"), "7v")) {
                 currentTab().pageDown(true);
                 return true;
-            } else if (Objects.equals(a221().getString("VD", ""), "30v")) {
+            } else if (Objects.equals(a221().getString("VD", "1v"), "30v")) {
                 currentTab().zoomOut();
                 return true;
-            } else if (Objects.equals(a221().getString("VD", ""), "60v") && currentTab().canGoForward()) {
+            } else if (Objects.equals(a221().getString("VD", "1v"), "60v") && currentTab().canGoForward()) {
                 currentTab().goForward();
                 return true;
-            } else if (Objects.equals(a221().getString("VD", ""), "120v")) {
+            } else if (Objects.equals(a221().getString("VD", "1v"), "120v")) {
                 currentTab().stopLoading();
                 currentTab().getFirstClient().onPageFinished(currentTab(), currentUrl());
                 return true;
-            } else if (Objects.equals(a221().getString("VD", ""), "140v")) {
+            } else if (Objects.equals(a221().getString("VD", "1v"), "140v")) {
                 Intents.f(this, Hist.class, 211);
                 return true;
             }
-            return true;
         }
         return super.onKeyDown(a, b);
     }
@@ -6550,21 +6133,17 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     @Override
     public boolean onKeyLongPress(int a, KeyEvent b) {
         if (a == 4 && !b.isCanceled()) {
-            if (a221().getString("longP", "") == null) {
+            if (Objects.equals(a221().getString("longP", "1p"), "1p")) {
                 c25();
                 moveTaskToBack(true);
                 return true;
-            } else if (Objects.equals(a221().getString("longP", ""), "1p")) {
-                c25();
-                moveTaskToBack(true);
-                return true;
-            } else if (Objects.equals(a221().getString("longP", ""), "7p")) {
+            } else if (Objects.equals(a221().getString("longP", "1p"), "7p")) {
                 c3(c48());
                 return true;
-            } else if (Objects.equals(a221().getString("longP", ""), "30p")) {
+            } else if (Objects.equals(a221().getString("longP", "1p"), "30p")) {
                 currentTab().reload();
                 return true;
-            } else if (Objects.equals(a221().getString("longP", ""), "60p")) {
+            } else if (Objects.equals(a221().getString("longP", "1p"), "60p")) {
                 if (!currentTab().canGoBack()) {
                     c25();
                     moveTaskToBack(true);
@@ -6573,7 +6152,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 }
                 return true;
             }
-            return true;
         }
         return super.onKeyLongPress(a, b);
     }
@@ -6625,21 +6203,14 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
     @Override
     public boolean onPrepareOptionsMenu(Menu a) {
-        if (ua) {
-            a.findItem(24).setChecked(true);
-        }
-        if (inE) {
-            a.findItem(31).setChecked(true);
-        }
-        if (dsM) {
-            a.findItem(32).setChecked(true);
-        }
+        a.findItem(24).setChecked(ua);
+        a.findItem(31).setChecked(inE);
+        a.findItem(32).setChecked(dsM);
         return super.onPrepareOptionsMenu(a);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem a) {
-
         switch (a.getItemId()) {
             case 26:
                 c130(BASE64_ENCODE);
@@ -6845,9 +6416,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 Intent d12 = new Intent(Intent.ACTION_GET_CONTENT);
                 d12.addCategory(Intent.CATEGORY_OPENABLE);
                 d12.setType("*/*");
-                if (d12.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(Intent.createChooser(d12, getString(R.string.a26)), 3);
-                }
+                startActivityForResult(Intent.createChooser(d12, getString(R.string.a26)), 3);
                 return true;
             case 14:
                 if (Permission.check(this, Permission.STORAGE, 3)) {
@@ -6886,11 +6455,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         String sg = a.getStringExtra("webvium");
         String sg0 = a.getStringExtra("value");
         String sg1 = a.getAction();
-        String queryq = a.getStringExtra("b");
-        if (queryq != null) {
-            c146(0);
-            a.removeExtra("b");
-        } else if (sg != null) {
+        if (sg != null) {
             c3(sg);
             a.removeExtra("webvium");
         } else if (sg0 != null) {
@@ -6963,7 +6528,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         c176(isInMultiWindowMode);
     }
 
-    @Override
     public String format() {
         SimpleDateFormat sdf = new SimpleDateFormat("MMddyy_HHmm", Locale.US);
         return sdf.format(new Date());

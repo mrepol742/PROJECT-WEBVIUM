@@ -17,17 +17,14 @@
 
 package com.mrepol742.webvium.bookmark;
 
-// BOOKMARK DATABASE
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-import com.mrepol742.webvium.BDMS;
 import com.mrepol742.webvium.app.Sqlite;
-import com.mrepol742.webvium.app.WebviumDatabase;
 
-public class BookmarkHelper implements WebviumDatabase {
+public class BookmarkHelper {
 
     private static BookmarkHelper d3;
     private final SQLiteDatabase sld;
@@ -54,19 +51,16 @@ public class BookmarkHelper implements WebviumDatabase {
         }
     }
 
-    @Override
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
-    @Override
     public void finish() {
         if (sld != null && sld.isOpen()) {
             sld.close();
         }
     }
 
-    @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_BOOKMARK, null, null);
@@ -82,15 +76,6 @@ public class BookmarkHelper implements WebviumDatabase {
         }
     }
 
-    public void d(BDMS a) {
-        if (sld != null && sld.isOpen()) {
-            ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_BOOKMARK, a.sg);
-            values.put(Sqlite.COL2_BOOKMARK, a.sg0);
-            sld.insert(Sqlite.TABLE_BOOKMARK, null, values);
-        }
-    }
-
     public void f(final String oldTitle, final String oldURl, final String newTitle, final String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
@@ -102,5 +87,38 @@ public class BookmarkHelper implements WebviumDatabase {
                             Sqlite.COL2_BOOKMARK +
                             " LIKE ?", new String[]{oldTitle, oldURl});
         }
+    }
+
+    static class BookmarkDatabase extends SQLiteOpenHelper {
+
+        public BookmarkDatabase(Context context) {
+            super(context, Sqlite.DATA_BOOKMARK, null, Sqlite.VERSION_BOOKMARK);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE " +
+                    Sqlite.TABLE_BOOKMARK +
+                    " ( " +
+                    "_id" +
+                    " INTEGER PRIMARY KEY, " +
+                    Sqlite.COL1_BOOKMARK +
+                    " TEXT, " +
+                    Sqlite.COL2_BOOKMARK +
+                    " TEXT ) ");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " +
+                    Sqlite.TABLE_BOOKMARK);
+            onCreate(db);
+        }
+
+        @Override
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            onUpgrade(db, oldVersion, newVersion);
+        }
+
     }
 }

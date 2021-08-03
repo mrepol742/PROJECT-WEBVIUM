@@ -17,8 +17,10 @@
 
 package com.mrepol742.webvium;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,6 +53,7 @@ public class Exce extends BaseActivity {
             "Invalid intent operation"
     };
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle be) {
         theme(T_ASSISTANT);
@@ -78,7 +81,7 @@ public class Exce extends BaseActivity {
         } else {
             finish();
         }
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     private void a(final String madeErrMsg) {

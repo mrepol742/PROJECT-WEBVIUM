@@ -23,19 +23,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Base64;
 import android.webkit.URLUtil;
 
-import com.mrepol742.webvium.HDMS;
 import com.mrepol742.webvium.app.Sqlite;
-import com.mrepol742.webvium.app.WebviumDatabase;
 
-import java.io.ByteArrayOutputStream;
-
-public class HistoryHelper implements WebviumDatabase {
+public class HistoryHelper {
 
     private static HistoryHelper d1;
     private final SharedPreferences sp;
@@ -54,19 +49,16 @@ public class HistoryHelper implements WebviumDatabase {
         return d1;
     }
 
-    @Override
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
-    @Override
     public void finish() {
         if (sld != null && sld.isOpen()) {
             sld.close();
         }
     }
 
-    @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_HISTORY, null, null);
@@ -85,45 +77,16 @@ public class HistoryHelper implements WebviumDatabase {
         }
     }
 
-    public void c(final String a, final String b) {
+    public void c(String a, String b, long c) {
         if (!sp.getBoolean("pHistory", false)) {
             if (sld != null && sld.isOpen()) {
-                //if (HDMS.b(changedTo.toLowerCase())) {
-                // if (HDMS.b(b.toLowerCase())) {
                 ContentValues values = new ContentValues();
                 values.put(Sqlite.COL1_HISTORY, h(a));
                 values.put(Sqlite.COL2_HISTORY, b);
-                values.put(Sqlite.COL3_HISTORY, System.currentTimeMillis());
+                values.put(Sqlite.COL3_HISTORY, c);
                 sld.insert(Sqlite.TABLE_HISTORY, null, values);
             }
         }
-    }
-
-    public void d(HDMS HDMS) {
-        if (!sp.getBoolean("pHistory", false)) {
-            if (sld != null && sld.isOpen()) {
-                //if (HDMS.b(changedTo.toLowerCase())) {
-                // if (HDMS.b(b.toLowerCase())) {
-                ContentValues values = new ContentValues();
-                values.put(Sqlite.COL1_HISTORY, h(HDMS.ls));
-                values.put(Sqlite.COL2_HISTORY, HDMS.ls0);
-                values.put(Sqlite.COL3_HISTORY, HDMS.ls2);
-                sld.insert(Sqlite.TABLE_HISTORY, null, values);
-            }
-
-        }
-    }
-
-    private String e(Bitmap bi) {
-        try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bi.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream .toByteArray();
-            return Base64.encodeToString(byteArray, Base64.DEFAULT);
-        } catch (Exception en) {
-            en.printStackTrace();
-        }
-        return null;
     }
 
     private String h(String sg) {
@@ -152,6 +115,40 @@ public class HistoryHelper implements WebviumDatabase {
                             " LIKE ? AND " +
                             Sqlite.COL3_HISTORY +
                             " LIKE ?", new String[]{oldTitle, oldURl, Long.toString(oldTIme)});
+        }
+    }
+
+    static class HistoryDatabase extends SQLiteOpenHelper {
+
+        protected HistoryDatabase(Context context) {
+            super(context, Sqlite.DATA_HISTORY, null, Sqlite.VERSION_HISTORY);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE " +
+                    Sqlite.TABLE_HISTORY +
+                    " ( " +
+                    "_id" +
+                    " INTEGER PRIMARY KEY, " +
+                    Sqlite.COL1_HISTORY +
+                    " TEXT, " +
+                    Sqlite.COL2_HISTORY +
+                    " TEXT, " +
+                    Sqlite.COL3_HISTORY +
+                    " INTEGER)");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " +
+                    Sqlite.TABLE_HISTORY);
+            onCreate(db);
+        }
+
+        @Override
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            onUpgrade(db, oldVersion, newVersion);
         }
     }
 

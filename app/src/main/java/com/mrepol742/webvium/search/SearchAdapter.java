@@ -33,20 +33,21 @@ import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.app.Resources;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchAdapter extends MainBaseAdapter {
     private final Context a;
-    private final ArrayList<String> c;
-    private ArrayList<String> b;
+    private final List<String> c;
+    private List<String> b;
 
-    public SearchAdapter(Context ct, ArrayList<String> a1) {
+    public SearchAdapter(Context ct, List<String> a1) {
         super(ct);
         a = ct;
         b = a1;
         c = a1;
     }
 
-    public void a(ArrayList<String> a1) {
+    public void a(List<String> a1) {
         b.clear();
         c.clear();
         b.addAll(a1);
@@ -76,18 +77,17 @@ public class SearchAdapter extends MainBaseAdapter {
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 b = (ArrayList<String>) results.values;
                 notifyDataSetChanged();
-
             }
 
             @Override
             protected FilterResults performFiltering(CharSequence cs) {
                 FilterResults fr = new FilterResults();
                 if (cs == null) {
-                    ArrayList<String> ls55 = new ArrayList<>(b);
+                    List<String> ls55 = new ArrayList<>(b);
                     fr.count = ls55.size();
                     fr.values = ls55;
                 } else {
-                    ArrayList<String> ls = new ArrayList<>();
+                    List<String> ls = new ArrayList<>();
                     if (c.size() != 0) {
                         for (String f : c) {
                             if (f.toLowerCase().contains(cs.toString().toLowerCase())) {
@@ -111,24 +111,19 @@ public class SearchAdapter extends MainBaseAdapter {
                 LayoutInflater li = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 vw = li.inflate(R.layout.b6, vg, false);
                 w18 = new W16a();
-
                 w18.a = vw.findViewById(R.id.d16);
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
                 if (!sp.getBoolean("autoUpdate", false)) {
                     w18.a.setTextColor(Resources.getColor(a, R.color.c));
-
                 } else {
                     w18.a.setTextColor(Resources.getColor(a, R.color.b));
                 }
-
                 w18.a.setTypeface(type(Typeface.NORMAL));
                 w18.a.setBackgroundResource(R.drawable.f3);
                 vw.setTag(w18);
             } else {
                 w18 = (W16a) vw.getTag();
             }
-
-            //  w18.changedTo.setText(U8.changedTo(b.get(it)));
             w18.a.setText(b.get(it));
 
         } catch (IndexOutOfBoundsException ignored) {

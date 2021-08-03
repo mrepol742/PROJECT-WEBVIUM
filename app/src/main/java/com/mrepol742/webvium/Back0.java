@@ -35,16 +35,12 @@ import com.mrepol742.webvium.app.ActivityState;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.permission.PermissionHelper;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Map;
 
 /*
  * @BackupActivity
@@ -74,37 +70,9 @@ public class Back0 extends BaseActivity {
         onNewIntent(getIntent());
     }
 
-    @Deprecated
     protected void a(InputStream is) {
         try {
-            ObjectInputStream ois = new ObjectInputStream(is);
-            Object ot = ois.readObject();
-            ois.close();
-            is.close();
-            if (ot instanceof ArrayList) {
-                ArrayList<?> al = (ArrayList) ot;
-                Object ot1 = al.get(0);
-                if (ot1 instanceof HDMS) {
-                    j(ot);
-                } else if (ot1 instanceof BDMS) {
-                    i(ot);
-                } else if (ot1 instanceof PDMS) {
-                    h(ot);
-                } else if (ot1 instanceof DDMS) {
-                    f(ot);
-                } else if (ot1 instanceof SDMS) {
-                    e(ot);
-                } else {
-                    AwesomeToast.c(Back0.this, getString(R.string.z21));
-                    finishAndRemoveTask();
-                }
-
-            } else if (ot instanceof Map) {
-                c(ot);
-            } else {
-                AwesomeToast.c(Back0.this, getString(R.string.z21));
-                finishAndRemoveTask();
-            }
+            // TODO: Check here what kind of db is in the file
         } catch (Exception en) {
             AwesomeToast.c(Back0.this, getString(R.string.z21));
             en.printStackTrace();
@@ -121,28 +89,13 @@ public class Back0 extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Back0.this);
-                Map<String, ?> al;
                 try {
-                    al = (Map) mp;
-                    SharedPreferences.Editor spe = sp.edit();
-                    spe.clear();
-                    for (Map.Entry<String, ?> sg : al.entrySet()) {
-                        Object ob = sg.getValue();
-                        if (ob instanceof String) {
-                            spe.putString(sg.getKey(), (String) ob);
-                        } else if (ob instanceof Boolean) {
-                            String ky = sg.getKey();
-                            if (ky.equals("ptm") || ky.equals("lockWn99")) {
-                                spe.putBoolean(ky, false);
-                            } else {
-                                spe.putBoolean(ky, (Boolean) ob);
-                            }
-                        } else if (ob instanceof Integer) {
-                            spe.putInt(sg.getKey(), (Integer) ob);
-                        }
-                    }
-                    spe.apply();
+                   SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Back0.this);
+                   SharedPreferences.Editor spe = sp.edit();
+                   spe.clear();
+
+                   // TODO: import the settings
+                   spe.apply();
                     ActivityState.changedTo(Back0.this, "com.mrepol742.webvium.activity.alias.PRE", PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
                     ActivityState.changedTo(Back0.this, "com.mrepol742.webvium.activity.alias.MAY", PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
                     Back0.this.getSharedPreferences("a", 0).edit().putString("ajGjbduTwibdi", "").putString("gsJsGsKSIgPes", "").apply();
@@ -180,14 +133,9 @@ public class Back0 extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                SearchHelper d1 = SearchHelper.getInstance(Back0.this.getApplicationContext());
-                ArrayList<SDMS> al;
                 try {
-                    al = (ArrayList) mp;
-                    d1.delete();
-                    for (SDMS w13 : al) {
-                        d1.c(w13.sg);
-                    }
+                    SearchHelper d1 = SearchHelper.getInstance(Back0.this.getApplicationContext());
+                    // TODO: import search db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {
                     en.printStackTrace();
@@ -217,14 +165,9 @@ public class Back0 extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                DownloadHelper d1 = DownloadHelper.getInstance(Back0.this.getApplicationContext());
-                ArrayList<DDMS> al;
                 try {
-                    al = (ArrayList) mp;
-                    d1.delete();
-                    for (DDMS w13 : al) {
-                        d1.d(w13);
-                    }
+                    DownloadHelper d1 = DownloadHelper.getInstance(Back0.this.getApplicationContext());
+                    // TODO: import download db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {
                     en.printStackTrace();
@@ -249,44 +192,6 @@ public class Back0 extends BaseActivity {
         AwesomeToast.b(this, a);
     }
 
-    private void h(final Object mp) {
-        final AlertDialog.Builder a = new AlertDialog.Builder(this);
-        a.setCancelable(false);
-        a.setTitle(getString(R.string.t6));
-        a.setMessage(getString(R.string.z37));
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                PermissionHelper d1 = PermissionHelper.getInstance(Back0.this.getApplicationContext());
-                ArrayList<PDMS> al;
-                try {
-                    al = (ArrayList) mp;
-                    d1.delete();
-                    for (PDMS w13 : al) {
-                        d1.d(w13);
-                    }
-                    Back0.this.g(Back0.this.getString(R.string.b27));
-                } catch (Exception en) {
-                    en.printStackTrace();
-                    Back0.this.d(Back0.this.getString(R.string.b28));
-                }
-
-                a12.dismiss();
-                Back0.this.finishAndRemoveTask();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-                Back0.this.finishAndRemoveTask();
-            }
-        });
-        a.create().show();
-    }
-
     private void i(final Object mp) {
         final AlertDialog.Builder a = new AlertDialog.Builder(this);
         a.setCancelable(false);
@@ -296,14 +201,9 @@ public class Back0 extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                BookmarkHelper d1 = BookmarkHelper.getInstance(Back0.this.getApplicationContext());
-                ArrayList<BDMS> al;
                 try {
-                    al = (ArrayList) mp;
-                    d1.delete();
-                    for (BDMS w13 : al) {
-                        d1.d(w13);
-                    }
+                BookmarkHelper d1 = BookmarkHelper.getInstance(Back0.this.getApplicationContext());
+                    // TODO: import bookmark db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {
                     en.printStackTrace();
@@ -333,14 +233,9 @@ public class Back0 extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                HistoryHelper d1 = HistoryHelper.getInstance(Back0.this.getApplicationContext());
-                ArrayList<HDMS> al;
                 try {
-                    al = (ArrayList) mp;
-                    d1.delete();
-                    for (HDMS w13 : al) {
-                        d1.d(w13);
-                    }
+                    HistoryHelper d1 = HistoryHelper.getInstance(Back0.this.getApplicationContext());
+                    // TODO: import history db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {
                     Back0.this.d(Back0.this.getString(R.string.b28));
@@ -393,6 +288,7 @@ public class Back0 extends BaseActivity {
                 startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 742);
             } else if (action.equals(Intent.ACTION_VIEW) && data != null) {
                 try {
+                    AwesomeToast.c(Back0.this, getString(R.string.z21));
                     a(new FileInputStream(URLDecoder.decode(data.replace("file://", ""), "UTF-8")));
                 } catch (Exception en) {
                     AwesomeToast.c(Back0.this, getString(R.string.z21));

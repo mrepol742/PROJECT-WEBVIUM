@@ -25,9 +25,10 @@ import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainWebView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WebViews extends MainWebView {
-    public final ArrayList<ForwardBackwardHistoryDataModel> w4 = new ArrayList<>();
+    public final List<ForwardBackwardHistoryDataModel> w4 = new ArrayList<>();
 
     @Keep
     public WebViews(Context ct) {

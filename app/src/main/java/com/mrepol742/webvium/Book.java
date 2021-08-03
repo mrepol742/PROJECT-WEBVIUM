@@ -27,6 +27,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,15 +52,17 @@ import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.util.Html;
+
 import android.text.TextWatcher;
+
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.net.Stream;
-import com.mrepol742.webvium.util.U3;
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * @BookmarkActivity
@@ -80,8 +83,8 @@ public class Book extends BaseActivity {
     private GridView e;
     private RelativeLayout f6;
     private BookmarkAdapter w15;
-    private ArrayList<String> ls;
-    private ArrayList<String> ls0;
+    private final List<String> ls = new ArrayList<>();
+    private final List<String> ls0 = new ArrayList<>();
     private ImageView iv;
     private TextView f8;
     private ImageView iv1;
@@ -106,14 +109,12 @@ public class Book extends BaseActivity {
                     Book.this.k2(a2, a5);
                     return true;
                 case 9:
-
                     Clipboard.a(Book.this, a5);
                     Book.this.k5(Book.this.getString(R.string.k9));
                     return true;
                 case 6:
                     Book.this.a(a2, a5);
                     return true;
-
                 case 5:
                     Book.this.l(a2, 7);
                     return true;
@@ -121,44 +122,28 @@ public class Book extends BaseActivity {
                     Book.this.c43(a2);
                     return true;
                 case 15:
-
                     Book.this.l(a2, 0);
-
                     return true;
                 case 16:
-
                     Book.this.l(a2, 1);
-
                     return true;
                 case 17:
-
                     Book.this.l(a2, 2);
-
                     return true;
                 case 18:
-
                     Book.this.l(a2, 3);
-
                     return true;
                 case 19:
-
                     Book.this.l(a2, 5);
-
                     return true;
                 case 20:
-
                     Book.this.l(a2, 4);
-
                     return true;
                 case 21:
-
                     Book.this.l(a2, 6);
-
                     return true;
                 case 22:
-
                     Book.this.l(a2, 8);
-
                     return true;
                 case 23:
                     Book.this.b(a5);
@@ -245,8 +230,6 @@ public class Book extends BaseActivity {
             f6.setClickable(true);
             iv.setVisibility(View.GONE);
         } else {
-            ls = new ArrayList<>();
-            ls0 = new ArrayList<>();
             while (res.moveToNext()) {
                 ls.add(res.getString(1));
                 ls0.add(res.getString(2));
@@ -255,26 +238,24 @@ public class Book extends BaseActivity {
             Animation.animate(Book.this, R.anim.i, iv);
         }
         res.close();
-        if (ls != null) {
-            w15 = new BookmarkAdapter(this, ls);
-            e.setAdapter(w15);
-            e.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        w15 = new BookmarkAdapter(this, ls);
+        e.setAdapter(w15);
+        e.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                @Override
-                public void onItemClick(AdapterView<?> a1, View b1, int c1, long d1) {
-                    Intents.d("value", ls0.get(c1), Book.this);
-                    Book.this.finish();
-                }
-            });
-            e.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a1, View b1, int c1, long d1) {
+                Intents.d("value", ls0.get(c1), Book.this);
+                Book.this.finish();
+            }
+        });
+        e.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-                @Override
-                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Book.this.n(view, i);
-                    return true;
-                }
-            });
-        }
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Book.this.n(view, i);
+                return true;
+            }
+        });
         iv1 = findViewById(R.id.j3);
         iv1.setBackgroundResource(R.drawable.c6);
         iv1.setImageResource(R.drawable.c16);
@@ -362,11 +343,7 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -383,11 +360,7 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -395,7 +368,7 @@ public class Book extends BaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void b(String a) {
@@ -445,9 +418,6 @@ public class Book extends BaseActivity {
             public void onClick(DialogInterface a2, int i) {
                 d3.c(ed.getText().toString(), ed1.getText().toString());
                 Book.this.k5(Book.this.getString(R.string.u1));
-                f6.setClickable(false);
-                Book.this.e.setVisibility(View.VISIBLE);
-                iv.setVisibility(View.VISIBLE);
                 Book.this.k();
                 a2.dismiss();
             }
@@ -471,11 +441,7 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -492,11 +458,7 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -504,7 +466,7 @@ public class Book extends BaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void d() {
@@ -562,61 +524,34 @@ public class Book extends BaseActivity {
     }
 
     private void k() {
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                final ArrayList<String> itemIdsh = new ArrayList<>();
-                Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_BOOKMARK +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC", null);
-                if (res.getCount() == 0) {
-                    Book.this.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            f8.setVisibility(View.VISIBLE);
-                            f6.setClickable(true);
-                            e.setVisibility(View.GONE);
-                            iv.setVisibility(View.GONE);
-                            AwesomeToast.c(Book.this, "cursor count was 0 hiding UI");
-                        }
-                    });
-                } else {
-                    while (res.moveToNext()) {
-                        itemIdsh.add(res.getString(1));
-                    }
-                    if (itemIdsh.size() == 0) {
-                        Book.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                f8.setVisibility(View.VISIBLE);
-                                f6.setClickable(true);
-                                e.setVisibility(View.GONE);
-                                iv.setVisibility(View.GONE);
-                                AwesomeToast.c(Book.this, "itemIdsh.size() == 0");
-                            }
-                        });
-                    } else {
-                        Book.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                w15.a(itemIdsh);
-                                w15.notifyDataSetChanged();
-                                f8.setVisibility(View.GONE);
-                                e.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }
-                }
-                res.close();
+        final List<String> itemIdsh = new ArrayList<>();
+        Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+                Sqlite.TABLE_BOOKMARK +
+                " ORDER BY " +
+                "_id" +
+                " DESC", null);
+        if (res.getCount() == 0) {
+            f8.setVisibility(View.VISIBLE);
+            f6.setClickable(true);
+            e.setVisibility(View.GONE);
+            iv.setVisibility(View.GONE);
+        } else {
+            while (res.moveToNext()) {
+                itemIdsh.add(res.getString(1));
             }
-        };
-        new Thread(p15).start();
+            if (itemIdsh.size() == 0) {
+                f8.setVisibility(View.VISIBLE);
+                f6.setClickable(true);
+                e.setVisibility(View.GONE);
+                iv.setVisibility(View.GONE);
+            } else {
+                w15.a(itemIdsh);
+                w15.notifyDataSetChanged();
+                f8.setVisibility(View.GONE);
+                e.setVisibility(View.VISIBLE);
+            }
+        }
+        res.close();
     }
 
     public void l(String url, final int type) {
@@ -936,11 +871,7 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -957,11 +888,7 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -969,7 +896,7 @@ public class Book extends BaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private int p(int i) {

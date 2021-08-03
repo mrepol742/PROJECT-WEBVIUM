@@ -17,19 +17,16 @@
 
 package com.mrepol742.webvium.download;
 
-// HISTORY DATABASE
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
 
-import com.mrepol742.webvium.DDMS;
 import com.mrepol742.webvium.app.Sqlite;
-import com.mrepol742.webvium.app.WebviumDatabase;
 
-public class DownloadHelper implements WebviumDatabase {
+public class DownloadHelper {
 
     private static DownloadHelper d10;
     private final SQLiteDatabase sld;
@@ -48,19 +45,16 @@ public class DownloadHelper implements WebviumDatabase {
         return d10;
     }
 
-    @Override
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
-    @Override
     public void finish() {
         if (sld != null && sld.isOpen()) {
             sld.close();
         }
     }
 
-    @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_DOWNLOAD, null, null);
@@ -97,17 +91,6 @@ public class DownloadHelper implements WebviumDatabase {
         }
     }
 
-    public void d(DDMS w7) {
-        if (sld != null && sld.isOpen()) {
-            ContentValues values = new ContentValues();
-            values.put(Sqlite.COL1_DOWNLOAD, w7.a);
-            values.put(Sqlite.COL2_DOWNLOAD, w7.b);
-            values.put(Sqlite.COL3_DOWNLOAD, w7.c);
-            values.put(Sqlite.COL4_DOWNLOAD, w7.d);
-            sld.insert(Sqlite.TABLE_DOWNLOAD, null, values);
-        }
-    }
-
     public void i(String oldTitle, String oldURl, long oldSize, long oldTIme, String newTitle, String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
@@ -124,6 +107,43 @@ public class DownloadHelper implements WebviumDatabase {
                             " LIKE ? AND " +
                             Sqlite.COL4_DOWNLOAD +
                             " LIKE ?", new String[]{oldTitle, oldURl, Long.toString(oldSize), Long.toString(oldTIme)});
+        }
+
+    }
+
+    static class DownloadDatabase extends SQLiteOpenHelper {
+
+        protected DownloadDatabase(Context context) {
+            super(context, Sqlite.DATA_DOWNLOAD, null, Sqlite.VERSION_DOWNLOAD);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE " +
+                    Sqlite.TABLE_DOWNLOAD +
+                    " ( " +
+                    "_id" +
+                    " INTEGER PRIMARY KEY, " +
+                    Sqlite.COL1_DOWNLOAD +
+                    " TEXT, " +
+                    Sqlite.COL2_DOWNLOAD +
+                    " TEXT, " +
+                    Sqlite.COL3_DOWNLOAD +
+                    " INTEGER, " +
+                    Sqlite.COL4_DOWNLOAD +
+                    " INTEGER)");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " +
+                    Sqlite.TABLE_DOWNLOAD);
+            onCreate(db);
+        }
+
+        @Override
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            onUpgrade(db, oldVersion, newVersion);
         }
 
     }

@@ -39,11 +39,12 @@ import com.mrepol742.webvium.util.DateUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class DownloadAdapter extends MainBaseAdapter {
     private final Context a;
-    private final ArrayList<DownloadDataModel> al;
+    private final List<DownloadDataModel> al;
     private final SimpleDateFormat day;
     private final SimpleDateFormat month;
     private final SimpleDateFormat year;
@@ -54,7 +55,7 @@ public class DownloadAdapter extends MainBaseAdapter {
     private final ForegroundColorSpan I;
     private final ForegroundColorSpan B;
 
-    public DownloadAdapter(Context ct, ArrayList<DownloadDataModel> al) {
+    public DownloadAdapter(Context ct, List<DownloadDataModel> al) {
         super(ct);
         this.al = al;
         a = ct;
@@ -69,7 +70,7 @@ public class DownloadAdapter extends MainBaseAdapter {
         this.year = new SimpleDateFormat("yyyy", Locale.US);
     }
 
-    public void a(ArrayList<DownloadDataModel> w) {
+    public void a(List<DownloadDataModel> w) {
         synchronized (this.al) {
             al.clear();
             al.addAll(w);
@@ -165,7 +166,8 @@ public class DownloadAdapter extends MainBaseAdapter {
             w20.c.setImageResource(d(b(it).b));
             Date date = new Date(b(it).d);
             String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
-            w20.d.setText(Formatter.formatFileSize(a, b(it).c) + " | " + fiDate);
+            String w20d = Formatter.formatFileSize(a, b(it).c) + " | " + fiDate;
+            w20.d.setText(w20d);
         } catch (IndexOutOfBoundsException ignored) {
 
         }

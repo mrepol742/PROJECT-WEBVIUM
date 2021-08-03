@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -36,7 +37,7 @@ import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.search.SearchHelper;
 import android.text.TextWatcher;
-import com.mrepol742.webvium.util.U3;
+
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.app.SoftKeyboard;
 
@@ -45,7 +46,7 @@ import com.mrepol742.webvium.app.SoftKeyboard;
  */
 public class Assi extends BaseActivity {
     private LinearLayout gjj;
-    private AutoCompleteTextView p;
+    private Edit p;
     private ImageView iv;
     private ImageView iv1;
     private SearchHelper d2;
@@ -113,16 +114,14 @@ public class Assi extends BaseActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    SoftKeyboard.hide(Assi.this, gjj);
                     String query = p.getText().toString();
-                    if (U3.b(query)) {
+                    if (TextUtils.isEmpty(query)) {
+                        SoftKeyboard.hide(Assi.this, gjj);
                         Intents.e(Assi.this, "value", query, Webv.class);
-
                         d2.c(query);
                         Assi.this.finish();
-
+                        handled = true;
                     }
-                    handled = true;
                 }
                 return handled;
             }
@@ -147,7 +146,8 @@ public class Assi extends BaseActivity {
 
                 @Override
                 public void onClick(View view) {
-                    Assi.this.b();
+                    Intent a = new Intent(Assi.this, Voic.class);
+                    startActivityForResult(a, 100);
                 }
             });
             Animation.animate(this, R.anim.i, iv1);
@@ -190,13 +190,6 @@ public class Assi extends BaseActivity {
                     p.getText().clear();
                 }
             });
-        }
-    }
-
-    private void b() {
-        Intent a = new Intent(this, Voic.class);
-        if (a.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(a, 100);
         }
     }
 }

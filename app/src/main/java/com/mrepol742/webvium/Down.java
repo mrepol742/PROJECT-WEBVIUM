@@ -41,6 +41,7 @@ import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * @DownloadActivity
@@ -48,7 +49,7 @@ import java.util.ArrayList;
 public class Down extends BaseActivity {
 
     private ListView a3;
-    private ArrayList<DownloadDataModel> al;
+    private List<DownloadDataModel> al = new ArrayList<>();
     private RelativeLayout f2;
     private ImageView iv;
     private DownloadHelper d10;
@@ -63,7 +64,6 @@ public class Down extends BaseActivity {
         iv = findViewById(R.id.l7);
         ImageView iv1 = findViewById(R.id.f3);
         setActionBar(a1);
-
         d10 = DownloadHelper.getInstance(getApplicationContext());
         a1.setElevation(5);
         a1.setBackgroundResource(R.drawable.p);
@@ -113,7 +113,6 @@ public class Down extends BaseActivity {
             f2.setVisibility(View.VISIBLE);
             a3.setVisibility(View.GONE);
         } else {
-            al = new ArrayList<>();
             while (res.moveToNext()) {
                 al.add(new DownloadDataModel(res.getString(1),
                         res.getString(2),
@@ -137,10 +136,8 @@ public class Down extends BaseActivity {
         iv1.setBackgroundResource(R.drawable.c6);
         iv1.setImageResource(R.drawable.c16);
         //  iv1.setOnClickListener(view -> c("",""));
-        if (al != null) {
-            DownloadAdapter w12 = new DownloadAdapter(this, al);
-            a3.setAdapter(w12);
-        }
+        DownloadAdapter w12 = new DownloadAdapter(this, al);
+        a3.setAdapter(w12);
     }
 
     private void i() {

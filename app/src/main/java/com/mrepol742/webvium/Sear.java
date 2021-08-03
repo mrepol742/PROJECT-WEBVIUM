@@ -29,6 +29,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,8 +40,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,49 +49,39 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mrepol742.webvium.app.Sqlite;
-import com.mrepol742.webvium.app.main.MainBaseActivity;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.history.HistoryHelper;
+import com.mrepol742.webvium.app.SoftKeyboard;
+import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.StorageDirectory;
+import com.mrepol742.webvium.app.base.BaseActivity;
+import com.mrepol742.webvium.app.main.MainBaseActivity;
+import com.mrepol742.webvium.bookmark.BookmarkHelper;
+import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.search.SearchAdapter;
 import com.mrepol742.webvium.search.SearchHelper;
-import android.text.TextWatcher;
 import com.mrepol742.webvium.security.Base64;
-import com.mrepol742.webvium.util.U3;
-import com.mrepol742.webvium.util.BitmapCache;
 import com.mrepol742.webvium.util.Animation;
-import com.mrepol742.webvium.app.SoftKeyboard;
 import com.mrepol742.webvium.util.AwesomeToast;
+import com.mrepol742.webvium.util.BitmapCache;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /*
  * @SearchActivity
  */
-public class Sear extends MainBaseActivity {
-    private final String[] webvium = {
-            "webvium-source:",
-            "webvium://calculator",
-            "webvium://credits",
-            "webvium://blank",
-            "webvium://search",
-            "webvium://history",
-            "webvium://bookmarks",
-            "webvium://rickroll"
-    };
-    private AutoCompleteTextView p;
+public class Sear extends BaseActivity {
+    private Edit p;
     private ListView d;
     private RelativeLayout b19;
     private SearchAdapter aa;
     private SearchHelper d2;
-    private ArrayList<String> ls;
+    private final List<String> ls = new ArrayList<>();
     private ImageView iv1;
     private PopupMenu pm;
     private String query23;
@@ -120,17 +110,14 @@ public class Sear extends MainBaseActivity {
                     Sear.this.f5(query23);
                     return true;
                 case 4:
-
                     Sear.this.q(query23);
                     return true;
-
                 case 5:
                     Sear.this.s(query23);
                     return true;
                 case 6:
                     Sear.this.w(query23);
                     return true;
-
             }
             return false;
         }
@@ -139,10 +126,9 @@ public class Sear extends MainBaseActivity {
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        theme(T_ASSISTANT);
         super.onCreate(savedInstanceState);
-
         a225(R.layout.e);
-
         Toolbar o = findViewById(R.id.o);
         p = findViewById(R.id.p);
         ImageView iv = findViewById(R.id.k19);
@@ -177,9 +163,6 @@ public class Sear extends MainBaseActivity {
                 }
             });
         } else {
-            if (ls == null) {
-                ls = new ArrayList<>();
-            }
             while (res.moveToNext()) {
                 ls.add(res.getString(1));
             }
@@ -193,9 +176,6 @@ public class Sear extends MainBaseActivity {
                     "_id" +
                     " DESC ", null);
             if (rest.getCount() != 0) {
-                if (ls == null) {
-                    ls = new ArrayList<>();
-                }
                 boolean bn = !a221().getBoolean("showLKS", false);
                 while (rest.moveToNext()) {
                     if (bn) {
@@ -213,9 +193,6 @@ public class Sear extends MainBaseActivity {
                         "_id" +
                         " DESC ", null);
                 if (rest1.getCount() != 0) {
-                    if (ls == null) {
-                        ls = new ArrayList<>();
-                    }
                     boolean bn = !a221().getBoolean("showLKS", false);
                     while (rest1.moveToNext()) {
                         if (bn) {
@@ -228,56 +205,54 @@ public class Sear extends MainBaseActivity {
 
             }
         }
-        if (ls != null) {
-            aa = new SearchAdapter(this, ls);
-            if (Objects.equals(a221().getString("arrange", ""), "1z")) {
-                Collections.sort(ls);
-            }
-            if (Objects.equals(a221().getString("arrange", ""), "7z")) {
-                Collections.sort(ls, Collections.reverseOrder());
-            }
-            if (Objects.equals(a221().getString("arrange", ""), "60z")) {
-                Collections.reverse(ls);
-            }
-
-            d.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int c1, long l) {
-                    Sear.this.search(aa.getItem(c1).toString());
-                    Sear.this.finish();
-                    SoftKeyboard.hide(Sear.this, b19);
-                }
-            });
-            d.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-                @Override
-                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    query23 = aa.getItem(i).toString();
-                    Sear.this.p(view);
-                    return true;
-                }
-            });
-            d.setAdapter(aa);
-            p.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    aa.getFilter().filter(charSequence);
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    o();
-                }
-
-            });
+        aa = new SearchAdapter(this, ls);
+        if (Objects.equals(a221().getString("arrange", ""), "1z")) {
+            Collections.sort(ls);
         }
+        if (Objects.equals(a221().getString("arrange", ""), "7z")) {
+            Collections.sort(ls, Collections.reverseOrder());
+        }
+        if (Objects.equals(a221().getString("arrange", ""), "60z")) {
+            Collections.reverse(ls);
+        }
+
+        d.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int c1, long l) {
+                Sear.this.search(aa.getItem(c1).toString());
+                Sear.this.finish();
+                SoftKeyboard.hide(Sear.this, b19);
+            }
+        });
+        d.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                query23 = aa.getItem(i).toString();
+                Sear.this.p(view);
+                return true;
+            }
+        });
+        d.setAdapter(aa);
+        p.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                aa.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                o();
+            }
+
+        });
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         setActionBar(o);
         o.setElevation(5);
@@ -358,7 +333,7 @@ public class Sear extends MainBaseActivity {
                     Sear.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     SoftKeyboard.hide(Sear.this, b19);
                     String query = p.getText().toString();
-                    if (U3.b(query)) {
+                    if (TextUtils.isEmpty(query)) {
                         d2.c(query);
                         Sear.this.search(query);
                         Sear.this.finish();
@@ -369,11 +344,6 @@ public class Sear extends MainBaseActivity {
             }
         });
         o();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, webvium);
-        p.setAdapter(adapter);
-        p.setThreshold(4);
-        p.setDropDownBackgroundDrawable(Resources.getDrawable(this, R.drawable.c12));
         if (a221().getBoolean("voice", true) && !spr()) {
             iv.setImageResource(R.drawable.c9);
             iv.setBackgroundResource(R.drawable.c6);
@@ -382,7 +352,8 @@ public class Sear extends MainBaseActivity {
 
                 @Override
                 public void onClick(View view) {
-                    Sear.this.f3();
+                    Intent a = new Intent(Sear.this, Voic.class);
+                    startActivityForResult(a, 100);
                 }
             });
             Animation.animate(this, R.anim.i, iv);
@@ -402,7 +373,6 @@ public class Sear extends MainBaseActivity {
         });
         ActionBar ab = getActionBar();
         if (ab != null) {
-
             ab.setDisplayShowTitleEnabled(false);
         }
     }
@@ -410,7 +380,6 @@ public class Sear extends MainBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 100) {
             if (resultCode == RESULT_OK && null != data) {
                 String speechText = data.getStringExtra("a");
@@ -418,7 +387,6 @@ public class Sear extends MainBaseActivity {
                 p.setText(speechText);
             }
         }
-
     }
 
     @Override
@@ -432,13 +400,6 @@ public class Sear extends MainBaseActivity {
     protected void onStop() {
         super.onStop();
         SoftKeyboard.hide(this, b19);
-    }
-
-    private void f3() {
-        Intent a = new Intent(this, Voic.class);
-        if (a.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(a, 100);
-        }
     }
 
     public void f4(String a) {
@@ -477,52 +438,27 @@ public class Sear extends MainBaseActivity {
     }
 
     private void k() {
-        Runnable p15 = new Runnable() {
-
-            @Override
-            public void run() {
-                final ArrayList<String> itemIdsh = new ArrayList<>();
-                Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_SEARCH +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC ", null);
-                if (res.getCount() == 0) {
-                    Sear.this.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            d.setVisibility(View.GONE);
-                        }
-                    });
-                } else {
-                    while (res.moveToNext()) {
-                        itemIdsh.add(res.getString(1));
-                    }
-                    if (itemIdsh.size() == 0) {
-                        Sear.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                d.setVisibility(View.GONE);
-                            }
-                        });
-                    } else {
-                        Sear.this.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                aa.a(itemIdsh);
-                                aa.notifyDataSetChanged();
-                            }
-                        });
-                    }
-                }
-                res.close();
-
+        List<String> itemIdsh = new ArrayList<>();
+        Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
+                Sqlite.TABLE_SEARCH +
+                " ORDER BY " +
+                "_id" +
+                " DESC ", null);
+        if (res.getCount() == 0) {
+            d.setVisibility(View.GONE);
+        } else {
+            while (res.moveToNext()) {
+                itemIdsh.add(res.getString(1));
             }
-        };
-        new Thread(p15).start();
+            if (itemIdsh.size() == 0) {
+                d.setVisibility(View.GONE);
+
+            } else {
+                aa.a(itemIdsh);
+                aa.notifyDataSetChanged();
+            }
+        }
+        res.close();
     }
 
     private void l() {
@@ -544,9 +480,6 @@ public class Sear extends MainBaseActivity {
             switch (a) {
                 case "webvium://calculator":
                     Intents.a(this, Pret.class);
-                    break;
-                case "webvium://credits":
-                    Intents.a(this, Cred.class);
                     break;
                 case "webvium://managespace":
                     Intents.a(this, Mana.class);
@@ -633,11 +566,7 @@ public class Sear extends MainBaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -655,11 +584,7 @@ public class Sear extends MainBaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -667,7 +592,7 @@ public class Sear extends MainBaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed.getText().toString()));
     }
 
     private void p(View w) {
@@ -756,11 +681,7 @@ public class Sear extends MainBaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -777,11 +698,7 @@ public class Sear extends MainBaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (U3.a(ed)) {
-                    okButton.setEnabled(U3.a(ed1));
-                } else {
-                    okButton.setEnabled(false);
-                }
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -789,7 +706,7 @@ public class Sear extends MainBaseActivity {
 
             }
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed) && U3.a(ed1));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void t(String a) {
@@ -851,8 +768,7 @@ public class Sear extends MainBaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                okButton.setEnabled(U3.a(ed));
+                okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
 
             @Override
@@ -861,7 +777,7 @@ public class Sear extends MainBaseActivity {
             }
 
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(U3.a(ed));
+        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()));
     }
 
     @Override
@@ -869,7 +785,7 @@ public class Sear extends MainBaseActivity {
         try {
             String sg = a.getAction();
             String sg1 = a.getStringExtra("value");
-            if (sg1 != null && U3.b(sg1)) {
+            if (sg1 != null) {
                 p.setText(sg1);
             } else if (sg.equals(Intents.ACTION_PASTE)) {
                 try {

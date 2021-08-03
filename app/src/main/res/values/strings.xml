@@ -150,16 +150,15 @@
     <string name="f8">Set Cache Mode</string>
     <string name="f10">Captions</string>
     <string name="f11">Content to Captured</string>
-    <string name="f13">You agreed on %1$s</string>
     <string name="f14">Bug Report</string>
     <string name="f16">Databases, cache, cookies</string>
     <string name="f17">Clears all storage currently being used by the JavaScript storage APIs. This includes the Application Cache, Web SQL Database and the HTML5 Web Storage APIs.</string>
     <string name="g3">Clears any saved credentials for HTTP authentication</string>
     <string name="g4">Enables debugging of web contents (HTML / CSS / JavaScript)</string>
-    <string name="g5">We don\'t store your data period.\n\nWe physically can\'t. We have nowhere to store it. We don\'t even have a server database to store it. So even if Elon Musk asked nicely to see your data, we wouldn\'t have anything to show him.</string>
+    <string name="g5">We physically can\'t. We have nowhere to store it. We don\'t even have a server database to store it. So even if Elon Musk asked nicely to see your data, we wouldn\'t have anything to show him.</string>
     <string name="g6">PIN</string>
     <string name="g7">Text Selection</string>
-
+    <string name="g8">We don\'t store your data period.</string>
     <string name="g9">Layer Type</string>
     <string name="g10">Set Layer Type</string>
     <string name="g11">Zoom Gesture</string>
@@ -690,7 +689,6 @@
     <string name="n39">Touch to open search</string>
     <string name="n40">Touch to open Webvium</string>
     <string name="o29">Custom Background Image was been loaded.</string>
-    <string name="p29">Request Headers</string>
     <string name="p30">Failed to change poster image.</string>
     <string name="p33">Failed to change background image.</string>
     <string name="p34">Click</string>
@@ -732,22 +730,6 @@
     <string name="s33">Failed! Inspect Elements was enabled.</string>
     <string name="s34">Failed! Design Mode was enabled.</string>
     <string name="t21">Backup</string>
-    <string name="t24">Cookie</string>
-    <string name="t25">Include Cookie when requesting download</string>
-    <string name="t26">Include User-agent when requesting download</string>
-    <string name="t27">Mime Type</string>
-    <string name="t28">Connection</string>
-    <string name="t29">Metered</string>
-    <string name="t30">Allow to downloads over the metered connection</string>
-    <string name="t31">Roaming</string>
-    <string name="t32">Allow to downloads over the roaming connection</string>
-    <string name="t33">Device</string>
-    <string name="t34">Requires Charging</string>
-    <string name="t35">Allow downloads only when the device is charging</string>
-    <string name="t36">Requires Idle</string>
-    <string name="t37">Allow downloads only when the device is in idle mode</string>
-    <string name="t38">Media Scanning</string>
-    <string name="t39">Allow media scanning when download finish</string>
     <string name="u23">Edit</string>
     <string name="u24">Query</string>
     <string name="u25">Manage Space Icon</string>
@@ -768,8 +750,8 @@
         <item quantity="zero"> </item>
     </plurals>
 
-    <string name="v27">No item\'s to be cleared</string>
-    <string name="v29">No file\'s to be cleared</string>
+    <string name="v27">No items found.</string>
+    <string name="v29">No files found.</string>
     <string name="v30">Clear All Downloads</string>
     <string name="w21">Download File</string>
     <string name="w22">Unknown file size</string>
@@ -780,7 +762,6 @@
     <string name="x37">Gesture up/down to hide/show navbar</string>
     <string name="x38">Failed! No Internet Connection</string>
 
-    <string name="y28">Features</string>
     <string name="y30">The developers behind this awesome project</string>
     <string name="z21">Failed! An Error Occurred</string>
     <string name="z22">No internet connection detected</string>
@@ -791,13 +772,10 @@
     <string name="z28">Latest Update</string>
     <string name="z29">A new update of webvium was now available to download\nclick to start the download</string>
     <string name="z30">Unknown error, couldn\'t check for update</string>
-    <string name="z31">The database doesn\'t contain any item\'s</string>
+    <string name="z31">The database doesn\'t contain any data.</string>
     <string name="z32">Download</string>
-    <string name="z33">Permission</string>
     <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
-    <string name="z36">&lt;b>We will export:&lt;/b>&lt;br>• All Permission&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
-    <string name="z37">Do you really want to import Permission Database\nThis will override your Permission Settings</string>
     <string name="z38">APK</string>
     <string name="z39">Automatically backup Webvium apk upon installing of new update</string>
     <string name="z40">New Update</string>
@@ -812,8 +790,8 @@
     <string name="x49">Queries</string>
     <string name="x56">Last Installed on:</string>
     <string name="x57">Webvium</string>
-    <string name="x58">May 6, 2020 | 12:00:00</string>
-    <string name="y64">&lt;br>&lt;b>%1$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>%3$s&lt;/b>&lt;br>APP OWNER&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Amos Ayomide&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>
+    <string name="x58">12:00, August 8, 2021</string>
+    <string name="y64">&lt;br>&lt;b>%1$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>https://webvium.github.io&lt;/b>&lt;br>Website&lt;br>&lt;br>&lt;b>https://webvium.github.io/SourceCode&lt;/b>&lt;br>Source Code&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Amos Ayomide&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>
     <string name="y65">Ooops!</string>
     <string name="y66">End Process</string>
     <string name="y67">Send Report</string>
@@ -840,7 +818,6 @@
     <string name="y91">Theme Color Adaptation</string>
     <string name="y92">Adapt website theme to Webvium Main UI</string>
     <string name="y93">Enabled Experimental Features</string>
-    <string name="y94">Coming Soon…</string>
     <string name="y95">Webvium Javascript Interface</string>
     <string name="y96">RenderProcess Unresponsive</string>
     <string name="y97">Terminate if render become unresponsive</string>
@@ -868,7 +845,6 @@
     <string name="z61">Microphone</string>
     <string name="z62">Media Identifier</string>
     <string name="z63">MIDI Devices</string>
-    <string name="z64">Close All</string>
     <string name="z65">Send Email</string>
     <string name="z66">**Describe the bug**\nBriefly explain what the bug is.\n\n**To Reproduce**\nSteps to reproduce the behavior:\n1. Go to …\n2. Click on …\n3. Scroll down to …\n4. See error\n\n**Expected behavior**\nA clear and concise description of what you expected to happen.\n\n**Screenshots**\nIf applicable, add screenshots to help explain your problem.\n\n**Android (please complete the following information):**\n- Device: [e.g. Samsung]\n- OS: [e.g. Android 5]\n- Webvium version: [e.g. v1.o]\n\n**Additional context**\nAdd any other context about the problem here.</string>
     <string name="z67">**Below are the captured logcat**</string>
@@ -897,7 +873,7 @@
     <string name="z90">Clear Download History</string>
     <string name="z91">Download History Cleared.</string>
     <string name="z92">Do you really want to clear Download History?</string>
-
+    <string name="z93">Clear Bookmarks &amp; History</string>
 
 
 </resources>

@@ -24,6 +24,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.mrepol742.webvium.annotation.Keep;
 
 public class SoftKeyboard {
+
     @Keep
     private SoftKeyboard() {
     }

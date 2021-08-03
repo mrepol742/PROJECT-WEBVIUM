@@ -23,7 +23,6 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +38,12 @@ import com.mrepol742.webvium.util.DateUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class HistoryAdapter extends MainBaseAdapter {
     private final Context a;
-    private final ArrayList<HistoryDataModel> w3;
+    private final List<HistoryDataModel> w3;
     private final SharedPreferences sp;
     private final ForegroundColorSpan A;
     private final ForegroundColorSpan E;
@@ -55,7 +55,7 @@ public class HistoryAdapter extends MainBaseAdapter {
     private final SimpleDateFormat year;
 
 
-    public HistoryAdapter(Context ct, ArrayList<HistoryDataModel> w3) {
+    public HistoryAdapter(Context ct, List<HistoryDataModel> w3) {
         super(ct);
         this.a = ct;
         this.w3 = w3;
@@ -81,7 +81,7 @@ public class HistoryAdapter extends MainBaseAdapter {
         return R.drawable.a8;
     }
 
-    public void a(ArrayList<HistoryDataModel> w3) {
+    public void a(List<HistoryDataModel> w3) {
         synchronized (this.w3) {
             this.w3.clear();
             this.w3.addAll(w3);

@@ -17,6 +17,10 @@
 
 <ScrollView xmlns:a="http://schemas.android.com/apk/res/android"
     a:id="@id/c3"
+    a:paddingStart="?m"
+    a:paddingEnd="?m"
+    a:layout_marginTop="10dp"
+    a:layout_marginBottom="10dp"
     a:layout_width="match_parent"
     a:layout_height="match_parent">
 
@@ -51,6 +55,6 @@
             a:layout_marginTop="20dp"
             a:layout_marginEnd="15dp"
             a:gravity="center"
-            a:textSize="@dimen/b" />
+            a:textSize="@dimen/c" />
     </LinearLayout>
 </ScrollView>

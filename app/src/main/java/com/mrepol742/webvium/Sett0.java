@@ -20,7 +20,6 @@ package com.mrepol742.webvium;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -36,7 +35,6 @@ import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.setting.fragment.AboutFragment;
 import com.mrepol742.webvium.setting.fragment.DatabaseFragment;
-import com.mrepol742.webvium.setting.fragment.FeatureFragment;
 import com.mrepol742.webvium.setting.fragment.SettingFragment;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.Hardware;
@@ -97,29 +95,6 @@ public class Sett0 extends BaseActivity {
                 Sett0.this.invalidateOptionsMenu();
             }
         });
-        final TextView tv0 = findViewById(R.id.m18);
-        if (BuildConfig.DEBUG) {
-            tv0.setText(getString(R.string.y28));
-            tv0.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    try {
-                        Animation.animate(Sett0.this, R.anim.i, tv0);
-                        Animation.animate(Sett0.this, R.anim.c, b);
-                        b.setText(Sett0.this.getString(R.string.y28));
-                    } catch (Exception en) {
-                        en.printStackTrace();
-                    }
-                    Sett0.this.as(R.id.m10, new FeatureFragment());
-                    id = "a3";
-                    Sett0.this.b24(true);
-                    Sett0.this.invalidateOptionsMenu();
-                }
-            });
-        } else {
-            tv0.setVisibility(View.GONE);
-        }
         final TextView tv1 = findViewById(R.id.m20);
             tv1.setText(getString(R.string.t21));
             tv1.setOnClickListener(new View.OnClickListener() {
@@ -163,33 +138,27 @@ public class Sett0 extends BaseActivity {
         if (!a221().getBoolean("autoUpdate", false)) {
             b.setTextColor(k);
             tv.setTextColor(k);
-            tv0.setTextColor(k);
             tv1.setTextColor(k);
             tv2.setTextColor(k);
         } else {
             b.setTextColor(l);
             tv.setTextColor(l);
-            tv0.setTextColor(l);
             tv1.setTextColor(l);
             tv2.setTextColor(l);
         }
         tv.setTypeface(type(Typeface.NORMAL));
-        tv0.setTypeface(type(Typeface.NORMAL));
         tv1.setTypeface(type(Typeface.NORMAL));
         tv2.setTypeface(type(Typeface.NORMAL));
         tv.setCompoundDrawablePadding(6);
-        tv0.setCompoundDrawablePadding(6);
         tv1.setCompoundDrawablePadding(6);
         tv2.setCompoundDrawablePadding(6);
         ll = findViewById(R.id.m16);
         ll.setBackgroundResource(R.drawable.f1);
         ll.setElevation(5);
         tv.setBackgroundResource(R.drawable.b17);
-        tv0.setBackgroundResource(R.drawable.b17);
         tv1.setBackgroundResource(R.drawable.b17);
         tv2.setBackgroundResource(R.drawable.b17);
         tv.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g9), null, null);
-        tv0.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g10), null, null);
         tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g11), null, null);
         tv2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g12), null, null);
         iv = findViewById(R.id.o25);

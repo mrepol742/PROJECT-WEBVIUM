@@ -17,10 +17,11 @@
 
 package com.mrepol742.webvium.util;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Build;
 import android.provider.MediaStore;
 
 import com.mrepol742.webvium.annotation.Keep;
@@ -33,10 +34,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-@SuppressWarnings("ALL")
 public class FileUtil {
 
     public static final String n = "\n";
@@ -146,7 +145,7 @@ public class FileUtil {
         return false;
     }
 
-    //Environment.DIRECTORY_DOCUMENTS + "/Webvium"
+    @TargetApi(Build.VERSION_CODES.Q)
     public static boolean write(Context a, String name, String meme, String loc, String data) {
         try {
             ContentValues values = new ContentValues();
@@ -154,8 +153,8 @@ public class FileUtil {
             values.put(MediaStore.MediaColumns.MIME_TYPE, meme);
             values.put(MediaStore.MediaColumns.RELATIVE_PATH, loc);
             Uri uri = a.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
-            ObjectOutputStream outputStream = (ObjectOutputStream) a.getContentResolver().openOutputStream(uri);
-            outputStream.writeObject(data);
+            OutputStream outputStream = a.getContentResolver().openOutputStream(uri);
+            outputStream.write(data.getBytes());
             outputStream.close();
             return true;
         } catch (Exception e) {
@@ -165,14 +164,14 @@ public class FileUtil {
     }
 
     public static void write(final String location, final String data, final boolean readOnly) {
-        Runnable runnable = new Runnable() {
+        Runnable re = new Runnable() {
 
             @Override
             public void run() {
                 write(new File(location), data, readOnly);
             }
         };
-        new Thread(runnable).start();
+        new Thread(re).start();
     }
 
     public static boolean copy(java.io.File fe, java.io.File fe2, boolean readOnly) {

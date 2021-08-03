@@ -23,13 +23,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Sqlite;
-import com.mrepol742.webvium.app.WebviumDatabase;
-import com.mrepol742.webvium.util.Inapproriate;
 
-public class SearchHelper implements WebviumDatabase {
+public class SearchHelper {
 
     private static SearchHelper d2;
     private static String temp = "";
@@ -49,19 +48,16 @@ public class SearchHelper implements WebviumDatabase {
         return d2;
     }
 
-    @Override
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
-    @Override
     public void finish() {
         if (sld != null && sld.isOpen()) {
             sld.close();
         }
     }
 
-    @Override
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_SEARCH, null, null);
@@ -79,12 +75,10 @@ public class SearchHelper implements WebviumDatabase {
     public void c(final String a) {
         if (!sp.getBoolean("pSearch", false) && !temp.equals(a)) {
             if (sld != null && sld.isOpen()) {
-                if (Inapproriate.isInapproriate(a.toLowerCase())) {
                     temp = a;
                     ContentValues values = new ContentValues();
                     values.put(Sqlite.COL1_SEARCH, a);
                     sld.insert(Sqlite.TABLE_SEARCH, null, values);
-                }
             }
         }
     }
@@ -98,4 +92,36 @@ public class SearchHelper implements WebviumDatabase {
                             " LIKE ? ", new String[]{oldData});
         }
     }
+
+    static class SearchDatabase extends SQLiteOpenHelper {
+
+        protected SearchDatabase(Context context) {
+            super(context, Sqlite.DATA_SEARCH, null, Sqlite.VERSION_SEARCH);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE " +
+                    Sqlite.TABLE_SEARCH +
+                    " ( " +
+                    "_id" +
+                    " INTEGER PRIMARY KEY, " +
+                    Sqlite.COL1_SEARCH +
+                    " TEXT )");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " +
+                    Sqlite.TABLE_SEARCH);
+            onCreate(db);
+        }
+
+        @Override
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            onUpgrade(db, oldVersion, newVersion);
+        }
+
+    }
+
 }

@@ -17,10 +17,8 @@
 
 package com.mrepol742.webvium.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.provider.Settings;
 
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.security.SHA;
@@ -32,7 +30,7 @@ public class AppID {
     private AppID() {
     }
 
-    @SuppressLint("HardwareIds")
+
     public static String getAppID(Context ct) {
         String a = "742" +
                 Build.BOARD.length() % 10 +
@@ -44,8 +42,7 @@ public class AppID {
                 Build.TAGS.length() % 10 +
                 Build.TYPE.length() % 10 +
                 Build.USER.length() % 10;
-        String b = Settings.Secure.getString(ct.getContentResolver(), Settings.Secure.ANDROID_ID);
-        String id = a + b + UUID.randomUUID().toString();
+        String id = a + UUID.randomUUID().toString();
         return SHA.a("SHA-1", id);
     }
 }
