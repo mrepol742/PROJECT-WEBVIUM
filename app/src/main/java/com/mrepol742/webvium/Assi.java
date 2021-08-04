@@ -62,10 +62,8 @@ public class Assi extends BaseActivity {
         iv = findViewById(R.id.m13);
         iv1 = findViewById(R.id.m19);
         d2 = SearchHelper.getInstance(getApplicationContext());
-        TextView hau = findViewById(R.id.e7);
         TextView m11 = findViewById(R.id.m11);
         m11.setText(getString(R.string.l24));
-        hau.setText("|");
         LinearLayout f2 = findViewById(R.id.g4);
         f2.setFitsSystemWindows(true);
         f2.setBackgroundResource(R.drawable.b17);

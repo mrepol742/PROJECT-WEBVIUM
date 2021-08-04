@@ -875,5 +875,9 @@
     <string name="z92">Do you really want to clear Download History?</string>
     <string name="z93">Clear Bookmarks &amp; History</string>
 
-
+    <string name="z94">Search History</string>
+    <string name="z95">Browsing History</string>
+    <string name="z96">Download History</string>
+    <string name="z97">Bookmarks</string>
+    <string name="z98">Suggest Download</string>
 </resources>

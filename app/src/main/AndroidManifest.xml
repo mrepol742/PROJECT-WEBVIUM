@@ -106,7 +106,6 @@
             a:name="com.mrepol742.webvium.Sear"
             a:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
-            a:theme="@style/m"
             a:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action a:name="com.mrepol742.webvium.intent.action.PASTE" />
@@ -624,7 +623,6 @@
             a:name="com.mrepol742.webvium.Voic"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:launchMode="singleTask"
-            a:theme="@style/m"
             a:windowSoftInputMode="stateHidden" />
 
         <activity

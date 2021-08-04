@@ -1,0 +1,22 @@
+<!--
+  ~
+  ~ Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
+  ~
+  ~ License under the GNU General Public License, Version 3.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.gnu.org/licenses/gpl-3.0.en.html
+  ~
+  ~ Unless required by the applicable law or agreed in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector android:autoMirrored="true" android:height="24dp"
+    android:tint="?a" android:viewportHeight="24"
+    android:viewportWidth="24" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@android:color/white" android:pathData="M6,15L6,15c0.56,0 1,-0.45 1,-1V8.41L17.89,19.3c0.39,0.39 1.02,0.39 1.41,0l0,0c0.39,-0.39 0.39,-1.02 0,-1.41L8.41,7H14c0.55,0 1,-0.45 1,-1V6c0,-0.55 -0.45,-1 -1,-1H6C5.45,5 5,5.45 5,6V14C5,14.55 5.45,15 6,15z"/>
+</vector>

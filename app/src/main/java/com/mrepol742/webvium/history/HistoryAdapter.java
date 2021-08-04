@@ -139,7 +139,6 @@ public class HistoryAdapter extends MainBaseAdapter {
                 LayoutInflater li = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 e = li.inflate(R.layout.a22, vg, false);
                 w17 = new AN();
-
                 w17.a = e.findViewById(R.id.e19);
                 w17.b = e.findViewById(R.id.e20);
                 w17.c = e.findViewById(R.id.e18);
@@ -162,10 +161,6 @@ public class HistoryAdapter extends MainBaseAdapter {
             } else {
                 w17 = (AN) e.getTag();
             }
-           /* w17.changedTo.setText(U8.changedTo(c(it).ls));
-            w17.c.setImageResource(c(it).ls1);
-            w17.b.setText(b(U8.changedTo(c(it).ls0)), TextView.BufferType.SPANNABLE);
-            w17.d.setText(c(it).ls2);*/
             w17.a.setText(c(it).ls);
             w17.c.setImageResource(d(c(it).ls0));
             w17.b.setText(b(c(it).ls0), TextView.BufferType.SPANNABLE);

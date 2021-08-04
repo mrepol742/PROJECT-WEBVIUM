@@ -144,6 +144,7 @@ import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.permission.PermissionDataModel;
+import com.mrepol742.webvium.search.SearchDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.security.Caesar;
@@ -880,6 +881,7 @@ public class Webv extends MainBaseActivity {
 
                 @Override
                 public void onClick(View view) {
+                    // TODO: request permission first
                     Intent a12 = new Intent(Webv.this, Voic.class);
                     Webv.this.startActivityForResult(a12, 742);
                 }
@@ -2371,6 +2373,24 @@ ct = 0;
                     }
                     rest1.close();
                 }
+                if (a221().getBoolean("showDLM", false)) {
+                    DownloadHelper d31 = DownloadHelper.getInstance(getApplicationContext());
+                    Cursor rest2 = d31.getReadableDatabase().rawQuery("SELECT * FROM " +
+                            Sqlite.TABLE_DOWNLOAD +
+                            " ORDER BY " +
+                            "_id" +
+                            " DESC ", null);
+                    if (rest2.getCount() != 0) {
+                        boolean bn12 = !a221().getBoolean("showLKS", false);
+                        while (rest2.moveToNext()) {
+                            if (bn12) {
+                                ls.add(Base64.encode(rest2.getString(1)));
+                            }
+                            ls.add(Base64.encode(rest2.getString(2)));
+                        }
+                    }
+                    rest2.close();
+                }
                 return ls.toString().replaceAll("\\[", "")
                         .replaceAll("]", "")
                         .replaceAll(", ", ":");
@@ -2414,11 +2434,6 @@ ct = 0;
                     case Webv.SE_FACEBOOK:
                         return searchEngine[13] + searchPath[8];
                 }
-            }
-
-            @JavascriptInterface
-            public void voice() {
-                Intents.a(Webv.this, Voic.class);
             }
         }, Package.c() + "SearchHelper");
         h.addJavascriptInterface(new Object() {

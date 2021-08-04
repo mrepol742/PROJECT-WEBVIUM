@@ -15,6 +15,7 @@
   ~ limitations under the License.
   -->
 
+<!-- TODO: needed update -->
 <Toolbar xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     a:id="@id/o"
@@ -47,17 +48,6 @@
                 a:textColor="?h"
                 a:textSize="@dimen/c"
                 tools:ignore="LabelFor" />
-
-            <TextView
-                a:id="@id/e7"
-                a:layout_width="wrap_content"
-                a:layout_height="match_parent"
-                a:layout_marginStart="7dp"
-                a:ellipsize="end"
-                a:gravity="center_vertical"
-                a:maxLines="1"
-                a:textColor="?h"
-                a:textSize="@dimen/c" />
 
             <com.mrepol742.webvium.Edit
                 a:id="@id/p"

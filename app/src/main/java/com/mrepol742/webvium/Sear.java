@@ -55,11 +55,12 @@ import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.SoftKeyboard;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
+import com.mrepol742.webvium.download.DownloadHelper;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.search.SearchAdapter;
+import com.mrepol742.webvium.search.SearchDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.Animation;
@@ -75,16 +76,20 @@ import java.util.Objects;
 /*
  * @SearchActivity
  */
-public class Sear extends BaseActivity {
+public class Sear extends MainBaseActivity {
     private Edit p;
     private ListView d;
     private RelativeLayout b19;
     private SearchAdapter aa;
     private SearchHelper d2;
-    private final List<String> ls = new ArrayList<>();
+    private final List<SearchDataModel> ls = new ArrayList<>();
     private ImageView iv1;
     private PopupMenu pm;
     private String query23;
+    public static final int SEARCH = 1;
+    public static final int HISTORY = 2;
+    public static final int DOWNLOAD = 3;
+    public static final int BOOKMARK = 4;
 
     final MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
 
@@ -126,7 +131,6 @@ public class Sear extends BaseActivity {
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        theme(T_ASSISTANT);
         super.onCreate(savedInstanceState);
         a225(R.layout.e);
         Toolbar o = findViewById(R.id.o);
@@ -138,10 +142,8 @@ public class Sear extends BaseActivity {
         b19 = findViewById(R.id.b19);
         b19.setBackgroundResource(R.drawable.b17);
         b19.setClickable(true);
-        TextView hau = findViewById(R.id.e7);
         TextView m11 = findViewById(R.id.m11);
         m11.setText(getString(R.string.e));
-        hau.setText("|");
         if (a221().getBoolean("blocksv", false)) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         } else {
@@ -164,7 +166,7 @@ public class Sear extends BaseActivity {
             });
         } else {
             while (res.moveToNext()) {
-                ls.add(res.getString(1));
+                ls.add(new SearchDataModel(res.getString(1), SEARCH));
             }
         }
         res.close();
@@ -179,9 +181,9 @@ public class Sear extends BaseActivity {
                 boolean bn = !a221().getBoolean("showLKS", false);
                 while (rest.moveToNext()) {
                     if (bn) {
-                        ls.add(rest.getString(1));
+                        ls.add(new SearchDataModel(rest.getString(1), HISTORY));
                     }
-                    ls.add(rest.getString(2));
+                    ls.add(new SearchDataModel(rest.getString(2), HISTORY));
                 }
             }
             rest.close();
@@ -196,19 +198,39 @@ public class Sear extends BaseActivity {
                     boolean bn = !a221().getBoolean("showLKS", false);
                     while (rest1.moveToNext()) {
                         if (bn) {
-                            ls.add(rest1.getString(1));
+                            ls.add(new SearchDataModel(rest.getString(1), BOOKMARK));
                         }
-                        ls.add(rest1.getString(2));
+                        ls.add(new SearchDataModel(rest.getString(2), BOOKMARK));
                     }
                 }
                 rest1.close();
-
+            }
+            if (a221().getBoolean("showDLM", false)) {
+                DownloadHelper d31 = DownloadHelper.getInstance(getApplicationContext());
+                Cursor rest2 = d31.getReadableDatabase().rawQuery("SELECT * FROM " +
+                        Sqlite.TABLE_DOWNLOAD +
+                        " ORDER BY " +
+                        "_id" +
+                        " DESC ", null);
+                if (rest2.getCount() != 0) {
+                    boolean bn12 = !a221().getBoolean("showLKS", false);
+                    while (rest2.moveToNext()) {
+                        if (bn12) {
+                            ls.add(new SearchDataModel(rest2.getString(1), DOWNLOAD));
+                        }
+                        ls.add(new SearchDataModel(rest2.getString(2), DOWNLOAD));
+                    }
+                }
+                rest2.close();
             }
         }
         aa = new SearchAdapter(this, ls);
-        if (Objects.equals(a221().getString("arrange", ""), "1z")) {
+        // TODO:failed
+        /*if (Objects.equals(a221().getString("arrange", ""), "1z")) {
             Collections.sort(ls);
         }
+
+         */
         if (Objects.equals(a221().getString("arrange", ""), "7z")) {
             Collections.sort(ls, Collections.reverseOrder());
         }
@@ -316,7 +338,6 @@ public class Sear extends BaseActivity {
             p.setTextColor(e);
             p.setHintTextColor(g);
         }
-
         cd.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -324,7 +345,6 @@ public class Sear extends BaseActivity {
                 SoftKeyboard.show(Sear.this, p);
             }
         });
-
         p.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
@@ -437,8 +457,9 @@ public class Sear extends BaseActivity {
         AwesomeToast.b(this, a);
     }
 
+    // TODO: needs update
     private void k() {
-        List<String> itemIdsh = new ArrayList<>();
+        List<SearchDataModel> itemIdsh = new ArrayList<>();
         Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
@@ -448,7 +469,7 @@ public class Sear extends BaseActivity {
             d.setVisibility(View.GONE);
         } else {
             while (res.moveToNext()) {
-                itemIdsh.add(res.getString(1));
+                itemIdsh.add(new SearchDataModel(res.getString(1), SEARCH));
             }
             if (itemIdsh.size() == 0) {
                 d.setVisibility(View.GONE);

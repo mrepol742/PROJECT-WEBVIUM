@@ -62,6 +62,12 @@
             a:key="showHTT"
             a:title="@string/l26" />
         <com.mrepol742.webvium.Swit
+            a:defaultValue="false"
+            a:dependency="showS"
+            a:key="showDLM"
+            a:title="@string/z98" />
+
+        <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:dependency="showS"
             a:key="showLKS"

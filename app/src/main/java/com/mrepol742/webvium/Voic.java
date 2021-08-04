@@ -54,6 +54,7 @@ import java.util.Objects;
 /*
  * @VoiceSearchActivity
  */
+// TODO: KILL IF PERMISSION NOT GRANTED
 public class Voic extends BaseActivity {
     public SpeechRecognizer sr;
     public TextView tv;
@@ -61,18 +62,13 @@ public class Voic extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle a123) {
-        theme(T_ASSISTANT);
         super.onCreate(a123);
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        LayoutInflater b = getLayoutInflater();
-        View c = b.inflate(R.layout.q, null);
-        a.setView(c);
-        tv = c.findViewById(R.id.n21);
+        a225(R.layout.q);
+        tv = findViewById(R.id.n21);
         int f = Resources.getColor(this, R.color.c);
         int g = Resources.getColor(this, R.color.b);
-        sv = c.findViewById(R.id.n);
-        RelativeLayout rl = c.findViewById(R.id.w);
-
+        sv = findViewById(R.id.n);
+        RelativeLayout rl = findViewById(R.id.w);
         tv.setTypeface(type(Typeface.NORMAL));
         if (!a221().getBoolean("autoUpdate", false)) {
             tv.setTextColor(f);
@@ -200,8 +196,6 @@ public class Voic extends BaseActivity {
             b();
             c();
         }
-        a.setCancelable(true);
-        a.create().show();
     }
 
     @Override

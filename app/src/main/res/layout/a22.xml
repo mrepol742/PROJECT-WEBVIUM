@@ -20,7 +20,6 @@
     a:layout_height="match_parent"
     a:layout_gravity="center_vertical"
     a:orientation="horizontal"
-
     a:paddingStart="12dp"
     a:paddingEnd="12dp">
 
