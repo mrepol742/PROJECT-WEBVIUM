@@ -25,6 +25,8 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.LruCache;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -33,11 +35,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
+import com.mrepol742.webvium.R;
+import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.StorageDirectory;
 
 import java.io.File;
 
-public class MainBaseAdapter extends BaseAdapter implements View.OnTouchListener, View.OnDragListener {
+public class MainBaseAdapter extends BaseAdapter {
     private static final String MAVEN_PRO = "classes";
     private static final int PRIMARY_CACHE = 99;
     private static final int SECONDARY_CACHE = 100;
@@ -46,12 +50,22 @@ public class MainBaseAdapter extends BaseAdapter implements View.OnTouchListener
     private final SharedPreferences sp;
     private final String PRIMARY_FONT;
     private final String SECONDARY_FONT;
+    private final ForegroundColorSpan A;
+    private final ForegroundColorSpan E;
+    private final ForegroundColorSpan S;
+    private final ForegroundColorSpan I;
+    private final ForegroundColorSpan B;
 
     public MainBaseAdapter(Context ct) {
         cac = new LruCache<>(32);
         sp = PreferenceManager.getDefaultSharedPreferences(ct);
         SECONDARY_FONT = StorageDirectory.Fonts.getSecondaryFont(ct);
         PRIMARY_FONT = StorageDirectory.Fonts.getPrimaryFont(ct);
+        this.A = new ForegroundColorSpan(Resources.getColor(ct, R.color.a));
+        this.E = new ForegroundColorSpan(Resources.getColor(ct, R.color.e));
+        this.S = new ForegroundColorSpan(Resources.getColor(ct, R.color.s));
+        this.I = new ForegroundColorSpan(Resources.getColor(ct, R.color.i));
+        this.B = new ForegroundColorSpan(Resources.getColor(ct, R.color.b));
         main = Typeface.createFromAsset(ct.getAssets(), MAVEN_PRO);
     }
 
@@ -73,43 +87,6 @@ public class MainBaseAdapter extends BaseAdapter implements View.OnTouchListener
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         return null;
-    }
-
-    protected void w44a(View v, float x, float y) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = Math.round(x);
-        params.topMargin = Math.round(y);
-        v.getRootView().setLayoutParams(params);
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        ClipData.Item item = new ClipData.Item(view.getTag().toString());
-        String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_PLAIN};
-        ClipData data = new ClipData(view.getTag().toString(), mimeTypes, item);
-        View.DragShadowBuilder ds = new View.DragShadowBuilder(view);
-        if (Build.VERSION.SDK_INT >= 24) {
-            view.startDragAndDrop(data, ds, view, 0);
-        } else {
-            view.startDrag(data, ds, view, 0);
-        }
-        w44a(view, view.getX(), view.getY());
-        return true;
-    }
-
-    @Override
-    public boolean onDrag(View view, DragEvent de) {
-        switch (de.getAction()) {
-            case DragEvent.ACTION_DRAG_STARTED:
-            case DragEvent.ACTION_DRAG_EXITED:
-            case DragEvent.ACTION_DRAG_ENTERED:
-            case DragEvent.ACTION_DROP:
-            case DragEvent.ACTION_DRAG_ENDED:
-                return true;
-            default:
-                return false;
-        }
     }
 
     public Typeface type(int sg) {
@@ -139,5 +116,36 @@ public class MainBaseAdapter extends BaseAdapter implements View.OnTouchListener
             cac.put(sg, bp);
         }
         return bp;
+    }
+
+    public SpannableString scheme(String url) {
+        SpannableString ssb = new SpannableString(url);
+        if (url.startsWith("https://")) {
+            ssb.setSpan(this.A, 0, 8, 0);
+        } else if (url.startsWith("http://")) {
+            ssb.setSpan(this.E, 0, 7, 0);
+        } else if (url.startsWith("file://")) {
+            ssb.setSpan(this.S, 0, 7, 0);
+        } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
+            ssb.setSpan(this.S, 0, 10, 0);
+        } else {
+            if (!this.sp.getBoolean("autoUpdate", false)) {
+                ssb.setSpan(this.I, 0, url.length(), 0);
+            } else {
+                ssb.setSpan(this.B, 0, url.length(), 0);
+            }
+        }
+        return ssb;
+    }
+
+    public int icon(String b) {
+        if (b.startsWith("https://")) {
+            return R.drawable.a15;
+        } else if (b.startsWith("http://")) {
+            return R.drawable.a16;
+        } else if (b.startsWith("file://") || b.startsWith("content://")) {
+            return R.drawable.a17;
+        }
+        return R.drawable.a18;
     }
 }

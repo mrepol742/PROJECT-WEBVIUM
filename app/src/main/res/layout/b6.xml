@@ -29,13 +29,12 @@
         a:layout_height="wrap_content"
         a:layout_gravity="center_vertical"
         a:layout_alignParentStart="true"
-        a:src="@drawable/a1"
+        a:contentDescription="@string/z99"
         a:padding="15dp" />
 
     <TextView a:layout_toEndOf="@id/o52"
         a:layout_toStartOf="@id/o53"
     a:id="@id/d16"
-        a:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     a:layout_width="match_parent"
     a:layout_height="wrap_content"
     a:maxLines="1"
@@ -44,7 +43,6 @@
 
 
     <ImageView
-        a:src="@drawable/a1"
         a:id="@id/o53"
         a:layout_alignParentEnd="true"
         a:layout_width="wrap_content"

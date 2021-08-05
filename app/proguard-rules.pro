@@ -25,9 +25,9 @@
 -keepattributes *Annotation*
 -optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
 -repackageclasses 'com.mrepol742.webvium'
--obfuscationdictionary ObfuscationDictionary.txt
--packageobfuscationdictionary ObfuscationDictionary.txt
--classobfuscationdictionary ClassObfuscationDictionary.txt
+-obfuscationdictionary secondary-dictionary.txt
+-packageobfuscationdictionary secondary-dictionary.txt
+-classobfuscationdictionary primary-dictonary.txt
 -optimizationpasses 5
 -allowaccessmodification
 -dontpreverify

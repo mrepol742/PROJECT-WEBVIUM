@@ -334,7 +334,7 @@ public class Book extends BaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
+        TextWatcher tw = new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -343,31 +343,16 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
+                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString().trim()) && TextUtils.isEmpty(charSequence.toString().trim()));
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        };
+        ed.addTextChangedListener(tw);
+        ed1.addTextChangedListener(tw);
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
@@ -432,7 +417,7 @@ public class Book extends BaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
+        TextWatcher tw = new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -441,31 +426,16 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
+                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString().trim()) && TextUtils.isEmpty(charSequence.toString().trim()));
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        };
+        ed.addTextChangedListener(tw);
+        ed1.addTextChangedListener(tw);
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 
@@ -862,7 +832,7 @@ public class Book extends BaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
+        TextWatcher tw = new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -871,31 +841,16 @@ public class Book extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
+                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString().trim()) && TextUtils.isEmpty(charSequence.toString().trim()));
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        };
+        ed.addTextChangedListener(tw);
+        ed1.addTextChangedListener(tw);
         g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
     }
 

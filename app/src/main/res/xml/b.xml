@@ -63,11 +63,7 @@
             a:key="eac"
             a:summary="@string/l20"
             a:title="@string/l19" />
-        <com.mrepol742.webvium.Swit
-            a:defaultValue="true"
-            a:key="pnd"
-            a:summary="@string/x6"
-            a:title="@string/n13" />
+
     </com.mrepol742.webvium.Pref0>
     <com.mrepol742.webvium.Pref0 a:title="@string/n12">
         <com.mrepol742.webvium.Swit

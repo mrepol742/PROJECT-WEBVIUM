@@ -72,10 +72,6 @@ public class Boot extends BroadcastReceiver {
                 PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, Upda.class), PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
             }
-            if (sp.getBoolean("pnd", true)) {
-                PendingIntent it = PendingIntent.getService(a, 0, new Intent(a, Noti.class), PendingIntent.FLAG_UPDATE_CURRENT);
-                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
-            }
             if (sp.getBoolean("fltWeb", false)) {
                 MainNotification.c(a, a.getString(R.string.l32), a.getString(R.string.l34));
                 android.app.Notification.Builder m = Notifications.a(a, a.getString(R.string.l32));

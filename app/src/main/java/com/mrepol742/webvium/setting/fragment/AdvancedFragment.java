@@ -225,18 +225,6 @@ public class AdvancedFragment extends BasePreferenceFragment {
                     return true;
                 }
             });
-            Pref a96755 = (Pref) findPreference("admn");
-            a96755.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intent i = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-                    i.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, new ComponentName(getActivity(), Devi.class));
-                    i.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "");
-                    startActivityForResult(i, 5);
-                    return true;
-                }
-            });
         } catch (Exception ex) {
             ex.printStackTrace();
         }

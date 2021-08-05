@@ -7,17 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Java-7-blue.svg" />
-  <img src="https://img.shields.io/badge/XML-blue.svg" />
-   <img src="https://img.shields.io/badge/SQLite-blue.svg" />
-  <img src="https://img.shields.io/badge/HTML-blue.svg" />
-  <img src="https://img.shields.io/badge/CSS-blue.svg" />
-  <img src="https://img.shields.io/badge/JavaScript-blue.svg" />
-    <img src="https://img.shields.io/badge/JSON-blue.svg" />
-</p>
-<p align="center">
  <img src="https://github.com/mrepol742/PROJECT-WEBVIUM/actions/workflows/gradle.yml/badge.svg" />
- <img src="https://wakatime.com/badge/github/mrepol742/PROJECT-WEBVIUM.svg" />
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Android%20Gradle%20Plugin-4%2E2%2E2-blue.svg" />
@@ -25,7 +15,9 @@
   <img src="https://img.shields.io/badge/SDK-30-blue.svg" />
   <img src="https://img.shields.io/badge/Build%20Tools-30.0.3-blue.svg" />
  </p>
-
+ <p align="center">
+<img src="https://mrepol742.github.io/images/webvium_light_main.webp" width="150px"> <img src="https://mrepol742.github.io/images/webvium_dark_main.webp" width="150px">
+</p>
   <p>Webvium is a weightless android app that has a size of 570KB. It's Fast, Material Design and Full-Featured Web Browser for Android. And its absolutely free to download and without any ads.</p>
         <div><h3>CUSTOMIZATION</h3>Use the Interface settings, to change the app theme to dark or light. Add a little curved on edge of screen or make your favorite photo or wallpaper as app main background. Redefined your browsing experience.</div>
         <div><h3>LIGHTWEIGHT AND FASTER</h3>Webvium is programmed and developed to be the most lightweight app possible. Lightweight means faster installation time. Faster download time. And better browsing experience. Share this app to your friends within fraction of a seconds.</div>

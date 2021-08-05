@@ -1,4 +1,4 @@
-name: Build with Gradle
+name: Android CI
 
 on:
   push:
@@ -21,16 +21,3 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
-  notify:
-    name: Discord Notification
-    runs-on: ubuntu-latest
-    needs:
-      - build
-    if: ${{ always() }}
-    
-    steps:
-      - name: Notify
-        uses: nobrayner/discord-webhook@v1
-        with:
-          github-token: ${{ secrets.github_token }}
-          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}

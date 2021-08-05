@@ -162,7 +162,7 @@ return R.drawable.a19;
             } else {
                 w18 = (W16a) vw.getTag();
             }
-            w18.a.setText(c(it).data);
+            w18.a.setText(scheme(c(it).data));
             w18.b.setImageResource(d(c(it).id));
             w18.b.setContentDescription(a.getString(e(c(it).id)));
         } catch (IndexOutOfBoundsException ignored) {

@@ -30,14 +30,12 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 20210802
-        versionName "1.8"
-        // < 1.0 The version i know what i am doing,
-        // > 1.5 Now only god knows.
+        versionName "1.8.1"
         proguardFiles getDefaultProguardFile(
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
         android.applicationVariants.all { variant ->
             variant.outputs.all {
-                outputFileName = "webvium-${variant.name}.apk"
+                outputFileName = "Webvium-${variant.name}.apk"
             }
         }
     }

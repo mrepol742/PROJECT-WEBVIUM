@@ -690,10 +690,7 @@ public class Webv extends MainBaseActivity {
             AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             PendingIntent it = PendingIntent.getService(this, 0, new Intent(this, Upda.class), PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it);
-            PendingIntent it1 = PendingIntent.getService(this, 0, new Intent(this, Noti.class), PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, it1);
             Intents.b(this, Upda.class);
-            Intents.b(this, Noti.class);
         }
         if (k5 == 275 && a221().getBoolean("lockWn99", false)) {
             Intent it = new Intent(this, Lock.class);

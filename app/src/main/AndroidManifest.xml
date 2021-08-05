@@ -687,19 +687,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver
-            a:name="com.mrepol742.webvium.Devi"
-            a:label="@string/p20"
-            a:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data
-                a:name="android.app.device_admin"
-                a:resource="@xml/z" />
-            <intent-filter>
-                <action a:name="android.app.action.DEVICE_ADMIN_ENABLED" />
-                <category a:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
         <service
             a:name="com.mrepol742.webvium.Save"
             a:exported="false"
@@ -709,11 +696,6 @@
             a:name="com.mrepol742.webvium.Clip"
             a:exported="false"
             a:label="@string/x8" />
-
-        <service
-            a:name="com.mrepol742.webvium.Noti"
-            a:exported="false"
-            a:label="@string/m6" />
 
         <service
             a:name="com.mrepol742.webvium.Upda"

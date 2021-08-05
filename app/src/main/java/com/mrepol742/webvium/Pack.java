@@ -49,9 +49,6 @@ public class Pack extends BroadcastReceiver {
                 Intents.a(a, Webv.class);
             }
             Intents.b(a, Upda.class);
-            Intents.b(a, Noti.class);
-
-
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
             MainNotification.b(a, a.getString(R.string.z79), a.getString(R.string.z80));
             android.app.Notification.Builder m = Notifications.a(a, a.getString(R.string.z79));

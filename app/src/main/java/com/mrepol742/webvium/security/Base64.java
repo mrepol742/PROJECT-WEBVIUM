@@ -26,7 +26,7 @@ public class Base64 {
     }
 
     public static String decode(String a) {
-        return new String(formatDecode(a.replaceAll(" ", "").getBytes()));
+        return new String(formatDecode(a.trim().getBytes()));
     }
 
     public static String encode(String a) {

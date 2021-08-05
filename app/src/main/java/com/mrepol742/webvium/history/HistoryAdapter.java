@@ -45,11 +45,6 @@ public class HistoryAdapter extends MainBaseAdapter {
     private final Context a;
     private final List<HistoryDataModel> w3;
     private final SharedPreferences sp;
-    private final ForegroundColorSpan A;
-    private final ForegroundColorSpan E;
-    private final ForegroundColorSpan S;
-    private final ForegroundColorSpan I;
-    private final ForegroundColorSpan B;
     private final SimpleDateFormat day;
     private final SimpleDateFormat month;
     private final SimpleDateFormat year;
@@ -63,22 +58,6 @@ public class HistoryAdapter extends MainBaseAdapter {
         this.day = new SimpleDateFormat("dd", Locale.US);
         this.month = new SimpleDateFormat("MM", Locale.US);
         this.year = new SimpleDateFormat("yyyy", Locale.US);
-        this.A = new ForegroundColorSpan(Resources.getColor(ct, R.color.a));
-        this.E = new ForegroundColorSpan(Resources.getColor(ct, R.color.e));
-        this.S = new ForegroundColorSpan(Resources.getColor(ct, R.color.s));
-        this.I = new ForegroundColorSpan(Resources.getColor(ct, R.color.i));
-        this.B = new ForegroundColorSpan(Resources.getColor(ct, R.color.b));
-    }
-
-    public static int d(String b) {
-        if (b.startsWith("https://")) {
-            return R.drawable.a15;
-        } else if (b.startsWith("http://")) {
-            return R.drawable.a16;
-        } else if (b.startsWith("file://") || b.startsWith("content://")) {
-            return R.drawable.a17;
-        } 
-        return R.drawable.a8;
     }
 
     public void a(List<HistoryDataModel> w3) {
@@ -86,26 +65,6 @@ public class HistoryAdapter extends MainBaseAdapter {
             this.w3.clear();
             this.w3.addAll(w3);
         }
-    }
-
-    private SpannableString b(String url) {
-        SpannableString ssb = new SpannableString(url);
-        if (url.startsWith("https://")) {
-            ssb.setSpan(this.A, 0, 8, 0);
-        } else if (url.startsWith("http://")) {
-            ssb.setSpan(this.E, 0, 7, 0);
-        } else if (url.startsWith("file://")) {
-            ssb.setSpan(this.S, 0, 7, 0);
-        } else if (url.startsWith("content://") || url.startsWith("webvium://")) {
-            ssb.setSpan(this.S, 0, 10, 0);
-        } else {
-            if (!this.sp.getBoolean("autoUpdate", false)) {
-                ssb.setSpan(this.I, 0, url.length(), 0);
-            } else {
-                ssb.setSpan(this.B, 0, url.length(), 0);
-            }
-        }
-        return ssb;
     }
 
     public HistoryDataModel c(int i) {
@@ -162,8 +121,8 @@ public class HistoryAdapter extends MainBaseAdapter {
                 w17 = (AN) e.getTag();
             }
             w17.a.setText(c(it).ls);
-            w17.c.setImageResource(d(c(it).ls0));
-            w17.b.setText(b(c(it).ls0), TextView.BufferType.SPANNABLE);
+            w17.c.setImageResource(icon(c(it).ls0));
+            w17.b.setText(scheme(c(it).ls0), TextView.BufferType.SPANNABLE);
             Date date = new Date(c(it).ls2);
             String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
             w17.d.setText(fiDate);

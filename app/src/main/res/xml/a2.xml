@@ -35,10 +35,6 @@
         a:title="@string/z50" />
 
     <com.mrepol742.webvium.Pref0 a:title="@string/a22">
-        <com.mrepol742.webvium.Pref
-            a:key="admn"
-            a:summary="@string/a24"
-            a:title="@string/a23" />
         <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="safe"
