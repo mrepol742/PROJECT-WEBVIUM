@@ -26,7 +26,7 @@
         layout="@layout/a18"
         a:layout_width="match_parent"
         a:layout_height="match_parent"
-        a:layout_alignStart="?m"
+        a:layout_marginStart="?m"
         a:layout_marginEnd="?m"
         a:layout_below="@id/o" />
 

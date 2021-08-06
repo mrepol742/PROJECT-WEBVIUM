@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -45,7 +46,7 @@ import com.mrepol742.webvium.util.TextWatcher;
  */
 public class Assi extends BaseActivity {
     private LinearLayout gjj;
-    private Edit p;
+    private EditText p;
     private ImageView iv;
     private ImageView iv1;
     private SearchHelper d2;

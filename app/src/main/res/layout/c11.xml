@@ -49,7 +49,7 @@
                 a:textSize="@dimen/c"
                 tools:ignore="LabelFor" />
 
-            <com.mrepol742.webvium.Edit
+            <EditText
                 a:id="@id/p"
                 a:layout_width="match_parent"
                 a:layout_height="match_parent"

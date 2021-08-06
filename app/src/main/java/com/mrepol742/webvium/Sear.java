@@ -40,6 +40,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -77,7 +78,7 @@ import java.util.Objects;
  * @SearchActivity
  */
 public class Sear extends MainBaseActivity {
-    private Edit p;
+    private EditText p;
     private ListView d;
     private RelativeLayout b19;
     private SearchAdapter aa;
@@ -345,15 +346,15 @@ public class Sear extends MainBaseActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    Sear.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                    SoftKeyboard.hide(Sear.this, b19);
                     String query = p.getText().toString();
-                    if (TextUtils.isEmpty(query)) {
+                    if (!TextUtils.isEmpty(query)) {
+                        Sear.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                        SoftKeyboard.hide(Sear.this, b19);
                         d2.c(query);
                         Sear.this.search(query);
                         Sear.this.finish();
+                        return true;
                     }
-                    return true;
                 }
                 return false;
             }
