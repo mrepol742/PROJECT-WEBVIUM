@@ -45,10 +45,9 @@ import com.mrepol742.webvium.Swit;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.security.SHA;
-
-import android.text.TextWatcher;
-
 import com.mrepol742.webvium.util.AwesomeToast;
+import com.mrepol742.webvium.util.TextWatcher;
+import com.mrepol742.webvium.util.WindowObscured;
 
 import java.util.Objects;
 
@@ -56,6 +55,8 @@ public class SecurityLockFragment extends BasePreferenceFragment {
     private final IntentFilter is = new IntentFilter();
     private Swit spe;
     private R7 r7;
+    private final PasswordTransformationMethod ptm = new PasswordTransformationMethod();
+    private final WindowObscured wo = new WindowObscured();
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,20 +137,8 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         final Edit e15 = a7.findViewById(R.id.e15);
         final Edit a67 = a7.findViewById(R.id.a6);
         int c = Resources.getColor(getActivity(), R.color.c);
-        e15.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
-        a67.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
+        e15.setOnTouchListener(wo);
+        a67.setOnTouchListener(wo);
         int d1 = Resources.getColor(getActivity(), R.color.b);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
@@ -163,20 +152,8 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         a67.setHint(getActivity().getResources().getString(R.string.l1));
         e15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         a67.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        e15.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
-        a67.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
+        e15.setTransformationMethod(ptm);
+        a67.setTransformationMethod(ptm);
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -201,27 +178,8 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-        a67.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+        TextWatcher tw = new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -235,38 +193,12 @@ public class SecurityLockFragment extends BasePreferenceFragment {
                     okButton.setEnabled(false);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        e15.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (e15.getText().toString().length() >= 4) {
-                    if (a67.getText().toString().length() >= 4) {
-                        okButton.setEnabled(a67.getText().toString().equals(e15.getText().toString()));
-                    } else {
-                        okButton.setEnabled(false);
-                    }
-                } else {
-                    okButton.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        };
+        a67.addTextChangedListener(tw);
+        e15.addTextChangedListener(tw);
+        okButton.setOnTouchListener(wo);
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(wo);
+        okButton.setEnabled(false);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -278,13 +210,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         a5.setTitle(getActivity().getResources().getString(R.string.c5));
         a5.setView(a7);
         final Edit e15 = a7.findViewById(R.id.e14);
-        e15.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
+        e15.setOnTouchListener(wo);
         int a15 = Resources.getColor(getActivity(), R.color.c);
         int a16 = Resources.getColor(getActivity(), R.color.b);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -295,13 +221,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         }
         e15.setHint(getActivity().getResources().getString(R.string.g6));
         e15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        e15.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
+        e15.setTransformationMethod(ptm);
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -330,39 +250,17 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         e15.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 okButton.setEnabled(e15.getText().toString().length() >= 4);
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        okButton.setOnTouchListener(wo);
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(wo);
+        okButton.setEnabled(false);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -376,13 +274,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         final Edit e16 = a7.findViewById(R.id.e16);
         int a15 = Resources.getColor(getActivity(), R.color.c);
         int a16 = Resources.getColor(getActivity(), R.color.b);
-        e16.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
+        e16.setOnTouchListener(wo);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sp.getBoolean("autoUpdate", false)) {
             e16.setTextColor(a15);
@@ -391,13 +283,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         }
         e16.setHint(getActivity().getResources().getString(R.string.g6));
         e16.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        e16.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
+        e16.setTransformationMethod(ptm);
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -426,39 +312,17 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         e16.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 okButton.setEnabled(e16.getText().toString().length() >= 4);
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        okButton.setOnTouchListener(wo);
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(wo);
+        okButton.setEnabled(false);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -511,27 +375,9 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         e15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         a67.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         l15.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        e15.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
-        a67.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
-        l15.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
+        e15.setTransformationMethod(ptm);
+        a67.setTransformationMethod(ptm);
+        l15.setTransformationMethod(ptm);
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -561,27 +407,8 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-        a67.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+        TextWatcher tw = new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -599,72 +426,13 @@ public class SecurityLockFragment extends BasePreferenceFragment {
                     okButton.setEnabled(false);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        e15.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (e15.getText().toString().length() >= 4) {
-                    if (a67.getText().toString().length() >= 4 && !a67.getText().toString().equals(e15.getText().toString())) {
-                        if (l15.getText().toString().length() >= 4 && !l15.getText().toString().equals(e15.getText().toString())) {
-                            okButton.setEnabled(a67.getText().toString().equals(l15.getText().toString()));
-                        } else {
-                            okButton.setEnabled(false);
-                        }
-                    } else {
-                        okButton.setEnabled(false);
-                    }
-                } else {
-                    okButton.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-
-        });
-        l15.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (e15.getText().toString().length() >= 4) {
-                    if (a67.getText().toString().length() >= 4 && !a67.getText().toString().equals(e15.getText().toString())) {
-                        if (l15.getText().toString().length() >= 4 && !l15.getText().toString().equals(e15.getText().toString())) {
-                            okButton.setEnabled(a67.getText().toString().equals(l15.getText().toString()));
-                        } else {
-                            okButton.setEnabled(false);
-                        }
-                    } else {
-                        okButton.setEnabled(false);
-                    }
-                } else {
-                    okButton.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        };
+        a67.addTextChangedListener(tw);
+        e15.addTextChangedListener(tw);
+        l15.addTextChangedListener(tw);
+        okButton.setOnTouchListener(wo);
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(wo);
+        okButton.setEnabled(false);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -693,13 +461,7 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         }
         e16.setHint(getActivity().getResources().getString(R.string.g6));
         e16.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        e16.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
+        e16.setTransformationMethod(ptm);
         a5.setPositiveButton(getResources().getString(R.string.i6), new DialogInterface.OnClickListener() {
 
             @Override
@@ -730,39 +492,17 @@ public class SecurityLockFragment extends BasePreferenceFragment {
         final AlertDialog d = a5.create();
         Objects.requireNonNull(d.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
-        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-            }
-        });
         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
         e16.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 okButton.setEnabled(e16.getText().toString().length() >= 4);
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        okButton.setOnTouchListener(wo);
+        d.getButton(AlertDialog.BUTTON_NEGATIVE).setOnTouchListener(wo);
+        okButton.setEnabled(false);
     }
 
     private class R7 extends BroadcastReceiver {

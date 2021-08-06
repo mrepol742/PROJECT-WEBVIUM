@@ -42,6 +42,7 @@ import com.mrepol742.webvium.app.Vibrator;
 import com.mrepol742.webvium.security.SHA;
 import com.mrepol742.webvium.util.BitmapCache;
 import com.mrepol742.webvium.util.AwesomeToast;
+import com.mrepol742.webvium.util.WindowObscured;
 
 import java.io.File;
 import java.util.Objects;
@@ -83,30 +84,19 @@ public class Lock extends MainBaseActivity implements View.OnClickListener, View
         int f = Resources.getColor(this, R.color.c);
         int g = Resources.getColor(this, R.color.b);
         tv1.setTextColor(f);
+        WindowObscured wo = new WindowObscured();
         for (int it2 : ids) {
             if (it2 == R.id.i9) {
                 ImageView iw1 = findViewById(it2);
                 iw1.setImageResource(R.drawable.b27);
                 iw1.setOnClickListener(this);
                 iw1.setOnLongClickListener(this);
-                iw1.setOnTouchListener(new View.OnTouchListener() {
-
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-                    }
-                });
+                iw1.setOnTouchListener(wo);
             } else if (it2 == R.id.j1) {
                 ImageView j1 = findViewById(it2);
                 j1.setImageResource(R.drawable.b28);
                 j1.setOnClickListener(this);
-                j1.setOnTouchListener(new View.OnTouchListener() {
-
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-                    }
-                });
+                j1.setOnTouchListener(wo);
                 j1.setOnLongClickListener(this);
             } else {
                 TextView tv = findViewById(it2);
@@ -114,13 +104,7 @@ public class Lock extends MainBaseActivity implements View.OnClickListener, View
                 tv.setBackgroundResource(R.drawable.a26);
                 tv.setOnClickListener(this);
                 tv.setOnLongClickListener(this);
-                tv.setOnTouchListener(new View.OnTouchListener() {
-
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-                    }
-                });
+                tv.setOnTouchListener(wo);
                 tv.setTypeface(type(Typeface.BOLD));
                 tv.setText(a(it2));
             }

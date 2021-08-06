@@ -71,9 +71,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.format.Formatter;
-import android.text.method.PasswordTransformationMethod;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -119,6 +117,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
+
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.GeolocationDataModel;
 import com.mrepol742.webvium.app.Intents;
@@ -159,6 +158,8 @@ import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.IdentityGenerator;
 import com.mrepol742.webvium.util.PassGen;
+import com.mrepol742.webvium.util.PasswordTransformationMethod;
+import com.mrepol742.webvium.util.TextWatcher;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -1625,21 +1626,11 @@ ct = 0;
                     sjs.addTextChangedListener(new TextWatcher() {
 
                         @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                        }
-
-                        @Override
                         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                             okButton.setEnabled(sjs.getText().toString().length() != 0);
                         }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-
-                        }
                     });
-                    g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    okButton.setEnabled(false);
                     return true;
                 }
                 return false;
@@ -2688,11 +2679,6 @@ ct = 0;
             s.addTextChangedListener(new TextWatcher() {
 
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     String sg78 = StorageDirectory.getWebviumDir() + "/Downloads/" + charSequence;
                     j.setText(sg78);
@@ -2707,11 +2693,6 @@ ct = 0;
                     } else {
                         okButton.setEnabled(false);
                     }
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
                 }
             });
             String jhh56 = s.getText().toString();
@@ -2806,41 +2787,10 @@ ct = 0;
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        TextWatcher tw = new TextWatcher(ed, ed1, okButton);
+        ed.addTextChangedListener(tw);
+        ed1.addTextChangedListener(tw);
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -3491,11 +3441,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -3512,11 +3457,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
         final AlertDialog g = a.create();
@@ -3981,11 +3921,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(charSequence)) {
                     if (TextUtils.isEmpty(ed1.getText().toString())) {
@@ -4003,29 +3938,8 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     okButton.setEnabled(false);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        ed1.addTextChangedListener(new TextWatcher(ed, ed1, okButton));
         if (TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString())) {
             java.io.File file = new java.io.File(StorageDirectory.getWebviumDir() + "/Downloads/" + ed.getText().toString());
             if (file.exists()) {
@@ -4134,41 +4048,10 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString()) && TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        TextWatcher tw = new TextWatcher(ed, ed1, okButton);
+        ed.addTextChangedListener(tw);
+        ed1.addTextChangedListener(tw);
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void c68(View a) {
@@ -4596,11 +4479,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String sg = StorageDirectory.getWebviumDir() + "/Downloads/" + charSequence;
                 ti3.setText(sg);
@@ -4614,11 +4492,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 } else {
                     okButton.setEnabled(false);
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
         if (TextUtils.isEmpty(ed.getText().toString())) {
@@ -4719,11 +4592,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -4740,11 +4608,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
         g.show();
@@ -4829,15 +4692,8 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
         }
         ed.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        ed.setTransformationMethod(new PasswordTransformationMethod() {
-
-            @Override
-            public CharSequence getTransformation(CharSequence source, View view) {
-                return source;
-            }
-        });
+        ed.setTransformationMethod(new PasswordTransformationMethod());
         bn.setText(getString(R.string.e28));
-
         bn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -4906,14 +4762,11 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         Button bn = c.findViewById(R.id.k14);
         int e = Resources.getColor(this, R.color.c);
         int f = Resources.getColor(this, R.color.b);
-
         if (!a221().getBoolean("autoUpdate", false)) {
             ti.setTextColor(e);
-
             bn.setTextColor(e);
         } else {
             ti.setTextColor(f);
-
             bn.setTextColor(f);
         }
         Html.a(ti, IdentityGenerator.a(getResources().getQuantityString(R.plurals.m23, 23)));
@@ -5004,11 +4857,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -5025,11 +4873,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
         final AlertDialog g = a.create();
@@ -5142,11 +4985,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (ed.hasFocus()) {
                     try {
@@ -5161,17 +4999,8 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     }
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
         });
         ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -5187,10 +5016,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                         ed1.setError(getString(R.string.y75));
                     }
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
             }
         });
         final AlertDialog g = a.create();
@@ -5909,20 +5734,12 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         jjj.addTextChangedListener(new TextWatcher() {
 
                 @Override
-                public void beforeTextChanged(CharSequence p1, int p2, int p3, int p4) {
-                }
-
-                @Override
                 public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
                     if (!p1.toString().trim().equals("")) {
                         currentTab().findAllAsync(p1.toString());
                     } else {
                         currentTab().findAllAsync("");
                     }
-                }
-
-                @Override
-                public void afterTextChanged(Editable p1) {
                 }
             });
         if (!iFP) {

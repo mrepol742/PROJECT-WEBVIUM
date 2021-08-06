@@ -21,9 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,7 +32,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.webkit.WebStorage;
 
-import com.mrepol742.webvium.Devi;
 import com.mrepol742.webvium.Edit0;
 import com.mrepol742.webvium.Lock;
 import com.mrepol742.webvium.List;
@@ -61,7 +58,6 @@ public class AdvancedFragment extends BasePreferenceFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 345 && resultCode == Activity.RESULT_OK) {
             Intents.e(getActivity(), "search", Sett.FRAGMENT_SECURITY_LOCK, Sett.class);
-
         }
         if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
             Intents.e(getActivity(), "search", Sett.FRAGMENT_PRETEND_MODE, Sett.class);

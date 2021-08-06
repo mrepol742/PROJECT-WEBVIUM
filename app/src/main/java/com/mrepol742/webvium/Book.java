@@ -52,14 +52,12 @@ import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.util.Html;
-
-import android.text.TextWatcher;
-
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
+import com.mrepol742.webvium.util.TextWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -319,7 +317,6 @@ public class Book extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a2, int it) {
-                //  m(ed.getText().toString() ,ed1.getText().toString());
                 Book.this.shrt(ed.getText().toString(), ed1.getText().toString(), R.mipmap.w);
                 a2.dismiss();
             }
@@ -334,26 +331,10 @@ public class Book extends BaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        TextWatcher tw = new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString().trim()) && TextUtils.isEmpty(charSequence.toString().trim()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
+        TextWatcher tw = new TextWatcher(ed, ed1, okButton);
         ed.addTextChangedListener(tw);
         ed1.addTextChangedListener(tw);
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void b(String a) {
@@ -376,7 +357,6 @@ public class Book extends BaseActivity {
         final Edit ed1 = c.findViewById(R.id.f12);
         int e = Resources.getColor(this, R.color.c);
         int f = Resources.getColor(this, R.color.b);
-
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ed1.setTextColor(e);
@@ -417,26 +397,10 @@ public class Book extends BaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        TextWatcher tw = new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString().trim()) && TextUtils.isEmpty(charSequence.toString().trim()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
+        TextWatcher tw = new TextWatcher(ed, ed1, okButton);
         ed.addTextChangedListener(tw);
         ed1.addTextChangedListener(tw);
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void d() {
@@ -617,11 +581,6 @@ public class Book extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -638,11 +597,6 @@ public class Book extends BaseActivity {
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
         g.show();
@@ -718,11 +672,6 @@ public class Book extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -740,13 +689,6 @@ public class Book extends BaseActivity {
                     bn.setBackgroundResource(R.drawable.c11);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-
-
         });
         final AlertDialog g = a.create();
         g.show();
@@ -797,7 +739,6 @@ public class Book extends BaseActivity {
         final Edit ed1 = c.findViewById(R.id.f12);
         int e = Resources.getColor(this, R.color.c);
         int f = Resources.getColor(this, R.color.b);
-
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ed1.setTextColor(e);
@@ -832,26 +773,10 @@ public class Book extends BaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        TextWatcher tw = new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(ed1.getText().toString().trim()) && TextUtils.isEmpty(charSequence.toString().trim()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
+        TextWatcher tw = new TextWatcher(ed, ed1, okButton);
         ed.addTextChangedListener(tw);
         ed1.addTextChangedListener(tw);
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private int p(int i) {
@@ -939,11 +864,6 @@ public class Book extends BaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String url = ed.getText().toString().trim();
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -960,11 +880,6 @@ public class Book extends BaseActivity {
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
         final AlertDialog g = a.create();

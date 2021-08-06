@@ -320,7 +320,5 @@ public class Tool extends BaseActivity {
             ex.printStackTrace();
         }
     }
-
-
 }
  

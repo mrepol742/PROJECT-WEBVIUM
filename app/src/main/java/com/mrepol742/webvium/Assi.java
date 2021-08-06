@@ -36,10 +36,9 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.search.SearchHelper;
-import android.text.TextWatcher;
-
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.app.SoftKeyboard;
+import com.mrepol742.webvium.util.TextWatcher;
 
 /*
  * @AssistantActivity
@@ -88,18 +87,8 @@ public class Assi extends BaseActivity {
         p.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 e();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
         ActionBar ab = getActionBar();

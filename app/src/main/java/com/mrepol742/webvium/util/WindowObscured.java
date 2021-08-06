@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain changedTo copy of the License at
+ * You may obtain a copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -15,28 +15,17 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium;
+package com.mrepol742.webvium.util;
 
-import android.app.admin.DeviceAdminReceiver;
-import android.content.Context;
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.view.MotionEvent;
+import android.view.View;
 
-/*
- * @DeviceAdminReceiver
- */
-public class Devi extends DeviceAdminReceiver {
+public class WindowObscured implements View.OnTouchListener {
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onEnabled(Context context, Intent intent) {
-    }
-
-    @Override
-    public CharSequence onDisableRequested(Context context, Intent intent) {
-        return "";
-    }
-
-    @Override
-    public void onDisabled(Context context, Intent intent) {
-
+    public boolean onTouch(View v, MotionEvent event) {
+        return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
     }
 }

@@ -36,6 +36,7 @@ import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.security.SHA;
 import com.mrepol742.webvium.util.AwesomeToast;
+import com.mrepol742.webvium.util.WindowObscured;
 
 /*
  * @PretendModeActivity
@@ -100,13 +101,7 @@ public class Pret extends MainBaseActivity implements View.OnClickListener, View
             }
             tv4.setOnClickListener(this);
             tv4.setOnLongClickListener(this);
-            tv4.setOnTouchListener(new View.OnTouchListener() {
-
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return (event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0;
-                }
-            });
+            tv4.setOnTouchListener(new WindowObscured());
         }
         w4.getSettings().setJavaScriptEnabled(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

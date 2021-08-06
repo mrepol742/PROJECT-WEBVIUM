@@ -30,7 +30,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -66,6 +65,7 @@ import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
 import com.mrepol742.webvium.util.BitmapCache;
+import com.mrepol742.webvium.util.TextWatcher;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -258,11 +258,6 @@ public class Sear extends MainBaseActivity {
         });
         d.setAdapter(aa);
         p.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -543,7 +538,6 @@ public class Sear extends MainBaseActivity {
         final Edit ed1 = c.findViewById(R.id.f12);
         int e = Resources.getColor(this, R.color.c);
         int f = Resources.getColor(this, R.color.b);
-
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ed1.setTextColor(e);
@@ -578,42 +572,10 @@ public class Sear extends MainBaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed.getText().toString()));
+        TextWatcher tw = new TextWatcher(ed, ed1, okButton);
+        ed.addTextChangedListener(tw);
+        ed1.addTextChangedListener(tw);
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed.getText().toString()));
     }
 
     private void p(View w) {
@@ -646,8 +608,6 @@ public class Sear extends MainBaseActivity {
 
     private void s(String a23) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
-
-
         LayoutInflater b = getLayoutInflater();
         View c = b.inflate(R.layout.z, null);
         a.setCancelable(true);
@@ -659,7 +619,6 @@ public class Sear extends MainBaseActivity {
         final Edit ed1 = c.findViewById(R.id.f12);
         int e = Resources.getColor(this, R.color.c);
         int f = Resources.getColor(this, R.color.b);
-
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ed1.setTextColor(e);
@@ -693,41 +652,10 @@ public class Sear extends MainBaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        ed1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        TextWatcher tw = new TextWatcher(ed, ed1, okButton);
+        ed.addTextChangedListener(tw);
+        ed1.addTextChangedListener(tw);
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void t(String a) {
@@ -750,7 +678,6 @@ public class Sear extends MainBaseActivity {
         final Edit ed = c.findViewById(R.id.e3);
         int e = Resources.getColor(this, R.color.c);
         int f = Resources.getColor(this, R.color.b);
-
         if (!a221().getBoolean("autoUpdate", false)) {
             ed.setTextColor(e);
             ti.setTextColor(e);
@@ -783,22 +710,11 @@ public class Sear extends MainBaseActivity {
         ed.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 okButton.setEnabled(TextUtils.isEmpty(charSequence));
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-
         });
-        g.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(TextUtils.isEmpty(ed.getText().toString()));
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()));
     }
 
     @Override
