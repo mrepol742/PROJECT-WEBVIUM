@@ -65,16 +65,6 @@
             a:title="@string/l19" />
 
     </com.mrepol742.webvium.Pref0>
-    <com.mrepol742.webvium.Pref0 a:title="@string/n12">
-        <com.mrepol742.webvium.Swit
-            a:defaultValue="true"
-            a:key="acu"
-            a:title="@string/n11" />
-
-        <com.mrepol742.webvium.Pref
-            a:key="cfu"
-            a:title="@string/m2" />
-    </com.mrepol742.webvium.Pref0>
 
     <com.mrepol742.webvium.Pref0 a:title="@string/y">
         <com.mrepol742.webvium.Swit

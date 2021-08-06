@@ -33,7 +33,23 @@
         a:summary="@string/y30"
         a:title="@string/m7" />
     <com.mrepol742.webvium.Pref0 a:title="@string/n12">
-        <com.mrepol742.webvium.Pref a:key="ml1" />
+        <com.mrepol742.webvium.Swit
+            a:defaultValue="true"
+            a:key="acu"
+            a:title="@string/n11" />
+
+        <com.mrepol742.webvium.List
+            a:defaultValue="1z"
+            a:dialogTitle="@string/z103"
+            a:entries="@array/b21"
+            a:entryValues="@array/b22"
+            a:key="updCH7"
+            a:summary="%1$s"
+            a:title="@string/z102" />
+
+        <com.mrepol742.webvium.Pref
+            a:key="cfu"
+            a:title="@string/m2" />
     </com.mrepol742.webvium.Pref0>
 
 </PreferenceScreen>

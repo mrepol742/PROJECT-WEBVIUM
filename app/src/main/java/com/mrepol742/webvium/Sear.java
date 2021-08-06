@@ -188,42 +188,42 @@ public class Sear extends MainBaseActivity {
                 }
             }
             rest.close();
-            if (a221().getBoolean("showBKM", false)) {
-                BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
-                Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_BOOKMARK +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC ", null);
-                if (rest1.getCount() != 0) {
-                    boolean bn = !a221().getBoolean("showLKS", false);
-                    while (rest1.moveToNext()) {
-                        if (bn) {
-                            ls.add(new SearchDataModel(rest.getString(1), BOOKMARK));
-                        }
-                        ls.add(new SearchDataModel(rest.getString(2), BOOKMARK));
+        }
+        if (a221().getBoolean("showBKM", false)) {
+            BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
+            Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+                    Sqlite.TABLE_BOOKMARK +
+                    " ORDER BY " +
+                    "_id" +
+                    " DESC ", null);
+            if (rest1.getCount() != 0) {
+                boolean bn = !a221().getBoolean("showLKS", false);
+                while (rest1.moveToNext()) {
+                    if (bn) {
+                        ls.add(new SearchDataModel(rest1.getString(1), BOOKMARK));
                     }
+                    ls.add(new SearchDataModel(rest1.getString(2), BOOKMARK));
                 }
-                rest1.close();
             }
-            if (a221().getBoolean("showDLM", false)) {
-                DownloadHelper d31 = DownloadHelper.getInstance(getApplicationContext());
-                Cursor rest2 = d31.getReadableDatabase().rawQuery("SELECT * FROM " +
-                        Sqlite.TABLE_DOWNLOAD +
-                        " ORDER BY " +
-                        "_id" +
-                        " DESC ", null);
-                if (rest2.getCount() != 0) {
-                    boolean bn12 = !a221().getBoolean("showLKS", false);
-                    while (rest2.moveToNext()) {
-                        if (bn12) {
-                            ls.add(new SearchDataModel(rest2.getString(1), DOWNLOAD));
-                        }
-                        ls.add(new SearchDataModel(rest2.getString(2), DOWNLOAD));
+            rest1.close();
+        }
+        if (a221().getBoolean("showDLM", false)) {
+            DownloadHelper d31 = DownloadHelper.getInstance(getApplicationContext());
+            Cursor rest2 = d31.getReadableDatabase().rawQuery("SELECT * FROM " +
+                    Sqlite.TABLE_DOWNLOAD +
+                    " ORDER BY " +
+                    "_id" +
+                    " DESC ", null);
+            if (rest2.getCount() != 0) {
+                boolean bn12 = !a221().getBoolean("showLKS", false);
+                while (rest2.moveToNext()) {
+                    if (bn12) {
+                        ls.add(new SearchDataModel(rest2.getString(1), DOWNLOAD));
                     }
+                    ls.add(new SearchDataModel(rest2.getString(2), DOWNLOAD));
                 }
-                rest2.close();
             }
+            rest2.close();
         }
         aa = new SearchAdapter(this, ls);
         // TODO:failed
@@ -232,18 +232,17 @@ public class Sear extends MainBaseActivity {
         }
 
          */
-        if (Objects.equals(a221().getString("arrange", ""), "7z")) {
+        if (Objects.equals(a221().getString("arrange", "30z"), "7z")) {
             Collections.sort(ls, Collections.reverseOrder());
         }
-        if (Objects.equals(a221().getString("arrange", ""), "60z")) {
+        if (Objects.equals(a221().getString("arrange", "30z"), "60z")) {
             Collections.reverse(ls);
         }
-
         d.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int c1, long l) {
-                Sear.this.search(aa.getItem(c1).toString());
+                Sear.this.search(aa.c(c1).data);
                 Sear.this.finish();
                 SoftKeyboard.hide(Sear.this, b19);
             }
@@ -252,7 +251,7 @@ public class Sear extends MainBaseActivity {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                query23 = aa.getItem(i).toString();
+                query23 = aa.c(i).data;
                 Sear.this.p(view);
                 return true;
             }

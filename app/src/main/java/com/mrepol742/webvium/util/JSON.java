@@ -20,6 +20,7 @@ package com.mrepol742.webvium.util;
 import android.database.Cursor;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.Sqlite;
+import com.mrepol742.webvium.app.UpdateDataModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,14 +35,16 @@ public class JSON {
 
     }
 
-    public static int[] getUpdate(String sg) {
+    public static UpdateDataModel getUpdate(String sg, String build) {
         try {
-            JSONObject root = new JSONObject(sg);
-            return new int[]{root.getInt("versionName"), root.getInt("versionCode")};
+            JSONObject a = new JSONObject(sg);
+            JSONArray c = a.getJSONArray(build);
+            JSONObject b = new JSONObject(c.get(0).toString());
+            return new UpdateDataModel(b.getString("url"), b.getInt("name"), b.getInt("code"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return new int[]{0, 0};
+        return null;
     }
 
     public static String toString(Cursor cursor, int id) {

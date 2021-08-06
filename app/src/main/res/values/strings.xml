@@ -246,7 +246,7 @@
     <string name="l19">Colorized</string>
     <string name="l20">Whether the notification should be colorized</string>
     <string name="m1">Failed to start safe browsing.</string>
-    <string name="m2">Check for Update</string>
+    <string name="m2">Update Now</string>
     <string name="m3">Browse</string>
     <string name="m5">Clipboard</string>
     <string name="m6">Notification Service</string>
@@ -881,4 +881,9 @@
     <string name="z97">Bookmarks</string>
     <string name="z98">Suggest Download</string>
     <string name="z99">Query Type</string>
+    <string name="z100">Development</string>
+    <string name="z101">Stable</string>
+    <string name="z102">Update Channel</string>
+    <string name="z103">Set Update Channel</string>
+
 </resources>

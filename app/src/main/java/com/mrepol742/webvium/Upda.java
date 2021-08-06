@@ -31,6 +31,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Notifications;
+import com.mrepol742.webvium.app.UpdateDataModel;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
@@ -44,8 +45,6 @@ import java.util.Objects;
 /*
  * @UpdateService
  */
-
-// TODO: under programming
 public class Upda extends Service {
     private SharedPreferences sp;
     private final String updateUrl = "https://mrepol742.github.io/PROJECT-WEBVIUM/update.json";
@@ -64,15 +63,13 @@ public class Upda extends Service {
                 @Override
                 public void run() {
                     try {
-                        int versionName = Integer.parseInt(Package.e(Upda.this).replaceAll("\\.", "_"));
-                        int versionCode = 1;
-                        int[] newUpdate = JSON.getUpdate(Stream.f(updateUrl, "742"));
-                        if (newUpdate[0] == 0) {
+                        int versionName = Integer.parseInt(Package.e(Upda.this).replaceAll("\\.", ""));
+                        int versionCode = Package.f(Upda.this);
+                        UpdateDataModel newUpdate = JSON.getUpdate(Stream.f(updateUrl, "0"), "rel");
+                        if (newUpdate == null) {
                             b();
-                        } else if (newUpdate[0] > versionName) {
-
-                        } else if (newUpdate[0] == versionName && newUpdate[1] > versionCode) {
-
+                        } else if (newUpdate.name > versionName || (newUpdate.name == versionName && newUpdate.code > versionCode)) {
+                            a();
                         }
                     } catch (PackageManager.NameNotFoundException w) {
                         w.printStackTrace();
@@ -151,5 +148,4 @@ public class Upda extends Service {
         PendingIntent it = PendingIntent.getService(Upda.this, 0, new Intent(Upda.this, Upda.class), PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, it);
     }
-
 }

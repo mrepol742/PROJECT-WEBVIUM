@@ -495,4 +495,13 @@
         <item name="120z">120z</item>
 
     </string-array>
+
+    <string-array name="b21">
+    <item name="1z">@string/z100</item>
+    <item name="7z">@string/z101</item>
+    </string-array>
+    <string-array name="b22">
+    <item name="1z">1z</item>
+    <item name="7z">7z</item>
+    </string-array>
 </resources>

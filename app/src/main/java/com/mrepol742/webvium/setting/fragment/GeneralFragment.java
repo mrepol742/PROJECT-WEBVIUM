@@ -129,16 +129,6 @@ public class GeneralFragment extends BasePreferenceFragment {
                     return true;
                 }
             });
-            Pref a1 = (Pref) findPreference("cfu");
-            a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intents.b(GeneralFragment.this.getActivity(), Upda.class);
-                    AwesomeToast.b(GeneralFragment.this.getActivity(), GeneralFragment.this.getString(R.string.m30));
-                    return true;
-                }
-            });
         } catch (Exception ex) {
             ex.printStackTrace();
         }
