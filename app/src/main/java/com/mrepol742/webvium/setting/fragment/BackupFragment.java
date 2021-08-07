@@ -77,7 +77,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 BackupFragment.this.a6();
                 return true;
             case "ets":
-                back("Settings_" + format() + ".bac", SETTINGS);
+                back("Settings_" + format() + ".json", SETTINGS);
                 return true;
             case "se":
                 SearchHelper d1a = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
@@ -412,13 +412,13 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
 
     private String getName(int id) {
         if (id == 0) {
-            return "Bookmark_" + format() + ".bac";
+            return "Bookmark_" + format() + ".json";
         } else if (id == 1) {
-            return "Download_" + format() + ".bac";
+            return "Download_" + format() + ".json";
         } else if (id == 2) {
-            return "History_" + format() + ".bac";
+            return "History_" + format() + ".json";
         }
-        return "Search_" + format() + ".bac";
+        return "Search_" + format() + ".json";
     }
 
     private String location(int id) {
@@ -536,7 +536,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
     private void back(String name, int id) {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("text/plain");
+        intent.setType("text/json");
         intent.putExtra(Intent.EXTRA_TITLE, name);
         startActivityForResult(intent, id);
     }
