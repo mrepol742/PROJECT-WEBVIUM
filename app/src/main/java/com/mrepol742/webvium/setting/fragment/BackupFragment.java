@@ -63,6 +63,12 @@ import java.util.Map;
 public class BackupFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
     private final IntentFilter is = new IntentFilter();
     private R7 r7;
+    private static final int SEARCH = 0;
+    private static final int DOWNLOAD = 1;
+    private static final int HISTORY = 2;
+    private static final int BOOKMARK = 3;
+    private static final int SETTINGS = 4;
+    private static final int APK = 5;
 
     @Override
     public boolean onPreferenceClick(Preference a123) {
@@ -71,19 +77,47 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 BackupFragment.this.a6();
                 return true;
             case "ets":
-                BackupFragment.this.a13();
+                back("Settings_" + format() + ".bac", SETTINGS);
                 return true;
             case "se":
-                BackupFragment.this.a17();
+                SearchHelper d1a = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resa = d1a.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
+                if (resa.getCount() == 0) {
+                    g(BackupFragment.this.getString(R.string.v27));
+                } else {
+                    back(getName(4), SEARCH);
+                }
+                resa.close();
                 return true;
             case "he":
-                BackupFragment.this.b1();
+                HistoryHelper d1b = HistoryHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resb = d1b.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
+                if (resb.getCount() == 0) {
+                    g(BackupFragment.this.getString(R.string.v27));
+                } else {
+                    back(getName(2), HISTORY);
+                }
+                resb.close();
                 return true;
             case "be":
-                BackupFragment.this.b5();
+                BookmarkHelper d1c = BookmarkHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resc = d1c.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
+                if (resc.getCount() == 0) {
+                    g(BackupFragment.this.getString(R.string.v27));
+                } else {
+                    back(getName(0), BOOKMARK);
+                }
+                resc.close();
                 return true;
             case "do":
-                BackupFragment.this.b9();
+                DownloadHelper d1d = DownloadHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resd = d1d.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
+                if (resd.getCount() == 0) {
+                    g(BackupFragment.this.getString(R.string.v27));
+                } else {
+                    back(getName(1), DOWNLOAD);
+                }
+                resd.close();
                 return true;
             case "bcP":
                 // TODO: initiated backup
@@ -98,8 +132,39 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 345 && resultCode != Activity.RESULT_OK) {
-            getActivity().getFragmentManager().popBackStack();
+        switch (requestCode) {
+            case 345:
+                if (resultCode != Activity.RESULT_OK) {
+                    getActivity().getFragmentManager().popBackStack();
+                }
+                break;
+            case SETTINGS:
+                FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(PreferenceManager.getDefaultSharedPreferences(BackupFragment.this.getActivity()).getAll()));
+                break;
+            case SEARCH:
+                SearchHelper d1a = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resa = d1a.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
+                FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resa, 4));
+                resa.close();
+                break;
+            case HISTORY:
+                HistoryHelper d1b = HistoryHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resb = d1b.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
+                FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resb, 2));
+                resb.close();
+                break;
+            case BOOKMARK:
+                BookmarkHelper d1c = BookmarkHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resc = d1c.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
+                FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resc, 0));
+                resc.close();
+                break;
+            case DOWNLOAD:
+                DownloadHelper d1d = DownloadHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
+                Cursor resd = d1d.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
+                FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resd, 1));
+                resd.close();
+                break;
         }
     }
 
@@ -194,7 +259,6 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                createFolder();
                 write(PreferenceManager.getDefaultSharedPreferences(BackupFragment.this.getActivity()).getAll());
                 a12.dismiss();
             }
@@ -467,6 +531,14 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
         if (Build.VERSION.SDK_INT < 30) {
             FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
         }
+    }
+
+    private void back(String name, int id) {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TITLE, name);
+        startActivityForResult(intent, id);
     }
 
     private class R7 extends BroadcastReceiver {

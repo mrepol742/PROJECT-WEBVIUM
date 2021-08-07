@@ -29,6 +29,7 @@ public class TextWatcher implements android.text.TextWatcher {
     private EditText ed;
     private EditText ed1;
 
+    @Keep
     public TextWatcher() {
 
     }

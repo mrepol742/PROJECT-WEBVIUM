@@ -98,9 +98,10 @@ public class AdvancedFragment extends BasePreferenceFragment implements Preferen
                 java10.setEnabled(bn);
                 java11.setEnabled(bn);
                 java12.setEnabled(bn);
-                javaweb.setEnabled(bn);
+                if (Build.VERSION.SDK_INT >= 29) {
+                    javaweb.setEnabled(bn);
+                }
                 return true;
-
         }
         return false;
     }
@@ -108,30 +109,6 @@ public class AdvancedFragment extends BasePreferenceFragment implements Preferen
     @Override
     public boolean onPreferenceClick(Preference a123) {
         switch (a123.getKey()) {
-            case "cjsa":
-                AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                a.setCancelable(true);
-                a.setTitle(getString(R.string.c));
-                a.setMessage(getString(R.string.a33));
-                a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a12, int intetg) {
-                        WebStorage.getInstance().deleteAllData();
-                        AwesomeToast.b(getActivity(), AdvancedFragment.this.getString(R.string.a34));
-                        a12.dismiss();
-
-                    }
-                });
-                a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a1, int intetg) {
-                        a1.dismiss();
-                    }
-                });
-                a.create().show();
-                return true;
             case "wPretend":
                 if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
                     Intent it = new Intent(AdvancedFragment.this.getActivity(), Lock.class);
@@ -199,11 +176,11 @@ public class AdvancedFragment extends BasePreferenceFragment implements Preferen
         java10 = (Swit) findPreference("Java10");
         java11 = (Swit) findPreference("Java11");
         java12 = (Swit) findPreference("Java12");
-        javaweb = (Swit) findPreference("Javaweb");
+        if (Build.VERSION.SDK_INT >= 29) {
+            javaweb = (Swit) findPreference("Javaweb");
+        }
         List java = (List) findPreference("java");
         java.setOnPreferenceChangeListener(this);
-        Pref pc = (Pref) findPreference("cjsa");
-        pc.setOnPreferenceClickListener(this);
     }
 
     @Override

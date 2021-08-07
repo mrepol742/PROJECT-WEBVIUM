@@ -18,10 +18,12 @@
 package com.mrepol742.webvium.util;
 
 import android.annotation.TargetApi;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
 import com.mrepol742.webvium.annotation.Keep;
@@ -169,6 +171,25 @@ public class FileUtil {
             @Override
             public void run() {
                 write(new File(location), data, readOnly);
+            }
+        };
+        new Thread(re).start();
+    }
+
+    public static void write(final ContentResolver cr, final Uri uri, final String data) {
+        Runnable re = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    ParcelFileDescriptor pfd = cr.openFileDescriptor(uri, "w");
+                    FileOutputStream fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
+                    fileOutputStream.write((data).getBytes());
+                    fileOutputStream.close();
+                    pfd.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         new Thread(re).start();

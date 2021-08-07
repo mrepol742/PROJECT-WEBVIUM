@@ -28,6 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.webkit.CookieManager;
+import android.webkit.WebStorage;
 import android.webkit.WebViewDatabase;
 
 import com.mrepol742.webvium.Clip;
@@ -35,6 +36,7 @@ import com.mrepol742.webvium.Edit0;
 import com.mrepol742.webvium.List;
 import com.mrepol742.webvium.Lock;
 import com.mrepol742.webvium.Mana;
+import com.mrepol742.webvium.Pref;
 import com.mrepol742.webvium.Webv;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.Swit;
@@ -94,6 +96,29 @@ public class PrivacyFragment extends BasePreferenceFragment implements Preferenc
     @Override
     public boolean onPreferenceClick(Preference a1) {
         switch (a1.getKey()) {
+            case "cjsa":
+                AlertDialog.Builder a45 = new AlertDialog.Builder(getActivity());
+                a45.setCancelable(true);
+                a45.setTitle(getString(R.string.c));
+                a45.setMessage(getString(R.string.a33));
+                a45.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a12, int intetg) {
+                        WebStorage.getInstance().deleteAllData();
+                        AwesomeToast.b(getActivity(), PrivacyFragment.this.getString(R.string.a34));
+                        a12.dismiss();
+                    }
+                });
+                a45.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int intetg) {
+                        a1.dismiss();
+                    }
+                });
+                a45.create().show();
+                return true;
             case "clearCache":
             case "clearBook":
                 Intents.a(getActivity(), Mana.class);
@@ -274,6 +299,10 @@ public class PrivacyFragment extends BasePreferenceFragment implements Preferenc
         j5.setOnPreferenceClickListener(this);
         Swit cbf = (Swit) findPreference("nCV");
         cbf.setOnPreferenceChangeListener(this);
+        if (Build.VERSION.SDK_INT >= 26) {
+            Pref pc = (Pref) findPreference("cjsa");
+            pc.setOnPreferenceClickListener(this);
+        }
     }
 
     @Override
