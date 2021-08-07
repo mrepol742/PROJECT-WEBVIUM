@@ -267,7 +267,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
         o22.setVisibility(View.GONE);
         o21.setBackgroundResource(R.drawable.c6);
         o21.setImageResource(R.drawable.a24);
-        o21.setOnClickListener(thsi);
+        o21.setOnClickListener(this);
     }
 
     @Override

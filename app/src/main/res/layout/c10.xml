@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
 	xmlns:a="http://schemas.android.com/apk/res/android"
 	a:layout_width="match_parent"
 	a:layout_height="wrap_content"
@@ -7,28 +7,27 @@
     a:id="@id/o50"
 	a:paddingRight="10dp">
 
-	<ImageView a:src="@drawable/g10" a:layout_alignParentStart="true"
-		a:layout_height="match_parent"
-		a:layout_width="wrap_content" a:contentDescription="@string/y89"
+	<ImageView a:src="@drawable/g10"
+		a:layout_height="match_parent" a:layout_weight="0.2"
+		a:layout_width="0dp" a:contentDescription="@string/y89"
 		a:id="@id/o48" />
 
-	<com.mrepol742.webvium.Edit
+	<com.mrepol742.webvium.Edit a:layout_weight="1"
 		a:layout_height="wrap_content" a:paddingStart="5dp" a:paddingEnd="5dp"
-		a:layout_width="wrap_content" a:layout_alignStart="@id/o51"
-		a:id="@id/o47" a:layout_alignEnd="@id/o48"
+		a:layout_width="0dp"
+		a:id="@id/o47"
 		a:singleLine="true" />
 
-	<ImageView a:layout_alignEnd="@id/o49"
-		a:layout_height="match_parent"
-		a:layout_width="wrap_content" a:contentDescription="@string/z106"
-		a:layout_margin="50dp"
+	<ImageView
+		a:layout_height="match_parent" a:layout_weight="0.2"
+		a:layout_width="0dp" a:contentDescription="@string/z106"
 		a:id="@id/o51" a:src="@drawable/c15" />
 
-	<ImageView
-		a:layout_margin="5dp" a:layout_alignParentEnd="true" a:contentDescription="@string/z107"
+	<ImageView a:layout_weight="0.2"
+		a:contentDescription="@string/z107"
 		a:layout_height="match_parent" a:src="@drawable/b14"
-		a:layout_width="wrap_content"
+		a:layout_width="0dp"
 		a:id="@id/o49"/>
 
-</RelativeLayout>
+</LinearLayout>
 

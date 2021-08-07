@@ -759,7 +759,7 @@
     <string name="x45">Export Databases</string>
     <string name="x46">Import Databases</string>
     <string name="x47">To Import a Database</string>
-    <string name="x48">Click here to open File Picker and navigate to default backup location %1$s then choose the backup you want to import.</string>
+    <string name="x48">Click here to import the backup databases json file.</string>
     <string name="x56">Last Installed on:</string>
     <string name="x57">Webvium</string>
     <string name="y64">&lt;br>&lt;b>%1$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>https://webvium.github.io&lt;/b>&lt;br>Website&lt;br>&lt;br>&lt;b>https://webvium.github.io/SourceCode&lt;/b>&lt;br>Source Code&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Amos Ayomide&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>

@@ -39,6 +39,7 @@ import android.widget.TextView;
 import com.mrepol742.webvium.Lock;
 import com.mrepol742.webvium.Webv;
 import com.mrepol742.webvium.R;
+import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
@@ -118,7 +119,11 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 resd.close();
                 return true;
             case "bcP":
-                // TODO: initiated backup
+                try {
+                    back(Package.c() + " " + Package.e(getActivity()) + ".apk", APK);
+                } catch (Exception en) {
+                    en.printStackTrace();
+                }
                 return true;
             case "se23":
                 // TODO: open file picker
@@ -130,11 +135,15 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 345 && resultCode != Activity.RESULT_OK) {
+            getActivity().getFragmentManager().popBackStack();
+        }
+        if (data.getData() == null) {
+            return;
+        }
         switch (requestCode) {
-            case 345:
-                if (resultCode != Activity.RESULT_OK) {
-                    getActivity().getFragmentManager().popBackStack();
-                }
+            case APK:
+                FileUtil.write(getActivity().getContentResolver(), data.getData());
                 break;
             case SETTINGS:
                 FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(PreferenceManager.getDefaultSharedPreferences(BackupFragment.this.getActivity()).getAll()));
@@ -190,7 +199,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
         Preference asd = findPreference("bcP");
         asd.setOnPreferenceClickListener(this);
         Preference l114 = findPreference("se23");
-        l114.setSummary(String.format(getActivity().getString(R.string.x48), location()));
+        l114.setSummary(getString(R.string.x48));
         l114.setOnPreferenceClickListener(this);
     }
 
@@ -257,26 +266,19 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
     }
 
     public String format() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMddyy_HHmm", Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("hh.mm aa, MMMM dd, yyyy", Locale.US);
         return sdf.format(new Date());
     }
 
     private String getName(int id) {
         if (id == 0) {
-            return "Bookmark_" + format() + ".json";
+            return "Bookmark " + format() + ".json";
         } else if (id == 1) {
-            return "Download_" + format() + ".json";
+            return "Download " + format() + ".json";
         } else if (id == 2) {
-            return "History_" + format() + ".json";
+            return "History " + format() + ".json";
         }
-        return "Search_" + format() + ".json";
-    }
-
-    private String location() {
-        if (Build.VERSION.SDK_INT >= 30) {
-            return StorageDirectory.a() + "/Documents/Webvium/Backup/";
-        }
-        return StorageDirectory.getWebviumDir() + "/Backup/";
+        return "Search " + format() + ".json";
     }
 
     private void back(String name, int id) {

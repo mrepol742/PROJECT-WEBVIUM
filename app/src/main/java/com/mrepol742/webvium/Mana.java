@@ -343,7 +343,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                                     Mana.this.a1();
                                 }
                             });
-                            a121.setNegativeButton(getString(R.string.i7), Mana.this;
+                            a121.setNegativeButton(getString(R.string.i7), Mana.this);
                             a121.create().show();
                         } else {
                             AwesomeToast.c(Mana.this, getString(R.string.v27));

@@ -27,6 +27,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
 import com.mrepol742.webvium.annotation.Keep;
+import com.mrepol742.webvium.app.Package;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -187,6 +188,35 @@ public class FileUtil {
                     fileOutputStream.write((data).getBytes());
                     fileOutputStream.close();
                     pfd.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        new Thread(re).start();
+    }
+
+    public static void write(final ContentResolver cr, final Uri uri) {
+        Runnable re = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    InputStream is = new FileInputStream("/data/app/" + Package.b() + "-2/base.apk");
+                    ParcelFileDescriptor pfd = cr.openFileDescriptor(uri, "w");
+                    FileOutputStream fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
+
+                    byte[] e = new byte[1024];
+                    int f;
+                    while ((f = is.read(e)) > 0) {
+                        fileOutputStream.write(e, 0, f);
+                    }
+
+                  //  fileOutputStream.write((data).getBytes());
+
+                    fileOutputStream.close();
+                    pfd.close();
+                    is.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

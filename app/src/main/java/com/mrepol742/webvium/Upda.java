@@ -90,6 +90,10 @@ public class Upda extends Service {
     }
 
     private void a(String url) {
+        SharedPreferences c56 = getSharedPreferences("wv", 0);
+        SharedPreferences.Editor spe = c56.edit();
+        spe.putLong("upda", System.currentTimeMillis());
+        spe.apply();
         MainNotification.b(Upda.this, Upda.this.getString(R.string.x11), Upda.this.getString(R.string.z2));
         android.app.Notification.Builder m = Notifications.a(Upda.this, Upda.this.getString(R.string.x11));
         m.setSmallIcon(R.drawable.j);

@@ -122,8 +122,13 @@ public class AboutFragment extends BasePreferenceFragment implements Preference.
         a5.setOnPreferenceClickListener(this);
         Pref a1 = (Pref) findPreference("cfu");
         a1.setOnPreferenceClickListener(this);
-        Preference preference = findPreference("ins12");
+        SharedPreferences sp = getActivity().getSharedPreferences("wv", 0);
+        long lg = sp.getLong("upda", 0);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh.mm aa, MMMM dd, yyyy", Locale.US);
+        if (lg != 0){
+            a1.setSummary(simpleDateFormat.format(new Date(lg)));
+        }
+        Preference preference = findPreference("ins12");
         try {
             preference.setTitle(getString(R.string.x56));
             preference.setSummary(simpleDateFormat.format(new Date(Package.g(getActivity()))));
