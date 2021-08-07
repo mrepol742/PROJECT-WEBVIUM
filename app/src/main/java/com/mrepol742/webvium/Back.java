@@ -160,10 +160,10 @@ public class Back extends Service {
                 m.setVisibility(android.app.Notification.VISIBILITY_SECRET);
             }
             m.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.r));
-            Intent j = new Intent(this, Back1.class);
+            Intent j = new Intent(this, Back.class);
             PendingIntent k = PendingIntent.getActivity(this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
             m.setContentIntent(k);
-            Intent j55 = new Intent(this, Back1.class);
+            Intent j55 = new Intent(this, Back.class);
             PendingIntent pi235 = PendingIntent.getActivity(this, 2, j55, PendingIntent.FLAG_UPDATE_CURRENT);
             m.addAction(new android.app.Notification.Action(R.drawable.a20, getString(R.string.z45), pi235));
             NotificationManager nmc = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

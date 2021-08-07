@@ -34,50 +34,44 @@ import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
 
-public class AccessibilityFragment extends BasePreferenceFragment {
+public class AccessibilityFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
+
+    @Override
+    public boolean onPreferenceClick(Preference a) {
+        switch (a.getKey()) {
+            case "zoom":
+                AlertDialog.Builder c = new AlertDialog.Builder(getActivity());
+                LayoutInflater d = LayoutInflater.from(getActivity());
+                View e = d.inflate(R.layout.a12, null);
+                c.setCancelable(false);
+                c.setView(e);
+                TextView f = e.findViewById(R.id.g1);
+                f.setText(getString(R.string.o1));
+                if (!a221().getBoolean("autoUpdate", false)) {
+                    f.setTextColor(Resources.getColor(getActivity(), R.color.c));
+                } else {
+                    f.setTextColor(Resources.getColor(getActivity(), R.color.b));
+                }
+                AlertDialog j5 = c.create();
+                O5 timer = new O5(2000, 2000, j5);
+                timer.start();
+                j5.show();
+                return true;
+            case "textS":
+                Intents.a(AccessibilityFragment.this.getActivity(), Text.class);
+                return true;
+        }
+        return false;
+    };
 
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            a5(R.xml.k);
-            Preference l = findPreference("zoom");
-            l.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    AlertDialog.Builder c = new AlertDialog.Builder(getActivity());
-                    LayoutInflater d = LayoutInflater.from(getActivity());
-                    View e = d.inflate(R.layout.a12, null);
-                    c.setCancelable(false);
-                    c.setView(e);
-                    TextView f = e.findViewById(R.id.g1);
-                    f.setText(getString(R.string.o1));
-                    if (!a221().getBoolean("autoUpdate", false)) {
-                        f.setTextColor(Resources.getColor(getActivity(), R.color.c));
-                    } else {
-                        f.setTextColor(Resources.getColor(getActivity(), R.color.b));
-                    }
-                    AlertDialog j5 = c.create();
-                    O5 timer = new O5(2000, 2000, j5);
-                    timer.start();
-                    j5.show();
-                    return true;
-                }
-            });
-            Preference a1 = findPreference("textS");
-            a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intents.a(AccessibilityFragment.this.getActivity(), Text.class);
-                    return true;
-                }
-            });
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        a5(R.xml.k);
+        Preference l = findPreference("zoom");
+        l.setOnPreferenceClickListener(this);
+        Preference a1 = findPreference("textS");
+        a1.setOnPreferenceClickListener(this);
     }
 
     class O5 extends CountDownTimer {

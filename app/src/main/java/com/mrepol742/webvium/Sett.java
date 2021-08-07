@@ -34,7 +34,7 @@ import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.setting.fragment.AboutFragment;
 import com.mrepol742.webvium.setting.fragment.AccessibilityFragment;
 import com.mrepol742.webvium.setting.fragment.AdvancedFragment;
-import com.mrepol742.webvium.setting.fragment.DatabaseFragment;
+import com.mrepol742.webvium.setting.fragment.BackupFragment;
 import com.mrepol742.webvium.setting.fragment.DownloadFragment;
 import com.mrepol742.webvium.setting.fragment.DevelopmentFragment;
 import com.mrepol742.webvium.setting.fragment.GeneralFragment;
@@ -182,7 +182,7 @@ public class Sett extends BaseActivity {
                     h18.setText(getString(R.string.t7));
                     break;
                 case FRAGMENT_DATABASE:
-                    as(i, new DatabaseFragment());
+                    as(i, new BackupFragment());
                     h18.setText(getString(R.string.t6));
                     break;
                 case FRAGMENT_SECURITY_LOCK:
@@ -207,6 +207,7 @@ public class Sett extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 0, 0, getString(R.string.a8));
         a.add(0, 1, 0, getString(R.string.f14));
+        a.add(0, 2, 0, getString(R.string.z86));
         return super.onCreateOptionsMenu(a);
     }
 
@@ -217,18 +218,30 @@ public class Sett extends BaseActivity {
                 b23();
                 return true;
             case 1:
-                Intent intent = new Intent("android.intent.action.SEND");
-                intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
-                intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z69));
-                intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66));
-                intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
-                intent.setType("text/html");
-                intent.setPackage("com.google.android.gm");
-                startActivity(Intent.createChooser(intent, getString(R.string.z65)));
+                a(true);
+                return true;
+            case 2:
+                a(false);
                 return true;
             default:
                 return super.onOptionsItemSelected(a);
         }
+    }
+
+    private void a(boolean bn) {
+        Intent intent = new Intent("android.intent.action.SEND");
+        intent.putExtra("android.intent.extra.EMAIL", new String[]{getString(R.string.dev_mail)});
+        if (bn) {
+            intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z69));
+            intent.putExtra("android.intent.extra.TEXT", getString(R.string.z66));
+        } else {
+            intent.putExtra("android.intent.extra.SUBJECT", getString(R.string.z86));
+            intent.putExtra("android.intent.extra.TEXT", getString(R.string.z87));
+        }
+        intent.putExtra("android.intent.extra.CC", getString(R.string.dev_mail));
+        intent.setType("text/html");
+        intent.setPackage("com.google.android.gm");
+        startActivity(Intent.createChooser(intent, getString(R.string.z65)));
     }
 
     private void b23() {

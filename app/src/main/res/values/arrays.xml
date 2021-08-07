@@ -497,8 +497,8 @@
     </string-array>
 
     <string-array name="b21">
-    <item name="1z">@string/z100</item>
-    <item name="7z">@string/z101</item>
+    <item name="1z">@string/z101</item>
+    <item name="7z">@string/z100</item>
     </string-array>
     <string-array name="b22">
     <item name="1z">1z</item>

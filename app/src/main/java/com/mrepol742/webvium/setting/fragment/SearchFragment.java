@@ -45,75 +45,70 @@ public class SearchFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (Build.VERSION.SDK_INT >= 23) {
-                a5(R.xml.l);
-            } else {
-                a5(R.xml.d);
-            }
-            Pref b = (Pref) findPreference("asst");
-            b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a1) {
-                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                    a.setCancelable(true);
-                    a.setTitle(getString(R.string.z18));
-                    a.setMessage(getString(R.string.a21));
-                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            Intents.k(SearchFragment.this.getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
-                            AwesomeToast.d(SearchFragment.this.getActivity(), Html.b(SearchFragment.this.getString(R.string.b33)).toString());
-                            a12.dismiss();
-                        }
-                    });
-                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a1, int intetg) {
-                            a1.dismiss();
-                        }
-                    });
-                    a.create().show();
-                    return true;
-                }
-            });
-            Swit cbf = (Swit) findPreference("qckS");
-            cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().equals("true")) {
-                        MainNotification.b(SearchFragment.this.getActivity(), SearchFragment.this.getActivity().getString(R.string.l33), SearchFragment.this.getActivity().getString(R.string.y18));
-                        android.app.Notification.Builder m = Notifications.a(SearchFragment.this.getActivity(), SearchFragment.this.getActivity().getString(R.string.l33));
-                        m.setSmallIcon(R.drawable.a18);
-                        m.setContentTitle(SearchFragment.this.getActivity().getString(R.string.l33));
-                        m.setContentText(SearchFragment.this.getActivity().getString(R.string.n39));
-                        m.setOngoing(true);
-                        m.setColor(Resources.getColor(SearchFragment.this.getActivity(), R.color.a));
-                        m.setAutoCancel(false);
-                        Intent j11 = new Intent(SearchFragment.this.getActivity(), Sear.class);
-
-                        PendingIntent k567 = PendingIntent.getActivity(SearchFragment.this.getActivity(), 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
-                        m.setContentIntent(k567);
-                        if (Build.VERSION.SDK_INT <= 26) {
-                            m.setPriority(android.app.Notification.PRIORITY_LOW);
-                        }
-                        m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
-                        m.setLargeIcon(BitmapFactory.decodeResource(SearchFragment.this.getActivity().getResources(), R.mipmap.b));
-                        NotificationManager nmc = (NotificationManager) SearchFragment.this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                        nmc.notify(Notifications.d, m.build());
-                    } else {
-                        MainNotification.a(SearchFragment.this.getActivity(), Notifications.d);
-                    }
-                    return true;
-                }
-            });
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (Build.VERSION.SDK_INT >= 23) {
+            a5(R.xml.l);
+        } else {
+            a5(R.xml.d);
         }
+        Pref b = (Pref) findPreference("asst");
+        b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference a1) {
+                AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                a.setCancelable(true);
+                a.setTitle(getString(R.string.z18));
+                a.setMessage(getString(R.string.a21));
+                a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a12, int intetg) {
+                        Intents.k(SearchFragment.this.getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
+                        AwesomeToast.d(SearchFragment.this.getActivity(), Html.b(SearchFragment.this.getString(R.string.b33)).toString());
+                        a12.dismiss();
+                    }
+                });
+                a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int intetg) {
+                        a1.dismiss();
+                    }
+                });
+                a.create().show();
+                return true;
+            }
+        });
+        Swit cbf = (Swit) findPreference("qckS");
+        cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue.toString().equals("true")) {
+                    MainNotification.b(SearchFragment.this.getActivity(), SearchFragment.this.getActivity().getString(R.string.l33), SearchFragment.this.getActivity().getString(R.string.y18));
+                    android.app.Notification.Builder m = Notifications.a(SearchFragment.this.getActivity(), SearchFragment.this.getActivity().getString(R.string.l33));
+                    m.setSmallIcon(R.drawable.a18);
+                    m.setContentTitle(SearchFragment.this.getActivity().getString(R.string.l33));
+                    m.setContentText(SearchFragment.this.getActivity().getString(R.string.n39));
+                    m.setOngoing(true);
+                    m.setColor(Resources.getColor(SearchFragment.this.getActivity(), R.color.a));
+                    m.setAutoCancel(false);
+                    Intent j11 = new Intent(SearchFragment.this.getActivity(), Sear.class);
+
+                    PendingIntent k567 = PendingIntent.getActivity(SearchFragment.this.getActivity(), 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
+                    m.setContentIntent(k567);
+                    if (Build.VERSION.SDK_INT <= 26) {
+                        m.setPriority(android.app.Notification.PRIORITY_LOW);
+                    }
+                    m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+                    m.setLargeIcon(BitmapFactory.decodeResource(SearchFragment.this.getActivity().getResources(), R.mipmap.b));
+                    NotificationManager nmc = (NotificationManager) SearchFragment.this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                    nmc.notify(Notifications.d, m.build());
+                } else {
+                    MainNotification.a(SearchFragment.this.getActivity(), Notifications.d);
+                }
+                return true;
+            }
+        });
     }
 }

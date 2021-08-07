@@ -28,14 +28,10 @@ public class DevelopmentFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (Build.VERSION.SDK_INT >= 29) {
-                a5(R.xml.a7);
-            } else {
-                a5(R.xml.u);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (Build.VERSION.SDK_INT >= 29) {
+            a5(R.xml.a7);
+        } else {
+            a5(R.xml.u);
         }
     }
 }

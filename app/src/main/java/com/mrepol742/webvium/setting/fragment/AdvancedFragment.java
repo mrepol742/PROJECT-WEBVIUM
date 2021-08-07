@@ -49,9 +49,108 @@ import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.Objects;
 
-public class AdvancedFragment extends BasePreferenceFragment {
+public class AdvancedFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
     private final IntentFilter is = new IntentFilter();
     private R7 r7;
+    private Edit0 etp12;
+    private Swit java9;
+    private Swit java10;
+    private Swit java11;
+    private Swit java12;
+    private Swit javaweb;
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        switch (preference.getKey()) {
+            case "fltWeb":
+                if (newValue.toString().equals("true")) {
+                    MainNotification.c(AdvancedFragment.this.getActivity(), AdvancedFragment.this.getActivity().getString(R.string.l32), AdvancedFragment.this.getActivity().getString(R.string.l34));
+                    android.app.Notification.Builder m = Notifications.a(AdvancedFragment.this.getActivity(), AdvancedFragment.this.getActivity().getString(R.string.l32));
+                    m.setSmallIcon(R.drawable.a18);
+                    m.setContentTitle(AdvancedFragment.this.getActivity().getString(R.string.l32));
+                    m.setContentText(AdvancedFragment.this.getActivity().getString(R.string.n40));
+                    m.setOngoing(true);
+                    m.setColor(Resources.getColor(AdvancedFragment.this.getActivity(), R.color.a));
+                    m.setAutoCancel(false);
+                    Intent j11 = new Intent(AdvancedFragment.this.getActivity(), Webv.class);
+                    PendingIntent k567 = PendingIntent.getActivity(AdvancedFragment.this.getActivity(), 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
+                    m.setContentIntent(k567);
+                    if (Build.VERSION.SDK_INT <= 26) {
+                        m.setPriority(android.app.Notification.PRIORITY_MIN);
+                    }
+                    m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
+                    m.setLargeIcon(BitmapFactory.decodeResource(AdvancedFragment.this.getActivity().getResources(), R.mipmap.c));
+                    NotificationManager nmc = (NotificationManager) AdvancedFragment.this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                    nmc.notify(Notifications.e, m.build());
+                } else {
+                    MainNotification.a(AdvancedFragment.this.getActivity(), Notifications.e);
+                }
+                return true;
+            case "CTextE":
+                etp12.setSummary(newValue.toString());
+                return true;
+            case "textE":
+                etp12.setEnabled(newValue.toString().equals("3840a"));
+                return true;
+            case "java":
+                boolean bn = !newValue.toString().equals("7f");
+                java9.setEnabled(bn);
+                java10.setEnabled(bn);
+                java11.setEnabled(bn);
+                java12.setEnabled(bn);
+                javaweb.setEnabled(bn);
+                return true;
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference a123) {
+        switch (a123.getKey()) {
+            case "cjsa":
+                AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                a.setCancelable(true);
+                a.setTitle(getString(R.string.c));
+                a.setMessage(getString(R.string.a33));
+                a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a12, int intetg) {
+                        WebStorage.getInstance().deleteAllData();
+                        AwesomeToast.b(getActivity(), AdvancedFragment.this.getString(R.string.a34));
+                        a12.dismiss();
+
+                    }
+                });
+                a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface a1, int intetg) {
+                        a1.dismiss();
+                    }
+                });
+                a.create().show();
+                return true;
+            case "wPretend":
+                if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
+                    Intent it = new Intent(AdvancedFragment.this.getActivity(), Lock.class);
+                    AdvancedFragment.this.startActivityForResult(it, 123);
+                } else {
+                    Intents.e(AdvancedFragment.this.getActivity(), "search", Sett.FRAGMENT_PRETEND_MODE, Sett.class);
+                }
+                return true;
+            case "wLock":
+                if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
+                    Intent it = new Intent(AdvancedFragment.this.getActivity(), Lock.class);
+                    AdvancedFragment.this.startActivityForResult(it, 345);
+                } else {
+                    Intents.e(AdvancedFragment.this.getActivity(), "search", Sett.FRAGMENT_SECURITY_LOCK, Sett.class);
+                }
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -70,160 +169,41 @@ public class AdvancedFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-                is.addAction(Intent.ACTION_SCREEN_ON);
-                r7 = new R7();
-                getActivity().registerReceiver(r7, is);
-            }
-            if (Build.VERSION.SDK_INT >= 30) {
-                a5(R.xml.y);
-            } else if (Build.VERSION.SDK_INT >= 29) {
-                a5(R.xml.a2);
-            } else if (Build.VERSION.SDK_INT >= 26) {
-                a5(R.xml.a3);
-            } else {
-                a5(R.xml.f);
-            }
-            final List lp90 = (List) findPreference("textE");
-            final Edit0 etp12 = (Edit0) findPreference("CtextE");
-            Swit cbf = (Swit) findPreference("fltWeb");
-            cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().equals("true")) {
-                        MainNotification.c(AdvancedFragment.this.getActivity(), AdvancedFragment.this.getActivity().getString(R.string.l32), AdvancedFragment.this.getActivity().getString(R.string.l34));
-                        android.app.Notification.Builder m = Notifications.a(AdvancedFragment.this.getActivity(), AdvancedFragment.this.getActivity().getString(R.string.l32));
-                        m.setSmallIcon(R.drawable.a18);
-                        m.setContentTitle(AdvancedFragment.this.getActivity().getString(R.string.l32));
-                        m.setContentText(AdvancedFragment.this.getActivity().getString(R.string.n40));
-                        m.setOngoing(true);
-                        m.setColor(Resources.getColor(AdvancedFragment.this.getActivity(), R.color.a));
-                        m.setAutoCancel(false);
-                        Intent j11 = new Intent(AdvancedFragment.this.getActivity(), Webv.class);
-                        PendingIntent k567 = PendingIntent.getActivity(AdvancedFragment.this.getActivity(), 0, j11, PendingIntent.FLAG_UPDATE_CURRENT);
-                        m.setContentIntent(k567);
-                        if (Build.VERSION.SDK_INT <= 26) {
-                            m.setPriority(android.app.Notification.PRIORITY_MIN);
-                        }
-                        m.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
-                        m.setLargeIcon(BitmapFactory.decodeResource(AdvancedFragment.this.getActivity().getResources(), R.mipmap.c));
-                        NotificationManager nmc = (NotificationManager) AdvancedFragment.this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                        nmc.notify(Notifications.e, m.build());
-                    } else {
-                        MainNotification.a(AdvancedFragment.this.getActivity(), Notifications.e);
-                    }
-                    return true;
-                }
-            });
-            etp12.setEnabled(Objects.equals(a221().getString("textE", ""), "3840a"));
-            etp12.setSummary(a221().getString("CtextE", ""));
-            etp12.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    etp12.setSummary(newValue.toString());
-                    return true;
-                }
-            });
-            lp90.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    etp12.setEnabled(newValue.toString().equals("3840a"));
-                    return true;
-                }
-            });
-            Pref a9 = (Pref) findPreference("wLock");
-            a9.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-
-                    if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
-                        Intent it = new Intent(AdvancedFragment.this.getActivity(), Lock.class);
-                        AdvancedFragment.this.startActivityForResult(it, 345);
-                    } else {
-                        Intents.e(AdvancedFragment.this.getActivity(), "search", Sett.FRAGMENT_SECURITY_LOCK, Sett.class);
-                    }
-                    return true;
-                }
-            });
-            Pref a9zx = (Pref) findPreference("wPretend");
-            a9zx.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-
-                    if (AdvancedFragment.this.a221().getBoolean("lockWn99", false)) {
-                        Intent it = new Intent(AdvancedFragment.this.getActivity(), Lock.class);
-                        AdvancedFragment.this.startActivityForResult(it, 123);
-                    } else {
-                        Intents.e(AdvancedFragment.this.getActivity(), "search", Sett.FRAGMENT_PRETEND_MODE, Sett.class);
-                    }
-                    return true;
-                }
-            });
-            final Swit java9 = (Swit) findPreference("Java9");
-            final Swit java10 = (Swit) findPreference("Java10");
-            final Swit java11 = (Swit) findPreference("Java11");
-            final Swit java12 = (Swit) findPreference("Java12");
-            final Swit javaweb = (Swit) findPreference("Javaweb");
-            List java = (List) findPreference("java");
-            java.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().equals("7f")) {
-                        java9.setEnabled(false);
-                        java10.setEnabled(false);
-                        java11.setEnabled(false);
-                        java12.setEnabled(false);
-                        javaweb.setEnabled(false);
-                    } else {
-                        java9.setEnabled(true);
-                        java10.setEnabled(true);
-                        java11.setEnabled(true);
-                        java12.setEnabled(true);
-                        javaweb.setEnabled(true);
-                    }
-                    return true;
-                }
-            });
-            Pref pc = (Pref) findPreference("cjsa");
-            pc.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a5) {
-                    final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                    a.setCancelable(true);
-                    a.setTitle(getString(R.string.c));
-                    a.setMessage(getString(R.string.a33));
-                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a12, int intetg) {
-                            WebStorage.getInstance().deleteAllData();
-                            AwesomeToast.b(getActivity(), AdvancedFragment.this.getString(R.string.a34));
-                            a12.dismiss();
-
-                        }
-                    });
-                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface a1, int intetg) {
-                            a1.dismiss();
-                        }
-                    });
-                    a.create().show();
-                    return true;
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
+            is.addAction(Intent.ACTION_SCREEN_ON);
+            r7 = new R7();
+            getActivity().registerReceiver(r7, is);
         }
+        if (Build.VERSION.SDK_INT >= 30) {
+            a5(R.xml.y);
+        } else if (Build.VERSION.SDK_INT >= 29) {
+            a5(R.xml.a2);
+        } else if (Build.VERSION.SDK_INT >= 26) {
+            a5(R.xml.a3);
+        } else {
+            a5(R.xml.f);
+        }
+        List lp90 = (List) findPreference("textE");
+        etp12 = (Edit0) findPreference("CtextE");
+        Swit cbf = (Swit) findPreference("fltWeb");
+        cbf.setOnPreferenceChangeListener(this);
+        etp12.setEnabled(Objects.equals(a221().getString("textE", ""), "3840a"));
+        etp12.setSummary(a221().getString("CtextE", ""));
+        etp12.setOnPreferenceChangeListener(this);
+        lp90.setOnPreferenceChangeListener(this);
+        Pref a9 = (Pref) findPreference("wLock");
+        a9.setOnPreferenceClickListener(this);
+        Pref a9zx = (Pref) findPreference("wPretend");
+        a9zx.setOnPreferenceClickListener(this);
+        java9 = (Swit) findPreference("Java9");
+        java10 = (Swit) findPreference("Java10");
+        java11 = (Swit) findPreference("Java11");
+        java12 = (Swit) findPreference("Java12");
+        javaweb = (Swit) findPreference("Javaweb");
+        List java = (List) findPreference("java");
+        java.setOnPreferenceChangeListener(this);
+        Pref pc = (Pref) findPreference("cjsa");
+        pc.setOnPreferenceClickListener(this);
     }
 
     @Override

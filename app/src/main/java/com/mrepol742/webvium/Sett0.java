@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -34,10 +35,9 @@ import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.setting.fragment.AboutFragment;
-import com.mrepol742.webvium.setting.fragment.DatabaseFragment;
+import com.mrepol742.webvium.setting.fragment.BackupFragment;
 import com.mrepol742.webvium.setting.fragment.SettingFragment;
 import com.mrepol742.webvium.security.Base64;
-import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.util.Animation;
 
 /*
@@ -46,7 +46,25 @@ import com.mrepol742.webvium.util.Animation;
 public class Sett0 extends BaseActivity {
     private LinearLayout ll;
     private String id = "a";
-    private ImageView iv, iv0, iv1;
+    private ImageView iv, iv0;
+    private PopupMenu mu;
+
+    final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
+
+        @Override
+        public boolean onMenuItemClick(MenuItem a1) {
+            switch (a1.getItemId()) {
+                case 0:
+                    a(true);
+                    return true;
+                case 1:
+                    a(false);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle a) {
@@ -109,7 +127,7 @@ public class Sett0 extends BaseActivity {
                     } catch (Exception en) {
                         en.printStackTrace();
                     }
-                    Sett0.this.as(R.id.m10, new DatabaseFragment());
+                    Sett0.this.as(R.id.m10, new BackupFragment());
                     id = "a2";
                     Sett0.this.b24(false);
                     Sett0.this.invalidateOptionsMenu();
@@ -163,10 +181,8 @@ public class Sett0 extends BaseActivity {
         tv2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g12), null, null);
         iv = findViewById(R.id.o25);
         iv0 = findViewById(R.id.o26);
-        iv1 = findViewById(R.id.a);
         iv.setBackgroundResource(R.drawable.c6);
         iv0.setBackgroundResource(R.drawable.c6);
-        iv1.setBackgroundResource(R.drawable.c6);
         iv.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -178,19 +194,16 @@ public class Sett0 extends BaseActivity {
 
             @Override
             public void onClick(View view) {
-                a(true);
-            }
-        });
-        iv1.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                a(false);
+                if (mu == null) {
+                    mu = new PopupMenu(Sett0.this, iv0);
+                }
+                Menu menu = mu.getMenu();
+                menu.add(0, 0, 0, getString(R.string.f14)).setOnMenuItemClickListener(mio);
+                menu.add(0, 1, 0, getString(R.string.z86)).setOnMenuItemClickListener(mio);
             }
         });
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);
-        iv1.setImageResource(R.drawable.b18);
         b24(true);
     }
 
@@ -201,7 +214,6 @@ public class Sett0 extends BaseActivity {
         if (iv.getVisibility() == View.VISIBLE && iv0.getVisibility() == View.VISIBLE && id.equals("a2")) {
             Animation.animate(this, R.anim.i, iv);
             Animation.animate(this, R.anim.i, iv0);
-            Animation.animate(this, R.anim.i, iv1);
         }
     }
 
@@ -212,33 +224,6 @@ public class Sett0 extends BaseActivity {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu a) {
-        if (Hardware.isTablet(this) && (id.equals("a") || id.equals("a1"))) {
-            a.add(0, 0, 0, getString(R.string.a8));
-            a.add(0, 1, 0, getString(R.string.f14));
-            a.add(0, 2, 0, getString(R.string.z86));
-        }
-        return super.onCreateOptionsMenu(a);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem a) {
-        switch (a.getItemId()) {
-            case 0:
-                b23();
-                return true;
-            case 1:
-                a(true);
-                return true;
-            case 2:
-                a(false);
-                return true;
-            default:
-                return super.onOptionsItemSelected(a);
-        }
     }
 
     private void b23() {
@@ -252,9 +237,7 @@ public class Sett0 extends BaseActivity {
         if (bn) {
             iv.setVisibility(View.GONE);
             iv0.setVisibility(View.GONE);
-            iv1.setVisibility(View.GONE);
         } else {
-            iv.setVisibility(View.VISIBLE);
             iv.setVisibility(View.VISIBLE);
             iv.setVisibility(View.VISIBLE);
         }

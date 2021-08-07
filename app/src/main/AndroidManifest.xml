@@ -190,14 +190,6 @@
         </activity>
 
         <activity
-            a:name="com.mrepol742.webvium.Back1"
-            a:configChanges="keyboardHidden|orientation|screenSize"
-            a:excludeFromRecents="true"
-            a:launchMode="singleTask"
-            a:theme="@style/m"
-            a:windowSoftInputMode="stateHidden" />
-
-        <activity
             a:name="com.mrepol742.webvium.Assi"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:excludeFromRecents="true"
@@ -700,11 +692,6 @@
         <service
             a:name="com.mrepol742.webvium.Upda"
             a:label="@string/n21"
-            tools:ignore="ExportedService" />
-
-        <service
-            a:name="com.mrepol742.webvium.Back"
-            a:label="@string/n22"
             tools:ignore="ExportedService" />
         
     </application>

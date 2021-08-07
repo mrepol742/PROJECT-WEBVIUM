@@ -48,19 +48,7 @@
         a:layout_alignParentEnd="true"
         a:layout_marginEnd="15dp"
         a:layout_marginBottom="20dp"
-        a:contentDescription="@string/f14"
-        a:elevation="5dp"
-        a:padding="10dp" />
-
-    <ImageView
-        a:id="@id/a"
-        a:layout_width="wrap_content"
-        a:layout_height="wrap_content"
-        a:layout_above="@id/o26"
-        a:layout_alignParentEnd="true"
-        a:layout_marginEnd="15dp"
-        a:layout_marginBottom="20dp"
-        a:contentDescription="@string/z86"
+        a:contentDescription="@string/z104"
         a:elevation="5dp"
         a:padding="10dp" />
 

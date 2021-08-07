@@ -52,12 +52,25 @@ import com.mrepol742.webvium.util.WindowObscured;
 
 import java.util.Objects;
 
-public class PretendModeFragment extends BasePreferenceFragment {
+public class PretendModeFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
     private final IntentFilter is = new IntentFilter();
     private Swit spe;
     private R7 r7;
     private final PasswordTransformationMethod ptm = new PasswordTransformationMethod();
     private final WindowObscured wo = new WindowObscured();
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        switch (preference.getKey()) {
+            case "cHANS":
+                PretendModeFragment.this.i();
+                return true;
+            case "cLANS":
+                PretendModeFragment.this.k();
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -70,53 +83,35 @@ public class PretendModeFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-                is.addAction(Intent.ACTION_SCREEN_ON);
-                r7 = new R7();
-                getActivity().registerReceiver(r7, is);
-            }
-            a5(R.xml.a1);
-            spe = (Swit) findPreference("ptm");
-            spe.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().equals("true")) {
-                        SharedPreferences a = getActivity().getSharedPreferences("a", 0);
-                        String sg = a.getString("gsJsGsKSIgPes", "");
-                        if (sg != null) {
-                            b();
-                        } else {
-                            d();
-                        }
-                    } else {
-                        PretendModeFragment.this.e();
-                    }
-                    return true;
-                }
-            });
-            Preference a1 = findPreference("cHANS");
-            a1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    PretendModeFragment.this.i();
-                    return true;
-                }
-            });
-            Preference a12 = findPreference("cLANS");
-            a12.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    PretendModeFragment.this.k();
-                    return true;
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
+            is.addAction(Intent.ACTION_SCREEN_ON);
+            r7 = new R7();
+            getActivity().registerReceiver(r7, is);
         }
+        a5(R.xml.a1);
+        spe = (Swit) findPreference("ptm");
+        spe.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue.toString().equals("true")) {
+                    SharedPreferences a = getActivity().getSharedPreferences("a", 0);
+                    String sg = a.getString("gsJsGsKSIgPes", "");
+                    if (sg != null) {
+                        b();
+                    } else {
+                        d();
+                    }
+                } else {
+                    PretendModeFragment.this.e();
+                }
+                return true;
+            }
+        });
+        Preference a1 = findPreference("cHANS");
+        a1.setOnPreferenceClickListener(this);
+        Preference a12 = findPreference("cLANS");
+        a12.setOnPreferenceClickListener(this);
     }
 
     @Override

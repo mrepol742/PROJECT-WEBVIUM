@@ -42,9 +42,6 @@ public class Pack extends BroadcastReceiver {
     @Override
     public void onReceive(Context a, Intent b) {
         if (b.getAction().equals("android.intent.action.MY_PACKAGE_REPLACED")) {
-            if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("bcP", true) && Build.VERSION.SDK_INT < 29) {
-                Intents.b(a, Back.class);
-            }
             if (PreferenceManager.getDefaultSharedPreferences(a).getBoolean("maUU", false) && PreferenceManager.getDefaultSharedPreferences(a).getBoolean("asd71", false)) {
                 Intents.a(a, Webv.class);
             }

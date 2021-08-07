@@ -60,9 +60,40 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-public class DatabaseFragment extends BasePreferenceFragment {
+public class BackupFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
     private final IntentFilter is = new IntentFilter();
     private R7 r7;
+
+    @Override
+    public boolean onPreferenceClick(Preference a123) {
+        switch (a123.getKey()) {
+            case "res":
+                BackupFragment.this.a6();
+                return true;
+            case "ets":
+                BackupFragment.this.a13();
+                return true;
+            case "se":
+                BackupFragment.this.a17();
+                return true;
+            case "he":
+                BackupFragment.this.b1();
+                return true;
+            case "be":
+                BackupFragment.this.b5();
+                return true;
+            case "do":
+                BackupFragment.this.b9();
+                return true;
+            case "bcP":
+                // TODO: initiated backup
+                return true;
+            case "se23":
+                // TODO: open file picker
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -75,89 +106,29 @@ public class DatabaseFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
-                is.addAction(Intent.ACTION_SCREEN_ON);
-                r7 = new R7();
-                getActivity().registerReceiver(r7, is);
-            }
-            a5(R.xml.x);
-            Preference n = findPreference("res");
-            n.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    DatabaseFragment.this.a6();
-                    return true;
-                }
-            });
-            Preference l = findPreference("ets");
-            l.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    DatabaseFragment.this.a13();
-                    return true;
-                }
-            });
-
-            Preference l1 = findPreference("se");
-            l1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    DatabaseFragment.this.a17();
-                    return true;
-                }
-            });
-
-            Preference l11 = findPreference("he");
-            l11.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    DatabaseFragment.this.b1();
-                    return true;
-                }
-            });
-
-            Preference l111 = findPreference("be");
-            l111.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    DatabaseFragment.this.b5();
-                    return true;
-                }
-            });
-
-            Preference l111444 = findPreference("do");
-            l111444.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    DatabaseFragment.this.b9();
-                    return true;
-                }
-            });
-            Swit SWIT = (Swit) findPreference("bcP");
-            SWIT.setSummary(getString(R.string.z39));
-
-            Preference l114 = findPreference("se23");
-            l114.setSummary(String.format(getActivity().getString(R.string.x48), StorageDirectory.getWebviumDir() + "/Backup"));
-            l114.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intent it = new Intent(DatabaseFragment.this.getActivity(), Back0.class);
-                    it.putExtra("a", "a");
-                    DatabaseFragment.this.startActivity(it);
-                    return true;
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (a221().getBoolean("lockWn99", false) && a221().getBoolean("scrON", false)) {
+            is.addAction(Intent.ACTION_SCREEN_ON);
+            r7 = new R7();
+            getActivity().registerReceiver(r7, is);
         }
+        a5(R.xml.x);
+        Preference n = findPreference("res");
+        n.setOnPreferenceClickListener(this);
+        Preference l = findPreference("ets");
+        l.setOnPreferenceClickListener(this);
+        Preference l1 = findPreference("se");
+        l1.setOnPreferenceClickListener(this);
+        Preference l11 = findPreference("he");
+        l11.setOnPreferenceClickListener(this);
+        Preference l111 = findPreference("be");
+        l111.setOnPreferenceClickListener(this);
+        Preference l111444 = findPreference("do");
+        l111444.setOnPreferenceClickListener(this);
+        Preference asd = findPreference("bcP");
+        asd.setOnPreferenceClickListener(this);
+        Preference l114 = findPreference("se23");
+        l114.setSummary(String.format(getActivity().getString(R.string.x48), location()));
+        l114.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -177,10 +148,10 @@ public class DatabaseFragment extends BasePreferenceFragment {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                SharedPreferences.Editor b = DatabaseFragment.this.a221().edit();
+                SharedPreferences.Editor b = BackupFragment.this.a221().edit();
                 b.clear();
                 b.apply();
-                DatabaseFragment.this.t();
+                BackupFragment.this.t();
                 a12.dismiss();
             }
         });
@@ -224,7 +195,7 @@ public class DatabaseFragment extends BasePreferenceFragment {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 createFolder();
-                write(PreferenceManager.getDefaultSharedPreferences(DatabaseFragment.this.getActivity()).getAll());
+                write(PreferenceManager.getDefaultSharedPreferences(BackupFragment.this.getActivity()).getAll());
                 a12.dismiss();
             }
         });
@@ -248,10 +219,10 @@ public class DatabaseFragment extends BasePreferenceFragment {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 createFolder();
-                SearchHelper d1 = SearchHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                SearchHelper d1 = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
                 Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
-                    g(DatabaseFragment.this.getString(R.string.z31));
+                    g(BackupFragment.this.getString(R.string.z31));
                 } else {
                     write(res, 3);
                 }
@@ -279,10 +250,10 @@ public class DatabaseFragment extends BasePreferenceFragment {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 createFolder();
-                HistoryHelper d1 = HistoryHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                HistoryHelper d1 = HistoryHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
                 Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
-                    g(DatabaseFragment.this.getString(R.string.z31));
+                    g(BackupFragment.this.getString(R.string.z31));
                 } else {
                     write(res, 2);
                 }
@@ -310,10 +281,10 @@ public class DatabaseFragment extends BasePreferenceFragment {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 createFolder();
-                BookmarkHelper d1 = BookmarkHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                BookmarkHelper d1 = BookmarkHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
                 Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
-                    g(DatabaseFragment.this.getString(R.string.z31));
+                    g(BackupFragment.this.getString(R.string.z31));
                 } else {
                     write(res, 0);
                 }
@@ -341,10 +312,10 @@ public class DatabaseFragment extends BasePreferenceFragment {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 createFolder();
-                DownloadHelper d1 = DownloadHelper.getInstance(DatabaseFragment.this.getActivity().getApplicationContext());
+                DownloadHelper d1 = DownloadHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
                 Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
                 if (res.getCount() == 0) {
-                   g(DatabaseFragment.this.getString(R.string.z31));
+                    g(BackupFragment.this.getString(R.string.z31));
                 } else {
                     write(res, 1);
                 }
@@ -387,10 +358,14 @@ public class DatabaseFragment extends BasePreferenceFragment {
     }
 
     private String location(int id) {
+        return location() + getName(id);
+    }
+
+    private String location() {
         if (Build.VERSION.SDK_INT >= 30) {
-            return StorageDirectory.a() + "/Documents/Webvium/Backup/" + DatabaseFragment.this.getName(id);
+            return StorageDirectory.a() + "/Documents/Webvium/Backup/";
         }
-        return StorageDirectory.getWebviumDir() + "/Backup/" + getName(id);
+        return StorageDirectory.getWebviumDir() + "/Backup/";
     }
 
     private void write(Map<String, ?> map) {
@@ -401,37 +376,37 @@ public class DatabaseFragment extends BasePreferenceFragment {
             public void run() {
                 try {
                     if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(), Environment.DIRECTORY_DOCUMENTS + "/Webvium/Setting_" + format() + ".bac", "", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup/", sg)) {
-                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
+                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
                             }
                         });
                     } else if (FileUtil.write(new File(StorageDirectory.getWebviumDir() + "/Backup/Setting_" + format() + ".bac"), sg, false)) {
-                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
+                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
                             }
                         });
                     } else {
-                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
                             }
                         });
                     }
                 } catch (Exception en) {
                     en.printStackTrace();
-                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                    BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
-                            DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                            BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
                         }
                     });
                 }
@@ -447,38 +422,38 @@ public class DatabaseFragment extends BasePreferenceFragment {
             @Override
             public void run() {
                 try {
-                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(),Environment.DIRECTORY_DOCUMENTS + "/Webvium/" + DatabaseFragment.this.getName(id), "", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup/", sg)) {
-                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(), Environment.DIRECTORY_DOCUMENTS + "/Webvium/" + BackupFragment.this.getName(id), "", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup/", sg)) {
+                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
+                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
                             }
                         });
                     } else if (FileUtil.write(new File(location(id)), sg, false)) {
-                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b25));
+                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
                             }
                         });
                     } else {
-                        DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
-                                DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
                             }
                         });
                     }
                 } catch (Exception en) {
                     en.printStackTrace();
-                    DatabaseFragment.this.getActivity().runOnUiThread(new Runnable() {
+                    BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
-                            DatabaseFragment.this.d(DatabaseFragment.this.getString(R.string.b26));
+                            BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
                         }
                     });
                 }

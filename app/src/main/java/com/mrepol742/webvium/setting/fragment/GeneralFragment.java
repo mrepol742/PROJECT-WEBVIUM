@@ -33,7 +33,7 @@ import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.Objects;
 
-public class GeneralFragment extends BasePreferenceFragment {
+public class GeneralFragment extends BasePreferenceFragment implements Preference.OnPreferenceChangeListener {
     private static final String[] eng = {
             "https://google.com",
             "https://duckduckgo.com",
@@ -50,88 +50,86 @@ public class GeneralFragment extends BasePreferenceFragment {
             "https://github.com",
             "https://facebook.com"
     };
+    private Edit0 hj89;
+    private List hj9;
+    private String a20;
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        switch (preference.getKey()) {
+            case "cGeneral":
+                if (newValue != null) {
+                    hj89.setSummary(newValue.toString());
+                } else {
+                    hj89.setSummary(GeneralFragment.this.c48());
+                }
+                return true;
+            case "general":
+                if (newValue.toString().equals("1o")) {
+                    hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.x17));
+                    hj89.setEnabled(false);
+                    hj89.setSummary(a221().getString("cGeneral", ""));
+                } else if (newValue.toString().equals("7o")) {
+                    hj9.setSummary(a20);
+                    hj89.setEnabled(false);
+                    hj89.setSummary(a221().getString("cGeneral", ""));
+                } else if (newValue.toString().equals("30o")) {
+                    hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.c26));
+                    hj89.setEnabled(false);
+                    hj89.setSummary(a221().getString("cGeneral", ""));
+                } else if (newValue.toString().equals("60o")) {
+                    hj89.setEnabled(true);
+                    hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.q20));
+                    String pre = a221().getString("cGeneral", "");
+                    if (pre != null) {
+                        hj89.setSummary(pre);
+                    } else {
+                        hj89.setSummary(GeneralFragment.this.c48());
+                    }
+                }
+                return true;
+        }
+        return true;
+    }
 
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (Build.VERSION.SDK_INT >= 28) {
-                a5(R.xml.b);
-            } else if (Build.VERSION.SDK_INT >= 26) {
-                a5(R.xml.a);
-            } else {
-                a5(R.xml.c);
-            }
-            final List hj9 = (List) findPreference("general");
-            final Edit0 hj89 = (Edit0) findPreference("cGeneral");
-            SharedPreferences a19 = getActivity().getSharedPreferences("wv", 0);
-            final String a20 = a19.getString("MyURL", c48());
-            if (Objects.equals(a221().getString("general", ""), "1o")) {
-                hj9.setSummary(getActivity().getResources().getString(R.string.x17));
-                hj89.setEnabled(false);
-                hj89.setSummary(a221().getString("cGeneral", ""));
-            } else if (Objects.equals(a221().getString("general", ""), "7o")) {
-                hj9.setSummary(a20);
-                hj89.setEnabled(false);
-                hj89.setSummary(a221().getString("cGeneral", ""));
-            } else if (Objects.equals(a221().getString("general", ""), "30o")) {
-                hj9.setSummary(getActivity().getResources().getString(R.string.c26));
-                hj89.setEnabled(false);
-                hj89.setSummary(a221().getString("cGeneral", ""));
-            } else if (Objects.equals(a221().getString("general", ""), "60o")) {
-                hj9.setSummary(getActivity().getResources().getString(R.string.q20));
-                hj89.setEnabled(true);
-                String pre = a221().getString("cGeneral", "");
-                if (pre != null) {
-                    hj89.setSummary(pre);
-                } else {
-                    hj89.setSummary(c48());
-                }
-            }
-            hj89.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue != null) {
-                        hj89.setSummary(newValue.toString());
-                    } else {
-                        hj89.setSummary(GeneralFragment.this.c48());
-                    }
-                    return true;
-                }
-            });
-            hj9.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().equals("1o")) {
-                        hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.x17));
-                        hj89.setEnabled(false);
-                        hj89.setSummary(a221().getString("cGeneral", ""));
-                    } else if (newValue.toString().equals("7o")) {
-                        hj9.setSummary(a20);
-                        hj89.setEnabled(false);
-                        hj89.setSummary(a221().getString("cGeneral", ""));
-                    } else if (newValue.toString().equals("30o")) {
-                        hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.c26));
-                        hj89.setEnabled(false);
-                        hj89.setSummary(a221().getString("cGeneral", ""));
-                    } else if (newValue.toString().equals("60o")) {
-                        hj89.setEnabled(true);
-                        hj9.setSummary(GeneralFragment.this.getActivity().getResources().getString(R.string.q20));
-                        String pre = a221().getString("cGeneral", "");
-                        if (pre != null) {
-                            hj89.setSummary(pre);
-                        } else {
-                            hj89.setSummary(GeneralFragment.this.c48());
-                        }
-                    }
-                    return true;
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (Build.VERSION.SDK_INT >= 28) {
+            a5(R.xml.b);
+        } else if (Build.VERSION.SDK_INT >= 26) {
+            a5(R.xml.a);
+        } else {
+            a5(R.xml.c);
         }
+        hj9 = (List) findPreference("general");
+        hj89 = (Edit0) findPreference("cGeneral");
+        SharedPreferences a19 = getActivity().getSharedPreferences("wv", 0);
+        a20 = a19.getString("MyURL", c48());
+        if (Objects.equals(a221().getString("general", ""), "1o")) {
+            hj9.setSummary(getActivity().getResources().getString(R.string.x17));
+            hj89.setEnabled(false);
+            hj89.setSummary(a221().getString("cGeneral", ""));
+        } else if (Objects.equals(a221().getString("general", ""), "7o")) {
+            hj9.setSummary(a20);
+            hj89.setEnabled(false);
+            hj89.setSummary(a221().getString("cGeneral", ""));
+        } else if (Objects.equals(a221().getString("general", ""), "30o")) {
+            hj9.setSummary(getActivity().getResources().getString(R.string.c26));
+            hj89.setEnabled(false);
+            hj89.setSummary(a221().getString("cGeneral", ""));
+        } else if (Objects.equals(a221().getString("general", ""), "60o")) {
+            hj9.setSummary(getActivity().getResources().getString(R.string.q20));
+            hj89.setEnabled(true);
+            String pre = a221().getString("cGeneral", "");
+            if (pre != null) {
+                hj89.setSummary(pre);
+            } else {
+                hj89.setSummary(c48());
+            }
+        }
+        hj89.setOnPreferenceChangeListener(this);
+        hj9.setOnPreferenceChangeListener(this);
     }
 
     private String c48() {

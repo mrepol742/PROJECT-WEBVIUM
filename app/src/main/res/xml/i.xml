@@ -36,6 +36,7 @@
         <com.mrepol742.webvium.Swit
             a:defaultValue="true"
             a:key="acu"
+            a:summary="@string/z105"
             a:title="@string/n11" />
 
         <com.mrepol742.webvium.List

@@ -40,6 +40,7 @@ import com.mrepol742.webvium.app.base.BaseFragment;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.security.Base64;
+import com.mrepol742.webvium.setting.SettingAdapter;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.util.Animation;
 

@@ -42,9 +42,35 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
 
-public class InterfaceFragment extends BasePreferenceFragment {
+public class InterfaceFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
     private static final int PRIMARY_FONT = 1234;
     private static final int SECONDARY_FONT = 1235;
+
+    @Override
+    public boolean onPreferenceClick(Preference a123) {
+        switch (a123.getKey()) {
+            case "autoUpdate":
+                InterfaceFragment.this.t(1);
+                return true;
+            case "autoUpdate742":
+            case "webviumB":
+                InterfaceFragment.this.t(0);
+                return true;
+            case "cus":
+                Intent d = new Intent(Intent.ACTION_GET_CONTENT);
+                d.setType("image/*");
+                d.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 79);
+                return true;
+            case "cfnt5":
+                InterfaceFragment.this.b19(PRIMARY_FONT);
+                return true;
+            case "cfnt2":
+                InterfaceFragment.this.b19(SECONDARY_FONT);
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
@@ -150,74 +176,23 @@ public class InterfaceFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (Build.VERSION.SDK_INT >= 29) {
-                a5(R.xml.t);
-            } else {
-                a5(R.xml.o);
-            }
-            Preference b = findPreference("autoUpdate");
-            b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    InterfaceFragment.this.t(1);
-                    return true;
-                }
-            });
-            Preference b742 = findPreference("autoUpdate742");
-            b742.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    InterfaceFragment.this.t(0);
-                    return true;
-                }
-            });
-            Preference a4 = findPreference("cus");
-            a4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intent d = new Intent(Intent.ACTION_GET_CONTENT);
-                    d.setType("image/*");
-                    d.addCategory(Intent.CATEGORY_OPENABLE);
-                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 79);
-                    return true;
-                }
-            });
-
-            Preference a7 = findPreference("webviumB");
-            a7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    InterfaceFragment.this.t(0);
-                    return true;
-                }
-            });
-            Preference a455 = findPreference("cfnt5");
-            a455.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    InterfaceFragment.this.b19(PRIMARY_FONT);
-                    return true;
-                }
-            });
-            Preference a433 = findPreference("cfnt2");
-            a433.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    InterfaceFragment.this.b19(SECONDARY_FONT);
-                    return true;
-                }
-            });
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (Build.VERSION.SDK_INT >= 29) {
+            a5(R.xml.t);
+        } else {
+            a5(R.xml.o);
         }
+        Preference b = findPreference("autoUpdate");
+        b.setOnPreferenceClickListener(this);
+        Preference b742 = findPreference("autoUpdate742");
+        b742.setOnPreferenceClickListener(this);
+        Preference a4 = findPreference("cus");
+        a4.setOnPreferenceClickListener(this);
+        Preference a7 = findPreference("webviumB");
+        a7.setOnPreferenceClickListener(this);
+        Preference a455 = findPreference("cfnt5");
+        a455.setOnPreferenceClickListener(this);
+        Preference a433 = findPreference("cfnt2");
+        a433.setOnPreferenceClickListener(this);
     }
 
     private String b20(int cn) {

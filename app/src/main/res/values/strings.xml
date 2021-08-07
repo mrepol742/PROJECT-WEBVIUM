@@ -265,7 +265,7 @@
     <string name="m20">0</string>
     <string name="n1">Theme</string>
     <string name="n2">Hardware</string>
-    <string name="n11">Automatically Check for Update</string>
+    <string name="n11">Update Service</string>
     <string name="n12">Update</string>
     <string name="n13">Push Notification</string>
     <string name="o1">Restarting Webvium…</string>
@@ -778,7 +778,7 @@
     <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
     <string name="z38">APK</string>
     <string name="z39">Automatically backup Webvium apk upon installing of new update</string>
-    <string name="z40">New Update</string>
+    <string name="z40">Export Webvium APK</string>
     <string name="x41">Youtube</string>
     <string name="x42">Github</string>
     <string name="x43">Facebook</string>
@@ -885,5 +885,6 @@
     <string name="z101">Stable</string>
     <string name="z102">Update Channel</string>
     <string name="z103">Set Update Channel</string>
-
+    <string name="z104">Feedback</string>
+    <string name="z105">Automatically check for update.</string>
 </resources>

@@ -38,46 +38,37 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-public class VideoFragment extends BasePreferenceFragment {
+public class VideoFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
+
+    @Override
+    public boolean onPreferenceClick(Preference a) {
+        switch (a.getKey()) {
+            case "captions":
+                Intents.k(VideoFragment.this.getActivity(), Settings.ACTION_CAPTIONING_SETTINGS);
+                return true;
+            case "shDCu":
+                Intents.a(VideoFragment.this.getActivity(), Vide.class);
+                return true;
+            case "cusP":
+                Intent d = new Intent(Intent.ACTION_GET_CONTENT);
+                d.setType("image/*");
+                d.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 7423);
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            a5(R.xml.h);
-            Preference o = findPreference("captions");
-            o.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intents.k(VideoFragment.this.getActivity(), Settings.ACTION_CAPTIONING_SETTINGS);
-                    return true;
-                }
-            });
-            Preference o5 = findPreference("shDCu");
-            o5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intents.a(VideoFragment.this.getActivity(), Vide.class);
-                    return true;
-                }
-            });
-            Preference a4 = findPreference("cusP");
-            a4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-                @Override
-                public boolean onPreferenceClick(Preference a) {
-                    Intent d = new Intent(Intent.ACTION_GET_CONTENT);
-                    d.setType("image/*");
-                    d.addCategory(Intent.CATEGORY_OPENABLE);
-                    startActivityForResult(Intent.createChooser(d, getString(R.string.a26)), 7423);
-                    return true;
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        a5(R.xml.h);
+        Preference o = findPreference("captions");
+        o.setOnPreferenceClickListener(this);
+        Preference o5 = findPreference("shDCu");
+        o5.setOnPreferenceClickListener(this);
+        Preference a4 = findPreference("cusP");
+        a4.setOnPreferenceClickListener(this);
     }
 
     @Override

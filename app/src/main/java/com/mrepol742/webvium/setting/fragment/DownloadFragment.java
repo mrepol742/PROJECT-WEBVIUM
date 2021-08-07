@@ -35,42 +35,38 @@ public class DownloadFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (Build.VERSION.SDK_INT >= 23) {
-                a5(R.xml.m);
-                Preference d = findPreference("batt");
-                d.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            a5(R.xml.m);
+            Preference d = findPreference("batt");
+            d.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-                    @Override
-                    public boolean onPreferenceClick(Preference a5) {
-                        AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                        a.setCancelable(true);
-                        a.setTitle(getString(R.string.f));
-                        a.setMessage(Html.b(getString(R.string.u12)));
-                        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference a5) {
+                    AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
+                    a.setCancelable(true);
+                    a.setTitle(getString(R.string.f));
+                    a.setMessage(Html.b(getString(R.string.u12)));
+                    a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface a12, int intetg) {
-                                Intents.k(DownloadFragment.this.getActivity(), Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-                                AwesomeToast.d(DownloadFragment.this.getActivity(), Html.b(DownloadFragment.this.getString(R.string.a25)).toString());
-                            }
-                        });
-                        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface a12, int intetg) {
+                            Intents.k(DownloadFragment.this.getActivity(), Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                            AwesomeToast.d(DownloadFragment.this.getActivity(), Html.b(DownloadFragment.this.getString(R.string.a25)).toString());
+                        }
+                    });
+                    a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface a1, int intetg) {
-                                a1.dismiss();
-                            }
-                        });
-                        a.create().show();
-                        return true;
-                    }
-                });
-            } else {
-                a5(R.xml.e);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+                        @Override
+                        public void onClick(DialogInterface a1, int intetg) {
+                            a1.dismiss();
+                        }
+                    });
+                    a.create().show();
+                    return true;
+                }
+            });
+        } else {
+            a5(R.xml.e);
         }
     }
 }

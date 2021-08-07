@@ -43,25 +43,21 @@ public class ToolFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        try {
-            if (Build.VERSION.SDK_INT >= 29) {
-                a5(R.xml.a5);
-            } else {
-                a5(R.xml.j);
-                Preference u1 = findPreference("clearScreen");
-                u1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        if (Build.VERSION.SDK_INT >= 29) {
+            a5(R.xml.a5);
+        } else {
+            a5(R.xml.j);
+            Preference u1 = findPreference("clearScreen");
+            u1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-                    @Override
-                    public boolean onPreferenceClick(Preference a) {
-                        if (Permission.check(getActivity(), Permission.STORAGE, 2)) {
-                            f();
-                        }
-                        return true;
+                @Override
+                public boolean onPreferenceClick(Preference a) {
+                    if (Permission.check(getActivity(), Permission.STORAGE, 2)) {
+                        f();
                     }
-                });
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+                    return true;
+                }
+            });
         }
     }
 
