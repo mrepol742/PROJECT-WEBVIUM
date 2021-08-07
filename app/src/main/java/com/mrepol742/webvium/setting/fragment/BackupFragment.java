@@ -36,11 +36,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.mrepol742.webvium.Back0;
 import com.mrepol742.webvium.Lock;
 import com.mrepol742.webvium.Webv;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.Swit;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.bookmark.BookmarkHelper;
@@ -250,153 +248,6 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
         j5.show();
     }
 
-    private void a13() {
-        AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(String.format(getString(R.string.b38), StorageDirectory.a() + "Settings_" + format() + ".bac")));
-        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                write(PreferenceManager.getDefaultSharedPreferences(BackupFragment.this.getActivity()).getAll());
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void a17() {
-        AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(String.format(getString(R.string.b40), location(3))));
-        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                createFolder();
-                SearchHelper d1 = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    g(BackupFragment.this.getString(R.string.z31));
-                } else {
-                    write(res, 3);
-                }
-                res.close();
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void b1() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(String.format(getString(R.string.c22), location(2))));
-        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                createFolder();
-                HistoryHelper d1 = HistoryHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    g(BackupFragment.this.getString(R.string.z31));
-                } else {
-                    write(res, 2);
-                }
-                res.close();
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void b5() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(String.format(getString(R.string.c24), location(0))));
-        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                createFolder();
-                BookmarkHelper d1 = BookmarkHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    g(BackupFragment.this.getString(R.string.z31));
-                } else {
-                    write(res, 0);
-                }
-                res.close();
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
-    private void b9() {
-        final AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.t6));
-        a.setMessage(Html.b(String.format(getString(R.string.z34), location(1))));
-        a.setPositiveButton(getString(R.string.q14), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                createFolder();
-                DownloadHelper d1 = DownloadHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
-                if (res.getCount() == 0) {
-                    g(BackupFragment.this.getString(R.string.z31));
-                } else {
-                    write(res, 1);
-                }
-                res.close();
-                a12.dismiss();
-            }
-        });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
-        a.create().show();
-    }
-
     private void d(String a) {
         AwesomeToast.c(getActivity(), a);
     }
@@ -421,116 +272,11 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
         return "Search_" + format() + ".json";
     }
 
-    private String location(int id) {
-        return location() + getName(id);
-    }
-
     private String location() {
         if (Build.VERSION.SDK_INT >= 30) {
             return StorageDirectory.a() + "/Documents/Webvium/Backup/";
         }
         return StorageDirectory.getWebviumDir() + "/Backup/";
-    }
-
-    private void write(Map<String, ?> map) {
-        final String sg = JSON.toString(map);
-        Runnable re = new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(), Environment.DIRECTORY_DOCUMENTS + "/Webvium/Setting_" + format() + ".bac", "", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup/", sg)) {
-                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
-                            }
-                        });
-                    } else if (FileUtil.write(new File(StorageDirectory.getWebviumDir() + "/Backup/Setting_" + format() + ".bac"), sg, false)) {
-                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
-                            }
-                        });
-                    } else {
-                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
-                            }
-                        });
-                    }
-                } catch (Exception en) {
-                    en.printStackTrace();
-                    BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
-                        }
-                    });
-                }
-            }
-        };
-        new Thread(re).start();
-    }
-
-    private void write(Cursor cr, final int id) {
-        final String sg = JSON.toString(cr, id);
-        Runnable re = new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    if (Build.VERSION.SDK_INT >= 30 && FileUtil.write(getActivity(), Environment.DIRECTORY_DOCUMENTS + "/Webvium/" + BackupFragment.this.getName(id), "", Environment.DIRECTORY_DOCUMENTS + "/Webvium/Backup/", sg)) {
-                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
-                            }
-                        });
-                    } else if (FileUtil.write(new File(location(id)), sg, false)) {
-                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b25));
-                            }
-                        });
-                    } else {
-                        BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
-                            }
-                        });
-                    }
-                } catch (Exception en) {
-                    en.printStackTrace();
-                    BackupFragment.this.getActivity().runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            BackupFragment.this.d(BackupFragment.this.getString(R.string.b26));
-                        }
-                    });
-                }
-            }
-        };
-        new Thread(re).start();
-        cr.close();
-    }
-
-    private void createFolder() {
-        if (Build.VERSION.SDK_INT < 30) {
-            FileUtil.createNewFolder(StorageDirectory.getWebviumDir() + "/Backup");
-        }
     }
 
     private void back(String name, int id) {

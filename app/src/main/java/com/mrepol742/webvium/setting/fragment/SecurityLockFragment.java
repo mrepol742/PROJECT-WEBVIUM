@@ -29,7 +29,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;

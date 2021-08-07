@@ -33,7 +33,6 @@ import com.mrepol742.webvium.Sear;
 import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.history.HistoryDataModel;
 
 import java.util.ArrayList;
 import java.util.List;

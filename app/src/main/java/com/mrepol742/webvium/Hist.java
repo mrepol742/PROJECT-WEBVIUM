@@ -25,7 +25,6 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,7 +64,7 @@ import java.util.List;
 /*
  * @HistoryActivity
  */
-public class Hist extends BaseActivity {
+public class Hist extends BaseActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, View.OnClickListener, DialogInterface.OnClickListener{
     public static final int LINKS = 0;
     public static final int TRANCEROUTE = 1;
     public static final int NPING = 2;
@@ -164,6 +163,28 @@ public class Hist extends BaseActivity {
     };
 
     @Override
+    public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
+        Intents.d("value", w15.c(c).ls0, Hist.this);
+        Hist.this.finish();
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        n(view, i);
+        return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        finish();
+    }
+
+    @Override
+    public void onClick(DialogInterface a2, int i) {
+        a2.dismiss();
+    }
+
+    @Override
     protected void onCreate(Bundle a) {
         theme(T_DEFAULT);
         super.onCreate(a);
@@ -185,31 +206,19 @@ public class Hist extends BaseActivity {
                 "_id" +
                 " DESC", null);
         if (res.getCount() == 0) {
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
                     f4.setVisibility(View.VISIBLE);
                     a3.setVisibility(View.GONE);
                     f2.setClickable(true);
-                }
-            });
         } else {
             while (res.moveToNext()) {
                 al.add(new HistoryDataModel(res.getString(1),
                         res.getString(2),
                         res.getLong(3)));
             }
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
                     f4.setVisibility(View.GONE);
                     a3.setVisibility(View.VISIBLE);
                     o22.setVisibility(View.VISIBLE);
                     Animation.animate(Hist.this, R.anim.i, o22);
-                }
-            });
         }
         res.close();
         ActionBar ab = getActionBar();
@@ -241,31 +250,11 @@ public class Hist extends BaseActivity {
             f4.setTextColor(g);
         }
         a1.setNavigationIcon(R.drawable.a2);
-        a1.setNavigationOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Hist.this.finish();
-            }
-        });
+        a1.setNavigationOnClickListener(this);
         w15 = new HistoryAdapter(this, al);
         a3.setAdapter(w15);
-        a3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> a4, View b, int c, long d) {
-                Intents.d("value", w15.c(c).ls0, Hist.this);
-                Hist.this.finish();
-            }
-        });
-        a3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                n(view, i);
-                return true;
-            }
-        });
+        a3.setOnItemClickListener(this);
+        a3.setOnItemLongClickListener(this);
         o22.setBackgroundResource(R.drawable.c6);
         o22.setImageResource(R.drawable.a23);
         o22.setOnClickListener(new View.OnClickListener() {
@@ -278,13 +267,7 @@ public class Hist extends BaseActivity {
         o22.setVisibility(View.GONE);
         o21.setBackgroundResource(R.drawable.c6);
         o21.setImageResource(R.drawable.a24);
-        o21.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        o21.setOnClickListener(thsi);
     }
 
     @Override
@@ -335,20 +318,14 @@ public class Hist extends BaseActivity {
                 a2.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
         TextWatcher tw = new TextWatcher(ed, ed1, okButton);
         ed.addTextChangedListener(tw);
         ed1.addTextChangedListener(tw);
-        okButton.setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void b(String a) {
@@ -373,13 +350,7 @@ public class Hist extends BaseActivity {
                 a1.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                a12.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         a.create().show();
     }
 
@@ -436,20 +407,14 @@ public class Hist extends BaseActivity {
                 a2.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
         TextWatcher tw = new TextWatcher(ed, ed1, okButton);
         ed.addTextChangedListener(tw);
         ed1.addTextChangedListener(tw);
-        okButton.setEnabled(TextUtils.isEmpty(ed.getText().toString()) && TextUtils.isEmpty(ed1.getText().toString()));
+        okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()) && !TextUtils.isEmpty(ed1.getText().toString()));
     }
 
     private void i() {
@@ -465,19 +430,12 @@ public class Hist extends BaseActivity {
                 Hist.this.f(Hist.this.getString(R.string.t1));
                 f4.setVisibility(View.VISIBLE);
                 a3.setVisibility(View.GONE);
-
                 o22.setVisibility(View.GONE);
                 f2.setClickable(true);
-
+                a12.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         a.create().show();
     }
 
@@ -792,13 +750,7 @@ public class Hist extends BaseActivity {
                 a2.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);

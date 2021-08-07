@@ -16,7 +16,6 @@
   -->
 
 <resources>
-    <item name="a" type="id" />
     <item name="c" type="id" />
     <item name="d" type="id" />
     <item name="e" type="id" />
@@ -81,7 +80,6 @@
     <item name="e1" type="id" />
     <item name="e2" type="id" />
     <item name="e3" type="id" />
-    <item name="e7" type="id" />
     <item name="e8" type="id" />
     <item name="e9" type="id" />
     <item name="e10" type="id" />

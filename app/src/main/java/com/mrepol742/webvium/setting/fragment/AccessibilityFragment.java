@@ -62,7 +62,7 @@ public class AccessibilityFragment extends BasePreferenceFragment implements Pre
                 return true;
         }
         return false;
-    };
+    }
 
     @Override
     public void onCreate(Bundle b1) {

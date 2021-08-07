@@ -33,13 +33,4 @@ public class BaseFragment extends Fragment {
         }
         return sharedPreferences;
     }
-
-    public void a225(String sg, boolean def) {
-        if (exclusive == null) {
-            exclusive = getActivity().getSharedPreferences("wv", 0);
-        }
-        SharedPreferences.Editor e = exclusive.edit();
-        e.putBoolean(sg, def);
-        e.apply();
-    }
 }

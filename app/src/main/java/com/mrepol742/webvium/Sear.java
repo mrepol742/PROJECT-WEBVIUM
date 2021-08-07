@@ -77,7 +77,7 @@ import java.util.Objects;
 /*
  * @SearchActivity
  */
-public class Sear extends MainBaseActivity {
+public class Sear extends MainBaseActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, TextView.OnEditorActionListener, PopupMenu.OnDismissListener {
     private EditText p;
     private ListView d;
     private RelativeLayout b19;
@@ -129,6 +129,44 @@ public class Sear extends MainBaseActivity {
         }
     };
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int c1, long l) {
+        Sear.this.search(aa.c(c1).data);
+        Sear.this.finish();
+        SoftKeyboard.hide(Sear.this, b19);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l){
+        query23=aa.c(i).data;
+        Sear.this.p(view);
+        return true;
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            String query = p.getText().toString();
+            if (!TextUtils.isEmpty(query)) {
+                Sear.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                SoftKeyboard.hide(Sear.this, b19);
+                d2.c(query);
+                Sear.this.search(query);
+                Sear.this.finish();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onDismiss(PopupMenu popupMenu) {
+        popupMenu.getMenu().clear();
+        if (Sear.this.query23 != null) {
+            Sear.this.query23 = null;
+        }
+    }
+
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,13 +196,7 @@ public class Sear extends MainBaseActivity {
                 "_id" +
                 " DESC ", null);
         if (res.getCount() == 0) {
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    d.setVisibility(View.GONE);
-                }
-            });
+            d.setVisibility(View.GONE);
         } else {
             while (res.moveToNext()) {
                 ls.add(new SearchDataModel(res.getString(1), SEARCH));
@@ -238,24 +270,8 @@ public class Sear extends MainBaseActivity {
         if (Objects.equals(a221().getString("arrange", "30z"), "60z")) {
             Collections.reverse(ls);
         }
-        d.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int c1, long l) {
-                Sear.this.search(aa.c(c1).data);
-                Sear.this.finish();
-                SoftKeyboard.hide(Sear.this, b19);
-            }
-        });
-        d.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                query23 = aa.c(i).data;
-                Sear.this.p(view);
-                return true;
-            }
-        });
+        d.setOnItemClickListener(this);
+        d.setOnItemLongClickListener(this);
         d.setAdapter(aa);
         p.addTextChangedListener(new TextWatcher() {
 
@@ -340,24 +356,7 @@ public class Sear extends MainBaseActivity {
                 SoftKeyboard.show(Sear.this, p);
             }
         });
-        p.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    String query = p.getText().toString();
-                    if (!TextUtils.isEmpty(query)) {
-                        Sear.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                        SoftKeyboard.hide(Sear.this, b19);
-                        d2.c(query);
-                        Sear.this.search(query);
-                        Sear.this.finish();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
+        p.setOnEditorActionListener(this);
         o();
         if (a221().getBoolean("voice", true) && !spr()) {
             iv.setImageResource(R.drawable.c9);
@@ -436,6 +435,7 @@ public class Sear extends MainBaseActivity {
                 d2.b(b);
                 Sear.this.f6(String.format(Sear.this.getString(R.string.h5), b));
                 Sear.this.k();
+                a12.dismiss();
             }
         });
         a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
@@ -581,16 +581,7 @@ public class Sear extends MainBaseActivity {
     private void p(View w) {
         if (pm == null) {
             pm = new PopupMenu(this, w);
-            pm.setOnDismissListener(new PopupMenu.OnDismissListener() {
-
-                @Override
-                public void onDismiss(PopupMenu popupMenu) {
-                    popupMenu.getMenu().clear();
-                    if (Sear.this.query23 != null) {
-                        Sear.this.query23 = null;
-                    }
-                }
-            });
+            pm.setOnDismissListener(this);
         }
         Menu me = pm.getMenu();
         me.add(0, 0, 0, getString(R.string.o5)).setOnMenuItemClickListener(e);
@@ -707,13 +698,8 @@ public class Sear extends MainBaseActivity {
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
-        ed.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                okButton.setEnabled(TextUtils.isEmpty(charSequence));
-            }
-        });
+        TextWatcher tw = new TextWatcher(ed, okButton);
+        ed.addTextChangedListener(tw);
         okButton.setEnabled(!TextUtils.isEmpty(ed.getText().toString()));
     }
 

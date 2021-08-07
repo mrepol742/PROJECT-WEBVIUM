@@ -32,7 +32,6 @@ import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -46,7 +45,6 @@ import com.mrepol742.webvium.app.Permission;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.AwesomeToast;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;

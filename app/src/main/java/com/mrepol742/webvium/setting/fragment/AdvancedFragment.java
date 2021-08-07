@@ -18,19 +18,16 @@
 package com.mrepol742.webvium.setting.fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.webkit.WebStorage;
 
 import com.mrepol742.webvium.Edit0;
 import com.mrepol742.webvium.Lock;
@@ -45,7 +42,6 @@ import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.Intents;
-import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.Objects;
 

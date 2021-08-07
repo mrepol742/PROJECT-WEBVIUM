@@ -67,7 +67,6 @@ import android.print.PrintManager;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -143,7 +142,6 @@ import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.permission.PermissionDataModel;
-import com.mrepol742.webvium.search.SearchDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.security.Caesar;
@@ -161,11 +159,9 @@ import com.mrepol742.webvium.util.PassGen;
 import com.mrepol742.webvium.util.PasswordTransformationMethod;
 import com.mrepol742.webvium.util.TextWatcher;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -192,7 +188,7 @@ import android.view.View.OnClickListener;
 /*
  * @WebviumActivity
  */
-public class Webv extends MainBaseActivity {
+public class Webv extends MainBaseActivity implements DialogInterface.OnClickListener, View.OnClickListener, PopupMenu.OnDismissListener {
     public static final String UA_DEFAULT = "1e";
     public static final String UA_ANDROID_STOCK = "7e";
     public static final String UA_INTERNET_EXPLORER = "30e";
@@ -626,6 +622,79 @@ public class Webv extends MainBaseActivity {
     }
 
     @Override
+    public void onClick(DialogInterface a2, int i) {
+        a2.dismiss();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.d20:
+                Webv.this.c75();
+                break;
+            case R.id.v:
+            case R.id.g:
+            case R.id.c13:
+                Webv.this.c22();
+                break;
+            case R.id.m6:
+                Webv.this.c144();
+                break;
+            case R.id.m7:
+                Webv.this.c18();
+                break;
+            case R.id.r:
+                if (Webv.this.currentTab().getProgress() == 100) {
+                    Webv.this.currentTab().reload();
+                } else {
+                    Webv.this.currentTab().stopLoading();
+                    Webv.this.currentTab().getFirstClient().onPageFinished(Webv.this.currentTab(), Webv.this.currentUrl());
+                }
+                break;
+            case R.id.b1:
+                Webv.this.c51(Webv.this.currentTab());
+                break;
+            case R.id.z:
+                // TODO: request permission first
+                Intent a12 = new Intent(Webv.this, Voic.class);
+                Webv.this.startActivityForResult(a12, 742);
+                break;
+            case R.id.s:
+                if (Webv.this.currentTab().canGoForward()) {
+                    Webv.this.currentTab().goForward();
+                }
+                break;
+            case R.id.q:
+                if (currentSettings().getJavaScriptEnabled()) {
+                    if (Webv.this.des != null) {
+                        AlertDialog.Builder a = new AlertDialog.Builder(Webv.this);
+                        a.setTitle(currentTitle());
+                        a.setCancelable(true);
+                        a.setMessage(Webv.this.des);
+                        a.setPositiveButton(getString(R.string.y89), Webv.this);
+                        final AlertDialog g = a.create();
+                        g.show();
+                    } else {
+                        c7(getString(R.string.z82));
+                    }
+                } else {
+                    c7(getString(R.string.u13));
+                }
+                break;
+            case R.id.m5:
+                if (Webv.this.currentTab().canGoBack()) {
+                    Webv.this.currentTab().goBack();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onDismiss(PopupMenu popupMenu) {
+        popupMenu.getMenu().clear();
+    }
+
+    @Override
     protected void onActivityResult(int a, int b, Intent c) {
         super.onActivityResult(a, b, c);
         if (a == 742) {
@@ -739,13 +808,7 @@ public class Webv extends MainBaseActivity {
             this.ab.setDisplayShowTitleEnabled(false);
         }
         this.o.setElevation(5);
-        this.iw.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Webv.this.c75();
-            }
-        });
+        this.iw.setOnClickListener(this);
         this.iw.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
@@ -756,13 +819,7 @@ public class Webv extends MainBaseActivity {
         });
         this.a7 = Resources.getColor(this, R.color.c);
         this.a8 = Resources.getColor(this, R.color.b);
-        this.cd.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Webv.this.c22();
-            }
-        });
+        this.cd.setOnClickListener(this);
         this.cd.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
@@ -771,39 +828,15 @@ public class Webv extends MainBaseActivity {
                 return true;
             }
         });
-        this.u.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Webv.this.c22();
-            }
-        });
-        hsv.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Webv.this.c22();
-            }
-        });
+        this.u.setOnClickListener(this);
+        hsv.setOnClickListener(this);
         this.u.setTypeface(type(Typeface.NORMAL));
         this.g.setMax(100);
         tv7.setImageResource(R.drawable.d7);
-        tv7.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Webv.this.c144();
-            }
-        });
+        tv7.setOnClickListener(this);
         tv7.setBackgroundResource(R.drawable.b17);
         tv8.setImageResource(R.drawable.b29);
-        tv8.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Webv.this.c18();
-            }
-        });
+        tv8.setOnClickListener(this);
         tv9.setImageResource(R.drawable.d9);
         tv9.setBackgroundResource(R.drawable.b17);
         tv9.setOnClickListener(new View.OnClickListener() {
@@ -852,48 +885,15 @@ public class Webv extends MainBaseActivity {
         this.cd.setBackgroundResource(R.drawable.w);
         c15(h);
         c50(h);
-        tv3.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if (Webv.this.currentTab().getProgress() == 100) {
-                    Webv.this.currentTab().reload();
-                } else {
-                    Webv.this.currentTab().stopLoading();
-                    Webv.this.currentTab().getFirstClient().onPageFinished(Webv.this.currentTab(), Webv.this.currentUrl());
-                }
-            }
-        });
+        tv3.setOnClickListener(this);
         tv3.setBackgroundResource(R.drawable.b17);
         if (a221().getBoolean("home", true)) {
-            tv1.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    Webv.this.c51(Webv.this.currentTab());
-                }
-            });
+            tv1.setOnClickListener(this);
         }
         if (a221().getBoolean("voice", true) && !spr()) {
-            tv2.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    // TODO: request permission first
-                    Intent a12 = new Intent(Webv.this, Voic.class);
-                    Webv.this.startActivityForResult(a12, 742);
-                }
-            });
+            tv2.setOnClickListener(this);
         }
-        tv4.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if (Webv.this.currentTab().canGoForward()) {
-                    Webv.this.currentTab().goForward();
-                }
-            }
-        });
+        tv4.setOnClickListener(this);
         final MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
 
             @Override
@@ -911,13 +911,7 @@ public class Webv extends MainBaseActivity {
                 }
                 if (pm0 == null) {
                     pm0 = new PopupMenu(Webv.this, view);
-                    pm0.setOnDismissListener(new PopupMenu.OnDismissListener() {
-
-                        @Override
-                        public void onDismiss(PopupMenu popupMenu) {
-                            popupMenu.getMenu().clear();
-                        }
-                    });
+                    pm0.setOnDismissListener(Webv.this);
                 }
                 Menu me = pm0.getMenu();
                 int size = Webv.this.currentTab().w4.size();
@@ -928,42 +922,8 @@ public class Webv extends MainBaseActivity {
                 return true;
             }
         });
-        tv5.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if (currentSettings().getJavaScriptEnabled()) {
-                    if (Webv.this.des != null) {
-                        AlertDialog.Builder a = new AlertDialog.Builder(Webv.this);
-                        a.setTitle(currentTitle());
-                        a.setCancelable(true);
-                        a.setMessage(Webv.this.des);
-                        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface a2, int i) {
-                                a2.dismiss();
-                            }
-                        });
-                        final AlertDialog g = a.create();
-                        g.show();
-                    } else {
-                        c7(getString(R.string.z82));
-                    }
-                } else {
-                    c7(getString(R.string.u13));
-                }
-            }
-        });
-        tv6.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if (Webv.this.currentTab().canGoBack()) {
-                    Webv.this.currentTab().goBack();
-                }
-            }
-        });
+        tv5.setOnClickListener(this);
+        tv6.setOnClickListener(this);
         tv6.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
@@ -973,13 +933,7 @@ public class Webv extends MainBaseActivity {
                 }
                 if (pm0 == null) {
                     pm0 = new PopupMenu(Webv.this, view);
-                    pm0.setOnDismissListener(new PopupMenu.OnDismissListener() {
-
-                        @Override
-                        public void onDismiss(PopupMenu popupMenu) {
-                            popupMenu.getMenu().clear();
-                        }
-                    });
+                    pm0.setOnDismissListener(Webv.this;
                 }
                 Menu me = pm0.getMenu();
                 int size = Webv.this.currentTab().w4.size();
@@ -2666,13 +2620,7 @@ ct = 0;
                     a34.dismiss();
                 }
             });
-            c.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface a, int intetg) {
-                    a.dismiss();
-                }
-            });
+            c.setNegativeButton(getString(R.string.i7), this);
             final AlertDialog g = c.create();
             g.show();
             final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -2777,13 +2725,7 @@ ct = 0;
                 Webv.this.c8(Webv.this.getString(R.string.t2));
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -3656,13 +3598,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(cm.toString());
-        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setPositiveButton(getString(R.string.y89), this);
         final AlertDialog g = a.create();
         g.show();
     }
@@ -3830,13 +3766,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 a12.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         a.create().show();
     }
 
@@ -3908,13 +3838,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -4038,13 +3962,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 a2.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -4198,13 +4116,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 Webv.this.startActivity(a4);
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         a.create().show();
     }
 
@@ -4303,13 +4215,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             ed1.setTextColor(Resources.getColor(this, R.color.b));
         }
         Html.a(ed, ag9);
-        a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a12, int intetg) {
-                a12.dismiss();
-            }
-        });
+        a.setPositiveButton(getString(R.string.i6), this);
         final AlertDialog g = a.create();
         g.show();
     }
@@ -4365,13 +4271,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         Intent d = new Intent(Intent.ACTION_VIEW);
         d.setData(Uri.parse(c109(b)));
         startActivity(Intent.createChooser(d, getString(R.string.a26)));
-    }
-
-    public String c107(String sg) {
-        if (sg.startsWith("tel:")) {
-            return sg;
-        }
-        return "tel:" + sg;
     }
 
     private void c108() throws PackageManager.NameNotFoundException {
@@ -4466,13 +4365,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 a2.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), this);
         final AlertDialog g = a.create();
         g.show();
         final Button okButton = g.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -5051,13 +4944,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         c.setTitle(getString(R.string.l35));
         c.setCancelable(true);
         c.setMessage(Html.b(getString(R.string.l36)));
-        c.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a, int intetg) {
-                a.dismiss();
-            }
-        });
+        c.setPositiveButton(getString(R.string.i6), this);
         c.create().show();
     }
 
@@ -5074,13 +4961,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 a12.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.l15), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.l15), this);
         a.create().show();
     }
 
@@ -5530,13 +5411,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm0.toString()));
-        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setPositiveButton(getString(R.string.y89), this);
         final AlertDialog g = a.create();
         g.show();
     }
@@ -5555,13 +5430,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             ed.setTextColor(Resources.getColor(this, R.color.b));
         }
         ed.setText(Html.b(cm2.toString()));
-        a.setPositiveButton(getString(R.string.y89), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int i) {
-                a2.dismiss();
-            }
-        });
+        a.setPositiveButton(getString(R.string.y89), this);
         final AlertDialog g = a.create();
         g.show();
     }
@@ -5698,7 +5567,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     
     private void c183() {
         final LinearLayout never_gonna_give_you_up = findViewById(R.id.m4);
-        LayoutInflater u_r_hentai = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater u_r_hentai = getLayoutInflater();
         final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null);
         final int childCount = never_gonna_give_you_up.getChildCount();
         ImageView ppp = u_r_idiot.findViewById(R.id.o48);

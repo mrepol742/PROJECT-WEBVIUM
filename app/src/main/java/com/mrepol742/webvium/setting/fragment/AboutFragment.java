@@ -33,17 +33,13 @@ import android.widget.TextView;
 import com.mrepol742.webvium.BuildConfig;
 import com.mrepol742.webvium.Pref;
 import com.mrepol742.webvium.Upda;
-import com.mrepol742.webvium.Webv;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
-import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.util.AwesomeToast;
 import com.mrepol742.webvium.util.Html;
-import com.mrepol742.webvium.util.JSON;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

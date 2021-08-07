@@ -49,12 +49,6 @@ public class DownloadHelper {
         return sld;
     }
 
-    public void finish() {
-        if (sld != null && sld.isOpen()) {
-            sld.close();
-        }
-    }
-
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_DOWNLOAD, null, null);

@@ -26,7 +26,6 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;

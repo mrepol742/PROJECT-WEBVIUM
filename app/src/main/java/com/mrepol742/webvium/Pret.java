@@ -25,7 +25,6 @@ import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.widget.LinearLayout;

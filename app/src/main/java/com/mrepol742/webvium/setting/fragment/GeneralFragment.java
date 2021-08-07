@@ -24,12 +24,8 @@ import android.preference.Preference;
 
 import com.mrepol742.webvium.Edit0;
 import com.mrepol742.webvium.List;
-import com.mrepol742.webvium.Pref;
 import com.mrepol742.webvium.R;
-import com.mrepol742.webvium.Upda;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
-import com.mrepol742.webvium.app.Intents;
-import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.util.Objects;
 

@@ -49,7 +49,7 @@ import java.util.List;
 public class Down extends BaseActivity {
 
     private ListView a3;
-    private List<DownloadDataModel> al = new ArrayList<>();
+    private final List<DownloadDataModel> al = new ArrayList<>();
     private RelativeLayout f2;
     private ImageView iv;
     private DownloadHelper d10;

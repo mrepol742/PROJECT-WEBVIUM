@@ -71,7 +71,7 @@ import java.util.Objects;
 /*
  * @ManageSpaceActivity
  */
-public class Mana extends BaseActivity {
+public class Mana extends BaseActivity implements DialogInterface.OnClickListener {
 
     private static final int[] drawables = {
             R.drawable.d15,
@@ -117,6 +117,11 @@ public class Mana extends BaseActivity {
     private ManageSpaceAdapter w19;
     private ImageView iv1;
     private R7 r7;
+
+    @Override
+    public void onClick(DialogInterface a2, int intetg) {
+        a2.dismiss();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -280,13 +285,7 @@ public class Mana extends BaseActivity {
                                     Mana.this.a1();
                                 }
                             });
-                            a12.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface a2, int intetg) {
-                                    a2.dismiss();
-                                }
-                            });
+                            a12.setNegativeButton(getString(R.string.i7), Mana.this);
                             a12.create().show();
                         } else {
                             AwesomeToast.c(Mana.this, getString(R.string.v27));
@@ -317,13 +316,7 @@ public class Mana extends BaseActivity {
                                 Mana.this.a1();
                             }
                         });
-                        a12.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface a2, int intetg) {
-                                a2.dismiss();
-                            }
-                        });
+                        a12.setNegativeButton(getString(R.string.i7), Mana.this);
                         a12.create().show();
                         break;
                     case 2:
@@ -350,13 +343,7 @@ public class Mana extends BaseActivity {
                                     Mana.this.a1();
                                 }
                             });
-                            a121.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface a2, int intetg) {
-                                    a2.dismiss();
-                                }
-                            });
+                            a121.setNegativeButton(getString(R.string.i7), Mana.this;
                             a121.create().show();
                         } else {
                             AwesomeToast.c(Mana.this, getString(R.string.v27));
@@ -384,13 +371,7 @@ public class Mana extends BaseActivity {
                                     Mana.this.a1();
                                 }
                             });
-                            a13.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface a2, int intetg) {
-                                    a2.dismiss();
-                                }
-                            });
+                            a13.setNegativeButton(getString(R.string.i7), Mana.this);
                             a13.create().show();
                         } else {
                             AwesomeToast.c(Mana.this, getString(R.string.v27));
@@ -419,17 +400,10 @@ public class Mana extends BaseActivity {
                                     Mana.this.a1();
                                 }
                             });
-                            a11.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface a2, int intetg) {
-                                    a2.dismiss();
-                                }
-                            });
+                            a11.setNegativeButton(getString(R.string.i7), Mana.this);
                             a11.create().show();
                         } else {
                             AwesomeToast.c(Mana.this, getString(R.string.v27));
-
                         }
                         res1.close();
                         break;
@@ -451,13 +425,7 @@ public class Mana extends BaseActivity {
                                 System.exit(0);
                             }
                         });
-                        a14.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface a2, int intetg) {
-                                a2.dismiss();
-                            }
-                        });
+                        a14.setNegativeButton(getString(R.string.i7), Mana.this);
                         a14.create().show();
                         break;
                     case 6:
@@ -577,13 +545,7 @@ public class Mana extends BaseActivity {
                 a12.dismiss();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a1, int intetg) {
-                a1.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), Mana.this);
         a.create().show();
     }
 
@@ -674,13 +636,7 @@ public class Mana extends BaseActivity {
                 Mana.this.a1();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), Mana.this);
         a.create().show();
     }
 
@@ -698,13 +654,7 @@ public class Mana extends BaseActivity {
                 Mana.this.a1();
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int intetg) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), Mana.this);
         a.create().show();
     }
 
@@ -740,13 +690,7 @@ public class Mana extends BaseActivity {
                 System.exit(0);
             }
         });
-        a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface a2, int inetg) {
-                a2.dismiss();
-            }
-        });
+        a.setNegativeButton(getString(R.string.i7), Mana.this);
         a.create().show();
     }
 

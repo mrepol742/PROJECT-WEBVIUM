@@ -9,7 +9,7 @@
 
 	<ImageView a:src="@drawable/g10" a:layout_alignParentStart="true"
 		a:layout_height="match_parent"
-		a:layout_width="wrap_content"
+		a:layout_width="wrap_content" a:contentDescription="@string/y89"
 		a:id="@id/o48" />
 
 	<com.mrepol742.webvium.Edit
@@ -20,12 +20,12 @@
 
 	<ImageView a:layout_alignEnd="@id/o49"
 		a:layout_height="match_parent"
-		a:layout_width="wrap_content"
+		a:layout_width="wrap_content" a:contentDescription="@string/z106"
 		a:layout_margin="50dp"
 		a:id="@id/o51" a:src="@drawable/c15" />
 
 	<ImageView
-		a:layout_margin="5dp" a:layout_alignParentEnd="true"
+		a:layout_margin="5dp" a:layout_alignParentEnd="true" a:contentDescription="@string/z107"
 		a:layout_height="match_parent" a:src="@drawable/b14"
 		a:layout_width="wrap_content"
 		a:id="@id/o49"/>

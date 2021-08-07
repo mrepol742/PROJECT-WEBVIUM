@@ -69,7 +69,7 @@ public class Upda extends Service {
                         if (newUpdate == null) {
                             b();
                         } else if (newUpdate.name > versionName || (newUpdate.name == versionName && newUpdate.code > versionCode)) {
-                            a();
+                            a(newUpdate.url);
                         }
                     } catch (PackageManager.NameNotFoundException w) {
                         w.printStackTrace();
@@ -89,7 +89,7 @@ public class Upda extends Service {
         return null;
     }
 
-    private void a() {
+    private void a(String url) {
         MainNotification.b(Upda.this, Upda.this.getString(R.string.x11), Upda.this.getString(R.string.z2));
         android.app.Notification.Builder m = Notifications.a(Upda.this, Upda.this.getString(R.string.x11));
         m.setSmallIcon(R.drawable.j);
@@ -131,7 +131,7 @@ public class Upda extends Service {
         }
         m.setLargeIcon(BitmapFactory.decodeResource(Upda.this.getResources(), R.drawable.j));
         Intent j = new Intent(Upda.this, Webv.class);
-        j.putExtra("value", "https://mrepol742.github.io/PROJECT-WEBVIUM");
+        j.putExtra("value", url);
         PendingIntent k = PendingIntent.getActivity(Upda.this, 1, j, PendingIntent.FLAG_UPDATE_CURRENT);
         m.setContentIntent(k);
         PendingIntent pi23 = PendingIntent.getActivity(Upda.this, 0, j, PendingIntent.FLAG_UPDATE_CURRENT);

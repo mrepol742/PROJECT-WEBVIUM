@@ -21,9 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
-import android.text.SpannableString;
 import android.text.format.Formatter;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +35,6 @@ import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.util.DateUtil;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
