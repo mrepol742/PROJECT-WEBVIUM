@@ -127,7 +127,6 @@ public class Sett extends BaseActivity {
 
     @Override
     protected void onNewIntent(Intent a) {
-        try {
             if (Objects.equals(a.getAction(), Intent.ACTION_MAIN) && a.getCategories().contains("android.intent.category.NOTIFICATION_PREFERENCES")) {
                 return;
             }
@@ -198,16 +197,13 @@ public class Sett extends BaseActivity {
             a.setAction("");
             a.setData(null);
             a.setFlags(0);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu a) {
         a.add(0, 0, 0, getString(R.string.a8));
         a.add(0, 1, 0, getString(R.string.f14));
-        a.add(0, 2, 0, getString(R.string.z86));
+        a.add(0, 2, 0, getString(R.string.a41));
         return super.onCreateOptionsMenu(a);
     }
 
@@ -215,7 +211,10 @@ public class Sett extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem a) {
         switch (a.getItemId()) {
             case 0:
-                b23();
+                Intent b = new Intent("android.intent.action.SEND");
+                b.setType("text/plain");
+                b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
+                startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
                 return true;
             case 1:
                 a(true);
@@ -243,12 +242,4 @@ public class Sett extends BaseActivity {
         intent.setPackage("com.google.android.gm");
         startActivity(Intent.createChooser(intent, getString(R.string.z65)));
     }
-
-    private void b23() {
-        Intent b = new Intent("android.intent.action.SEND");
-        b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
-        startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
-    }
-
 }

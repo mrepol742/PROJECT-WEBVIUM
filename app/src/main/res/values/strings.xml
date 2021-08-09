@@ -522,7 +522,7 @@
 
     <string name="d39">Searching for %1$s</string>
     <string name="d40">Size</string>
-    <string name="d41">Find on page</string>
+    <string name="d41">Find on Page</string>
     <string name="e21">Link</string>
     <string name="e22">Free Space</string>
     <string name="e23">Free Space After Download</string>
@@ -605,7 +605,7 @@
     <string name="j33">Disable Pretend Mode</string>
     <string name="j34">Incorrect Answer.</string>
     <string name="j35">Calculator</string>
-    <string name="j36">Web OSINT</string>
+    <string name="j36">More…</string>
     <string name="j38">Change PIN</string>
     <string name="j39">Old PIN</string>
     <string name="j40">New PIN</string>
@@ -843,7 +843,6 @@
     <string name="z90">Clear Download History</string>
     <string name="z92">Do you really want to clear Download History?</string>
     <string name="z93">Clear Bookmarks &amp; History</string>
-
     <string name="z94">Search History</string>
     <string name="z95">Browsing History</string>
     <string name="z96">Download History</string>
@@ -858,4 +857,5 @@
     <string name="z105">Automatically check for update.</string>
     <string name="z106">Find Up</string>
     <string name="z107">Find Down</string>
+    <string name="a41">Request Feature</string>
 </resources>

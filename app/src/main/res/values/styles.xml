@@ -84,10 +84,8 @@
         <item name="k">@color/u</item>
         <item name="l">@color/b</item>
         <item name="m">24dp</item>
-        <item name="n">@drawable/f21</item>
         <item name="o">@drawable/f17</item>
         <item name="p">@drawable/f20</item>
-        <item name="q">@drawable/f24</item>
         <item name="r">@color/q</item>
         <item name="s">@color/d</item>
         <item name="a4">@color/o</item>
@@ -141,10 +139,8 @@
         <item name="k">@color/v</item>
         <item name="l">@color/m</item>
         <item name="m">24dp</item>
-        <item name="n">@drawable/f21</item>
         <item name="o">@drawable/f17</item>
         <item name="p">@drawable/f20</item>
-        <item name="q">@drawable/f24</item>
         <item name="r">@color/d</item>
         <item name="s">@color/q</item>
         <item name="a4">@color/w</item>
@@ -241,14 +237,10 @@
         <item name="android:listChoiceBackgroundIndicator">?v</item>
         <item name="android:alertDialogTheme">@style/s</item>
         <item name="android:switchStyle">@style/c15</item>
-        <item name="android:checkboxStyle">@style/c16</item>
-        <item name="android:radioButtonStyle">@style/c17</item>
         <item name="android:colorEdgeEffect">?r</item>
         <item name="android:popupMenuStyle">@style/a15</item>
         <item name="android:actionOverflowMenuStyle">@style/a15</item>
         <item name="android:preferenceCategoryStyle">@style/c19</item>
-        <!--   <item name="android:preferenceStyle">@style/c20</item>
-         <item name="android:preferenceLayoutChild">@style/c20</item>-->
         <item name="android:horizontalScrollViewStyle">@style/c22</item>
         <item name="android:editTextStyle">@style/c26</item>
         <item name="android:editTextBackground">@drawable/d14</item>
@@ -293,11 +285,7 @@
         <item name="android:listChoiceBackgroundIndicator">?v</item>
         <item name="android:alertDialogTheme">@style/t</item>
         <item name="android:switchStyle">@style/c15</item>
-        <item name="android:checkboxStyle">@style/c16</item>
-        <item name="android:radioButtonStyle">@style/c17</item>
         <item name="android:preferenceCategoryStyle">@style/c19</item>
-        <!--   <item name="android:preferenceStyle">@style/c20</item>
-        <item name="android:preferenceLayoutChild">@style/c20</item>-->
         <item name="android:horizontalScrollViewStyle">@style/c22</item>
         <item name="android:editTextStyle">@style/c26</item>
         <item name="android:editTextBackground">@drawable/d14</item>
@@ -357,14 +345,6 @@
         <item name="android:thumb">?o</item>
         <item name="android:track">?p</item>
         <item name="android:showText">false</item>
-    </style>
-
-    <style name="c16" parent="@style/c41">
-        <item name="android:button">?n</item>
-    </style>
-
-    <style name="c17" parent="@style/c34">
-        <item name="android:button">?q</item>
     </style>
 
     <style name="c19">
@@ -499,5 +479,4 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">?a</item>
     </style>
-
 </resources>

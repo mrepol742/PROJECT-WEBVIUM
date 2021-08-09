@@ -31,16 +31,11 @@
         <item name="android:listChoiceBackgroundIndicator">@drawable/f3</item>
         <item name="android:alertDialogTheme">@style/s</item>
         <item name="android:switchStyle">@style/c15</item>
-        <item name="android:checkboxStyle">@style/c16</item>
-        <item name="android:radioButtonStyle">@style/c17</item>
         <item name="android:colorEdgeEffect">?r</item>
 
         <item name="android:popupMenuStyle">@style/a15</item>
         <item name="android:actionOverflowMenuStyle">@style/a15</item>
         <item name="android:preferenceCategoryStyle">@style/c19</item>
-        <!--      <item name="android:preferenceStyle">@style/c20</item>
-            <item name="android:preferenceLayoutChild">@style/c20</item>-->
-
         <item name="android:horizontalScrollViewStyle">@style/c22</item>
 
         <item name="android:listMenuViewStyle">@style/c24</item>
@@ -88,13 +83,7 @@
         <item name="android:listChoiceBackgroundIndicator">@drawable/f3</item>
         <item name="android:alertDialogTheme">@style/t</item>
         <item name="android:switchStyle">@style/c15</item>
-        <item name="android:checkboxStyle">@style/c16</item>
-        <item name="android:radioButtonStyle">@style/c17</item>
-
         <item name="android:preferenceCategoryStyle">@style/c19</item>
-        <!--  <item name="android:preferenceStyle">@style/c20</item>
-        <item name="android:preferenceLayoutChild">@style/c20</item>-->
-
         <item name="android:horizontalScrollViewStyle">@style/c22</item>
 
         <item name="android:listMenuViewStyle">@style/c24</item>

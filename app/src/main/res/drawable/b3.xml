@@ -15,10 +15,10 @@
   ~ limitations under the License.
   -->
 
-<set xmlns:a="http://schemas.android.com/apk/res/android">
-
-    <translate
-        a:duration="600"
-        a:fromYDelta="100%"
-        a:toYDelta="0" />
-</set>
+<inset xmlns:a="http://schemas.android.com/apk/res/android"
+    a:inset="5dp">
+<shape a:shape="rectangle">
+    <corners a:radius="50dp" />
+    <solid a:color="?b" />
+</shape>
+</inset>

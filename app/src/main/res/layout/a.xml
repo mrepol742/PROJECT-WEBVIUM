@@ -55,45 +55,36 @@
 
     <LinearLayout
         a:id="@id/m16"
-        a:layout_width="match_parent"
-        a:layout_height="wrap_content"
+        a:layout_width="fill_parent"
+        a:layout_height="40dp"
         a:layout_alignParentBottom="true"
+        a:elevation="5dp"
         a:gravity="center"
         a:orientation="horizontal"
         a:paddingTop="5dp">
 
-        <TextView
+        <ImageView
             a:id="@id/m17"
             a:layout_width="0dp"
             a:layout_height="wrap_content"
             a:layout_weight="0.5"
-            a:ellipsize="end"
-            a:gravity="center"
-            a:maxLines="1"
-            a:padding="5dp"
-            a:textSize="16sp" />
+            a:contentDescription="@string/h3"
+            />
 
-        <TextView
+        <ImageView
             a:id="@id/m20"
             a:layout_width="0dp"
             a:layout_height="wrap_content"
             a:layout_weight="0.5"
-            a:ellipsize="end"
-            a:gravity="center"
-            a:maxLines="1"
-            a:padding="5dp"
-            a:textSize="16sp" />
+            a:contentDescription="@string/t21"
+            />
 
-        <TextView
+        <ImageView
             a:id="@id/m1"
             a:layout_width="0dp"
             a:layout_height="wrap_content"
             a:layout_weight="0.5"
-            a:ellipsize="end"
-            a:gravity="center"
-            a:maxLines="1"
-            a:padding="5dp"
-            a:textSize="16sp" />
+            a:contentDescription="@string/l" />
 
     </LinearLayout>
 

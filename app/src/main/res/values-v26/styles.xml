@@ -32,10 +32,8 @@
         <item name="k">@color/u</item>
         <item name="l">@color/b</item>
         <item name="m">24dp</item>
-        <item name="n">@drawable/f21</item>
         <item name="o">@drawable/f17</item>
         <item name="p">@drawable/f20</item>
-        <item name="q">@drawable/f24</item>
         <item name="r">@color/q</item>
         <item name="s">@color/d</item>
         <item name="android:textColorPrimary">?a</item>
@@ -80,10 +78,8 @@
         <item name="k">@color/v</item>
         <item name="l">@color/m</item>
         <item name="m">24dp</item>
-        <item name="n">@drawable/f21</item>
         <item name="o">@drawable/f17</item>
         <item name="p">@drawable/f20</item>
-        <item name="q">@drawable/f24</item>
         <item name="r">@color/d</item>
         <item name="s">@color/q</item>
 

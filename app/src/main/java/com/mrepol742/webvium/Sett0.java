@@ -43,11 +43,13 @@ import com.mrepol742.webvium.util.Animation;
 /*
  * SettingActivity
  */
-public class Sett0 extends BaseActivity {
+public class Sett0 extends BaseActivity implements View.OnClickListener{
     private LinearLayout ll;
     private String id = "a";
-    private ImageView iv, iv0;
+    private ImageView iv;
+    private ImageView iv0;
     private PopupMenu mu;
+    private TextView b;
 
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
@@ -67,12 +69,59 @@ public class Sett0 extends BaseActivity {
     };
 
     @Override
+    public void onClick(View view) {
+        Animation.animate(Sett0.this, R.anim.i, view);
+        Animation.animate(Sett0.this, R.anim.c, b);
+        switch (view.getId()) {
+            case R.id.m17:
+                b.setText(Sett0.this.getString(R.string.h3));
+                Sett0.this.as(R.id.m10, new SettingFragment());
+                id = "a";
+                Sett0.this.b24(View.VISIBLE);
+                break;
+            case R.id.m20:
+                b.setText(Sett0.this.getString(R.string.t21));
+                Sett0.this.as(R.id.m10, new BackupFragment());
+                id = "b";
+                Sett0.this.b24(View.GONE);
+                break;
+            case R.id.m1:
+                b.setText(Sett0.this.getString(R.string.l));
+                Sett0.this.as(R.id.m10, new AboutFragment());
+                id = "c";
+                Sett0.this.b24(View.VISIBLE);
+                break;
+            case R.id.b7:
+                Sett0.this.finishAndRemoveTask();
+                break;
+            case R.id.o25:
+                Intent b = new Intent("android.intent.action.SEND");
+                b.setType("text/plain");
+                b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
+                startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
+                break;
+            case R.id.o26:
+                if (mu == null) {
+                    mu = new PopupMenu(Sett0.this, view);
+                    Menu menu = mu.getMenu();
+                    menu.add(0, 0, 0, getString(R.string.f14)).setOnMenuItemClickListener(mio);
+                    menu.add(0, 1, 0, getString(R.string.z86)).setOnMenuItemClickListener(mio);
+                }
+                mu.show();
+                break;
+            default:
+                break;
+        }
+        Sett0.this.invalidateOptionsMenu();
+    }
+
+    @Override
     protected void onCreate(Bundle a) {
         theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.a);
         Toolbar tl = findViewById(R.id.b7);
-        final TextView b = findViewById(R.id.b8);
+        b = findViewById(R.id.b8);
         setActionBar(tl);
         b.setTypeface(type(Typeface.BOLD));
         int k = Resources.getColor(this, R.color.c);
@@ -83,135 +132,45 @@ public class Sett0 extends BaseActivity {
         }
         tl.setBackgroundResource(R.drawable.p);
         tl.setNavigationIcon(R.drawable.a2);
-        tl.setNavigationOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Sett0.this.finishAndRemoveTask();
-            }
-        });
+        tl.setNavigationOnClickListener(this);
         b.setText(getString(R.string.h3));
         as(R.id.m10, new SettingFragment());
-        final TextView tv = findViewById(R.id.m17);
-        tv.setText(getString(R.string.h3));
-        Animation.animate(this, R.anim.c, b);
-        Animation.animate(this, R.anim.i, tv);
-        tv.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                try {
-                    Animation.animate(Sett0.this, R.anim.c, b);
-                    b.setText(Sett0.this.getString(R.string.h3));
-                } catch (Exception en) {
-                    en.printStackTrace();
-                }
-                Animation.animate(Sett0.this, R.anim.i, tv);
-                Sett0.this.as(R.id.m10, new SettingFragment());
-                id = "a";
-                Sett0.this.b24(true);
-                Sett0.this.invalidateOptionsMenu();
-            }
-        });
-        final TextView tv1 = findViewById(R.id.m20);
-            tv1.setText(getString(R.string.t21));
-            tv1.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    try {
-                        Animation.animate(Sett0.this, R.anim.i, tv1);
-                        Animation.animate(Sett0.this, R.anim.c, b);
-                        b.setText(Sett0.this.getString(R.string.t21));
-
-                    } catch (Exception en) {
-                        en.printStackTrace();
-                    }
-                    Sett0.this.as(R.id.m10, new BackupFragment());
-                    id = "a2";
-                    Sett0.this.b24(false);
-                    Sett0.this.invalidateOptionsMenu();
-                }
-            });
-        final TextView tv2 = findViewById(R.id.m1);
-        tv2.setText(getString(R.string.l));
-        tv2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                try {
-                    Animation.animate(Sett0.this, R.anim.i, tv2);
-                    Animation.animate(Sett0.this, R.anim.c, b);
-                    b.setText(Sett0.this.getString(R.string.l));
-
-                } catch (Exception en) {
-                    en.printStackTrace();
-                }
-                Sett0.this.as(R.id.m10, new AboutFragment());
-                id = "a1";
-                Sett0.this.b24(true);
-                Sett0.this.invalidateOptionsMenu();
-            }
-        });
+        ImageView tv = findViewById(R.id.m17);
+        tv.setOnClickListener(this);
+        ImageView tv1 = findViewById(R.id.m20);
+            tv1.setOnClickListener(this);
+        ImageView tv2 = findViewById(R.id.m1);
+        tv2.setOnClickListener(this);
         if (!a221().getBoolean("autoUpdate", false)) {
             b.setTextColor(k);
-            tv.setTextColor(k);
-            tv1.setTextColor(k);
-            tv2.setTextColor(k);
         } else {
             b.setTextColor(l);
-            tv.setTextColor(l);
-            tv1.setTextColor(l);
-            tv2.setTextColor(l);
         }
-        tv.setTypeface(type(Typeface.NORMAL));
-        tv1.setTypeface(type(Typeface.NORMAL));
-        tv2.setTypeface(type(Typeface.NORMAL));
-        tv.setCompoundDrawablePadding(6);
-        tv1.setCompoundDrawablePadding(6);
-        tv2.setCompoundDrawablePadding(6);
         ll = findViewById(R.id.m16);
         ll.setBackgroundResource(R.drawable.f1);
         ll.setElevation(5);
         tv.setBackgroundResource(R.drawable.b17);
         tv1.setBackgroundResource(R.drawable.b17);
         tv2.setBackgroundResource(R.drawable.b17);
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g9), null, null);
-        tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g11), null, null);
-        tv2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, Resources.getDrawable(this, R.drawable.g12), null, null);
+        tv.setImageResource(R.drawable.g9);
+        tv1.setImageResource(R.drawable.g11);
+        tv2.setImageResource(R.drawable.g12);
         iv = findViewById(R.id.o25);
         iv0 = findViewById(R.id.o26);
         iv.setBackgroundResource(R.drawable.c6);
         iv0.setBackgroundResource(R.drawable.c6);
-        iv.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Sett0.this.b23();
-            }
-        });
-        iv0.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if (mu == null) {
-                    mu = new PopupMenu(Sett0.this, iv0);
-                }
-                Menu menu = mu.getMenu();
-                menu.add(0, 0, 0, getString(R.string.f14)).setOnMenuItemClickListener(mio);
-                menu.add(0, 1, 0, getString(R.string.z86)).setOnMenuItemClickListener(mio);
-            }
-        });
+        iv.setOnClickListener(this);
+        iv0.setOnClickListener(this);
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);
-        b24(true);
+        b24(View.VISIBLE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Animation.animate(this, R.anim.a, ll);
-        if (iv.getVisibility() == View.VISIBLE && iv0.getVisibility() == View.VISIBLE && id.equals("a2")) {
+        if (id.equals("a") || id.equals("c")) {
             Animation.animate(this, R.anim.i, iv);
             Animation.animate(this, R.anim.i, iv0);
         }
@@ -226,21 +185,9 @@ public class Sett0 extends BaseActivity {
         return false;
     }
 
-    private void b23() {
-        Intent b = new Intent("android.intent.action.SEND");
-        b.setType("text/plain");
-        b.putExtra("android.intent.extra.TEXT", String.format(getString(R.string.f33), Base64.decode("aHR0cHM6Ly9tcmVwb2w3NDIuZ2l0aHViLmlvL1BST0pFQ1QtV0VCVklVTS8")));
-        startActivity(Intent.createChooser(b, String.format(getString(R.string.l8), "\"" + Package.c() + "\"")));
-    }
-
-    private void b24(boolean bn) {
-        if (bn) {
-            iv.setVisibility(View.GONE);
-            iv0.setVisibility(View.GONE);
-        } else {
-            iv.setVisibility(View.VISIBLE);
-            iv.setVisibility(View.VISIBLE);
-        }
+    private void b24(int view) {
+        iv.setVisibility(view);
+        iv0.setVisibility(view);
     }
 
     private void a(boolean bn) {

@@ -846,7 +846,6 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             }
         });
-        try {
             this.d1 = HistoryHelper.getInstance(getApplicationContext());
             this.d2 = SearchHelper.getInstance(getApplicationContext());
             this.d3 = BookmarkHelper.getInstance(getApplicationContext());
@@ -858,9 +857,6 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
             }
             cd.setBackgroundResource(R.drawable.w);
             tv.setBackgroundResource(R.drawable.f2);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
         this.cm1 = CookieManager.getInstance();
         if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
             this.br2 = new R36();
@@ -975,7 +971,9 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
     protected void onResume() {
         super.onResume();
         try {
-            Animation.animate(this, R.anim.a, llt);
+            if (!iFP) {
+                Animation.animate(this, R.anim.a, llt);
+            }
             if (!a221().getBoolean("textST", true)) {
                 if (Build.VERSION.SDK_INT >= 24) {
                     currentSettings().setDisabledActionModeMenuItems(WebSettings.MENU_ITEM_NONE);
@@ -5071,6 +5069,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     }
 
     public void c144() {
+        c184();
         if (pm7 == null) {
             pm7 = new PopupMenu(this, tv7);
             MenuItem.OnMenuItemClickListener e = new MenuItem.OnMenuItemClickListener() {
@@ -5078,14 +5077,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 @Override
                 public boolean onMenuItemClick(MenuItem a1) {
                     switch (a1.getItemId()) {
-                        case 4:
-                            Webv.this.c25();
-                            Webv.this.finishAndRemoveTask();
-                            return true;
-                        case 5:
-                            Webv.this.currentTab().clearCache(false);
-                            Webv.this.c8(Webv.this.getString(R.string.a27));
-                            return true;
                         case 0:
                             Intents.a(Webv.this, Down.class);
                             return true;
@@ -5116,8 +5107,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             me.add(0, 1, 0, getString(R.string.s14)).setOnMenuItemClickListener(e);
             me.add(0, 2, 0, getString(R.string.s16)).setOnMenuItemClickListener(e);
             me.add(0, 3, 0, getString(R.string.h3)).setOnMenuItemClickListener(e);
-            me.add(0, 4, 0, getString(R.string.h2)).setOnMenuItemClickListener(e);
-            me.add(0, 5, 0, getString(R.string.e10)).setOnMenuItemClickListener(e);
         }
         pm7.show();
     }
@@ -5250,12 +5239,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             sm.add(0, 7, 0, getString(R.string.h12)).setOnMenuItemClickListener(e1);
             SubMenu sm0 = a1.addSubMenu(getString(R.string.j36));
             sm0.add(0, 19, 0, getString(R.string.y15)).setOnMenuItemClickListener(e1);
-            // sm0.add(0, 15, 0, getString(R.string.x9)).setOnMenuItemClickListener(e1);
-            // sm0.add(0, 20, 0, getString(R.string.z15)).setOnMenuItemClickListener(e1);
             sm0.add(0, 21, 0, getString(R.string.f32)).setOnMenuItemClickListener(e1);
-            // sm0.add(0, 16, 0, getString(R.string.x16)).setOnMenuItemClickListener(e1);
-            // sm0.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(e1);
-            // sm0.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(e1);
             sm0.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(e1);
             sm0.add(0, 5, 0, getString(R.string.j)).setOnMenuItemClickListener(e1);
             sm0.add(0, 25, 0, getString(R.string.y76)).setOnMenuItemClickListener(e1);
@@ -5445,8 +5429,8 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             ab.hide();
             llt.setVisibility(View.GONE);
         } else {
+            ab.show();
             if (!iFP) {
-                ab.show();
                 llt.setVisibility(View.VISIBLE);
             }
         }
@@ -5564,12 +5548,80 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             spe.apply();
         }
     }
-    
+
     private void c183() {
-        final LinearLayout never_gonna_give_you_up = findViewById(R.id.m4);
+        if (!iFP) {
+            final LinearLayout ll = findViewById(R.id.o50);
+            if (ll.getVisibility() != View.VISIBLE) {
+                this.llt.setVisibility(View.GONE);
+                iFP = true;
+                ll.setVisibility(View.VISIBLE);
+                ll.setBackgroundResource(R.drawable.f1);
+                ImageView iv = findViewById(R.id.o48);
+                EditText edit = findViewById(R.id.o47);
+                ImageView iv1 = findViewById(R.id.o51);
+                ImageView iv2 = findViewById(R.id.o49);
+                edit.setTypeface(type(Typeface.NORMAL));
+                iv1.setImageResource(R.drawable.c15);
+                iv2.setImageResource(R.drawable.b14);
+                iv.setImageResource(R.drawable.g10);
+                iv.setBackgroundResource(R.drawable.b17);
+                iv1.setBackgroundResource(R.drawable.b17);
+                iv2.setBackgroundResource(R.drawable.b17);
+                edit.setHint(getString(R.string.z85));
+                Animation.animate(this, R.anim.a, ll);
+                if (!a221().getBoolean("autoUpdate", false)) {
+                    edit.setTextColor(Resources.getColor(this, R.color.c));
+                } else {
+                    edit.setTextColor(Resources.getColor(this, R.color.b));
+                }
+                if (Build.VERSION.SDK_INT >= 26) {
+                    edit.setImportantForAutofill(EditText.IMPORTANT_FOR_AUTOFILL_NO);
+                }
+                edit.setImeOptions(EditorInfo.IME_FLAG_NO_FULLSCREEN);
+                iv1.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        currentTab().findNext(false);
+                    }
+                });
+                iv2.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        currentTab().findNext(true);
+                    }
+                });
+                iv.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        ll.setVisibility(View.GONE);
+                        Webv.this.llt.setVisibility(View.VISIBLE);
+                        Animation.animate(Webv.this, R.anim.a, Webv.this.llt);
+                        currentTab().findAllAsync("");
+                        iFP = false;
+                    }
+                });
+                edit.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
+                        if (!TextUtils.isEmpty(p1.toString().trim())) {
+                            currentTab().findAllAsync(p1.toString());
+                        } else {
+                            currentTab().findAllAsync("");
+                        }
+                    }
+                });
+            }
+        }
+    }
+    /*
+    private void c183() {
         LayoutInflater u_r_hentai = getLayoutInflater();
         final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null);
-        final int childCount = never_gonna_give_you_up.getChildCount();
         ImageView ppp = u_r_idiot.findViewById(R.id.o48);
         Edit jjj = u_r_idiot.findViewById(R.id.o47);
         jjj.setHint(getString(R.string.z85));
@@ -5611,25 +5663,23 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     }
                 }
             });
+        final int childCount = this.llt.getChildCount();
         if (!iFP) {
             for (int i = 0; i < childCount; i++) {
-                View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
-                if (i_am_running_out_of_variable_names instanceof ImageView) {
-                    i_am_running_out_of_variable_names.setVisibility(View.GONE);
-                }
+                View i_am_running_out_of_variable_names = this.llt.getChildAt(i);
+                i_am_running_out_of_variable_names.setVisibility(View.GONE);
             }
-            never_gonna_give_you_up.addView(u_r_idiot);
+            this.llt.addView(u_r_idiot);
             iFP = true;
         }
         ppp.setOnClickListener(new OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
-                    never_gonna_give_you_up.removeView(u_r_idiot.findViewById(R.id.o50));
+                    Webv.this.llt.removeView(u_r_idiot.findViewById(R.id.o50));
                     for (int i = 0; i < childCount; i++) {
-                        View i_am_running_out_of_variable_names = never_gonna_give_you_up.getChildAt(i);
-                        if (i_am_running_out_of_variable_names instanceof ImageView) {
-                            i_am_running_out_of_variable_names.setVisibility(View.VISIBLE);
-                        }
+                        View i_am_running_out_of_variable_names = Webv.this.llt.getChildAt(i);
+                        i_am_running_out_of_variable_names.setVisibility(View.VISIBLE);
                     }
                     iFP = false;
                     currentTab().findAllAsync("");
@@ -5637,11 +5687,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 }
             });
 
-        /*
-         * I am eating user's RAM
-         * It's really delicious
-         */
-    }
+    } */
 
     private void c184() {
         if (penHis.size() != 0) {
@@ -5859,43 +5905,34 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         a.add(0, 24, 0, getString(R.string.h20)).setCheckable(true);
         a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
         a.add(0, 32, 0, getString(R.string.s32)).setCheckable(true);
-        // web osint
-        SubMenu sm = a.addSubMenu(getString(R.string.j36));
-        sm.add(0, 1, 0, getString(R.string.y15));
-        // sm.add(0, 2, 0, getString(R.string.x9));
-        // sm.add(0, 3, 0, getString(R.string.z15));
-        // sm.add(0, 4, 0, getString(R.string.x16));
-        // sm.add(0, 5, 0, getString(R.string.y11));
-        // sm.add(0, 6, 0, getString(R.string.z4));
-        sm.add(0, 7, 0, getString(R.string.h6));
-        sm.add(0, 8, 0, getString(R.string.j));
-        // sm.add(0, 9, 0, getString(R.string.z12));
-        sm.add(0, 25, 0, getString(R.string.f32));
-        sm.add(0, 28, 0, getString(R.string.y76));
-        sm.add(0, 29, 0, getString(R.string.y77));
-        sm.add(0, 30, 0, getString(R.string.y78));
-        // error
-        SubMenu b = a.addSubMenu(getString(R.string.h30));
-        b.add(0, 10, 0, getString(R.string.h36));
-        b.add(0, 11, 0, getString(R.string.e2));
-        // javascript
-        SubMenu c = a.addSubMenu(getString(R.string.c8));
-        c.add(0, 12, 0, getString(R.string.f23));
-        c.add(0, 13, 0, getString(R.string.h4));
-        a.add(0, 26, 0, getString(R.string.y73));
-        a.add(0, 27, 0, getString(R.string.y74));
+        a.add(0, 33, 0, getString(R.string.d41));
         if (Build.VERSION.SDK_INT < 29) {
             a.add(0, 14, 0, getString(R.string.k1));
         }
-        a.add(0, 15, 0, getString(R.string.h7));
-        a.add(0, 16, 0, getString(R.string.h35));
-        a.add(0, 17, 0, getString(R.string.y14));
-        a.add(0, 19, 0, getString(R.string.z16));
-        a.add(0, 20, 0, getString(R.string.z17));
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
-        a.add(0, 33, 0, getString(R.string.d41));
+        // web osint
+        SubMenu sm = a.addSubMenu(getString(R.string.j36));
+            sm.add(0, 1, 0, getString(R.string.y15));
+            sm.add(0, 7, 0, getString(R.string.h6));
+            sm.add(0, 8, 0, getString(R.string.j));
+            sm.add(0, 25, 0, getString(R.string.f32));
+            sm.add(0, 28, 0, getString(R.string.y76));
+            sm.add(0, 29, 0, getString(R.string.y77));
+            sm.add(0, 30, 0, getString(R.string.y78));
+            sm.add(0, 10, 0, getString(R.string.h36));
+            sm.add(0, 11, 0, getString(R.string.e2));
+           sm.add(0, 12, 0, getString(R.string.f23));
+           sm.add(0, 13, 0, getString(R.string.h4));
+        sm.add(0, 26, 0, getString(R.string.y73));
+        sm.add(0, 27, 0, getString(R.string.y74));
+
+        sm.add(0, 15, 0, getString(R.string.h7));
+        sm.add(0, 16, 0, getString(R.string.h35));
+        sm.add(0, 17, 0, getString(R.string.y14));
+        sm.add(0, 19, 0, getString(R.string.z16));
+        sm.add(0, 20, 0, getString(R.string.z17));
         return super.onCreateOptionsMenu(a);
     }
 
@@ -6126,8 +6163,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     }
                 }
                 return true;
-            case 2:
-                return true;
             case 4:
                 c112(currentUrl(), 1);
                 return true;
@@ -6315,7 +6350,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 
         @Override
         public void onReceive(Context a, Intent b) {
-            try {
                 String sg = b.getAction();
                 if (sg.equals("android.intent.action.BATTERY_CHANGED")) {
                     if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
@@ -6327,9 +6361,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                         }
                     }
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
         }
     }
 

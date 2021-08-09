@@ -29,10 +29,8 @@
     <attr name="k" format="color" />
     <attr name="l" format="color" />
     <attr name="m" format="dimension" />
-    <attr name="n" format="reference" />
     <attr name="o" format="reference" />
     <attr name="p" format="reference" />
-    <attr name="q" format="reference" />
     <attr name="r" format="color" />
     <attr name="s" format="color" />
     <attr name="t" format="reference" />
