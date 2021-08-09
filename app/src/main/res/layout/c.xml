@@ -197,7 +197,7 @@
         a:visibility="gone"
         a:id="@id/o50"
         a:layout_width="fill_parent"
-        a:layout_height="40dp"
+        a:layout_height="50dp"
         a:layout_alignParentBottom="true"
         a:elevation="5dp"
         a:gravity="center"
@@ -210,18 +210,22 @@
             a:id="@id/o48" />
 
         <EditText a:layout_weight="1"
-            a:layout_height="wrap_content" a:paddingStart="5dp" a:paddingEnd="5dp" a:paddingTop="3dp" a:paddingBottom="3dp"
+            a:layout_height="wrap_content" 
+a:layout_marginStart="7dp"
+                a:layout_marginEnd="7dp"
+                a:background="@null"
             a:layout_width="0dp" a:inputType="text"
             a:id="@id/o47"
-            a:singleLine="true"
+            a:maxLines="1"
+                a:selectAllOnFocus="true"
             tools:ignore="Autofill,LabelFor" />
 
         <ImageView
-            a:layout_height="wrap_content" a:layout_weight="0.2"
+            a:layout_height="wrap_content" a:layout_weight="0.1"
             a:layout_width="0dp" a:contentDescription="@string/z106"
             a:id="@id/o51"  />
 
-        <ImageView a:layout_weight="0.2"
+        <ImageView a:layout_weight="0.1"
             a:contentDescription="@string/z107"
             a:layout_height="wrap_content"
             a:layout_width="0dp"

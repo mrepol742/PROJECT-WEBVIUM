@@ -105,7 +105,7 @@ public class Sett0 extends BaseActivity implements View.OnClickListener{
                     mu = new PopupMenu(Sett0.this, view);
                     Menu menu = mu.getMenu();
                     menu.add(0, 0, 0, getString(R.string.f14)).setOnMenuItemClickListener(mio);
-                    menu.add(0, 1, 0, getString(R.string.z86)).setOnMenuItemClickListener(mio);
+                    menu.add(0, 1, 0, getString(R.string.a41)).setOnMenuItemClickListener(mio);
                 }
                 mu.show();
                 break;

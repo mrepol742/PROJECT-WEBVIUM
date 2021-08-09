@@ -159,10 +159,12 @@ import com.mrepol742.webvium.util.PassGen;
 import com.mrepol742.webvium.util.PasswordTransformationMethod;
 import com.mrepol742.webvium.util.TextWatcher;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -187,6 +189,10 @@ import android.view.View.OnClickListener;
 
 /*
  * @WebviumActivity
+ */
+
+/*
+ * Hello World
  */
 public class Webv extends MainBaseActivity implements DialogInterface.OnClickListener, View.OnClickListener, PopupMenu.OnDismissListener {
     public static final String UA_DEFAULT = "1e";
@@ -441,6 +447,21 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
             return false;
         }
     };
+
+    /*
+     * Theory is when you know everything
+     * but nothing works.
+     *
+     * Practice is when everything works
+     * but nobody's knows why.
+     *
+     *
+     * In Programming, theory & pratice
+     * are combined :
+     * 
+     * NOTHINGS WORKS & NOBODY
+     * KNOWS WHY.
+     */
 
     final MenuItem.OnMenuItemClickListener e4 = new MenuItem.OnMenuItemClickListener() {
 
@@ -1090,6 +1111,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
         web.loadUrl(a);
     }
 
+    // TODO: Not Working
     private String c6(ConsoleMessage.MessageLevel lev) {
         if (lev == ConsoleMessage.MessageLevel.TIP) {
             return "#ff34a853";
@@ -1244,6 +1266,16 @@ ct = 0;
         }
         return Uri.parse(currentUrl()).getHost();
     }
+
+    /*
+     * I think I've seen this film before
+     * And I didn't like the ending
+     * You're not my code anymore
+     * So what am I doin' now?
+     * You were working before
+     * Now I'm in exile seein' you crashed
+     * I think I've seen this film before
+     * /
 
     @SuppressLint("ClickableViewAccessibility")
     private void c34(WebViews h) {
@@ -3424,128 +3456,67 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         }
         ti.setText(getString(R.string.v13));
         final String sg = Uri.parse(url).getHost();
-        Runnable re = new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    final boolean st = Ping.isHostReachable(sg, 2500);
-                    final boolean nd = Ping.isHostReachable(sg, 5000);
-                    final boolean rd = Ping.isHostReachable(sg, 10000);
-                    Timer timer = new Timer();
-                    timer.schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    ti.setText(Html.b(String.format(getString(R.string.y85), sg, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                }
-                            });
-                        }
-                    }, 1000);
-                    timer.schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                }
-                            });
-                        }
-                    }, 2000);
-                    timer.schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                }
-                            });
-                        }
-                    }, 3000);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-        };
-        new Thread(re).start();
+        pro(ti, sg);
         ed.setText(sg);
         bn.setText(getString(R.string.i6));
-
         bn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 final String ab = Uri.parse(ed.getText().toString()).getHost();
                 ti.setText(Webv.this.getString(R.string.v13));
-                Runnable re2 = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        try {
-                            final boolean st = Ping.isHostReachable(ab, 2500);
-                            final boolean nd = Ping.isHostReachable(ab, 5000);
-                            final boolean rd = Ping.isHostReachable(ab, 10000);
-                            Timer timer = new Timer();
-                            timer.schedule(new TimerTask() {
-
-                                @Override
-                                public void run() {
-                                    runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            ti.setText(Html.b(String.format(getString(R.string.y85), ab, st).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                        }
-                                    });
-                                }
-                            }, 1000);
-                            timer.schedule(new TimerTask() {
-
-                                @Override
-                                public void run() {
-                                    runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            ti.append(Html.b(String.format(getString(R.string.y86), nd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                        }
-                                    });
-                                }
-                            }, 2000);
-                            timer.schedule(new TimerTask() {
-
-                                @Override
-                                public void run() {
-                                    runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            ti.append(Html.b(String.format(getString(R.string.y87), rd).replaceAll("true", getString(R.string.y80)).replaceAll("false", getString(R.string.y81))));
-                                        }
-                                    });
-                                }
-                            }, 3000);
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
-                    }
-                };
-                new Thread(re2).start();
-
+                pro(ti, ab);
             }
         });
         final AlertDialog g = a.create();
         g.show();
+    }
+
+    private void pro(final TextView tv, final String url) {
+Runnable re = new Runnable() {
+
+@Override
+public void run() {
+        try {
+            ArrayList<String> cmd = new ArrayList<>();
+            cmd.add("ping");
+            cmd.add("www.google.com");
+            ProcessBuilder pb = new ProcessBuilder(cmd);
+            Process process = pb.start();
+            final BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            final BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            String s = null;
+            tv.setText("");
+            while ((s = input.readLine()) != null) {
+runOnUiThread(new Runnable() {
+
+@Override 
+public void run() {
+try {
+tv.append(input.readLine());
+} catch (Exception en){}
+}
+});
+            }
+            while ((s = error.readLine()) != null) {
+               runOnUiThread(new Runnable() {
+
+@Override 
+public void run() {
+try {
+tv.append(error.readLine());
+} catch (Exception en){}
+}
+});
+            }
+            input.close();
+            error.close();
+        } catch (Exception en) {
+            en.printStackTrace();
+        }
+}
+};
+new Thread(re).start();
     }
 
     public String c46() {
@@ -4770,6 +4741,13 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         g.show();
     }
 
+    /*
+     * Roses are red
+     * Violets are blue
+     * Unexpected '{'
+     * on line 32.
+     */
+
     public void c127() {
         String[] suggestion = {"document.getElementById()",
                 "document.getElementByTagName()",
@@ -5561,6 +5539,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 EditText edit = findViewById(R.id.o47);
                 ImageView iv1 = findViewById(R.id.o51);
                 ImageView iv2 = findViewById(R.id.o49);
+                edit.setBackgroundResource(R.drawable.w);
                 edit.setTypeface(type(Typeface.NORMAL));
                 iv1.setImageResource(R.drawable.c15);
                 iv2.setImageResource(R.drawable.b14);
@@ -5618,76 +5597,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             }
         }
     }
-    /*
-    private void c183() {
-        LayoutInflater u_r_hentai = getLayoutInflater();
-        final View u_r_idiot = u_r_hentai.inflate(R.layout.c10, null);
-        ImageView ppp = u_r_idiot.findViewById(R.id.o48);
-        Edit jjj = u_r_idiot.findViewById(R.id.o47);
-        jjj.setHint(getString(R.string.z85));
-        ImageView prev = u_r_idiot.findViewById(R.id.o51);
-        prev.setImageResource(R.drawable.c15);
-        ImageView next = u_r_idiot.findViewById(R.id.o49);
-        next.setImageResource(R.drawable.b14);
-        ppp.setImageResource(R.drawable.g10);
-        prev.setBackgroundResource(R.drawable.b17);
-        next.setBackgroundResource(R.drawable.b17);
-        ppp.setBackgroundResource(R.drawable.b17);
-        jjj.setTypeface(type(Typeface.NORMAL));
-        if (!a221().getBoolean("autoUpdate", false)) {
-            jjj.setTextColor(Resources.getColor(this, R.color.c));
-        } else {
-            jjj.setTextColor(Resources.getColor(this, R.color.b));
-        }
-        prev.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    currentTab().findNext(false);
-                }
-            });
-        next.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    currentTab().findNext(true);
-                }
-        });
-        jjj.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
-                    if (!p1.toString().trim().equals("")) {
-                        currentTab().findAllAsync(p1.toString());
-                    } else {
-                        currentTab().findAllAsync("");
-                    }
-                }
-            });
-        final int childCount = this.llt.getChildCount();
-        if (!iFP) {
-            for (int i = 0; i < childCount; i++) {
-                View i_am_running_out_of_variable_names = this.llt.getChildAt(i);
-                i_am_running_out_of_variable_names.setVisibility(View.GONE);
-            }
-            this.llt.addView(u_r_idiot);
-            iFP = true;
-        }
-        ppp.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    Webv.this.llt.removeView(u_r_idiot.findViewById(R.id.o50));
-                    for (int i = 0; i < childCount; i++) {
-                        View i_am_running_out_of_variable_names = Webv.this.llt.getChildAt(i);
-                        i_am_running_out_of_variable_names.setVisibility(View.VISIBLE);
-                    }
-                    iFP = false;
-                    currentTab().findAllAsync("");
-                    tv9.setVisibility(View.GONE);
-                }
-            });
-
-    } */
 
     private void c184() {
         if (penHis.size() != 0) {
@@ -5899,6 +5808,12 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         }
         return super.onKeyLongPress(a, b);
     }
+
+    /*
+     * When your program
+     * was completly mess
+     * but it does its job
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu a) {

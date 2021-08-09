@@ -172,7 +172,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         a225(R.layout.e);
-        Toolbar o = findViewById(R.id.o);
+        final Toolbar o = findViewById(R.id.o);
         p = findViewById(R.id.p);
         ImageView iv = findViewById(R.id.k19);
         iv1 = findViewById(R.id.m13);
@@ -319,29 +319,34 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
         }
         p.setTypeface(type(Typeface.NORMAL));
         m11.setTypeface(type(Typeface.BOLD));
-        final File fe = new File(StorageDirectory.getBackground(this));
         cd.setBackgroundResource(R.drawable.w);
-        if (a221().getBoolean("webviumB", false) && fe.exists()) {
-            o.setBackgroundColor(Resources.getColor(this, android.R.color.transparent));
-            Runnable p155 = new Runnable() {
+        Runnable re = new Runnable() {
 
-                @Override
-                public void run() {
+            @Override
+            public void run() {
+                final File fe = new File(StorageDirectory.getBackground(Sear.this));
+                if (a221().getBoolean("webviumB", false) && fe.exists()) {
                     final Bitmap bp = BitmapCache.getInstance().a(StorageDirectory.getBackground(Sear.this));
                     Sear.this.runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
+                            o.setBackgroundColor(Resources.getColor(Sear.this, android.R.color.transparent));
                             b19.setBackground(new BitmapDrawable(Sear.this.getResources(), bp));
                         }
                     });
-                }
-            };
-            new Thread(p155).start();
+                } else {
+                    Sear.this.runOnUiThread(new Runnable() {
 
-        } else {
-            o.setBackgroundResource(R.drawable.p);
-        }
+                        @Override
+                        public void run() {
+                            o.setBackgroundResource(R.drawable.p);
+                        }
+                    });
+                }
+            }
+        };
+        new Thread(re).start();
         if (!a221().getBoolean("autoUpdate", false)) {
             p.setTextColor(d1);
             p.setHintTextColor(f);
