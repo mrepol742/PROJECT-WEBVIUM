@@ -221,11 +221,11 @@ a:layout_marginStart="7dp"
             tools:ignore="Autofill,LabelFor" />
 
         <ImageView
-            a:layout_height="wrap_content" a:layout_weight="0.1"
+            a:layout_height="wrap_content" a:layout_weight="0.2"
             a:layout_width="0dp" a:contentDescription="@string/z106"
             a:id="@id/o51"  />
 
-        <ImageView a:layout_weight="0.1"
+        <ImageView a:layout_weight="0.2"
             a:contentDescription="@string/z107"
             a:layout_height="wrap_content"
             a:layout_width="0dp"

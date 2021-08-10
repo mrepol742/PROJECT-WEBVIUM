@@ -105,9 +105,7 @@ public class Save extends Service {
         android.app.Notification.Builder m = Notifications.a(this, getString(R.string.i4));
         m.setSmallIcon(R.drawable.c2);
         m.setContentTitle(a);
-        if (!com.mrepol742.webvium.util.Inapproriate.isInapproriate(b)) {
-            m.setContentText(b);
-        }
+        m.setContentText(b);
         m.setOngoing(true);
         m.setColor(Resources.getColor(this, R.color.a));
         m.setAutoCancel(false);
@@ -127,15 +125,10 @@ public class Save extends Service {
         android.app.Notification.BigTextStyle bigText = new android.app.Notification.BigTextStyle();
 
         bigText.setSummaryText(getString(R.string.l4));
-        if (com.mrepol742.webvium.util.Inapproriate.isInapproriate(jk)) {
             bigText.setBigContentTitle(getResources().getString(R.string.u20));
             m.setContentTitle(getResources().getString(R.string.u20));
             m.setContentText(jk);
             bigText.bigText(jk);
-        } else {
-            bigText.setBigContentTitle(getResources().getString(R.string.u20));
-            m.setContentTitle(getResources().getString(R.string.u20));
-        }
         m.setStyle(bigText);
         m.setColor(Resources.getColor(this, R.color.a));
 

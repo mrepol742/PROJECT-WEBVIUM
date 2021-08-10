@@ -154,6 +154,9 @@ public class Book extends BaseActivity {
                 case 26:
                     Book.this.l(a2, SITEMAPS);
                     return true;
+                case 27:
+                    Book.this.c33(a2);
+                    return true;
             }
             return false;
         }
@@ -709,17 +712,12 @@ public class Book extends BaseActivity {
             a.add(0, 24, 0, getString(R.string.u23)).setOnMenuItemClickListener(d);
             SubMenu sb1 = a.addSubMenu(getString(R.string.j36));
             sb1.add(0, 19, 0, getString(R.string.y15)).setOnMenuItemClickListener(d);
-            //sb1.add(0, 15, 0, getString(R.string.x9)).setOnMenuItemClickListener(d);
-            //sb1.add(0, 20, 0, getString(R.string.z15)).setOnMenuItemClickListener(d);
             sb1.add(0, 21, 0, getString(R.string.f32)).setOnMenuItemClickListener(d);
-            //sb1.add(0, 16, 0, getString(R.string.x16)).setOnMenuItemClickListener(d);
-            //sb1.add(0, 17, 0, getString(R.string.y11)).setOnMenuItemClickListener(d);
-            //sb1.add(0, 18, 0, getString(R.string.z4)).setOnMenuItemClickListener(d);
-            sb1.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(d);
+           sb1.add(0, 13, 0, getString(R.string.h6)).setOnMenuItemClickListener(d);
             sb1.add(0, 5, 0, getString(R.string.j)).setOnMenuItemClickListener(d);
             sb1.add(0, 25, 0, getString(R.string.y76)).setOnMenuItemClickListener(d);
             sb1.add(0, 26, 0, getString(R.string.y77)).setOnMenuItemClickListener(d);
-            //sb1.add(0, 22, 0, getString(R.string.z12)).setOnMenuItemClickListener(d);
+            sb1.add(0, 27, 0, getString(R.string.y78)).setOnMenuItemClickListener(d);
             a.add(0, 12, 0, getString(R.string.i4)).setOnMenuItemClickListener(d);
         }
         pm.show();
@@ -879,6 +877,41 @@ public class Book extends BaseActivity {
                     ed.setError(getString(R.string.y82));
                     bn.setBackgroundResource(R.drawable.c11);
                 }
+            }
+        });
+        final AlertDialog g = a.create();
+        g.show();
+    }
+
+    private void c33(String url) {
+        AlertDialog.Builder a = new AlertDialog.Builder(this);
+        LayoutInflater b = getLayoutInflater();
+        View c = b.inflate(R.layout.b8, null);
+        a.setCancelable(true);
+        a.setTitle(getString(R.string.y78));
+        a.setView(c);
+        final Edit ed = c.findViewById(R.id.g8);
+        final TextView ti = c.findViewById(R.id.e2);
+        final Button bn = c.findViewById(R.id.k20);
+        int e = Resources.getColor(this, R.color.c);
+        int f = Resources.getColor(this, R.color.b);
+        if (!a221().getBoolean("autoUpdate", false)) {
+            ed.setTextColor(e);
+            ti.setTextColor(e);
+        } else {
+            ed.setTextColor(f);
+            ti.setTextColor(f);
+        }
+        ti.setText(getString(R.string.v13));
+        pro(ti, url);
+        ed.setText(url);
+        bn.setText(getString(R.string.i6));
+        bn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                ti.setText(Book.this.getString(R.string.v13));
+                pro(ti, ed.getText().toString());
             }
         });
         final AlertDialog g = a.create();

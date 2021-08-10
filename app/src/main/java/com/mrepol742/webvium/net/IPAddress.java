@@ -19,6 +19,9 @@ package com.mrepol742.webvium.net;
 
 import com.mrepol742.webvium.annotation.Keep;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class IPAddress {
 
     @Keep
@@ -26,28 +29,19 @@ public class IPAddress {
     }
 
     public static boolean isValidIpAddress(String ip) {
-        if (!ip.contains(".")) {
+        String zeroTo255
+                = "(\\d{1,2}|(0|1)\\"
+                + "d{2}|2[0-4]\\d|25[0-5])";
+        String regex
+                = zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255;
+        Pattern p = Pattern.compile(regex);
+        if (ip == null) {
             return false;
         }
-        String[] dots = ip.split("\\.");
-        if (dots.length != 4) {
-            return false;
-        }
-        try {
-            int line0 = parseInt(dots, 0);
-            int line1 = parseInt(dots, 1);
-            int line2 = parseInt(dots, 2);
-            int line3 = parseInt(dots, 3);
-            int maxN = 255;
-            return (line0 > 0 || line1 > 0 || line2 > 0 || line3 > 0) && (line0 < maxN || line1 < maxN || line2 < maxN || line3 < maxN);
-        } catch (NumberFormatException nfe) {
-            nfe.printStackTrace();
-        }
-        return false;
+        Matcher m = p.matcher(ip);
+        return m.matches();
     }
-
-    private static int parseInt(String[] dots, int line) throws NumberFormatException {
-        return Integer.parseInt(dots[line].replaceAll(" ", "").replaceAll("\\.", ""));
-    }
-
 }

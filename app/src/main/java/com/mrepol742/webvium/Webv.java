@@ -139,7 +139,6 @@ import com.mrepol742.webvium.history.HistoryDataModel;
 import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.IPAddress;
-import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.permission.PermissionDataModel;
 import com.mrepol742.webvium.search.SearchHelper;
@@ -159,12 +158,10 @@ import com.mrepol742.webvium.util.PassGen;
 import com.mrepol742.webvium.util.PasswordTransformationMethod;
 import com.mrepol742.webvium.util.TextWatcher;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -185,7 +182,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import android.view.View.OnClickListener;
 
 /*
  * @WebviumActivity
@@ -377,7 +373,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
     private FrameLayout fl;
     private PopupMenu pm0, pm1, pm2, pm3, pm4, pm5, pm6, pm7, pm8;
     private TextView inf;
-    private String sg;
+    private String sg; // from context
     private BroadcastReceiver ipH;
     private int ct;
     private boolean pageF;
@@ -458,7 +454,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
      *
      * In Programming, theory & pratice
      * are combined :
-     * 
+     *
      * NOTHINGS WORKS & NOBODY
      * KNOWS WHY.
      */
@@ -540,7 +536,6 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     Clipboard.a(Webv.this, sg);
                     Webv.this.c8(Webv.this.getString(R.string.k9));
                     return true;
-
                 case 6:
                     Webv.this.c14(null, sg);
                     return true;
@@ -623,9 +618,9 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     if (menuPopupHelper != null) {
                         Class<?> classPopupHelper = Class.forName(menuPopupHelper
                                 .getClass().getName());
-                    Method setForceIcons = classPopupHelper.getMethod(
-                            "setForceShowIcon", boolean.class);
-                    setForceIcons.invoke(menuPopupHelper, true);
+                        Method setForceIcons = classPopupHelper.getMethod(
+                                "setForceShowIcon", boolean.class);
+                        setForceIcons.invoke(menuPopupHelper, true);
                     }
                     break;
                 }
@@ -867,17 +862,17 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             }
         });
-            this.d1 = HistoryHelper.getInstance(getApplicationContext());
-            this.d2 = SearchHelper.getInstance(getApplicationContext());
-            this.d3 = BookmarkHelper.getInstance(getApplicationContext());
-            c134();
-            if (!a221().getBoolean("autoUpdate", false)) {
-                this.u.setTextColor(this.a7);
-            } else {
-                this.u.setTextColor(this.a8);
-            }
-            cd.setBackgroundResource(R.drawable.w);
-            tv.setBackgroundResource(R.drawable.f2);
+        this.d1 = HistoryHelper.getInstance(getApplicationContext());
+        this.d2 = SearchHelper.getInstance(getApplicationContext());
+        this.d3 = BookmarkHelper.getInstance(getApplicationContext());
+        c134();
+        if (!a221().getBoolean("autoUpdate", false)) {
+            this.u.setTextColor(this.a7);
+        } else {
+            this.u.setTextColor(this.a8);
+        }
+        cd.setBackgroundResource(R.drawable.w);
+        tv.setBackgroundResource(R.drawable.f2);
         this.cm1 = CookieManager.getInstance();
         if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
             this.br2 = new R36();
@@ -1017,7 +1012,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
             if (Build.VERSION.SDK_INT >= 24) {
                 boolean bn1 = isInMultiWindowMode() || isInPictureInPictureMode();
                 if (bn1) {
-                   c176(true);
+                    c176(true);
                 }
             }
             currentTab().resumeTimers();
@@ -1167,17 +1162,17 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     Webv.this.currentTab().pauseTimers();
                     Webv.this.currentTab().onPause();
                     fl.removeAllViews();
-                 
+
                     tabs.clear();
-WebViews web = new WebViews(Webv.this);
+                    WebViews web = new WebViews(Webv.this);
                     tabs.add(web);
-ct = 0;
+                    ct = 0;
                     Webv.this.c50(web);
                     Webv.this.c34(web);
                     Webv.this.c15(web);
                     Webv.this.c149(web);
                     fl.addView(web);
-                   
+
                 } else {
                     Webv.this.currentTab().pauseTimers();
                     Webv.this.currentTab().onPause();
@@ -1275,7 +1270,7 @@ ct = 0;
      * You were working before
      * Now I'm in exile seein' you crashed
      * I think I've seen this film before
-     * /
+     */
 
     @SuppressLint("ClickableViewAccessibility")
     private void c34(WebViews h) {
@@ -1807,7 +1802,6 @@ ct = 0;
                 Animation.animate(Webv.this, R.anim.c, tv5);
             }
         });
-        h.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         h.setWebViewClient(new MainWebViewClient() {
 
             @Override
@@ -2040,7 +2034,7 @@ ct = 0;
                                     "sc.innerHTML = `" +
                                     "function myfun(e) {" +
                                     "    mangaid = e.target;" +
-                                    "    var getit = prompt('"+ getSharedPreferences("di", 0).getString("di", "") +"', e.target.outerHTML);" +
+                                    "    var getit = prompt('" + getSharedPreferences("di", 0).getString("di", "") + "', e.target.outerHTML);" +
                                     "    if (getit != null) {" +
                                     "        e.target.outerHTML = getit;" +
                                     "    }" +
@@ -2135,7 +2129,7 @@ ct = 0;
                         }
                         return false;
                     } else if (b.startsWith("smsto:")) {
-                        String[] sg5 = sg.split(":");
+                        String[] sg5 = b.split(":");
                         Intent it = new Intent(Intent.ACTION_SENDTO);
                         it.setData(Uri.parse("smsto:" + sg5[1]));
                         it.putExtra("address", sg5[1]);
@@ -2445,7 +2439,7 @@ ct = 0;
 
                                         @Override
                                         public void run() {
-                                            int co = Color.parseColor(sg);
+                                            int co = Color.parseColor(a);
                                             InsetDrawable inset = new InsetDrawable(Resources.toDrawable(GradientDrawable.RECTANGLE,
                                                     new float[]{0f, 0f, 0f, 0f, 10f, 10f, 10f, 10f}, co), 10, 0, 10, 0);
                                             Webv.this.o.setBackground(inset);
@@ -2505,13 +2499,6 @@ ct = 0;
                         new Thread(re1).start();
                     }
                 }
-            }
-
-            @JavascriptInterface
-            public void b(String sg) {
-                Intent it = new Intent(Intents.ACTION_IP);
-                it.putExtra("ip", sg);
-                sendBroadcast(it);
             }
 
             @JavascriptInterface
@@ -2940,7 +2927,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     }
                     return "";
                 }
-                
+
                 @JavascriptInterface
                 public String encodeSHA(String algo, String text, boolean ran) {
                     try {
@@ -3455,68 +3442,19 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             ti.setTextColor(f);
         }
         ti.setText(getString(R.string.v13));
-        final String sg = Uri.parse(url).getHost();
-        pro(ti, sg);
-        ed.setText(sg);
+        pro(ti, url);
+        ed.setText(url);
         bn.setText(getString(R.string.i6));
         bn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                final String ab = Uri.parse(ed.getText().toString()).getHost();
                 ti.setText(Webv.this.getString(R.string.v13));
-                pro(ti, ab);
+                pro(ti, ed.getText().toString());
             }
         });
         final AlertDialog g = a.create();
         g.show();
-    }
-
-    private void pro(final TextView tv, final String url) {
-Runnable re = new Runnable() {
-
-@Override
-public void run() {
-        try {
-            ArrayList<String> cmd = new ArrayList<>();
-            cmd.add("ping");
-            cmd.add("www.google.com");
-            ProcessBuilder pb = new ProcessBuilder(cmd);
-            Process process = pb.start();
-            final BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            final BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String s = null;
-            tv.setText("");
-            while ((s = input.readLine()) != null) {
-runOnUiThread(new Runnable() {
-
-@Override 
-public void run() {
-try {
-tv.append(input.readLine());
-} catch (Exception en){}
-}
-});
-            }
-            while ((s = error.readLine()) != null) {
-               runOnUiThread(new Runnable() {
-
-@Override 
-public void run() {
-try {
-tv.append(error.readLine());
-} catch (Exception en){}
-}
-});
-            }
-            input.close();
-            error.close();
-        } catch (Exception en) {
-            en.printStackTrace();
-        }
-}
-};
-new Thread(re).start();
     }
 
     public String c46() {
@@ -3895,18 +3833,18 @@ new Thread(re).start();
                     /*if (Build.VERSION.SDK_INT < 25) {
 
                      */
-                        Intent f = new Intent();
-                        f.putExtra("android.intent.extra.shortcut.INTENT", e);
-                        f.putExtra("android.intent.extra.shortcut.NAME", ed.getText().toString());
-                        if (currentTab().getFavicon() != null) {
-                            f.putExtra("android.intent.extra.shortcut.ICON", currentTab().getFavicon());
-                        } else {
-                            f.putExtra("android.intent.extra.shortcut.ICON_RESOURCE",
-                                    Intent.ShortcutIconResource.fromContext(Webv.this, R.mipmap.c));
-                        }
-                        f.putExtra("duplicate", false);
-                        f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-                        sendBroadcast(f);
+                    Intent f = new Intent();
+                    f.putExtra("android.intent.extra.shortcut.INTENT", e);
+                    f.putExtra("android.intent.extra.shortcut.NAME", ed.getText().toString());
+                    if (currentTab().getFavicon() != null) {
+                        f.putExtra("android.intent.extra.shortcut.ICON", currentTab().getFavicon());
+                    } else {
+                        f.putExtra("android.intent.extra.shortcut.ICON_RESOURCE",
+                                Intent.ShortcutIconResource.fromContext(Webv.this, R.mipmap.c));
+                    }
+                    f.putExtra("duplicate", false);
+                    f.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+                    sendBroadcast(f);
                     /* } else {
                         ShortcutInfo shortcut = new ShortcutInfo.Builder(Webv.this, "id1").build();
                         shortcut.setShortLabel(ed.getText().toString());
@@ -5511,7 +5449,7 @@ new Thread(re).start();
         if (Build.VERSION.SDK_INT >= 30) {
             f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b);
         } else if (Build.VERSION.SDK_INT >= 23 && Permission.checkOnly(Webv.this, Permission.STORAGE)) {
-            f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b );
+            f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b);
         } else {
             f.setDestinationInExternalPublicDir(Package.c() + "/Download", b);
         }
@@ -5600,13 +5538,13 @@ new Thread(re).start();
 
     private void c184() {
         if (penHis.size() != 0) {
-            for (HistoryDataModel hdm: penHis) {
+            for (HistoryDataModel hdm : penHis) {
                 d1.c(hdm.ls, hdm.ls0, hdm.ls2);
             }
             penHis.clear();
         }
     }
-    
+
     @Override
     @TargetApi(Build.VERSION_CODES.M)
     public void onRequestPermissionsResult(int a, String[] b, int[] c) {
@@ -5811,7 +5749,7 @@ new Thread(re).start();
 
     /*
      * When your program
-     * was completly mess
+     * was completely mess
      * but it does its job
      */
 
@@ -5827,19 +5765,18 @@ new Thread(re).start();
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
-        // web osint
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
-            sm.add(0, 1, 0, getString(R.string.y15));
-            sm.add(0, 7, 0, getString(R.string.h6));
-            sm.add(0, 8, 0, getString(R.string.j));
-            sm.add(0, 25, 0, getString(R.string.f32));
-            sm.add(0, 28, 0, getString(R.string.y76));
-            sm.add(0, 29, 0, getString(R.string.y77));
-            sm.add(0, 30, 0, getString(R.string.y78));
-            sm.add(0, 10, 0, getString(R.string.h36));
-            sm.add(0, 11, 0, getString(R.string.e2));
-           sm.add(0, 12, 0, getString(R.string.f23));
-           sm.add(0, 13, 0, getString(R.string.h4));
+        sm.add(0, 1, 0, getString(R.string.y15));
+        sm.add(0, 7, 0, getString(R.string.h6));
+        sm.add(0, 8, 0, getString(R.string.j));
+        sm.add(0, 25, 0, getString(R.string.f32));
+        sm.add(0, 28, 0, getString(R.string.y76));
+        sm.add(0, 29, 0, getString(R.string.y77));
+        sm.add(0, 30, 0, getString(R.string.y78));
+        sm.add(0, 10, 0, getString(R.string.h36));
+        sm.add(0, 11, 0, getString(R.string.e2));
+        sm.add(0, 12, 0, getString(R.string.f23));
+        sm.add(0, 13, 0, getString(R.string.h4));
         sm.add(0, 26, 0, getString(R.string.y73));
         sm.add(0, 27, 0, getString(R.string.y74));
 
@@ -6265,17 +6202,17 @@ new Thread(re).start();
 
         @Override
         public void onReceive(Context a, Intent b) {
-                String sg = b.getAction();
-                if (sg.equals("android.intent.action.BATTERY_CHANGED")) {
-                    if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
-                        int d = b.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
-                        if (d == 1) {
-                            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                        } else {
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                        }
+            String sg = b.getAction();
+            if (sg.equals("android.intent.action.BATTERY_CHANGED")) {
+                if (Objects.requireNonNull(a221().getString("screen", "")).equals("30j")) {
+                    int d = b.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                    if (d == 1) {
+                        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    } else {
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                     }
                 }
+            }
         }
     }
 

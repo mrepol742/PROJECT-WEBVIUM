@@ -41,7 +41,6 @@ import com.mrepol742.webvium.app.main.MainWebView;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.net.Connectivity;
-import com.mrepol742.webvium.net.Ping;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.net.Stream;
 import com.mrepol742.webvium.util.AwesomeToast;
@@ -58,8 +57,7 @@ public class Tool extends BaseActivity {
     public static final int TOOL_SITEMAPS = 1;
     public static final int TOOL_ASSET_LINKS = 3;
     public static final int TOOL_HEADERS = 4;
-    private TextView k;
-    private TextView tt;
+    private TextView tt, k;
     private MainWebView m;
     private FrameLayout fl;
 
@@ -68,11 +66,10 @@ public class Tool extends BaseActivity {
         theme(T_DEFAULT);
         super.onCreate(a);
         a225(R.layout.d);
+        tt = findViewById(R.id.b8);
         k = findViewById(R.id.l);
-        tt = findViewById(R.id.o29);
         fl = findViewById(R.id.c);
-        Toolbar i = findViewById(R.id.k);
-        k.setTypeface(type(Typeface.BOLD));
+        Toolbar i = findViewById(R.id.b7);
         m = new MainWebView(this);
         fl.addView(m);
         int o = Resources.getColor(this, R.color.c);
@@ -133,6 +130,7 @@ public class Tool extends BaseActivity {
                     AwesomeToast.c(Tool.this, getString(R.string.x38));
                     AwesomeToast.b(Tool.this, getString(R.string.y72));
                 }
+                a.loadUrl("about:blank");
                 a.loadDataWithBaseURL("webvium", getString(R.string.c33), "text/html", "UTF-8", null);
             }
         });
@@ -189,87 +187,33 @@ public class Tool extends BaseActivity {
                     }
                     break;
                 case TOOL_ROBOTS:
-                    Runnable runnable = new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try {
-                                final URL url = new URL(data);
-                                final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
-                                Tool.this.runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        if (bn) {
+                    try {
+                        URL url = new URL(data);
                                             m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/robots.txt");
-                                        } else {
-                                            m.loadDataWithBaseURL(null, Tool.this.getString(R.string.c33), "text", "UTF-8", null);
-                                        }
-                                    }
-                                });
+
                             } catch (Exception en) {
                                 en.printStackTrace();
                             }
-                        }
-                    };
-                    new Thread(runnable).start();
                     tt.setText(getString(R.string.f32));
                     k.setText(Uri.parse(data).getHost());
                     break;
                 case TOOL_ASSET_LINKS:
-                    Runnable runnable1 = new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try {
-                                final URL url = new URL(data);
-                                final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
-                                Tool.this.runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        if (bn) {
-                                            m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
-                                        } else {
-                                            m.loadDataWithBaseURL(null, Tool.this.getString(R.string.c33), "text", "UTF-8", null);
-                                        }
-
-                                    }
-                                });
+                     try {
+                                 URL url = new URL(data);
+                                     m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/.well-known/assetlinks.json");
                             } catch (Exception en) {
                                 en.printStackTrace();
                             }
-                        }
-                    };
-                    new Thread(runnable1).start();
                     tt.setText(getString(R.string.y76));
                     k.setText(Uri.parse(data).getHost());
                     break;
                 case TOOL_SITEMAPS:
-                    Runnable runnable2 = new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try {
-                                final URL url = new URL(data);
-                                final boolean bn = Ping.isReachable(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
-                                Tool.this.runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        if (bn) {
+                   try {
+                                 URL url = new URL(data);
                                             m.loadUrl(url.getProtocol() + "://" + url.getHost() + "/sitemap.xml");
-                                        } else {
-                                            m.loadDataWithBaseURL(null, Tool.this.getString(R.string.c33), "text", "UTF-8", null);
-                                        }
-                                    }
-                                });
                             } catch (Exception en) {
                                 en.printStackTrace();
                             }
-                        }
-                    };
-                    new Thread(runnable2).start();
                     tt.setText(getString(R.string.y77));
                     k.setText(Uri.parse(data).getHost());
                     break;
@@ -308,9 +252,7 @@ public class Tool extends BaseActivity {
                     k.setText(Uri.parse(data).getHost());
                     break;
                 default:
-                    // popup list
-
-
+                   break;
             }
             a.replaceExtras(new Bundle());
             a.setAction("");

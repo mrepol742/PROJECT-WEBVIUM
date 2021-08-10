@@ -63,7 +63,7 @@ public class Clip extends Service {
             if (d34 != null) {
                 sg = d34.getText().toString();
             }
-            if (sg != null && com.mrepol742.webvium.util.Inapproriate.isInapproriate(sg.toLowerCase())) {
+            if (sg != null) {
                 if (URLUtil.isValidUrl(sg)) {
                     if (Domain.isValidDomain(sg)) {
                         a(sg);

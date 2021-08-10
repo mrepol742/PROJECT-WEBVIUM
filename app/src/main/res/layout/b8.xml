@@ -15,18 +15,40 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    a:layout_width="fill_parent"
+    a:layout_width="match_parent"
     a:layout_height="wrap_content"
     a:paddingStart="?m"
-    a:paddingEnd="?m">
+    a:paddingEnd="?m"
+    a:orientation="vertical">
+
+    <LinearLayout
+        a:id="@id/o38"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:layout_marginTop="10dp">
+
+        <com.mrepol742.webvium.Edit
+            a:id="@id/g8"
+            a:layout_width="0dp"
+            a:layout_height="match_parent"
+            a:layout_margin="5dp"
+            a:layout_weight="0.4"
+            a:inputType="text"
+            a:selectAllOnFocus="true"
+            a:textSize="@dimen/b" />
+
+        <Button
+            a:id="@id/k20"
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="0.1" />
+    </LinearLayout>
 
     <ScrollView
         a:layout_width="match_parent"
         a:layout_height="wrap_content"
-        a:layout_above="@id/o38"
-        a:layout_alignParentTop="true"
         a:layout_marginTop="10dp">
 
         <TextView
@@ -41,29 +63,5 @@
             a:textSize="@dimen/x"
             tools:ignore="LabelFor" />
     </ScrollView>
-
-    <LinearLayout
-        a:id="@id/o38"
-        a:layout_width="match_parent"
-        a:layout_height="wrap_content"
-        a:layout_alignParentBottom="true"
-        a:layout_marginTop="10dp">
-
-        <com.mrepol742.webvium.Edit
-            a:id="@id/g8"
-            a:layout_width="0dp"
-            a:layout_height="match_parent"
-            a:layout_margin="5dp"
-            a:layout_weight="0.4"
-            a:inputType="textAutoCorrect"
-            a:selectAllOnFocus="true"
-            a:textSize="@dimen/b" />
-
-        <Button
-            a:id="@id/k20"
-            a:layout_width="0dp"
-            a:layout_height="wrap_content"
-            a:layout_weight="0.1" />
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
 

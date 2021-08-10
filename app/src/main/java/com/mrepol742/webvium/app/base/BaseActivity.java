@@ -24,19 +24,24 @@
  import android.content.Intent;
  import android.content.SharedPreferences;
  import android.graphics.Typeface;
+ import android.net.Uri;
  import android.os.Build;
  import android.os.Bundle;
  import android.preference.PreferenceManager;
  import android.speech.SpeechRecognizer;
  import android.util.LruCache;
  import android.view.ViewGroup;
+ import android.widget.TextView;
 
  import com.mrepol742.webvium.R;
  import com.mrepol742.webvium.app.Intents;
  import com.mrepol742.webvium.app.StorageDirectory;
  import com.mrepol742.webvium.util.AwesomeToast;
 
+ import java.io.BufferedReader;
  import java.io.File;
+ import java.io.InputStreamReader;
+ import java.util.ArrayList;
 
  public class BaseActivity extends Activity {
 
@@ -260,5 +265,45 @@
 
      public boolean spr() {
          return !SpeechRecognizer.isRecognitionAvailable(this);
+     }
+
+     public void pro(final TextView tv, final String url) {
+         Runnable re = new Runnable() {
+
+             @Override
+             public void run() {
+                 try {
+                     ArrayList<String> cmd = new ArrayList<>();
+                     cmd.add("ping");
+                     cmd.add(Uri.parse(url).getHost());
+                     ProcessBuilder pb = new ProcessBuilder(cmd);
+                     Process process = pb.start();
+                     BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                     BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                     final StringBuilder sb = new StringBuilder();
+                     String s;
+                     while ((s = input.readLine()) != null) {
+                         sb.append(s);
+                         sb.append("\n");
+                     }
+                     while ((s = error.readLine()) != null) {
+                         sb.append(s);
+                         sb.append("\n");
+                     }
+                     input.close();
+                     error.close();
+                     runOnUiThread(new Runnable() {
+
+                         @Override
+                         public void run() {
+                             tv.setText(sb.toString());
+                         }
+                     });
+                 } catch (Exception en) {
+                     en.printStackTrace();
+                 }
+             }
+         };
+         new Thread(re).start();
      }
  }
