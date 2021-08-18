@@ -116,34 +116,34 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
                     Hist.this.a(a2, a5);
                     return true;
                 case 5:
-                    Hist.this.l(a2, 7);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.SOURCE_CODE);
                     return true;
                 case 13:
-                    Hist.this.c43(a2);
+                    NSLookup(getLayoutInflater(), Hist.this, a2);
                     return true;
                 case 15:
-                    Hist.this.l(a2, 0);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.LINKS);
                     return true;
                 case 16:
-                    Hist.this.l(a2, 1);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.TRANCEROUTE);
                     return true;
                 case 17:
-                    Hist.this.l(a2, 2);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.NPING);
                     return true;
                 case 18:
-                    Hist.this.l(a2, 3);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.WHOIS);
                     return true;
                 case 19:
-                    Hist.this.l(a2, 5);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.META_TAGS);
                     return true;
                 case 20:
-                    Hist.this.l(a2, 4);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.HEADERS);
                     return true;
                 case 21:
-                    Hist.this.l(a2, 6);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.ROBOTS);
                     return true;
                 case 22:
-                    Hist.this.l(a2, 8);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.IP_GEO);
                     return true;
                 case 23:
                     Hist.this.b(a5);
@@ -152,13 +152,13 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
                     Hist.this.o(a5, a2, a4);
                     break;
                 case 25:
-                    Hist.this.l(a2, ASSETLINKS);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.ASSETLINKS);
                     return true;
                 case 26:
-                    Hist.this.l(a2, SITEMAPS);
+                    Tools(getLayoutInflater(), Hist.this, a2, BaseActivity.SITEMAPS);
                     return true;
                 case 27:
-                    Hist.this.c33(a2);
+                    ping(getLayoutInflater(), Hist.this, a2);
                     return true;
             }
             return false;

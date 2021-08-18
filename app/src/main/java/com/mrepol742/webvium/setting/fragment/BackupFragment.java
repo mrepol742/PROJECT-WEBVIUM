@@ -62,12 +62,12 @@ import java.util.Map;
 public class BackupFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
     private final IntentFilter is = new IntentFilter();
     private R7 r7;
-    private static final int SEARCH = 0;
-    private static final int DOWNLOAD = 1;
-    private static final int HISTORY = 2;
-    private static final int BOOKMARK = 3;
-    private static final int SETTINGS = 4;
-    private static final int APK = 5;
+    private static final int SEARCH = 10;
+    private static final int DOWNLOAD = 11;
+    private static final int HISTORY = 12;
+    private static final int BOOKMARK = 13;
+    private static final int SETTINGS = 14;
+    private static final int APK = 15;
 
     @Override
     public boolean onPreferenceClick(Preference a123) {
@@ -76,7 +76,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 BackupFragment.this.a6();
                 return true;
             case "ets":
-                back("Settings_" + format() + ".json", SETTINGS);
+                back("settings.json", SETTINGS);
                 return true;
             case "se":
                 SearchHelper d1a = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
@@ -125,9 +125,6 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                     en.printStackTrace();
                 }
                 return true;
-            case "se23":
-                // TODO: open file picker
-                return true;
         }
         return false;
     }
@@ -135,7 +132,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 345 && resultCode != Activity.RESULT_OK) {
+        if (requestCode == 345 || resultCode != Activity.RESULT_OK) {
             getActivity().getFragmentManager().popBackStack();
         }
         if (data.getData() == null) {
@@ -198,9 +195,6 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
         l111444.setOnPreferenceClickListener(this);
         Preference asd = findPreference("bcP");
         asd.setOnPreferenceClickListener(this);
-        Preference l114 = findPreference("se23");
-        l114.setSummary(getString(R.string.x48));
-        l114.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -257,28 +251,19 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
         j5.show();
     }
 
-    private void d(String a) {
-        AwesomeToast.c(getActivity(), a);
-    }
-
     private void g(String a) {
         AwesomeToast.b(getActivity(), a);
     }
 
-    public String format() {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh.mm aa, MMMM dd, yyyy", Locale.US);
-        return sdf.format(new Date());
-    }
-
     private String getName(int id) {
         if (id == 0) {
-            return "Bookmark " + format() + ".json";
+            return "bookmark.json";
         } else if (id == 1) {
-            return "Download " + format() + ".json";
+            return "download.json";
         } else if (id == 2) {
-            return "History " + format() + ".json";
+            return "history.json";
         }
-        return "Search " + format() + ".json";
+        return "search.json";
     }
 
     private void back(String name, int id) {

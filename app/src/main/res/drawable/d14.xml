@@ -26,7 +26,7 @@
                 <solid a:color="@android:color/transparent" />
                 <stroke
                     a:width="1dp"
-                    a:color="@color/c" />
+                    a:color="?f" />
                 <padding
                     a:bottom="5dp"
                     a:left="5dp"
@@ -42,7 +42,7 @@
                 <solid a:color="@android:color/transparent" />
                 <stroke
                     a:width="1dp"
-                    a:color="@color/c" />
+                    a:color="?f" />
                 <padding
                     a:bottom="5dp"
                     a:left="5dp"

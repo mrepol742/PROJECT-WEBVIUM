@@ -48,6 +48,7 @@ public class Sett0 extends BaseActivity implements View.OnClickListener{
     private String id = "a";
     private ImageView iv;
     private ImageView iv0;
+    private ImageView iv1;
     private PopupMenu mu;
     private TextView b;
 
@@ -70,26 +71,29 @@ public class Sett0 extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        Animation.animate(Sett0.this, R.anim.i, view);
-        Animation.animate(Sett0.this, R.anim.c, b);
         switch (view.getId()) {
             case R.id.m17:
                 b.setText(Sett0.this.getString(R.string.h3));
                 Sett0.this.as(R.id.m10, new SettingFragment());
                 id = "a";
-                Sett0.this.b24(View.VISIBLE);
+                Sett0.this.b24(View.VISIBLE, View.GONE);
+                Animation.animate(Sett0.this, R.anim.i, view);
+                Animation.animate(Sett0.this, R.anim.c, b);
                 break;
             case R.id.m20:
                 b.setText(Sett0.this.getString(R.string.t21));
                 Sett0.this.as(R.id.m10, new BackupFragment());
                 id = "b";
-                Sett0.this.b24(View.GONE);
+                Sett0.this.b24(View.GONE, View.VISIBLE);
+                Animation.animate(Sett0.this, R.anim.i, iv1);
                 break;
             case R.id.m1:
                 b.setText(Sett0.this.getString(R.string.l));
                 Sett0.this.as(R.id.m10, new AboutFragment());
                 id = "c";
-                Sett0.this.b24(View.VISIBLE);
+                Sett0.this.b24(View.VISIBLE, View.GONE);
+                Animation.animate(Sett0.this, R.anim.i, view);
+                Animation.animate(Sett0.this, R.anim.c, b);
                 break;
             case R.id.b7:
                 Sett0.this.finishAndRemoveTask();
@@ -109,6 +113,7 @@ public class Sett0 extends BaseActivity implements View.OnClickListener{
                 }
                 mu.show();
                 break;
+            case R.id.o55:
             default:
                 break;
         }
@@ -157,13 +162,17 @@ public class Sett0 extends BaseActivity implements View.OnClickListener{
         tv2.setImageResource(R.drawable.g12);
         iv = findViewById(R.id.o25);
         iv0 = findViewById(R.id.o26);
+        iv1 = findViewById(R.id.o55);
         iv.setBackgroundResource(R.drawable.c6);
         iv0.setBackgroundResource(R.drawable.c6);
+        iv1.setBackgroundResource(R.drawable.c6);
         iv.setOnClickListener(this);
         iv0.setOnClickListener(this);
+        iv1.setOnClickListener(this);
         iv.setImageResource(R.drawable.c7);
         iv0.setImageResource(R.drawable.c8);
-        b24(View.VISIBLE);
+        iv1.setImageResource(R.drawable.b4);
+        b24(View.VISIBLE, View.GONE);
     }
 
     @Override
@@ -173,6 +182,8 @@ public class Sett0 extends BaseActivity implements View.OnClickListener{
         if (id.equals("a") || id.equals("c")) {
             Animation.animate(this, R.anim.i, iv);
             Animation.animate(this, R.anim.i, iv0);
+        } else if (id.equals("b")) {
+            Animation.animate(this, R.anim.i, iv1);
         }
     }
 
@@ -185,9 +196,10 @@ public class Sett0 extends BaseActivity implements View.OnClickListener{
         return false;
     }
 
-    private void b24(int view) {
+    private void b24(int view, int views) {
         iv.setVisibility(view);
         iv0.setVisibility(view);
+        iv1.setVisibility(views);
     }
 
     private void a(boolean bn) {

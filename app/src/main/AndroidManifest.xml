@@ -127,86 +127,14 @@
             a:taskAffinity="com.mrepol742.webvium.task.SCT"
             a:windowSoftInputMode="stateHidden" />
 
+        <!-- TODO: REMOVED -->
         <activity
             a:name="com.mrepol742.webvium.Back0"
             a:configChanges="keyboardHidden|orientation|screenSize"
             a:excludeFromRecents="true"
             a:launchMode="singleTask"
             a:theme="@style/m"
-            a:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <action a:name="android.intent.action.VIEW" />
-                <category a:name="android.intent.category.BROWSABLE" />
-                <category a:name="android.intent.category.DEFAULT" />
-                <data a:scheme="file" />
-                <data a:scheme="content" />
-                <data a:mimeType="*/*" />
-                <data a:host="*" />
-                <data a:pathPattern=".*.bac" />
-                <data a:pathPattern=".*..*.bac" />
-                <data a:pathPattern=".*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.bac" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.bac" />
-            </intent-filter>
-
-            <!--
-
-            <intent-filter>
-                <action a:name="android.intent.action.VIEW" />
-                <category a:name="android.intent.category.BROWSABLE" />
-                <category a:name="android.intent.category.DEFAULT" />
-                <data a:scheme="file" />
-                <data a:scheme="content" />
-                <data a:mimeType="*/*" />
-                <data a:host="*" />
-                <data a:pathPattern=".*.webv" />
-                <data a:pathPattern=".*..*.webv" />
-                <data a:pathPattern=".*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*.webv" />
-                <data a:pathPattern=".*..*..*..*..*..*..*..*..*..*..*..*..*..*..*.webv" />
-            </intent-filter>
-
-            -->
-        </activity>
-
-        <activity
-            a:name="com.mrepol742.webvium.Assi"
-            a:configChanges="keyboardHidden|orientation|screenSize"
-            a:excludeFromRecents="true"
-            a:launchMode="singleTask"
-            a:taskAffinity="com.mrepol742.webvium.task.ASY"
-            a:theme="@style/m"
-            a:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action a:name="android.intent.action.ASSIST" />
-                <category a:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action a:name="com.mrepol742.webvium.intent.action.ASSIST" />
-                <category a:name="com.mrepol742.webvium.intent.category.GENIUS" />
-                <category a:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            a:windowSoftInputMode="stateHidden"/>
 
         <activity
             a:name="com.mrepol742.webvium.Sett"

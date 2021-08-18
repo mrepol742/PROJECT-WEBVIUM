@@ -43,13 +43,6 @@
 
     </com.mrepol742.webvium.Pref0>
 
-    <com.mrepol742.webvium.Pref0 a:title="@string/x46">
-        <com.mrepol742.webvium.Pref
-            a:key="se23"
-            a:title="@string/x47" />
-    </com.mrepol742.webvium.Pref0>
-
-
     <com.mrepol742.webvium.Pref0 a:title="@string/b20">
         <com.mrepol742.webvium.Pref
             a:key="res"

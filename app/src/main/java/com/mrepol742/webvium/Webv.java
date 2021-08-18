@@ -2405,6 +2405,11 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
         h.addJavascriptInterface(new Object() {
 
             @JavascriptInterface
+            public boolean isCustomBackgroundEnabled() {
+                return a221().getBoolean("webviumB", false);
+            }
+
+            @JavascriptInterface
             public boolean isDarkModeEnabled() {
                 return a221().getBoolean("autoUpdate", false);
             }

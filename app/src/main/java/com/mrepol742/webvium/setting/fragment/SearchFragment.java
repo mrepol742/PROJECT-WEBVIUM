@@ -45,40 +45,7 @@ public class SearchFragment extends BasePreferenceFragment {
     @Override
     public void onCreate(Bundle b1) {
         super.onCreate(b1);
-        if (Build.VERSION.SDK_INT >= 23) {
-            a5(R.xml.l);
-        } else {
-            a5(R.xml.d);
-        }
-        Pref b = (Pref) findPreference("asst");
-        b.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-            @Override
-            public boolean onPreferenceClick(Preference a1) {
-                AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
-                a.setCancelable(true);
-                a.setTitle(getString(R.string.z18));
-                a.setMessage(getString(R.string.a21));
-                a.setPositiveButton(getString(R.string.i6), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a12, int intetg) {
-                        Intents.k(SearchFragment.this.getActivity(), "android.settings.VOICE_INPUT_SETTINGS");
-                        AwesomeToast.d(SearchFragment.this.getActivity(), Html.b(SearchFragment.this.getString(R.string.b33)).toString());
-                        a12.dismiss();
-                    }
-                });
-                a.setNegativeButton(getString(R.string.i7), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface a1, int intetg) {
-                        a1.dismiss();
-                    }
-                });
-                a.create().show();
-                return true;
-            }
-        });
+        a5(R.xml.d);
         Swit cbf = (Swit) findPreference("qckS");
         cbf.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 

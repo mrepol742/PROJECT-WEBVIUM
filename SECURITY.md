@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-* Security Vulnirability are been delivered via the latest update available and not by patch on each version.
+* Security Venerability are been delivered via the latest update available and not by patch on each version.
 
 ## Reporting a Vulnerability
 

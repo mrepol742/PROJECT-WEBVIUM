@@ -29,6 +29,18 @@
         a:layout_below="@id/b7" />
 
     <ImageView
+        a:id="@id/o55"
+        a:layout_width="wrap_content"
+        a:layout_height="wrap_content"
+        a:layout_above="@id/o25"
+        a:layout_alignParentEnd="true"
+        a:layout_marginEnd="15dp"
+        a:layout_marginBottom="20dp"
+        a:contentDescription="@string/a42"
+        a:elevation="5dp"
+        a:padding="10dp" />
+
+    <ImageView
         a:id="@id/o25"
         a:layout_width="wrap_content"
         a:layout_height="wrap_content"
@@ -51,7 +63,6 @@
         a:contentDescription="@string/z104"
         a:elevation="5dp"
         a:padding="10dp" />
-
 
     <LinearLayout
         a:id="@id/m16"
