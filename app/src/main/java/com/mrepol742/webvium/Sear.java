@@ -20,10 +20,12 @@ package com.mrepol742.webvium;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -82,10 +84,10 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
     private ListView d;
     private RelativeLayout b19;
     private SearchAdapter aa;
-    private SearchHelper d2;
     private final List<SearchDataModel> ls = new ArrayList<>();
     private ImageView iv1;
     private PopupMenu pm;
+    private Sqlite sql;
     private String query23;
     public static final int SEARCH = 1;
     public static final int HISTORY = 2;
@@ -150,7 +152,11 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             if (!TextUtils.isEmpty(query)) {
                 Sear.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                 SoftKeyboard.hide(Sear.this, b19);
-                d2.c(query);
+                if (!a221().getBoolean("pSearch", false)) {
+                    ContentValues values = new ContentValues();
+                    values.put(Sqlite.COL1_SEARCH, query);
+                    sql.getWritableDatabase().insert(Sqlite.TABLE_SEARCH, null, values);
+                }
                 Sear.this.search(query);
                 Sear.this.finish();
                 return true;
@@ -189,8 +195,9 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
         iv1.setBackgroundResource(R.drawable.b17);
-        d2 = SearchHelper.getInstance(getApplicationContext());
-        Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
+        sql = Sqlite.getInstance(getApplicationContext());
+        SQLiteDatabase db = sql.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
@@ -204,8 +211,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
         }
         res.close();
         if (a221().getBoolean("showHTT", false)) {
-            HistoryHelper d1 = HistoryHelper.getInstance(getApplicationContext());
-            Cursor rest = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
+            Cursor rest = db.rawQuery("SELECT * FROM " +
                     Sqlite.TABLE_HISTORY +
                     " ORDER BY " +
                     "_id" +
@@ -222,8 +228,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             rest.close();
         }
         if (a221().getBoolean("showBKM", false)) {
-            BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
-            Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+            Cursor rest1 = db.rawQuery("SELECT * FROM " +
                     Sqlite.TABLE_BOOKMARK +
                     " ORDER BY " +
                     "_id" +
@@ -240,8 +245,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             rest1.close();
         }
         if (a221().getBoolean("showDLM", false)) {
-            DownloadHelper d31 = DownloadHelper.getInstance(getApplicationContext());
-            Cursor rest2 = d31.getReadableDatabase().rawQuery("SELECT * FROM " +
+            Cursor rest2 = db.rawQuery("SELECT * FROM " +
                     Sqlite.TABLE_DOWNLOAD +
                     " ORDER BY " +
                     "_id" +
@@ -402,7 +406,11 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
         if (requestCode == 100) {
             if (resultCode == RESULT_OK && null != data) {
                 String speechText = data.getStringExtra("a");
-                d2.c(speechText);
+                if (!a221().getBoolean("pSearch", false)) {
+                    ContentValues values = new ContentValues();
+                    values.put(Sqlite.COL1_SEARCH, speechText);
+                    sql.getWritableDatabase().insert(Sqlite.TABLE_SEARCH, null, values);
+                }
                 p.setText(speechText);
             }
         }
@@ -437,7 +445,9 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                d2.b(b);
+                sql.getWritableDatabase().delete(Sqlite.TABLE_SEARCH,
+                        Sqlite.COL1_SEARCH +
+                                " =? ", new String[]{b});
                 Sear.this.f6(String.format(Sear.this.getString(R.string.h5), b));
                 Sear.this.k();
                 a12.dismiss();
@@ -460,7 +470,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
     // TODO: needs update
     private void k() {
         List<SearchDataModel> itemIdsh = new ArrayList<>();
-        Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
+        Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
@@ -562,7 +572,10 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
 
             @Override
             public void onClick(DialogInterface a2, int i) {
-                Sear.this.u(ed.getText().toString(), ed1.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_BOOKMARK, ed.getText().toString());
+                values.put(Sqlite.COL2_BOOKMARK, ed1.getText().toString());
+                sql.getWritableDatabase().insert(Sqlite.TABLE_BOOKMARK, null, values);
                 Sear.this.t(Sear.this.getString(R.string.t2));
                 a2.dismiss();
             }
@@ -658,11 +671,6 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
         AwesomeToast.b(this, a);
     }
 
-    private void u(String a, String b) {
-        BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
-        d3.c(a, b);
-    }
-
     private void w(final String oldTitle) {
         AlertDialog.Builder a = new AlertDialog.Builder(this);
         LayoutInflater b = getLayoutInflater();
@@ -688,7 +696,11 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
 
             @Override
             public void onClick(DialogInterface a2, int it) {
-                d2.f(oldTitle, ed.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_SEARCH, ed.getText().toString());
+                sql.getWritableDatabase().update(Sqlite.TABLE_SEARCH, values,
+                        Sqlite.COL1_SEARCH +
+                                " LIKE ? ", new String[]{oldTitle});
                 Sear.this.k();
                 a2.dismiss();
             }

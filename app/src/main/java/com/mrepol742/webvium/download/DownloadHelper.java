@@ -26,18 +26,21 @@ import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Sqlite;
 
+@Deprecated
 public class DownloadHelper {
 
     private static DownloadHelper d10;
     private final SQLiteDatabase sld;
     private final SharedPreferences sp;
 
+    @Deprecated
     private DownloadHelper(Context ct) {
         DownloadDatabase d9 = new DownloadDatabase(ct);
         sp = PreferenceManager.getDefaultSharedPreferences(ct);
         sld = d9.getWritableDatabase();
     }
 
+    @Deprecated
     public static DownloadHelper getInstance(Context ctx) {
         if (d10 == null) {
             d10 = new DownloadHelper(ctx);
@@ -45,16 +48,19 @@ public class DownloadHelper {
         return d10;
     }
 
+    @Deprecated
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
+    @Deprecated
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_DOWNLOAD, null, null);
         }
     }
 
+    @Deprecated
     public void b(DownloadDataModel w2) {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_DOWNLOAD,
@@ -72,6 +78,7 @@ public class DownloadHelper {
         }
     }
 
+    @Deprecated
     public void c(String a, String b, long c) {
         if (!sp.getBoolean("pDownload", false)) {
             if (sld != null && sld.isOpen()) {
@@ -85,6 +92,7 @@ public class DownloadHelper {
         }
     }
 
+    @Deprecated
     public void i(String oldTitle, String oldURl, long oldSize, long oldTIme, String newTitle, String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();

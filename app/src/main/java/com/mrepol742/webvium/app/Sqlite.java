@@ -17,7 +17,16 @@
 
 package com.mrepol742.webvium.app;
 
-public class Sqlite {
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.webkit.URLUtil;
+
+import com.mrepol742.webvium.history.HistoryDataModel;
+
+public class Sqlite extends SQLiteOpenHelper {
     public static final String DATA_DOWNLOAD = "a1";
     public static final int VERSION_DOWNLOAD = 1;
     public static final String TABLE_DOWNLOAD = "a2";
@@ -43,4 +52,79 @@ public class Sqlite {
     public static final String TABLE_BOOKMARK = "e2";
     public static final String COL1_BOOKMARK = "e3";
     public static final String COL2_BOOKMARK = "e4";
+
+    public static Sqlite sqlite;
+
+    public static Sqlite getInstance(Context context) {
+        if (sqlite == null) {
+            sqlite = new Sqlite(context);
+        }
+        return sqlite;
+    }
+
+    protected Sqlite(Context context) {
+        super(context, "webvium.db", null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " +
+                Sqlite.TABLE_BOOKMARK +
+                " ( " +
+                "_id" +
+                " INTEGER PRIMARY KEY, " +
+                Sqlite.COL1_BOOKMARK +
+                " TEXT, " +
+                Sqlite.COL2_BOOKMARK +
+                " TEXT ) ");
+        db.execSQL("CREATE TABLE " +
+                Sqlite.TABLE_DOWNLOAD +
+                " ( " +
+                "_id" +
+                " INTEGER PRIMARY KEY, " +
+                Sqlite.COL1_DOWNLOAD +
+                " TEXT, " +
+                Sqlite.COL2_DOWNLOAD +
+                " TEXT, " +
+                Sqlite.COL3_DOWNLOAD +
+                " INTEGER, " +
+                Sqlite.COL4_DOWNLOAD +
+                " INTEGER)");
+        db.execSQL("CREATE TABLE " +
+                Sqlite.TABLE_HISTORY +
+                " ( " +
+                "_id" +
+                " INTEGER PRIMARY KEY, " +
+                Sqlite.COL1_HISTORY +
+                " TEXT, " +
+                Sqlite.COL2_HISTORY +
+                " TEXT, " +
+                Sqlite.COL3_HISTORY +
+                " INTEGER)");
+        db.execSQL("CREATE TABLE " +
+                Sqlite.TABLE_SEARCH +
+                " ( " +
+                "_id" +
+                " INTEGER PRIMARY KEY, " +
+                Sqlite.COL1_SEARCH +
+                " TEXT )");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " +
+                Sqlite.TABLE_DOWNLOAD);
+        db.execSQL("DROP TABLE IF EXISTS " +
+                Sqlite.TABLE_HISTORY);
+        db.execSQL("DROP TABLE IF EXISTS " +
+                Sqlite.TABLE_SEARCH);
+        db.execSQL("DROP TABLE IF EXISTS " +
+                Sqlite.TABLE_BOOKMARK);
+        onCreate(db);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db, oldVersion, newVersion);
+    }
 }

@@ -33,6 +33,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -351,9 +352,6 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
     public Timer cdt;
     public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
     private CookieManager cm1;
-    private HistoryHelper d1;
-    private SearchHelper d2;
-    private BookmarkHelper d3;
     private GeolocationDataModel w6;
     private PermissionDataModel w8;
     private R36 br2;
@@ -385,6 +383,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
     private String des;
     private boolean iFP = false;
     private final List<HistoryDataModel> penHis = new ArrayList<>();
+    private Sqlite sql;
 
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
 
@@ -396,7 +395,11 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                         String c = Clipboard.b(Webv.this);
                         if (c != null) {
                             c49(c);
-                            d2.c(c);
+                            if (!a221().getBoolean("pSearch", false)) {
+                                ContentValues values = new ContentValues();
+                                values.put(Sqlite.COL1_SEARCH, c);
+                                sql.getWritableDatabase().insert(Sqlite.TABLE_SEARCH, null, values);
+                            }
                         } else {
                             c7(getString(R.string.t20));
                         }
@@ -718,7 +721,11 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                 String query = c.getStringExtra("a");
                 c8(String.format(getString(R.string.d39), Objects.requireNonNull(query)));
                 c49(query);
-                d2.c(query);
+                if (!a221().getBoolean("pSearch", false)) {
+                    ContentValues values = new ContentValues();
+                    values.put(Sqlite.COL1_SEARCH, query);
+                    sql.getWritableDatabase().insert(Sqlite.TABLE_SEARCH, null, values);
+                }
                 c.removeExtra("a");
             }
         }
@@ -862,9 +869,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             }
         });
-        this.d1 = HistoryHelper.getInstance(getApplicationContext());
-        this.d2 = SearchHelper.getInstance(getApplicationContext());
-        this.d3 = BookmarkHelper.getInstance(getApplicationContext());
+        this.sql = Sqlite.getInstance(getApplicationContext());
         c134();
         if (!a221().getBoolean("autoUpdate", false)) {
             this.u.setTextColor(this.a7);
@@ -2288,13 +2293,18 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             @JavascriptInterface
             public void saveQuery(String sg) {
-                d2.c(sg);
+                if (!a221().getBoolean("pSearch", false)) {
+                    ContentValues values = new ContentValues();
+                    values.put(Sqlite.COL1_SEARCH, sg);
+                    sql.getWritableDatabase().insert(Sqlite.TABLE_SEARCH, null, values);
+                }
             }
 
             @JavascriptInterface
             public String query() {
                 ArrayList<String> ls = new ArrayList<>();
-                Cursor res = d2.getReadableDatabase().rawQuery("SELECT * FROM " +
+                SQLiteDatabase db = sql.getReadableDatabase();
+                Cursor res = db.rawQuery("SELECT * FROM " +
                         Sqlite.TABLE_SEARCH +
                         " ORDER BY " +
                         "_id" +
@@ -2306,7 +2316,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     res.close();
                 }
                 if (a221().getBoolean("showHTT", false)) {
-                    Cursor rest = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
+                    Cursor rest = db.rawQuery("SELECT * FROM " +
                             Sqlite.TABLE_HISTORY +
                             " ORDER BY " +
                             "_id" +
@@ -2323,7 +2333,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     rest.close();
                 }
                 if (a221().getBoolean("showBKM", false)) {
-                    Cursor rest1 = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+                    Cursor rest1 = db.rawQuery("SELECT * FROM " +
                             Sqlite.TABLE_BOOKMARK +
                             " ORDER BY " +
                             "_id" +
@@ -2340,8 +2350,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     rest1.close();
                 }
                 if (a221().getBoolean("showDLM", false)) {
-                    DownloadHelper d31 = DownloadHelper.getInstance(getApplicationContext());
-                    Cursor rest2 = d31.getReadableDatabase().rawQuery("SELECT * FROM " +
+                    Cursor rest2 = db.rawQuery("SELECT * FROM " +
                             Sqlite.TABLE_DOWNLOAD +
                             " ORDER BY " +
                             "_id" +
@@ -2743,7 +2752,8 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             @Override
             public void onClick(DialogInterface a2, int i) {
-                d3.c(ed.getText().toString(), ed1.getText().toString());
+// TODO: check
+                //d3.c(ed.getText().toString(), ed1.getText().toString());
                 Webv.this.c8(Webv.this.getString(R.string.t2));
             }
         });
@@ -3172,7 +3182,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         }
         if (a221().getBoolean("clearH", false)) {
             bl4 = true;
-            d1.delete();
+            sql.getWritableDatabase().delete(Sqlite.TABLE_HISTORY, null, null);
         }
         if (a221().getBoolean("clearC", false)) {
             Clipboard.a(this, " ");
@@ -5445,8 +5455,12 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         if (a221().getBoolean("launch", false)) {
             Intents.a(this, Down.class);
         }
-        DownloadHelper dh = DownloadHelper.getInstance(getApplicationContext());
-        dh.c(b, w18.a1, w18.a4);
+        ContentValues values = new ContentValues();
+        values.put(Sqlite.COL1_DOWNLOAD, b);
+        values.put(Sqlite.COL2_DOWNLOAD, w18.a1);
+        values.put(Sqlite.COL3_DOWNLOAD, w18.a4);
+        values.put(Sqlite.COL4_DOWNLOAD, System.currentTimeMillis());
+        sql.getWritableDatabase().insert(Sqlite.TABLE_DOWNLOAD, null, values);
         DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request f = new DownloadManager.Request(Uri.parse(w18.a1));
         f.setTitle(b);
@@ -5542,11 +5556,20 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     }
 
     private void c184() {
-        if (penHis.size() != 0) {
-            for (HistoryDataModel hdm : penHis) {
-                d1.c(hdm.ls, hdm.ls0, hdm.ls2);
+        if (!a221().getBoolean("pHistory", false)) {
+            if (penHis.size() != 0) {
+                for (HistoryDataModel hdm : penHis) {
+                    SQLiteDatabase sld = sql.getWritableDatabase();
+                    if (sld != null && sld.isOpen()) {
+                        ContentValues values = new ContentValues();
+                        values.put(Sqlite.COL1_HISTORY, hdm.ls);
+                        values.put(Sqlite.COL2_HISTORY, hdm.ls0);
+                        values.put(Sqlite.COL3_HISTORY, hdm.ls2);
+                        sld.insert(Sqlite.TABLE_HISTORY, null, values);
+                    }
+                }
+                penHis.clear();
             }
-            penHis.clear();
         }
     }
 
@@ -6055,9 +6078,12 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             try {
                 String c = Clipboard.b(this);
                 if (c != null) {
-                    SearchHelper d2 = SearchHelper.getInstance(getApplicationContext());
-                    d2.c(c);
                     c49(c);
+                    if (!a221().getBoolean("pSearch", false)) {
+                        ContentValues values = new ContentValues();
+                        values.put(Sqlite.COL1_SEARCH, c);
+                        sql.getWritableDatabase().insert(Sqlite.TABLE_SEARCH, null, values);
+                    }
                 } else {
                     AwesomeToast.c(this, getString(R.string.t20));
                 }

@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -68,6 +69,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
     private static final int BOOKMARK = 13;
     private static final int SETTINGS = 14;
     private static final int APK = 15;
+    private Sqlite sql;
 
     @Override
     public boolean onPreferenceClick(Preference a123) {
@@ -79,8 +81,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 back("settings.json", SETTINGS);
                 return true;
             case "se":
-                SearchHelper d1a = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resa = d1a.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resa = sql.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
                 if (resa.getCount() == 0) {
                     g(BackupFragment.this.getString(R.string.v27));
                 } else {
@@ -89,8 +90,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 resa.close();
                 return true;
             case "he":
-                HistoryHelper d1b = HistoryHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resb = d1b.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resb = sql.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
                 if (resb.getCount() == 0) {
                     g(BackupFragment.this.getString(R.string.v27));
                 } else {
@@ -99,8 +99,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 resb.close();
                 return true;
             case "be":
-                BookmarkHelper d1c = BookmarkHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resc = d1c.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resc = sql.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
                 if (resc.getCount() == 0) {
                     g(BackupFragment.this.getString(R.string.v27));
                 } else {
@@ -109,8 +108,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 resc.close();
                 return true;
             case "do":
-                DownloadHelper d1d = DownloadHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resd = d1d.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resd = sql.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
                 if (resd.getCount() == 0) {
                     g(BackupFragment.this.getString(R.string.v27));
                 } else {
@@ -146,26 +144,22 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
                 FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(PreferenceManager.getDefaultSharedPreferences(BackupFragment.this.getActivity()).getAll()));
                 break;
             case SEARCH:
-                SearchHelper d1a = SearchHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resa = d1a.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resa = sql.getWritableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_SEARCH + " ORDER BY " + "_id" + " DESC", null);
                 FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resa, 4));
                 resa.close();
                 break;
             case HISTORY:
-                HistoryHelper d1b = HistoryHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resb = d1b.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resb = sql.getWritableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_HISTORY + " ORDER BY " + "_id" + " DESC", null);
                 FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resb, 2));
                 resb.close();
                 break;
             case BOOKMARK:
-                BookmarkHelper d1c = BookmarkHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resc = d1c.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resc = sql.getWritableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_BOOKMARK + " ORDER BY " + "_id" + " DESC", null);
                 FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resc, 0));
                 resc.close();
                 break;
             case DOWNLOAD:
-                DownloadHelper d1d = DownloadHelper.getInstance(BackupFragment.this.getActivity().getApplicationContext());
-                Cursor resd = d1d.getReadableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
+                Cursor resd = sql.getWritableDatabase().rawQuery("SELECT * FROM " + Sqlite.TABLE_DOWNLOAD + " ORDER BY " + "_id" + " DESC", null);
                 FileUtil.write(getActivity().getContentResolver(), data.getData(), JSON.toString(resd, 1));
                 resd.close();
                 break;
@@ -181,6 +175,7 @@ public class BackupFragment extends BasePreferenceFragment implements Preference
             getActivity().registerReceiver(r7, is);
         }
         a5(R.xml.x);
+        sql = Sqlite.getInstance(getActivity().getApplicationContext());
         Preference n = findPreference("res");
         n.setOnPreferenceClickListener(this);
         Preference l = findPreference("ets");

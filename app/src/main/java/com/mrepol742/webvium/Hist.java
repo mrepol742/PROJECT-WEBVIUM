@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -76,7 +77,6 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
     public static final int IP_GEO = 8;
     public static final int ASSETLINKS = 9;
     public static final int SITEMAPS = 10;
-    private HistoryHelper d1;
     private HistoryAdapter w15;
     private ListView a3;
     private final List<HistoryDataModel> al = new ArrayList<>();
@@ -86,6 +86,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
     private TextView f4;
     private PopupMenu pm;
     private int b;
+    private Sqlite sql;
 
     final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
@@ -201,9 +202,9 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
         f4 = findViewById(R.id.f4);
         f2.setBackgroundResource(R.drawable.b17);
         setActionBar(a1);
-        d1 = HistoryHelper.getInstance(getApplicationContext());
+        sql = Sqlite.getInstance(getApplicationContext());
         a1.setElevation(5);
-        Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
+        Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_HISTORY +
                 " ORDER BY " +
                 "_id" +
@@ -347,7 +348,13 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
 
             @Override
             public void onClick(DialogInterface a1, int intetg) {
-                d1.b(b, kl, b1);
+                sql.getWritableDatabase().delete(Sqlite.TABLE_HISTORY,
+                        Sqlite.COL1_HISTORY +
+                                " =? AND " +
+                                Sqlite.COL2_HISTORY +
+                                " =? AND " +
+                                Sqlite.COL3_HISTORY +
+                                " =? ", new String[]{kl, b, Long.toString(b1)});
                 Hist.this.f(String.format(Hist.this.getString(R.string.h5), b));
                 Hist.this.k();
                 a1.dismiss();
@@ -359,12 +366,6 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
 
     private void f(String a) {
         AwesomeToast.b(this, a);
-
-    }
-
-    private void g(String a, String b) {
-        BookmarkHelper d3 = BookmarkHelper.getInstance(getApplicationContext());
-        d3.c(a, b);
     }
 
     public void h(String a23, String asd) {
@@ -405,7 +406,10 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
 
             @Override
             public void onClick(DialogInterface a2, int i) {
-                Hist.this.g(ed.getText().toString(), ed1.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_BOOKMARK, ed.getText().toString());
+                values.put(Sqlite.COL2_BOOKMARK, ed1.getText().toString());
+                sql.getWritableDatabase().insert(Sqlite.TABLE_BOOKMARK, null, values);
                 Hist.this.f(Hist.this.getString(R.string.t2));
                 a2.dismiss();
             }
@@ -429,7 +433,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                d1.delete();
+                sql.getWritableDatabase().delete(Sqlite.TABLE_HISTORY, null, null);
                 Hist.this.f(Hist.this.getString(R.string.t1));
                 f4.setVisibility(View.VISIBLE);
                 a3.setVisibility(View.GONE);
@@ -444,7 +448,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
 
     private void k() {
         List<HistoryDataModel> al = new ArrayList<>();
-        Cursor res = d1.getReadableDatabase().rawQuery("SELECT * FROM " +
+        Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_HISTORY +
                 " ORDER BY " +
                 "_id" +
@@ -743,7 +747,17 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
 
             @Override
             public void onClick(DialogInterface a2, int it) {
-                d1.i(oldTitle, oldURl, oldTIme, ed.getText().toString(), ed1.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_HISTORY, ed.getText().toString());
+                values.put(Sqlite.COL2_HISTORY, ed1.getText().toString());
+                values.put(Sqlite.COL3_HISTORY, oldTIme);
+                sql.getWritableDatabase().update(Sqlite.TABLE_HISTORY, values,
+                        Sqlite.COL1_HISTORY +
+                                " LIKE ? AND " +
+                                Sqlite.COL2_HISTORY +
+                                " LIKE ? AND " +
+                                Sqlite.COL3_HISTORY +
+                                " LIKE ?", new String[]{oldTitle, oldURl, Long.toString(oldTIme)});
                 Hist.this.k();
                 a2.dismiss();
             }

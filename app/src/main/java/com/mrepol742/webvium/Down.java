@@ -52,7 +52,7 @@ public class Down extends BaseActivity {
     private final List<DownloadDataModel> al = new ArrayList<>();
     private RelativeLayout f2;
     private ImageView iv;
-    private DownloadHelper d10;
+    private Sqlite sql;
 
     @Override
     protected void onCreate(Bundle a) {
@@ -64,7 +64,7 @@ public class Down extends BaseActivity {
         iv = findViewById(R.id.l7);
         ImageView iv1 = findViewById(R.id.f3);
         setActionBar(a1);
-        d10 = DownloadHelper.getInstance(getApplicationContext());
+        sql = Sqlite.getInstance(getApplicationContext());
         a1.setElevation(5);
         a1.setBackgroundResource(R.drawable.p);
         ActionBar ab = getActionBar();
@@ -104,7 +104,7 @@ public class Down extends BaseActivity {
             }
         });
         a3 = findViewById(R.id.a3);
-        Cursor res = d10.getReadableDatabase().rawQuery("SELECT * FROM " +
+        Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_DOWNLOAD +
                 " ORDER BY " +
                 "_id" +
@@ -149,7 +149,7 @@ public class Down extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                d10.delete();
+                sql.getWritableDatabase().delete(Sqlite.TABLE_SEARCH, null, null);
                 Down.this.f(Down.this.getString(R.string.v23));
                 f2.setVisibility(View.VISIBLE);
                 a3.setVisibility(View.GONE);

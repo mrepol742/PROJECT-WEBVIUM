@@ -28,6 +28,7 @@ import android.preference.PreferenceManager;
 
 import com.mrepol742.webvium.app.Sqlite;
 
+@Deprecated
 public class SearchHelper {
 
     private static SearchHelper d2;
@@ -35,12 +36,14 @@ public class SearchHelper {
     private final SharedPreferences sp;
     private final SQLiteDatabase sld;
 
+    @Deprecated
     public SearchHelper(Context ct) {
         SearchDatabase d7 = new SearchDatabase(ct);
         sp = PreferenceManager.getDefaultSharedPreferences(ct);
         sld = d7.getWritableDatabase();
     }
 
+    @Deprecated
     public static SearchHelper getInstance(Context ctx) {
         if (d2 == null) {
             d2 = new SearchHelper(ctx);
@@ -48,16 +51,19 @@ public class SearchHelper {
         return d2;
     }
 
+    @Deprecated
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
+    @Deprecated
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_SEARCH, null, null);
         }
     }
 
+    @Deprecated
     public void b(final String a) {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_SEARCH,
@@ -66,6 +72,7 @@ public class SearchHelper {
         }
     }
 
+    @Deprecated
     public void c(final String a) {
         if (!sp.getBoolean("pSearch", false) && !temp.equals(a)) {
             if (sld != null && sld.isOpen()) {
@@ -77,6 +84,7 @@ public class SearchHelper {
         }
     }
 
+    @Deprecated
     public void f(final String oldData, final String newData) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();

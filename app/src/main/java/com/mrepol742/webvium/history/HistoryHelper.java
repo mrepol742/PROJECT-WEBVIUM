@@ -30,18 +30,21 @@ import android.webkit.URLUtil;
 
 import com.mrepol742.webvium.app.Sqlite;
 
+@Deprecated
 public class HistoryHelper {
 
     private static HistoryHelper d1;
     private final SharedPreferences sp;
     private final SQLiteDatabase sld;
 
+    @Deprecated
     private HistoryHelper(Context ct) {
         sp = PreferenceManager.getDefaultSharedPreferences(ct);
         HistoryDatabase d5 = new HistoryDatabase(ct);
         sld = d5.getWritableDatabase();
     }
 
+    @Deprecated
     public static HistoryHelper getInstance(Context ctx) {
         if (d1 == null) {
             d1 = new HistoryHelper(ctx);
@@ -49,16 +52,19 @@ public class HistoryHelper {
         return d1;
     }
 
+    @Deprecated
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
+    @Deprecated
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_HISTORY, null, null);
         }
     }
 
+    @Deprecated
     public void b(final String a, final String b, final long s) {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_HISTORY,
@@ -71,6 +77,7 @@ public class HistoryHelper {
         }
     }
 
+    @Deprecated
     public void c(String a, String b, long c) {
         if (!sp.getBoolean("pHistory", false)) {
             if (sld != null && sld.isOpen()) {
@@ -96,6 +103,7 @@ public class HistoryHelper {
         return sg;
     }
 
+    @Deprecated
     public void i(String oldTitle, String oldURl, long oldTIme, String newTitle, String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();

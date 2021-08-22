@@ -24,16 +24,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.mrepol742.webvium.app.Sqlite;
 
+@Deprecated
 public class BookmarkHelper {
 
     private static BookmarkHelper d3;
     private final SQLiteDatabase sld;
 
+    @Deprecated
     private BookmarkHelper(Context ct) {
         BookmarkDatabase d8 = new BookmarkDatabase(ct);
         sld = d8.getWritableDatabase();
     }
 
+    @Deprecated
     public static BookmarkHelper getInstance(Context ctx) {
         if (d3 == null) {
             d3 = new BookmarkHelper(ctx);
@@ -41,6 +44,7 @@ public class BookmarkHelper {
         return d3;
     }
 
+    @Deprecated
     public void b(final String a, final String b) {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_BOOKMARK,
@@ -51,16 +55,19 @@ public class BookmarkHelper {
         }
     }
 
+    @Deprecated
     public SQLiteDatabase getReadableDatabase() {
         return sld;
     }
 
+    @Deprecated
     public void delete() {
         if (sld != null && sld.isOpen()) {
             sld.delete(Sqlite.TABLE_BOOKMARK, null, null);
         }
     }
 
+    @Deprecated
     public void c(final String a, final String b) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();
@@ -70,6 +77,7 @@ public class BookmarkHelper {
         }
     }
 
+    @Deprecated
     public void f(final String oldTitle, final String oldURl, final String newTitle, final String newUrl) {
         if (sld != null && sld.isOpen()) {
             ContentValues values = new ContentValues();

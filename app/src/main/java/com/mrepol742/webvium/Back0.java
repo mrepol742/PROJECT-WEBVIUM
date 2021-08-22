@@ -48,6 +48,7 @@ import java.net.URLDecoder;
 
 public class Back0 extends BaseActivity {
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -134,7 +135,7 @@ public class Back0 extends BaseActivity {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 try {
-                    SearchHelper d1 = SearchHelper.getInstance(Back0.this.getApplicationContext());
+
                     // TODO: import search db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {
@@ -166,7 +167,7 @@ public class Back0 extends BaseActivity {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 try {
-                    DownloadHelper d1 = DownloadHelper.getInstance(Back0.this.getApplicationContext());
+
                     // TODO: import download db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {
@@ -202,7 +203,7 @@ public class Back0 extends BaseActivity {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 try {
-                BookmarkHelper d1 = BookmarkHelper.getInstance(Back0.this.getApplicationContext());
+
                     // TODO: import bookmark db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {
@@ -234,7 +235,7 @@ public class Back0 extends BaseActivity {
             @Override
             public void onClick(DialogInterface a12, int intetg) {
                 try {
-                    HistoryHelper d1 = HistoryHelper.getInstance(Back0.this.getApplicationContext());
+
                     // TODO: import history db
                     Back0.this.g(Back0.this.getString(R.string.b27));
                 } catch (Exception en) {

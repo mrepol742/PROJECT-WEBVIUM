@@ -19,6 +19,7 @@ package com.mrepol742.webvium;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -76,7 +77,6 @@ public class Book extends BaseActivity {
     public static final int IP_GEO = 8;
     public static final int ASSETLINKS = 9;
     public static final int SITEMAPS = 10;
-    private BookmarkHelper d3;
     private GridView e;
     private RelativeLayout f6;
     private BookmarkAdapter w15;
@@ -87,6 +87,7 @@ public class Book extends BaseActivity {
     private ImageView iv1;
     private PopupMenu pm;
     private int it;
+    private Sqlite sql;
 
     final MenuItem.OnMenuItemClickListener d = new MenuItem.OnMenuItemClickListener() {
 
@@ -218,8 +219,8 @@ public class Book extends BaseActivity {
                 Book.this.finish();
             }
         });
-        d3 = BookmarkHelper.getInstance(getApplicationContext());
-        Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+        sql = Sqlite.getInstance(getApplicationContext());
+        Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_BOOKMARK +
                 " ORDER BY " +
                 "_id" +
@@ -383,7 +384,10 @@ public class Book extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a2, int i) {
-                d3.c(ed.getText().toString(), ed1.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_BOOKMARK, ed.getText().toString());
+                values.put(Sqlite.COL2_BOOKMARK, ed1.getText().toString());
+                sql.getWritableDatabase().insert(Sqlite.TABLE_BOOKMARK, null, values);
                 Book.this.k5(Book.this.getString(R.string.u1));
                 Book.this.k();
                 a2.dismiss();
@@ -414,7 +418,7 @@ public class Book extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                d3.delete();
+                sql.getWritableDatabase().delete(Sqlite.TABLE_BOOKMARK, null, null);
                 Book.this.k5(Book.this.getString(R.string.u3));
                 f6.setClickable(true);
                 e.setVisibility(View.GONE);
@@ -440,7 +444,11 @@ public class Book extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a12, int intetg) {
-                d3.b(b, c5);
+                sql.getWritableDatabase().delete(Sqlite.TABLE_BOOKMARK,
+                        Sqlite.COL1_BOOKMARK +
+                                "=? AND " +
+                                Sqlite.COL2_BOOKMARK +
+                                "=? ", new String[]{b, c5});
                 Book.this.k5(String.format(Book.this.getString(R.string.h5), b));
                 Book.this.k();
             }
@@ -461,7 +469,7 @@ public class Book extends BaseActivity {
 
     private void k() {
         final List<String> itemIdsh = new ArrayList<>();
-        Cursor res = d3.getReadableDatabase().rawQuery("SELECT * FROM " +
+        Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_BOOKMARK +
                 " ORDER BY " +
                 "_id" +
@@ -755,7 +763,14 @@ public class Book extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface a2, int it) {
-                d3.f(oldTitle, oldURl, ed.getText().toString(), ed1.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_BOOKMARK, ed.getText().toString());
+                values.put(Sqlite.COL2_BOOKMARK, ed1.getText().toString());
+                sql.getWritableDatabase().update(Sqlite.TABLE_BOOKMARK, values,
+                        Sqlite.COL1_BOOKMARK +
+                                " LIKE ? AND " +
+                                Sqlite.COL2_BOOKMARK +
+                                " LIKE ?", new String[]{oldTitle, oldURl});
                 Book.this.k();
                 a2.dismiss();
             }

@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -117,6 +118,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
     private ManageSpaceAdapter w19;
     private ImageView iv1;
     private R7 r7;
+    private Sqlite sql;
 
     @Override
     public void onClick(DialogInterface a2, int intetg) {
@@ -154,26 +156,28 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
         for (int i : getStrings()) {
             a.add(getString(i));
         }
+        sql = Sqlite.getInstance(getApplicationContext());
+        final SQLiteDatabase db = sql.getWritableDatabase();
         String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+        Cursor rest1 = db.rawQuery(sb5, null);
         String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+        Cursor res = db.rawQuery(sb55, null);
         String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+        Cursor rest = db.rawQuery(sb12, null);
         String sb12a = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor resta = DownloadHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12a, null);
+        Cursor resta = db.rawQuery(sb12a, null);
         int cont = rest1.getCount();
         if (cont == 0) {
             b.add(getString(R.string.v27));
@@ -269,7 +273,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                                 " ORDER BY " +
                                 "_id" +
                                 " DESC";
-                        Cursor rest1 = BookmarkHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+                        Cursor rest1 = db.rawQuery(sb5, null);
                         if (rest1.getCount() != 0) {
                             AlertDialog.Builder a12 = new AlertDialog.Builder(Mana.this);
                             a12.setCancelable(true);
@@ -279,8 +283,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
 
                                 @Override
                                 public void onClick(DialogInterface a22, int intetg) {
-                                    BookmarkHelper d3 = BookmarkHelper.getInstance(Mana.this.getApplicationContext());
-                                    d3.delete();
+                                    db.delete(Sqlite.TABLE_BOOKMARK, null, null);
                                     a22.dismiss();
                                     Mana.this.a1();
                                 }
@@ -324,7 +327,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                                 " ORDER BY " +
                                 "_id" +
                                 " DESC";
-                        Cursor rest = HistoryHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+                        Cursor rest = db.rawQuery(sb12, null);
                         if (rest.getCount() != 0) {
                             AlertDialog.Builder a121 = new AlertDialog.Builder(Mana.this);
                             a121.setCancelable(true);
@@ -334,8 +337,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
 
                                 @Override
                                 public void onClick(DialogInterface a22, int intetg) {
-                                    HistoryHelper d1 = HistoryHelper.getInstance(Mana.this.getApplicationContext());
-                                    d1.delete();
+                                    db.delete(Sqlite.TABLE_HISTORY, null, null);
                                     if (Webv.bl) {
                                         Webv.bl4 = true;
                                     }
@@ -355,7 +357,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                                 " ORDER BY " +
                                 "_id" +
                                 " DESC";
-                        Cursor res = SearchHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+                        Cursor res = db.rawQuery(sb55, null);
                         if (res.getCount() != 0) {
                             AlertDialog.Builder a13 = new AlertDialog.Builder(Mana.this);
                             a13.setCancelable(true);
@@ -365,8 +367,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
 
                                 @Override
                                 public void onClick(DialogInterface a22, int intetg) {
-                                    SearchHelper d2 = SearchHelper.getInstance(Mana.this.getApplicationContext());
-                                    d2.delete();
+                                    db.delete(Sqlite.TABLE_SEARCH, null, null);
                                     a22.dismiss();
                                     Mana.this.a1();
                                 }
@@ -384,7 +385,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                                 " ORDER BY " +
                                 "_id" +
                                 " DESC";
-                        Cursor res1 = DownloadHelper.getInstance(Mana.this.getApplicationContext()).getReadableDatabase().rawQuery(sb551, null);
+                        Cursor res1 = db.rawQuery(sb551, null);
                         if (res1.getCount() != 0) {
                             AlertDialog.Builder a11 = new AlertDialog.Builder(Mana.this);
                             a11.setCancelable(true);
@@ -394,8 +395,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
 
                                 @Override
                                 public void onClick(DialogInterface a22, int intetg) {
-                                    DownloadHelper d2 = DownloadHelper.getInstance(Mana.this.getApplicationContext());
-                                    d2.delete();
+                                    db.delete(Sqlite.TABLE_DOWNLOAD, null, null);
                                     a22.dismiss();
                                     Mana.this.a1();
                                 }
@@ -672,14 +672,11 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                 Mana.this.getSharedPreferences("wv", 0).edit().clear().apply();
                 Mana.this.a221().edit().clear().apply();
                 Mana.this.getSharedPreferences("a", 0).edit().clear().apply();
-                HistoryHelper d1 = HistoryHelper.getInstance(Mana.this.getApplicationContext());
-                d1.delete();
-                SearchHelper d2 = SearchHelper.getInstance(Mana.this.getApplicationContext());
-                d2.delete();
-                BookmarkHelper d3 = BookmarkHelper.getInstance(Mana.this.getApplicationContext());
-                d3.delete();
-                DownloadHelper d9 = DownloadHelper.getInstance(Mana.this.getApplicationContext());
-                d9.delete();
+                SQLiteDatabase db = sql.getWritableDatabase();
+                db.delete(Sqlite.TABLE_SEARCH, null, null);
+                db.delete(Sqlite.TABLE_HISTORY, null, null);
+                db.delete(Sqlite.TABLE_DOWNLOAD, null, null);
+                db.delete(Sqlite.TABLE_DOWNLOAD, null, null);
                 if (Build.VERSION.SDK_INT < 29) {
                     Mana.this.l(StorageDirectory.getWebviumDir());
                 }
@@ -708,26 +705,27 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
         for (int i5 = 0; i5 < 5; i5++) {
             d.add("");
         }
+        SQLiteDatabase db = sql.getWritableDatabase();
         String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor rest1 = BookmarkHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb5, null);
+        Cursor rest1 = db.rawQuery(sb5, null);
         String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor res = SearchHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb55, null);
+        Cursor res = db.rawQuery(sb55, null);
         String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor rest = HistoryHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb12, null);
+        Cursor rest = db.rawQuery(sb12, null);
         String sb122 = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
                 " ORDER BY " +
                 "_id" +
                 " DESC";
-        Cursor restt = DownloadHelper.getInstance(getApplicationContext()).getReadableDatabase().rawQuery(sb122, null);
+        Cursor restt = db.rawQuery(sb122, null);
         int cont = rest1.getCount();
         if (cont == 0) {
             b.add(getString(R.string.v27));
