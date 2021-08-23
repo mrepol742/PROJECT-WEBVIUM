@@ -119,12 +119,12 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mrepol742.webvium.app.Clipboard;
-import com.mrepol742.webvium.app.GeolocationDataModel;
+import com.mrepol742.webvium.app.Geolocation;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.Package;
-import com.mrepol742.webvium.app.PendingDownloadDataModel;
-import com.mrepol742.webvium.app.Permission;
+import com.mrepol742.webvium.app.PendingDownload;
+import com.mrepol742.webvium.app.Permissions;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.SoftKeyboard;
 import com.mrepol742.webvium.app.Sqlite;
@@ -134,15 +134,11 @@ import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
-import com.mrepol742.webvium.download.DownloadHelper;
-import com.mrepol742.webvium.history.HistoryDataModel;
-import com.mrepol742.webvium.history.HistoryHelper;
+import com.mrepol742.webvium.app.History;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.net.Stream;
-import com.mrepol742.webvium.permission.PermissionDataModel;
-import com.mrepol742.webvium.search.SearchHelper;
+import com.mrepol742.webvium.app.PendingPermissionRequest;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.security.Caesar;
 import com.mrepol742.webvium.security.SHA;
@@ -154,7 +150,6 @@ import com.mrepol742.webvium.util.BitmapCache;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.util.Html;
-import com.mrepol742.webvium.util.IdentityGenerator;
 import com.mrepol742.webvium.util.PassGen;
 import com.mrepol742.webvium.util.PasswordTransformationMethod;
 import com.mrepol742.webvium.util.TextWatcher;
@@ -352,8 +347,8 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
     public Timer cdt;
     public ImageView tv, tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
     private CookieManager cm1;
-    private GeolocationDataModel w6;
-    private PermissionDataModel w8;
+    private Geolocation w6;
+    private PendingPermissionRequest w8;
     private R36 br2;
     private R8 r8;
     private ca149 br4;
@@ -365,7 +360,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
     private LinearLayout llt;
     private ActionBar ab;
     private WebViewDatabase wd;
-    private PendingDownloadDataModel pend;
+    private PendingDownload pend;
     private ForegroundColorSpan A, E, S, I, B;
     private R7 r7;
     private FrameLayout fl;
@@ -382,7 +377,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
     public static boolean bl4 = false;
     private String des;
     private boolean iFP = false;
-    private final List<HistoryDataModel> penHis = new ArrayList<>();
+    private final List<History> penHis = new ArrayList<>();
     private Sqlite sql;
 
     final MenuItem.OnMenuItemClickListener mio = new MenuItem.OnMenuItemClickListener() {
@@ -546,7 +541,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     Webv.this.c58(sg, null);
                     return true;
                 case 12:
-                    if (Permission.check(Webv.this, Permission.STORAGE, 4)) {
+                    if (Permissions.check(Webv.this, Permissions.STORAGE, 4)) {
                         Webv.this.c55(sg, null);
                     }
                     return true;
@@ -604,7 +599,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     Webv.this.c16(sg, 0);
                     return true;
                 case POPUPMENU_IMAGE_SAVE_IMAGE:
-                    Webv.this.c74(new PendingDownloadDataModel(sg, sg, sg, 0L, sg));
+                    Webv.this.c74(new PendingDownload(sg, sg, sg, 0L, sg));
                     return true;
             }
             return false;
@@ -1350,13 +1345,13 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             @Override
             public void onDownloadStart(String str, String str2, String str3, String str4, long j) {
-                PendingDownloadDataModel w18 = new PendingDownloadDataModel(str, str3, str4, j, str2);
+                PendingDownload w18 = new PendingDownload(str, str3, str4, j, str2);
                 try {
                     WifiManager b = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                     if (!a221().getBoolean("autoD", false)) {
                         if (a221().getBoolean("wifi", false)) {
                             if (b.isWifiEnabled()) {
-                                if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                                if (Permissions.check(Webv.this, Permissions.STORAGE, 1)) {
                                     c11(w18);
                                 } else {
                                     pend = w18;
@@ -1365,7 +1360,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                                 c7(getString(R.string.v12));
                             }
                         } else {
-                            if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                            if (Permissions.check(Webv.this, Permissions.STORAGE, 1)) {
                                 c11(w18);
                             } else {
                                 pend = w18;
@@ -1374,7 +1369,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     } else {
                         if (a221().getBoolean("wifi", false)) {
                             if (b.isWifiEnabled()) {
-                                if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                                if (Permissions.check(Webv.this, Permissions.STORAGE, 1)) {
                                     c182(w18, URLUtil.guessFileName(w18.a1, w18.a2, w18.a3));
                                 } else {
                                     pend = w18;
@@ -1383,7 +1378,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                                 c7(getString(R.string.v12));
                             }
                         } else {
-                            if (Permission.check(Webv.this, Permission.STORAGE, 1)) {
+                            if (Permissions.check(Webv.this, Permissions.STORAGE, 1)) {
                                 c182(w18, URLUtil.guessFileName(w18.a1, w18.a2, w18.a3));
                             } else {
                                 pend = w18;
@@ -1723,11 +1718,11 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
                     @Override
                     public void onClick(DialogInterface a1, int i) {
-                        if (Permission.check(Webv.this, Permission.LOCATION, 5)) {
+                        if (Permissions.check(Webv.this, Permissions.LOCATION, 5)) {
                             b.invoke(a, true, c);
                             c8(String.format(getString(R.string.v15), a));
                         } else {
-                            w6 = new GeolocationDataModel(a, b);
+                            w6 = new Geolocation(a, b);
                         }
                         a1.dismiss();
                     }
@@ -1763,22 +1758,22 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     @Override
                     public void onClick(DialogInterface a1, int i) {
                         if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE) && Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
-                            if (!Permission.check(Webv.this, Permission.CAMERA, 9) && !Permission.check(Webv.this, Permission.MICROPHONE, 10)) {
-                                w8 = new PermissionDataModel(pr);
+                            if (!Permissions.check(Webv.this, Permissions.CAMERA, 9) && !Permissions.check(Webv.this, Permissions.MICROPHONE, 10)) {
+                                w8 = new PendingPermissionRequest(pr);
                             } else {
                                 pr.grant(pr.getResources());
                                 Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
                             }
                         } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_VIDEO_CAPTURE)) {
-                            if (!Permission.check(Webv.this, Permission.CAMERA, 6)) {
-                                w8 = new PermissionDataModel(pr);
+                            if (!Permissions.check(Webv.this, Permissions.CAMERA, 6)) {
+                                w8 = new PendingPermissionRequest(pr);
                             } else {
                                 pr.grant(pr.getResources());
                                 Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
                             }
                         } else if (Arrays.toString(pr.getResources()).contains(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) {
-                            if (!Permission.check(Webv.this, Permission.MICROPHONE, 7)) {
-                                w8 = new PermissionDataModel(pr);
+                            if (!Permissions.check(Webv.this, Permissions.MICROPHONE, 7)) {
+                                w8 = new PendingPermissionRequest(pr);
                             } else {
                                 pr.grant(pr.getResources());
                                 Webv.this.c8(String.format(Webv.this.getString(R.string.i40), pr.getOrigin(), Arrays.toString(pr.getResources())));
@@ -1837,7 +1832,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                     registerReceiver(r8, ift);
                     err = bn;
                     if (Build.VERSION.SDK_INT >= 23 && c.startsWith("file://")) {
-                        Permission.check(Webv.this, Permission.STORAGE, 2);
+                        Permissions.check(Webv.this, Permissions.STORAGE, 2);
                     }
                     String sg = String.format(getString(R.string.v20), c, b, d);
                     cm0.append(sg);
@@ -2240,7 +2235,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
             @Override
             public void doUpdateVisitedHistory(WebView a, String b, boolean c) {
                 if (!c && (b.startsWith("http://") || b.startsWith("https://") || b.startsWith("file://") || b.startsWith("content://") || IPAddress.isValidIpAddress(b))) {
-                    penHis.add(new HistoryDataModel(a.getTitle(), b, System.currentTimeMillis()));
+                    penHis.add(new History(a.getTitle(), b, System.currentTimeMillis()));
                     SharedPreferences c56 = getSharedPreferences("wv", 0);
                     SharedPreferences.Editor d56 = c56.edit();
                     d56.putString("MyURL", b);
@@ -2538,7 +2533,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
         }
     }
 
-    private void c11(final PendingDownloadDataModel w18) {
+    private void c11(final PendingDownload w18) {
         try {
             final String b = URLUtil.guessFileName(w18.a1, w18.a2, w18.a3);
             AlertDialog.Builder c = new AlertDialog.Builder(this);
@@ -4042,14 +4037,14 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         a.create().show();
     }
 
-    private void c74(PendingDownloadDataModel w18) {
+    private void c74(PendingDownload w18) {
         try {
             WifiManager b = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (!a221().getBoolean("autoD", false)) {
                 if (URLUtil.isValidUrl(w18.a1)) {
                     if (a221().getBoolean("wifi", false)) {
                         if (b.isWifiEnabled()) {
-                            if (Permission.check(this, Permission.STORAGE, 1)) {
+                            if (Permissions.check(this, Permissions.STORAGE, 1)) {
                                 c11(w18);
                             } else {
                                 pend = w18;
@@ -4058,7 +4053,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                             c7(getString(R.string.v12));
                         }
                     } else {
-                        if (Permission.check(this, Permission.STORAGE, 1)) {
+                        if (Permissions.check(this, Permissions.STORAGE, 1)) {
                             c11(w18);
                         } else {
                             pend = w18;
@@ -4068,7 +4063,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                     c111(w18.a1);
                 }
             } else {
-                if (Permission.check(this, Permission.STORAGE, 1)) {
+                if (Permissions.check(this, Permissions.STORAGE, 1)) {
                     c182(w18, URLUtil.guessFileName(w18.a1, w18.a2, w18.a3));
                 } else {
                     pend = w18;
@@ -4563,38 +4558,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             }
         });
         final AlertDialog g = a.create();
-        g.show();
-    }
-
-    public void c123() {
-        AlertDialog.Builder a = new AlertDialog.Builder(this);
-        LayoutInflater b = getLayoutInflater();
-        View c = b.inflate(R.layout.b17, null);
-        a.setCancelable(true);
-        a.setTitle(getString(R.string.z17));
-        a.setView(c);
-        final TextView ti = c.findViewById(R.id.k13);
-        Button bn = c.findViewById(R.id.k14);
-        int e = Resources.getColor(this, R.color.c);
-        int f = Resources.getColor(this, R.color.b);
-        if (!a221().getBoolean("autoUpdate", false)) {
-            ti.setTextColor(e);
-            bn.setTextColor(e);
-        } else {
-            ti.setTextColor(f);
-            bn.setTextColor(f);
-        }
-        Html.a(ti, IdentityGenerator.a(getResources().getQuantityString(R.plurals.m23, 23)));
-        bn.setText(getString(R.string.e28));
-        bn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Html.a(ti, IdentityGenerator.a(Webv.this.getResources().getQuantityString(R.plurals.m23, 23)));
-            }
-        });
-        final AlertDialog g = a.create();
-        Objects.requireNonNull(g.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         g.show();
     }
 
@@ -5451,7 +5414,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         g.show();
     }
 
-    private void c182(PendingDownloadDataModel w18, String b) {
+    private void c182(PendingDownload w18, String b) {
         if (a221().getBoolean("launch", false)) {
             Intents.a(this, Down.class);
         }
@@ -5467,7 +5430,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         f.setMimeType(w18.a3);
         if (Build.VERSION.SDK_INT >= 30) {
             f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b);
-        } else if (Build.VERSION.SDK_INT >= 23 && Permission.checkOnly(Webv.this, Permission.STORAGE)) {
+        } else if (Build.VERSION.SDK_INT >= 23 && Permissions.checkOnly(Webv.this, Permissions.STORAGE)) {
             f.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, b);
         } else {
             f.setDestinationInExternalPublicDir(Package.c() + "/Download", b);
@@ -5558,7 +5521,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
     private void c184() {
         if (!a221().getBoolean("pHistory", false)) {
             if (penHis.size() != 0) {
-                for (HistoryDataModel hdm : penHis) {
+                for (History hdm : penHis) {
                     SQLiteDatabase sld = sql.getWritableDatabase();
                     if (sld != null && sld.isOpen()) {
                         ContentValues values = new ContentValues();
@@ -5812,7 +5775,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         sm.add(0, 16, 0, getString(R.string.h35));
         sm.add(0, 17, 0, getString(R.string.y14));
         sm.add(0, 19, 0, getString(R.string.z16));
-        sm.add(0, 20, 0, getString(R.string.z17));
         return super.onCreateOptionsMenu(a);
     }
 
@@ -5884,9 +5846,6 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             case 16:
                 c159();
                 return true;
-            case 20:
-                c123();
-                return true;
             case 22:
                 c100(currentTab());
                 return true;
@@ -5957,7 +5916,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 }
                 return true;
             case 21:
-                if (Permission.check(this, Permission.STORAGE, 4)) {
+                if (Permissions.check(this, Permissions.STORAGE, 4)) {
                     c55(currentUrl(), currentTitle());
                 }
                 return true;
@@ -6034,7 +5993,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 startActivityForResult(Intent.createChooser(d12, getString(R.string.a26)), 3);
                 return true;
             case 14:
-                if (Permission.check(this, Permission.STORAGE, 3)) {
+                if (Permissions.check(this, Permissions.STORAGE, 3)) {
                     SoftKeyboard.hide(this, back23);
                     if (Objects.requireNonNull(a221().getString("SVCTb", "1a2")).equals("1a2")) {
                         c68(back23);

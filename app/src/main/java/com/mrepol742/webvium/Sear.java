@@ -21,8 +21,10 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,6 +32,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -38,11 +41,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -51,6 +56,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
@@ -58,12 +64,8 @@ import com.mrepol742.webvium.app.SoftKeyboard;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.StorageDirectory;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
-import com.mrepol742.webvium.download.DownloadHelper;
-import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.search.SearchAdapter;
-import com.mrepol742.webvium.search.SearchDataModel;
-import com.mrepol742.webvium.search.SearchHelper;
+import com.mrepol742.webvium.app.main.MainBaseAdapter;
+import com.mrepol742.webvium.app.Search;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
@@ -83,8 +85,8 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
     private EditText p;
     private ListView d;
     private RelativeLayout b19;
-    private SearchAdapter aa;
-    private final List<SearchDataModel> ls = new ArrayList<>();
+    private Adapter aa;
+    private final List<Search> ls = new ArrayList<>();
     private ImageView iv1;
     private PopupMenu pm;
     private Sqlite sql;
@@ -206,7 +208,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             d.setVisibility(View.GONE);
         } else {
             while (res.moveToNext()) {
-                ls.add(new SearchDataModel(res.getString(1), SEARCH));
+                ls.add(new Search(res.getString(1), SEARCH));
             }
         }
         res.close();
@@ -220,9 +222,9 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
                 boolean bn = !a221().getBoolean("showLKS", false);
                 while (rest.moveToNext()) {
                     if (bn) {
-                        ls.add(new SearchDataModel(rest.getString(1), HISTORY));
+                        ls.add(new Search(rest.getString(1), HISTORY));
                     }
-                    ls.add(new SearchDataModel(rest.getString(2), HISTORY));
+                    ls.add(new Search(rest.getString(2), HISTORY));
                 }
             }
             rest.close();
@@ -237,9 +239,9 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
                 boolean bn = !a221().getBoolean("showLKS", false);
                 while (rest1.moveToNext()) {
                     if (bn) {
-                        ls.add(new SearchDataModel(rest1.getString(1), BOOKMARK));
+                        ls.add(new Search(rest1.getString(1), BOOKMARK));
                     }
-                    ls.add(new SearchDataModel(rest1.getString(2), BOOKMARK));
+                    ls.add(new Search(rest1.getString(2), BOOKMARK));
                 }
             }
             rest1.close();
@@ -254,14 +256,14 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
                 boolean bn12 = !a221().getBoolean("showLKS", false);
                 while (rest2.moveToNext()) {
                     if (bn12) {
-                        ls.add(new SearchDataModel(rest2.getString(1), DOWNLOAD));
+                        ls.add(new Search(rest2.getString(1), DOWNLOAD));
                     }
-                    ls.add(new SearchDataModel(rest2.getString(2), DOWNLOAD));
+                    ls.add(new Search(rest2.getString(2), DOWNLOAD));
                 }
             }
             rest2.close();
         }
-        aa = new SearchAdapter(this, ls);
+        aa = new Adapter(this, ls);
         // TODO:failed
         /*if (Objects.equals(a221().getString("arrange", ""), "1z")) {
             Collections.sort(ls);
@@ -469,7 +471,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
 
     // TODO: needs update
     private void k() {
-        List<SearchDataModel> itemIdsh = new ArrayList<>();
+        List<Search> itemIdsh = new ArrayList<>();
         Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
@@ -479,7 +481,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             d.setVisibility(View.GONE);
         } else {
             while (res.moveToNext()) {
-                itemIdsh.add(new SearchDataModel(res.getString(1), SEARCH));
+                itemIdsh.add(new Search(res.getString(1), SEARCH));
             }
             if (itemIdsh.size() == 0) {
                 d.setVisibility(View.GONE);
@@ -755,6 +757,150 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
         if (Objects.equals(a221().getString("hide", ""), "30d")) {
             if (hasFocus) {
                 l();
+            }
+        }
+    }
+
+    public static class Adapter extends MainBaseAdapter {
+        private final Context a;
+        private final List<Search> c;
+        private List<Search> b;
+
+        public Adapter(Context ct, List<Search> a1) {
+            super(ct);
+            a = ct;
+            b = a1;
+            c = a1;
+        }
+
+        public void a(List<Search> a1) {
+            b.clear();
+            c.clear();
+            b.addAll(a1);
+            c.addAll(a1);
+        }
+
+        public Search c(int i) {
+            return (Search) getItem(i);
+        }
+
+        private int d(int it) {
+            switch (it) {
+                case HISTORY:
+                    return R.drawable.a11;
+                default:
+                case SEARCH:
+                    return R.drawable.a6;
+                case BOOKMARK:
+    return R.drawable.b2;
+                case DOWNLOAD:
+    return R.drawable.a19;
+            }
+        }
+
+        private int e(int it) {
+            switch (it) {
+                case HISTORY:
+                    return R.string.z95;
+                default:
+                case SEARCH:
+                    return R.string.z94;
+                case BOOKMARK:
+                    return R.string.z97;
+                case DOWNLOAD:
+                    return R.string.z96;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return b.size();
+        }
+
+        @Override
+        public Object getItem(int it) {
+            return b.get(it);
+        }
+
+        @Override
+        public long getItemId(int it) {
+            return it;
+        }
+
+        public Filter getFilter() {
+            return new Filter() {
+
+                @Override
+                @SuppressWarnings("unchecked")
+                protected void publishResults(CharSequence constraint, FilterResults results) {
+                    b = (ArrayList<Search>) results.values;
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                protected FilterResults performFiltering(CharSequence cs) {
+                    FilterResults fr = new FilterResults();
+                    if (cs == null) {
+                        List<Search> ls55 = new ArrayList<>(b);
+                        fr.count = ls55.size();
+                        fr.values = ls55;
+                    } else {
+                        List<Search> ls = new ArrayList<>();
+                        if (c.size() != 0) {
+                            for (Search f : c) {
+                                if (f.data.toLowerCase().contains(cs.toString().toLowerCase())) {
+                                    ls.add(new Search(f.data, f.id));
+                                }
+                            }
+                        }
+                        fr.count = ls.size();
+                        fr.values = ls;
+                    }
+                    return fr;
+                }
+            };
+        }
+
+        @Override
+        public View getView(int it, View vw, ViewGroup vg) {
+            try {
+                Layout w18;
+                if (vw == null) {
+                    LayoutInflater li = (LayoutInflater) a.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    vw = li.inflate(R.layout.b6, vg, false);
+                    w18 = new Layout();
+                    w18.a = vw.findViewById(R.id.d16);
+                    w18.b = vw.findViewById(R.id.o52);
+                    w18.c = vw.findViewById(R.id.o53);
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
+                    if (!sp.getBoolean("autoUpdate", false)) {
+                        w18.a.setTextColor(Resources.getColor(a, R.color.c));
+                    } else {
+                        w18.a.setTextColor(Resources.getColor(a, R.color.b));
+                    }
+                    w18.a.setTypeface(type(Typeface.NORMAL));
+                    w18.a.setBackgroundResource(R.drawable.f3);
+                    w18.c.setImageResource(R.drawable.a5);
+                    vw.setTag(w18);
+                } else {
+                    w18 = (Layout) vw.getTag();
+                }
+                w18.a.setText(scheme(c(it).data));
+                w18.b.setImageResource(d(c(it).id));
+                w18.b.setContentDescription(a.getString(e(c(it).id)));
+            } catch (IndexOutOfBoundsException ignored) {
+
+            }
+            return vw;
+        }
+
+        private static class Layout {
+            ImageView b;
+            TextView a;
+            ImageView c;
+
+            @Keep
+            private Layout() {
             }
         }
     }

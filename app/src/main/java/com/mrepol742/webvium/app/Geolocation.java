@@ -15,20 +15,16 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.manage.space;
+package com.mrepol742.webvium.app;
 
-import java.util.ArrayList;
+import android.webkit.GeolocationPermissions;
 
-public class ManageSpaceDataModel {
-    public final ArrayList<String> a1;
-    public final ArrayList<String> a2;
-    public final ArrayList<Integer> a3;
-    public final ArrayList<String> a4;
+public class Geolocation {
+    public final String a;
+    public final GeolocationPermissions.Callback b;
 
-    public ManageSpaceDataModel(ArrayList<String> a1, ArrayList<String> a2, ArrayList<Integer> a3, ArrayList<String> a4) {
-        this.a1 = a1;
-        this.a2 = a2;
-        this.a3 = a3;
-        this.a4 = a4;
+    public Geolocation(String a, GeolocationPermissions.Callback b) {
+        this.a = a;
+        this.b = b;
     }
 }

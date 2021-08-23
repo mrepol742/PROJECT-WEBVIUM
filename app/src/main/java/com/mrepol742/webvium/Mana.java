@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,32 +35,32 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.format.Formatter;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.ActivityState;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.download.DownloadHelper;
-import com.mrepol742.webvium.history.HistoryHelper;
+import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.manage.space.ManageSpaceAdapter;
-import com.mrepol742.webvium.manage.space.ManageSpaceDataModel;
-import com.mrepol742.webvium.app.Permission;
-import com.mrepol742.webvium.search.SearchHelper;
+import com.mrepol742.webvium.app.ManageSpace;
+import com.mrepol742.webvium.app.Permissions;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.Animation;
@@ -115,7 +116,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
     private final ArrayList<Integer> c = new ArrayList<>();
     private final ArrayList<String> d = new ArrayList<>();
     private final IntentFilter ee = new IntentFilter();
-    private ManageSpaceAdapter w19;
+    private Adapter w19;
     private ImageView iv1;
     private R7 r7;
     private Sqlite sql;
@@ -130,7 +131,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 345) {
             if (resultCode == Activity.RESULT_OK) {
-                Permission.check(this, Permission.STORAGE, 1);
+                Permissions.check(this, Permissions.STORAGE, 1);
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 finishAndRemoveTask();
             }
@@ -145,7 +146,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
             Intent it12 = new Intent(this, Lock.class);
             startActivityForResult(it12, 345);
         } else {
-            Permission.check(this, Permission.STORAGE, 1);
+            Permissions.check(this, Permissions.STORAGE, 1);
         }
          for (int i5 : getDrawables()) {
             c.add(i5);
@@ -209,7 +210,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
         rest.close();
         resta.close();
         if (Build.VERSION.SDK_INT < 29) {
-            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
+            boolean bn = Permissions.checkOnly(this, Permissions.STORAGE);
             if (bn) {
                 int lg = a7(Package.c() + "/Screenshot/");
                 int lg1 = a7(Package.c() + "/Downloads/");
@@ -261,7 +262,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
             }
         });
         g5.setElevation(5);
-        w19 = new ManageSpaceAdapter(this, new ManageSpaceDataModel(a, b, c, d));
+        w19 = new Adapter(this, new ManageSpace(a, b, c, d));
         a3.setAdapter(w19);
         a3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -429,7 +430,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                         a14.create().show();
                         break;
                     case 6:
-                        if (Permission.check(Mana.this, Permission.STORAGE, 3)) {
+                        if (Permissions.check(Mana.this, Permissions.STORAGE, 3)) {
                             java.io.File fe = new java.io.File(StorageDirectory.getWebviumDir() + "/Screenshot");
                             int i = 0;
                             if (fe.exists() && fe.isDirectory()) {
@@ -443,7 +444,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                         }
                         break;
                     case 7:
-                        if (Permission.check(Mana.this, Permission.STORAGE, 4)) {
+                        if (Permissions.check(Mana.this, Permissions.STORAGE, 4)) {
                             java.io.File fe = new java.io.File(StorageDirectory.getDownloadDir());
                             int i = 0;
                             if (fe.exists() && fe.isDirectory()) {
@@ -468,7 +469,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
 
             @Override
             public void onClick(View view) {
-                if (Permission.check(Mana.this, Permission.STORAGE, 5)) {
+                if (Permissions.check(Mana.this, Permissions.STORAGE, 5)) {
                     y();
                 }
             }
@@ -757,7 +758,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
         rest.close();
         restt.close();
         if (Build.VERSION.SDK_INT < 29) {
-            boolean bn = Permission.checkOnly(this, Permission.STORAGE);
+            boolean bn = Permissions.checkOnly(this, Permissions.STORAGE);
             if (bn) {
                 int lg = a7(Package.c() + "/Screenshot/");
                 int lg1 = a7(Package.c() + "/Downloads/");
@@ -780,7 +781,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                 b.add("Storage permission is required");
             }
         }
-        w19.a(new ManageSpaceDataModel(a, b, c, d));
+        w19.a(new ManageSpace(a, b, c, d));
         w19.notifyDataSetChanged();
     }
 
@@ -854,5 +855,97 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                 }
             }
         }
+    }
+
+    public static class Adapter extends MainBaseAdapter {
+        private final Context a;
+        private final ManageSpace w;
+
+        public Adapter(Context ct, ManageSpace w) {
+            super(ct);
+            this.w = w;
+            a = ct;
+        }
+
+        public void a(ManageSpace w) {
+            this.w.a1.clear();
+            this.w.a2.clear();
+            this.w.a3.clear();
+            this.w.a4.clear();
+            this.w.a1.addAll(w.a1);
+            this.w.a2.addAll(w.a2);
+            this.w.a3.addAll(w.a3);
+            this.w.a4.addAll(w.a4);
+        }
+
+        @Override
+        public int getCount() {
+            return w.a1.size();
+        }
+
+        @Override
+        public Object getItem(int it) {
+            return it;
+        }
+
+        @Override
+        public long getItemId(int it) {
+            return it;
+        }
+
+        @Override
+        public View getView(int it, View e, ViewGroup vg) {
+            try {
+                Layout w20;
+                if (e == null) {
+                    LayoutInflater li = (LayoutInflater) a.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    e = li.inflate(R.layout.a11, vg, false);
+                    w20 = new Layout();
+                    w20.a = e.findViewById(R.id.g7);
+                    w20.b = e.findViewById(R.id.g8);
+                    w20.c = e.findViewById(R.id.a12);
+                    w20.d = e.findViewById(R.id.a13);
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
+                    if (!sp.getBoolean("autoUpdate", false)) {
+                        w20.a.setTextColor(Resources.getColor(a, R.color.c));
+                        w20.b.setTextColor(Resources.getColor(a, R.color.c));
+                        w20.d.setTextColor(Resources.getColor(a, R.color.c));
+                        w20.c.setBackgroundResource(R.drawable.v);
+                    } else {
+                        w20.a.setTextColor(Resources.getColor(a, R.color.b));
+                        w20.b.setTextColor(Resources.getColor(a, R.color.b));
+                        w20.d.setTextColor(Resources.getColor(a, R.color.b));
+                        w20.c.setBackgroundResource(R.drawable.y);
+                    }
+
+
+                    w20.a.setTypeface(type(Typeface.BOLD));
+                    w20.b.setTypeface(type(Typeface.NORMAL));
+                    w20.d.setTypeface(type(Typeface.NORMAL));
+                    e.setTag(w20);
+                } else {
+                    w20 = (Layout) e.getTag();
+                }
+                w20.a.setText(w.a1.get(it));
+                w20.b.setText(w.a2.get(it));
+                w20.c.setImageResource(w.a3.get(it));
+                w20.d.setText(w.a4.get(it));
+            } catch (IndexOutOfBoundsException ignored) {
+
+            }
+            return e;
+        }
+
+        private static class Layout {
+            TextView a;
+            TextView b;
+            ImageView c;
+            TextView d;
+
+            @Keep
+            private Layout() {
+            }
+        }
+
     }
 }

@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain changedTo copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.search;
+package com.mrepol742.webvium.app;
 
-public class SearchDataModel {
-    public final String data;
-    public final int id;
+public class ForwardBackwardHistory {
+    public final String sg;
+    public final String sg0;
 
-    public SearchDataModel(String data, int id) {
-        this.data = data;
-        this.id = id;
+    public ForwardBackwardHistory(String sg, String sg0) {
+        this.sg = sg;
+        this.sg0 = sg0;
     }
 }

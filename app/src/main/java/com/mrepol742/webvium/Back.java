@@ -35,7 +35,7 @@ import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.app.Permission;
+import com.mrepol742.webvium.app.Permissions;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -129,7 +129,7 @@ public class Back extends Service {
     }
 
     private String dt() throws PackageManager.NameNotFoundException {
-        if (!Permission.checkOnly(this, Permission.STORAGE)) {
+        if (!Permissions.checkOnly(this, Permissions.STORAGE)) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             MainNotification.b(this, getString(R.string.n22), getString(R.string.z42));
             android.app.Notification.Builder m = Notifications.a(this, getString(R.string.n22));

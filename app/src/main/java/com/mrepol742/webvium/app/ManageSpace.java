@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain changedTo copy of the License at
+ * You may obtain a copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -15,18 +15,20 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.download;
+package com.mrepol742.webvium.app;
 
-public class DownloadDataModel {
-    public final String a;
-    public final String b;
-    public final long c;
-    public final long d;
+import java.util.ArrayList;
 
-    public DownloadDataModel(String a, String b, long c, long d) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+public class ManageSpace {
+    public final ArrayList<String> a1;
+    public final ArrayList<String> a2;
+    public final ArrayList<Integer> a3;
+    public final ArrayList<String> a4;
+
+    public ManageSpace(ArrayList<String> a1, ArrayList<String> a2, ArrayList<Integer> a3, ArrayList<String> a4) {
+        this.a1 = a1;
+        this.a2 = a2;
+        this.a3 = a3;
+        this.a4 = a4;
     }
 }

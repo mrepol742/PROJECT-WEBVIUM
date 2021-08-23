@@ -34,7 +34,7 @@ import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.util.FileUtil;
 import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.app.Permission;
+import com.mrepol742.webvium.app.Permissions;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.AwesomeToast;
 
@@ -52,7 +52,7 @@ public class ToolFragment extends BasePreferenceFragment {
 
                 @Override
                 public boolean onPreferenceClick(Preference a) {
-                    if (Permission.check(getActivity(), Permission.STORAGE, 2)) {
+                    if (Permissions.check(getActivity(), Permissions.STORAGE, 2)) {
                         f();
                     }
                     return true;

@@ -41,7 +41,7 @@ import android.widget.TextView;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.app.Permission;
+import com.mrepol742.webvium.app.Permissions;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.AwesomeToast;
 
@@ -228,7 +228,7 @@ public class Voic extends BaseActivity {
 
             @Override
             public void onClick(View view) {
-                if (Permission.check(Voic.this, Permission.MICROPHONE, 1)) {
+                if (Permissions.check(Voic.this, Permissions.MICROPHONE, 1)) {
                     if (Voic.this.spr()) {
                         Voic.this.b();
                     }

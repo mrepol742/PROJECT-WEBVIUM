@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebViews extends MainWebView {
-    public final List<ForwardBackwardHistoryDataModel> w4 = new ArrayList<>();
+    public final List<ForwardBackwardHistory> w4 = new ArrayList<>();
 
     @Keep
     public WebViews(Context ct) {
@@ -52,13 +52,13 @@ public class WebViews extends MainWebView {
 
     @Override
     public void goBack() {
-        w4.add(new ForwardBackwardHistoryDataModel("", getUrl()));
+        w4.add(new ForwardBackwardHistory("", getUrl()));
         super.goBack();
     }
 
     @Override
     public void goForward() {
-        w4.add(new ForwardBackwardHistoryDataModel(getUrl(), ""));
+        w4.add(new ForwardBackwardHistory(getUrl(), ""));
         super.goForward();
     }
 }

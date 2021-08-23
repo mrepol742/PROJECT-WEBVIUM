@@ -30,12 +30,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.ActivityState;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.download.DownloadHelper;
-import com.mrepol742.webvium.history.HistoryHelper;
-import com.mrepol742.webvium.search.SearchHelper;
 import com.mrepol742.webvium.util.AwesomeToast;
 
 import java.io.FileInputStream;

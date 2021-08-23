@@ -20,6 +20,7 @@ package com.mrepol742.webvium;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -33,21 +34,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.bookmark.BookmarkAdapter;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
+import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
@@ -61,6 +64,7 @@ import com.mrepol742.webvium.util.TextWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*
  * @BookmarkActivity
@@ -79,7 +83,7 @@ public class Book extends BaseActivity {
     public static final int SITEMAPS = 10;
     private GridView e;
     private RelativeLayout f6;
-    private BookmarkAdapter w15;
+    private Adapter w15;
     private final List<String> ls = new ArrayList<>();
     private final List<String> ls0 = new ArrayList<>();
     private ImageView iv;
@@ -239,7 +243,7 @@ public class Book extends BaseActivity {
             Animation.animate(Book.this, R.anim.i, iv);
         }
         res.close();
-        w15 = new BookmarkAdapter(this, ls);
+        w15 = new Adapter(this, ls);
         e.setAdapter(w15);
         e.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -931,5 +935,84 @@ public class Book extends BaseActivity {
         });
         final AlertDialog g = a.create();
         g.show();
+    }
+
+    public static class Adapter extends MainBaseAdapter {
+        private static final int[] background = {
+                R.drawable.g3,
+                R.drawable.g4,
+                R.drawable.g5,
+                R.drawable.g6
+        };
+        private final Context a;
+        private final List<String> b;
+        private final Random rm;
+
+
+        public Adapter(Context ct, List<String> al) {
+            super(ct);
+            a = ct;
+            b = al;
+            rm = new Random();
+        }
+
+        public void a(List<String> a1) {
+            synchronized (b) {
+                b.clear();
+                b.addAll(a1);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return b.size();
+        }
+
+        @Override
+        public Object getItem(int it) {
+            return it;
+        }
+
+        @Override
+        public long getItemId(int it) {
+            return it;
+        }
+
+        @Override
+        public View getView(int it, View e, ViewGroup vg) {
+            try {
+                Layout w20;
+                if (e == null) {
+                    LayoutInflater ll = (LayoutInflater) a.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    e = ll.inflate(R.layout.w, vg, false);
+                    w20 = new Layout();
+                    w20.tv = e.findViewById(R.id.f1);
+                    w20.ll = e.findViewById(R.id.o23);
+                    w20.tv.setCompoundDrawablePadding(20);
+                    w20.tv.setTextColor(Resources.getColor(a, R.color.b));
+                    w20.tv.setCompoundDrawablesWithIntrinsicBounds(null, Resources.getDrawable(a, R.drawable.a9), null, null);
+                    w20.tv.setTypeface(type(Typeface.BOLD));
+                    e.setTag(w20);
+                } else {
+                    w20 = (Layout) e.getTag();
+                }
+                w20.tv.setText(b.get(it));
+                w20.ll.setBackgroundResource(background[rm.nextInt(background.length)]);
+                w20.ll.setElevation(5);
+
+            } catch (IndexOutOfBoundsException ignored) {
+
+            }
+            return e;
+        }
+
+        private static class Layout {
+            TextView tv;
+            LinearLayout ll;
+
+            @Keep
+            private Layout() {
+            }
+        }
     }
 }

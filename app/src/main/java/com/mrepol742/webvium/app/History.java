@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain changedTo copy of the License at
+ * You may obtain a copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.history;
+package com.mrepol742.webvium.app;
 
-public class HistoryDataModel {
+public class History {
     public final String ls;
     public final String ls0;
     public final long ls2;
 
-    public HistoryDataModel(String ls, String ls0, long ls2) {
+    public History(String ls, String ls0, long ls2) {
         this.ls = ls;
         this.ls0 = ls0;
         this.ls2 = ls2;

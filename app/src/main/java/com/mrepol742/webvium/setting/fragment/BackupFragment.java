@@ -26,11 +26,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -43,22 +40,10 @@ import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.download.DownloadHelper;
-import com.mrepol742.webvium.history.HistoryHelper;
 import com.mrepol742.webvium.util.FileUtil;
-import com.mrepol742.webvium.app.StorageDirectory;
-import com.mrepol742.webvium.search.SearchHelper;
-import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.AwesomeToast;
 import com.mrepol742.webvium.util.JSON;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
 
 public class BackupFragment extends BasePreferenceFragment implements Preference.OnPreferenceClickListener {
     private final IntentFilter is = new IntentFilter();

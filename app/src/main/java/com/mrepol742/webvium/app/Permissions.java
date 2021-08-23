@@ -26,14 +26,14 @@ import android.os.Build;
 
 import com.mrepol742.webvium.annotation.Keep;
 
-public class Permission {
+public class Permissions {
     public static final String LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     public static final String STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     public static final String CAMERA = Manifest.permission.CAMERA;
     public static final String MICROPHONE = Manifest.permission.RECORD_AUDIO;
 
     @Keep
-    private Permission() {
+    private Permissions() {
     }
 
     public static boolean check(Activity ay, String sg, int it) {

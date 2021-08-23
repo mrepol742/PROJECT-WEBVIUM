@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain changedTo copy of the License at
+ * You may obtain a copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -15,14 +15,18 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.permission;
+package com.mrepol742.webvium.app;
 
-import android.webkit.PermissionRequest;
+public class Download {
+    public final String a;
+    public final String b;
+    public final long c;
+    public final long d;
 
-public class PermissionDataModel {
-    public final PermissionRequest pr;
-
-    public PermissionDataModel(PermissionRequest pr) {
-        this.pr = pr;
+    public Download(String a, String b, long c, long d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
     }
 }

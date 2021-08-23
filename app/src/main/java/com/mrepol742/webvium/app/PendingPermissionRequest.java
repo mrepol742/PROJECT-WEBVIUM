@@ -4,7 +4,7 @@
  *
  * License under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain changedTo copy of the License at
+ * You may obtain a copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
  *
@@ -17,18 +17,12 @@
 
 package com.mrepol742.webvium.app;
 
-public class PendingDownloadDataModel {
-    public final String a1;
-    public final String a2;
-    public final String a3;
-    public final long a4;
-    public final String a6;
+import android.webkit.PermissionRequest;
 
-    public PendingDownloadDataModel(String a1, String a2, String a3, long a4, String a6) {
-        this.a1 = a1;
-        this.a2 = a2;
-        this.a3 = a3;
-        this.a4 = a4;
-        this.a6 = a6;
+public class PendingPermissionRequest {
+    public final PermissionRequest pr;
+
+    public PendingPermissionRequest(PermissionRequest pr) {
+        this.pr = pr;
     }
 }

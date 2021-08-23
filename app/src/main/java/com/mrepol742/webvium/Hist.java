@@ -20,18 +20,22 @@ package com.mrepol742.webvium;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
@@ -43,15 +47,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.mrepol742.webvium.annotation.Keep;
 import com.mrepol742.webvium.app.Sqlite;
 import com.mrepol742.webvium.app.base.BaseActivity;
-import com.mrepol742.webvium.bookmark.BookmarkHelper;
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.history.HistoryAdapter;
-import com.mrepol742.webvium.history.HistoryDataModel;
-import com.mrepol742.webvium.history.HistoryHelper;
+import com.mrepol742.webvium.app.main.MainBaseAdapter;
+import com.mrepol742.webvium.app.History;
+import com.mrepol742.webvium.util.DateUtil;
 import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.Domain;
 import com.mrepol742.webvium.net.Stream;
@@ -59,8 +63,11 @@ import com.mrepol742.webvium.util.Animation;
 import com.mrepol742.webvium.util.AwesomeToast;
 import com.mrepol742.webvium.util.TextWatcher;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /*
  * @HistoryActivity
@@ -77,9 +84,9 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
     public static final int IP_GEO = 8;
     public static final int ASSETLINKS = 9;
     public static final int SITEMAPS = 10;
-    private HistoryAdapter w15;
+    private Adapter w15;
     private ListView a3;
-    private final List<HistoryDataModel> al = new ArrayList<>();
+    private final List<History> al = new ArrayList<>();
     private RelativeLayout f2;
     private ImageView o21;
     private ImageView o22;
@@ -215,7 +222,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
                     f2.setClickable(true);
         } else {
             while (res.moveToNext()) {
-                al.add(new HistoryDataModel(res.getString(1),
+                al.add(new History(res.getString(1),
                         res.getString(2),
                         res.getLong(3)));
             }
@@ -255,7 +262,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
         }
         a1.setNavigationIcon(R.drawable.a2);
         a1.setNavigationOnClickListener(this);
-        w15 = new HistoryAdapter(this, al);
+        w15 = new Adapter(this, al);
         a3.setAdapter(w15);
         a3.setOnItemClickListener(this);
         a3.setOnItemLongClickListener(this);
@@ -447,7 +454,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
     }
 
     private void k() {
-        List<HistoryDataModel> al = new ArrayList<>();
+        List<History> al = new ArrayList<>();
         Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_HISTORY +
                 " ORDER BY " +
@@ -460,7 +467,7 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
             f2.setClickable(true);
         } else {
             while (res.moveToNext()) {
-                al.add(new HistoryDataModel(res.getString(1),
+                al.add(new History(res.getString(1),
                         res.getString(2),
                         res.getLong(3)));
             }
@@ -898,5 +905,110 @@ public class Hist extends BaseActivity implements AdapterView.OnItemClickListene
         });
         final AlertDialog g = a.create();
         g.show();
+    }
+
+    public static class Adapter extends MainBaseAdapter {
+        private final Context a;
+        private final List<History> w3;
+        private final SharedPreferences sp;
+        private final SimpleDateFormat day;
+        private final SimpleDateFormat month;
+        private final SimpleDateFormat year;
+
+
+        public Adapter(Context ct, List<History> w3) {
+            super(ct);
+            this.a = ct;
+            this.w3 = w3;
+            this.sp = PreferenceManager.getDefaultSharedPreferences(ct);
+            this.day = new SimpleDateFormat("dd", Locale.US);
+            this.month = new SimpleDateFormat("MM", Locale.US);
+            this.year = new SimpleDateFormat("yyyy", Locale.US);
+        }
+
+        public void a(List<History> w3) {
+            synchronized (this.w3) {
+                this.w3.clear();
+                this.w3.addAll(w3);
+            }
+        }
+
+        public History c(int i) {
+            return (History) getItem(i);
+        }
+
+        @Override
+        public int getCount() {
+            synchronized (this.w3) {
+                return this.w3.size();
+            }
+        }
+
+        @Override
+        public Object getItem(int it) {
+            synchronized (this.w3) {
+                return this.w3.get(it);
+            }
+        }
+
+        @Override
+        public long getItemId(int it) {
+            return it;
+        }
+
+        @Override
+        public View getView(int it, View e, ViewGroup vg) {
+            try {
+                Layout w17;
+                if (e == null) {
+                    LayoutInflater li = (LayoutInflater) a.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    e = li.inflate(R.layout.a22, vg, false);
+                    w17 = new Layout();
+                    w17.a = e.findViewById(R.id.e19);
+                    w17.b = e.findViewById(R.id.e20);
+                    w17.c = e.findViewById(R.id.e18);
+                    w17.d = e.findViewById(R.id.n29);
+                    if (!this.sp.getBoolean("autoUpdate", false)) {
+                        w17.a.setTextColor(Resources.getColor(a, R.color.c));
+                        w17.b.setTextColor(Resources.getColor(a, R.color.c));
+                        w17.d.setTextColor(Resources.getColor(a, R.color.c));
+                        w17.c.setBackgroundResource(R.drawable.v);
+                    } else {
+                        w17.a.setTextColor(Resources.getColor(a, R.color.b));
+                        w17.b.setTextColor(Resources.getColor(a, R.color.b));
+                        w17.d.setTextColor(Resources.getColor(a, R.color.b));
+                        w17.c.setBackgroundResource(R.drawable.y);
+                    }
+                    w17.a.setTypeface(type(Typeface.BOLD));
+                    w17.b.setTypeface(type(Typeface.NORMAL));
+                    w17.d.setTypeface(type(Typeface.NORMAL));
+                    e.setTag(w17);
+                } else {
+                    w17 = (Layout) e.getTag();
+                }
+                w17.a.setText(c(it).ls);
+                w17.c.setImageResource(icon(c(it).ls0));
+                w17.b.setText(scheme(c(it).ls0), TextView.BufferType.SPANNABLE);
+                Date date = new Date(c(it).ls2);
+                String fiDate = day.format(date).replaceAll("^0*", "") + " " + DateUtil.format(Integer.parseInt(month.format(date))) + " " + year.format(date);
+                w17.d.setText(fiDate);
+            } catch (IndexOutOfBoundsException ignored) {
+
+            }
+            return e;
+        }
+
+        private static class Layout {
+            TextView a;
+            TextView b;
+            ImageView c;
+            TextView d;
+
+            @Keep
+            private Layout() {
+            }
+        }
+
+
     }
 }
