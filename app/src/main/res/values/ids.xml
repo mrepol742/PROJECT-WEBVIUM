@@ -23,7 +23,6 @@
     <item name="g" type="id" />
     <item name="h" type="id" />
     <item name="i" type="id" />
-    <item name="k" type="id" />
     <item name="l" type="id" />
     <item name="n" type="id" />
     <item name="o" type="id" />
@@ -105,7 +104,6 @@
     <item name="f12" type="id" />
 
     <item name="g1" type="id" />
-    <item name="g4" type="id" />
     <item name="g7" type="id" />
     <item name="g8" type="id" />
     <item name="h17" type="id" />
@@ -137,8 +135,6 @@
     <item name="k10" type="id" />
     <item name="k11" type="id" />
     <item name="k12" type="id" />
-    <item name="k13" type="id" />
-    <item name="k14" type="id" />
     <item name="k19" type="id" />
     <item name="k20" type="id" />
 
@@ -171,7 +167,6 @@
     <item name="m15" type="id" />
     <item name="m16" type="id" />
     <item name="m17" type="id" />
-    <item name="m19" type="id" />
     <item name="m20" type="id" />
     <item name="n1" type="id" />
     <item name="n2" type="id" />
@@ -203,7 +198,6 @@
     <item name="o23" type="id" />
     <item name="o25" type="id" />
     <item name="o26" type="id" />
-    <item name="o29" type="id" />
     <item name="o30" type="id" />
     <item name="o31" type="id" />
     <item name="o32" type="id" />

@@ -406,15 +406,10 @@
     <string-array name="b9">
         <item name="1z">@string/h24</item>
         <item name="7z">@string/h25</item>
-        <item name="30z">@string/h26</item>
-        <item name="60z">@string/h27</item>
-
     </string-array>
     <string-array name="b10">
         <item name="1z">1z</item>
         <item name="7z">7z</item>
-        <item name="30z">30z</item>
-        <item name="60z">60z</item>
     </string-array>
 
 
@@ -496,12 +491,4 @@
 
     </string-array>
 
-    <string-array name="b21">
-    <item name="1z">@string/z101</item>
-    <item name="7z">@string/z100</item>
-    </string-array>
-    <string-array name="b22">
-    <item name="1z">1z</item>
-    <item name="7z">7z</item>
-    </string-array>
 </resources>

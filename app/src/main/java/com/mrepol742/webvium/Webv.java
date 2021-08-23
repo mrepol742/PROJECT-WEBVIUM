@@ -2303,7 +2303,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                         Sqlite.TABLE_SEARCH +
                         " ORDER BY " +
                         "_id" +
-                        " DESC ", null);
+                        getOrder(), null);
                 if (res.getCount() != 0) {
                     while (res.moveToNext()) {
                         ls.add(Base64.encode(res.getString(1)));
@@ -2315,7 +2315,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                             Sqlite.TABLE_HISTORY +
                             " ORDER BY " +
                             "_id" +
-                            " DESC ", null);
+                            getOrder(), null);
                     if (rest.getCount() != 0) {
                         boolean bn = a221().getBoolean("showLKS", false);
                         while (rest.moveToNext()) {
@@ -2332,7 +2332,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                             Sqlite.TABLE_BOOKMARK +
                             " ORDER BY " +
                             "_id" +
-                            " DESC ", null);
+                            getOrder(), null);
                     if (rest1.getCount() != 0) {
                         boolean bn = a221().getBoolean("showLKS", false);
                         while (rest1.moveToNext()) {
@@ -2349,7 +2349,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                             Sqlite.TABLE_DOWNLOAD +
                             " ORDER BY " +
                             "_id" +
-                            " DESC ", null);
+                            getOrder(), null);
                     if (rest2.getCount() != 0) {
                         boolean bn12 = !a221().getBoolean("showLKS", false);
                         while (rest2.moveToNext()) {
@@ -2747,8 +2747,10 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             @Override
             public void onClick(DialogInterface a2, int i) {
-// TODO: check
-                //d3.c(ed.getText().toString(), ed1.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(Sqlite.COL1_BOOKMARK, ed.getText().toString());
+                values.put(Sqlite.COL2_BOOKMARK, ed1.getText().toString());
+                sql.getWritableDatabase().insert(Sqlite.TABLE_BOOKMARK, null, values);
                 Webv.this.c8(Webv.this.getString(R.string.t2));
             }
         });
@@ -5534,6 +5536,13 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 penHis.clear();
             }
         }
+    }
+
+    private String getOrder() {
+        if (a221().getString("arrange", "7z").equals("7z")) {
+            return " DESC";
+        }
+        return " ASC";
     }
 
     @Override

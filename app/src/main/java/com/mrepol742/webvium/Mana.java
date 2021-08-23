@@ -159,25 +159,13 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
         }
         sql = Sqlite.getInstance(getApplicationContext());
         final SQLiteDatabase db = sql.getWritableDatabase();
-        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK;
         Cursor rest1 = db.rawQuery(sb5, null);
-        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH;
         Cursor res = db.rawQuery(sb55, null);
-        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY;
         Cursor rest = db.rawQuery(sb12, null);
-        String sb12a = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb12a = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD;
         Cursor resta = db.rawQuery(sb12a, null);
         int cont = rest1.getCount();
         if (cont == 0) {
@@ -270,10 +258,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
             public void onItemClick(AdapterView<?> a, View b, int c, long d) {
                 switch (c) {
                     case 0:
-                        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
-                                " ORDER BY " +
-                                "_id" +
-                                " DESC";
+                        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK;
                         Cursor rest1 = db.rawQuery(sb5, null);
                         if (rest1.getCount() != 0) {
                             AlertDialog.Builder a12 = new AlertDialog.Builder(Mana.this);
@@ -324,10 +309,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                         a12.create().show();
                         break;
                     case 2:
-                        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
-                                " ORDER BY " +
-                                "_id" +
-                                " DESC";
+                        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY;
                         Cursor rest = db.rawQuery(sb12, null);
                         if (rest.getCount() != 0) {
                             AlertDialog.Builder a121 = new AlertDialog.Builder(Mana.this);
@@ -354,10 +336,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                         rest.close();
                         break;
                     case 3:
-                        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
-                                " ORDER BY " +
-                                "_id" +
-                                " DESC";
+                        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH;
                         Cursor res = db.rawQuery(sb55, null);
                         if (res.getCount() != 0) {
                             AlertDialog.Builder a13 = new AlertDialog.Builder(Mana.this);
@@ -382,10 +361,7 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
                         res.close();
                         break;
                     case 4:
-                        String sb551 = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
-                                " ORDER BY " +
-                                "_id" +
-                                " DESC";
+                        String sb551 = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD;
                         Cursor res1 = db.rawQuery(sb551, null);
                         if (res1.getCount() != 0) {
                             AlertDialog.Builder a11 = new AlertDialog.Builder(Mana.this);
@@ -707,25 +683,13 @@ public class Mana extends BaseActivity implements DialogInterface.OnClickListene
             d.add("");
         }
         SQLiteDatabase db = sql.getWritableDatabase();
-        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb5 = "SELECT * FROM " + Sqlite.TABLE_BOOKMARK;
         Cursor rest1 = db.rawQuery(sb5, null);
-        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb55 = "SELECT * FROM " + Sqlite.TABLE_SEARCH;
         Cursor res = db.rawQuery(sb55, null);
-        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb12 = "SELECT * FROM " + Sqlite.TABLE_HISTORY;
         Cursor rest = db.rawQuery(sb12, null);
-        String sb122 = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD +
-                " ORDER BY " +
-                "_id" +
-                " DESC";
+        String sb122 = "SELECT * FROM " + Sqlite.TABLE_DOWNLOAD;
         Cursor restt = db.rawQuery(sb122, null);
         int cont = rest1.getCount();
         if (cont == 0) {

@@ -65,7 +65,7 @@
             a:key="showLKS"
             a:title="@string/l27" />
         <com.mrepol742.webvium.List
-            a:defaultValue="30z"
+            a:defaultValue="7z"
             a:dependency="showS"
             a:dialogTitle="@string/b6"
             a:entries="@array/b9"

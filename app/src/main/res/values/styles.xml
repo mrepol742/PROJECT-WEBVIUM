@@ -380,8 +380,6 @@
 
     <style name="c33" parent="@android:style/Widget.Material.EditText" />
 
-    <style name="c34" parent="android:Widget.Material.CompoundButton.RadioButton" />
-
     <style name="c35" parent="android:Widget.Material.ActionButton.Overflow" />
 
     <style name="c36" parent="android:Theme.Material.Light" />
@@ -393,8 +391,6 @@
     <style name="c39" parent="android:Widget.Material.ListPopupWindow" />
 
     <style name="c40" parent="android:Widget.Material" />
-
-    <style name="c41" parent="android:Widget.Material.CompoundButton.CheckBox" />
 
     <style name="c42" parent="android:Widget.Material.Button" />
 

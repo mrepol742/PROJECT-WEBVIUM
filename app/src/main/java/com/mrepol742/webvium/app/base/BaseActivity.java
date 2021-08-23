@@ -23,7 +23,6 @@
  import android.app.FragmentManager;
  import android.app.FragmentTransaction;
  import android.content.Context;
- import android.content.DialogInterface;
  import android.content.Intent;
  import android.content.SharedPreferences;
  import android.graphics.Typeface;
@@ -32,21 +31,15 @@
  import android.os.Bundle;
  import android.preference.PreferenceManager;
  import android.speech.SpeechRecognizer;
- import android.text.TextUtils;
  import android.util.LruCache;
  import android.view.LayoutInflater;
- import android.view.Menu;
- import android.view.SubMenu;
  import android.view.View;
  import android.view.ViewGroup;
- import android.view.Window;
  import android.webkit.URLUtil;
  import android.widget.Button;
- import android.widget.PopupMenu;
  import android.widget.TextView;
 
  import com.mrepol742.webvium.Edit;
- import com.mrepol742.webvium.Hist;
  import com.mrepol742.webvium.R;
  import com.mrepol742.webvium.Tool;
  import com.mrepol742.webvium.app.Intents;

@@ -65,7 +65,7 @@ public class Upda extends Service {
                     try {
                         int versionName = Integer.parseInt(Package.e(Upda.this).replaceAll("\\.", ""));
                         int versionCode = Package.f(Upda.this);
-                        UpdateDataModel newUpdate = JSON.getUpdate(Stream.f(updateUrl, "0"), "rel");
+                        UpdateDataModel newUpdate = JSON.getUpdate(Stream.f(updateUrl, "0"), Upda.this.getPackageName());
                         if (newUpdate == null) {
                             b();
                         } else if (newUpdate.name > versionName || (newUpdate.name == versionName && newUpdate.code > versionCode)) {

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.setting.fragment;
+package com.mrepol742.webvium.app.fragment;
 
 import android.Manifest;
 import android.annotation.TargetApi;

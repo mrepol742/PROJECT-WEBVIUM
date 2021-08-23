@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.setting.fragment;
+package com.mrepol742.webvium.app.fragment;
 
 // SETTINGS FRAGMENT PART 0 over 1 (def== mail)
 
@@ -23,24 +23,31 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mrepol742.webvium.Lock;
 import com.mrepol742.webvium.Mana;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.Sett;
+import com.mrepol742.webvium.annotation.Keep;
+import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.base.BaseFragment;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Package;
+import com.mrepol742.webvium.app.main.MainBaseAdapter;
 import com.mrepol742.webvium.security.Base64;
-import com.mrepol742.webvium.setting.SettingAdapter;
 import com.mrepol742.webvium.util.Hardware;
 import com.mrepol742.webvium.util.Animation;
 
@@ -110,8 +117,8 @@ public class SettingFragment extends BaseFragment {
             v = inflater.inflate(R.layout.a23, container, false);
         }
         ListView a31 = v.findViewById(R.id.a3);
-        SettingAdapter aa;
-        aa = new SettingAdapter(getActivity(), header1, summary1);
+        Adapter aa;
+        aa = new Adapter(getActivity(), header1, summary1);
         a31.setAdapter(aa);
         a31.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -275,5 +282,94 @@ public class SettingFragment extends BaseFragment {
             ft.addToBackStack(a);
             ft.commit();
         }
+    }
+
+    public static class Adapter extends MainBaseAdapter {
+        private static final int[] drawables = {
+                R.drawable.c17,
+                R.drawable.c18,
+                R.drawable.c19,
+                R.drawable.c20,
+                R.drawable.d1,
+                R.drawable.d2,
+                R.drawable.d3,
+                R.drawable.d4,
+                R.drawable.d5,
+                R.drawable.e1,
+                R.drawable.d20
+        };
+        private static int[] header;
+        private static int[] summary;
+        private final Context a;
+
+        public Adapter(Context ct, int[] a1, int[] b) {
+            super(ct);
+            a = ct;
+            header = a1;
+            summary = b;
+        }
+
+        @Override
+        public int getCount() {
+            return header.length;
+        }
+
+        @Override
+        public Object getItem(int it) {
+            return it;
+        }
+
+        @Override
+        public long getItemId(int it) {
+            return it;
+        }
+
+        @Override
+        public View getView(int it, View e, ViewGroup vg) {
+            try {
+                Layout w17;
+                if (e == null) {
+                    LayoutInflater li = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    e = li.inflate(R.layout.b3, vg, false);
+                    w17 = new Layout();
+                    w17.a = e.findViewById(R.id.e19);
+                    w17.b = e.findViewById(R.id.e20);
+                    w17.c = e.findViewById(R.id.e18);
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a);
+                    if (!sp.getBoolean("autoUpdate", false)) {
+                        w17.a.setTextColor(Resources.getColor(a, R.color.c));
+                        w17.b.setTextColor(Resources.getColor(a, R.color.c));
+                        w17.c.setBackgroundResource(R.drawable.v);
+                    } else {
+                        w17.a.setTextColor(Resources.getColor(a, R.color.b));
+                        w17.b.setTextColor(Resources.getColor(a, R.color.b));
+                        w17.c.setBackgroundResource(R.drawable.y);
+                    }
+                    w17.a.setTypeface(type(Typeface.BOLD));
+                    w17.b.setTypeface(type(Typeface.NORMAL));
+                    e.setTag(w17);
+                } else {
+                    w17 = (Layout) e.getTag();
+                }
+                w17.a.setText(header[it]);
+                w17.c.setImageResource(drawables[it]);
+                w17.b.setText(summary[it]);
+
+            } catch (IndexOutOfBoundsException ignored) {
+
+            }
+            return e;
+        }
+
+        private static class Layout {
+            TextView a;
+            TextView b;
+            ImageView c;
+
+            @Keep
+            private Layout() {
+            }
+        }
+
     }
 }

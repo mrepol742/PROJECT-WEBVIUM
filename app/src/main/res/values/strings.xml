@@ -167,7 +167,6 @@
     <string name="g19">&lt;b>Link:&lt;/b> %1$s&lt;br>&lt;b>Error Code:&lt;/b> %2$d</string>
     <string name="g20">This URL %1$s contains Ads that was blocked by Webvium AdBlocker.</string>
     <string name="h1">Safe Browsing</string>
-    <string name="h2">Quit</string>
     <string name="h3">Settings</string>
     <string name="h4">Console Message</string>
     <string name="h5">%1$s removed.</string>
@@ -238,7 +237,7 @@
     <string name="l19">Colorized</string>
     <string name="l20">Whether the notification should be colorized</string>
     <string name="m1">Failed to start safe browsing.</string>
-    <string name="m2">Update Now</string>
+    <string name="m2">Check Now</string>
     <string name="m3">Browse</string>
     <string name="m5">Clipboard</string>
     <string name="m7">Credits</string>
@@ -297,7 +296,6 @@
     <string name="q11">Enable WiFi before webpage get loaded</string>
     <string name="q12">Turn On Wifi</string>
     <string name="q13">Hide/Show Toolbar Elevation</string>
-    <string name="q14">Export</string>
     <string name="q16">Bookmark</string>
     <string name="q17">History</string>
     <string name="q18">Search</string>
@@ -469,15 +467,9 @@
     <string name="z12">IP Geolocation</string>
     <string name="z15">Meta Tags</string>
     <string name="z16">PassGen</string>
-    <string name="z17">IDGen</string>
-    <string name="z18">Assistant</string>
-    <string name="z19">Webvium Search</string>
-    <string name="z20">Make Webvium Search as your default assistant</string>
-    <string name="a21">To make Webvium Search as your default Assistant in your phone, click the OK button then click Assist App &lt;b>>>&lt;/b> Webvium &lt;b>>>&lt;/b> DONE.</string>
     <string name="a22">Security</string>
     <string name="a25">Click All Apps >> Webvium &lt;b>>>&lt;/b> Don\'t Optimize &lt;b>>>&lt;/b> DONE.</string>
     <string name="a26">Choose actions:</string>
-    <string name="a27">Cache Cleared.</string>
     <string name="a28">Do you really want to clear Cookies?</string>
     <string name="a29">Cookies Cleared.</string>
     <string name="a30">Clear JavaScript Storage APIs</string>
@@ -493,20 +485,13 @@
     <string name="b21">Do you really want to clear HTTP Auth Username and Password?</string>
     <string name="b22">HTTP Auth Username and Password Cleared.</string>
     <string name="b24">Do you really want to revert Settings back to default?</string>
-    <string name="b25">Backup Exported.</string>
-    <string name="b26">Failed to Export.</string>
     <string name="b27">Backup Imported.</string>
     <string name="b28">Failed to Import.</string>
     <string name="b32">Download</string>
-    <string name="b33">Click Assist App &lt;b>>>&lt;/b> Webvium &lt;b>>>&lt;/b> DONE.</string>
     <string name="b36">Do you really want to clear Clipboard?</string>
     <string name="b37">Clipboard Cleared.</string>
-    <string name="b38">&lt;b>We will export:&lt;/b>&lt;br>• All Settings&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
     <string name="b39">Do you really want to import Settings Database\n\nThis will override your current Settings\n\nWebvium will restart automatically after importing the database.</string>
-    <string name="b40">&lt;b>Wze will export:&lt;/b>&lt;br>• All Search History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
     <string name="c21">Do you really want to import Search Database\nThis will override your Search History</string>
-    <string name="c22">&lt;b>We will export:&lt;/b>&lt;br>• All Browsing History&lt;br>&lt;br>&lt;b>To File:&lt;/b>&lt;br>• %1$s</string>
-    <string name="c24">&lt;b>We will export:&lt;/b>&lt;br>• All Bookmark&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="c26">about:blank</string>
     <string name="c30">Name</string>
     <string name="c31">Saved Path</string>
@@ -557,12 +542,9 @@
     <string name="h21">Custom Poster Image was been loaded.</string>
     <string name="h22">Go Back</string>
     <string name="h23">Go Forward</string>
-    <string name="h24">A to Z</string>
-    <string name="h25">Z to A</string>
-    <string name="h26">Newer to Older</string>
-    <string name="h27">Older to Newer</string>
+    <string name="h24">Ascending</string>
+    <string name="h25">Descending</string>
     <string name="h28">Session Cookies Cleared.</string>
-    <string name="h30">Error</string>
     <string name="h33">Sensor Portrait</string>
     <string name="h34">Sensor Landscape</string>
     <string name="h35">Local IP</string>
@@ -631,7 +613,6 @@
     <string name="k40">Override URL loading in HTTPS</string>
     <string name="l22">Certificate is valid</string>
     <string name="l23">Certificate isn\'t valid</string>
-    <string name="l24">Assist</string>
     <string name="l25">Suggest Bookmarks</string>
     <string name="l26">Suggest History</string>
     <string name="l27">Strict Suggestion to Links</string>
@@ -645,10 +626,6 @@
     <string name="l39">Notify me</string>
     <string name="l40">Notify you that the webpage was been successfully loaded</string>
     <string name="m22">Webpage Failed Load</string>
-    <plurals name="m23">
-        <item quantity="one">&lt;b>%1$s&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %2$s&lt;br/>&lt;b>Middle Name:&lt;/b> %3$s&lt;br/>&lt;b>Last Name:&lt;/b> %4$s&lt;br/>&lt;b>Birthday:&lt;/b> %5$s&lt;br/>&lt;b>Gender:&lt;/b> %6$s&lt;br/>&lt;b>Age:&lt;/b> %7$d&lt;br/>&lt;b>Relationship:&lt;/b> %8$s&lt;br/>&lt;b>Country:&lt;/b> %9$s&lt;br/>&lt;b>Eye Color:&lt;/b> %10$s&lt;br/>&lt;b>Height:&lt;/b> %11$s&lt;br/>&lt;b>Weight:&lt;/b> %12$d Pound&lt;br/>&lt;b>Hobby:&lt;/b> %13$s&lt;br/>&lt;b>Interested in:&lt;/b> %14$s&lt;br/>&lt;b>Religion:&lt;/b> %15$s&lt;br/>&lt;b>Mother Name:&lt;/b> %16$s&lt;br/>&lt;b>Father Name:&lt;/b> %17$s</item>
-        <item quantity="other">&lt;b>%1$s&lt;/b>&lt;br/>&lt;br/>&lt;b>First Name:&lt;/b> %2$s&lt;br/>&lt;b>Middle Name:&lt;/b> %3$s&lt;br/>&lt;b>Last Name:&lt;/b> %4$s&lt;br/>&lt;b>Birthday:&lt;/b> %5$s&lt;br/>&lt;b>Gender:&lt;/b> %6$s&lt;br/>&lt;b>Age:&lt;/b> %7$d&lt;br/>&lt;b>Relationship:&lt;/b> %8$s&lt;br/>&lt;b>Country:&lt;/b> %9$s&lt;br/>&lt;b>Eye Color:&lt;/b> %10$s&lt;br/>&lt;b>Height:&lt;/b> %11$s&lt;br/>&lt;b>Weight:&lt;/b> %12$d Pounds&lt;br/>&lt;b>Hobby:&lt;/b> %13$s&lt;br/>&lt;b>Interested in:&lt;/b> %14$s&lt;br/>&lt;b>Religion:&lt;/b> %15$s&lt;br/>&lt;b>Mother Name:&lt;/b> %16$s&lt;br/>&lt;b>Father Name:&lt;/b> %17$s</item>
-    </plurals>
     <string name="m24">There\'s no Internet Connection</string>
     <string name="m25">The device is in Airplane Mode</string>
     <string name="m28">Set Vibration EffectL</string>
@@ -746,9 +723,7 @@
 
     <string name="y30">The developers behind this awesome project</string>
     <string name="z21">Failed! An Error Occurred</string>
-    <string name="z31">The database doesn\'t contain any data.</string>
     <string name="z32">Download</string>
-    <string name="z34">&lt;b>We will export:&lt;/b>&lt;br>• All Download&lt;br>&lt;br>&lt;b>To File:&lt;/b>• %1$s</string>
     <string name="z35">Do you really want to import Downloads Database\nThis will override your Downloads History</string>
     <string name="z38">APK</string>
     <string name="z40">Export Webvium APK</string>
@@ -757,9 +732,6 @@
     <string name="x43">Facebook</string>
     <string name="x44">Privacy Policy</string>
     <string name="x45">Export Databases</string>
-    <string name="x46">Import Databases</string>
-    <string name="x47">To Import a Database</string>
-    <string name="x48">Click here to import the backup databases json file.</string>
     <string name="x56">Last Installed on:</string>
     <string name="x57">Webvium</string>
     <string name="y64">&lt;br>&lt;b>%1$s&lt;/b>&lt;br>SESSION ID&lt;br>&lt;br>&lt;b>%2$s&lt;/b>&lt;br>APP ID&lt;br>&lt;br>&lt;b>https://webvium.github.io&lt;/b>&lt;br>Website&lt;br>&lt;br>&lt;b>https://webvium.github.io/SourceCode&lt;/b>&lt;br>Source Code&lt;br>&lt;br>&lt;br>&lt;b>Melvin Jones Repol&lt;/b>&lt;br>&lt;b>Samiun Nafis&lt;/b>&lt;br>DEVELOPER&lt;br>&lt;br>&lt;b>Amos Ayomide&lt;/b>&lt;br>Tester&lt;br>&lt;br>&lt;br&lt;br>© 2021. Mrepol742. All Rights Reserved.&lt;br>© 2021. SamiunNafis. All Rights Reserved.</string>
@@ -775,14 +747,9 @@
     <string name="y76">AssetLinks.json</string>
     <string name="y77">Sitemap.xml</string>
     <string name="y78">Ping</string>
-    <string name="y80">Reachable by us</string>
-    <string name="y81">Unable to reach</string>
     <string name="y82">Missing Protocol.</string>
     <string name="y83">Invalid Protocol.</string>
     <string name="y84">Invalid Domain.</string>
-    <string name="y85">%1$s &lt;br> 2500ms == %2$b</string>
-    <string name="y86">&lt;br>5000ms == %1$b</string>
-    <string name="y87">&lt;br>1000ms == %1$b</string>
     <string name="y89">Close</string>
     <string name="y90">&lt;br>------------------&lt;br>&lt;br>&lt;b>PROJECT-WEBVIUM&lt;/b>&lt;br>version %1$s&lt;br>&lt;br>------------------&lt;br></string>
     <string name="y91">Theme Color Adaptation</string>
@@ -849,10 +816,6 @@
     <string name="z97">Bookmarks</string>
     <string name="z98">Suggest Download</string>
     <string name="z99">Query Type</string>
-    <string name="z100">Development</string>
-    <string name="z101">Stable</string>
-    <string name="z102">Update Channel</string>
-    <string name="z103">Set Update Channel</string>
     <string name="z104">Feedback</string>
     <string name="z105">Automatically check for update.</string>
     <string name="z106">Find Up</string>

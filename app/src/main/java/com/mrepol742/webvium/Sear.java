@@ -74,7 +74,6 @@ import com.mrepol742.webvium.util.TextWatcher;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -203,7 +202,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
                 Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
-                " DESC ", null);
+                getOrder(), null);
         if (res.getCount() == 0) {
             d.setVisibility(View.GONE);
         } else {
@@ -217,7 +216,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
                     Sqlite.TABLE_HISTORY +
                     " ORDER BY " +
                     "_id" +
-                    " DESC ", null);
+                    getOrder(), null);
             if (rest.getCount() != 0) {
                 boolean bn = !a221().getBoolean("showLKS", false);
                 while (rest.moveToNext()) {
@@ -234,7 +233,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
                     Sqlite.TABLE_BOOKMARK +
                     " ORDER BY " +
                     "_id" +
-                    " DESC ", null);
+                    getOrder(), null);
             if (rest1.getCount() != 0) {
                 boolean bn = !a221().getBoolean("showLKS", false);
                 while (rest1.moveToNext()) {
@@ -251,7 +250,7 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
                     Sqlite.TABLE_DOWNLOAD +
                     " ORDER BY " +
                     "_id" +
-                    " DESC ", null);
+                    getOrder(), null);
             if (rest2.getCount() != 0) {
                 boolean bn12 = !a221().getBoolean("showLKS", false);
                 while (rest2.moveToNext()) {
@@ -264,18 +263,6 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             rest2.close();
         }
         aa = new Adapter(this, ls);
-        // TODO:failed
-        /*if (Objects.equals(a221().getString("arrange", ""), "1z")) {
-            Collections.sort(ls);
-        }
-
-         */
-        if (Objects.equals(a221().getString("arrange", "30z"), "7z")) {
-            Collections.sort(ls, Collections.reverseOrder());
-        }
-        if (Objects.equals(a221().getString("arrange", "30z"), "60z")) {
-            Collections.reverse(ls);
-        }
         d.setOnItemClickListener(this);
         d.setOnItemLongClickListener(this);
         d.setAdapter(aa);
@@ -431,6 +418,13 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
         SoftKeyboard.hide(this, b19);
     }
 
+    private String getOrder() {
+        if (a221().getString("arrange", "7z").equals("7z")) {
+            return " DESC";
+        }
+        return " ASC";
+    }
+
     public void f4(String a) {
         Intent b = new Intent("android.intent.action.SEND");
         b.setType("text/plain");
@@ -469,14 +463,14 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
         AwesomeToast.b(this, a);
     }
 
-    // TODO: needs update
     private void k() {
         List<Search> itemIdsh = new ArrayList<>();
-        Cursor res = sql.getReadableDatabase().rawQuery("SELECT * FROM " +
+        SQLiteDatabase db = sql.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " +
                 Sqlite.TABLE_SEARCH +
                 " ORDER BY " +
                 "_id" +
-                " DESC ", null);
+                getOrder(), null);
         if (res.getCount() == 0) {
             d.setVisibility(View.GONE);
         } else {
@@ -492,6 +486,57 @@ public class Sear extends MainBaseActivity implements AdapterView.OnItemClickLis
             }
         }
         res.close();
+        if (a221().getBoolean("showHTT", false)) {
+            Cursor rest = db.rawQuery("SELECT * FROM " +
+                    Sqlite.TABLE_HISTORY +
+                    " ORDER BY " +
+                    "_id" +
+                    getOrder(), null);
+            if (rest.getCount() != 0) {
+                boolean bn = !a221().getBoolean("showLKS", false);
+                while (rest.moveToNext()) {
+                    if (bn) {
+                        itemIdsh.add(new Search(rest.getString(1), HISTORY));
+                    }
+                    itemIdsh.add(new Search(rest.getString(2), HISTORY));
+                }
+            }
+            rest.close();
+        }
+        if (a221().getBoolean("showBKM", false)) {
+            Cursor rest1 = db.rawQuery("SELECT * FROM " +
+                    Sqlite.TABLE_BOOKMARK +
+                    " ORDER BY " +
+                    "_id" +
+                    getOrder(), null);
+            if (rest1.getCount() != 0) {
+                boolean bn = !a221().getBoolean("showLKS", false);
+                while (rest1.moveToNext()) {
+                    if (bn) {
+                        itemIdsh.add(new Search(rest1.getString(1), BOOKMARK));
+                    }
+                    itemIdsh.add(new Search(rest1.getString(2), BOOKMARK));
+                }
+            }
+            rest1.close();
+        }
+        if (a221().getBoolean("showDLM", false)) {
+            Cursor rest2 = db.rawQuery("SELECT * FROM " +
+                    Sqlite.TABLE_DOWNLOAD +
+                    " ORDER BY " +
+                    "_id" +
+                    getOrder(), null);
+            if (rest2.getCount() != 0) {
+                boolean bn12 = !a221().getBoolean("showLKS", false);
+                while (rest2.moveToNext()) {
+                    if (bn12) {
+                        itemIdsh.add(new Search(rest2.getString(1), DOWNLOAD));
+                    }
+                    itemIdsh.add(new Search(rest2.getString(2), DOWNLOAD));
+                }
+            }
+            rest2.close();
+        }
     }
 
     private void l() {

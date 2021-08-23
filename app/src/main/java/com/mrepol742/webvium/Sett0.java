@@ -34,9 +34,9 @@ import android.widget.Toolbar;
 import com.mrepol742.webvium.app.base.BaseActivity;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.Resources;
-import com.mrepol742.webvium.setting.fragment.AboutFragment;
-import com.mrepol742.webvium.setting.fragment.BackupFragment;
-import com.mrepol742.webvium.setting.fragment.SettingFragment;
+import com.mrepol742.webvium.app.fragment.AboutFragment;
+import com.mrepol742.webvium.app.fragment.BackupFragment;
+import com.mrepol742.webvium.app.fragment.SettingFragment;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.util.Animation;
 

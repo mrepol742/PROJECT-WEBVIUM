@@ -1,13 +1,13 @@
 /*
  *
  * Copyright (c) 2021 Melvin Jones Repol (mrepol742.github.io). All rights reserved.
- *
+ *   
  * License under the GNU General Public License, Version 3.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at
  *
  *     https://www.gnu.org/licenses/gpl-3.0.en.html
- *
+ *     
  * Unless required by the applicable law or agreed in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,20 +15,17 @@
  * limitations under the License.
  */
 
-package com.mrepol742.webvium.setting.fragment;
+package com.mrepol742.webvium.app.fragment;
 
-import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 
-import com.mrepol742.webvium.Pref;
 import com.mrepol742.webvium.R;
 import com.mrepol742.webvium.Sear;
 import com.mrepol742.webvium.Swit;
@@ -36,9 +33,6 @@ import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.base.BasePreferenceFragment;
 import com.mrepol742.webvium.app.main.MainNotification;
-import com.mrepol742.webvium.app.Intents;
-import com.mrepol742.webvium.util.Html;
-import com.mrepol742.webvium.util.AwesomeToast;
 
 public class SearchFragment extends BasePreferenceFragment {
 
