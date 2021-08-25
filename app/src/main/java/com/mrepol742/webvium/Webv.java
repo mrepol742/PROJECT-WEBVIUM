@@ -5877,14 +5877,16 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
                 // means you can read
                 if (currentSettings().getJavaScriptEnabled()) {
                     if (!dsM) {
-                        if (a.isChecked()) {
-                            a.setChecked(false);
-                            inE = false;
-                            currentTab().evaluateJavascript("javascript:document.removeEventListener('click', myfun, true);", null);
-                        } else {
-                            a.setChecked(true);
-                            inE = true;
-                            currentTab().evaluateJavascript("javascript:document.addEventListener('click', myfun, true);", null);
+                        if (!pageF) {
+                            if (a.isChecked()) {
+                                a.setChecked(false);
+                                inE = false;
+                                currentTab().evaluateJavascript("javascript:document.removeEventListener('click', myfun, true);", null);
+                            } else {
+                                a.setChecked(true);
+                                inE = true;
+                                currentTab().evaluateJavascript("javascript:document.addEventListener('click', myfun, true);", null);
+                            }
                         }
                     } else {
                         c7(getString(R.string.s34));
