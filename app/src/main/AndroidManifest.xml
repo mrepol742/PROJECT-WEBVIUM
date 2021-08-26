@@ -621,6 +621,9 @@
             a:name="com.mrepol742.webvium.Upda"
             a:label="@string/n21"
             tools:ignore="ExportedService" />
+		
+		<service 
+			a:name="com.mrepol742.webvium.ScreenshotService" />
         
     </application>
 

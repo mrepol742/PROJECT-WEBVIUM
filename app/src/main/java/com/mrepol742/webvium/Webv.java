@@ -52,6 +52,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
+import android.media.projection.MediaProjectionManager;
 import android.net.MailTo;
 import android.net.Uri;
 import android.net.http.SslCertificate;
@@ -117,13 +118,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
-
 import com.mrepol742.webvium.app.Clipboard;
 import com.mrepol742.webvium.app.Geolocation;
+import com.mrepol742.webvium.app.History;
 import com.mrepol742.webvium.app.Intents;
 import com.mrepol742.webvium.app.Notifications;
 import com.mrepol742.webvium.app.Package;
 import com.mrepol742.webvium.app.PendingDownload;
+import com.mrepol742.webvium.app.PendingPermissionRequest;
 import com.mrepol742.webvium.app.Permissions;
 import com.mrepol742.webvium.app.Resources;
 import com.mrepol742.webvium.app.SoftKeyboard;
@@ -134,11 +136,9 @@ import com.mrepol742.webvium.app.WebViews;
 import com.mrepol742.webvium.app.main.MainBaseActivity;
 import com.mrepol742.webvium.app.main.MainNotification;
 import com.mrepol742.webvium.app.main.MainWebViewClient;
-import com.mrepol742.webvium.app.History;
 import com.mrepol742.webvium.net.Connectivity;
 import com.mrepol742.webvium.net.IPAddress;
 import com.mrepol742.webvium.net.Stream;
-import com.mrepol742.webvium.app.PendingPermissionRequest;
 import com.mrepol742.webvium.security.Base64;
 import com.mrepol742.webvium.security.Caesar;
 import com.mrepol742.webvium.security.SHA;
@@ -153,7 +153,6 @@ import com.mrepol742.webvium.util.Html;
 import com.mrepol742.webvium.util.PassGen;
 import com.mrepol742.webvium.util.PasswordTransformationMethod;
 import com.mrepol742.webvium.util.TextWatcher;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -178,6 +177,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.os.Handler;
 
 /*
  * @WebviumActivity
@@ -752,6 +752,11 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
                 this.b = null;
             } else if (this.b != null) {
                 this.b = null;
+            }
+        }
+		if (a == 808) {
+            if (b == Activity.RESULT_OK && null != c) {
+                startService(ScreenshotService.getStartIntent(this, b, c));
             }
         }
     }
@@ -3048,11 +3053,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         if (Objects.requireNonNull(a221().getString("java", "1f")).equals("7f")) {
             ws.setJavaScriptEnabled(false);
         }
-        if (!ws.getJavaScriptEnabled()) {
-            if (Uri.parse(currentUrl()).getHost().equals("mrepol742.github.io") && currentUrl().contains("/Search")) {
-                c50(currentTab());
-            }
-        }
+        
         if (Objects.requireNonNull(a221().getString("mcm", "1r")).equals("1r")) {
             ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
@@ -3139,6 +3140,15 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("60m")) {
             ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
         }
+		
+		// TODO: check
+		
+		/*if (!currentSettings().getJavaScriptEnabled()) {
+            if (Uri.parse(currentUrl()).getHost().equals("mrepol742.github.io") && currentUrl().contains("/Search")) {
+                c50(currentTab());
+            }
+        }*/
+		
     }
 
     public void c16(String a, int c11) {
@@ -5537,6 +5547,28 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             }
         }
     }
+	
+	private void c185(int resultCode) {
+        MediaProjectionManager mProjectionManager =
+			(MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        startActivityForResult(mProjectionManager.createScreenCaptureIntent(), resultCode);
+		
+		/*
+		 * Its deprecated 
+		 * But i dont know the !(deprecated) method to do the task
+		 * So, if u know, then use it
+		 */
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				c186(Webv.this);
+			}
+		}, 2000);
+    }
+	
+	private void c186(Context c) {
+		startService(ScreenshotService.getStopIntent(c));
+	}
 
     private String getOrder() {
         if (a221().getString("arrange", "7z").equals("7z")) {
@@ -5759,12 +5791,14 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         a.add(0, 31, 0, getString(R.string.s31)).setCheckable(true);
         a.add(0, 32, 0, getString(R.string.s32)).setCheckable(true);
         a.add(0, 33, 0, getString(R.string.d41));
-        if (Build.VERSION.SDK_INT < 29) {
+        /*if (Build.VERSION.SDK_INT < 29) {
             a.add(0, 14, 0, getString(R.string.k1));
-        }
+        }*/
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
+		a.add(0, 34, 0, getString(R.string.k1));
+		
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
         sm.add(0, 1, 0, getString(R.string.y15));
         sm.add(0, 7, 0, getString(R.string.h6));
@@ -5919,6 +5953,9 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
             case 33:
                 c183();
                 return true;
+		    case 34:
+				c185(808);
+				return true;
             case 13:
                 if (cm.capacity() > 16) {
                     c47();
