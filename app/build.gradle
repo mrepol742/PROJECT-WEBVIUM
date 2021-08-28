@@ -29,8 +29,8 @@ android {
         applicationId "com.mrepol742.webvium"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 20210823
-        versionName "1.9"
+        versionCode 20210828
+        versionName "2.0"
         proguardFiles getDefaultProguardFile(
                 'proguard-android-optimize.txt'), 'proguard-rules.pro'
         android.applicationVariants.all { variant ->

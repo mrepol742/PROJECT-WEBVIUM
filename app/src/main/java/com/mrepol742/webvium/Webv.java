@@ -2293,7 +2293,7 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             @JavascriptInterface
             public void saveQuery(String sg) {
-                if (!a221().getBoolean("pSearch", false)) {
+                if (c187() && !a221().getBoolean("pSearch", false)) {
                     ContentValues values = new ContentValues();
                     values.put(Sqlite.COL1_SEARCH, sg);
                     sql.getWritableDatabase().insert(Sqlite.TABLE_SEARCH, null, values);
@@ -2302,6 +2302,9 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             @JavascriptInterface
             public String query() {
+                if (!c187()) {
+                    return null;
+                }
                 ArrayList<String> ls = new ArrayList<>();
                 SQLiteDatabase db = sql.getReadableDatabase();
                 Cursor res = db.rawQuery("SELECT * FROM " +
@@ -2373,11 +2376,17 @@ public class Webv extends MainBaseActivity implements DialogInterface.OnClickLis
 
             @JavascriptInterface
             public boolean isValidDomain(String sg) {
-                return Domain.isValidDomain(sg);
+                if (c187()) {
+                    return Domain.isValidDomain(sg);
+                }
+                return false;
             }
 
             @JavascriptInterface
             public String getSearchEngine() {
+                if (!c187()) {
+                    return null;
+                }
                 switch (Objects.requireNonNull(a221().getString("searchP", ""))) {
                     case Webv.SE_DUCKDUCKGO:
                         return searchEngine[1];
@@ -3140,14 +3149,11 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         if (Objects.requireNonNull(a221().getString("caches", "1m")).equals("60m")) {
             ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
         }
-		
-		// TODO: check
-		
-		/*if (!currentSettings().getJavaScriptEnabled()) {
-            if (Uri.parse(currentUrl()).getHost().equals("mrepol742.github.io") && currentUrl().contains("/Search")) {
-                c50(currentTab());
+		if (!h.getSettings().getJavaScriptEnabled()) {
+            if (h.getUrl() != null && h.getUrl().startsWith(WEBVIUM_HOME)) {
+                c50(h);
             }
-        }*/
+        }
 		
     }
 
@@ -5570,6 +5576,10 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
 		startService(ScreenshotService.getStopIntent(c));
 	}
 
+    private boolean c187() {
+        return currentUrl().startsWith(WEBVIUM_HOME);
+    }
+
     private String getOrder() {
         if (a221().getString("arrange", "7z").equals("7z")) {
             return " DESC";
@@ -5797,7 +5807,7 @@ bigText.bigText(changedTo.getResources().getString(R.string.g29));
         a.add(0, 21, 0, getString(R.string.i4));
         a.add(0, 22, 0, getString(R.string.w3));
         a.add(0, 23, 0, getString(R.string.o5));
-		a.add(0, 34, 0, getString(R.string.k1));
+	a.add(0, 34, 0, getString(R.string.k1));
 		
         SubMenu sm = a.addSubMenu(getString(R.string.j36));
         sm.add(0, 1, 0, getString(R.string.y15));
