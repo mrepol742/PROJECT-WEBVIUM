@@ -41,7 +41,6 @@ It does not mean Webvium is lightweight we wont care about your storage free spa
 **AdBlocker**
 
 Stay safe while surfing the Internet. Webvium AdBlocker will take care of blocking ads, analytics and error monitoring.
->https://mrepol742.github.io/adstest/
 
 **Webvium VPN**
 
