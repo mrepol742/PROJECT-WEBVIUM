@@ -1,63 +1,25 @@
-#
+![Webvium](https://mrepol742.github.io/images/webvium2.jpg)
 
-<h1 align="center">WE  ARE  NO  LONGER  OPEN  SOURCE</h1>
+**What is Webvium?** <br>
+A Project that aims to be the lightest, fastest, secured, private and full-featured android web browser.
 
+**History** <br>
+Webvium was programmed and designed to consumed less resources, 0 background services which means when you close the app its closed. The app uses 0 libraries and frameworks making the total app/download size 500KB.
 
-<p align="center">
-<a href="https://mrepol742.github.io/webvium?ref=github.com">
-  <img alt="Webvium" src="https://mrepol742.github.io/images/webvium_transparent_icon.png" width="200px"/> 
-  </a> 
-  <h3 align="center">Lightweight, Fast, Material and Full-Featured Android Web Browser.</h3>
-</p>
-<br>
+Most of the app in store are 80% full of libraries or frameworks. When i started this project this uses AppCombat making the app weight 1MB but as time goes by i decided to get rid of it and start working to make this project a little challenging. That is the time i focus to make this program improved while making it the smallest app. It's been 3 years of quite programming and still going on further while improving the app pretty much compared before. 
 
+https://mrepol742.github.io/webvium/#other_v
 
-***FEATURES***
+It list webvium release started in April 16, 2021 with version 21 a.k.a version 1.0 till recent releases. As i progress to create this project. It started be just a fun project to learn something new and combined ideas of knowledge and learning. But as time goes on, it becoming something else that could somehow revolutionize or change the way we look at software or programming. Its crazy to think such an app is just weight 500KB... 
 
-
-**Cuztomization**
-
-Use the Interface settings, to change the app theme to dark or light. Add a little curved on edge of screen or make your favorite photo or wallpaper as app main background. Redefined your browsing experience with customization from Webvium.
-
-**Lightweight & Faster**
-
-Webvium is designed to be the most lightweight app possible. Lightweight means faster installation time, faster download time, better app experience. Share this app to your friends within fraction of a seconds.
-
-**Material Design**
-
-Immerse yourself in new and awesome browser fully material based designed. The colors and icons are carefully picked for you, and it uses one of the coolest fonts ever The Maven Pro from Google Fonts. Easier UI Navigation and modern based UI designs.
-
-**Total Browsing Control**
-
-Here you can customize your all of web settings preferences if you wanted anytime. Webvium guaranteed that your the admin(super-user) of the app.
-
-**Incomparable Privacy**
-
-Protect your privacy, Webvium does not collect any kind of data Your browsing activity is at highest security and anonymous.
-
-**You In Control**
-
-Yeah, the only browser that allows you to backup all of your data settings preferences, history, searches, bookmarks and download list and export it when you needed.
-
-**Manage Space**
-
-It does not mean Webvium is lightweight we wont care about your storage free space. Here we revolutionize how browser should look like. In Webvium Manage Space you can see what part of webvium tool so much space and delete them whenever you want.
-
-**AdBlocker**
-
-Stay safe while surfing the Internet. Webvium AdBlocker will take care of blocking ads, analytics and error monitoring.
-
-**Webvium VPN**
-
-Anonymous, Secured, Private and the fastest Virtual Private Network.
-> [https://mrepol742.github.io/webviumvpn](https://mrepol742.github.io/webviumvpn?ref=github.com)
+I pour full support and effort on making such things possible and come alive proving such thing is possible to be done. I can call it a triumph of software development. The app uses SQLite as a database for download, search, browsing history and bookmarks. User's can also download the database in json format and import it back. The app doesn't sync any of this data to any server and since we don't use any libraries or frameworks the users received the app purely code written by me which is proudly to say. 
 
 
-<br>
-<br>
-<br>
-<p align="center">
-  <h3 align="center">For more info check Webvium Webpage</h3>
-  <h4 align="center"><a href="https://mrepol742.github.io/webvium?ref=github.com">https://mrepol742.github.io/webvium</a></h4>
-</p>
-<br>
+The app provides so much feature's that i cant write it all down so i only pick major features and use it to present the app for new users. It maybe not the best for you but the app is still improving as time goes by the released version history apk proved it.
+
+As of now the app is in under heavy development to provide another based feature which if you open any external link it'll open it in new tab instead of loading it in current tab. The app provided the basic browser functionality thought i admit it doesn't yet support the target_blank which means url that uses that will load inside the current tab and not in new tab. Thought i will get into it soon making it come alive.
+
+The development of this project has no turning back now...
+
+Feel free to test it:
+https://mrepol742.github.io/webvium
